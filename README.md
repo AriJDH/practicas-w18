@@ -46,3 +46,4 @@ Cada desarrolador cuenta con un branch con la estructura ya creada a su nombre p
    `git commit -m "mensaje de commit"`
    
    `git push`
+testing permissions
