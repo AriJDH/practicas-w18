@@ -4,7 +4,7 @@ public class Main {
     public static void main(String[] args) {
 
         String ciudades [] = new String [10];
-        int temperaturas [][] = new int [10][2];
+        double temperaturas [][] = new double [10][2];
 
         Scanner entrada = new Scanner(System.in);
         System.out.println("Ingresa las 10 ciudades: ");
@@ -14,12 +14,12 @@ public class Main {
         System.out.println("Ingrese los 10 pares de temperaturas: ");
         for(int i = 0; i<10 ; i++){
             for(int j = 0; j< 2; j++){
-                temperaturas[i][j]= entrada.nextInt();
+                temperaturas[i][j]= entrada.nextDouble();
             }
         }
         entrada.close();
-        int menor = 0;
-        int mayor = 0;
+        double menor = 0;
+        double mayor = 0;
         int posMayor = 0;
         int posMenor = 0;
         for(int i = 0; i<10 ; i++){
