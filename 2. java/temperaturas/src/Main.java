@@ -17,6 +17,7 @@ public class Main {
                 temperaturas[i][j]= entrada.nextInt();
             }
         }
+        entrada.close();
         int menor = 0;
         int mayor = 0;
         int posMayor = 0;
