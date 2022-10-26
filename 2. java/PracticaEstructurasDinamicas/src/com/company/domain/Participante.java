@@ -8,8 +8,9 @@ public class Participante {
     private int celular;
     private int numeroEmergencia;
     private String grupoSanguineo;
+    private int numeroParticipante;
 
-    public Participante(int dni, String nombre, String apellido, int edad, int celular, int numeroEmergencia, String grupoSanguineo) {
+    public Participante(int dni, String nombre, String apellido, int edad, int celular, int numeroEmergencia, String grupoSanguineo, int numeroParticipante) {
         this.dni = dni;
         this.nombre = nombre;
         this.apellido = apellido;
@@ -17,9 +18,11 @@ public class Participante {
         this.celular = celular;
         this.numeroEmergencia = numeroEmergencia;
         this.grupoSanguineo = grupoSanguineo;
+        this.numeroParticipante=numeroParticipante;
     }
 
     public void print(){
+        System.out.println("Número de inscripción: "+ numeroParticipante);
         System.out.println("DNI: "+ dni);
         System.out.println("Nombre: "+ nombre);
         System.out.println("Apellido: "+apellido);
@@ -83,5 +86,13 @@ public class Participante {
 
     public void setGrupoSanguineo(String grupoSanguineo) {
         this.grupoSanguineo = grupoSanguineo;
+    }
+
+    public int getNumeroParticipante() {
+        return numeroParticipante;
+    }
+
+    public void setNumeroParticipante(int numeroParticipante) {
+        this.numeroParticipante = numeroParticipante;
     }
 }

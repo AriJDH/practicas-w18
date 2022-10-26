@@ -10,11 +10,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class UI {
-    private int CHICO=1;
-    private int MEDIANO=2;
-    private int GRANDE=3;
     private Map<Integer, List<Participante>> categorias;
-    Scanner teclado=new Scanner(System.in);
+    private Scanner teclado=new Scanner(System.in);
+    private int contadorInscriptos=0;
 
     public UI(List<Participante> circuitoChico, List<Participante> circuitoMediano, List<Participante> circuitoGrande) {
         categorias=new HashMap<Integer, List<Participante>>();
@@ -64,7 +62,8 @@ public class UI {
         teclado.nextLine();
         System.out.println("Ingrese el grupo sanguíneo:");
         String grupoSanguineo=teclado.nextLine();
-        Participante participante = new Participante(dni,nombre,apellido,edad,celular,numeroEmergencia,grupoSanguineo);
+        contadorInscriptos++;
+        Participante participante = new Participante(dni,nombre,apellido,edad,celular,numeroEmergencia,grupoSanguineo, contadorInscriptos);
         agregarACategoria(categoria,participante);
     }
 
@@ -76,7 +75,6 @@ public class UI {
         for(int i=0;i<inscriptos.size();i++){
             int numInscripcion = i+1;
             System.out.println("----------------------------------------");
-            System.out.println("Número de inscripción: " + numInscripcion);
             inscriptos.get(i).print();
         }
 
