@@ -1,10 +1,7 @@
 package practica_vivo_p2;
 
 import javax.swing.*;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Scanner;
+import java.util.*;
 
 public class EjercicioCarrera {
 
@@ -34,6 +31,7 @@ public class EjercicioCarrera {
                     crearParticipante();
                     break;
                 case "B":
+                    consultarParticipantes();
                     break;
                 case "C":
                     break;
@@ -46,7 +44,7 @@ public class EjercicioCarrera {
                 default:
                     System.out.println("No se ingreso una opción valida");
             }
-            
+
             if (indicadorSalir) {
                 break;
             }
@@ -61,7 +59,7 @@ public class EjercicioCarrera {
         System.out.println("3 -> Circuito avanzando");
 
         Scanner teclado = new Scanner(System.in);
-        int opcionCategoria = teclado.nextInt();
+        int opcionCategoria = Integer.valueOf(teclado.nextLine());
 
         System.out.println("Ingrese DNI");
         String dni = teclado.nextLine();
@@ -93,6 +91,7 @@ public class EjercicioCarrera {
         participante.put("celular", celular);
         participante.put("numero", numero);
         participante.put("grupoSanguineo", grupoSanguineo);
+
         int montoAbonar = 0;
 
         switch (opcionCategoria) {
@@ -158,17 +157,31 @@ public class EjercicioCarrera {
 
         switch (opcionCategoria) {
             case 1:
-
+                imprimirListaParticipante(circuitoChico);
                 break;
             case 2:
-
+                imprimirListaParticipante(circuitoMedio);
                 break;
             case 3:
-
+                imprimirListaParticipante(circuitoAvanzado);
                 break;
             default:
                 System.out.println("Opción no valida");
                 break;
+        }
+    }
+
+    private static void imprimirListaParticipante(List<Map<String, String>> listaParticipante) {
+
+        System.out.println("---------INFORMACION PARTICIPANTES----------");
+        for (Map<String, String> participante: listaParticipante) {
+
+            for (Map.Entry<String, String> mapaParticipante : participante.entrySet()) {
+
+                System.out.println(mapaParticipante.getKey() + " " + mapaParticipante.getValue());
+
+                System.out.println("================");
+            }
         }
     }
 }
