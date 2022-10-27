@@ -1,6 +1,5 @@
 package practica_vivo_p2;
 
-import javax.swing.*;
 import java.util.*;
 
 public class EjercicioCarrera {
@@ -90,7 +89,7 @@ public class EjercicioCarrera {
         participante.put("numero", numero);
         participante.put("grupoSanguineo", grupoSanguineo);
 
-        int montoAbonar = 0;
+        int montoAbonar;
 
         switch (opcionCategoria) {
             case 1:
@@ -123,7 +122,7 @@ public class EjercicioCarrera {
 
     private static int calcularMontoAbonar(int categoria, int edad) {
 
-        int montoAbonar = 0;
+        int montoAbonar;
 
         if (categoria == 1) {
 
