@@ -1,4 +1,4 @@
-package ejercicio_practico_poo_p1;
+package ejercicio_practico_poo_p1_vivo;
 
 public class Persona {
 
@@ -84,5 +84,9 @@ public class Persona {
         }
 
         return retorno;
+    }
+
+    public boolean esMayorDeEdad() {
+        return Integer.valueOf(edad) > 18 ? true : false;
     }
 }
