@@ -19,8 +19,7 @@ public class EjercicioCarrera {
             System.out.println("A). Inscribir participante.");
             System.out.println("B). Mostrar participantes por categoria.");
             System.out.println("C). Desinscribir participante de categoria.");
-            System.out.println("D). Determinar monto a abonar.");
-            System.out.println("E). Salir.");
+            System.out.println("D). Salir.");
 
             Scanner teclado = new Scanner(System.in);
 
@@ -34,10 +33,9 @@ public class EjercicioCarrera {
                     consultarParticipantes();
                     break;
                 case "C":
+                    desincribirParticipante();
                     break;
                 case "D":
-                    break;
-                case "E":
                     System.out.println("-----SE CIERRA EL PROGRAMA---------");
                     indicadorSalir = true;
                     break;
@@ -99,18 +97,21 @@ public class EjercicioCarrera {
                 //Calcular monto a pagar
                 montoAbonar = calcularMontoAbonar(1, Integer.parseInt(edad));
                 participante.put("montoAbonar", String.valueOf(montoAbonar));
+                participante.put("numeroInscripcion", String.valueOf(circuitoChico.size() + 1));
                 circuitoChico.add(participante);
                 break;
             case 2:
                 //Calcular monto a pagar
                 montoAbonar = calcularMontoAbonar(2, Integer.parseInt(edad));
                 participante.put("montoAbonar", String.valueOf(montoAbonar));
+                participante.put("numeroInscripcion", String.valueOf(circuitoMedio.size() + 1));
                 circuitoMedio.add(participante);
                 break;
             case 3:
                 //Calcular monto a pagar
                 montoAbonar = calcularMontoAbonar(3, Integer.parseInt(edad));
                 participante.put("montoAbonar", String.valueOf(montoAbonar));
+                participante.put("numeroInscripcion", String.valueOf(circuitoAvanzado.size() + 1));
                 circuitoAvanzado.add(participante);
                 break;
             default:
@@ -179,9 +180,40 @@ public class EjercicioCarrera {
             for (Map.Entry<String, String> mapaParticipante : participante.entrySet()) {
 
                 System.out.println(mapaParticipante.getKey() + " " + mapaParticipante.getValue());
-
-                System.out.println("================");
             }
+
+            System.out.println("================");
         }
     }
+
+    private static void desincribirParticipante() {
+
+        System.out.println("------Seleccione categoria------");
+        System.out.println("1 -> Circuito chico");
+        System.out.println("2 -> Circuito medio");
+        System.out.println("3 -> Circuito avanzando");
+
+        Scanner teclado = new Scanner(System.in);
+
+        int opcionCategoria = Integer.valueOf(teclado.nextLine());
+
+        System.out.println("Ingrese numero de inscripcion del participante");
+        int numeroInscripcion = Integer.valueOf(teclado.nextLine());
+
+        switch (opcionCategoria) {
+            case 1:
+                circuitoChico.removeIf(participante -> participante.get("numeroInscripcion").equals(String.valueOf(numeroInscripcion)));
+                break;
+            case 2:
+                circuitoMedio.removeIf(participante -> participante.get("numeroInscripcion").equals(String.valueOf(numeroInscripcion)));
+                break;
+            case 3:
+                circuitoAvanzado.removeIf(participante -> participante.get("numeroInscripcion").equals(String.valueOf(numeroInscripcion)));
+                break;
+            default:
+                System.out.println("Opción no valida");
+                break;
+        }
+    }
+
 }
