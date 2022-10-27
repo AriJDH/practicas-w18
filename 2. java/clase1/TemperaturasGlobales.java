@@ -1,3 +1,5 @@
+package clase1;
+
 import java.util.Scanner;
 
 public class TemperaturasGlobales {
@@ -24,7 +26,6 @@ public class TemperaturasGlobales {
             System.out.println("ingrese su temperatura maxima: ");
             temperaturas[i][1] = input2.nextInt();
         }
-
         // calculo de minimos y maximos
 
         double minTemp, maxTemp;
