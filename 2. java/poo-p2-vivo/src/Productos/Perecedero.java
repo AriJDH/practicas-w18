@@ -1,7 +1,7 @@
 package Productos;
 
 public class Perecedero extends Producto {
-    int diasPorCaducar;
+    protected int diasPorCaducar;
 
     public Perecedero(String nombre, double precio, int diasPorCaducar) {
         super(nombre, precio);
@@ -14,15 +14,14 @@ public class Perecedero extends Producto {
 
     @Override
     public double calcular(int cantidadDeProductos) {
-        double nuevoPrecio = super.calcular(cantidadDeProductos);
         if (diasPorCaducar == 1) {
-            nuevoPrecio/=4;
+            return super.calcular(cantidadDeProductos)/4;
         } else if (diasPorCaducar == 2) {
-            nuevoPrecio/=3;
+            return super.calcular(cantidadDeProductos)/3;
         } else if (diasPorCaducar == 3) {
-            nuevoPrecio/=2;
+            return super.calcular(cantidadDeProductos)/2;
         }
-        return nuevoPrecio;
+        return super.calcular(cantidadDeProductos);
     }
 
     public void setDiasPorCaducar(int diasPorCaducar) {

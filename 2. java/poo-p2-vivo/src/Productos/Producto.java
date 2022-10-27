@@ -1,8 +1,8 @@
 package Productos;
 
 public class Producto {
-    String nombre;
-    double precio;
+    protected String nombre;
+    protected double precio;
 
     public Producto(String nombre, double precio) {
         this.nombre = nombre;
