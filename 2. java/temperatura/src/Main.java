@@ -56,9 +56,6 @@ public class Main {
 
             System.out.println("La menor temperatura fue de " + ciudadMinima + " con " + temperaturaMinima + " y la mayor temperatura fue de " + ciudadMaxima + " con " + temperaturaMaxima);
 
-
-
-
         }
 
 }
