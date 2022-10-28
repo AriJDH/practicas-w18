@@ -1,8 +1,18 @@
 package clase3.ClasesAbsEInterfaces;
 
-public class Ejercicio1 {
-    public interface Transaccion {
-        public void transaccionOk();
-        public void transaccionNoOk();
+public abstract class FiguraGeometrica {
+    private int posX;
+    private int posY;
+
+    public FiguraGeometrica(int posX, int posY) {
+        this.posX = posX;
+        this.posY = posY;
     }
+
+    public abstract double calcularArea();
+
+    public String otroMetodo(){
+        return "Método desde la figura geométrica";
+    }
+
 }
