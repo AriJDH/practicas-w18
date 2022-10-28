@@ -1,4 +1,6 @@
-package practica_abstracta_interfaces_vivo.ejercicio3;
+package practica_abstracta_interfaces_vivo.ejercicio3.clases;
+
+import practica_abstracta_interfaces_vivo.ejercicio3.interfaces.IAlimentacionAnimal;
 
 public class Gato extends Animal implements IAlimentacionAnimal {
 
