@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/temperatura.iml" filepath="$PROJECT_DIR$/temperatura.iml" />
+      <module fileurl="file://$PROJECT_DIR$/intro-java-temperatura.iml" filepath="$PROJECT_DIR$/intro-java-temperatura.iml" />
     </modules>
   </component>
 </project>
