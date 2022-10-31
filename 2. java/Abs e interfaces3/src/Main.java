@@ -26,8 +26,6 @@ public class Main {
        for(Animal anim :animales){
            anim.sonar();
        }
-
-        vaca.comerAnimal(gato);
         gato.comerAnimal(perro);
         perro.comerAnimal(vaca);
     }

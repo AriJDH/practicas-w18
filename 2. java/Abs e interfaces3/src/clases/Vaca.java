@@ -12,8 +12,5 @@ public class Vaca extends Animal implements Herbivoro {
     public void comer() {
         System.out.println("Soy una Vaca comiendo hierba");
     }
-    @Override
-    public void comerAnimal(Animal animal) {
-        System.out.println("Me estoy comiendo un " +animal.getClass().getSimpleName());
-    }
+
 }

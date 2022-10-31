@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement />
+  <nodes>
+    <node x="-67.92366154507584" y="197.21104517631085">clases.Vaca</node>
+    <node x="246.60994732126107" y="356.07507352464324">clases.Gato</node>
+    <node x="229.212879331049" y="200.36002442757498">clases.Animal</node>
+    <node x="523.1255703978482" y="-14.208681795801255">interfaces.Carnivoro</node>
+    <node x="40.808423325987945" y="66.30362794631475">interfaces.Herbivoro</node>
+    <node x="525.6962219662776" y="150.81286909920527">clases.Perro</node>
+    <node x="323.41833815540497" y="73.35886980679402">interfaces.Sonido</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="clases.Perro" target="interfaces.Carnivoro" relationship="REALIZATION">
+      <point x="-114.50022196627754" y="1.309007947156715E-4" />
+      <point x="500.0" y="223.313" />
+      <point x="500.0" y="15.791" />
+      <point x="-68.49957039784817" y="-3.1820419874506456E-4" />
+    </edge>
+    <edge source="clases.Gato" target="interfaces.Carnivoro" relationship="REALIZATION">
+      <point x="114.50005267873894" y="-7.35246432554959E-5" />
+      <point x="500.0" y="428.575" />
+      <point x="500.0" y="15.791" />
+      <point x="-68.49957039784817" y="-3.1820419874506456E-4" />
+    </edge>
+    <edge source="clases.Animal" target="interfaces.Sonido" relationship="REALIZATION">
+      <point x="44.70545882435596" y="-44.5" />
+      <point x="0.0" y="30.0" />
+    </edge>
+    <edge source="clases.Perro" target="clases.Animal" relationship="GENERALIZATION">
+      <point x="-2.2196627753601206E-4" y="72.50013090079472" />
+      <point x="640.196" y="326.0" />
+      <point x="343.713" y="326.0" />
+      <point x="1.2066895101270347E-4" y="44.49997557242503" />
+    </edge>
+    <edge source="clases.Gato" target="clases.Animal" relationship="GENERALIZATION">
+      <point x="5.2678738938993774E-5" y="-72.50007352464326" />
+      <point x="361.11" y="326.0" />
+      <point x="343.713" y="326.0" />
+      <point x="1.2066895101270347E-4" y="44.49997557242503" />
+    </edge>
+    <edge source="clases.Vaca" target="interfaces.Herbivoro" relationship="REALIZATION">
+      <point x="63.23208487106379" y="-72.5" />
+      <point x="0.0" y="30.0" />
+    </edge>
+    <edge source="clases.Vaca" target="clases.Animal" relationship="GENERALIZATION">
+      <point x="114.49966154507584" y="-4.5176310834449396E-5" />
+      <point x="211.713" y="269.711" />
+      <point x="211.713" y="326.0" />
+      <point x="343.713" y="326.0" />
+      <point x="1.2066895101270347E-4" y="44.49997557242503" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Compact" zoom="0.6182495344506518" showDependencies="false" x="353.5" y="253.5" />
+  <SelectedNodes>
+    <node>clases.Animal</node>
+    <node>clases.Gato</node>
+    <node>interfaces.Carnivoro</node>
+    <node>interfaces.Herbivoro</node>
+    <node>interfaces.Sonido</node>
+    <node>clases.Vaca</node>
+    <node>clases.Perro</node>
+  </SelectedNodes>
+  <Categories>
+    <Category>Constructors</Category>
+    <Category>Fields</Category>
+    <Category>Methods</Category>
+    <Category>Properties</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+
