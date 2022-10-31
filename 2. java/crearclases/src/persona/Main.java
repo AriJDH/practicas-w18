@@ -17,7 +17,7 @@ public class Main {
         if (imc == -1) {
             System.out.println("es menor a 20..: peso bajo");
         } else if (imc == 0) {
-            System.out.println("imc entre 20 y 25..:  peso saludable");
+            System.out.println("imc entre 20 y 25..: peso saludable");
         } else {
             System.out.println("imc mayor a 25..: sobrepeso");
         }
