@@ -6,7 +6,7 @@ public interface Imprimible  {
 
     public static void imprimir(Archivo archivo) {
 
-        System.out.println("El " + archivo + " se está imprimiendo");
+        System.out.println("Imprimiendo " + archivo);
 
     }
 

@@ -3,7 +3,7 @@ package clases;
 import Interface.Imprimible;
 import superclase.Archivo;
 
-public class Curriculum extends Archivo implements Imprimible {
+public class Curriculum extends Archivo {
 
     private Persona persona;
 
@@ -12,4 +12,13 @@ public class Curriculum extends Archivo implements Imprimible {
         this.persona = persona;
 
     }
+
+    @Override
+    public String toString() {
+        return "Curriculum{" +
+                "persona=" + persona +
+                '}';
+    }
+
+
 }

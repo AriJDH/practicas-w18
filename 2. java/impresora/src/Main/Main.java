@@ -1,5 +1,6 @@
 package Main;
 
+import Interface.Imprimible;
 import clases.Curriculum;
 import clases.Informe;
 import clases.LibroPDF;
@@ -28,6 +29,12 @@ public class Main {
 
 
         Informe informe = new Informe(72, "Carlos Antonio", "Estrada","blablabla");
+
+        Imprimible.imprimir(curriculum);
+
+        Imprimible.imprimir(informe);
+
+        Imprimible.imprimir(libroPDF);
 
     }
 

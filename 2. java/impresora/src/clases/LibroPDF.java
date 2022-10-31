@@ -3,7 +3,7 @@ package clases;
 import Interface.Imprimible;
 import superclase.Archivo;
 
-public class LibroPDF extends Archivo implements Imprimible {
+public class LibroPDF extends Archivo {
 
     private int cantidadPaginas;
     private String autor;
@@ -16,4 +16,17 @@ public class LibroPDF extends Archivo implements Imprimible {
         this.titulo = titulo;
         this.genero = genero;
     }
+
+    @Override
+    public String toString() {
+        return "LibroPDF{" +
+                "cantidadPaginas=" + cantidadPaginas +
+                ", autor='" + autor + '\'' +
+                ", titulo='" + titulo + '\'' +
+                ", genero='" + genero + '\'' +
+                '}';
+    }
+
+
+
 }

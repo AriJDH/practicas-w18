@@ -3,7 +3,7 @@ package clases;
 import Interface.Imprimible;
 import superclase.Archivo;
 
-public class Informe extends Archivo implements Imprimible {
+public class Informe extends Archivo  {
 
     private int cantidadPaginas;
     private String autor;
@@ -19,5 +19,13 @@ public class Informe extends Archivo implements Imprimible {
     //texto con n longitud??
     private String texto;
 
-
+    @Override
+    public String toString() {
+        return "Informe{" +
+                "cantidadPaginas=" + cantidadPaginas +
+                ", autor='" + autor + '\'' +
+                ", revisor='" + revisor + '\'' +
+                ", texto='" + texto + '\'' +
+                '}';
+    }
 }

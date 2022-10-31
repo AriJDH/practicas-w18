@@ -39,4 +39,14 @@ public class Persona {
     public List<String> getHabilidades() {
         return habilidades;
     }
+
+    @Override
+    public String toString() {
+        return "Persona{" +
+                "nombre='" + nombre + '\'' +
+                ", dni='" + dni + '\'' +
+                ", edad=" + edad +
+                ", habilidades=" + habilidades +
+                '}';
+    }
 }
