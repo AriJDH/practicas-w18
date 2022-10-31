@@ -1,5 +1,8 @@
 package banco;
 
+import animales.Gato;
+import animales.Perro;
+import animales.Vaca;
 import imprimir.Curriculum;
 import imprimir.Imprimir;
 import imprimir.Informes;
@@ -39,6 +42,22 @@ public class Main {
         Imprimir.print(libroPdf);
 
 
+    // Ejercicio 3
 
+        Perro perro = new Perro();
+        Gato gato = new Gato();
+        Vaca vaca = new Vaca();
+
+        perro.emitirSonido();
+        gato.emitirSonido();
+        vaca.emitirSonido();
+
+        perro.comerCarne();
+        gato.comerCarne();
+        vaca.comerHierba();
+
+        perro.comerAnimal(perro);
+        gato.comerAnimal(gato);
+        vaca.comerAnimal(vaca);
     }
 }
