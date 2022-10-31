@@ -8,6 +8,7 @@ public class Distribuidora {
 
     public static void main(String[] args) {
 
+
         List<Producto> productos = new ArrayList<Producto>();
 
         Perecederos producto1 = new Perecederos("Leche",50,1);
