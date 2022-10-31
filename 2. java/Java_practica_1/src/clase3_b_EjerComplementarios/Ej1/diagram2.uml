@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement />
+  <nodes>
+    <node x="-103.0" y="90.5">Ejercicio1.Interesante</node>
+    <node x="-54.0" y="175.0">Ejercicio1.Tutor</node>
+    <node x="671.0" y="175.0">Ejercicio1.Profesor</node>
+    <node x="181.75" y="75.0">Ejercicio1.Estudiante</node>
+    <node x="523.0" y="175.0">Ejercicio1.Soporte</node>
+    <node x="192.75" y="-15.0">Ejercicio1.Persona</node>
+    <node x="76.0" y="175.0">Ejercicio1.EstudianteTecnico</node>
+    <node x="313.0" y="175.0">Ejercicio1.Mantenimiento</node>
+    <node x="633.0" y="75.0">Ejercicio1.MiembroPersonal</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="Ejercicio1.Estudiante" target="Ejercicio1.Persona" relationship="GENERALIZATION">
+      <point x="0.0" y="-30.0" />
+      <point x="0.0" y="30.0" />
+    </edge>
+    <edge source="Ejercicio1.Tutor" target="Ejercicio1.Estudiante" relationship="GENERALIZATION">
+      <point x="25.0" y="-30.0" />
+      <point x="21.0" y="155.0" />
+      <point x="252.25" y="155.0" />
+      <point x="0.0" y="30.0" />
+    </edge>
+    <edge source="Ejercicio1.Mantenimiento" target="Ejercicio1.MiembroPersonal" relationship="GENERALIZATION">
+      <point x="0.0" y="-30.0" />
+      <point x="403.0" y="165.0" />
+      <point x="732.5" y="165.0" />
+      <point x="0.0" y="30.0" />
+    </edge>
+    <edge source="Ejercicio1.MiembroPersonal" target="Ejercicio1.Persona" relationship="GENERALIZATION">
+      <point x="0.0" y="-30.0" />
+      <point x="732.5" y="65.0" />
+      <point x="252.25" y="65.0" />
+      <point x="0.0" y="30.0" />
+    </edge>
+    <edge source="Ejercicio1.EstudianteTecnico" target="Ejercicio1.Interesante" relationship="REALIZATION">
+      <point x="-51.75" y="-30.0" />
+      <point x="127.75" y="165.0" />
+      <point x="-29.0" y="165.0" />
+      <point x="0.0" y="14.5" />
+    </edge>
+    <edge source="Ejercicio1.Soporte" target="Ejercicio1.MiembroPersonal" relationship="GENERALIZATION">
+      <point x="0.0" y="-30.0" />
+      <point x="582.0" y="165.0" />
+      <point x="732.5" y="165.0" />
+      <point x="0.0" y="30.0" />
+    </edge>
+    <edge source="Ejercicio1.Tutor" target="Ejercicio1.Interesante" relationship="REALIZATION">
+      <point x="-25.0" y="-30.0" />
+      <point x="0.0" y="14.5" />
+    </edge>
+    <edge source="Ejercicio1.Profesor" target="Ejercicio1.MiembroPersonal" relationship="GENERALIZATION">
+      <point x="0.0" y="-30.0" />
+      <point x="0.0" y="30.0" />
+    </edge>
+    <edge source="Ejercicio1.EstudianteTecnico" target="Ejercicio1.Estudiante" relationship="GENERALIZATION">
+      <point x="51.75" y="-30.0" />
+      <point x="231.25" y="155.0" />
+      <point x="252.25" y="155.0" />
+      <point x="0.0" y="30.0" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Compact" zoom="0.9581151832460733" showDependencies="false" x="374.5" y="120.0" />
+  <SelectedNodes />
+  <Categories>
+    <Category>Constructors</Category>
+    <Category>Properties</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+
