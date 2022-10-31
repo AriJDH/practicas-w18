@@ -15,5 +15,15 @@ public class Main {
         vaca.emitirSonido();
         vaca.comerCarne();
 
+        comerAnimal(perro);
+    }
+
+    /**
+     * Metodo que a partir de cualquier tipo de animal muestra su correspondiente alimentacion
+     * haciendo uso del polimorfismo
+     * @param animal objeto que puede ser cualquier animal
+     */
+    private static void comerAnimal(Animal animal) {
+        animal.comerAnimal();
     }
 }

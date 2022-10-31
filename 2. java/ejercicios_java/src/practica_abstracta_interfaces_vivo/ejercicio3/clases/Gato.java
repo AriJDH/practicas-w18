@@ -10,6 +10,11 @@ public class Gato extends Animal implements IAlimentacionAnimal {
     }
 
     @Override
+    public void comerAnimal() {
+        System.out.println("come carne y hierba de vez en cuando");
+    }
+
+    @Override
     public void comerCarne() {
         System.out.println("Come carne");
     }
