@@ -1,4 +1,4 @@
-package Interfaces;
+package Ejercicio1.Interfaces;
 
 public interface Transacciones {
     public abstract void transaccionOK(String tipoTransaccion);

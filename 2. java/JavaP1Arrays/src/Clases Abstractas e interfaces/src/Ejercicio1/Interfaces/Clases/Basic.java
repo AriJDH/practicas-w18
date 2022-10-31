@@ -1,8 +1,8 @@
-package Clases;
+package Ejercicio1.Interfaces.Clases;
 
-import Interfaces.ConsultaSaldo;
-import Interfaces.PagoServicios;
-import Interfaces.RetiroEF;
+import Ejercicio1.Interfaces.ConsultaSaldo;
+import Ejercicio1.Interfaces.PagoServicios;
+import Ejercicio1.Interfaces.RetiroEF;
 
 public class Basic implements PagoServicios, RetiroEF , ConsultaSaldo {
     public Basic() {

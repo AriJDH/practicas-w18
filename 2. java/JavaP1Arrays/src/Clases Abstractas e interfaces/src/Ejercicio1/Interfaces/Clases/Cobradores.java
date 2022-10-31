@@ -1,7 +1,7 @@
-package Clases;
+package Ejercicio1.Interfaces.Clases;
 
-import Interfaces.ConsultaSaldo;
-import Interfaces.RetiroEF;
+import Ejercicio1.Interfaces.ConsultaSaldo;
+import Ejercicio1.Interfaces.RetiroEF;
 
 public class Cobradores implements RetiroEF, ConsultaSaldo {
     public Cobradores() {
