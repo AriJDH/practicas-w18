@@ -19,8 +19,9 @@ public class NaveSimple implements INave {
     @Override
     public double acumularPuntos(int x, int y) {
 
-        double distancia
-        return 0;
+        double distancia = Math.sqrt(Math.pow((this.x - x), 2) + Math.pow((this.y - y), 2));
+
+        return distancia;
     }
 
     @Override
