@@ -1,4 +1,4 @@
-import java.util.Collections;mport java.util.Collections;
+import java.util.Collections;
 
 public class Test {
     public String identificaDocumento(Object o) {
