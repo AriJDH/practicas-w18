@@ -53,6 +53,4 @@ public class Curriculum implements Imprimible {
         System.out.println("Profesion: " +  this.profesion);
         System.out.println("Tecnologias: " + this.tecnologia);
     }
-
-
 }

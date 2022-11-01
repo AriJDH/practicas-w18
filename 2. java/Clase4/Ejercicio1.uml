@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>Ejercicio1</OriginalElement>
+  <nodes>
+    <node x="687.0" y="80.0">Ejercicio1.Estudiante</node>
+    <node x="443.12083333333334" y="0.0">Ejercicio1.Persona</node>
+    <node x="357.57916666666665" y="80.0">Ejercicio1.Tecnico</node>
+    <node x="549.0" y="190.0">Ejercicio1.EstudianteTecnico</node>
+    <node x="186.0" y="190.0">Ejercicio1.PersonalMantenimiento</node>
+    <node x="131.75" y="80.0">Ejercicio1.MiembroPersonal</node>
+    <node x="0.0" y="265.0">Ejercicio1.Test</node>
+    <node x="515.3291666666667" y="80.0">Ejercicio1.Docente</node>
+    <node x="0.0" y="190.0">Ejercicio1.PersonalSoporte</node>
+    <node x="750.0" y="190.0">Ejercicio1.Tutor</node>
+    <node x="418.0" y="190.0">Ejercicio1.Profesor</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="Ejercicio1.EstudianteTecnico" target="Ejercicio1.Estudiante">
+      <point x="45.25" y="-15.0" />
+      <point x="684.75" y="170.0" />
+      <point x="718.5" y="170.0" />
+      <point x="-31.5" y="15.0" />
+    </edge>
+    <edge source="Ejercicio1.MiembroPersonal" target="Ejercicio1.Persona">
+      <point x="0.0" y="-15.0" />
+      <point x="214.75" y="55.0" />
+      <point x="468.87083333333334" y="55.0" />
+      <point x="-25.75" y="15.0" />
+    </edge>
+    <edge source="Ejercicio1.PersonalMantenimiento" target="Ejercicio1.Tecnico">
+      <point x="53.0" y="-15.0" />
+      <point x="345.0" y="170.0" />
+      <point x="409.07916666666665" y="170.0" />
+      <point x="0.0" y="15.0" />
+    </edge>
+    <edge source="Ejercicio1.EstudianteTecnico" target="Ejercicio1.Tecnico">
+      <point x="-45.25" y="-15.0" />
+      <point x="594.25" y="140.0" />
+      <point x="443.4125" y="140.0" />
+      <point x="34.33333333333337" y="15.0" />
+    </edge>
+    <edge source="Ejercicio1.Estudiante" target="Ejercicio1.Persona">
+      <point x="0.0" y="-15.0" />
+      <point x="750.0" y="55.0" />
+      <point x="520.3708333333333" y="55.0" />
+      <point x="25.75" y="15.0" />
+    </edge>
+    <edge source="Ejercicio1.PersonalSoporte" target="Ejercicio1.Tecnico">
+      <point x="41.5" y="-15.0" />
+      <point x="124.5" y="160.0" />
+      <point x="374.74583333333334" y="160.0" />
+      <point x="-34.333333333333314" y="15.0" />
+    </edge>
+    <edge source="Ejercicio1.Profesor" target="Ejercicio1.Docente">
+      <point x="27.75" y="-15.0" />
+      <point x="501.25" y="170.0" />
+      <point x="541.0791666666667" y="170.0" />
+      <point x="-25.75" y="15.0" />
+    </edge>
+    <edge source="Ejercicio1.Profesor" target="Ejercicio1.MiembroPersonal">
+      <point x="-27.75" y="-15.0" />
+      <point x="445.75" y="150.0" />
+      <point x="270.08333333333337" y="150.0" />
+      <point x="55.33333333333337" y="15.0" />
+    </edge>
+    <edge source="Ejercicio1.Tutor" target="Ejercicio1.Estudiante">
+      <point x="21.75" y="-15.0" />
+      <point x="815.25" y="170.0" />
+      <point x="781.5" y="170.0" />
+      <point x="31.5" y="15.0" />
+    </edge>
+    <edge source="Ejercicio1.PersonalMantenimiento" target="Ejercicio1.MiembroPersonal">
+      <point x="-53.0" y="-15.0" />
+      <point x="239.0" y="150.0" />
+      <point x="214.75" y="150.0" />
+      <point x="0.0" y="15.0" />
+    </edge>
+    <edge source="Ejercicio1.Tutor" target="Ejercicio1.Docente">
+      <point x="-21.75" y="-15.0" />
+      <point x="771.75" y="130.0" />
+      <point x="592.5791666666667" y="130.0" />
+      <point x="25.75" y="15.0" />
+    </edge>
+    <edge source="Ejercicio1.PersonalSoporte" target="Ejercicio1.MiembroPersonal">
+      <point x="-41.5" y="-15.0" />
+      <point x="41.5" y="150.0" />
+      <point x="159.41666666666669" y="150.0" />
+      <point x="-55.33333333333334" y="15.0" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="1.0" x="418.5" y="147.5" />
+  <SelectedNodes>
+    <node>Ejercicio1.Estudiante</node>
+  </SelectedNodes>
+  <Categories />
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+
