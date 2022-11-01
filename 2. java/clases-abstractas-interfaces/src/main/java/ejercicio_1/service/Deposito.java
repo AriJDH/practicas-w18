@@ -1,8 +1,8 @@
-package service;
+package ejercicio_1.service;
 
-import user.User;
+import ejercicio_1.user.User;
 
-public class Deposito implements ITransaccion {
+public class Deposito implements service.ITransaccion {
 
     private User user;
 

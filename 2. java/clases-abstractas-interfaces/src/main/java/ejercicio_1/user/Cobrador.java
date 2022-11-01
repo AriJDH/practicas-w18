@@ -1,9 +1,9 @@
-package user;
+package ejercicio_1.user;
 
-import service.ConsultaSaldo;
-import service.RetiroEfectivo;
+import ejercicio_1.service.ConsultaSaldo;
+import ejercicio_1.service.RetiroEfectivo;
 
-public class Cobrador extends User{
+public class Cobrador extends User {
     private RetiroEfectivo retiroEfectivo;
     private ConsultaSaldo consultaSaldo;
 

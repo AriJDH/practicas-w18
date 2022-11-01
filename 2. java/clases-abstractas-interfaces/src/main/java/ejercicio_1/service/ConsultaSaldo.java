@@ -1,8 +1,7 @@
-package service;
+package ejercicio_1.service;
 
-import user.User;
-
-public class ConsultaSaldo implements ITransaccion {
+import ejercicio_1.user.User;
+public class ConsultaSaldo implements service.ITransaccion {
     private User user;
 
     public void mostrarSaldo(boolean error){

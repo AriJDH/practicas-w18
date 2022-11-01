@@ -1,8 +1,8 @@
-package service;
+package ejercicio_1.service;
 
-import user.User;
+import ejercicio_1.user.User;
 
-public class PagoServicio implements ITransaccion {
+public class PagoServicio implements service.ITransaccion {
     private User user;
 
     public void pagarServicio(String nombreServicio, double amount){

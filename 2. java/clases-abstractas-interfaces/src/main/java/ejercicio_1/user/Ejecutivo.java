@@ -1,9 +1,9 @@
-package user;
+package ejercicio_1.user;
 
-import service.Deposito;
-import service.Transferencia;
+import ejercicio_1.service.Deposito;
+import ejercicio_1.service.Transferencia;
 
-public class Ejecutivo extends User{
+public class Ejecutivo extends User {
 
     private final Deposito deposito;
     private final Transferencia transferencia;

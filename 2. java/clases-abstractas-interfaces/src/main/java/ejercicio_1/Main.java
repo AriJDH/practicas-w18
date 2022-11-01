@@ -1,7 +1,13 @@
-import service.*;
-import user.Basic;
-import user.Cobrador;
-import user.Ejecutivo;
+package ejercicio_1;
+
+import ejercicio_1.service.ConsultaSaldo;
+import ejercicio_1.service.Deposito;
+import ejercicio_1.service.PagoServicio;
+import ejercicio_1.service.RetiroEfectivo;
+import ejercicio_1.service.Transferencia;
+import ejercicio_1.user.Basic;
+import ejercicio_1.user.Cobrador;
+import ejercicio_1.user.Ejecutivo;
 
 public class Main {
 

@@ -1,8 +1,8 @@
-package service;
+package ejercicio_1.service;
 
-import user.User;
+import ejercicio_1.user.User;
 
-public class Transferencia implements ITransaccion {
+public class Transferencia implements service.ITransaccion {
     private User user;
 
     public void transferir(String CBU, double cantidadATransferir) {

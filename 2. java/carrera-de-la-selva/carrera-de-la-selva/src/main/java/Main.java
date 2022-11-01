@@ -26,13 +26,10 @@ public class Main {
 
     }
 
-    public static void mostrarCategorias(String categoria) {
-
-    }
-
     public static void inscribir(Map<String, Object> categoria, Map<String, Object> persona) {
         ArrayList<Object> listaInscriptos = ( ArrayList<Object> ) categoria.get("inscriptos");
         if ((Integer)persona.get("edad") < 18)
+            listaInscriptos.add(persona);
 
 
     }

@@ -1,8 +1,8 @@
-package user;
+package ejercicio_1.user;
 
-import service.ConsultaSaldo;
-import service.PagoServicio;
-import service.RetiroEfectivo;
+import ejercicio_1.service.ConsultaSaldo;
+import ejercicio_1.service.PagoServicio;
+import ejercicio_1.service.RetiroEfectivo;
 
 public class Basic extends User{
 

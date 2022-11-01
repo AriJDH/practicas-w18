@@ -1,8 +1,8 @@
-package service;
+package ejercicio_1.service;
 
-import user.User;
+import ejercicio_1.user.User;
 
-public class RetiroEfectivo implements ITransaccion {
+public class RetiroEfectivo implements service.ITransaccion {
     private User user;
 
     public void setUser(User user) {
