@@ -41,25 +41,10 @@ public class Main {
         LibrosEnPdf librosEnPdf = new LibrosEnPdf(libro);
         //endregion
 
-        Main main = new Main();
-        main.imprimible(imprimirCurriculum);
-        main.imprimible(librosEnPdf);
-        main.imprimible(informes);
-
+        Imprimible.imprimir(imprimirCurriculum);
+        Imprimible.imprimir(librosEnPdf);
+        Imprimible.imprimir(informes);
     }
 
-    public void imprimible(Object objecto){
-        if (objecto != null && objecto instanceof Curriculums) {
-            System.out.println("Imprimiendo curriculum ...");
-        }else{
-            if (objecto != null && objecto instanceof Informes) {
-                System.out.println("Imprimiendo informe ...");
-            }else{
-                if (objecto != null && objecto instanceof LibrosEnPdf) {
-                    System.out.println("Imprimiendo libro en formato PDF ...");
-                }
-            }
-        }
-        ((IImprimir<Object>) objecto).imprimir();
-    }
+
 }
