@@ -1,4 +1,4 @@
-package Intro_Java_Parte2;
+package POO_Parte2.Excepciones;
 
 public class PracticaExcepciones {
     private int a = 0;

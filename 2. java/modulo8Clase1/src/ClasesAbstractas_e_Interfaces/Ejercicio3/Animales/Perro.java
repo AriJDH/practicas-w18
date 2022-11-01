@@ -1,4 +1,6 @@
-package ClasesAbstractas_e_Interfaces.Ejercicio3;
+package ClasesAbstractas_e_Interfaces.Ejercicio3.Animales;
+
+import ClasesAbstractas_e_Interfaces.Ejercicio3.Interfaces.ICarnivoro;
 
 public class Perro extends Animal implements ICarnivoro {
     public Perro() {

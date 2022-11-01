@@ -1,4 +1,4 @@
-package ClasesAbstractas_e_Interfaces.Clientes;
+package ClasesAbstractas_e_Interfaces.Ejercicio1.Clientes;
 
 import java.util.Random;
 

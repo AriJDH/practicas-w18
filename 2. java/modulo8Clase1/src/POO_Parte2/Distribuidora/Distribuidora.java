@@ -1,4 +1,4 @@
-package POO_Parte2;
+package POO_Parte2.Distribuidora;
 
 public class Distribuidora {
     public static void main(String[] args) {

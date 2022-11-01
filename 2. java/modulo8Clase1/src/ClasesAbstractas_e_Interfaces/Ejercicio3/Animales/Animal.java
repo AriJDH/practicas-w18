@@ -1,4 +1,4 @@
-package ClasesAbstractas_e_Interfaces.Ejercicio3;
+package ClasesAbstractas_e_Interfaces.Ejercicio3.Animales;
 
 public abstract class Animal {
     private String especie;

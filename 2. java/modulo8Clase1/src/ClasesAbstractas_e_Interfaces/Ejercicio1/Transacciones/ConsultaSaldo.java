@@ -1,6 +1,6 @@
-package ClasesAbstractas_e_Interfaces.Transacciones;
+package ClasesAbstractas_e_Interfaces.Ejercicio1.Transacciones;
 
-public class ConsultaSaldo implements Transaccion {
+public class ConsultaSaldo implements ITransaccion {
     @Override
     public void transaccionOk() {
         System.out.println("Consulta de saldo exitosa \n");

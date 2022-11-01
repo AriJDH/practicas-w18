@@ -1,15 +1,14 @@
-package ClasesAbstractas_e_Interfaces.Clientes;
+package ClasesAbstractas_e_Interfaces.Ejercicio1.Clientes;
 
-import ClasesAbstractas_e_Interfaces.Transacciones.Deposito;
-import ClasesAbstractas_e_Interfaces.Transacciones.RetiroEfectivo;
-import ClasesAbstractas_e_Interfaces.Transacciones.Transaccion;
-import ClasesAbstractas_e_Interfaces.Transacciones.Transferencia;
+import ClasesAbstractas_e_Interfaces.Ejercicio1.Transacciones.Deposito;
+import ClasesAbstractas_e_Interfaces.Ejercicio1.Transacciones.ITransaccion;
+import ClasesAbstractas_e_Interfaces.Ejercicio1.Transacciones.Transferencia;
 
 import java.util.Random;
 
 public class Ejecutivo extends Cliente {
     public void depositoEfectivo(){
-        Transaccion t = new Deposito();
+        ITransaccion t = new Deposito();
         Random rd = new Random();
         if (rd.nextBoolean()){
             t.transaccionOk();
@@ -19,7 +18,7 @@ public class Ejecutivo extends Cliente {
     }
 
     public void transferenciaEfectivo(){
-        Transaccion t = new Transferencia();
+        ITransaccion t = new Transferencia();
         Random rd = new Random();
         if (rd.nextBoolean()){
             t.transaccionOk();

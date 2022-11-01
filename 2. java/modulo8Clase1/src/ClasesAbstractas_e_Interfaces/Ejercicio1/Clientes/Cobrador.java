@@ -1,14 +1,14 @@
-package ClasesAbstractas_e_Interfaces.Clientes;
+package ClasesAbstractas_e_Interfaces.Ejercicio1.Clientes;
 
-import ClasesAbstractas_e_Interfaces.Transacciones.ConsultaSaldo;
-import ClasesAbstractas_e_Interfaces.Transacciones.RetiroEfectivo;
-import ClasesAbstractas_e_Interfaces.Transacciones.Transaccion;
+import ClasesAbstractas_e_Interfaces.Ejercicio1.Transacciones.ConsultaSaldo;
+import ClasesAbstractas_e_Interfaces.Ejercicio1.Transacciones.RetiroEfectivo;
+import ClasesAbstractas_e_Interfaces.Ejercicio1.Transacciones.ITransaccion;
 
 import java.util.Random;
 
 public class Cobrador extends Cliente {
     public void consultaSaldo() {
-        Transaccion t = new ConsultaSaldo();
+        ITransaccion t = new ConsultaSaldo();
         Random rd = new Random();
         if (rd.nextBoolean()) {
             t.transaccionOk();
@@ -18,7 +18,7 @@ public class Cobrador extends Cliente {
     }
 
     public void retiroEfectivo() {
-        Transaccion t = new RetiroEfectivo();
+        ITransaccion t = new RetiroEfectivo();
         Random rd = new Random();
         if (rd.nextBoolean()) {
             t.transaccionOk();

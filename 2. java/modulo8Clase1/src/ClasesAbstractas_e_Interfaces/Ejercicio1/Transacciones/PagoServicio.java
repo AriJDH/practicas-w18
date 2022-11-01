@@ -1,8 +1,6 @@
-package ClasesAbstractas_e_Interfaces.Transacciones;
+package ClasesAbstractas_e_Interfaces.Ejercicio1.Transacciones;
 
-import ClasesAbstractas_e_Interfaces.Transacciones.Transaccion;
-
-public class PagoServicio implements Transaccion {
+public class PagoServicio implements ITransaccion {
 
     @Override
     public void transaccionOk() {

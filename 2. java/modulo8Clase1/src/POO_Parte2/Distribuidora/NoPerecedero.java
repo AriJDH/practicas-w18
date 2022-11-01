@@ -1,4 +1,4 @@
-package POO_Parte2;
+package POO_Parte2.Distribuidora;
 
 public class NoPerecedero extends Producto{
     private String tipo;

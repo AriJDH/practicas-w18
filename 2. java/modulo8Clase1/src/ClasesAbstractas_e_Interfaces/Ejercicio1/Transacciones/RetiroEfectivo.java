@@ -1,8 +1,6 @@
-package ClasesAbstractas_e_Interfaces.Transacciones;
+package ClasesAbstractas_e_Interfaces.Ejercicio1.Transacciones;
 
-import ClasesAbstractas_e_Interfaces.Transacciones.Transaccion;
-
-public class RetiroEfectivo implements Transaccion {
+public class RetiroEfectivo implements ITransaccion {
     @Override
     public void transaccionOk() {
         System.out.println("Su retiro fue realizado con éxito \n");

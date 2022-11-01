@@ -1,4 +1,4 @@
-package POO_Parte2;
+package POO_Parte2.Distribuidora;
 
 public class Perecedero extends Producto {
     private int diasPorCaducar;

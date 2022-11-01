@@ -1,8 +1,8 @@
-package ClasesAbstractas_e_Interfaces;
+package ClasesAbstractas_e_Interfaces.Ejercicio1;
 
-import ClasesAbstractas_e_Interfaces.Clientes.Basic;
-import ClasesAbstractas_e_Interfaces.Clientes.Cobrador;
-import ClasesAbstractas_e_Interfaces.Clientes.Ejecutivo;
+import ClasesAbstractas_e_Interfaces.Ejercicio1.Clientes.Basic;
+import ClasesAbstractas_e_Interfaces.Ejercicio1.Clientes.Cobrador;
+import ClasesAbstractas_e_Interfaces.Ejercicio1.Clientes.Ejecutivo;
 
 public class Main {
     public static void main(String[] args) {
