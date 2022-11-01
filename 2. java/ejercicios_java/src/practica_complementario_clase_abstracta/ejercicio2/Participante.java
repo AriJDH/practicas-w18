@@ -4,19 +4,11 @@ import java.util.List;
 
 public class Participante {
 
-    //private List<Asteroide> coordenadasAsteroides;
+    private String userName;
 
     private Integer puntuacion = 0;
 
     private ContenedorNaves contenedorNaves = new ContenedorNaves();
-
-    /*public List<Asteroide> getCoordenadasAsteroides() {
-        return coordenadasAsteroides;
-    }
-
-    public void setCoordenadasAsteroides(List<Asteroide> coordenadasAsteroides) {
-        this.coordenadasAsteroides = coordenadasAsteroides;
-    }*/
 
     public ContenedorNaves getContenedorNaves() {
         return contenedorNaves;
@@ -66,5 +58,13 @@ public class Participante {
 
     public Integer getPuntuacion() {
         return puntuacion;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 }

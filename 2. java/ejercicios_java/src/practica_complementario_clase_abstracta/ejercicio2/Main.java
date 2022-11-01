@@ -16,15 +16,16 @@ public class Main {
         List<Participante> participantes = new ArrayList<>();
 
         Participante participante = new Participante();
-
-        participante.cargarNaves(new NaveSimple("nave dizzi", 12, 1),
+        participante.setUserName("Dizzi");
+        participante.cargarNaves(new NaveSimple("nave dizzi", 12, 25),
                 new ContenedorNaves(
                         new NaveSimple("Nave tren", 13, 12),
                         new NaveSimple("Nave valencia", 22, 10)
                 ));
 
         Participante participante2 = new Participante();
-        participante2.cargarNaves(new NaveSimple("Nave dizzi 2", 2, 1));
+        participante2.setUserName("Johan");
+        participante2.cargarNaves(new NaveSimple("Nave Johan", 2, 1));
 
         participantes.add(participante);
         participantes.add(participante2);

@@ -57,6 +57,9 @@ public class Juego {
         Participante participante = participantes.stream()
                 .max((x1, x2) -> x1.getPuntuacion().compareTo(x2.getPuntuacion())).get();
 
+        System.out.println("UserName: " + participante.getUserName());
+        System.out.println("Puntuacion: " + participante.getPuntuacion());
+
         System.out.println(participante);
     }
 
