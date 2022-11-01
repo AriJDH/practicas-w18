@@ -16,16 +16,28 @@ public class NaveSimple implements INave {
 
     private int puntuacion = 0;
 
+    public NaveSimple() {
+    }
+
     @Override
-    public double acumularPuntos(int x, int y) {
+    public double calcularDistancia(int x, int y) {
 
-        double distancia = Math.sqrt(Math.pow((this.x - x), 2) + Math.pow((this.y - y), 2));
-
-        return distancia;
+        //Obtener distancia entre los dos puntos
+        return Math.sqrt(Math.pow((this.x - x), 2) + Math.pow((this.y - y), 2));
     }
 
     @Override
     public int getPuntuacion() {
         return puntuacion;
+    }
+
+    @Override
+    public String toString() {
+        return "NaveSimple{" +
+                "nombre='" + nombre + '\'' +
+                ", x=" + x +
+                ", y=" + y +
+                ", puntuacion=" + puntuacion +
+                '}';
     }
 }

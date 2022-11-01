@@ -4,17 +4,19 @@ import java.util.List;
 
 public class Participante {
 
-    private List<Asteroide> coordenadasAsteroides;
+    //private List<Asteroide> coordenadasAsteroides;
+
+    private Integer puntuacion = 0;
 
     private ContenedorNaves contenedorNaves = new ContenedorNaves();
 
-    public List<Asteroide> getCoordenadasAsteroides() {
+    /*public List<Asteroide> getCoordenadasAsteroides() {
         return coordenadasAsteroides;
     }
 
     public void setCoordenadasAsteroides(List<Asteroide> coordenadasAsteroides) {
         this.coordenadasAsteroides = coordenadasAsteroides;
-    }
+    }*/
 
     public ContenedorNaves getContenedorNaves() {
         return contenedorNaves;
@@ -28,19 +30,41 @@ public class Participante {
         contenedorNaves.add(naves);
     }
 
-    public double empezarJuego() {
+    public double empezarJuego(int x, int y) {
 
-        double puntuacionMayor = 0;
+        double distanciaMasCercana = 0.0;
 
-        for (Asteroide asteroide: this.coordenadasAsteroides) {
+        for (int i = 0; i < contenedorNaves.getFlotaNaves().size(); i++) {
 
-            double puntuacion = contenedorNaves.acumularPuntos(asteroide.getX(), asteroide.getY());
+            INave nave = contenedorNaves.getFlotaNaves().get(i);
 
-            if (puntuacion > puntuacionMayor) {
-                puntuacionMayor = puntuacion;
+            double distancia = nave.calcularDistancia(x, y);
+
+            if (i == 0) {
+                distanciaMasCercana = distancia;
+            }
+
+            if (distancia < distanciaMasCercana) {
+                distanciaMasCercana = distancia;
             }
         }
 
-        return puntuacionMayor;
+        return distanciaMasCercana;
+    }
+
+    public void sumarPunto() {
+        this.puntuacion += 1;
+    }
+
+    @Override
+    public String toString() {
+        return "Participante{" +
+                "puntuacion=" + puntuacion +
+                ", contenedorNaves=" + contenedorNaves +
+                '}';
+    }
+
+    public Integer getPuntuacion() {
+        return puntuacion;
     }
 }

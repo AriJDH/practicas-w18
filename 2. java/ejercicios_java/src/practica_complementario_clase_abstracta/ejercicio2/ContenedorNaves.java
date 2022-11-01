@@ -4,12 +4,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class ContenedorNaves extends NaveSimple {
+public class ContenedorNaves implements INave {
 
     private List<INave> flotaNaves = new ArrayList<>();
 
     public ContenedorNaves(INave... naves) {
-        super("nave1",0,0);
         add(naves);
     }
 
@@ -22,15 +21,34 @@ public class ContenedorNaves extends NaveSimple {
     }
 
     @Override
-    public double acumularPuntos(int x, int y) {
+    public double calcularDistancia(int x, int y) {
 
         int puntuacion = 0;
 
-        for (INave nave : flotaNaves) {
+        double distancia = 0.0;
 
-            puntuacion += nave.acumularPuntos(x, y);
+        for (int i = 0; i < flotaNaves.size(); i++) {
+
+            distancia += flotaNaves.get(i).calcularDistancia(x, y);
+
         }
 
-        return puntuacion;
+        return distancia / flotaNaves.size();
+    }
+
+    @Override
+    public int getPuntuacion() {
+        return 0;
+    }
+
+    public List<INave> getFlotaNaves() {
+        return flotaNaves;
+    }
+
+    @Override
+    public String toString() {
+        return "ContenedorNaves{" +
+                "flotaNaves=" + flotaNaves +
+                '}';
     }
 }
