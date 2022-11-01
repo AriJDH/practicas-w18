@@ -1,2 +1,3 @@
-package PACKAGE_NAME;public interface Herviboro {
+public interface Herviboro {
+    public void comerHierva();
 }

@@ -1,2 +1,3 @@
-package PACKAGE_NAME;public interface Carnivoro {
+public interface Carnivoro {
+    public void comerCarne();
 }
