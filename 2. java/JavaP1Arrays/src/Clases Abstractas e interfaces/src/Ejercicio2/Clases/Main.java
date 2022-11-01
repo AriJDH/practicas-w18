@@ -1,5 +1,6 @@
 package Ejercicio2.Clases;
 
+import Ejercicio2.Interfaces.IImprimir;
 import Ejercicio2.Modelos.Habilidades;
 import Ejercicio2.Modelos.Informe;
 import Ejercicio2.Modelos.Libro;
@@ -40,24 +41,25 @@ public class Main {
         LibrosEnPdf librosEnPdf = new LibrosEnPdf(libro);
         //endregion
 
-        //region Forma 1
-        Imprimible imprimible = new Imprimible();
-        imprimible.imprimir(informes);
-        Imprimible imprimible2 = new Imprimible();
-        imprimible2.imprimir(librosEnPdf);
-        Imprimible imprimible3 = new Imprimible();
-        imprimible3.imprimir(imprimirCurriculum);
-        //endregion
+        Main main = new Main();
+        main.imprimible(imprimirCurriculum);
+        main.imprimible(librosEnPdf);
+        main.imprimible(informes);
 
-        //region Forma 2
-        Imprimible imprimible4 = new Imprimible();
-        imprimible4.setInformes(informes);
-        imprimible4.setLibrosEnPdf(librosEnPdf);
-        imprimible4.setCurriculums(imprimirCurriculum);
-        imprimible4.imprimir();
-        //endregion
+    }
 
-
-
+    public void imprimible(Object objecto){
+        if (objecto != null && objecto instanceof Curriculums) {
+            System.out.println("Imprimiendo curriculum ...");
+        }else{
+            if (objecto != null && objecto instanceof Informes) {
+                System.out.println("Imprimiendo informe ...");
+            }else{
+                if (objecto != null && objecto instanceof LibrosEnPdf) {
+                    System.out.println("Imprimiendo libro en formato PDF ...");
+                }
+            }
+        }
+        ((IImprimir<Object>) objecto).imprimir();
     }
 }
