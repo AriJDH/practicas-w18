@@ -5,11 +5,11 @@ public class Test {
         Main main = new Main();
         perro.emitirSonido();
         main.comerAnimal(perro);
-        Gato gato = new Gato();
-        gato.emitirSonido();
-        main.comerAnimal(gato);
         Vaca vaca = new Vaca();
         vaca.emitirSonido();
         main.comerAnimal(vaca);
+        Gato gato = new Gato();
+        gato.emitirSonido();
+        main.comerAnimal(gato);
     }
 }
