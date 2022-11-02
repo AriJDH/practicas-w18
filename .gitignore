@@ -195,7 +195,5 @@ buildNumber.properties
 
 # End of https://www.toptal.com/developers/gitignore/api/macos,intellij,maven,java
 
-java/Clase4/.idea
-java/Clase3/.idea
 
-
+**/.idea/*
