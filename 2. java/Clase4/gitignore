@@ -11,10 +11,6 @@
 .idea/**/usage.statistics.xml
 .idea/**/dictionaries
 .idea/**/shelf
-2._java/Clase3/.idea
-2._java/Clase4/.idea
-2._java/Clase3/*.iml
-2._java/Clase4/*.iml
 
 # AWS User-specific
 .idea/**/aws.xml
@@ -30,6 +26,16 @@
 .idea/**/dynamic.xml
 .idea/**/uiDesigner.xml
 .idea/**/dbnavigator.xml
+/2._java/Clase3/*.idea
+/2._java/Clase3/*.iml
+/2._java/Clase3/*.DS_Store
+/2._java/Clase3/*.xml
+2._java/Clase3/*.class
+/2._java/Clase4/*.idea
+/2._java/Clase4/*.iml
+/2._java/Clase4/*.DS_Store
+/2._java/Clase4/*.xml
+2._java/Clase3/*.class
 
 # Gradle
 .idea/**/gradle.xml
