@@ -12,7 +12,7 @@ public class Main {
         Persona soporteTecnico = new SoporteTecnico("Ulises");
         Persona estudiante = new Estudiante("Javiera");
         Persona estudianteTecnico = new Tecnico("Tana");
-        Persona estudianteTutor = new Tutor("Mariela");
+        Persona estudianteTutor = new Docencia("Mariela");
 
         ArrayList<Persona> personal = new ArrayList<>();
 
@@ -30,8 +30,8 @@ public class Main {
             if(p instanceof Tecnico){
                 ((Tecnico) p).darSoporteTecnico();
             }
-            if(p instanceof Tutor){
-                ((Tutor) p).darTutoria();
+            if(p instanceof Docencia){
+                ((Docencia) p).darTutoria();
             }
             System.out.println( " ---- ");
         }

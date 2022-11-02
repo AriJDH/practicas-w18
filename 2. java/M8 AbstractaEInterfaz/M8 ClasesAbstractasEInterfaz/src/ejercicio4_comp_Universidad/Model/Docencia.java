@@ -2,13 +2,13 @@ package ejercicio4_comp_Universidad.Model;
 
 import ejercicio4_comp_Universidad.Intefaz.FuncionDocencia;
 
-public class Docente extends Persona implements FuncionDocencia {
-    public Docente(String name) {
+public class Docencia extends Estudiante implements FuncionDocencia {
+    public Docencia(String name) {
         super(name);
     }
 
     @Override
     public String toString() {
-        return "Docente " + super.toString();
+        return "Docencia " + super.toString();
     }
 }
