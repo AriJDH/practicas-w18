@@ -28,10 +28,10 @@ public class Persona {
         if (imc<20) {
             return -1;
         }
-        if (imc<=25) {
-            return 0;
+        if (imc>=25) {
+            return 1;
         }
-        return 1;
+        return 0;
     }
 
     public boolean esMayorDeEdad() {
