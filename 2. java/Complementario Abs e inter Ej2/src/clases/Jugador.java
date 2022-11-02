@@ -22,8 +22,21 @@ public class Jugador {
 
     @Override
     public String toString() {
-        return "\r\n Jugador{" +
-                " nombre='" + nombre  +
-                " nave= " + this.nave.toString();
+        return "\r\n" +
+                " Nombre= " + nombre  +
+                "|| Nave= " + this.nave.toString();
     }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void sumarPunto(){
+        this.nave.sumarPunto();
+    }
+
+    public double puntosJugador(){
+        return this.nave.getPuntos();
+    }
+
 }

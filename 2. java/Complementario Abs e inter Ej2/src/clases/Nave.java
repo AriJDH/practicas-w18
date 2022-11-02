@@ -20,6 +20,9 @@ public abstract class Nave implements Moverse {
         this.ubicacion[1] = Math.random()*100;
     }
 
+    public void sumarPunto(){
+        this.puntos++;
+    }
     public double getEjeX(){
         return this.ubicacion[0];
     }
@@ -30,8 +33,10 @@ public abstract class Nave implements Moverse {
 
     @Override
     public String toString() {
-        return "Nave{" +
-                "nombre='" + nombre + '\'' +
-                '}';
+        return  nombre;
+    }
+
+    public int getPuntos() {
+        return puntos;
     }
 }

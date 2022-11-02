@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement />
+  <nodes>
+    <node x="-52.07281953216123" y="333.0023745669869">clases.NaveSimple</node>
+    <node x="-115.98945937166127" y="126.96638455284699">clases.Nave</node>
+    <node x="306.0247828383034" y="325.1199364751213">clases.FlotaDeNavesSimples</node>
+    <node x="133.95389968330824" y="148.51730636033145">clases.Jugador</node>
+    <node x="229.94989177901783" y="-14.848120781501862">clases.Juego</node>
+    <node x="-20.03110131574138" y="22.496322594852856">interfaz.Moverse</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="clases.Nave" target="interfaz.Moverse" relationship="REALIZATION">
+      <point x="101.5" y="-86.5" />
+      <point x="-32.45835805591989" y="14.5" />
+    </edge>
+    <edge source="clases.FlotaDeNavesSimples" target="clases.Nave" relationship="GENERALIZATION">
+      <point x="-123.49978283830339" y="6.35248787261844E-5" />
+      <point x="218.927" y="398.62" />
+      <point x="218.927" y="336.0" />
+      <point x="-26.989000000000004" y="336.0" />
+      <point x="4.5937166126464035E-4" y="86.49961544715302" />
+    </edge>
+    <edge source="clases.NaveSimple" target="clases.Nave" relationship="GENERALIZATION">
+      <point x="-1.804678387671288E-4" y="-30.000374566986864" />
+      <point x="110.92699999999999" y="336.0" />
+      <point x="-26.989000000000004" y="336.0" />
+      <point x="4.5937166126464035E-4" y="86.49961544715302" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Compact" zoom="0.6535433070866141" showDependencies="false" x="232.5" y="239.0" />
+  <SelectedNodes>
+    <node>clases.Nave</node>
+    <node>clases.Juego</node>
+    <node>clases.NaveSimple</node>
+    <node>clases.FlotaDeNavesSimples</node>
+    <node>interfaz.Moverse</node>
+    <node>clases.Jugador</node>
+  </SelectedNodes>
+  <Categories>
+    <Category>Constructors</Category>
+    <Category>Fields</Category>
+    <Category>Methods</Category>
+    <Category>Properties</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+
