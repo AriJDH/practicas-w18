@@ -3,25 +3,64 @@
   <ID>JAVA</ID>
   <OriginalElement />
   <nodes>
-    <node x="57.16666666666674" y="-303.1666666666667">ejercicio4_comp_Universidad.Model.Persona</node>
-    <node x="309.93750000000006" y="-264.50000000000006">ejercicio4_comp_Universidad.Intefaz.Tutor</node>
-    <node x="469.3333333333335" y="-189.66666666666663">ejercicio4_comp_Universidad.Model.SoporteTecnico</node>
-    <node x="-197.16666666666663" y="-189.66666666666663">Administrativo</node>
-    <node x="297.2708333333334" y="-189.66666666666663">ejercicio4_comp_Universidad.Model.Estudiante</node>
-    <node x="-26.479166666666615" y="-189.66666666666663">ejercicio4_comp_Universidad.Model.Mantenimiento</node>
-    <node x="158.89583333333343" y="-189.66666666666663">ejercicio4_comp_Universidad.Model.Docente</node>
-    <node x="307.2708333333334" y="-65.66666666666674">ejercicio4_comp_Universidad.Model.Tecnico</node>
+    <node x="-477.0" y="-1686.5">ejercicio4_comp_Universidad.Model.Docente</node>
+    <node x="-215.0" y="-1526.5">ejercicio4_comp_Universidad.Model.Tecnico</node>
+    <node x="-70.5" y="-1474.0">ejercicio4_comp_Universidad.Intefaz.FuncionSoporteTecnico</node>
+    <node x="-524.7206722559986" y="-1906.7649041764137">ejercicio4_comp_Universidad.Model.Persona</node>
+    <node x="-572.0" y="-1494.0">ejercicio4_comp_Universidad.Intefaz.FuncionTutor</node>
+    <node x="-305.0" y="-1686.5">ejercicio4_comp_Universidad.Model.Estudiante</node>
+    <node x="-699.0" y="-1686.5">ejercicio4_comp_Universidad.Model.Administrativo</node>
+    <node x="-954.3313424821622" y="-1691.439178986151">ejercicio4_comp_Universidad.Model.Mantenimiento</node>
+    <node x="-367.5" y="-1526.5">ejercicio4_comp_Universidad.Model.Tutor</node>
+    <node x="-82.5" y="-1686.5">ejercicio4_comp_Universidad.Model.SoporteTecnico</node>
   </nodes>
   <notes />
-  <edges />
-  <settings layout="Hierarchic Compact" zoom="1.5" showDependencies="false" x="224.0" y="-237.33333333333334" />
-  <SelectedNodes>
-    <node>ejercicio4_comp_Universidad.Intefaz.Tutor</node>
-  </SelectedNodes>
+  <edges>
+    <edge source="ejercicio4_comp_Universidad.Model.Administrativo" target="ejercicio4_comp_Universidad.Model.Persona" relationship="GENERALIZATION">
+      <point x="-0.07322459847853224" y="-30.522878451730662" />
+      <point x="-620.0732245984785" y="-1753.7649041764137" />
+      <point x="-480.0" y="-1753.7649041764137" />
+      <point x="-480.0" y="-1762.2649041764137" />
+      <point x="-488.2206722559986" y="-1762.2649041764137" />
+      <point x="-488.2206722559986" y="-1753.7649041764137" />
+      <point x="-480.0" y="-1753.7649041764137" />
+      <point x="-480.0" y="-1853.7649041764137" />
+      <point x="-48.5" y="26.5" />
+    </edge>
+    <edge source="ejercicio4_comp_Universidad.Model.Tutor" target="ejercicio4_comp_Universidad.Model.Estudiante" relationship="GENERALIZATION">
+      <point x="22.5" y="-26.5" />
+      <point x="-57.5" y="26.5" />
+    </edge>
+    <edge source="ejercicio4_comp_Universidad.Model.Docente" target="ejercicio4_comp_Universidad.Model.Persona" relationship="GENERALIZATION">
+      <point x="0.0" y="0.0" />
+      <point x="-420.0" y="-1760.0" />
+      <point x="-480.0" y="-1760.0" />
+      <point x="-480.0" y="-1860.2649041764137" />
+      <point x="-440.0" y="-1860.2649041764137" />
+      <point x="-440.0" y="-1880.2649041764137" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="ejercicio4_comp_Universidad.Model.Mantenimiento" target="ejercicio4_comp_Universidad.Model.Persona" relationship="GENERALIZATION">
+      <point x="0.0" y="-26.5" />
+      <point x="-873.8313424821622" y="-1753.7649041764137" />
+      <point x="-480.0" y="-1753.7649041764137" />
+      <point x="-480.0" y="-1853.7649041764137" />
+      <point x="0.0" y="26.5" />
+    </edge>
+    <edge source="ejercicio4_comp_Universidad.Model.Estudiante" target="ejercicio4_comp_Universidad.Model.Persona" relationship="GENERALIZATION">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="ejercicio4_comp_Universidad.Model.SoporteTecnico" target="ejercicio4_comp_Universidad.Model.Persona" relationship="GENERALIZATION">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Compact" zoom="0.8546934223087611" showDependencies="false" x="-84.61578784393521" y="-1565.6263270813058" />
+  <SelectedNodes />
   <Categories>
     <Category>Constructors</Category>
     <Category>Fields</Category>
-    <Category>Inner Classes</Category>
     <Category>Methods</Category>
     <Category>Properties</Category>
   </Categories>
