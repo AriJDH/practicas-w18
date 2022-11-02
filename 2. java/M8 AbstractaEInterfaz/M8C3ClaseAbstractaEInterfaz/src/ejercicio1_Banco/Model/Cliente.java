@@ -1,4 +1,4 @@
-package ejercicio1_Banco.ClasesClientes;
+package ejercicio1_Banco.Model;
 
 public abstract class Cliente {
     private double saldo;

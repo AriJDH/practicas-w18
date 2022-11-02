@@ -1,4 +1,4 @@
-package ejercicio1_Banco.ClasesClientes;
+package ejercicio1_Banco.Model;
 
 import ejercicio1_Banco.Interfaz.Consultable;
 import ejercicio1_Banco.Interfaz.Retirable;

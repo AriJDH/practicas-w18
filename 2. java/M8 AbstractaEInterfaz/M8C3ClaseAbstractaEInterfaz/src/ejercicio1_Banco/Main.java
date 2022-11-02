@@ -1,8 +1,8 @@
 package ejercicio1_Banco;
 
-import ejercicio1_Banco.ClasesClientes.Basic;
-import ejercicio1_Banco.ClasesClientes.Cobrador;
-import ejercicio1_Banco.ClasesClientes.Ejecutivo;
+import ejercicio1_Banco.Model.Basic;
+import ejercicio1_Banco.Model.Cobrador;
+import ejercicio1_Banco.Model.Ejecutivo;
 
 public class Main {
     public static void main(String[] args) {
