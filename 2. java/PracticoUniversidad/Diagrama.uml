@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>Clases.Estudiante</OriginalElement>
+  <nodes>
+    <node x="251.75" y="160.0">Clases.EstudianteTecnico</node>
+    <node x="214.0" y="0.0">Clases.Persona</node>
+    <node x="692.75" y="160.0">Clases.PersonalMantenimiento</node>
+    <node x="366.0" y="80.0">Interfaces.IDarSoporteTecnico</node>
+    <node x="131.0" y="160.0">Clases.Tutor</node>
+    <node x="452.75" y="160.0">Clases.PersonalSoporteTecnico</node>
+    <node x="202.5" y="80.0">Clases.Estudiante</node>
+    <node x="63.5" y="80.0">Interfaces.IDarClase</node>
+    <node x="715.5" y="80.0">Clases.Personal</node>
+    <node x="0.0" y="160.0">Clases.Profesor</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="Clases.EstudianteTecnico" target="Interfaces.IDarSoporteTecnico">
+      <point x="45.25" y="-15.0" />
+      <point x="387.5" y="135.0" />
+      <point x="413.25" y="135.0" />
+      <point x="-47.25" y="15.0" />
+    </edge>
+    <edge source="Clases.Profesor" target="Interfaces.IDarClase">
+      <point x="27.75" y="-15.0" />
+      <point x="83.25" y="135.0" />
+      <point x="93.25" y="135.0" />
+      <point x="-29.75" y="15.0" />
+    </edge>
+    <edge source="Clases.EstudianteTecnico" target="Clases.Estudiante">
+      <point x="-45.25" y="-15.0" />
+      <point x="31.5" y="15.0" />
+    </edge>
+    <edge source="Clases.Tutor" target="Clases.Estudiante">
+      <point x="21.75" y="-15.0" />
+      <point x="196.25" y="135.0" />
+      <point x="234.0" y="135.0" />
+      <point x="-31.5" y="15.0" />
+    </edge>
+    <edge source="Clases.PersonalSoporteTecnico" target="Interfaces.IDarSoporteTecnico">
+      <point x="-55.0" y="-15.0" />
+      <point x="47.25" y="15.0" />
+    </edge>
+    <edge source="Clases.PersonalSoporteTecnico" target="Clases.Personal">
+      <point x="55.0" y="-15.0" />
+      <point x="617.75" y="135.0" />
+      <point x="743.25" y="135.0" />
+      <point x="-27.75" y="15.0" />
+    </edge>
+    <edge source="Clases.Profesor" target="Clases.Persona">
+      <point x="-27.75" y="-15.0" />
+      <point x="27.75" y="55.0" />
+      <point x="231.16666666666666" y="55.0" />
+      <point x="-34.33333333333334" y="15.0" />
+    </edge>
+    <edge source="Clases.PersonalMantenimiento" target="Clases.Personal">
+      <point x="0.0" y="-15.0" />
+      <point x="27.75" y="15.0" />
+    </edge>
+    <edge source="Clases.Personal" target="Clases.Persona">
+      <point x="0.0" y="-15.0" />
+      <point x="771.0" y="55.0" />
+      <point x="299.83333333333337" y="55.0" />
+      <point x="34.33333333333337" y="15.0" />
+    </edge>
+    <edge source="Clases.Estudiante" target="Clases.Persona">
+      <point x="0.0" y="-15.0" />
+      <point x="0.0" y="15.0" />
+    </edge>
+    <edge source="Clases.Tutor" target="Interfaces.IDarClase">
+      <point x="-21.75" y="-15.0" />
+      <point x="29.75" y="15.0" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="1.0" x="452.5" y="95.0" />
+  <SelectedNodes>
+    <node>Clases.Estudiante</node>
+  </SelectedNodes>
+  <Categories />
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+
