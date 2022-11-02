@@ -11,8 +11,8 @@ public class Test {
         habilidades.add("SQL");
 
         Curriculum cv = new Curriculum("Seba", "Gines", habilidades);
-        cv.imprimir();
+        Imprimible.imprimir(cv);
         LibroPdf libro = new LibroPdf(456, "Tolkien", "El señor de los anillos", "Ciencia Ficción");
-        libro.imprimir();
+        Imprimible.imprimir(libro);
     }
 }

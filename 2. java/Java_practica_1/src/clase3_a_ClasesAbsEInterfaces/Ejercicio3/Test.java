@@ -5,9 +5,12 @@ public class Test {
         Gato gato = new Gato();
         Perro perro = new Perro();
         Vaca vaca = new Vaca();
+        Animal animal = new Perro();
 
         gato.emitirSonidos();
         gato.comerCarne();
-        gato.comerAnimal(vaca);
+        animal.comer();
+        animal = new Vaca();
+        animal.comer();
     }
 }

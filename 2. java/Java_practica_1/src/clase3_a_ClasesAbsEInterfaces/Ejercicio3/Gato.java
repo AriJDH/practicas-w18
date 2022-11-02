@@ -12,7 +12,7 @@ public class Gato extends Animal implements Carnivoro{
     }
 
     @Override
-    public void comerAnimal(Animal animal) {
-        System.out.println("Me estoy comiendo un " + animal.getClass().getSimpleName());
+    public void comer() {
+        this.comerCarne();
     }
 }

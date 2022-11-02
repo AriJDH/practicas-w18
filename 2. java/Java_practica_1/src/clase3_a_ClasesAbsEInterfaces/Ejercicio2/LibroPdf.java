@@ -14,10 +14,9 @@ public class LibroPdf implements Imprimible{
         this.genero = genero;
     }
 
-
     @Override
-    public void imprimir() {
-        System.out.println("El libro '" + this.titulo + "' del autor " + this.autor + " es del género " + this.genero + " y tiene " + this.cantPaginas + " páginas");
+    public String toString() {
+        return "El libro '" + this.titulo + "' del autor " + this.autor + " es del género " + this.genero + " y tiene " + this.cantPaginas + " páginas";
     }
 
 }
