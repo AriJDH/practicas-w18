@@ -38,11 +38,11 @@ public class Basic extends Cliente implements ConsultaSaldo, PagoServicios, Efec
 
     @Override
     public void transaccionOk() {
-        System.out.println("Transacción ok");
+        
     }
 
     @Override
     public void transaccionNoOk() {
-        System.out.println("Transacción no ok");
+
     }
 }
