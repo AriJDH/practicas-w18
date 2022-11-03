@@ -11,7 +11,6 @@
     <node x="-305.0" y="-1686.5">ejercicio4_comp_Universidad.Model.Estudiante</node>
     <node x="-699.0" y="-1686.5">ejercicio4_comp_Universidad.Model.Administrativo</node>
     <node x="-954.3313424821622" y="-1691.439178986151">ejercicio4_comp_Universidad.Model.Mantenimiento</node>
-    <node x="-400.26028488012025" y="-1526.5">ejercicio4_comp_Universidad.Model.Docencia</node>
     <node x="-82.5" y="-1686.5">ejercicio4_comp_Universidad.Model.SoporteTecnico</node>
   </nodes>
   <notes />
@@ -26,12 +25,6 @@
       <point x="-480.0" y="-1753.7649041764137" />
       <point x="-480.0" y="-1853.7649041764137" />
       <point x="-48.5" y="26.5" />
-    </edge>
-    <edge source="ejercicio4_comp_Universidad.Model.Docencia" target="ejercicio4_comp_Universidad.Model.Estudiante" relationship="GENERALIZATION">
-      <point x="22.5" y="-26.5" />
-      <point x="-303.26028488012025" y="-1568.5" />
-      <point x="-280.5" y="-1568.5" />
-      <point x="-57.5" y="26.5" />
     </edge>
     <edge source="ejercicio4_comp_Universidad.Model.SoporteTecnico" target="ejercicio4_comp_Universidad.Intefaz.FuncionSoporteTecnico" relationship="REALIZATION">
       <point x="91.1404273201806" y="38.0" />
@@ -52,12 +45,6 @@
       <point x="-480.0" y="-1753.7649041764137" />
       <point x="-480.0" y="-1853.7649041764137" />
       <point x="0.0" y="26.5" />
-    </edge>
-    <edge source="ejercicio4_comp_Universidad.Model.Docencia" target="ejercicio4_comp_Universidad.Intefaz.FuncionDocencia" relationship="REALIZATION">
-      <point x="0.0" y="0.0" />
-      <point x="-399.5" y="-1488.5" />
-      <point x="-399.5" y="-1398.4693997168893" />
-      <point x="0.0" y="0.0" />
     </edge>
     <edge source="ejercicio4_comp_Universidad.Model.Estudiante" target="ejercicio4_comp_Universidad.Model.Persona" relationship="GENERALIZATION">
       <point x="0.0" y="0.0" />
@@ -83,9 +70,9 @@
       <point x="0.0" y="0.0" />
     </edge>
   </edges>
-  <settings layout="Hierarchic Compact" zoom="0.8546934223087611" showDependencies="false" x="-384.0836614173228" y="-1515.1077921790675" />
+  <settings layout="Hierarchic Compact" zoom="0.6447338581047788" showDependencies="false" x="-293.7834184453054" y="-1558.3820990414195" />
   <SelectedNodes>
-    <node>ejercicio4_comp_Universidad.Intefaz.FuncionDocencia</node>
+    <node>ejercicio4_comp_Universidad.Model.Estudiante</node>
   </SelectedNodes>
   <Categories>
     <Category>Constructors</Category>

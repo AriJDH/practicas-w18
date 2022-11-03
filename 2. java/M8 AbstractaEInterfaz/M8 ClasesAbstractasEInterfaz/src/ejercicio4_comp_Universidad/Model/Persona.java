@@ -30,6 +30,6 @@ public abstract class Persona {
     @Override
     public String toString() {
         return
-                "\t" + name + "·" + " Legajo: " + getNroLegajo();
+                "\t" + name + " ·" + " Legajo: " + getNroLegajo();
     }
 }

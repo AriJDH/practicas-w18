@@ -9,6 +9,6 @@ public class SoporteTecnico extends Persona implements FuncionSoporteTecnico {
 
     @Override
     public String toString() {
-        return "SoporteTecnico " + super.toString();
+        return "SoporteTecnico \t\t" + super.toString();
     }
 }

@@ -9,6 +9,6 @@ public class Docente extends Persona implements FuncionDocencia {
 
     @Override
     public String toString() {
-        return "Docente " + super.toString();
+        return "Docente    \t\t\t" + super.toString();
     }
 }

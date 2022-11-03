@@ -3,8 +3,13 @@ package ejercicio4_comp_Universidad;
 import ejercicio4_comp_Universidad.Model.*;
 import ejercicio4_comp_Universidad.Util.Util;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 public class Main {
     public static void main(String[] args) {
+
+
         Persona admin = new Administrativo("Juan");
         Persona docente = new Docente("Mariana");
         Persona mantenimiento = new Mantenimiento("Roxanna");
@@ -14,7 +19,7 @@ public class Main {
         Persona estudianteTutor = new Tutor("Mariela");
 
 
-        Persona[] personal = Util.cargarPersonal(
+        List<Persona> personal = List.of(
                 admin,
                 docente,
                 mantenimiento,
@@ -23,7 +28,15 @@ public class Main {
                 estudianteTecnico,
                 estudianteTutor);
 
+        //Método tradicional
         Util.mostrarPersonal(personal);
+
+
+        //Con Lambda
+        Util.mostrarPersonalStream(personal);
+
+
+
 
     }
 
