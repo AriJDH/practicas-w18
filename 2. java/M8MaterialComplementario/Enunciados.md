@@ -1,6 +1,26 @@
 Ejercicio 1
-Asuma que queremos modelar personas de una universidad para implementar un sistema de administración de cursos. Hay diferentes personas involucradas: miembros del personal, estudiantes, profesores, personal de mantenimiento, tutores, personal de soporte técnico y estudiantes técnicos. Los tutores y los estudiantes técnicos son interesantes: los tutores son estudiantes que han sido elegidos para enseñar algo y los estudiantes técnicos son estudiantes que han sido seleccionados para colaborar en el soporte técnico. Realice una jerarquía de tipos (clases e interfaces) que represente esta situación. Reproduce un escenario donde se muestre qué tipos son clases concretas, clases abstractas e interfaces.
+
+Asuma que queremos modelar personas de una universidad para implementar un sistema de administración de cursos. 
+
+Hay diferentes personas involucradas: 
+- miembros del personal, 
+- estudiantes, 
+- profesores, 
+- personal de mantenimiento, 
+- tutores, 
+- personal de soporte técnico y 
+- estudiantes técnicos. 
+
+Los tutores y los estudiantes técnicos son interesantes: 
+los tutores son estudiantes que han sido elegidos para enseñar algo y los estudiantes técnicos son estudiantes que 
+han sido seleccionados para colaborar en el soporte técnico. 
+
+Realice una jerarquía de tipos (clases e interfaces) que represente esta situación. 
+
+Reproduce un escenario donde se muestre qué tipos son clases concretas, clases abstractas e interfaces.
+
 Ejercicio 2
+
 Un juego llamado Asteroid, consiste en acumular puntos cuando destruye un asteroide. Los participantes pueden poseer una nave simple o una flota de naves simples. Las naves poseen un nombre, una ubicación en coordenadas (x, y) y una puntuación inicial de cero. Las flota de naves simples solo poseen una lista de naves simples. Cuando se indica unas coordenadas, la nave que gana el punto será aquella que esté más cerca, donde la distancia será la(x1-x2)2+(y1-y2)2 , pero en el caso de una flota de naves, la distancia será el promedio de distancias de las naves de la flota.
 Para poder iniciar el juego, se deben inscribir los participantes en una lista y se inicia el juego cuando se pasa en forma de arreglo las coordenadas donde los blancos aparecerán. Al finalizar se mostrará la nave o flota de naves ganadora que acumuló más puntos, también se deberá mostrar los resultados obtenidos para cada coordenada ingresada.
 Para desarrollar este ejercicio, se recomienda el uso de interfaces, con el uso del patrón de diseño Composite.

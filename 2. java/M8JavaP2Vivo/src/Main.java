@@ -8,12 +8,13 @@ public class Main {
         Map<Integer, Map<String, String>> participantes = new HashMap<>();
         ingresoAlSistema(participantes);
     }
+
     private static void ingresoAlSistema(Map<Integer, Map<String, String>> participantes) {
         // Input por consola
         Scanner input = new Scanner(System.in);
         // Sistema para "Carrera de la selva"
-        System.out.println("¿Qué deseas hacer? \n 1) Ingresar participante \n 2) Ver participantes \n 3) Ver cantidad de inscriptos por categoría") ;
-        // TODO pendiente de realizar el método de cantidad de inscriptos por categoría y refactorizar la parte del circuito avanzado para menores.
+        System.out.println(
+                "¿Qué deseas hacer? \n 1) Ingresar participante \n 2) Ver participantes \n 3) Ver cantidad de inscriptos por categoría");
         int opcionElegida = Integer.parseInt(input.nextLine());
 
 
@@ -24,13 +25,39 @@ public class Main {
             ingresarParticipante(dni, participantes);
         } else if (opcionElegida == 2) {
             verParticipantes(participantes);
+        } else if (opcionElegida == 3) {
+            verCantidadInscriptosPorCategoria(participantes);
+        } else {
+            System.out.println("La opción elegida es incorrecta.");
+            ingresoAlSistema(participantes);
         }
+    }
+
+    private static void verCantidadInscriptosPorCategoria(Map<Integer, Map<String, String>> participantes) {
+        int circuitoChico = 0;
+        int circuitoMedio = 0;
+        int circuitoGrande = 0;
+        for (Map<String, String> valor : participantes.values()) {
+            int circuito = Integer.parseInt(valor.get("Circuito"));
+            if (circuito == 1) {
+                circuitoChico += 1;
+            } else if (circuito == 2) {
+                circuitoMedio += 1;
+            } else if (circuito == 3){
+                circuitoGrande += 1;
+            } else System.out.println("No hay inscriptos");
+        }
+        System.out.println("El circuito chico tiene " + circuitoChico + " participantes.");
+        System.out.println("El circuito medio tiene " + circuitoMedio + " participantes.");
+        System.out.println("El circuito grande tiene " + circuitoGrande + " participantes.");
+        ingresoAlSistema(participantes);
+
     }
 
     private static void ingresarParticipante(Integer dni, Map<Integer, Map<String, String>> participantes) {
         // Input por consola
         Scanner input = new Scanner(System.in);
-        System.out.println(participantes.containsKey(dni));
+        // System.out.println(participantes.containsKey(dni));
         // Participante
         if (participantes.containsKey(dni)) {
             System.out.println("El participante ya está registrado.");
@@ -50,9 +77,10 @@ public class Main {
             String numeroEmergencia = input.nextLine();
             System.out.println("Grupo Sanguíneo: ");
             String grupoSanguineo = input.nextLine();
-            System.out.println("Circuito (1=Chico, 2=Medio, 3=Grande) Ingresá 1, 2 o 3 según el circuito que elijas:  ");
+            System.out.println(
+                    "Circuito (1=Chico, 2=Medio, 3=Grande) Ingresá 1, 2 o 3 según el circuito que elijas:  ");
             int circuito = Integer.parseInt(input.nextLine());
-            String valor = calcularValor(edad,circuito);
+            String valor = calcularValor(edad, circuito);
 
             // Guardamos los datos en el participante
             Map<String, String> participante = new HashMap<>();
@@ -67,28 +95,29 @@ public class Main {
             participante.put("Valor Inscripción", valor);
             System.out.println(participante.toString());
             participantes.put(dni, participante);
-            System.out.println(participantes);
+            // System.out.println(participantes);
             ingresoAlSistema(participantes);
         }
     }
 
-    static String calcularValor(int edad, int circuito){
+    static String calcularValor(int edad, int circuito) {
         String valor = "";
-        if(edad <18 && circuito == 1){
+        if (edad < 18 && circuito == 1) {
             valor = "$ 1.300";
-        } else if(edad > 18 && circuito == 1){
+        } else if (edad > 18 && circuito == 1) {
             valor = "$ 1.500";
-        }else if(edad < 18 && circuito == 2){
+        } else if (edad < 18 && circuito == 2) {
             valor = "$ 2.000";
-        }else if(edad > 18 && circuito == 2){
+        } else if (edad > 18 && circuito == 2) {
             valor = "$ 2.300";
-        }else if(edad > 18 && circuito == 3){
+        } else if (edad > 18 && circuito == 3) {
             valor = "$ 2.800";
-        } else if(edad <18 && circuito == 3){
-            valor="No se admitió su inscripción";
+        } else if (edad < 18 && circuito == 3) {
+            valor = "No se admitió su inscripción";
         }
         return valor;
     }
+
     static void verParticipantes(Map<Integer, Map<String, String>> participantes) {
         System.out.println(participantes);
         ingresoAlSistema(participantes);
