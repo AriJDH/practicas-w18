@@ -55,8 +55,8 @@ public class Vehiculo {
 
     @Override
     public String toString() {
-        return "Modelo: " + modelo + ' ' +
-                "- \tMarca: " + marca + ' ' +
+        return "Modelo: " + modelo + " \t" +
+                "Marca: " + marca + ' ' +
                 "\t $ " + costo;
     }
 }

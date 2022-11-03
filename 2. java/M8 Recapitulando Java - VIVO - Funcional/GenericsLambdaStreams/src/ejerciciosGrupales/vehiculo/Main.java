@@ -41,41 +41,57 @@ public class Main {
 
 
         System.out.println("\n ---------Ordenado por Costo ------------ ");
-        vehiculos.stream()
+        garage.getVehiculos().stream()
                // .sorted((o1, o2) -> o1.getCosto().compareTo(o2.getCosto()))
                 .sorted(Comparator.comparing(Vehiculo::getCosto))
                 .forEach(System.out::println);
 
         System.out.println("\n ---------Ordenado por Marca y Costo ------------ ");
-        vehiculos.stream()
+        garage.getVehiculos().stream()
                 .sorted(Comparator.comparing(Vehiculo::getCosto))  //Así ordena primero por Marca y luego por costo
-                .sorted(Comparator.comparing(Vehiculo::getMarca))   //si invierto las sentencias ordena por costo y luego por marca
+                .sorted(Comparator.comparing(Vehiculo::getMarca))  //Si invierto las sentencias ordena por costo y luego por marca
                 .forEach(System.out::println);
 
         System.out.println("\n --------- Vehículos costo < 1000 ------------ ");
-        vehiculos.stream()
+        garage.getVehiculos().stream()
                 .filter(vehiculo -> vehiculo.getCosto() < 1000)
                 .sorted(Comparator.comparing(Vehiculo::getCosto))
                 .forEach(System.out::println);
 
         System.out.println("\n --------- Vehículos costo >= 1000 ------------ ");
-        vehiculos.stream()
+        garage.getVehiculos().stream()
                 .filter(vehiculo -> vehiculo.getCosto() >= 1000)
                 .sorted(Comparator.comparing(Vehiculo::getCosto))
                 .forEach(System.out::println);
 
         System.out.println("\n --------- Promedio de precios de toda la lista ------------ ");
-        OptionalDouble promedio = vehiculos.stream()
+        OptionalDouble promedio = garage.getVehiculos().stream()
                 .mapToInt(value -> value.getCosto())
                 .average();
 
         System.out.println("promedio: $" + Math.round(promedio.getAsDouble()));
 
 
+        System.out.println("\n --------- matToDouble Promedio de precios de toda la lista ------------ ");
+        Double promedioD = garage.getVehiculos().stream()
+                .mapToDouble(value -> value.getCosto())
+                .average()
+                .orElse(Double.NaN);
+
+        System.out.println("Promedio: $" + Math.round(promedioD));
+
+
+        System.out.println("\n --------- AveragingDouble - Promedio de precios de toda la lista ------------ ");
+
+        double promedioAvg = garage.getVehiculos().stream()
+                .collect(Collectors
+                        .averagingDouble(Vehiculo::getCosto));
+
+
 
         //otra forma de imprimir lista
-        vehiculos.stream().collect(Collectors.toList())
-                .forEach((x) -> System.out.println(x));
+        //vehiculos.stream().collect(Collectors.toList())
+        //        .forEach((x) -> System.out.println(x));
 
     }
 }
