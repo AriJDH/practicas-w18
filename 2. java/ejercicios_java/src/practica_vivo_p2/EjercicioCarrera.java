@@ -22,19 +22,19 @@ public class EjercicioCarrera {
 
             Scanner teclado = new Scanner(System.in);
 
-            String opcionMenu = String.valueOf(teclado.nextLine());
+            char opcionMenu = teclado.next().charAt(0);
 
             switch (opcionMenu) {
-                case "A":
+                case 'A':
                     crearParticipante();
                     break;
-                case "B":
+                case 'B':
                     consultarParticipantes();
                     break;
-                case "C":
+                case 'C':
                     desincribirParticipante();
                     break;
-                case "D":
+                case 'D':
                     System.out.println("-----SE CIERRA EL PROGRAMA---------");
                     indicadorSalir = true;
                     break;
