@@ -3,7 +3,7 @@ import java.util.ArrayList;
 public class Repositorio {
     private ArrayList<Localizador> localizadores;
 
-    public Repositorio(ArrayList<Localizador> localizadores) {
+    public Repositorio() {
         this.localizadores = new ArrayList<>();
     }
 

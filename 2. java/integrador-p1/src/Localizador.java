@@ -27,6 +27,14 @@ public class Localizador {
         return total;
     }
 
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public List<Reserva> getReservas() {
+        return reservas;
+    }
+
     public void setTotal(double total) {
         this.total = total;
     }

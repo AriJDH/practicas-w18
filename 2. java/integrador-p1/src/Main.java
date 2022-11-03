@@ -6,8 +6,15 @@ import java.util.TreeMap;
 public class Main {
     public static void main(String[] args) {
 
+        Repositorio repositorio = new Repositorio();
+        RepositorioClientes  repositorioClientes = new RepositorioClientes();
+
+
         Cliente alice = new Cliente(1, "20203030", "Alice", "Test");
         Cliente bob = new Cliente(2, "30302010", "Bob", "Foo");
+        repositorioClientes.agregaCliente(alice);
+        repositorioClientes.agregaCliente(bob);
+        repositorioClientes.agregaCliente(bob);
 
         ReservaHotel hotel1 = new ReservaHotel("Seasons", 3000);
         ReservaHotel hotel2 = new ReservaHotel("Panamericano", 1000);
@@ -28,7 +35,7 @@ public class Main {
 //        System.out.println(alice);
 //        System.out.println(hotel1);
 //        System.out.println(paquete1);
-        System.out.println(localizador1);
-
+//        System.out.println(localizador1);
+        repositorioClientes.showClientes();
     }
 }
