@@ -11,7 +11,7 @@ public class Distribuidora {
         p1.setPrecio(10);
         p1.setDiasPorCaducar(1);
         productos.add(p1);
-
+        
 
         Perecedero p2 = new Perecedero();
         p2.setNombre("Pepsi");
