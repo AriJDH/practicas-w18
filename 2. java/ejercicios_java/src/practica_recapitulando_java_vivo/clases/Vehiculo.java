@@ -1,4 +1,4 @@
-package practica_recapitulando_java_vivo;
+package practica_recapitulando_java_vivo.clases;
 
 public class Vehiculo {
 
@@ -11,7 +11,7 @@ public class Vehiculo {
     public Vehiculo() {
     }
 
-    public Vehiculo(String modelo, String marca, Double costo) {
+    public Vehiculo(String marca, String modelo, Double costo) {
         this.modelo = modelo;
         this.marca = marca;
         this.costo = costo;

@@ -1,4 +1,4 @@
-package practica_recapitulando_java_vivo;
+package practica_recapitulando_java_vivo.clases;
 
 import java.util.List;
 

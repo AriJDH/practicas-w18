@@ -1,5 +1,8 @@
 package practica_recapitulando_java_vivo;
 
+import practica_recapitulando_java_vivo.clases.Garaje;
+import practica_recapitulando_java_vivo.clases.Vehiculo;
+
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -33,7 +36,6 @@ public class Main {
         System.out.println("\n");
         System.out.println("========= Vehiculos ordenados por marca y costo =========");
         List<Vehiculo> vehiculosMarcaCosto = garaje.getVehiculos().stream().sorted(Comparator.comparing(Vehiculo::getMarca).thenComparingDouble(Vehiculo::getCosto)).collect(Collectors.toList());
-
         vehiculosMarcaCosto.forEach(System.out::println);
 
         //Ejercicio 5
