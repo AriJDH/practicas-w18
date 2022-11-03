@@ -1,13 +1,13 @@
-import Ejercicio1.Basic;
-import Ejercicio1.Cobrador;
-import Ejercicio1.Ejecutivo;
-import Ejercicio2.Curriculum;
-import Ejercicio2.PdfBook;
-import Ejercicio2.Printable;
-import Ejercicio2.Report;
-import Ejercicio3.Gato;
-import Ejercicio3.Perro;
-import Ejercicio3.Vaca;
+import ejercicio1.Basic;
+import ejercicio1.Cobrador;
+import ejercicio1.Ejecutivo;
+import ejercicio2.Curriculum;
+import ejercicio2.PdfBook;
+import ejercicio2.Printable;
+import ejercicio2.Report;
+import ejercicio3.Gato;
+import ejercicio3.Perro;
+import ejercicio3.Vaca;
 
 import java.util.ArrayList;
 import java.util.List;

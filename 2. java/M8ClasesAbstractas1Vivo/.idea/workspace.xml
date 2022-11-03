@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="bc2bb6ce-5b77-4d0b-8dfe-46ebccd140c1" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/M8ClasesAbstractas1Vivo.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Ejercicio1/Basic.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ejercicio1/Basic.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Ejercicio1/Cobrador.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ejercicio1/Cobrador.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Ejercicio1/Ejecutivo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ejercicio1/Ejecutivo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Ejercicio1/Transaccion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ejercicio1/Transaccion.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Ejercicio1/TransaccionConsultaSaldo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ejercicio1/TransaccionConsultaSaldo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Ejercicio1/TransaccionDeposito.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ejercicio1/TransaccionDeposito.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Ejercicio1/TransaccionPagoServicio.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ejercicio1/TransaccionPagoServicio.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Ejercicio1/TransaccionRetiroEfectivo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ejercicio1/TransaccionRetiroEfectivo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Ejercicio1/TransaccionTransferencia.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ejercicio1/TransaccionTransferencia.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Ejercicio2/Curriculum.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ejercicio2/Curriculum.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Ejercicio2/PdfBook.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ejercicio2/PdfBook.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Ejercicio2/Printable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ejercicio2/Printable.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Ejercicio2/Report.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ejercicio2/Report.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Ejercicio3/Animal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ejercicio3/Animal.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Ejercicio3/ComerAnimal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ejercicio3/ComerAnimal.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Ejercicio3/ComerCarne.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ejercicio3/ComerCarne.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Ejercicio3/ComerHierba.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ejercicio3/ComerHierba.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Ejercicio3/Gato.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ejercicio3/Gato.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Ejercicio3/Perro.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ejercicio3/Perro.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Ejercicio3/Vaca.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ejercicio3/Vaca.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../readme.md" beforeDir="false" afterPath="$PROJECT_DIR$/../readme.md" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+  </component>
+  <component name="ProjectId" id="2H2V73bzeTiU81b9rWTjrc5DeHF" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "/Users/MGONCALVESCO/Documents/Bootcamp/Repos DH/practicas-w18/2. java/M8ClasesAbstractas1Vivo"
+  }
+}]]></component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="bc2bb6ce-5b77-4d0b-8dfe-46ebccd140c1" name="Changes" comment="" />
+      <created>1667482995029</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1667482995029</updated>
+      <workItem from="1667482996118" duration="32000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>
