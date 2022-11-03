@@ -3,9 +3,7 @@ package ejerciciosGrupales.vehiculo;
 import ejerciciosGrupales.vehiculo.domain.Garage;
 import ejerciciosGrupales.vehiculo.domain.Vehiculo;
 
-import java.util.Comparator;
-import java.util.List;
-import java.util.OptionalDouble;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class Main {
@@ -64,7 +62,7 @@ public class Main {
                 .sorted(Comparator.comparing(Vehiculo::getCosto))
                 .forEach(System.out::println);
 
-        System.out.println("\n --------- Promedio de precios de toda la lista ------------ ");
+        System.out.println("\n ---------maptoInt / average Promedio de precios de toda la lista ------------ ");
         OptionalDouble promedio = garage.getVehiculos().stream()
                 .mapToInt(value -> value.getCosto())
                 .average();
@@ -72,7 +70,7 @@ public class Main {
         System.out.println("promedio: $" + Math.round(promedio.getAsDouble()));
 
 
-        System.out.println("\n --------- matToDouble Promedio de precios de toda la lista ------------ ");
+        System.out.println("\n --------- matToDouble / average Promedio de precios de toda la lista ------------ ");
         Double promedioD = garage.getVehiculos().stream()
                 .mapToDouble(value -> value.getCosto())
                 .average()
@@ -81,12 +79,29 @@ public class Main {
         System.out.println("Promedio: $" + Math.round(promedioD));
 
 
-        System.out.println("\n --------- AveragingDouble - Promedio de precios de toda la lista ------------ ");
+        System.out.println("\n --------- Collectors.averagingDouble - Promedio de precios de toda la lista ------------ ");
 
         double promedioAvg = garage.getVehiculos().stream()
                 .collect(Collectors
                         .averagingDouble(Vehiculo::getCosto));
 
+        System.out.println("\n --------- Agrupar por Marcas ------------ ");
+        Map<String, List<Vehiculo>> groupByMarca = garage.getVehiculos().stream()
+                .collect(Collectors.groupingBy(Vehiculo::getMarca));
+
+        groupByMarca.forEach((marca, v) -> {
+            System.out.println("\n" + marca.toUpperCase());
+            v.forEach(System.out::println);
+        });
+
+
+        System.out.println("\n --------- El más caro de Ford ------------ ");
+        Optional<String> modelMostExpensiveOfFord = garage.getVehiculos().stream()
+                .filter(vehiculo -> vehiculo.getMarca().equals("Ford"))
+                .max(Comparator.comparing(Vehiculo::getCosto))
+                .map(Vehiculo::toString);
+
+        modelMostExpensiveOfFord.ifPresent(System.out::println);
 
 
         //otra forma de imprimir lista
@@ -95,3 +110,4 @@ public class Main {
 
     }
 }
+
