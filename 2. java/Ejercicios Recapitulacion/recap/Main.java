@@ -4,6 +4,7 @@ import java.util.Comparator;
 
 public class Main {
     public static void main(String[] args) {
+
         ArrayList<Vehiculo> misVehiculos = new ArrayList<>();
         Garaje miGaraje = new Garaje(1);
 
