@@ -1,5 +1,5 @@
 package Supermercado;
-
+/*Ejercicio integrador*/
 public class Cliente {
 
     private String nombre;
