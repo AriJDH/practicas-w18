@@ -1,6 +1,9 @@
 package meli.bootcamp;
 
 import meli.bootcamp.clases.Cliente;
+import meli.bootcamp.clases.DetalleFactura;
+import meli.bootcamp.clases.Factura;
+import meli.bootcamp.clases.Item;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -28,9 +31,38 @@ public class App
         System.out.println("──────────────────────");
         System.out.print("INGRESE EL DNI DEL CLIENTE A BUSCAR: ");
         String dniBuscar = sc.nextLine();
-        buscarCliente(dniBuscar, clientes);
+        int indexBuscado = buscarCliente(dniBuscar, clientes);
+        if (indexBuscado != -1)
+        {
+            System.out.println("CLIENTE ENCONTRADO!");
+            System.out.println(clientes.get(indexBuscado));
+        }
+        else
+        {
+            System.out.println("CLIENTE NO ENCONTRADO");
+        }
         System.out.println("──────────────────────");
+        Factura factura = new Factura();
+        Item item1 = new Item(1,"PRODUCTO 1", 200.5);
+        Item item2 = new Item(2,"PRODUCTO 2", 50);
+        Item item3 = new Item(3,"PRODUCTO 3", 150.5);
+        DetalleFactura detalleFactura1 = new DetalleFactura(10, item1);
+        DetalleFactura detalleFactura2 = new DetalleFactura(10, item2);
+        DetalleFactura detalleFactura3 = new DetalleFactura(10, item3);
 
+        ArrayList<DetalleFactura> detalleFacturas = new ArrayList<>();
+        detalleFacturas.add(detalleFactura1);
+        detalleFacturas.add(detalleFactura2);
+        detalleFacturas.add(detalleFactura3);
+
+        Cliente error = new Cliente("1","a","b");
+        // clientes.add(error);
+        factura.setCliente(error, clientes);
+        factura.setDetalle(detalleFacturas);
+        System.out.println("──────────────────────");
+        System.out.println("PRECIO FINAL A PAGAR:");
+        factura.setPrecio();
+        System.out.println(factura.getPrecio());
     }
 
     private static void eliminarCliente(String dni, ArrayList<Cliente> clientes)
@@ -45,20 +77,16 @@ public class App
         }
     }
 
-    private static void buscarCliente(String dni, ArrayList<Cliente> clientes)
+    private static int buscarCliente(String dni, ArrayList<Cliente> clientes)
     {
-        boolean encontrado = false;
-        for (Cliente c:
-             clientes)
-        {
-            if (dni.equals(c.getDni()))
+        int index = -1;
+        for (int i = 0; i < clientes.size(); i++) {
+            if (dni.equals(clientes.get(i).getDni()))
             {
-                System.out.println(c);
-                encontrado = true;
-                break;
+                index = i;
+                return index;
             }
         }
-        if (!encontrado)
-            System.out.println("NO SE ENCONTRO EL CLIENTE");
+        return index;
     }
 }

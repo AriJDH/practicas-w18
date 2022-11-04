@@ -5,18 +5,21 @@ public class Cliente {
     private String nombre;
     private String apellido;
 
-    public Cliente(String dni, String nombre, String apellido) {
+    public Cliente(String dni, String nombre, String apellido)
+    {
         this.dni = dni;
         this.nombre = nombre;
         this.apellido = apellido;
     }
 
-    public String getDni() {
+    public String getDni()
+    {
         return dni;
     }
 
     @Override
-    public String toString() {
+    public String toString()
+    {
         final StringBuilder sb = new StringBuilder("Cliente{");
         sb.append("dni='").append(dni).append('\'');
         sb.append(", nombre='").append(nombre).append('\'');

@@ -5,14 +5,21 @@ public class Item {
     private String nombre;
     private double precio;
 
-    public Item(long id, String nombre, double precio) {
+    public Item(long id, String nombre, double precio)
+    {
         this.id = id;
         this.nombre = nombre;
         this.precio = precio;
     }
 
+    public double getPrecio()
+    {
+        return precio;
+    }
+
     @Override
-    public String toString() {
+    public String toString()
+    {
         final StringBuilder sb = new StringBuilder("Item{");
         sb.append("id=").append(id);
         sb.append(", nombre='").append(nombre).append('\'');
