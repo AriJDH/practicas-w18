@@ -1,8 +1,15 @@
 package org.example.domain;
 
-public class Cliente {
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
+public @Data class Cliente {
+    @EqualsAndHashCode.Include
     private int dni;
+    @EqualsAndHashCode.Include
     private String nombre;
+    @EqualsAndHashCode.Include
     private String apellido;
 
     public Cliente(int dni, String nombre, String apellido) {
@@ -15,27 +22,5 @@ public class Cliente {
         return "DNI: "+ this.dni + ". Nombre: "+ this.nombre + ". Apellido: "+ this.apellido+".";
     }
 
-    public int getDni() {
-        return dni;
-    }
 
-    public void setDni(int dni) {
-        this.dni = dni;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public String getApellido() {
-        return apellido;
-    }
-
-    public void setApellido(String apellido) {
-        this.apellido = apellido;
-    }
 }
