@@ -43,6 +43,7 @@ public class Localizador {
     }
 
     public double getTotal() {
+
         return total;
     }
 

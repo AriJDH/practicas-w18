@@ -8,6 +8,7 @@ public class Repositorio {
     }
 
     public void agregaLocalizador(Localizador localizador){
+
         this.localizadores.add(localizador);
     }
 

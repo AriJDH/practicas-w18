@@ -31,11 +31,13 @@ public class Main {
         List<Reserva> paquete1 = Arrays.asList(hotel1, comida2, boleto1, transporte2);
 
         Localizador localizador1 = new Localizador(alice, paquete1);
-
+        localizador1.agregaReserva(transporte1);
 //        System.out.println(alice);
 //        System.out.println(hotel1);
 //        System.out.println(paquete1);
 //        System.out.println(localizador1);
         repositorioClientes.showClientes();
+
+
     }
 }
