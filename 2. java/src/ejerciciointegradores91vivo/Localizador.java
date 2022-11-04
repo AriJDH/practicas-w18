@@ -21,18 +21,15 @@ public class Localizador {
 
 	public void calcularTotal() {
 
-		int cantidadLocalizadores = repo.descuentoPorCliente(getCliente());
+		int cantidadLocalizadores = repo.localizadoresPorCliente(getCliente());
 		if (cantidadLocalizadores >= 2) {
 			System.out.println("----*********------- \nEn proxima compra se le descontara un %5");
 		}
-
-		for (Paquete p : getPaquetes()) {
-
-			if (p.esCompleto())
-				System.out.println(
-						"----*********------- \nEn este paquete: " + p.toString() + " tienes " + "%10 de descuento");
-
-		}
+		
+		getPaquetes().stream().filter(p -> p.esCompleto()).forEach(p -> {
+			System.out.println(
+					"----*********------- \nEn este paquete: " + p.toString() + " tienes " + "%10 de descuento");
+		});
 		
 		if(getPaquetes().stream().filter(p -> p.isHotel()).count() >= 2) {
 			System.out.println(

@@ -21,7 +21,7 @@ public class RepositorioLocalizadorImpl implements IRepositorioLocalizador {
 	}
 
 	@Override
-	public int descuentoPorCliente(Cliente cliente) {
+	public int localizadoresPorCliente(Cliente cliente) {
 		
 		int cantidadLocalizador = (int) getLocalizador().stream().filter(l -> l.getCliente().equals(cliente))
 				.count();

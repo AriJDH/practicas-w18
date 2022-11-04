@@ -8,7 +8,7 @@ public interface IRepositorioLocalizador {
 	
 	void imprimirLocalizadorGenerado(Localizador localizador);
 	
-	int descuentoPorCliente(Cliente cliente);
+	int localizadoresPorCliente(Cliente cliente);
 	
 	void agregarCliente(Cliente cliente);
 
