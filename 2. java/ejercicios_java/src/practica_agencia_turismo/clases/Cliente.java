@@ -1,5 +1,6 @@
 package practica_agencia_turismo.clases;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Cliente {
@@ -8,7 +9,7 @@ public class Cliente {
 
     private String identificacion;
 
-    private List<Localizador> localizadores;
+    private List<Localizador> localizadores = new ArrayList<>();
 
     public String getNombre() {
         return nombre;
