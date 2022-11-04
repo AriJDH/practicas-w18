@@ -5,8 +5,14 @@ import java.util.Map;
 
 public class GuardaRopa {
 
+    public GuardaRopa(Map<Integer, List<Prenda>> guardaRopa, Integer id) {
+        this.guardaRopa = guardaRopa;
+        this.id = id;
+    }
+
     protected Map<Integer, List<Prenda>>guardaRopa;
     protected Integer id;
+
 
     public Map<Integer, List<Prenda>> getGuardaRopa() {
         return guardaRopa;
@@ -24,14 +30,18 @@ public class GuardaRopa {
         this.id = id;
     }
 
-    public Integer guardarPrendas(List<Prenda> listaDePrenda) {
-        if (!this.guardaRopa.isEmpty()){
-            this.id = this.guardaRopa.size() -1;
-        }else {
-            this.id = 0;
-        }
-        this.guardaRopa.put(this.id,listaDePrenda);
-        return this.id;
+    public Integer guardarPrendas(List<Prenda>listaDePrenda) {
+        if (!listaDePrenda.isEmpty()){
+            if (!this.guardaRopa.isEmpty()){
+                this.id = this.guardaRopa.size()-1;
+            }else {
+                this.id = 0;
+            }
+            this.guardaRopa.put(this.id,listaDePrenda);
+            return this.id;
+        }else
+            return 0;
+
     }
 
     @Override
