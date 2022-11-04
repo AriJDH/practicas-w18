@@ -12,7 +12,7 @@ public class Main {
 
         serieNumericaImpar.establecerValorInicial(1);
 
-        SerieNumerica serieNumericaMultiplo3 = new SerieNumerica();
+        Prototipo serieNumericaMultiplo3 = new SerieNumericaMultiplo3();
 
         serieNumericaMultiplo3.establecerValorInicial(3);
 
