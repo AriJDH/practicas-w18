@@ -12,6 +12,10 @@ public class Reserva {
         return costo;
     }
 
+    public void setCosto(double costo) {
+        this.costo = costo;
+    }
+
     public String getNombre() {
         return nombre;
     }

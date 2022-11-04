@@ -20,7 +20,26 @@ public class Localizador {
 
 
     public void agregaReserva(Reserva reserva){
+        int counterHotel = 0;
+        int counterBoleto = 0;
         reservas.add(reserva);
+
+        for (Reserva reservaCargada :this.reservas) {
+            if (reservaCargada instanceof ReservaHotel){
+                counterHotel++;
+                if (counterHotel >= 2 && reservaCargada instanceof ReservaHotel){
+                    ((ReservaHotel) reservaCargada).setDescuentoDelCinco(true);
+                }
+            }
+            if (reservaCargada instanceof ReservaBoleto){
+                counterBoleto++;
+                if (counterBoleto >= 2 && reservaCargada instanceof ReservaBoleto){
+                    ((ReservaBoleto) reservaCargada).setDescuentoDelCinco(true);
+                }
+            }
+        }
+
+
     }
 
     public double getTotal() {
