@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -18,6 +19,14 @@ public class Repositorio implements Localizador{
     public Repositorio(Cliente cliente, List<PaqueteTuristico> paquetes) {
         this.cliente = cliente;
         this.paquetes = paquetes;
+    }
+
+    public Repositorio(){
+
+    }
+    public Repositorio(Cliente cliente) {
+        this.cliente = cliente;
+        this.paquetes = new ArrayList<PaqueteTuristico>();
     }
 
     public Cliente getCliente() {
@@ -43,11 +52,10 @@ public class Repositorio implements Localizador{
 
     @Override
     public void mostrarReserva(PaqueteTuristico paquete, Cliente cliente) {
-        System.out.println("El cliente: " + cliente.toString() +" reservò los sigueintes paquetes:");
-        for (PaqueteTuristico p: this.paquetes){
-            System.out.println(p.toString());
-        }
         calcularPrecio(paquete);
+        System.out.println("El cliente: " + cliente.toString() +" reservò los sigueintes paquetes:");
+        System.out.println(paquete.toString());
+
         System.out.println("Precio total: $" + precioTotal(paquete));
 
     }
@@ -85,8 +93,6 @@ public class Repositorio implements Localizador{
             p.precio= 22000;
         if(p.hotel && p.comida)
             p.precio = 14000;
-
-        p.setPrecio(p.precio);
 
     }
 

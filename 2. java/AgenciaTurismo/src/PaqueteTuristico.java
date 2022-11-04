@@ -17,7 +17,7 @@ public class PaqueteTuristico {
                 ", pasaje=" + pasaje +
                 ", transporte=" + transporte +
                 ", completo=" + completo +
-                ", precio=$ " +
+                ", precio=$ " + precio +
                 '}';
     }
 
@@ -75,6 +75,7 @@ public class PaqueteTuristico {
         this.pasaje = pasaje;
         this.transporte = transporte;
         this.completo = completo;
-
+        if (this.hotel && this.comida && this.pasaje && this.transporte)
+            this.completo = true;
     }
 }
