@@ -4,6 +4,7 @@ import autos.Vehiculo;
 public class Main {
     public static void main(String[] args) {
 
+
         Garage garage = new Garage(1);
 
         Vehiculo v1 = new Vehiculo("Ford", "Fiesta", 1000);
