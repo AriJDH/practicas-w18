@@ -36,7 +36,10 @@ public class RepositorioClientes {
 
         for (Reserva reserva: localizador.getReservas()
              ) {
-//            chequear instanceof
+            if (reserva instanceof ReservaHotel){tieneHotel = true;}
+            if (reserva instanceof ReservaBoleto){tieneBoleto = true;}
+            if (reserva instanceof ReservaComida){tieneComida = true;}
+            if (reserva instanceof ReservaTransporte){tieneTransporte = true;}
         }
 
         return tieneBoleto && tieneHotel && tieneComida && tieneTransporte;
