@@ -2,9 +2,7 @@ package clase4_a_EjerciciosIntegrador.Ej2;
 
 public class Serie3<N extends Number> extends Serie<N>{
     public N valorSiguiente() {
-        double valorSiguiente = this.valor.doubleValue();
-        valorSiguiente += 2.0;
-        this.valor = valorSiguiente;
+        this.valor = this.valor.doubleValue() + 3;
         return (N) this.valor;
     }
 }

@@ -4,9 +4,7 @@ public class Serie2<N extends Number> extends Serie<N>{
 
     @Override
     public N valorSiguiente() {
-        double valorSiguiente = this.valor.doubleValue();
-        valorSiguiente += 2.0;
-        this.valor = valorSiguiente;
+        this.valor = this.valor.doubleValue() + 2;
         return (N) this.valor;
     }
 }
