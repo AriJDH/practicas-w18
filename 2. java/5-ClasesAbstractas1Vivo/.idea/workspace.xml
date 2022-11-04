@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="bc2bb6ce-5b77-4d0b-8dfe-46ebccd140c1" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/../M8EjerciciosIntegradoresP1VIVO/IntegracionInterfacesGenericosColecciones.../Enunciados.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../M8EjerciciosIntegradoresP1VIVO/IntegracionInterfacesGenericosColecciones.../src/BoletoViaje.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../M8EjerciciosIntegradoresP1VIVO/IntegracionInterfacesGenericosColecciones.../src/Cliente.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../M8EjerciciosIntegradoresP1VIVO/IntegracionInterfacesGenericosColecciones.../src/Comida.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../M8EjerciciosIntegradoresP1VIVO/IntegracionInterfacesGenericosColecciones.../src/Hotel.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../M8EjerciciosIntegradoresP1VIVO/IntegracionInterfacesGenericosColecciones.../src/IDescuento.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../M8EjerciciosIntegradoresP1VIVO/IntegracionInterfacesGenericosColecciones.../src/IRepositorio.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../M8EjerciciosIntegradoresP1VIVO/IntegracionInterfacesGenericosColecciones.../src/Localizador.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../M8EjerciciosIntegradoresP1VIVO/IntegracionInterfacesGenericosColecciones.../src/Paquete.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../M8EjerciciosIntegradoresP1VIVO/IntegracionInterfacesGenericosColecciones.../src/RepositorioCliente.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../M8EjerciciosIntegradoresP1VIVO/IntegracionInterfacesGenericosColecciones.../src/RepositorioLocalizador.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../M8EjerciciosIntegradoresP1VIVO/IntegracionInterfacesGenericosColecciones.../src/Reservable.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../M8EjerciciosIntegradoresP1VIVO/IntegracionInterfacesGenericosColecciones.../src/Transporte.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../M8ClasesAbstractas1Vivo/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../M8ClasesAbstractas1Vivo/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../M8ClasesAbstractas1Vivo/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../M8ClasesAbstractas1Vivo/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../M8ClasesAbstractas1Vivo/.idea/workspace.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../M8ClasesAbstractas1Vivo/Enunciados.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../M8ClasesAbstractas1Vivo/M8ClasesAbstractas1Vivo.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../M8ClasesAbstractas1Vivo/src/Main.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../M8ClasesAbstractas1Vivo/src/ejercicio1/Basic.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../M8ClasesAbstractas1Vivo/src/ejercicio1/Cobrador.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../M8ClasesAbstractas1Vivo/src/ejercicio1/Ejecutivo.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../M8ClasesAbstractas1Vivo/src/ejercicio1/Transaccion.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../M8ClasesAbstractas1Vivo/src/ejercicio1/TransaccionConsultaSaldo.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../M8ClasesAbstractas1Vivo/src/ejercicio1/TransaccionDeposito.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../M8ClasesAbstractas1Vivo/src/ejercicio1/TransaccionPagoServicio.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../M8ClasesAbstractas1Vivo/src/ejercicio1/TransaccionRetiroEfectivo.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../M8ClasesAbstractas1Vivo/src/ejercicio1/TransaccionTransferencia.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../M8ClasesAbstractas1Vivo/src/ejercicio2/Curriculum.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../M8ClasesAbstractas1Vivo/src/ejercicio2/PdfBook.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../M8ClasesAbstractas1Vivo/src/ejercicio2/Printable.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../M8ClasesAbstractas1Vivo/src/ejercicio2/Report.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../M8ClasesAbstractas1Vivo/src/ejercicio3/Animal.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../M8ClasesAbstractas1Vivo/src/ejercicio3/ComerAnimal.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../M8ClasesAbstractas1Vivo/src/ejercicio3/ComerCarne.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../M8ClasesAbstractas1Vivo/src/ejercicio3/ComerHierba.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../M8ClasesAbstractas1Vivo/src/ejercicio3/Gato.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../M8ClasesAbstractas1Vivo/src/ejercicio3/Perro.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../M8ClasesAbstractas1Vivo/src/ejercicio3/Vaca.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../M8JavaP1Vivo/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../M8JavaP1Vivo/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../M8JavaP1Vivo/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../M8JavaP1Vivo/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../M8JavaP1Vivo/Enunciados.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../M8JavaP1Vivo/M8JavaP1Vivo.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../M8JavaP1Vivo/src/Main.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../M8JavaP2Vivo/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../M8JavaP2Vivo/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../M8JavaP2Vivo/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../M8JavaP2Vivo/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../M8JavaP2Vivo/Enunciados.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../M8JavaP2Vivo/M8JavaP2Vivo.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../M8JavaP2Vivo/src/Main.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../M8MaterialComplementario/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../M8MaterialComplementario/.idea/codeStyles/codeStyleConfig.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../M8MaterialComplementario/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../M8MaterialComplementario/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../M8MaterialComplementario/.idea/uiDesigner.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../M8MaterialComplementario/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../M8MaterialComplementario/Enunciados.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../M8MaterialComplementario/M8MaterialComplementario.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../M8MaterialComplementario/ejerciciosMaterialComplementario.drawio.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../M8MaterialComplementario/src/Ejercicio1/Estudiante.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../M8MaterialComplementario/src/Ejercicio1/EstudianteTecnico.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../M8MaterialComplementario/src/Ejercicio1/IEnsenianza.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../M8MaterialComplementario/src/Ejercicio1/IReparacion.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../M8MaterialComplementario/src/Ejercicio1/Mantenimiento.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../M8MaterialComplementario/src/Ejercicio1/Persona.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../M8MaterialComplementario/src/Ejercicio1/Personal.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../M8MaterialComplementario/src/Ejercicio1/Profesor.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../M8MaterialComplementario/src/Ejercicio1/SoporteTecnico.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../M8MaterialComplementario/src/Ejercicio1/Tutor.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../M8MaterialComplementario/src/Ejercicio2/Asteroide.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../M8MaterialComplementario/src/Ejercicio2/FlotaNaves.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../M8MaterialComplementario/src/Ejercicio2/IPuntuable.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../M8MaterialComplementario/src/Ejercicio2/IUnidadDefensa.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../M8MaterialComplementario/src/Ejercicio2/Juego.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../M8MaterialComplementario/src/Ejercicio2/NaveSimple.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../M8MaterialComplementario/src/Ejercicio2/PuntoEspacio.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../M8MaterialComplementario/src/Main.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../M8POOP1Vivo/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../M8POOP1Vivo/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../M8POOP1Vivo/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../M8POOP1Vivo/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../M8POOP1Vivo/Enunciados.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../M8POOP1Vivo/M8POOP1Vivo.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../M8POOP1Vivo/src/Main.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../M8POOP1Vivo/src/Persona.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../M8POOP2Vivo/Enunciados.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../M8POOP2Vivo/M8POOP2Vivo.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../M8POOP2Vivo/src/Distribuidora.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../M8POOP2Vivo/src/NoPerecederos.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../M8POOP2Vivo/src/Perecederos.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../M8POOP2Vivo/src/PracticaExcepciones.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../M8POOP2Vivo/src/Producto.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../M8RecapitulandoJavaVivo/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../M8RecapitulandoJavaVivo/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../M8RecapitulandoJavaVivo/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../M8RecapitulandoJavaVivo/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../M8RecapitulandoJavaVivo/Enunciados.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../M8RecapitulandoJavaVivo/RecapitulandoJava.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../M8RecapitulandoJavaVivo/RecapitulandoJava/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../M8RecapitulandoJavaVivo/RecapitulandoJava/.idea/workspace.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../M8RecapitulandoJavaVivo/src/Main.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../M8RecapitulandoJavaVivo/src/ejercicio/Garage.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../M8RecapitulandoJavaVivo/src/ejercicio/Vehiculo.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../readme.md" beforeDir="false" afterPath="$PROJECT_DIR$/../readme.md" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2H2V73bzeTiU81b9rWTjrc5DeHF" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "/Users/MGONCALVESCO/Documents/Bootcamp/Repos DH/practicas-w18/2. java/5.ClasesAbstractas1Vivo",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0"
+  }
+}]]></component>
+  <component name="RunManager">
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Main" />
+      <module name="M8ClasesAbstractas1Vivo" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.Main" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="bc2bb6ce-5b77-4d0b-8dfe-46ebccd140c1" name="Changes" comment="" />
+      <created>1667482995029</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1667482995029</updated>
+      <workItem from="1667482996118" duration="32000" />
+      <workItem from="1667567621755" duration="48000" />
+      <workItem from="1667582357976" duration="578000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>
