@@ -1,4 +1,4 @@
-package clase4_a_EjerciciosIntegrador.Ej2;
+package clase4_a_EjerciciosIntegrador.Ej2_Series_Numericas;
 
 public class Test {
     public static void main(String[] args) {
@@ -23,6 +23,8 @@ public class Test {
         System.out.println("--------------------------------------------------------------------");
         System.out.println("-------------------INICIO INTEGER SERIE 3---------------------------");
         Serie<Integer> s3Integer = new Serie3<>();
+        int entero = s3Integer.valorSiguiente();
+        System.out.println(entero);
         for (int i =0 ; i< 4; i++){
             System.out.println(s3Integer.valorSiguiente());
         }

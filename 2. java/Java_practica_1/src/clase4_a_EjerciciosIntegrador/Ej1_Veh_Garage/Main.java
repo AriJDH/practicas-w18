@@ -1,7 +1,6 @@
-package clase4_a_EjerciciosIntegrador.Ej1;
+package clase4_a_EjerciciosIntegrador.Ej1_Veh_Garage;
 
 import java.util.Arrays;
-import java.util.OptionalDouble;
 
 public class Main {
     public static void main(String[] args) {

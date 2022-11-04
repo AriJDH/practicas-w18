@@ -1,4 +1,4 @@
-package clase4_a_EjerciciosIntegrador.Ej2;
+package clase4_a_EjerciciosIntegrador.Ej2_Series_Numericas;
 
 public abstract class Serie<N extends Number> {
 
