@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>Clases</OriginalElement>
+  <nodes>
+    <node x="0.0" y="83.0">Clases.PersonalMantenimiento</node>
+    <node x="0.0" y="244.0">Clases.Main</node>
+    <node x="490.375" y="83.0">Clases.Estudiantes</node>
+    <node x="257.0" y="83.0">Clases.TrabajoTecnico</node>
+    <node x="131.08749999999998" y="166.0">Clases.SoporteTecnico</node>
+    <node x="718.375" y="166.0">Clases.Profesores</node>
+    <node x="348.375" y="166.0">Clases.EstudiantesTecnicos</node>
+    <node x="660.75" y="83.0">Clases.Ensena</node>
+    <node x="587.375" y="166.0">Clases.Tutores</node>
+    <node x="503.875" y="0.0">Clases.Personal</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="Clases.Estudiantes" target="Clases.Personal">
+      <point x="0.0" y="-16.5" />
+      <point x="0.0" y="16.5" />
+    </edge>
+    <edge source="Clases.Profesores" target="Clases.Ensena">
+      <point x="-34.5" y="-16.5" />
+      <point x="752.875" y="141.0" />
+      <point x="737.25" y="141.0" />
+      <point x="25.5" y="16.5" />
+    </edge>
+    <edge source="Clases.Tutores" target="Clases.Estudiantes">
+      <point x="-27.75" y="-16.5" />
+      <point x="615.125" y="141.0" />
+      <point x="600.625" y="141.0" />
+      <point x="36.75" y="16.5" />
+    </edge>
+    <edge source="Clases.SoporteTecnico" target="Clases.TrabajoTecnico">
+      <point x="43.5" y="-16.5" />
+      <point x="261.5875" y="141.0" />
+      <point x="300.5" y="141.0" />
+      <point x="-43.5" y="16.5" />
+    </edge>
+    <edge source="Clases.EstudiantesTecnicos" target="Clases.TrabajoTecnico">
+      <point x="-54.75" y="-16.5" />
+      <point x="403.125" y="141.0" />
+      <point x="387.5" y="141.0" />
+      <point x="43.5" y="16.5" />
+    </edge>
+    <edge source="Clases.PersonalMantenimiento" target="Clases.Personal">
+      <point x="0.0" y="-16.5" />
+      <point x="118.5" y="58.0" />
+      <point x="523.875" y="58.0" />
+      <point x="-40.0" y="16.5" />
+    </edge>
+    <edge source="Clases.Tutores" target="Clases.Ensena">
+      <point x="27.75" y="-16.5" />
+      <point x="670.625" y="141.0" />
+      <point x="686.25" y="141.0" />
+      <point x="-25.5" y="16.5" />
+    </edge>
+    <edge source="Clases.Profesores" target="Clases.Personal">
+      <point x="34.5" y="-16.5" />
+      <point x="821.875" y="141.0" />
+      <point x="813.0" y="141.0" />
+      <point x="813.0" y="58.0" />
+      <point x="603.875" y="58.0" />
+      <point x="40.0" y="16.5" />
+    </edge>
+    <edge source="Clases.EstudiantesTecnicos" target="Clases.Estudiantes">
+      <point x="54.75" y="-16.5" />
+      <point x="512.625" y="141.0" />
+      <point x="527.125" y="141.0" />
+      <point x="-36.75" y="16.5" />
+    </edge>
+    <edge source="Clases.SoporteTecnico" target="Clases.PersonalMantenimiento">
+      <point x="-43.5" y="-16.5" />
+      <point x="174.58749999999998" y="141.0" />
+      <point x="118.5" y="141.0" />
+      <point x="0.0" y="16.5" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="1.0" x="428.5" y="138.5" />
+  <SelectedNodes />
+  <Categories />
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+

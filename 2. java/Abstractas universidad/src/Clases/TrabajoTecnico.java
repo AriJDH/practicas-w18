@@ -1,4 +1,4 @@
-package Interfaces;
+package Clases;
 
 public interface TrabajoTecnico {
 }
