@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="CarreraSelva:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <module>CarreraSelva</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
+    <root id="archive" name="CarreraSelva-1.0-SNAPSHOT.war">
+      <element id="artifact" artifact-name="CarreraSelva:war exploded" />
+    </root>
+  </artifact>
+</component>
