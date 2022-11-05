@@ -1,4 +1,4 @@
-package Ejercicio2;
+package Asteroides;
 
 import java.util.List;
 

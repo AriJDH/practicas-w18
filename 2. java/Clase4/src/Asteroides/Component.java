@@ -1,4 +1,4 @@
-package Ejercicio2;
+package Asteroides;
 
 public interface Component {
     double calcularPuntos(int x, int y);

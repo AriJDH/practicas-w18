@@ -1,4 +1,5 @@
-package Ejercicio2;
+package Asteroides;
+
 
 public class Test {
     public static void main(String[] args) {
@@ -7,7 +8,5 @@ public class Test {
         Nave nave2 = new Nave("Nave2", 10, 20);
         Nave nave3 = new Nave("NaveA", 40, 50);
         flota.addNave(nave3);
-
-
     }
 }

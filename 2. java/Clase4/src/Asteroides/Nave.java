@@ -1,4 +1,4 @@
-package Ejercicio2;
+package Asteroides;
 
 public class Nave implements Component{
     private String nombre;
