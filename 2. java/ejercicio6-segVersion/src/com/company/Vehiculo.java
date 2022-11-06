@@ -3,8 +3,7 @@ package com.company;
 public class Vehiculo {
     private String modelo;
     private String marca;
-    //para usar el compareTo debe ser wrapper Double en este caso o Integer
-    private int costo;
+    private Integer costo;
 
     public Vehiculo() {
     }
@@ -31,11 +30,20 @@ public class Vehiculo {
         this.marca = marca;
     }
 
-    public int getCosto() {
+    public Integer getCosto() {
         return costo;
     }
 
     public void setCosto(int costo) {
         this.costo = costo;
+    }
+
+    @Override
+    public String toString() {
+        return "Vehiculo{" +
+                "modelo='" + modelo + '\'' +
+                ", marca='" + marca + '\'' +
+                ", costo=" + costo +
+                '}';
     }
 }
