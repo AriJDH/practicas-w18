@@ -1,2 +1,4 @@
-package parte1;public class Vuelo {
+package parte1;
+
+public class Vuelo {
 }

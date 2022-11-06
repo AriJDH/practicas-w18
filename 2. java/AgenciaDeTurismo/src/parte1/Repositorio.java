@@ -1,2 +1,4 @@
-package parte1;public class Paquete {
+package parte1;
+
+public interface Repositorio {
 }

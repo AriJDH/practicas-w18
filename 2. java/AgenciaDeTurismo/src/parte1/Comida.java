@@ -1,2 +1,4 @@
-package parte1;public interface Comida {
+package parte1;
+
+public class Comida {
 }

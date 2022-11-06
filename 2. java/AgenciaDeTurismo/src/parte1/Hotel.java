@@ -1,2 +1,4 @@
-package parte1;public interface Hotel {
+package parte1;
+
+public class Hotel {
 }

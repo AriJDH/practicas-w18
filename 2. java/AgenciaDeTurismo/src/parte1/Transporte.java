@@ -1,2 +1,4 @@
-package parte1;public interface Transporte {
+package parte1;
+
+public class Transporte {
 }

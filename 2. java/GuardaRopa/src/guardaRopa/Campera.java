@@ -24,4 +24,5 @@ public class Campera extends Prenda{
     public void setModelo(String modelo) {
         super.setModelo(modelo);
     }
+
 }

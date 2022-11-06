@@ -1,2 +1,4 @@
-package parte1;public interface Boleto {
+package parte1;
+
+public class Boleto {
 }
