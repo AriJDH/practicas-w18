@@ -8,6 +8,7 @@ import java.util.Scanner;
 
 public class Main {
 
+
     private static List<Cliente> clientes = new ArrayList<>();
 
     public static void main(String[] args) {

@@ -42,5 +42,6 @@ public class Cliente {
                 ", identificacion='" + identificacion + '\'' +
                 ", localizadores=" + localizadores +
                 '}';
+
     }
 }

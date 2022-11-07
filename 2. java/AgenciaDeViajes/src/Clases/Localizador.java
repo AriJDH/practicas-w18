@@ -20,5 +20,6 @@ public class Localizador implements ILocalizador {
         return "Localizador{" +
                 "reservas=" + reservas +
                 '}';
+
     }
 }
