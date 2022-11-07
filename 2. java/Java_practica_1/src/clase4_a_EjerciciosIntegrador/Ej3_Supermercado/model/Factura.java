@@ -1,7 +1,6 @@
-package clase4_a_EjerciciosIntegrador.Ej3_Supermercado;
+package clase4_a_EjerciciosIntegrador.Ej3_Supermercado.model;
 
 import java.util.List;
-import java.util.stream.DoubleStream;
 
 public class Factura {
     private Cliente cliente;

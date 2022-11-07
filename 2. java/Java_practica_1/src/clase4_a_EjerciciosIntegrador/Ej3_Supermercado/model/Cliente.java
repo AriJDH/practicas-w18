@@ -1,17 +1,17 @@
-package clase4_a_EjerciciosIntegrador.Ej3_Supermercado;
+package clase4_a_EjerciciosIntegrador.Ej3_Supermercado.model;
 
-public class Cliente {
+import clase4_a_EjerciciosIntegrador.Ej3_Supermercado.repository.CRUDRepository;
+
+public class Cliente  {
     private String dni;
     private String nombre;
     private String apellido;
+
 
     public Cliente(String dni, String nombre, String apellido) {
         this.dni = dni;
         this.nombre = nombre;
         this.apellido = apellido;
-    }
-
-    public Cliente() {
     }
 
     public String getDni() {

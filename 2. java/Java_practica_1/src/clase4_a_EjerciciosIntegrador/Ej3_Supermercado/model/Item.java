@@ -1,4 +1,4 @@
-package clase4_a_EjerciciosIntegrador.Ej3_Supermercado;
+package clase4_a_EjerciciosIntegrador.Ej3_Supermercado.model;
 
 public class Item {
     private String codigo;
