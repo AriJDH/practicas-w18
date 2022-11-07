@@ -7,9 +7,8 @@ public class Factura {
     private ArrayList<Item> items;
     private double totalCompras;
 
-    public Factura(Cliente cliente, double totalCompras) {
+    public Factura(Cliente cliente) {
         this.cliente = cliente;
-        this.totalCompras = totalCompras;
         this.items = new ArrayList<>();
     }
 

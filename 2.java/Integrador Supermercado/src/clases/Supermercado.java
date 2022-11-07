@@ -17,6 +17,27 @@ public class Supermercado {
         this.clientes.add(new Cliente(dni, nombre, apellido));
     }
 
+    private Cliente buscarCliente(Cliente cliente){
+        int i = 0;
+        Cliente clienteBuscado = null;
+        while(i < this.clientes.size() && clienteBuscado == null){
+            if(cliente.getDni().equals(this.clientes.get(i).getDni())){
+                clienteBuscado = cliente;
+            }
+            i++;
+        }
+        return clienteBuscado;
+
+    }
+    public void crearFactura(Cliente cliente){
+        if(buscarCliente(cliente) == null){
+            this.facturas.add(new Factura(new Cliente(cliente.getDni(), cliente.getNombre(), cliente.getApellido())));
+        }else{
+            this.facturas.add(new Factura(cliente));
+        }
+
+    }
+
     public void mostrarDatosClientes(){
         for (Cliente cliente: this.clientes
              ) {

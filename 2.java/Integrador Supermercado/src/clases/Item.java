@@ -12,4 +12,8 @@ public class Item {
         this.cantidad = cantidad;
         this.precioUnitario = precioUnitario;
     }
+
+    public double getPrecioUnitario() {
+        return precioUnitario;
+    }
 }
