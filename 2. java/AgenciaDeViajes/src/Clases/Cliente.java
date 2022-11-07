@@ -1,23 +1,46 @@
 package Clases;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Cliente {
 
     private String nombre;
-    private int id;
 
-    public Cliente(String nombre) {
-        this.nombre = nombre;
-        this.id = id;
+    private String identificacion;
 
+    private List<Localizador> localizadores = new ArrayList<>();
+
+    public String getNombre() {
+        return nombre;
     }
 
-    public int getId(){
-        return this.id;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getIdentificacion() {
+        return identificacion;
+    }
+
+    public void setIdentificacion(String identificacion) {
+        this.identificacion = identificacion;
+    }
+
+    public List<Localizador> getLocalizadores() {
+        return localizadores;
+    }
+
+    public void setLocalizadores(List<Localizador> localizadores) {
+        this.localizadores = localizadores;
     }
 
     @Override
     public String toString() {
-        return "Cliente: "+ this.id + " Nombre: "+ this.nombre+".";
+        return "Cliente{" +
+                "nombre='" + nombre + '\'' +
+                ", identificacion='" + identificacion + '\'' +
+                ", localizadores=" + localizadores +
+                '}';
     }
 }
-
