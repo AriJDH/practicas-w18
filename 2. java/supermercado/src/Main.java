@@ -1,14 +1,13 @@
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class Main {
 
     public static void main(String[] args) {
 
+        //PARTE 1
+
         int dniSolicitado = 0;
         Scanner scanner = new Scanner(System.in);
-
 
         System.out.println("Ejercicio supermercado");
 
@@ -48,6 +47,27 @@ public class Main {
             if(dniSolicitado == listaClientes.get(i).getDni()){
                 System.out.println(listaClientes.get(i).toString());
             }
+        }
+
+        //PARTE 2
+
+        Item item1 = new Item(1,"papafritas");
+        Item item2 = new Item(2,"fideos");
+        Item item3 = new Item(3,"arroz");
+
+        List<Item> listaItems= new ArrayList<>();
+        listaItems.add(item1);
+        listaItems.add(item2);
+        listaItems.add(item3);
+
+        Factura factura1 = new Factura(cliente1, listaItems, 250 );
+
+        List<Factura> listaFacturas= new ArrayList<>();
+
+        if(listaClientes.contains(cliente1)){
+            listaFacturas.add(factura1);
+        }else {
+            //Cliente cliente4 = new Cliente(4, "Malena", "Ruiz");
         }
 
 
