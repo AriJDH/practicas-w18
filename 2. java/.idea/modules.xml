@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/2. java.iml" filepath="$PROJECT_DIR$/.idea/2. java.iml" />
       <module fileurl="file://$PROJECT_DIR$/abstraceinterfaz/abstraceinterfaz.iml" filepath="$PROJECT_DIR$/abstraceinterfaz/abstraceinterfaz.iml" />
+      <module fileurl="file://$PROJECT_DIR$/dakar/dakar.iml" filepath="$PROJECT_DIR$/dakar/dakar.iml" />
       <module fileurl="file://$PROJECT_DIR$/ejercicio-integrador-p1-vivo/ejercicio-integrador-p1-vivo.iml" filepath="$PROJECT_DIR$/ejercicio-integrador-p1-vivo/ejercicio-integrador-p1-vivo.iml" />
       <module fileurl="file://$PROJECT_DIR$/ejercicio-integrador-p2-pg/ejercicio-integrador-p2-pg.iml" filepath="$PROJECT_DIR$/ejercicio-integrador-p2-pg/ejercicio-integrador-p2-pg.iml" />
       <module fileurl="file://$PROJECT_DIR$/abstraceinterfaz/ejerciciopractico1/ejerciciopractico1.iml" filepath="$PROJECT_DIR$/abstraceinterfaz/ejerciciopractico1/ejerciciopractico1.iml" />
