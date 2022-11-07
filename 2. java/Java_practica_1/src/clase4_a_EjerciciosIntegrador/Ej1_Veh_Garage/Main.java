@@ -1,6 +1,7 @@
 package clase4_a_EjerciciosIntegrador.Ej1_Veh_Garage;
 
 import java.util.Arrays;
+import java.util.Comparator;
 
 public class Main {
     public static void main(String[] args) {
@@ -21,7 +22,7 @@ public class Main {
         System.out.println("Lista de vehiculos ordenada por costo:");
         System.out.println("----------------------------------------------------");
         garage.getListaVehiculo().stream()
-                .sorted((x,y) -> x.getCosto().compareTo(y.getCosto()))
+                .sorted(Comparator.comparing(Vehiculo::getCosto))
                 .forEach(System.out::println);
 
         /*

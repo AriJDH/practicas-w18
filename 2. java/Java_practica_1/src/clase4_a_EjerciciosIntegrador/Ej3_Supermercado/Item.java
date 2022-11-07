@@ -4,9 +4,9 @@ public class Item {
     private String codigo;
     private String nombre;
     private int cantComprada;
-    private Double precioUnitario;
+    private double precioUnitario;
 
-    public Item(String codigo, String nombre, int cantComprada, Double precioUnitario) {
+    public Item(String codigo, String nombre, int cantComprada, double precioUnitario) {
         this.codigo = codigo;
         this.nombre = nombre;
         this.cantComprada = cantComprada;

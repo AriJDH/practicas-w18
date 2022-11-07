@@ -18,4 +18,7 @@ public class Factura {
         return listaItems.stream().mapToDouble(x->x.getPrecioUnitario()*x.getCantComprada()).sum();
     }
 
+    public double getTotalCompra() {
+        return totalCompra;
+    }
 }
