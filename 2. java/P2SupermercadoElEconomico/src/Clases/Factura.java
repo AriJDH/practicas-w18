@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Factura {
+    private int codigo;
     private Cliente cliente;
     private List<Producto> listaProductos =new ArrayList<Producto>();
     private int total;
@@ -19,8 +20,8 @@ public class Factura {
     @Override
     public String toString() {
         return "Factura{" +
-                "cliente=" + cliente +
-                ", listaProductos=" + listaProductos +
+                "cliente=" + cliente.toString() +
+                ", listaProductos=" + listaProductos.toString() +
                 ", total=" + total +
                 '}';
     }
@@ -48,5 +49,13 @@ public class Factura {
 
     public void setTotal(int total) {
         this.total = total;
+    }
+
+    public int getCodigo() {
+        return codigo;
+    }
+
+    public void setCodigo(int codigo) {
+        this.codigo = codigo;
     }
 }

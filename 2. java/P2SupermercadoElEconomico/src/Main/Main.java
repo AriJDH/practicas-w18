@@ -3,6 +3,8 @@ package Main;
 import Clases.Cliente;
 import Clases.Factura;
 import Clases.Producto;
+import Repositorio.ClienteImp;
+import Repositorio.FacturaImp;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,63 +13,44 @@ import java.util.Scanner;
 public class Main {
 
     public static void main(String[] args) {
-        //Lista de clientes
-        List<Cliente> listaClientes = new ArrayList<Cliente>();
+        //Guardar clientes en la lista
+        Cliente cliente1=new Cliente(111,"Maria","Duque");
+        Cliente cliente2=new Cliente(222,"Esteban","Monsalve");
+        Cliente cliente3=new Cliente(333,"Paula","Duque");
 
-        listaClientes.add(new Cliente(111,"Maria","Duque"));
-        listaClientes.add(new Cliente(222,"Esteban","Monsalve"));
-        listaClientes.add(new Cliente(333,"Paula","Duque"));
+        ClienteImp clienteImp = new ClienteImp(); //Creo una instancia de la implementación. Ella ya me trae la lista
+        clienteImp.guardar(cliente1);
+        clienteImp.guardar(cliente2);
+        clienteImp.guardar(cliente3);
 
         //Recorrer lista de clientes
-        for(Cliente cliente: listaClientes) {
-            System.out.println(cliente.toString());
-        }
+        clienteImp.imprimir();
 
         //Info del que soliciten
         System.out.println("Ingrese el dni del cliente que desea consultar: ");
         Scanner texto = new Scanner(System.in);
         int dni = texto.nextInt();
-        boolean bandera =false;
 
-        for(Cliente cliente: listaClientes) {
-            if (cliente.getDni()==dni) {
-                System.out.println(cliente.toString());
-                bandera=true;
-            }
-        }
+        clienteImp.buscar(dni);
 
-        if (bandera==false) {
-            System.out.println("No se encuentra ningun cliente asociado a este Dni");
-        }
 
         //Borrar cliente que pidan
         System.out.println("Ingrese el dni del cliente que desea borrar: ");
         int dni2 = texto.nextInt();
-        boolean bandera2 =false;
 
-        for(Cliente cliente: listaClientes) {
-            if (cliente.getDni()==dni2) {
-                listaClientes.remove(cliente);
-                bandera2=true;
-                System.out.println("Cliente eliminado");
-            }
-        }
+        clienteImp.eliminar(dni2);
 
-        if (!bandera2) {
-            System.out.println("No se encuentra ningun cliente asociado a este Dni");
-        }
-
-        //Lista Facturas
-        List<Factura> listaFacturas = new ArrayList<Factura>();
 
         //Crear nueva factura
+        FacturaImp facturaImp = new FacturaImp();
+
         System.out.println("Ingrese el dni de la persona a la que se le va a asignar la factura");
         int dni3 = texto.nextInt();
         boolean bandera3 =false;
         Cliente clienteFactura = new Cliente();
 
         //Cliente para la factura
-        for(Cliente cliente: listaClientes) {
+        for(Cliente cliente: clienteImp.traerTodos()) {
             if (cliente.getDni()==dni3) {
                 bandera3=true;
                 clienteFactura=cliente;
@@ -78,7 +61,7 @@ public class Main {
         if (!bandera3){
             System.out.println("El cliente no esta creado, ingrese sus datos (dni, nombre, apellido");
             Cliente clienteFactura2=new Cliente(texto.nextInt(),texto.next(),texto.next());
-            listaClientes.add(clienteFactura2);
+            clienteImp.traerTodos().add(clienteFactura2);
             clienteFactura=clienteFactura2;
         }
 
@@ -101,9 +84,9 @@ public class Main {
         }
 
         //Agregartodo a la factura
-        listaFacturas.add(new Factura(clienteFactura,listaProductos1,total));
+        facturaImp.traerTodos().add(new Factura(clienteFactura,listaProductos1,total));
 
-        for(Factura factura:listaFacturas){
+        for(Factura factura:facturaImp.traerTodos()){
             System.out.println(factura.getCliente().getNombre());
             System.out.println(factura.getListaProductos().toString());
             System.out.println(factura.getTotal());
