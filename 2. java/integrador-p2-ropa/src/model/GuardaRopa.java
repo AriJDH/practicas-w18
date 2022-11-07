@@ -27,11 +27,6 @@ public class GuardaRopa {
         System.out.println("Le corresponde: " + getGuardaRopa());
     }
 
-    public List<Prenda> devolverPrendas(Integer numID){
-
-        
-    }
-
 
 
     public int getIdentificador() {

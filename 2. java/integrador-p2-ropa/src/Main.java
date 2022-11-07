@@ -24,7 +24,7 @@ public class Main {
 
         guardaRopa.guardarPrendas(prendas);
         guardaRopa.mostrarPrendas();
-
+        
 //        System.out.println("################## devolver prendas 0");
 //        System.out.println(guardaRopa.devolverPrendas(0));
 //        System.out.println("################## devolver prendas 1");
