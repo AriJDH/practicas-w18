@@ -33,7 +33,7 @@ public class RepositorioCliente implements Crud<Cliente, String> {
 
     @Override
     public String baja(String id) {
-        return null;
+        return clientes.remove(new Cliente(id))?"Cliente con DNI: "+id+" eliminado exitosamente.":"No se encontró un cliente con DNI: "+id+".";
     }
 
     @Override
@@ -43,7 +43,7 @@ public class RepositorioCliente implements Crud<Cliente, String> {
 
     @Override
     public Cliente conuslta(String id) {
-        return clientes.stream().filter(c -> c.getDni() == id).findFirst().orElse(null);
+        return clientes.stream().filter(c -> c.getDni().equals(id)).findFirst().orElse(null);
     }
 
     public void preCargaClientes(){
@@ -59,12 +59,5 @@ public class RepositorioCliente implements Crud<Cliente, String> {
     public void verTodoslosClientes(){
         System.out.println("***** LISTADO DE CLIENTES *****");
         clientes.stream().forEach(System.out::println);
-    }
-
-    public void ejecutarParte1(){
-        preCargaClientes();
-        verTodoslosClientes();
-
-
     }
 }

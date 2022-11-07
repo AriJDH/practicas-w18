@@ -1,5 +1,7 @@
 package clases;
 
+import java.util.Objects;
+
 public class Cliente {
     private String dni;
     private String nombre;
@@ -9,6 +11,10 @@ public class Cliente {
         this.dni = dni;
         this.nombre = nombre;
         this.apellido = apellido;
+    }
+
+    public Cliente(String dni) {
+        this.dni = dni;
     }
 
     public String getDni() {
@@ -41,5 +47,13 @@ public class Cliente {
                 "   DNI:      " + dni + '.' +
                 "   Nombre:   " + nombre + '.' +
                 "   Apellido: " + apellido + '.';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Cliente)) return false;
+        Cliente cliente = (Cliente) o;
+        return dni.equals(cliente.dni);
     }
 }
