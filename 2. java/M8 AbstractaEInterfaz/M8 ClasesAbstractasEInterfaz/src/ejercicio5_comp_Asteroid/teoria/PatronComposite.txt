@@ -1,0 +1,35 @@
+https://www.ionos.es/digitalguide/paginas-web/desarrollo-web/patron-composite/
+
+PATRÓN DE DISEÑO COMPOSITE
+
+Las estructuras de datos dinámicas requieren una estructura jerárquica clara y concisa. No es eficiente, por ejemplo, consultar cada vez, el tipo de un objeto antes de que los datos se hayan procesado. Se recomienda este patrón cuando muchos objetos simples se encuentran con objetos compuestos. Al ocultar sus diferencias, este paradigma de desarrollo facilita a los clientes actuar del mismo modo ante los objetos simples y compuestos.
+
+
+
+Consiste en representar objetos simples y sus containers (colecciones, grupos de objetos) en una clase abstracta de manera que puedan ser tratados uniformemente [Part-whole hierarchy -> Jerarquía parte-todo] en la que un objeto es siempre, o una parte de un todo, o un todo compuesto por varias partes.
+
+
+Resultado deseado -> Software flexible, caractreizado por objetos fácilmente implementables,  intercambiables, reutilizables y testeables. Para ésto, el patrón composite describe un método según el cual los objetos simples y complejos pueden ser tratados de la misma manera.  Así se peude crear una estructura de objetos fácilmente inteligible que permite al cliente un acceso altamente eficiente. También minimiza la probabilidad de error en el sistema.
+
+
+
+Para implementar éste patrón:
+
+- Interfaz de componentes unificada para los objetos simples (leaf) y los objetos complejos. Se debe decidir de antemano qué operaciones van a ser difenidas en la interfaz y cuáles en las clases Composite.
+- Los objetos leaf simples integran esta interfaz directamente.
+- Los objetos complejos envían peticiones específicas del cliente automáticamente a la interfaz y a sus componentes subordinados, es decir derivan las consultas a sus elementos child.
+
+- Para el cliente, resulta totalmente indiferente de qué tipo de objeto se trate (parte o todo) ya que solo se comunica con la interfaz.
+
+
+
+Ventajas:
+- Facilita la representación de estructuras altamente anidadas
+- Código simple y conciso
+- Gran escalabilidad
+
+Desventajas:
+- Implementación de interfaz de componentes complicada
+- Ajustes posteriores de las propiedades Composite complicados.
+
+

@@ -37,7 +37,7 @@ public class Util {
 
 
 
-        System.out.println("*** Funciones de Docencia ***");
+        System.out.println("\n*** Funciones de Docencia ***");
         List<Persona> funcionDocencia =
                 personal.stream()
                         .filter(FuncionDocencia.class::isInstance)

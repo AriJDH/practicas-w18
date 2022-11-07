@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement />
+  <nodes>
+    <node x="48.18596208680276" y="-146.67171132540562">ejercicio5_comp_Asteroid.model.NaveSimple</node>
+    <node x="93.68596208680276" y="-208.67171132540562">ejercicio5_comp_Asteroid.model.INave</node>
+    <node x="-333.30466609856876" y="160.02546220545122">ejercicio5_comp_Asteroid.model.Galaxia</node>
+    <node x="-199.99451476179527" y="-293.4225273776036">ejercicio5_comp_Asteroid.model.Participante</node>
+    <node x="-190.2697059713491" y="-29.14526249272093">ejercicio5_comp_Asteroid.model.Flota</node>
+  </nodes>
+  <notes>
+    <note x="-477.409761846989" y="-345.5385557038568">
+      <node>ejercicio5_comp_Asteroid.model.Participante</node>
+      <value>Los participantes pueden poseer: - Una nave simple o una flota de naves simples</value>
+      <edge>
+        <point x="0.0" y="0.0" />
+        <point x="-129.99451476179527" y="-142.06468073320713" />
+        <point x="-362.409761846989" y="-142.06468073320713" />
+        <point x="0.0" y="0.0" />
+      </edge>
+    </note>
+  </notes>
+  <edges />
+  <settings layout="Hierarchic Compact" zoom="0.6884985667040291" showDependencies="false" x="-42.3179623881976" y="38.15068757658196" />
+  <SelectedNodes>
+    <node>ejercicio5_comp_Asteroid.model.Galaxia</node>
+  </SelectedNodes>
+  <Categories>
+    <Category>Fields</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+

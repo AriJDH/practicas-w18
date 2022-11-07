@@ -3,19 +3,54 @@
  * https://docs.google.com/document/d/1p0dsoyA-4xXG-nc1-eQ20UxB1fL3DguMGQNL8lV96rw/edit
  * */
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Main {
 
     static Scanner sc = new Scanner(System.in);
+    static List<Object> participantesCircuitoChico = new ArrayList<>();
+    static List<Object> participantesCircuitoMedio = new ArrayList<>();
+    static List<Object> participantesCircuitoAvanzado = new ArrayList<>();
+
+    static Integer nroParticpante = 0;
 
 
     public static void main(String[] args) {
+
         System.out.println("------------- Carrera de la Selva -------------");
 
+        List participanteInscp1 = inscripcion("tana", "cing", "123", 18, "261", "261", "A-");
+        List participanteInscp2 = inscripcion("Icc", "cing", "123", 18, "261", "261", "A-");
+        List participanteInscp3 = inscripcion("Mari", "cing", "123", 18, "261", "261", "A-");
+        List participanteInscp4 = inscripcion("Susi", "cing", "123", 19, "261", "261", "A-");
+        List participanteInscp5 = inscripcion("Gachi", "cing", "123", 19, "261", "261", "A-");
+        List participanteInscp6 = inscripcion("Pachi", "cing", "123", 19, "261", "261", "A-");
+
+
+        mostrarParticipantes();
 
 
     }
+
+    private static void mostrarParticipantes() {
+        System.out.println("\nParticipantes Circuito Chico");
+        for (Object participante: participantesCircuitoChico) {
+            System.out.println(participante);
+        }
+
+        System.out.println("\nParticipantes Circuito Medio");
+        for (Object participante: participantesCircuitoMedio) {
+            System.out.println(participante);
+        }
+
+        System.out.println("\nParticipantes Circuito Avanzado");
+        for (Object participante: participantesCircuitoAvanzado) {
+            System.out.println(participante);
+        }
+    }
+
 
     private static void showMenuPrincipal() {
         System.out.println("1. Inscribir participante");
@@ -46,10 +81,9 @@ public class Main {
 
     }
 
-
-    //Ingresar categoría para opción 1, 2, 3, 4
+    //Ingresar categoría para opción 1, 2, 3
     private static Enum<CategoriaCircuito> ingresarCategoria() {
-        System.out.println("Ingrese Categoría");
+        System.out.print("Ingrese Categoría > ");
         int nroCategoria = sc.nextInt();  //todo acordarse de cerrarlo
         Enum<CategoriaCircuito> categoria = null;
 
@@ -68,7 +102,7 @@ public class Main {
         return categoria;
     }
 
-    private static int monto(int edad, String categoria) {
+    private static int monto(int edad, Enum<CategoriaCircuito> categoria) {
         int monto = 0;
         //todo implementar método monto con matriz - refactorizar
         /*
@@ -78,20 +112,25 @@ public class Main {
         * */
 
         if(esMayorEdad(edad)){
-            if(categoria.equals(CategoriaCircuito.CIRCUITO_CHICO)){
+            if(categoria.equals(CategoriaCircuito.CIRCUITO_CHICO)) {
                 monto = 1500;
-            } else if (categoria.equals(CategoriaCircuito.CIRCUITO_MEDIO)) {
+            }
+            if (categoria.equals(CategoriaCircuito.CIRCUITO_MEDIO)) {
                 monto = 2300;
-            } else {
+            }
+            if (categoria.equals(CategoriaCircuito.CIRCUITO_AVANZADO)){
                 monto = 2800;
             }
         } else {
             if(categoria.equals(CategoriaCircuito.CIRCUITO_CHICO)){
                 monto = 1300;
-            } else if (categoria.equals(CategoriaCircuito.CIRCUITO_MEDIO)) {
+            }
+            if (categoria.equals(CategoriaCircuito.CIRCUITO_MEDIO)) {
                 monto = 2000;
-            } else {
-                System.out.println("No se permiten inscripciones a menores de 18 años.");
+            }
+            if (categoria.equals(CategoriaCircuito.CIRCUITO_AVANZADO)){
+                System.out.println("No se permiten inscripciones a menores de 18 años. Reinicie la inscripción");
+                ingresarCategoria();
             }
         }
         return monto;
@@ -113,7 +152,39 @@ public class Main {
 
     }
 
+    public static List inscripcion(String nombre,
+                                   String apellido,
+                                   String dni,
+                                   Integer edad,
+                                   String celular,
+                                   String nroEmergencia,
+                                   String grupoSanguineo){
 
+        nroParticpante +=1;
+        Enum<CategoriaCircuito> categoriaCircuito = ingresarCategoria();
+        int monto = monto(edad, categoriaCircuito);
+        List participante = List.of(nroParticpante, nombre, apellido, dni, edad, celular, nroEmergencia, grupoSanguineo, categoriaCircuito, monto);
 
+        listadoParticipantesPorCategoria(categoriaCircuito, participante);
+
+        return participante;
+    }
+
+    private static void listadoParticipantesPorCategoria(Enum<CategoriaCircuito> categoriaCircuito, List<Object> participante) {
+
+        if (categoriaCircuito.equals(CategoriaCircuito.CIRCUITO_CHICO)) {
+            System.out.println("Categoría Circuito Chico\n");
+            participantesCircuitoChico.add(participante);
+        }
+        if (categoriaCircuito.equals(CategoriaCircuito.CIRCUITO_MEDIO)){
+            System.out.println("Categoría Circuito Medio\n");
+            participantesCircuitoMedio.add(participante);
+        }
+        if (categoriaCircuito.equals(CategoriaCircuito.CIRCUITO_AVANZADO)){
+            System.out.println("Categoría Circuito Avanzado\n");
+            participantesCircuitoAvanzado.add(participante);
+        }
+
+    }
 }
 
