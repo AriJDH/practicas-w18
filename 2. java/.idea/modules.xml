@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/2. java.iml" filepath="$PROJECT_DIR$/.idea/2. java.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ejercicios_integradores_P1/AgenciaTurismo/AgenciaTurismo.iml" filepath="$PROJECT_DIR$/ejercicios_integradores_P1/AgenciaTurismo/AgenciaTurismo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/abstract_vs_interface/abstract_vs_interface.iml" filepath="$PROJECT_DIR$/abstract_vs_interface/abstract_vs_interface.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ejercicios_integradores_P1/agencia_de_turismo/agencia_de_turismo.iml" filepath="$PROJECT_DIR$/ejercicios_integradores_P1/agencia_de_turismo/agencia_de_turismo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/intro_Java/intro_Java.iml" filepath="$PROJECT_DIR$/intro_Java/intro_Java.iml" />
+      <module fileurl="file://$PROJECT_DIR$/POO/parte1/parte1.iml" filepath="$PROJECT_DIR$/POO/parte1/parte1.iml" />
+      <module fileurl="file://$PROJECT_DIR$/POO/parte2/parte2.iml" filepath="$PROJECT_DIR$/POO/parte2/parte2.iml" />
+      <module fileurl="file://$PROJECT_DIR$/intro_Java/parte2/parte21.iml" filepath="$PROJECT_DIR$/intro_Java/parte2/parte21.iml" />
+      <module fileurl="file://$PROJECT_DIR$/recapitulando_java/recapitulando_java.iml" filepath="$PROJECT_DIR$/recapitulando_java/recapitulando_java.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ejercicios_integradores_P1/supermercado/supermercado.iml" filepath="$PROJECT_DIR$/ejercicios_integradores_P1/supermercado/supermercado.iml" />
+    </modules>
+  </component>
+</project>
