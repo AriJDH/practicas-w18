@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement />
+  <nodes>
+    <node x="58.5" y="-14.0">clases.Carrera</node>
+    <node x="-52.5" y="56.0">clases.Moto</node>
+    <node x="68.5" y="56.0">clases.Auto</node>
+  </nodes>
+  <notes />
+  <edges />
+  <settings layout="Hierarchic Compact" zoom="1.0" showDependencies="false" x="203.0" y="-46.5" />
+  <SelectedNodes>
+    <node>clases.Moto</node>
+  </SelectedNodes>
+  <Categories />
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+
