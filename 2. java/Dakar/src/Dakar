@@ -1,0 +1,60 @@
+@startuml
+
+!theme plain
+top to bottom direction
+skinparam linetype ortho
+
+class Auto {
+  + Auto(): 
+  ~ canRuedas: int
+  ~ PESO: double
+}
+class Carrera {
+  + Carrera(): 
+  ~ cantidadDeVehiculosPermitidos: int
+  ~ vehiculos: List<Vehiculo>
+  ~ nombre: String
+  ~ socorristaMoto: SocorristaMoto
+  ~ distasncia: double
+  ~ socorristaAuto: SocorristaAuto
+  ~ premioEnDolares: double
+  + socorrerMoto(String): void
+  + eliminarVehiculoConPatente(String): void
+  + determinarGanador(): Vehiculo
+  + eliminarVehiculo(Vehiculo): void
+  + darDeAltaMoto(double, double, double, String): void
+  + socorrerAuto(String): void
+  + darDeAltaAuto(double, double, double, String): void
+}
+class Moto {
+  + Moto(): 
+  ~ canRuedas: int
+  ~ PESO: double
+}
+class SocorristaAuto {
+  + SocorristaAuto(): 
+  + socorrer(Auto): void
+}
+class SocorristaMoto {
+  + SocorristaMoto(): 
+  + socorrer(Moto): void
+}
+class Vehiculo {
+  + Vehiculo(): 
+  ~ anguloDeGiro: double
+  ~ aceleracion: double
+  ~ cantRueda: int
+  ~ velocidad: double
+  ~ patente: String
+  ~ peso: double
+}
+
+Auto            -[#000082,plain]-^  Vehiculo       
+Carrera        "1" *-[#595959,plain]-> "socorristaAuto\n1" SocorristaAuto 
+Carrera        "1" *-[#595959,plain]-> "socorristaMoto\n1" SocorristaMoto 
+Carrera        "1" *-[#595959,plain]-> "vehiculos\n*" Vehiculo       
+Carrera         -[#595959,dashed]->  Vehiculo       : "«create»"
+Moto            -[#000082,plain]-^  Vehiculo       
+SocorristaAuto  -[#000082,plain]-^  Vehiculo       
+SocorristaMoto  -[#000082,plain]-^  Vehiculo       
+@enduml
