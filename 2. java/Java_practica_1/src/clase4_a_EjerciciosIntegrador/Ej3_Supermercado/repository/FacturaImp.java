@@ -10,6 +10,8 @@ public class FacturaImp implements CRUDRepository<Factura> {
 
     private Scanner teclado = new Scanner(System.in);
     List<Factura> listFacturas = new ArrayList<>();
+
+    ItemImp itemIMP = new ItemImp();
     @Override
     public void nuevo(Factura factura) {
         listFacturas.add(factura);
@@ -40,30 +42,14 @@ public class FacturaImp implements CRUDRepository<Factura> {
         System.out.println("Nueva factura");
         System.out.println("--------------------------------------------------------------------");
         List<Item> listaItems = new ArrayList<>();
-        String codigo, nombre;
-        int cantComprada;
-        double precioUnitario;
         char opcion = 'N';
         do {
-            System.out.println("--------------------------------------------------------------------");
-            System.out.println("Producto");
-            System.out.println("--------------------------------------------------------------------");
-            System.out.print("Código: ");
-            codigo = teclado.nextLine();
-            System.out.print("Nombre: ");
-            nombre = teclado.nextLine();
-            System.out.print("Cantidad comprada: ");
-            cantComprada = teclado.nextInt();
-            teclado.nextLine();
-            System.out.print("Precio Unitario: ");
-            precioUnitario = teclado.nextDouble();
-            teclado.nextLine();
-            listaItems.add(new Item(codigo, nombre, cantComprada, precioUnitario));
+            listaItems.add(itemIMP.nuevoConMenu());
             System.out.println("--------------------------------------------------------------------");
             System.out.print("Desea registrar otro producto a la factura? (S/N): ");
             opcion = teclado.nextLine().toUpperCase().charAt(0);
         } while(opcion == 'S');
-        Factura factura = new Factura("1",cliente, listaItems);
+        Factura factura = new Factura(String.valueOf(listFacturas.size()+1),cliente, listaItems);
         listFacturas.add(factura);
         System.out.println("--------------------------------------------------------------------");
         System.out.println("El monto total de la factura es $" + factura.getTotalCompra());

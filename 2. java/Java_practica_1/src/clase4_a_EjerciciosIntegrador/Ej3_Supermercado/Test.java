@@ -23,6 +23,7 @@ public class Test {
             System.out.println("3 - Eliminar cliente x DNI");
             System.out.println("4 - Mostrar cliente x DNI");
             System.out.println("5 - Nueva Factura");
+            System.out.println("6 - Mostrar factura X Código");
             System.out.println("\n0 - Salir");
             System.out.println("--------------------------------------------------------------------");
             opcion = teclado.nextLine().charAt(0);
@@ -37,6 +38,8 @@ public class Test {
                     break;
                 case '5': nuevaFactura();
                     break;
+                case '6': facIMP.mostrarUno();
+                    break;
                 case '0': System.out.println("\nSaliendo...");
                     break;
             }
@@ -48,13 +51,13 @@ public class Test {
         System.out.print("Ingrese el DNI del cliente: ");
         String dni = teclado.nextLine();
         Optional<Cliente> cliente = cliIMP.buscar(dni);
-        if (cliente.isPresent()) {
+        if (!cliente.isPresent()) {
             System.out.println("--------------------------------------------------------------------");
             System.out.println("El cliente no existe, se procede a crearlo...");
             System.out.println("--------------------------------------------------------------------");
-            facIMP.nuevoConDni(cliente.get());
-        } else {
             facIMP.nuevoConDni(cliIMP.nuevoConMenu());
+        } else {
+            facIMP.nuevoConDni(cliente.get());
         }
     }
 

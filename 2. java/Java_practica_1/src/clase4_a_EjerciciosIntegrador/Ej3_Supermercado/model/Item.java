@@ -13,6 +13,16 @@ public class Item {
         this.precioUnitario = precioUnitario;
     }
 
+    @Override
+    public String toString() {
+        return "Item{" +
+                "codigo='" + codigo + '\'' +
+                ", nombre='" + nombre + '\'' +
+                ", cantComprada=" + cantComprada +
+                ", precioUnitario=" + precioUnitario +
+                '}';
+    }
+
     public String getCodigo() {
         return codigo;
     }

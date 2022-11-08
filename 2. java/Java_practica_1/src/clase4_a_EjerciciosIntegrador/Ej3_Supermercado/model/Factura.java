@@ -16,6 +16,16 @@ public class Factura {
         this.totalCompra = calcularTotalCompra();
     }
 
+    @Override
+    public String toString() {
+        return "Factura{" +
+                "codigo='" + codigo + '\'' +
+                ", cliente=" + cliente +
+                ", listaItems=" + listaItems +
+                ", totalCompra=" + totalCompra +
+                '}';
+    }
+
     private double calcularTotalCompra(){
         return listaItems.stream().mapToDouble(x->x.getPrecioUnitario()*x.getCantComprada()).sum();
     }
