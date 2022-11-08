@@ -1,5 +1,7 @@
 package supermercado_el_economico.clases;
 
+import supermercado_el_economico.repository.FacturaImpl;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -7,6 +9,8 @@ import java.util.Scanner;
 public class Supermercado {
 
     private static List<Cliente> clientes;
+
+    private static FacturaImpl facturaImpl = new FacturaImpl();
 
     public static void main(String[] args) {
 
@@ -21,7 +25,8 @@ public class Supermercado {
             System.out.println("3) Consultas clientes");
             System.out.println("4) Consultas cliente por identificacion");
             System.out.println("5) Crear factura");
-            System.out.println("6) Salir");
+            System.out.println("6) Consultas facturas");
+            System.out.println("7) Salir");
 
             Scanner teclado = new Scanner(System.in);
 
@@ -46,6 +51,9 @@ public class Supermercado {
                     crearFactura();
                     break;
                 case 6:
+                    consultarFacturas();
+                    break;
+                case 7:
                     salirMenu = true;
                     break;
                 default:
@@ -133,7 +141,12 @@ public class Supermercado {
 
         List<Item> items = crearItems();
 
-        cliente.crearFacturas(items);
+        Factura factura = new Factura();
+        factura.setItems(items);
+        factura.setCliente(cliente);
+
+        facturaImpl.save(factura);
+
     }
 
     private static List<Item> crearItems() {
@@ -170,5 +183,9 @@ public class Supermercado {
         }
 
         return items;
+    }
+
+    private static void consultarFacturas() {
+        facturaImpl.mostrarTodo();
     }
 }

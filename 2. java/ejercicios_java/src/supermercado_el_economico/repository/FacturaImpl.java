@@ -12,11 +12,17 @@ public class FacturaImpl implements CRUDRepository<Factura> {
 
     @Override
     public void save(Factura objeto) {
+        objeto.calcularTotalFactura();
         this.facturas.add(objeto);
     }
 
     @Override
     public void mostrarTodo() {
+
+        System.out.println("===== Facturas consultadas =======");
+        for (Factura factura : facturas) {
+            System.out.println(factura.toString());
+        }
 
     }
 
