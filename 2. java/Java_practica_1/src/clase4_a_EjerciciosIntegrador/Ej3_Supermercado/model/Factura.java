@@ -18,12 +18,11 @@ public class Factura {
 
     @Override
     public String toString() {
-        return "Factura{" +
+        return "Factura --->" +
                 "codigo='" + codigo + '\'' +
                 ", cliente=" + cliente +
                 ", listaItems=" + listaItems +
-                ", totalCompra=" + totalCompra +
-                '}';
+                ", totalCompra=" + totalCompra;
     }
 
     private double calcularTotalCompra(){

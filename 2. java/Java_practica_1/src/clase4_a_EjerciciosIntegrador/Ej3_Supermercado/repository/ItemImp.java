@@ -28,7 +28,12 @@ public class ItemImp implements CRUDRepository<Item>{
     }
 
     @Override
-    public Item nuevoConMenu() {
+    public void eliminar() {
+
+    }
+
+    @Override
+    public Item nuevo() {
         String codigo, nombre;
         int cantComprada;
         double precioUnitario;

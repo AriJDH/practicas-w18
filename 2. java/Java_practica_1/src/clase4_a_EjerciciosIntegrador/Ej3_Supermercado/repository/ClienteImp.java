@@ -11,7 +11,7 @@ public class ClienteImp implements CRUDRepository<Cliente> {
     private Scanner teclado = new Scanner(System.in);
     Set<Cliente> setClientes = new HashSet<>();
     @Override
-    public Cliente nuevoConMenu(){
+    public Cliente nuevo(){
         String dni, nombre, apellido;
         System.out.println("--------------------------------------------------------------------");
         System.out.println("Nuevo cliente");
@@ -29,22 +29,6 @@ public class ClienteImp implements CRUDRepository<Cliente> {
         return cliente;
     }
 
-    public void eliminarConMenu(){
-        String dni;
-        System.out.println("--------------------------------------------------------------------");
-        System.out.printf("Ingrese un DNI para buscar el cliente a eliminar: ");
-        dni = teclado.nextLine();
-        System.out.println("--------------------------------------------------------------------");
-        Optional<Cliente> cliente = buscar(dni);
-        if (cliente.isPresent()){
-            eliminar(cliente.get());
-            mostrarTodos();
-        }else{
-            System.out.println("No se encontró el cliente con DNI " + dni);
-            System.out.println("\nPresione una tecla para continuar...");
-            teclado.nextLine();
-        }
-    }
 
     @Override
     public void nuevo(Cliente cliente) {
@@ -64,6 +48,24 @@ public class ClienteImp implements CRUDRepository<Cliente> {
     @Override
     public void eliminar(Cliente cliente) {
         setClientes.remove(cliente);
+    }
+
+    @Override
+    public void eliminar() {
+        String dni;
+        System.out.println("--------------------------------------------------------------------");
+        System.out.printf("Ingrese un DNI para buscar el cliente a eliminar: ");
+        dni = teclado.nextLine();
+        System.out.println("--------------------------------------------------------------------");
+        Optional<Cliente> cliente = buscar(dni);
+        if (cliente.isPresent()){
+            eliminar(cliente.get());
+            mostrarTodos();
+        }else{
+            System.out.println("No se encontró el cliente con DNI " + dni);
+            System.out.println("\nPresione una tecla para continuar...");
+            teclado.nextLine();
+        }
     }
 
     @Override

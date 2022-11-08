@@ -15,12 +15,10 @@ public class Item {
 
     @Override
     public String toString() {
-        return "Item{" +
-                "codigo='" + codigo + '\'' +
+        return "codigo='" + codigo + '\'' +
                 ", nombre='" + nombre + '\'' +
                 ", cantComprada=" + cantComprada +
-                ", precioUnitario=" + precioUnitario +
-                '}';
+                ", precioUnitario=" + precioUnitario;
     }
 
     public String getCodigo() {

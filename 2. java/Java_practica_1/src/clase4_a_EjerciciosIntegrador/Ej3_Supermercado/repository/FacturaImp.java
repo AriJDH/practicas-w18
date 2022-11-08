@@ -33,18 +33,36 @@ public class FacturaImp implements CRUDRepository<Factura> {
     }
 
     @Override
-    public Factura nuevoConMenu() {
+    public void eliminar() {
+        String codigo;
+        System.out.println("--------------------------------------------------------------------");
+        System.out.printf("Ingrese un Código para buscar la factura a eliminar: ");
+        codigo = teclado.nextLine();
+        System.out.println("--------------------------------------------------------------------");
+        Optional<Factura> factura = buscar(codigo);
+        if (factura.isPresent()){
+            eliminar(factura.get());
+            mostrarTodos();
+        }else{
+            System.out.println("No se encontró la factura con código " + codigo);
+            System.out.println("\nPresione una tecla para continuar...");
+            teclado.nextLine();
+        }
+    }
+
+    @Override
+    public Factura nuevo() {
         return null;
     }
 
-    public void nuevoConDni(Cliente cliente) {
+    public void nuevo(Cliente cliente) {
         System.out.println("--------------------------------------------------------------------");
         System.out.println("Nueva factura");
         System.out.println("--------------------------------------------------------------------");
         List<Item> listaItems = new ArrayList<>();
         char opcion = 'N';
         do {
-            listaItems.add(itemIMP.nuevoConMenu());
+            listaItems.add(itemIMP.nuevo());
             System.out.println("--------------------------------------------------------------------");
             System.out.print("Desea registrar otro producto a la factura? (S/N): ");
             opcion = teclado.nextLine().toUpperCase().charAt(0);
