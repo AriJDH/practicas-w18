@@ -2,26 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="48aa29ad-4d30-4e9a-857e-64f6763ea717" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Asteroide/Clases/FlotaDeNaves.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Asteroide/Clases/NaveSiemple.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Asteroide/Shapes/IEstructuraNave.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/SaveTheRopa/Clases/ArmaPrendas.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/SaveTheRopa/Clases/GuardaRopa.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/SaveTheRopa/Clases/Main.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/SaveTheRopa/Clases/Prenda.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Universidad/CAbstracta/Estudiante.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Universidad/CAbstracta/Persona.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Universidad/Clases/EstudianteTecnico.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Universidad/Clases/Main.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Universidad/Clases/MiembroPersonal.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Universidad/Clases/PersonalMantenimiento.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Universidad/Clases/PersonalSoporteTecnico.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Universidad/Clases/Profesor.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Universidad/Clases/Tutor.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Universidad/Interfaces/IEstudianteTecnico.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Universidad/Interfaces/ITutor.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Asteroide/Main.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Generics/Clases/Garaje.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Generics/Clases/Main.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Generics/Clases/Vehiculo.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/BootCamp/Asteroide/Clases/FlotaDeNaves.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/BootCamp/Asteroide/Clases/FlotaDeNaves.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/BootCamp/Asteroide/Clases/NaveSiemple.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/BootCamp/Asteroide/Clases/NaveSiemple.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/BootCamp/Asteroide/Shapes/IEstructuraNave.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/BootCamp/Asteroide/Shapes/IEstructuraNave.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Asteroide/Clases/FlotaDeNaves.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Asteroide/Clases/FlotaDeNaves.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Asteroide/Clases/NaveSiemple.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Asteroide/Clases/NaveSiemple.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Asteroide/Shapes/IEstructuraNave.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Asteroide/Shapes/IEstructuraNave.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -60,20 +51,7 @@
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
   </component>
-  <component name="RunManager" selected="Application.Main (3)">
-    <configuration name="Main (1)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="CarreraDeLaSelva.Clases.Main" />
-      <module name="BootCamp" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="CarreraDeLaSelva.Clases.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
+  <component name="RunManager" selected="Application.Main (4)">
     <configuration name="Main (2)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Universidad.Clases.Main" />
       <module name="BootCamp" />
@@ -101,11 +79,24 @@
       </method>
     </configuration>
     <configuration name="Main (4)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Practica_CalcularIMC.Clases.Main" />
+      <option name="MAIN_CLASS_NAME" value="Generics.Clases.Main" />
       <module name="BootCamp" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="Practica_CalcularIMC.Clases.*" />
+          <option name="PATTERN" value="Generics.Clases.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Main (5)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Asteroide.Main" />
+      <module name="BootCamp" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="Asteroide.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -126,26 +117,24 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
           <option name="containerStateName" value="" />
         </value>
       </option>
-      <option name="TEST_OBJECT" value="CLASS" />
-      <properties />
-      <listeners />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.Main (4)" />
+        <item itemvalue="Application.Main (5)" />
         <item itemvalue="Application.Main (3)" />
         <item itemvalue="Application.Main (2)" />
         <item itemvalue="Application.Main" />
-        <item itemvalue="Application.Main (1)" />
-        <item itemvalue="Application.Main (4)" />
       </list>
     </recent_temporary>
   </component>
@@ -158,7 +147,8 @@
       <option name="presentableId" value="Default" />
       <updated>1667534616531</updated>
       <workItem from="1667534618749" duration="3714000" />
-      <workItem from="1667571717670" duration="7113000" />
+      <workItem from="1667571717670" duration="7194000" />
+      <workItem from="1667776027307" duration="24734000" />
     </task>
     <servers />
   </component>
@@ -176,5 +166,48 @@
       </map>
     </option>
     <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/src/Asteroide/Clases/FlotaDeNaves.java</url>
+          <line>55</line>
+          <properties class="Asteroide.Clases.FlotaDeNaves" method="calcularDistancia">
+            <option name="EMULATED" value="true" />
+          </properties>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/src/Asteroide/Clases/FlotaDeNaves.java</url>
+          <line>49</line>
+          <properties class="Asteroide.Clases.FlotaDeNaves" method="setCordenadasAsteroide">
+            <option name="EMULATED" value="true" />
+          </properties>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/src/Asteroide/Clases/FlotaDeNaves.java</url>
+          <line>43</line>
+          <properties class="Asteroide.Clases.FlotaDeNaves" method="setCordenadasNave">
+            <option name="EMULATED" value="true" />
+          </properties>
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/src/Asteroide/Clases/NaveSiemple.java</url>
+          <line>54</line>
+          <properties class="Asteroide.Clases.NaveSiemple" method="calcularDistancia">
+            <option name="EMULATED" value="true" />
+          </properties>
+          <option name="timeStamp" value="5" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+    <watches-manager>
+      <configuration name="Application">
+        <watch expression="number.calcularDistancia()" />
+      </configuration>
+    </watches-manager>
   </component>
 </project>

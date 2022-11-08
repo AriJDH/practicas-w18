@@ -4,11 +4,13 @@ import java.util.List;
 
 public interface IEstructuraNave {
 
-    public void add(IEstructuraNave nave);
-    public String getNombre();
+    public void agregarNave(IEstructuraNave nave);
+    public String getNombreNave();
+    public void setNombreNave(String nombreNave);
     public void setPuntuacion();
     public int getPuntaje();
-    public void setCordenadas(List<Integer> coordenadas);
-    public float calcularDistancia(List<Integer> coordenadas);
+    public void setCordenadasNave(List<Integer> coordenadasNave);
+    public void setCordenadasAsteroide(List<Integer> coordenadasAsteroide);
+    public float calcularDistancia();
 
 }
