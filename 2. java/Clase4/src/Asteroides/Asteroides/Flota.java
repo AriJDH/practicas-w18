@@ -2,7 +2,7 @@ package Asteroides;
 
 import java.util.List;
 
-public class Flota implements Component{
+public class Flota implements Component {
 
    private List<Component> flota;
 
