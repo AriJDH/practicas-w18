@@ -2,17 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="48aa29ad-4d30-4e9a-857e-64f6763ea717" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/Asteroide/Main.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Generics/Clases/Garaje.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Generics/Clases/Main.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Generics/Clases/Vehiculo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Series/Clases/Main.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Series/Clases/Prototipo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Series/Clases/SerieDos.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Series/Clases/SerieUno.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/BootCamp/Asteroide/Clases/FlotaDeNaves.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/BootCamp/Asteroide/Clases/FlotaDeNaves.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/BootCamp/Asteroide/Clases/NaveSiemple.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/BootCamp/Asteroide/Clases/NaveSiemple.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/BootCamp/Asteroide/Shapes/IEstructuraNave.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/BootCamp/Asteroide/Shapes/IEstructuraNave.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Asteroide/Clases/FlotaDeNaves.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Asteroide/Clases/FlotaDeNaves.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Asteroide/Clases/NaveSiemple.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Asteroide/Clases/NaveSiemple.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Asteroide/Shapes/IEstructuraNave.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Asteroide/Shapes/IEstructuraNave.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -51,7 +45,20 @@
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
   </component>
-  <component name="RunManager" selected="Application.Main (4)">
+  <component name="RunManager" selected="Application.Main (1)">
+    <configuration name="Main (1)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Series.Clases.Main" />
+      <module name="BootCamp" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="Series.Clases.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="Main (2)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Universidad.Clases.Main" />
       <module name="BootCamp" />
@@ -104,19 +111,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Animales.Clases.Main" />
-      <module name="BootCamp" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="Animales.Clases.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
@@ -130,11 +124,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.Main (1)" />
         <item itemvalue="Application.Main (4)" />
         <item itemvalue="Application.Main (5)" />
         <item itemvalue="Application.Main (3)" />
         <item itemvalue="Application.Main (2)" />
-        <item itemvalue="Application.Main" />
       </list>
     </recent_temporary>
   </component>
@@ -148,7 +142,7 @@
       <updated>1667534616531</updated>
       <workItem from="1667534618749" duration="3714000" />
       <workItem from="1667571717670" duration="7194000" />
-      <workItem from="1667776027307" duration="24734000" />
+      <workItem from="1667776027307" duration="29833000" />
     </task>
     <servers />
   </component>
@@ -201,6 +195,16 @@
             <option name="EMULATED" value="true" />
           </properties>
           <option name="timeStamp" value="5" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/Series/Clases/SerieUno.java</url>
+          <line>8</line>
+          <option name="timeStamp" value="8" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/Series/Clases/Main.java</url>
+          <line>12</line>
+          <option name="timeStamp" value="9" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
