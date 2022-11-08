@@ -2,30 +2,48 @@ package clase3_b_EjerComplementarios.Ej2;
 
 import java.util.ArrayList;
 
-public class Flota implements Navegable{
-    private ArrayList<Nave> flota;
+public class Flota implements INave {
+    private ArrayList<INave> flota;
+    private String nombre;
+    private Integer puntuacion;
 
-    public void addNave(Nave nave){
-        flota.add(nave);
-    }
-
-    public Flota() {
+    public Flota(String nombre) {
+        this.nombre = nombre;
         this.flota = new ArrayList<>();
+        this.puntuacion = 0;
     }
 
 
     @Override
     public String toString() {
-        return "Flota{" +
-                "flota=" + flota +
-                '}';
+        return "Flota:" + flota;
     }
 
     @Override
-    public double getDistancia(int x, int y) {
+    public void add(INave nave) {
+        this.flota.add(nave);
+    }
+
+    @Override
+    public String getNombre() {
+        return this.nombre;
+    }
+
+    @Override
+    public void setPuntuacion() {
+        this.puntuacion ++;
+    }
+
+    @Override
+    public Integer getPuntaje() {
+        return this.puntuacion;
+    }
+
+    @Override
+    public double calcularDistancia(int x, int y) {
         double distancia = 0;
-        for ( Nave nave : flota ){
-            distancia += nave.getDistancia(x,y);
+        for ( INave nave : flota ){
+            distancia += nave.calcularDistancia(x,y);
         }
         return distancia / flota.size();
     }
