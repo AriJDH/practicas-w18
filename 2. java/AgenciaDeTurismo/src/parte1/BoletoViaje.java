@@ -3,20 +3,18 @@ package parte1;
 import java.util.Collections;
 import java.util.List;
 
-public class Hotel implements RepositorioBase {
+public class BoletoViaje implements RepositorioBase{
     protected RepositorioBase repositorio;
     protected int descuento = 0;
-    public Hotel(RepositorioBase repositorio) {
+    public BoletoViaje(RepositorioBase repositorio) {
         this.repositorio = repositorio;
-        this.repositorio.addLocalizador("Hotel");
+        this.repositorio.addLocalizador("Boleto Viaje");
         this.repositorio.setDescuento(this.getDescuento());
     }
-
     @Override
     public void setDescuento(int descuento) {
         this.descuento = descuento;
     }
-
     @Override
     public int getDescuento() {
         List<String> lista = this.repositorio.getLocalizadores();
@@ -36,6 +34,8 @@ public class Hotel implements RepositorioBase {
         return repositorio.getDescuento() + descuento;
     }
 
+
+
     @Override
     public List<String> getLocalizadores() {
         return repositorio.getLocalizadores();
@@ -45,10 +45,8 @@ public class Hotel implements RepositorioBase {
     public void addLocalizador(String localizador) {
         this.repositorio.getLocalizadores().add(localizador);
     }
-
     @Override
     public String toString() {
-        return repositorio + " Hotel ";
+        return repositorio + " BoletoViaje ";
     }
-
 }
