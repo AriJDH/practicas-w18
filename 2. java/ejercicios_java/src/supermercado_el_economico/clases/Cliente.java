@@ -1,5 +1,8 @@
 package supermercado_el_economico.clases;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Cliente {
 
     private String dni;
@@ -7,6 +10,12 @@ public class Cliente {
     private String nombre;
 
     private String apellido;
+
+    private List<Factura> facturas;
+
+    public Cliente() {
+        this.facturas = new ArrayList<>();
+    }
 
     public String getDni() {
         return dni;
@@ -32,12 +41,30 @@ public class Cliente {
         this.apellido = apellido;
     }
 
+    public List<Factura> getFacturas() {
+        return facturas;
+    }
+
+    public void setFacturas(List<Factura> facturas) {
+        this.facturas = facturas;
+    }
+
+    public void crearFacturas(List<Item> items) {
+
+        Factura factura = new Factura();
+
+        factura.crearFactura(this, items);
+
+        this.facturas.add(factura);
+    }
+
     @Override
     public String toString() {
         return "Cliente{" +
                 "dni='" + dni + '\'' +
                 ", nombre='" + nombre + '\'' +
                 ", apellido='" + apellido + '\'' +
+                ", facturas=" + facturas +
                 '}';
     }
 }

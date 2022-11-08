@@ -20,7 +20,8 @@ public class Supermercado {
             System.out.println("2) Eliminar cliente");
             System.out.println("3) Consultas clientes");
             System.out.println("4) Consultas cliente por identificacion");
-            System.out.println("5) Salir");
+            System.out.println("5) Crear factura");
+            System.out.println("6) Salir");
 
             Scanner teclado = new Scanner(System.in);
 
@@ -42,6 +43,9 @@ public class Supermercado {
                     consultarClienteDni();
                     break;
                 case 5:
+                    crearFactura();
+                    break;
+                case 6:
                     salirMenu = true;
                     break;
                 default:
@@ -103,12 +107,68 @@ public class Supermercado {
         System.out.print("Ingresar dni del cliente: ");
         String dni = teclado.nextLine();
 
-        Cliente cliente = clientes.stream().filter(x -> x.getDni().equals(dni)).findAny().orElse(null);
+        Cliente cliente = getCliente(dni);
 
         if (cliente != null) {
             System.out.println(cliente);
         } else {
             System.out.println("No existe cliente con DNI " + dni);
         }
+    }
+
+    private static Cliente getCliente(String dni) {
+        return clientes.stream().filter(x -> x.getDni().equals(dni)).findAny().orElse(null);
+    }
+
+    private static void crearFactura() {
+
+        System.out.println("======== Creacion factura ========");
+
+        Scanner teclado = new Scanner(System.in);
+
+        System.out.println("Ingresar dni cliente: ");
+        String dniCliente = teclado.nextLine();
+
+        Cliente cliente = getCliente(dniCliente);
+
+        List<Item> items = crearItems();
+
+        cliente.crearFacturas(items);
+    }
+
+    private static List<Item> crearItems() {
+
+        List<Item> items = new ArrayList<>();
+
+        Scanner teclado = new Scanner(System.in);
+
+        while (true) {
+            System.out.println("====== Creacion items ======");
+
+            System.out.println("Ingresar codigo: ");
+            String codigo = teclado.nextLine();
+
+            System.out.println("Ingresar nombre: ");
+            String nombre = teclado.nextLine();
+
+            System.out.println("Ingresar cantidad comprada: ");
+            Integer cantidadComprada = teclado.nextInt();
+
+            System.out.println("Ingresar costo unitario: ");
+            Double costoUnitario = teclado.nextDouble();
+
+            Item item = new Item(codigo, nombre, cantidadComprada, costoUnitario);
+
+            items.add(item);
+
+            System.out.println("¿Terminar creacion items? ");
+            boolean terminarCreacion = teclado.nextBoolean();
+
+            if (terminarCreacion) {
+                break;
+            }
+        }
+
+        return items;
     }
 }

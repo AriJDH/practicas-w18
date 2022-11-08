@@ -10,6 +10,13 @@ public class Item {
 
     private Double costoUnitario;
 
+    public Item(String codigo, String nombre, Integer cantidadComprada, Double costoUnitario) {
+        this.codigo = codigo;
+        this.nombre = nombre;
+        this.cantidadComprada = cantidadComprada;
+        this.costoUnitario = costoUnitario;
+    }
+
     public String getCodigo() {
         return codigo;
     }
@@ -40,5 +47,19 @@ public class Item {
 
     public void setCostoUnitario(Double costoUnitario) {
         this.costoUnitario = costoUnitario;
+    }
+
+    public Double obtenerValorTotal() {
+        return costoUnitario * cantidadComprada;
+    }
+
+    @Override
+    public String toString() {
+        return "Item{" +
+                "codigo='" + codigo + '\'' +
+                ", nombre='" + nombre + '\'' +
+                ", cantidadComprada=" + cantidadComprada +
+                ", costoUnitario=" + costoUnitario +
+                '}';
     }
 }
