@@ -129,7 +129,7 @@ public class Main {
             }
         }
 
-        cliente.getLocalizadores().add(localizador);
+        cliente.crearLocalizador(localizador);
     }
 
     private static Cliente obtenerCliente(String identificacion) {

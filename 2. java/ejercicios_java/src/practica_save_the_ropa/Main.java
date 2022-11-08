@@ -8,7 +8,7 @@ public class Main {
     public static void main(String[] args) {
 
         List<Prenda> prendas = new ArrayList<>();
-        prendas.add(new Prenda("Camisa", "Camisa"));
+        prendas.add(new Prenda("Chanel", "Camisa"));
         prendas.add(new Prenda("Pantalon", "Chanel"));
 
         List<Prenda> prendas2 = new ArrayList<>();
