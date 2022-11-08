@@ -7,10 +7,12 @@ import clase4_a_EjerciciosIntegrador.Ej3_Supermercado.repository.FacturaImp;
 import java.util.*;
 
 public class Test {
+
+    private static final Scanner teclado = new Scanner(System.in);
+    private static ClienteImp cliIMP = new ClienteImp();
+    private static FacturaImp facIMP = new FacturaImp();
+
     public static void main(String[] args) {
-        Scanner teclado = new Scanner(System.in);
-        ClienteImp cliIMP = new ClienteImp();
-        FacturaImp facIMP = new FacturaImp();
         char opcion='0';
         do{
             System.out.println("--------------------------------------------------------------------");
@@ -33,19 +35,7 @@ public class Test {
                     break;
                 case '4': cliIMP.mostrarUno();
                     break;
-                case '5':
-                    System.out.println("--------------------------------------------------------------------");
-                    System.out.print("Ingrese el DNI del cliente: ");
-                    String dni = teclado.nextLine();
-                    Optional<Cliente> cliente = cliIMP.buscar(dni);
-                    if (cliente.isPresent()) {
-                        System.out.println("--------------------------------------------------------------------");
-                        System.out.println("El cliente no existe, se procede a crearlo...");
-                        System.out.println("--------------------------------------------------------------------");
-                        facIMP.nuevoConDni(cliente.get());
-                    } else {
-                        facIMP.nuevoConDni(cliIMP.nuevoConMenu());
-                    }
+                case '5': nuevaFactura();
                     break;
                 case '0': System.out.println("\nSaliendo...");
                     break;
@@ -53,4 +43,20 @@ public class Test {
         }while (opcion != '0');
         teclado.close();
     }
+    public static void nuevaFactura(){
+        System.out.println("--------------------------------------------------------------------");
+        System.out.print("Ingrese el DNI del cliente: ");
+        String dni = teclado.nextLine();
+        Optional<Cliente> cliente = cliIMP.buscar(dni);
+        if (cliente.isPresent()) {
+            System.out.println("--------------------------------------------------------------------");
+            System.out.println("El cliente no existe, se procede a crearlo...");
+            System.out.println("--------------------------------------------------------------------");
+            facIMP.nuevoConDni(cliente.get());
+        } else {
+            facIMP.nuevoConDni(cliIMP.nuevoConMenu());
+        }
+    }
+
+
 }
