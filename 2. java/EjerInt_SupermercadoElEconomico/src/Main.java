@@ -4,5 +4,6 @@ public class Main {
     public static void main(String[] args) {
         SistemaSupermercado sis = new SistemaSupermercado();
         sis.ejecutarParte1();
+        sis.ejecutarParte2();
     }
 }

@@ -28,4 +28,9 @@ public class Linea {
     public double obtenerSubtotalLinea(){
         return this.cantidad * this.producto.getPrecio();
     }
+
+    @Override
+    public String toString() {
+        return cantidad+"x " +producto;
+    }
 }

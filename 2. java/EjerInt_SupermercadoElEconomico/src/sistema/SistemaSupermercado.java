@@ -1,19 +1,27 @@
 package sistema;
 
 import clases.Cliente;
+import clases.Factura;
+import clases.Linea;
+import clases.Producto;
 import repositorios.RepositorioCliente;
+import repositorios.RepositorioFactura;
 
 import java.io.Console;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class SistemaSupermercado {
     private RepositorioCliente repoClientes;
+    private RepositorioFactura repoFacturas;
 
     public SistemaSupermercado() {
         this.repoClientes = new RepositorioCliente();
+        this.repoFacturas = new RepositorioFactura();
     }
 
     public void ejecutarParte1(){
+        System.out.println("---------- PARTE 1 ----------");
         this.repoClientes.preCargaClientes();
         this.repoClientes.verTodoslosClientes();
 
@@ -45,5 +53,38 @@ public class SistemaSupermercado {
         }while(loopUserInput.equals("1"));
 
         scanner.close();
+    }
+
+    public void ejecutarParte2(){
+        System.out.println("\n---------- PARTE 2 ----------");
+
+        Producto p1 = new Producto("Pan", 50);
+        Producto p2 = new Producto("Leche", 30);
+        Producto p3 = new Producto("Arroz", 60);
+
+        ArrayList<Linea> detalle1 = new ArrayList<Linea>();
+        detalle1.add(new Linea(p3, 5));
+
+        ArrayList<Linea> detalle2 = new ArrayList<Linea>();
+        detalle2.add(new Linea(p3, 1));
+        detalle2.add(new Linea(p2, 1));
+        detalle2.add(new Linea(p1, 2));
+
+        Cliente clienteExistente = this.repoClientes.conuslta("1111111");
+        Cliente clienteNuevo = new Cliente("1212123", "Flamante", "Cliente");
+
+        nuevaFactura(clienteExistente, detalle1);
+        nuevaFactura(clienteNuevo, detalle2);
+    }
+
+    public void nuevaFactura(Cliente clienteParam, ArrayList<Linea> detalle){
+        Cliente clienteSistema = null;
+        if(clienteParam !=null)clienteSistema = this.repoClientes.conuslta(clienteParam.getDni());
+        if(clienteSistema == null){
+            this.repoClientes.alta(clienteParam);
+            clienteSistema = clienteParam;
+        }
+        Factura nuevaFactura = new Factura(clienteSistema, detalle);
+        System.out.println(this.repoFacturas.alta(nuevaFactura));
     }
 }
