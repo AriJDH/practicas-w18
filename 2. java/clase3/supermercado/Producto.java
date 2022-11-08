@@ -45,4 +45,18 @@ public class Producto {
     public void setPrecioUnitario(double precioUnitario) {
         this.precioUnitario = precioUnitario;
     }
+
+    public double calcularPrecio() {
+        return cant * precioUnitario;
+    }
+
+    @Override
+    public String toString() {
+        return "Producto{" +
+                "codigo=" + codigo +
+                ", nombre='" + nombre + '\'' +
+                ", cant=" + cant +
+                ", precioUnitario=" + precioUnitario +
+                '}';
+    }
 }
