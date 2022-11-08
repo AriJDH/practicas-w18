@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>/Users/acometto/Documents/BootCamp/practicas-w18/2. java/Ejercicio1_RefuerzoClasesAbs_Interfaces/src</OriginalElement>
+  <nodes>
+    <node x="-105.0" y="215.0">Main</node>
+    <node x="-55.0" y="64.0">Abstract.Persona</node>
+    <node x="-57.0" y="142.0">Class.Personal</node>
+    <node x="-105.0" y="-14.0">Interface.PersonaEspecializada</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="Abstract.Persona" target="Interface.PersonaEspecializada" relationship="REALIZATION">
+      <point x="0.0" y="-14.0" />
+      <point x="0.0" y="14.0" />
+    </edge>
+    <edge source="Class.Personal" target="Abstract.Persona" relationship="GENERALIZATION">
+      <point x="0.0" y="-14.0" />
+      <point x="0.0" y="14.0" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic" zoom="1.0" showDependencies="false" x="0.0" y="112.5" />
+  <SelectedNodes />
+  <Categories />
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+
