@@ -1,6 +1,8 @@
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.OptionalDouble;
+
 public class Main {
     public static void main(String[] args) {
         Vehiculo v1 = new Vehiculo("Ford", "Fiesta", 1000);
@@ -30,11 +32,13 @@ public class Main {
 
         Garaje gar = new Garaje("IDAN", veh);
         System.out.println("La lista ordenada por precio");
-        veh.sort(Comparator.comparing(Vehiculo::getCosto));
+        veh.sort(Comparator
+                .comparing(Vehiculo::getCosto));
         veh.forEach(System.out::println);
 
         System.out.println("La lista ordenada por marca y precio");
-        veh.sort(Comparator.comparing(Vehiculo::getMarca)
+        veh.sort(Comparator
+                .comparing(Vehiculo::getMarca)
                 .thenComparing(Comparator.comparing(Vehiculo::getCosto)));
         veh.forEach(System.out::println);
 
@@ -51,7 +55,11 @@ public class Main {
 
 
         System.out.println("El precio promedio de los autos es: ");
-        veh.stream().mapToDouble(vehiculo -> vehiculo.getCosto()).average();
+        OptionalDouble result = veh.stream().mapToDouble(vehiculo -> vehiculo.getCosto()).average();
+        System.out.println( result.getAsDouble());
+
+
+
     }
 
 

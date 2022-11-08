@@ -14,11 +14,10 @@ public class Vehiculo {
 
     @Override
     public String toString() {
-        return "Vehiculo{" +
-                "modelo='" + modelo + '\'' +
-                ", marca='" + marca + '\'' +
-                ", costo=" + costo +
-                '}';
+        return " Vehiculo { " +
+                "modelo: " + modelo  +
+                " - marca: " + marca +
+                " - costo: " + costo+" }" ;
     }
 
     public String getModelo() {
