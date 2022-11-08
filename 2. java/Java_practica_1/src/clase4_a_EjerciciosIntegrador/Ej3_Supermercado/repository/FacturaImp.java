@@ -12,31 +12,33 @@ public class FacturaImp implements CRUDRepository<Factura> {
     List<Factura> listFacturas = new ArrayList<>();
     @Override
     public void nuevo(Factura factura) {
-
+        listFacturas.add(factura);
     }
 
     @Override
     public void mostrarTodos() {
-
+        System.out.println("--------------------------------------------------------------------");
+        System.out.println("Listado de facturas");
+        System.out.println("--------------------------------------------------------------------");
+        listFacturas.stream().forEach(System.out::println);
+        System.out.println("\nPresione una tecla para continuar...");
+        teclado.nextLine();
     }
 
     @Override
     public void eliminar(Factura factura) {
-
+        listFacturas.remove(factura);
     }
 
     @Override
-    public void nuevoConMenu() {
-        /*System.out.println("--------------------------------------------------------------------");
+    public Factura nuevoConMenu() {
+        return null;
+    }
+
+    public void nuevoConDni(Cliente cliente) {
+        System.out.println("--------------------------------------------------------------------");
         System.out.println("Nueva factura");
         System.out.println("--------------------------------------------------------------------");
-        System.out.print("Ingrese el DNI del cliente: ");
-        String dni = teclado.nextLine();
-        Optional<Cliente> cliente = setClientes.stream().filter(c-> c.getDni().equals(dni)).findFirst();
-        if (!cliente.isPresent()){
-            System.out.println("Cliente con DNI " + dni + " no encontrado, se creará a continuación...");
-            cliente = nuevoCliente(setClientes, dni);
-        }
         List<Item> listaItems = new ArrayList<>();
         String codigo, nombre;
         int cantComprada;
@@ -61,41 +63,33 @@ public class FacturaImp implements CRUDRepository<Factura> {
             System.out.print("Desea registrar otro producto a la factura? (S/N): ");
             opcion = teclado.nextLine().toUpperCase().charAt(0);
         } while(opcion == 'S');
-        Factura factura = new Factura(cliente.get(), listaItems);
+        Factura factura = new Factura("1",cliente, listaItems);
         listFacturas.add(factura);
         System.out.println("--------------------------------------------------------------------");
         System.out.println("El monto total de la factura es $" + factura.getTotalCompra());
         System.out.println("\nPresione una tecla para continuar...");
         teclado.nextLine();
-
-         */
-    }
- /*
-    public static Optional<Cliente> nuevoCliente(Set<Cliente> setClientes, String dni){
-        String nombre, apellido;
-        System.out.println("--------------------------------------------------------------------");
-        System.out.println("Nuevo cliente DNI: " + dni);
-        System.out.println("--------------------------------------------------------------------");
-        System.out.print("Nombre: ");
-        nombre = teclado.nextLine();
-        System.out.print("Apellido: ");
-        apellido = teclado.nextLine();
-        Optional<Cliente> cliente = Optional.of(new Cliente(dni, nombre, apellido));
-        setClientes.add(cliente.get());
-        System.out.println("\nPresione una tecla para continuar...");
-        teclado.nextLine();
-        return cliente;
     }
 
-
-  */
     @Override
     public void mostrarUno() {
-
+        String codigo;
+        System.out.println("--------------------------------------------------------------------");
+        System.out.printf("Ingrese el código de la factura a mostrar: ");
+        codigo = teclado.nextLine();
+        System.out.println("--------------------------------------------------------------------");
+        Optional<Factura> factura = buscar(codigo);
+        if (factura.isPresent()){
+            System.out.println(factura.get());
+        }else{
+            System.out.println("No se encontró la factura con código " + codigo);
+        }
+        System.out.println("\nPresione una tecla para continuar...");
+        teclado.nextLine();
     }
 
     @Override
     public Optional<Factura> buscar(String s) {
-        return Optional.empty();
+        return listFacturas.stream().filter(c-> c.getCodigo().equals(s)).findFirst();
     }
 }

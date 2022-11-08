@@ -11,7 +11,7 @@ public class ClienteImp implements CRUDRepository<Cliente> {
     private Scanner teclado = new Scanner(System.in);
     Set<Cliente> setClientes = new HashSet<>();
     @Override
-    public void nuevoConMenu(){
+    public Cliente nuevoConMenu(){
         String dni, nombre, apellido;
         System.out.println("--------------------------------------------------------------------");
         System.out.println("Nuevo cliente");
@@ -22,9 +22,11 @@ public class ClienteImp implements CRUDRepository<Cliente> {
         nombre = teclado.nextLine();
         System.out.print("Apellido: ");
         apellido = teclado.nextLine();
-        nuevo(new Cliente(dni,nombre,apellido));
+        Cliente cliente = new Cliente(dni,nombre,apellido);
+        nuevo(cliente);
         System.out.println("\nPresione una tecla para continuar...");
         teclado.nextLine();
+        return cliente;
     }
 
     public void eliminarConMenu(){

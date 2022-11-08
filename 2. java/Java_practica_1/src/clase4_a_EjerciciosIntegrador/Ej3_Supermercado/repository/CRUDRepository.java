@@ -6,7 +6,7 @@ public interface CRUDRepository<T> {
     public void nuevo(T t);
     public void mostrarTodos();
     public void eliminar(T t);
-    public void nuevoConMenu();
+    public T nuevoConMenu();
     public void mostrarUno();
     public Optional<T> buscar(String s);
 }

@@ -1,16 +1,13 @@
 package clase4_a_EjerciciosIntegrador.Ej3_Supermercado;
 
+import clase4_a_EjerciciosIntegrador.Ej3_Supermercado.model.Cliente;
 import clase4_a_EjerciciosIntegrador.Ej3_Supermercado.repository.ClienteImp;
 import clase4_a_EjerciciosIntegrador.Ej3_Supermercado.repository.FacturaImp;
 
 import java.util.*;
 
 public class Test {
-
     public static void main(String[] args) {
-        menuSupermercado();
-    }
-    public static void menuSupermercado(){
         Scanner teclado = new Scanner(System.in);
         ClienteImp cliIMP = new ClienteImp();
         FacturaImp facIMP = new FacturaImp();
@@ -36,7 +33,19 @@ public class Test {
                     break;
                 case '4': cliIMP.mostrarUno();
                     break;
-                case '5': facIMP.nuevoConMenu();
+                case '5':
+                    System.out.println("--------------------------------------------------------------------");
+                    System.out.print("Ingrese el DNI del cliente: ");
+                    String dni = teclado.nextLine();
+                    Optional<Cliente> cliente = cliIMP.buscar(dni);
+                    if (cliente.isPresent()) {
+                        System.out.println("--------------------------------------------------------------------");
+                        System.out.println("El cliente no existe, se procede a crearlo...");
+                        System.out.println("--------------------------------------------------------------------");
+                        facIMP.nuevoConDni(cliente.get());
+                    } else {
+                        facIMP.nuevoConDni(cliIMP.nuevoConMenu());
+                    }
                     break;
                 case '0': System.out.println("\nSaliendo...");
                     break;

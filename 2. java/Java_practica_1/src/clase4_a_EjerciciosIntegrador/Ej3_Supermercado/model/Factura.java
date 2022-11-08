@@ -3,11 +3,14 @@ package clase4_a_EjerciciosIntegrador.Ej3_Supermercado.model;
 import java.util.List;
 
 public class Factura {
+
+    private String codigo;
     private Cliente cliente;
     private List<Item> listaItems;
     private double totalCompra;
 
-    public Factura(Cliente cliente, List<Item> listaItems) {
+    public Factura(String codigo, Cliente cliente, List<Item> listaItems) {
+        this.codigo = codigo;
         this.cliente = cliente;
         this.listaItems = listaItems;
         this.totalCompra = calcularTotalCompra();
@@ -19,5 +22,9 @@ public class Factura {
 
     public double getTotalCompra() {
         return totalCompra;
+    }
+
+    public String getCodigo() {
+        return codigo;
     }
 }
