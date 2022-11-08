@@ -1,4 +1,6 @@
-public class BoletoViaje extends Reservable{
+package model;
+
+public class BoletoViaje extends Reservable {
 
     // Atributos
     private Double precio;

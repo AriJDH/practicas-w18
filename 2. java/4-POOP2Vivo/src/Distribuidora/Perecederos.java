@@ -1,4 +1,4 @@
-
+package Distribuidora;
 
 public class Perecederos extends Producto {
     private int diasPorCaducar;

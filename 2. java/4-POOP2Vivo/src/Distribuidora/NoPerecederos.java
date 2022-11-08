@@ -1,4 +1,4 @@
-
+package Distribuidora;
 
 public class NoPerecederos extends Producto{
     protected String tipo;

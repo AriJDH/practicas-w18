@@ -1,4 +1,6 @@
-public class Hotel extends Reservable{
+package model;
+
+public class Transporte extends Reservable {
     @Override
     public void calcularDescuento(Double descuento) {
 

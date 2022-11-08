@@ -1,3 +1,7 @@
+package model;
+
+import model.Cliente;
+
 import java.util.List;
 
 public class Localizador {

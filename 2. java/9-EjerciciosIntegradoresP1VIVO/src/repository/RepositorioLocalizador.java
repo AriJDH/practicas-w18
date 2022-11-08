@@ -1,3 +1,5 @@
+package repository;
+
 import java.util.List;
 
 public class RepositorioLocalizador implements IRepositorio<Localizador> {

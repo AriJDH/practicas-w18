@@ -1,4 +1,6 @@
-public class Comida extends Reservable{
+package model;
+
+public class Comida extends Reservable {
 
     @Override
     public void calcularDescuento(Double descuento) {

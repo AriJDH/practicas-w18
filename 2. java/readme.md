@@ -10,7 +10,7 @@ Ejercicios:
 6. Material Complementario | Ej. 1 Cursos, Ej. 2 Juego Asteroid // _Terminado_
 7. Recapitulando Java Vivo | Vehiculos // _Terminado_
 8. Ejercicios Integradores P1 | 8.1 Ejercicio clase abstracta - Series numericas // _Terminado_
-                              | 8.2 Ejercicio Integrador Parte 1 Supermercado // **PENDIENTE** -> Video
+                              | 8.2 Ejercicio Integrador Parte 1 Supermercado // _Terminado_
 9. Ejercicios Integradores P1 VIVO | Turismo // **PENDIENTE**
 10. Ejercicios Integradores P2 | Ejercicio Integrador Parte II Supermercado // **PENDIENTE** -> Video
 11. Ejercicios Integradores P2 Vivo | 11.1 SaveTheRopa S.A // _Terminado_

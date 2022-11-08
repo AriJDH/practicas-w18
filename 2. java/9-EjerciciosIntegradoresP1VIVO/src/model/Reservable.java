@@ -1,4 +1,6 @@
-public abstract class Reservable implements IDescuento{
+package model;
+
+public abstract class Reservable implements IDescuento {
 
     // Atributos
     protected Double precio;

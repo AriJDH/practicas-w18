@@ -1,6 +1,8 @@
+package model;
+
 import java.util.List;
 
-public class Paquete extends Reservable{
+public class Paquete extends Reservable {
 
     // Atributos
     private List<Reservable> reservables;
