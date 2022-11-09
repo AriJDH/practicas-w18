@@ -42,10 +42,6 @@ public class Coordenada {
 
     @Override
     public String toString() {
-        return "Coordenada{" +
-                "x=" + x +
-                ", y=" + y +
-                ", resultados=" + this.listResultados +
-                '}';
+        return "Coordenada x: " + x + ", y: " + y + ", resultados: " + this.listResultados;
     }
 }

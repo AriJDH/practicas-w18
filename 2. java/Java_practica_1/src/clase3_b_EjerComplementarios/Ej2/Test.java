@@ -53,6 +53,8 @@ public class Test {
             teclado.nextLine();
         } else {
             calcularDistanciasYPuntuaciones();
+            mostrarGanador();
+            mostrarResultados();
         }
     }
 
@@ -64,16 +66,34 @@ public class Test {
             distanciaMinima = listaNavesYFlotas.get(posDistanciaMinima).calcularDistancia(coordenada.getX(), coordenada.getY());
             for( int i = 0; i < listaNavesYFlotas.size(); i++){
                 distancia = listaNavesYFlotas.get(i).calcularDistancia(coordenada.getX(), coordenada.getY());
-                coordenada.setResultado(distancia);
+                coordenada.setResultado(distancia); //asigno resultado de distancia de esa nave para esa coordenada.
                 if (distancia < distanciaMinima) {
                     posDistanciaMinima = i;
                     distanciaMinima = listaNavesYFlotas.get(posDistanciaMinima).calcularDistancia(coordenada.getX(), coordenada.getY());
                 }
             }
-            listaNavesYFlotas.get(posDistanciaMinima).setPuntuacion();
+            listaNavesYFlotas.get(posDistanciaMinima).setPuntuacion(); // le asigno el punto a la nave/flota más cercana a la coordenada
         }
     }
 
+    private static void mostrarGanador(){
+        int posMax=0;
+        for( int i = 0; i < listaNavesYFlotas.size(); i++){
+            if(listaNavesYFlotas.get(i).getPuntaje() > listaNavesYFlotas.get(posMax).getPuntaje()){
+                posMax = i;
+            }
+        }
+        System.out.println("\n-----------------------------------------");
+        System.out.print("El ganador es la nave/flota '" + listaNavesYFlotas.get(posMax).getNombre() + "' con " + listaNavesYFlotas.get(posMax).getPuntaje() + " puntos.");
+        System.out.println("\n-----------------------------------------");
+    }
+    private static void mostrarResultados(){
+        for(Coordenada coordenada : listaCoordenadas){
+            System.out.println("-----------------------------------------");
+            System.out.println(coordenada);
+        }
+        System.out.println("-----------------------------------------");
+    }
     private static void nuevaCoordenada() {
         char opcion;
         int x, y;
