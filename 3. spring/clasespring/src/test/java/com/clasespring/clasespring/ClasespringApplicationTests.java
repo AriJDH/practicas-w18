@@ -8,6 +8,7 @@ class ClasespringApplicationTests {
 
 	@Test
 	void contextLoads() {
+
 	}
 
 }
