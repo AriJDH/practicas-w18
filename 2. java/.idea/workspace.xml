@@ -2,10 +2,19 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="48aa29ad-4d30-4e9a-857e-64f6763ea717" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/Series/Clases/Main.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Series/Clases/Prototipo.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Series/Clases/SerieDos.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Series/Clases/SerieUno.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/AgenciaDeTurismo/Clases/Cliente.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/AgenciaDeTurismo/Clases/Localizador.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/AgenciaDeTurismo/Clases/Reserva.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/AgenciaDeTurismo/Interfaces/CrudRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/SuperMercadoEconomico/Clases/Cliente.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/SuperMercadoEconomico/Clases/Factura.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/SuperMercadoEconomico/Clases/Item.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/SuperMercadoEconomico/Interfaces/CrudRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/SuperMercadoEconomico/Main.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/SuperMercadoEconomico/Repository/ClienteCrud.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/SuperMercadoEconomico/Repository/FacturaCrud.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/SuperMercadoEconomico/Repository/ItemCrud.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../3. spring/demoRomanos/src/main/java/com/example/demoRomanos/Controller/ConvierteARomano.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -45,26 +54,13 @@
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
   </component>
-  <component name="RunManager" selected="Application.Main (1)">
+  <component name="RunManager" selected="Application.Main">
     <configuration name="Main (1)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Series.Clases.Main" />
       <module name="BootCamp" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="Series.Clases.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="Main (2)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Universidad.Clases.Main" />
-      <module name="BootCamp" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="Universidad.Clases.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -111,6 +107,19 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="SuperMercadoEconomico.Main" />
+      <module name="BootCamp" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="SuperMercadoEconomico.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
@@ -124,11 +133,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.Main" />
         <item itemvalue="Application.Main (1)" />
         <item itemvalue="Application.Main (4)" />
         <item itemvalue="Application.Main (5)" />
         <item itemvalue="Application.Main (3)" />
-        <item itemvalue="Application.Main (2)" />
       </list>
     </recent_temporary>
   </component>
@@ -142,7 +151,10 @@
       <updated>1667534616531</updated>
       <workItem from="1667534618749" duration="3714000" />
       <workItem from="1667571717670" duration="7194000" />
-      <workItem from="1667776027307" duration="29833000" />
+      <workItem from="1667776027307" duration="30750000" />
+      <workItem from="1668002506938" duration="10057000" />
+      <workItem from="1668019392834" duration="19000" />
+      <workItem from="1668019432344" duration="5344000" />
     </task>
     <servers />
   </component>
