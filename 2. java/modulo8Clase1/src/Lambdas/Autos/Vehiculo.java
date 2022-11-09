@@ -1,4 +1,4 @@
-package Lambdas;
+package Lambdas.Autos;
 
 public class Vehiculo {
     private String modelo;

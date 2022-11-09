@@ -1,4 +1,4 @@
-package Lambdas;
+package Lambdas.Autos;
 
 import java.util.ArrayList;
 import java.util.Comparator;
