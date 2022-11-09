@@ -6,16 +6,16 @@ public class Factura {
 
     private Long codigo;
     private Cliente cliente;
-    private List<Item>listaItes;
+    private List<Item>listaItems;
     private double total;
 
     public Factura() {
     }
 
-    public Factura(Long codigo, Cliente cliente, List<Item> listaItes, double total) {
+    public Factura(Long codigo, Cliente cliente, List<Item> listaItems, double total) {
         this.codigo = codigo;
         this.cliente = cliente;
-        this.listaItes = listaItes;
+        this.listaItems = listaItems;
         this.total = total;
     }
 
@@ -35,12 +35,12 @@ public class Factura {
         this.cliente = cliente;
     }
 
-    public List<Item> getListaItes() {
-        return listaItes;
+    public List<Item> getlistaItems() {
+        return listaItems;
     }
 
-    public void setListaItes(List<Item> listaItes) {
-        this.listaItes = listaItes;
+    public void setlistaItems(List<Item> listaItems) {
+        this.listaItems = listaItems;
     }
 
     public double getTotal() {
@@ -49,5 +49,15 @@ public class Factura {
 
     public void setTotal(double total) {
         this.total = total;
+    }
+
+    @Override
+    public String toString() {
+        return "Factura{" +
+                "codigo=" + codigo +
+                ", cliente=" + cliente +
+                ", listaItems=" + listaItems +
+                ", total=" + total +
+                '}';
     }
 }
