@@ -13,7 +13,7 @@ public class codigoMorseController {
 
     @GetMapping("/codigo/{mensaje}")
     public String decodificar (@PathVariable String mensaje){
-        String rta = " ";
+        String rta = "El mensaje decodificado es:  ";
         int num =0;
         Map<String, String> morse = new HashMap<String,String>();
         String [] codigo ={".-","-...","-.-.","-..",".","..-.","--.","....","..",".---","-.-",".-..","--","-.","---",
