@@ -1,6 +1,6 @@
 package model;
 
-public class BoletoViaje extends Reservable implements IDescuento <Integer>{
+public class BoletoViaje extends Reservable implements IDescuento<Integer> {
 	
 	// Constructores
 	public BoletoViaje() {
@@ -16,7 +16,9 @@ public class BoletoViaje extends Reservable implements IDescuento <Integer>{
 	@Override
 	public void calcularPrecio(Integer cantidad) {
 		Double precioTotal = getPrecioUnitario() * cantidad;
-		setPrecioTotal(precioTotal);
+		calcularDescuento(cantidad);
+		Double totalConDescuento = precioTotal - getDescuentoAplicado();
+		setPrecioTotal(totalConDescuento);
 	}
 	
 	@Override

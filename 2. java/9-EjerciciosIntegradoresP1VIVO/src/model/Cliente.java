@@ -47,6 +47,4 @@ public class Cliente {
 		localizadorList.add(localizador);
 	}
 	
-	
-	// TODO crear repositorio para clientes
 }

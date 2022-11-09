@@ -14,7 +14,9 @@ public class Hotel extends Reservable implements IDescuento<Integer>{
 	@Override
 	public void calcularPrecio(Integer cantidad) {
 		Double precioTotal = getPrecioUnitario() * cantidad;
-		setPrecioTotal(precioTotal);
+		calcularDescuento(cantidad);
+		Double totalConDescuento = precioTotal - getDescuentoAplicado();
+		setPrecioTotal(totalConDescuento);
 	}
 	
 	@Override
