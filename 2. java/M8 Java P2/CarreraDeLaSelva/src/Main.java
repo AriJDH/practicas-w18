@@ -3,35 +3,51 @@
  * https://docs.google.com/document/d/1p0dsoyA-4xXG-nc1-eQ20UxB1fL3DguMGQNL8lV96rw/edit
  * */
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
+
+import static java.lang.System.exit;
 
 public class Main {
 
+
     static Scanner sc = new Scanner(System.in);
-    static List<Object> participantesCircuitoChico = new ArrayList<>();
+    static List<String> participantesCircuitoChico = new ArrayList<>();
     static List<Object> participantesCircuitoMedio = new ArrayList<>();
     static List<Object> participantesCircuitoAvanzado = new ArrayList<>();
+    static HashMap<Integer, List> participantes = new HashMap<>();
 
     static Integer nroParticpante = 0;
+
+
+
+    public enum CategoriaCircuito {
+        CIRCUITO_CHICO, CIRCUITO_MEDIO, CIRCUITO_AVANZADO;
+
+        /*
+         * La competencia cuenta con 3 categorías dependiendo de su dificultad:
+         * Circuito chico: 2 km por selva y arroyos.
+         * Circuito medio: 5 km por selva, arroyos y barro.
+         * Circuito Avanzado: 10 km por selva, arroyos, barro y escalada en piedra.
+         * */
+
+    }
+
 
 
     public static void main(String[] args) {
 
         System.out.println("------------- Carrera de la Selva -------------");
+        showMenuPrincipal();
 
+    }
+
+    private static void ingresarParticipantes() {
         List participanteInscp1 = inscripcion("tana", "cing", "123", 18, "261", "261", "A-");
         List participanteInscp2 = inscripcion("Icc", "cing", "123", 18, "261", "261", "A-");
         List participanteInscp3 = inscripcion("Mari", "cing", "123", 18, "261", "261", "A-");
         List participanteInscp4 = inscripcion("Susi", "cing", "123", 19, "261", "261", "A-");
         List participanteInscp5 = inscripcion("Gachi", "cing", "123", 19, "261", "261", "A-");
         List participanteInscp6 = inscripcion("Pachi", "cing", "123", 19, "261", "261", "A-");
-
-
-        mostrarParticipantes();
-
-
     }
 
     private static void mostrarParticipantes() {
@@ -50,6 +66,13 @@ public class Main {
             System.out.println(participante);
         }
     }
+
+/*    private static void mostrarTodos(){
+        System.out.println("\nTodos los participantes");
+        for (Object participante: todosLosParticipantes) {
+            System.out.println(participante);
+        }
+    }*/
 
 
     private static void showMenuPrincipal() {
@@ -79,6 +102,20 @@ public class Main {
 
         System.out.println("0. Salir");
 
+        int opcion = sc.nextInt();
+
+        switch (opcion){
+            case 1: ingresarParticipantes();
+
+                break;
+            case 2: mostrarParticipantes();
+
+                break;
+            case 3: desinscribirPartipante();
+                break;
+            case 0: exit(0);
+        }
+        showMenuPrincipal();
     }
 
     //Ingresar categoría para opción 1, 2, 3
@@ -101,6 +138,7 @@ public class Main {
 
         return categoria;
     }
+
 
     private static int monto(int edad, Enum<CategoriaCircuito> categoria) {
         int monto = 0;
@@ -140,17 +178,7 @@ public class Main {
             return edad > 18;
     }
 
-    public enum CategoriaCircuito {
-        CIRCUITO_CHICO, CIRCUITO_MEDIO, CIRCUITO_AVANZADO;
 
-        /*
-        * La competencia cuenta con 3 categorías dependiendo de su dificultad:
-        * Circuito chico: 2 km por selva y arroyos.
-        * Circuito medio: 5 km por selva, arroyos y barro.
-        * Circuito Avanzado: 10 km por selva, arroyos, barro y escalada en piedra.
-        * */
-
-    }
 
     public static List inscripcion(String nombre,
                                    String apellido,
@@ -165,6 +193,9 @@ public class Main {
         int monto = monto(edad, categoriaCircuito);
         List participante = List.of(nroParticpante, nombre, apellido, dni, edad, celular, nroEmergencia, grupoSanguineo, categoriaCircuito, monto);
 
+
+        participantes.put(nroParticpante, participante);
+
         listadoParticipantesPorCategoria(categoriaCircuito, participante);
 
         return participante;
@@ -174,7 +205,7 @@ public class Main {
 
         if (categoriaCircuito.equals(CategoriaCircuito.CIRCUITO_CHICO)) {
             System.out.println("Categoría Circuito Chico\n");
-            participantesCircuitoChico.add(participante);
+            participantesCircuitoChico.add(participante.toString());
         }
         if (categoriaCircuito.equals(CategoriaCircuito.CIRCUITO_MEDIO)){
             System.out.println("Categoría Circuito Medio\n");
@@ -186,5 +217,10 @@ public class Main {
         }
 
     }
+        private static void desinscribirPartipante() {
+
+           //todo
+        }
+
 }
 
