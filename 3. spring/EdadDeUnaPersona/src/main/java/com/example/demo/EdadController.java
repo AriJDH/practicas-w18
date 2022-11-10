@@ -19,9 +19,7 @@ public class EdadController {
 		
 		Period periodo = Period.between(fecha, LocalDate.now());
 		
-		String edad =  String.valueOf(periodo.getYears());
-		
-		return edad;
+		return String.valueOf(periodo.getYears());
 	}
 
 }
