@@ -1,2 +1,15 @@
-package com.example.demoparams.DTO;public class EmployeeDTOReq {
+package com.example.demoparams.DTO;
+
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
+public class EmployeeDTOReq {
+    private String name;
+    private String lastName;
 }
