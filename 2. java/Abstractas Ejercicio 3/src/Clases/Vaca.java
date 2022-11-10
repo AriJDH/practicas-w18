@@ -10,8 +10,4 @@ public class Vaca extends Animal implements comerHierba {
         return "Muu";
     }
 
-    @Override
-    public String comerAnimal(Animal animal) {
-        return comerHierba();
-    }
 }
