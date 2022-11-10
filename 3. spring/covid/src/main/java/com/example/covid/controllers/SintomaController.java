@@ -32,6 +32,6 @@ public class SintomaController {
         if(optionalSintoma.isPresent())
             return new ResponseEntity<>(optionalSintoma.get().toDTO(), HttpStatus.OK);
         else
-            return ResponseEntity.notFound().header("El síntoma pedido no existe.").build();
+            return ResponseEntity.notFound().header("Resultado","El síntoma pedido no existe.").build();
     }
 }
