@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="48aa29ad-4d30-4e9a-857e-64f6763ea717" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/../3. spring/demoMorseCode/src/main/java/com/example/demoMorseCode/Controller/MorseController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-    </list>
+    <list default="true" id="48aa29ad-4d30-4e9a-857e-64f6763ea717" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -142,7 +139,7 @@
       <workItem from="1667776027307" duration="30750000" />
       <workItem from="1668002506938" duration="10057000" />
       <workItem from="1668019392834" duration="19000" />
-      <workItem from="1668019432344" duration="13597000" />
+      <workItem from="1668019432344" duration="13677000" />
     </task>
     <servers />
   </component>
