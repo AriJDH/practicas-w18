@@ -1,12 +1,11 @@
-package com.example.covid;
+package com.example.deportistas;
 
-import com.example.covid.domain.NivelDeGravedad;
-import com.example.covid.domain.Persona;
-import com.example.covid.domain.Sintoma;
-import com.example.covid.domain.dtos.PersonaDTO;
-import com.example.covid.repositories.PersonaRepository;
-import com.example.covid.repositories.RepositoryFactory;
-import com.example.covid.repositories.SintomaRepository;
+import com.example.deportistas.domain.Deporte;
+import com.example.deportistas.domain.NivelDeporte;
+import com.example.deportistas.domain.Persona;
+import com.example.deportistas.repositories.DeporteRepository;
+import com.example.deportistas.repositories.PersonaRepository;
+import com.example.deportistas.repositories.RepositoryFactory;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -14,26 +13,17 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class LoadDBConfig {
     private PersonaRepository personaRepository = RepositoryFactory.getPersonaRepository();
-    private SintomaRepository sintomaRepository = RepositoryFactory.getSintomaRepository();
+    private DeporteRepository deporteRepository = RepositoryFactory.getDeporteRepository();
     @Bean(name = "cargaInicialDb")
     public CommandLineRunner loadDb(){
         return (args)->{
-
-            Sintoma fiebre = new Sintoma(1, "fiebre", NivelDeGravedad.GRAVE);
-            Sintoma tos = new Sintoma(2, "tos", NivelDeGravedad.MEDIO);
-            Sintoma frio = new Sintoma(3, "frio", NivelDeGravedad.LEVE);
-            sintomaRepository.add(fiebre);
-            sintomaRepository.add(tos);
-            sintomaRepository.add(frio);
-
-            Persona marcos = new Persona(1,"Marcos", "Infantino", 22);
-            marcos.addSintoma(frio);
-            Persona abuelo = new Persona(2,"Norberto", "Rodriguez", 70);
-            abuelo.addSintoma(fiebre);
-            abuelo.addSintoma(tos);
-
+            Deporte futbol = new Deporte("futbol", NivelDeporte.MEDIO);
+            Deporte basquet = new Deporte("basquet", NivelDeporte.MEDIO);
+            deporteRepository.add(futbol);
+            deporteRepository.add(basquet);
+            Persona marcos = new Persona("Marcos", "Infantino", 22, basquet);
             personaRepository.add(marcos);
-            personaRepository.add(abuelo);
+
         };
     }
 }
