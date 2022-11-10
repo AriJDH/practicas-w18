@@ -28,6 +28,5 @@ public class Main {
         garaje.getVehiculos().stream().filter(v->v.getCosto()>1000).forEach(v-> System.out.println(v.toString()));
         System.out.println("-----------------PROMEDIO DE PRECIOS-----------------");
         System.out.println(garaje.getVehiculos().stream().mapToDouble(v->v.getCosto()).average().getAsDouble());
-
     }
 }
