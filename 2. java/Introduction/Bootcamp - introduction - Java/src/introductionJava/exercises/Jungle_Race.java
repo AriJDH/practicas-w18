@@ -19,43 +19,42 @@ class User {
   User(
     int id,
     int category,
-    // String DNI,
+    String DNI,
     String name,
-    // String lastName,
-    int age
-    // int phone,
-    // int emergencyPhone,
-    // String bloodType
+    String lastName,
+    int age,
+    int phone,
+    int emergencyPhone,
+    String bloodType
   ) {
     this.id = id;
     this.category = category;
-    // this.DNI = DNI;
+    this.DNI = DNI;
     this.name = name;
-    // this.lastName = lastName;
+    this.lastName = lastName;
     this.age = age;
-    // this.phone = phone;
-    // this.emergencyPhone = emergencyPhone;
-    // this.bloodType = bloodType;
+    this.phone = phone;
+    this.emergencyPhone = emergencyPhone;
+    this.bloodType = bloodType;
   }
 
   @Override
   public String toString() {
-    // return ("id" + this.id + " " + category + " " + DNI);
 
     return (
       "ID " +
       id +
       " Category " +
       category +
-      // DNI +
+      DNI +
       " Name " +
       name +
-      // lastName +
+      lastName +
       " Age " +
       age +
-      // phone +
-      // emergencyPhone +
-      // bloodType
+      phone +
+      emergencyPhone +
+      bloodType +
       " \n "
     );
   }
@@ -65,7 +64,6 @@ public class Jungle_Race {
 
   public static void main(String[] args) {
     Scanner sc = new Scanner(System.in);
-    // Map<Integer, Object> users = new HashMap<>();
     String[] categories = {
       "Circuito Chico",
       "Circuito Medio",
@@ -87,12 +85,12 @@ public class Jungle_Race {
       );
       int categoryUser = sc.nextInt();
 
-      // System.out.print("What's your DNI?:  ");
-      // String DNI = sc.next();
+      System.out.print("What's your DNI?:  ");
+      String DNI = sc.next();
       System.out.print("What's your name?:  ");
       String name = sc.next();
-      // System.out.print("What's your last name?:  ");
-      // String lastName = sc.next();
+      System.out.print("What's your last name?:  ");
+      String lastName = sc.next();
       System.out.print("What's your age?:  ");
       int age = sc.nextInt();
 
@@ -101,24 +99,24 @@ public class Jungle_Race {
         continue;
       }
 
-      // System.out.print("What's your phone?:  ");
-      // int phone = sc.nextInt();
-      // System.out.print("What's your emergency phone?:  ");
-      // int emergencyPhone = sc.nextInt();
-      // System.out.print("What's your blood type?:  ");
-      // String bloodType = sc.next();
+      System.out.print("What's your phone?:  ");
+      int phone = sc.nextInt();
+      System.out.print("What's your emergency phone?:  ");
+      int emergencyPhone = sc.nextInt();
+      System.out.print("What's your blood type?:  ");
+      String bloodType = sc.next();
 
       users.add(
         new User(
           i,
           categoryUser,
-          // DNI,
+          DNI,
           name,
-          // lastName,
-          age
-          // phone,
-          // emergencyPhone,
-          // bloodType
+          lastName,
+          age,
+          phone,
+          emergencyPhone,
+          bloodType
         )
       );
     }
