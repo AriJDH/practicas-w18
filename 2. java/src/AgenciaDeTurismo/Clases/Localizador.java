@@ -4,13 +4,17 @@ import java.util.List;
 
 public class Localizador {
     private Cliente cliente;
-    private Double total;
+    private Double total = 0.00;
     private List<Reserva> reservas;
+    private Long codigoLocalizador;
 
-    public Localizador(Cliente cliente, Double total, List<Reserva> reservas) {
+    public Localizador(Cliente cliente, List<Reserva> reservas) {
         setCliente(cliente);
-        setTotal(total);
         setReservas(reservas);
+    }
+
+    public Long getCodigoLocalizador() {
+        return codigoLocalizador++;
     }
 
     public Cliente getCliente() {
@@ -26,7 +30,13 @@ public class Localizador {
     }
 
     public void setTotal(Double total) {
-        this.total = total;
+        if (reservas.stream().filter(f ->f.isBoletos()).count()> 1
+        || reservas.stream().filter(f ->f.isHotel()).count()> 1)
+        {
+            this.total = total - (total * (5/100));
+        }else{
+            this.total = total;
+        }
     }
 
     public List<Reserva> getReservas() {

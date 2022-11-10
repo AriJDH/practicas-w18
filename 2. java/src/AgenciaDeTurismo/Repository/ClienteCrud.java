@@ -1,7 +1,7 @@
-package SuperMercadoEconomico.Repository;
+package AgenciaDeTurismo.Repository;
 
-import SuperMercadoEconomico.Clases.Cliente;
-import SuperMercadoEconomico.Interfaces.CrudRepository;
+import AgenciaDeTurismo.Clases.Cliente;
+import AgenciaDeTurismo.Interfaces.CrudRepository;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,7 +9,7 @@ import java.util.Optional;
 
 public class ClienteCrud implements CrudRepository<Cliente> {
 
-    List<Cliente> listaClientes = new ArrayList<Cliente>();
+    List<Cliente> listaClientes = new ArrayList<>();
 
     @Override
     public void save(Cliente objeto) {
@@ -18,27 +18,25 @@ public class ClienteCrud implements CrudRepository<Cliente> {
 
     @Override
     public void mostrarPantalla() {
-        for (Cliente c : listaClientes) {
+        for (AgenciaDeTurismo.Clases.Cliente c : listaClientes) {
             System.out.println("Dni: " + c.getDni());
             System.out.println("Nombre: " + c.getNombre());
-            System.out.println("Apellido: " + c.getApellido());
         }
     }
 
     @Override
     public Optional<Cliente> buscar(Long dniBuscado) {
         boolean bandera = false;
-        for (Cliente c : listaClientes) {
+        for (AgenciaDeTurismo.Clases.Cliente c : listaClientes) {
             if (c.getDni().equals(dniBuscado.toString())) {
                 System.out.println("----Cliente encontrado, sus datos son: ----");
                 System.out.println("Dni: " + c.getDni());
                 System.out.println("Nombre: " + c.getNombre());
-                System.out.println("Apellido: " + c.getApellido());
                 return Optional.of(c);
             }
         }
 
-        if (bandera == false) {
+        if (!bandera) {
             System.out.println("Cliente no encontrado");
         }
 
@@ -46,8 +44,8 @@ public class ClienteCrud implements CrudRepository<Cliente> {
     }
 
     @Override
-    public void eliminar(Long dniBorado) {
-        Optional<Cliente> cli = this.buscar(dniBorado);
+    public void eliminar(Long dniBorrado) {
+        Optional<AgenciaDeTurismo.Clases.Cliente> cli = this.buscar(dniBorrado);
 
         if (cli.isEmpty()) {
             System.out.println("No se encontró el cliente a borrar");
@@ -56,7 +54,6 @@ public class ClienteCrud implements CrudRepository<Cliente> {
             System.out.println("Cliente borrado correctamente");
             listaClientes.remove(cli.get());
         }
-
     }
 
     @Override

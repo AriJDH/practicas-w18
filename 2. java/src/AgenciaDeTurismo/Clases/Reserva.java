@@ -5,12 +5,32 @@ public class Reserva {
     private boolean comida;
     private boolean transporte;
     private boolean boletos;
+    private Double costoReserva;
+    private Long codigoReserva = 0L;
 
-    public Reserva(boolean hotel, boolean comida, boolean transporte, boolean boletos) {
+    public Reserva(boolean hotel, boolean comida, boolean transporte, boolean boletos, Double costoReserva) {
         setHotel(hotel);
         setComida(comida);
         setTransporte(transporte);
         setBoletos(boletos);
+        setCostoReserva(costoReserva);
+    }
+
+    public Double getCostoReserva() {
+        return costoReserva;
+    }
+
+    public void setCostoReserva(Double costoReserva) {
+
+        if (hotel && comida && transporte && boletos) {
+            this.costoReserva = (costoReserva - (costoReserva * (5/100)));
+        }else{
+            this.costoReserva = costoReserva;
+        }
+    }
+
+    public Long getCodigoReserva() {
+        return codigoReserva +=1L;
     }
 
     public boolean isHotel() {
@@ -48,10 +68,12 @@ public class Reserva {
     @Override
     public String toString() {
         return "Reserva{" +
-                "hotel=" + (hotel?"Si":"No") +
-                ", comida=" + (comida?"Si":"No") +
-                ", transporte=" + (transporte?"Si":"No") +
-                ", boletos=" + (boletos?"Si":"No") +
+                "hotel=" + (isHotel()?"Si":"No") +
+                ", comida=" + (isComida()?"Si":"No") +
+                ", transporte=" + (isTransporte()?"Si":"No") +
+                ", boletos=" + (isBoletos()?"Si":"No") +
+                ", codigo reserva=" + getCodigoReserva()+
+                ", costo reserva=" + getCostoReserva()+
                 '}';
     }
 }
