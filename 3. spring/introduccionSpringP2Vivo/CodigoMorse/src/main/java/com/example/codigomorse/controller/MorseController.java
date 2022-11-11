@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class MorseController {
 
     @GetMapping("/traducirMorse/{codigo}")
-    public String traducirMorse(@PathVariable String codigo){
+    public String traducirMorse(@PathVariable String codigo) {
         //String res = TraductorMorse.traducirMorseALetra("-- . .-. -.-. .- -.. ---   .-.. .. -... .-. .");
         return TraductorMorse.traducirMorseALetra(codigo);
     }
