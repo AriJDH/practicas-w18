@@ -1,0 +1,18 @@
+Todos los años en la provincia de Misiones, al norte de Argentina se lleva a cabo un evento conocido como “Carrera de la Selva”. El mismo se trata de una competición donde los mejores maratonistas y corredores de Latinoamérica se reúnen para desafiar sus habilidades deportivas.
+La competencia cuenta con 3 categorías dependiendo de su dificultad:
+    Circuito chico: 2 km por selva y arroyos.
+    Circuito medio: 5 km por selva, arroyos y barro.
+    Circuito Avanzado: 10 km por selva, arroyos, barro y escalada en piedra.
+    Cada participante puede inscribirse únicamente a una categoría y necesita, para dicha inscripción, proporcionar los siguientes datos: dni, nombre, apellido, edad, celular, número de emergencia y grupo sanguíneo. A cada inscripto, a la vez, se le asigna un número de participante consecutivo con respecto a la inscripción anterior; por ejemplo, si un participante se inscribe y el anterior fue el número 36, se le va a asignar el número 37.
+Para concluir con la inscripción, se debe calcular el monto a abonar por cada participante. Para ello se tienen en cuenta los siguientes valores:
+
+    Inscripción Circuito chico: Menores de 18 años $1300. Mayores de 18 años $1500.
+    Inscripción Circuito medio: Menores de 18 años $2000. Mayores de 18 años $2300.
+    Inscripción Circuito Avanzado: No se permite inscripciones a menores de 18 años. Mayores de 18 años $2800
+
+A partir de estos datos brindados, los organizadores de la carrera manifestaron que necesitan de una aplicación que sea capaz de:
+
+    Inscribir a un nuevo participante en una categoría. (Tener en cuenta que cada categoría tiene una lista de inscriptos diferente).
+    Mostrar por pantalla todos los inscriptos a una determinada categoría con sus correspondientes datos y número de inscripción.
+    Desinscribir a un participante de una categoría.
+    Determinar el monto que deberá abonar cada participante al inscribirse. Por ejemplo: si el participante se inscribe a la categoría Circuito chico y tiene 21 años, el monto a abonar es de $1500.
