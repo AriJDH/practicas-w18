@@ -17,7 +17,7 @@ public class PersonajeController {
     IpersonajeService personajeService = new PersonajeServiceImp();
 
     @GetMapping("/{name}")
-    public ResponseEntity<PersonajeDto> findByName(@PathVariable String name) {
+    public ResponseEntity<List<PersonajeDto>> findByName(@PathVariable String name) {
         return new ResponseEntity<>(personajeService.findByName(name), HttpStatus.OK);
     }
 

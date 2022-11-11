@@ -6,6 +6,6 @@ import java.util.List;
 
 public interface IpersonajeService {
 
-    public PersonajeDto findByName(String name);
+    public List<PersonajeDto> findByName(String name);
 
 }

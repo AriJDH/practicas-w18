@@ -17,14 +17,17 @@ public class PersonajeServiceImp implements IpersonajeService{
 
 
     @Override
-    public PersonajeDto findByName(String name) {
+    public List<PersonajeDto> findByName(String name) {
         PersonajeDto pDto = null;
+        List<PersonajeDto> personajes = new ArrayList<>();
         for(Personaje p: personajeRepository.getAll()){
-            if(p.getName().contains(name))
+            if(p.getName().contains(name)){
                 pDto=new PersonajeDto(p.getName(),p.getHeight(),p.getMass(),p.getGender(),p.getHomeworld(),p.getSpecies());
+                personajes.add(pDto);
+            }
         }
 
-        return pDto;
+        return personajes;
     }
 
 
