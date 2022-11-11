@@ -1,22 +1,23 @@
 package clase4_b_EjerciciosIntegrador;
 
 import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 public class RepositorioCliente implements IRepositorio<Cliente>{
 
-    private List<Cliente> clienteList;
+    private Set<Cliente> clienteList;
     @Override
     public void agregar(Cliente cliente) {
         clienteList.add(cliente);
     }
 
     @Override
-    public List<Cliente> listarTodos() {
+    public Set<Cliente> traerTodos() {
         return clienteList;
     }
 
     public RepositorioCliente() {
-        this.clienteList = new ArrayList<>();
+        this.clienteList = new HashSet<>();
     }
 }

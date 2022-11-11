@@ -1,9 +1,10 @@
 package clase3_b_EjerComplementarios.Ej2;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Flota implements INave {
-    private ArrayList<INave> flota;
+    private List<INave> flota;
     private String nombre;
     private Integer puntuacion;
 

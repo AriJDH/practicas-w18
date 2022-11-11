@@ -1,6 +1,6 @@
 package clase4_b_EjerciciosIntegrador;
 
-public abstract class Reserva {
+public class Reserva {
     protected Double precio;
     protected String tipo;
 

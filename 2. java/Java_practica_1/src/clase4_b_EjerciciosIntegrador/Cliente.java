@@ -1,37 +1,27 @@
 package clase4_b_EjerciciosIntegrador;
 
 public class Cliente {
-    private Long id;
-    private String nombres;
-    private String apellidos;
+    private String dni;
+    private String nombreApellido;
 
-    public Cliente(Long id, String nombres, String apellidos) {
-        this.id = id;
-        this.nombres = nombres;
-        this.apellidos = apellidos;
+    public Cliente(String dni, String nombreApellido) {
+        this.dni = dni;
+        this.nombreApellido = nombreApellido;
     }
 
-    public Long getId() {
-        return id;
+    public String getDni() {
+        return dni;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setDni(String dni) {
+        this.dni = dni;
     }
 
-    public String getNombres() {
-        return nombres;
+    public String getNombreApellido() {
+        return nombreApellido;
     }
 
-    public void setNombres(String nombres) {
-        this.nombres = nombres;
-    }
-
-    public String getApellidos() {
-        return apellidos;
-    }
-
-    public void setApellidos(String apellidos) {
-        this.apellidos = apellidos;
+    public void setNombreApellido(String nombreApellido) {
+        this.nombreApellido = nombreApellido;
     }
 }
