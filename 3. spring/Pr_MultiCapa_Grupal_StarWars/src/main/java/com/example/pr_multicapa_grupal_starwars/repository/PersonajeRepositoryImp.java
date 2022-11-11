@@ -2,6 +2,7 @@ package com.example.pr_multicapa_grupal_starwars.repository;
 
 import com.example.pr_multicapa_grupal_starwars.entity.Personaje;
 import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.ResourceUtils;
@@ -33,6 +34,7 @@ public class PersonajeRepositoryImp implements IPersonajeRepository{
 
     private void loadList(){
         ObjectMapper mapper = new ObjectMapper();
+        mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
         File jsonFile= null;
         try {
             jsonFile = ResourceUtils.getFile("classpath:starwars.json");

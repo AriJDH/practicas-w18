@@ -16,13 +16,9 @@ public class PersonajeDto {
     private Integer height;
     @JsonDeserialize(using = IntegerStringDeserialize.class)
     private Integer mass;
-    @JsonIgnore
     private String hair_color;
-    @JsonIgnore
     private String skin_color;
-    @JsonIgnore
     private String eye_color;
-    @JsonIgnore
     private String birth_year;
     private String gender;
     private String homeworld;
