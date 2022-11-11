@@ -2,7 +2,7 @@ package com.ejerciciospring.ejercicios_spring.practica_arquitectura_multicapa_p1
 
 import java.util.List;
 
-public interface IRepository <T> {
+public interface IRepository<T> {
 
         List<T> consultarEntidadPorNombre(String nombre);
 }

@@ -1,11 +1,8 @@
 package com.ejerciciospring.ejercicios_spring.practica_arquitectura_multicapa_p1_vivo.repository;
 
-import com.ejerciciospring.ejercicios_spring.practica2_dto_response.model.Persona;
-import com.ejerciciospring.ejercicios_spring.practica_arquitectura_multicapa_p1_vivo.entity.IntegerStringDeserialize;
 import com.ejerciciospring.ejercicios_spring.practica_arquitectura_multicapa_p1_vivo.entity.Personaje;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.module.SimpleModule;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.ResourceUtils;
 
@@ -43,9 +40,6 @@ public class RepositoryPersonajeImpl implements IRepository<Personaje> {
             e.printStackTrace();
         }
         ObjectMapper objectMapper = new ObjectMapper();
-        /*SimpleModule module = new SimpleModule();
-        module.addDeserializer(Integer.class, new IntegerStringDeserialize());
-        objectMapper.registerModule(module);**/
 
         TypeReference<List<Personaje>> typeRef = new TypeReference<>(){};
         try {
