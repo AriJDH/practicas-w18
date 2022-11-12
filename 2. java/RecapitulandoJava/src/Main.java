@@ -12,7 +12,7 @@ public class Main {
         garage.guardarVehiculo(new Vehiculo("Chevrolet", "Spin", 2500));
         garage.guardarVehiculo(new Vehiculo("Toyota", "Corola", 1200));
         garage.guardarVehiculo(new Vehiculo("Toyota", "Fortuner", 3000));
-        garage.guardarVehiculo(new Vehiculo("Renaul", "Logan", 950));
+        garage.guardarVehiculo(new Vehiculo("Renault", "Logan", 950));
 
 
          garage.ordenadosPorPrecio();

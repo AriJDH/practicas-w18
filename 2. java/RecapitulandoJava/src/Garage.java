@@ -1,12 +1,12 @@
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Comparator;
-import java.util.stream.Collectors;
+import java.util.List;
 
 public class Garage {
     Comparator<Vehiculo> compareByBrand = Comparator
             .comparing(Vehiculo::getMarca)
             .thenComparing(Vehiculo::getCosto);
+
     List<Vehiculo> garage = new ArrayList<>();
 
     public void guardarVehiculo (Vehiculo v) {
@@ -39,7 +39,7 @@ public class Garage {
         double averge = garage.stream()
                 .mapToDouble(vehiculo -> vehiculo.getCosto())
                 .average()
-                .orElse(Double.NaN);
+                .orElse(0);
 
         System.out.println("Promedio: " + averge);
     }
