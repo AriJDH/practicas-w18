@@ -4,7 +4,7 @@ import lombok.*;
 
 @Setter
 @Getter
-public class Food {
+public class Ingredient {
     private String name;
     private Integer calories;
 }

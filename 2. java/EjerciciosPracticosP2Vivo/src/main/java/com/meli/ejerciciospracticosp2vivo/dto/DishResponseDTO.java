@@ -2,10 +2,13 @@ package com.meli.ejerciciospracticosp2vivo.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
-@AllArgsConstructor
 @Getter
-public class FoodDTO {
+@AllArgsConstructor
+@NoArgsConstructor
+
+public class DishResponseDTO {
     private String name;
-    private Integer calories;
+    private Double totalCalories;
 }
