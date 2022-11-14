@@ -1,5 +1,4 @@
 package com.example.covid19.controller;
-
 import com.example.covid19.model.Persona;
 import com.example.covid19.model.Sintoma;
 import org.springframework.http.ResponseEntity;
@@ -95,9 +94,4 @@ public class CovidController {
         }
         return res;
     }
-
-
-
-
-
 }
