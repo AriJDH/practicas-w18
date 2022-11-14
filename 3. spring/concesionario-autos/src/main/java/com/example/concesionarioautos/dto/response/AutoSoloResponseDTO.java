@@ -20,4 +20,5 @@ public class AutoSoloResponseDTO {
     private Double price;
     private String currency;
     private Integer countOfOwners;
+    private String message;
 }

@@ -23,4 +23,5 @@ public class AutoResponseDTO {
     private String currency;
     private List<Service> services;
     private Integer countOfOwners;
+    private String message;
 }

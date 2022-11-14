@@ -1,4 +1,4 @@
-package excepciones.exceptions;
+package com.example.concesionarioautos.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,10 +13,4 @@ public class GlobalExceptionHandler {
     public ResponseEntity<?> NotFoundException(Exception e){
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
     }
-
-    /*
-    public ResponseEntity<?> BadRequestException(Exception e){
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
-    }
-     */
 }

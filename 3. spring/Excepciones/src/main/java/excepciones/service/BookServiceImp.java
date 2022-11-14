@@ -1,8 +1,7 @@
 package excepciones.service;
 
 import excepciones.entity.Book;
-import excepciones.exceptions.NotFoudException;
-import excepciones.repository.BookRespositoryImp;
+import excepciones.exceptions.NotFoundException;
 import excepciones.repository.IBookRepository;
 import org.springframework.stereotype.Service;
 
@@ -26,7 +25,7 @@ public class BookServiceImp implements IBookService{
     public Book findById(Long id) {
         Book libroEncontrado = bookRespositoryImp.findById(id);
         if(libroEncontrado == null){
-            throw new NotFoudException("El libre con id: " + id + " no fue encontrado.");
+            throw new NotFoundException("El libre con id: " + id + " no fue encontrado.");
         }
         return libroEncontrado;
     }

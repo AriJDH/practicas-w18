@@ -30,7 +30,7 @@ public class AutoRepositoryImp implements IAutoRepository{
 
     @Override
     public Auto findById(Long id) {
-        return autoList.stream().filter(a->a.getId().equals(id)).findFirst().get();
+        return autoList.stream().filter(a->a.getId().equals(id)).findFirst().orElse(null);
     }
 
     @Override

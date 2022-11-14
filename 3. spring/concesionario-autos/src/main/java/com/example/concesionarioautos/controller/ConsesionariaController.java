@@ -33,7 +33,7 @@ public class ConsesionariaController {
 
     @PostMapping("v1/api/vehicles/")
     public ResponseEntity<AutoResponseDTO> addVehicle(@RequestBody AutoRequestDTO auto){
-        return new ResponseEntity<>(autoService.add(auto), HttpStatus.OK);
+        return new ResponseEntity<>(autoService.add(auto), HttpStatus.CREATED);
     }
 
     @GetMapping("v1/api/vehicles/dates")
@@ -45,15 +45,5 @@ public class ConsesionariaController {
     public List<ResponseEntity<AutoResponseDTO>> findeByPrice(@RequestParam double since, @RequestParam double to){
         return autoService.findeByPrice(since, to).stream().map(a-> new ResponseEntity<>(a,HttpStatus.OK)).collect(Collectors.toList());
     }
-
-
-
- /*
-    @PostMapping("/calculateAll")
-    public List<DishResponseDTO> calculate(@RequestBody List<DishDTO> dishes){
-        return dishService.calculateAllCalories(dishes);
-    }
-
-     */
 
 }
