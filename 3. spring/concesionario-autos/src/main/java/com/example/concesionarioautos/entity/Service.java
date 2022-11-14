@@ -16,5 +16,4 @@ public class Service {
     private LocalDate date;
     private Double kilometers;
     private String descriptions;
-
 }

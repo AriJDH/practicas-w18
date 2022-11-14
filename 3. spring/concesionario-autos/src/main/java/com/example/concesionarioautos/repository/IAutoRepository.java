@@ -12,5 +12,4 @@ public interface IAutoRepository {
     public Auto findById(Long id);
     public List<Auto> findByYear(int desde, int hasta);
     public List<Auto> findeByPrice(Double desde, Double hasta);
-    public Long getNexttId();
 }

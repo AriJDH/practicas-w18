@@ -2,7 +2,6 @@ package com.example.concesionarioautos.entity;
 
 import lombok.*;
 
-
 import java.time.LocalDate;
 import java.util.List;
 
@@ -11,7 +10,6 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Auto {
-    private Long id;
     private String brand;
     private String model;
     private LocalDate manufacturingDate;

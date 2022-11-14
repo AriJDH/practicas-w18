@@ -8,6 +8,8 @@ import com.example.concesionarioautos.exception.NotFoundException;
 import com.example.concesionarioautos.repository.IAutoRepository;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,27 +18,27 @@ import java.util.stream.Collectors;
 @Service
 public class AutoServiceImp implements IAutoService{
 
+    private ObjectMapper op = new ObjectMapper();
     private final IAutoRepository database;
 
     public AutoServiceImp(IAutoRepository autoRepository) {
         this.database = autoRepository;
+        op.registerModule(new JavaTimeModule());
+        op.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
     }
 
     @Override
     public AutoResponseDTO add(AutoRequestDTO auto) {
-        database.add(new Auto(database.getNexttId(), auto.getBrand(), auto.getModel(), auto.getManufacturingDate(), auto.getNumberOfKilometers(), auto.getDoors(), auto.getPrice(), auto.getCurrency(), auto.getServices(), auto.getCountOfOwners()));
-        return new AutoResponseDTO(auto.getBrand(), auto.getModel(), auto.getManufacturingDate(), auto.getNumberOfKilometers(), auto.getDoors(), auto.getPrice(), auto.getCurrency(), auto.getServices(), auto.getCountOfOwners(),null);
-        //ObjectMapper op = new ObjectMapper();
-        //op.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-        //return op.convertValue(auto, AutoResponseDTO.class);
+        database.add(op.convertValue(auto, Auto.class));
+        return op.convertValue(auto, AutoResponseDTO.class);
     }
 
     @Override
     public List<AutoSoloResponseDTO> listAll() {
         List<AutoSoloResponseDTO> dtoList;
-        dtoList = database.listAll().stream().map(auto-> new AutoSoloResponseDTO(auto.getBrand(), auto.getModel(), auto.getManufacturingDate(), auto.getNumberOfKilometers(), auto.getDoors(), auto.getPrice(), auto.getCurrency(), auto.getCountOfOwners(),null)).collect(Collectors.toList());
+        dtoList = database.listAll().stream().map(auto-> (op.convertValue(auto, AutoSoloResponseDTO.class))).collect(Collectors.toList());
         if(dtoList.isEmpty()){
-            throw new NotFoundException("No existen vehículos registraodos");
+            throw new NotFoundException("No existen vehículos registrados");
         }
         return dtoList;
     }
@@ -47,7 +49,7 @@ public class AutoServiceImp implements IAutoService{
         if (auto == null){
             throw new NotFoundException("No existe el vehículo con id " + id);
         }
-        return new AutoResponseDTO(auto.getBrand(), auto.getModel(), auto.getManufacturingDate(), auto.getNumberOfKilometers(), auto.getDoors(), auto.getPrice(), auto.getCurrency(), auto.getServices(), auto.getCountOfOwners(),null);
+        return op.convertValue(auto, AutoResponseDTO.class);
     }
 
     @Override
@@ -56,7 +58,7 @@ public class AutoServiceImp implements IAutoService{
         if(autoList.isEmpty()){
             throw new NotFoundException("No existen vehículos registrados entre los años " + since + " y " + to);
         }
-        return autoList.stream().map(auto-> new AutoResponseDTO(auto.getBrand(), auto.getModel(), auto.getManufacturingDate(), auto.getNumberOfKilometers(), auto.getDoors(), auto.getPrice(), auto.getCurrency(), auto.getServices(), auto.getCountOfOwners(),null)).collect(Collectors.toList());
+        return autoList.stream().map(auto-> op.convertValue(auto, AutoResponseDTO.class)).collect(Collectors.toList());
     }
 
     @Override
@@ -65,6 +67,6 @@ public class AutoServiceImp implements IAutoService{
         if(autoList.isEmpty()){
             throw new NotFoundException("No existen vehículos registrados entre los precios $" + since + " y $" + to);
         }
-        return autoList.stream().map(auto-> new AutoResponseDTO(auto.getBrand(), auto.getModel(), auto.getManufacturingDate(), auto.getNumberOfKilometers(), auto.getDoors(), auto.getPrice(), auto.getCurrency(), auto.getServices(), auto.getCountOfOwners(),null)).collect(Collectors.toList());
+        return autoList.stream().map(auto-> op.convertValue(auto, AutoResponseDTO.class)).collect(Collectors.toList());
     }
 }
