@@ -12,8 +12,8 @@ import java.util.List;
 @AllArgsConstructor
 public class DishDTOres {
 
-    private Integer totalCalories;
+    private Integer totalDishCalories;
     private List<Ingredient> ingredients;
-    private Integer ingredientsWithMostCalories;
+    private Ingredient ingredientWithMostCalories;
 
 }

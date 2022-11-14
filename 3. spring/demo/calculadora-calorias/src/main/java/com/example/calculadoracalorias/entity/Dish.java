@@ -14,11 +14,6 @@ public class Dish {
 
     private String name;
     private List<Ingredient> ingredients;
-    private Integer totalCalories = ingredients
-            .stream()
-            .mapToInt(Ingredient::getCalories)
-            .sum();
-
     private Double weight;
 
 }

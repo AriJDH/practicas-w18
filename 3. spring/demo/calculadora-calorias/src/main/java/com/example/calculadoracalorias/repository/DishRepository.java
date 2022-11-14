@@ -1,6 +1,6 @@
 package com.example.calculadoracalorias.repository;
 
-import com.example.calculadoracalorias.dto.require.DishDTOreq;
+import com.example.calculadoracalorias.dto.require.DishToPostDTOreq;
 import com.example.calculadoracalorias.entity.Dish;
 import org.springframework.stereotype.Repository;
 
@@ -9,31 +9,28 @@ import java.util.List;
 
 @Repository
 public class DishRepository implements IDishRepository{
-
     private final List<Dish> dishes = new ArrayList<Dish>();
 
     @Override
+    public void addDish(Dish dish) {
+        dishes.add(dish);
+    }
+    @Override
+    public Dish getDish(String name, Double weight) {
+        for (Dish dish : dishes) {
+            if (dish.getName().equals(name) && dish.getWeight().equals(weight)) {
+                return dish;
+            }
+        }
+        return null;
+    }
+    @Override
     public List<Dish> getDishes() {
-        return null;
+        return dishes;
     }
 
     @Override
-    public Dish getDish(String name) {
-        return null;
-    }
-
-    @Override
-    public Dish addDish(DishDTOreq dish) {
-        return null;
-    }
-
-    @Override
-    public Integer getDishCaloriesByName(String name) {
-        return null;
-    }
-
-    @Override
-    public Integer getDishWithMostCaloriesByName(String name) {
+    public List<Dish> getDishesByList(List<Dish> list) {
         return null;
     }
 }

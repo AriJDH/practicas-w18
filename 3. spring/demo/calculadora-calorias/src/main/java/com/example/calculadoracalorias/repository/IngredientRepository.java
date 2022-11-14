@@ -30,4 +30,17 @@ public class IngredientRepository implements IIngredientRepository {
         }
     }
 
+    @Override
+    public List<Ingredient> getIngredients() {
+        return ingredients;
+    }
+
+    @Override
+    public Ingredient getIngredient(String name) {
+        for (Ingredient ingredient: ingredients) {
+            if(ingredient.getName().equals(name))
+                return ingredient;
+        }
+        return null;
+    }
 }

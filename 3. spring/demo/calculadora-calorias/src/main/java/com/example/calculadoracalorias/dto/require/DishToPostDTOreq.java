@@ -4,12 +4,15 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Getter
-@NoArgsConstructor
 @AllArgsConstructor
-public class DishDTOreq {
+@NoArgsConstructor
+public class DishToPostDTOreq {
 
     private String name;
+    private List<String> ingredientsName;
     private Double weight;
 
 }

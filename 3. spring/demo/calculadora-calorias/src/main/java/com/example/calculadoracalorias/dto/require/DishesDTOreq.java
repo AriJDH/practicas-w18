@@ -4,12 +4,13 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class DishDTOreq {
+public class DishesDTOreq {
 
-    private String name;
-    private Double weight;
+    private List<String> dishesName;
 
 }
