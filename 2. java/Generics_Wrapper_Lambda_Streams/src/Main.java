@@ -23,5 +23,7 @@ public class Main {
     garaje.vehiculosObtenerMenoresA(1000);
     garaje.vehiculosObtenerMayoresA(1000);
     garaje.vehiculosPrecioPromedio();
+
+    System.out.println(garaje.burbuja(new int[] { 1,2,3,4212,1, 2, 3, 4, 5 }));
   }
 }

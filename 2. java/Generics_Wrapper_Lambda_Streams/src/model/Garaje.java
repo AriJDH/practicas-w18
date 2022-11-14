@@ -1,6 +1,7 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -143,6 +144,15 @@ public class Garaje {
     double promedioTotal = totalPrecios / totalVehiculos;
     System.out.println("Promedio total de los Vehiculos: " + promedioTotal);
     System.out.println("-------------------------");
+  }
+
+  public static int[] burbuja(int[] array) {
+    Arrays.sort(array);
+
+    for (int i : array) {
+      System.out.println(i);
+    }
+    return array;
   }
 }
 // @@
