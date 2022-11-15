@@ -1,0 +1,89 @@
+[
+  {
+    "id": 1,
+    "brand": "Chevrolet",
+    "model": "Corsa",
+    "manufacturingDate": "2000-11-20",
+    "numberOfKilometers": 115000,
+    "doors": 5,
+    "price": 900000.0,
+    "currency": "AR",
+    "services": [
+      {
+        "date": "2003-05-20",
+        "kilometers": 60000,
+        "descriptions": "Change air filters"
+      }
+    ],
+    "countOfOwners": 2
+  },
+  {
+    "id": 2,
+    "brand": "Toyota",
+    "model": "Corolla",
+    "manufacturingDate": "2018-03-17",
+    "numberOfKilometers": 44000,
+    "doors": 5,
+    "price": 3500000.0,
+    "currency": "AR",
+    "services": [
+      {
+        "date": "2019-05-28",
+        "kilometers": 10000,
+        "descriptions": "Change oil"
+      },
+      {
+        "date": "2020-09-01",
+        "kilometers": 23000,
+        "descriptions": "Change air filters. Brake pads"
+      }
+    ],
+    "countOfOwners": 1
+  },
+  {
+    "id": 3,
+    "brand": "Mercedes Benz",
+    "model": "Clase A",
+    "manufacturingDate": "2005-05-02",
+    "numberOfKilometers": 180000,
+    "doors": 5,
+    "price": 1700000.0,
+    "currency": "AR",
+    "services": [
+      {
+        "date": "2007-10-20",
+        "kilometers": 20000,
+        "descriptions": "Change air filters"
+      },
+      {
+        "date": "2009-12-15",
+        "kilometers": 45000,
+        "descriptions": "Change air filters"
+      },
+      {
+        "date": "2012-08-11",
+        "kilometers": 63000,
+        "descriptions": "Change air filters"
+      }
+    ],
+    "countOfOwners": 3
+  },
+  {
+    "id": 4,
+    "brand": "Renault",
+    "model": "Scénic",
+    "manufacturingDate": "2002-07-07",
+    "numberOfKilometers": 230000,
+    "doors": 5,
+    "price": 1100000.50,
+    "currency": "AR",
+    "services": [
+      {
+        "date": "2019-10-20",
+        "kilometers": 155000,
+        "descriptions": "Change air filters"
+      }
+    ],
+    "countOfOwners": 5
+  }
+]

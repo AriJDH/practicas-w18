@@ -13,6 +13,4 @@ public class PersonaDTORepository {
 	PersonaDTO personaDTO1 = new PersonaDTO("Nombre1", "Apellido1", )
 	// Nuestra base de datos Peronas con sintoma (Tabla intermedia)
 	List<PersonaDTO> personasDTO = new ArrayList<>();
-	
-	
 }
