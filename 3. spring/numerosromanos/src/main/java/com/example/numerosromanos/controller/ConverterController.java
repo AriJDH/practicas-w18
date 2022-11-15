@@ -8,16 +8,13 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 
 public class ConverterController {
-    private ConverterService modelo;
-
+    private final ConverterService modelo;
     public ConverterController() {
         this.modelo = new ConverterService();
     }
-
     @GetMapping("/convertir/{romano}")
     public String enteroARomano(@PathVariable Integer romano) {
         return modelo.romanize(romano);
     }
-
-
+    
 }

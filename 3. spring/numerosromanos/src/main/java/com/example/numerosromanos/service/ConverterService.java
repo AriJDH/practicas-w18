@@ -5,8 +5,11 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class ConverterService {
-
     public static Map<String, Integer> map = new LinkedHashMap<String,Integer>();
+
+    public ConverterService() {
+        this.populateMap();
+    }
 
     public String romanize(int value){
         String result = "";
