@@ -1,19 +1,25 @@
-package com.example.concesionarioautos.exception;
+package com.example.blog.exception;
 
-import com.example.concesionarioautos.dto.response.ErrorResponseDTO;
+import com.example.blog.dto.response.ErrorDTO;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestController;
 
+
 @ControllerAdvice(annotations = RestController.class)
 public class GlobalExceptionHandler {
 
     @ExceptionHandler(NotFoundException.class)
     public ResponseEntity<?> NotFoundException(Exception e){
-        ErrorResponseDTO errorResponseDTO = new ErrorResponseDTO(e.getMessage(), 404);
-        return new ResponseEntity<>(errorResponseDTO, HttpStatus.NOT_FOUND);
-        //return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        ErrorDTO errorDTO = new ErrorDTO(e.getMessage(), 404);
+        return new ResponseEntity<>(errorDTO, HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(ConflictResourceException.class)
+    public ResponseEntity<?> ConflictResourceException(Exception e){
+        ErrorDTO errorDTO = new ErrorDTO(e.getMessage(), 409);
+        return new ResponseEntity<>(errorDTO, HttpStatus.CONFLICT);
     }
 }
