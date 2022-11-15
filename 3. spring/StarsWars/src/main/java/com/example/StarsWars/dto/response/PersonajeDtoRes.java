@@ -13,8 +13,8 @@ import lombok.Setter;
 
 public class PersonajeDtoRes {
     private String name;
-    private int height;
-    private int mass;
+    private Integer height;
+    private Integer mass;
     private String gender;
     private String homeworld;
     private String species;
@@ -23,8 +23,8 @@ public class PersonajeDtoRes {
     //Constructor que recive un perosnaje para poder mapear mas facil;
     public PersonajeDtoRes (Personaje p){
         this.name = p.getName();
-        this.height = p.getHeight();
-        this.mass = p.getMass();
+        this.height = Integer.valueOf(p.getHeight());
+        this.mass = Integer.valueOf(getMass());
         this.gender = p.getGender();
         this.homeworld = p.getHomeworld();
         this.species = p.getSpecies();

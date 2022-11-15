@@ -1,6 +1,8 @@
 package com.example.StarsWars.repository;
 
 import com.example.StarsWars.entity.Personaje;
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.stereotype.Repository;
@@ -26,9 +28,9 @@ public class PerosnajeRepositoryImp implements IPersonajeRepository{
 
     private void loadList(){
         ObjectMapper mapper = new ObjectMapper();
-        File jsonFile = new File("null");
+        File jsonFile = null;
         try{
-            jsonFile = ResourceUtils.getFile("classpath:starwars.json");
+            jsonFile = ResourceUtils.getFile("classpath:3. starwars.json");
             listOfpersonajes = mapper.readValue(jsonFile, new TypeReference<List<Personaje>>(){});
 
         }catch (Exception ex){
