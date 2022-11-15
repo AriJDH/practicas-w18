@@ -9,8 +9,8 @@ import lombok.NoArgsConstructor;
 @Getter
 public class PersonajeDTO {
     private String name;
-    private int height;
-    private int mass;
+    private Integer height;
+    private Integer mass;
     private String gender;
     private String homeworld;
     private String species;
