@@ -2,6 +2,7 @@ package com.example.multicapavivo.service;
 
 import com.example.multicapavivo.dto.PersonaDto;
 import com.example.multicapavivo.entity.Persona;
+import com.example.multicapavivo.exceptions.NotFoundException;
 import com.example.multicapavivo.repository.IPersonaRepository;
 import com.example.multicapavivo.repository.PersonaRepositoryImp;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -22,6 +23,8 @@ public class PersonaServiceImp implements IPersonaService{
         List<PersonaDto> personasDto = personas.stream()
                 .map(p -> op.convertValue(p, PersonaDto.class))
                 .collect(Collectors.toList());
-        return personasDto;
+
+        throw new NotFoundException("No se encontro nadaaa!");
+        //return personasDto;
     }
 }
