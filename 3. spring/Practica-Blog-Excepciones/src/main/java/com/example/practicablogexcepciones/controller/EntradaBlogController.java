@@ -5,10 +5,9 @@ import com.example.practicablogexcepciones.service.EntradaBlogServiceImp;
 import com.example.practicablogexcepciones.service.IEntradaBlogService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 public class EntradaBlogController {
@@ -23,11 +22,18 @@ public class EntradaBlogController {
     @PostMapping("/blog")
     public ResponseEntity<String>  agregarEntrada(@RequestBody EntradaBlogDto entradaBlogDto){
         // TODO agregar la excepcion si ya existe la entrada
-        entradaBlogService.crearEntradaBlog(entradaBlogDto);
+        entradaBlogService.add(entradaBlogDto);
         return new ResponseEntity<>("Entrada creada con éxito", HttpStatus.CREATED);
     }
 
-// Buscar un blog especifico
+    @GetMapping("/blog")
+    public ResponseEntity<List<EntradaBlogDto>> getAll(){
+        return new ResponseEntity<>(this.entradaBlogService.findAll(), HttpStatus.OK);
+    }
+
+
     @GetMapping("/blog/{id}")
-    public ResponseEntity<>
+    public ResponseEntity<EntradaBlogDto> getOne(@PathVariable Long id){
+        return new ResponseEntity<>(this.entradaBlogService.findOne(id), HttpStatus.OK);
+    }
 }

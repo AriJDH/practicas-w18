@@ -5,6 +5,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.util.Date;
 
 @Data
 @NoArgsConstructor
@@ -13,5 +15,5 @@ public class EntradaBlogDto {
     private long id;
     private String titulo;
     private String autor;
-    private SimpleDateFormat fechaPublicacion;
+    private Date fechaPublicacion;
 }
