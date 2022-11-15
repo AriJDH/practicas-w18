@@ -3,6 +3,7 @@ package com.uhu.multicapa.service;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.uhu.multicapa.dto.request.PersonDTO;
 import com.uhu.multicapa.entity.Person;
+import com.uhu.multicapa.exception.NotFoundException;
 import com.uhu.multicapa.repository.IPersonRepository;
 import com.uhu.multicapa.repository.PersonRepositoryImp;
 import org.springframework.stereotype.Service;
@@ -23,6 +24,7 @@ public class PersonServiceImp implements IPersonService{
         List<PersonDTO> personDTOList = personList.stream()
                 .map(person -> objectMapper.convertValue(person, PersonDTO.class))
                 .collect(Collectors.toList());
-        return personDTOList;
+        throw new NotFoundException("No se encontró lo que sea...");
+//        return personDTOList;
     }
 }
