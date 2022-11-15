@@ -19,16 +19,23 @@ public class EntradaBlogRepositoryImp implements IEntradaBlogRepository{
 
     @Override
     public EntradaBlog crearEntradaBlog(EntradaBlog e) {
-        return null;
+        EntradaBlog yaExiste = this.entradas.stream().filter(b -> b.getId().equals(e.getId())).findFirst().orElse(null);
+
+        if(yaExiste == null){
+            this.entradas.add(e);
+            return e;
+        }else{
+            return null;
+        }
     }
 
     @Override
     public EntradaBlog obtenerEntradaBlog(String id) {
-        return null;
+        return this.entradas.stream().filter(e -> e.getId().equals(id)).findFirst().orElse(null);
     }
 
     @Override
     public List<EntradaBlog> obtenerTodasLasEntradas() {
-        return null;
+        return this.entradas;
     }
 }
