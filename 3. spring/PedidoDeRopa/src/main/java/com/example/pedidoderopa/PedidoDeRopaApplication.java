@@ -1,13 +1,13 @@
-package com.deportes.demo;
+package com.example.pedidoderopa;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class DtoResponseEntityDeportesApplication {
+public class PedidoDeRopaApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(DtoResponseEntityDeportesApplication.class, args);
+        SpringApplication.run(PedidoDeRopaApplication.class, args);
     }
 
 }

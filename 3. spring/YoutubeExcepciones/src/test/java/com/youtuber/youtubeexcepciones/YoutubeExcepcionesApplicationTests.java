@@ -1,10 +1,10 @@
-package com.deportes.demo;
+package com.youtuber.youtubeexcepciones;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class DtoResponseEntityDeportesApplicationTests {
+class YoutubeExcepcionesApplicationTests {
 
     @Test
     void contextLoads() {

@@ -8,11 +8,11 @@
         <version>2.7.5</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>com.deportes</groupId>
-    <artifactId>DTOResponseEntityDeportes</artifactId>
+    <groupId>com.example</groupId>
+    <artifactId>PedidoDeRopa</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>DTOResponseEntityDeportes</name>
-    <description>Demo project for Spring Boot</description>
+    <name>PedidoDeRopa</name>
+    <description>PedidoDeRopa</description>
     <properties>
         <java.version>11</java.version>
     </properties>

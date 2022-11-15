@@ -19,34 +19,34 @@ import com.deportes.demo.repositorio.RepoDeDatos;
 @RestController
 @RequestMapping("/inicio")
 public class PersonaDeporteController {
-	
-	@Autowired
-	private RepoDeDatos datos;
-	
-	@GetMapping("/findSport")
-	public List<Deporte> getDeportes(){
-		
-		return datos.getDeportes();
-		
-	}
-	
-	@GetMapping("/findSport/{name}")
-	public String getDeportebyName(@PathVariable String name){
-		
-		return datos.getDeportes().stream()
-				.filter(d -> d.getNombre().equals(name))
-				.map(d -> d.getNivel())
-				.findFirst()
-				.orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND,
-						"No se encontro deporte con nombre " + name));
-		
-	}
-	
-	@GetMapping("/findSportsPersons")
-	public ResponseEntity<PersonaDeportistaDTO> getPersonasDeportistas(){
-		
-		return new ResponseEntity(datos.getDTO(), HttpStatus.OK);
-		
-	}
+
+    @Autowired
+    private RepoDeDatos datos;
+
+    @GetMapping("/findSport")
+    public List<Deporte> getDeportes() {
+
+        return datos.getDeportes();
+
+    }
+
+    @GetMapping("/findSport/{name}")
+    public String getDeportebyName(@PathVariable String name) {
+
+        return datos.getDeportes().stream()
+                .filter(d -> d.getNombre().equals(name))
+                .map(d -> d.getNivel())
+                .findFirst()
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,
+                        "No se encontro deporte con nombre " + name));
+
+    }
+
+    @GetMapping("/findSportsPersons")
+    public ResponseEntity<PersonaDeportistaDTO> getPersonasDeportistas() {
+
+        return new ResponseEntity(datos.getDTO(), HttpStatus.OK);
+
+    }
 
 }
