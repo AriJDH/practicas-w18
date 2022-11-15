@@ -1,2 +1,4 @@
-package com.example.covid19.controller;public class Covid19Controller {
+package com.example.covid19.controller;
+
+public class Covid19Controller {
 }
