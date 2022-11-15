@@ -2,6 +2,7 @@ package com.dh.blog.service;
 
 import com.dh.blog.dto.EntradaBlogDTO;
 import com.dh.blog.entity.EntradaBlog;
+import com.dh.blog.exception.BlogEntryNotFoundException;
 import com.dh.blog.exception.BlogEntryRepeatedException;
 import com.dh.blog.repository.BlogRepository;
 import com.dh.blog.repository.IBlogRepository;
@@ -35,6 +36,8 @@ public class BlogService implements IBlogService {
     @Override
     public EntradaBlogDTO findBlogById(Integer id) {
         EntradaBlog entradaBlog = blogRepository.findBlogById(id);
+        if (entradaBlog == null)
+            throw new BlogEntryNotFoundException("Id ingresado no corresponde a ninguna entrada de Blog.");
         EntradaBlogDTO entradaBlogDTO = MapperSingleton.getInstance().map(entradaBlog, EntradaBlogDTO.class);
         return entradaBlogDTO;
     }

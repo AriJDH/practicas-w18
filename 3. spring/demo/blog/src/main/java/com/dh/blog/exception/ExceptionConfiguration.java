@@ -11,8 +11,8 @@ public class ExceptionConfiguration {
 
     @ExceptionHandler(BlogEntryRepeatedException.class)
     public ResponseEntity<?> blogEntryRepeatedException(BlogEntryRepeatedException e){
-        ErrorDTO err = new ErrorDTO(e.getMessage(), HttpStatus.NOT_ACCEPTABLE.value());
-        return new ResponseEntity<>(err, HttpStatus.NOT_ACCEPTABLE);
+        ErrorDTO err = new ErrorDTO(e.getMessage(), HttpStatus.CONFLICT.value());
+        return new ResponseEntity<>(err, HttpStatus.CONFLICT);
     }
 
     @ExceptionHandler(BlogEntryNotFoundException.class)

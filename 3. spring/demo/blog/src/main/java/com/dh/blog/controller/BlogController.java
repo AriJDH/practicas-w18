@@ -3,8 +3,11 @@ package com.dh.blog.controller;
 import com.dh.blog.dto.EntradaBlogDTO;
 import com.dh.blog.service.BlogService;
 import com.dh.blog.service.IBlogService;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/blog")
@@ -17,16 +20,19 @@ public class BlogController {
 
     @PostMapping("/addBlog")
     public ResponseEntity<?> addBlog(@RequestBody EntradaBlogDTO blogDTO) {
-        return null;
+        blogService.addBlogEntry(blogDTO);
+        return new ResponseEntity<>("Blog agregado correctamente.", HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<?> getBlogById(@PathVariable Integer id) {
-        return null;
+        EntradaBlogDTO blogDTO = blogService.findBlogById(id);
+        return ResponseEntity.ok().body(blogDTO);
     }
 
     @GetMapping("")
     public ResponseEntity<?> getBlogEntries(){
-        return null;
+        List<EntradaBlogDTO> entradasBlog = blogService.findBlogEntries();
+        return ResponseEntity.ok().body(entradasBlog);
     }
 }
