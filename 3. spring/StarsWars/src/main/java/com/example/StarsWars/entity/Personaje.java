@@ -2,9 +2,7 @@ package com.example.StarsWars.entity;
 
 import com.example.StarsWars.deserializers.IntegerDeserilizerCustom;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @NoArgsConstructor
 @AllArgsConstructor

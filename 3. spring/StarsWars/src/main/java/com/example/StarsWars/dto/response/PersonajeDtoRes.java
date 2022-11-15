@@ -23,8 +23,8 @@ public class PersonajeDtoRes {
     //Constructor que recive un perosnaje para poder mapear mas facil;
     public PersonajeDtoRes (Personaje p){
         this.name = p.getName();
-        this.height = Integer.valueOf(p.getHeight());
-        this.mass = Integer.valueOf(getMass());
+        this.height = p.getHeight();
+        this.mass = p.getMass();
         this.gender = p.getGender();
         this.homeworld = p.getHomeworld();
         this.species = p.getSpecies();

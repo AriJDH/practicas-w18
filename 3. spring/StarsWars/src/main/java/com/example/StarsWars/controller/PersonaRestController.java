@@ -22,4 +22,10 @@ public class PersonaRestController {
     public ResponseEntity<List<PersonajeDtoRes>> getPersonaje(@PathVariable String palabra){
         return new ResponseEntity<List<PersonajeDtoRes>>(personajeService.getPersonajesServ(palabra), HttpStatus.OK);
     }
+
+    //Devuelve el json como PersonajeDto
+    @GetMapping("/json")
+    public ResponseEntity<List<PersonajeDtoRes>> getAllPersonajeDto(){
+        return new ResponseEntity<List<PersonajeDtoRes>>(personajeService.getAllPersonajes(),HttpStatus.OK);
+    }
 }

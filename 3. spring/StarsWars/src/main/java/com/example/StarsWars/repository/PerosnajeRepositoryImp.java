@@ -14,10 +14,10 @@ import java.util.List;
 
 @Repository
 public class PerosnajeRepositoryImp implements IPersonajeRepository{
-    private List<Personaje> listOfpersonajes = new ArrayList<>();
+    private final List<Personaje> listOfpersonajes;
 
     public PerosnajeRepositoryImp() {
-        loadList();
+        this. listOfpersonajes = loadList();
     }
 
     @Override
@@ -25,17 +25,21 @@ public class PerosnajeRepositoryImp implements IPersonajeRepository{
         return listOfpersonajes;
     }
 
-
-    private void loadList(){
+    //Cargar la lista a traves de un json.
+    private List<Personaje> loadList(){
         ObjectMapper mapper = new ObjectMapper();
+        List<Personaje> newListOfPersonaje = new ArrayList<>();
         File jsonFile = null;
         try{
             jsonFile = ResourceUtils.getFile("classpath:3. starwars.json");
-            listOfpersonajes = mapper.readValue(jsonFile, new TypeReference<List<Personaje>>(){});
+            if(jsonFile == null)
+                throw new IllegalArgumentException("El json no se leyo correctamente");
+            newListOfPersonaje = mapper.readValue(jsonFile, new TypeReference<List<Personaje>>(){});
+
 
         }catch (Exception ex){
             System.out.println("No exsiste el arhcivo." + ex.getMessage());
         }
-
+        return newListOfPersonaje;
     }
 }

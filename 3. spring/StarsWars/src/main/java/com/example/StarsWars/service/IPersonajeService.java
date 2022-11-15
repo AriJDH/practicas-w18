@@ -9,4 +9,5 @@ import java.util.List;
 @Service
 public interface IPersonajeService {
     List<PersonajeDtoRes> getPersonajesServ(String palabra);
+    List<PersonajeDtoRes> getAllPersonajes();
 }
