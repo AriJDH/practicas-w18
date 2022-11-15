@@ -1,2 +1,10 @@
-package com.example.blog.exception;public class NotFoundException {
+package com.example.blog.exception;
+
+public class NotFoundException extends RuntimeException {
+    public NotFoundException(){
+    }
+
+    public NotFoundException(String message){
+        super(message);
+    }
 }
