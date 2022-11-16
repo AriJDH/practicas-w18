@@ -7,8 +7,8 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserFollowersDTOres {
-    //US 0002 - GET - /users/{userId}/followers/count
+public class UserFollowersCountDTOres {
+    //TODO US 0002 - GET - /users/{userId}/followers/count
     private int user_id;
     private String user_name;
     private int followers_count;
