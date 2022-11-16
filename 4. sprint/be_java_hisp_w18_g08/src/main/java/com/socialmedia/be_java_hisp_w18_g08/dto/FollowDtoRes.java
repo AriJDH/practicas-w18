@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class FollowDtoRes {
 
-    private String statusCode;
+    private Integer statusCode;
     private String message;
 
 }
