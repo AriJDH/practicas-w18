@@ -4,9 +4,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Arrays;
 import java.util.Hashtable;
-import java.util.List;
 import java.util.Set;
 
 @RestController
@@ -33,7 +31,6 @@ public class Traductor {
     public static String morseAAscii(String morseBuscado) {
         Hashtable<String, String> equivalencias = obtenerEquivalencias();
         Set<String> claves = equivalencias.keySet();
-        // La clave es la letra ASCII
         for (String clave : claves) {
             String morse = equivalencias.get(clave);
             if (morse.equals(morseBuscado)) {
