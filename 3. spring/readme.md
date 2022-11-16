@@ -10,3 +10,5 @@ Ejercicios:
 6. Arquitectura Multicapa - P1 - VIVO | Starwars // **En desarrollo**
 7. Ejercicios Prácticos - P2 - VIVO | Calculador de calorías // _Terminado_
 8. Ejercicios Prácticos - P2 - VIVO | Ejercicio concesionaria de autos (Opcional) // _Terminado_
+9. Manejo de Excepciones - P1 - VIVO | Youtuber // **En Desarrollo**
+10. Recapitulando Spring - P2 - VIVO | Link Tracker // **En desarrollo**

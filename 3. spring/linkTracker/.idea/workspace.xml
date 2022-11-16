@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="0e5d335a-11e4-455e-87db-a89f1dfbf18d" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/../8. vehiculos/Enunciados.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../9. youtuber/Enunciados.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../9. youtuber/src/main/java/com/manejoExcepcionesVivo/youtuber/controller/EntradaBlogController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../9. youtuber/src/main/java/com/manejoExcepcionesVivo/youtuber/dto/EntradaBlogDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../9. youtuber/src/main/java/com/manejoExcepcionesVivo/youtuber/entity/EntradaBlog.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../9. youtuber/src/main/java/com/manejoExcepcionesVivo/youtuber/exception/ExceptionHandlerController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../9. youtuber/src/main/java/com/manejoExcepcionesVivo/youtuber/exception/IdDuplicadoException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../9. youtuber/src/main/java/com/manejoExcepcionesVivo/youtuber/repository/EntradaBlogRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../9. youtuber/src/main/java/com/manejoExcepcionesVivo/youtuber/repository/IEntradaBlogRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../9. youtuber/src/main/java/com/manejoExcepcionesVivo/youtuber/service/EntradaBlogServiceImp.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../9. youtuber/src/main/java/com/manejoExcepcionesVivo/youtuber/service/IEntradaBlogService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../9. youtuber/src/main/java/com/manejoExcepcionesVivo/youtuber/util/ErrorMessageDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../9. youtuber/src/main/java/com/manejoExcepcionesVivo/youtuber/util/Mapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../2. java/9-EjerciciosIntegradoresP1VIVO/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../2. java/9-EjerciciosIntegradoresP1VIVO/src/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../2. java/9-EjerciciosIntegradoresP1VIVO/src/model/BoletoViaje.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../2. java/9-EjerciciosIntegradoresP1VIVO/src/model/BoletoViaje.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../2. java/9-EjerciciosIntegradoresP1VIVO/src/model/Comida.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../2. java/9-EjerciciosIntegradoresP1VIVO/src/model/Comida.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../2. java/9-EjerciciosIntegradoresP1VIVO/src/model/Hotel.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../2. java/9-EjerciciosIntegradoresP1VIVO/src/model/Hotel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../2. java/9-EjerciciosIntegradoresP1VIVO/src/model/Localizador.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../2. java/9-EjerciciosIntegradoresP1VIVO/src/model/Localizador.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../2. java/9-EjerciciosIntegradoresP1VIVO/src/model/Paquete.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../2. java/9-EjerciciosIntegradoresP1VIVO/src/model/Paquete.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../2. java/9-EjerciciosIntegradoresP1VIVO/src/model/Reservable.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../2. java/9-EjerciciosIntegradoresP1VIVO/src/model/Reservable.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../2. java/9-EjerciciosIntegradoresP1VIVO/src/model/Transporte.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../2. java/9-EjerciciosIntegradoresP1VIVO/src/model/Transporte.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../2. java/readme.md" beforeDir="false" afterPath="$PROJECT_DIR$/../../2. java/readme.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../5. covid19/src/main/java/com/DTOResponseEntityP2/covid19/repository/PersonaDTORepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/../5. covid19/src/main/java/com/DTOResponseEntityP2/covid19/repository/PersonaDTORepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../readme.md" beforeDir="false" afterPath="$PROJECT_DIR$/../readme.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../vehiculos/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../vehiculos/.mvn/wrapper/maven-wrapper.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../vehiculos/.mvn/wrapper/maven-wrapper.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../vehiculos/New Collection.postman_collection.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../vehiculos/mvnw" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../vehiculos/mvnw.cmd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../vehiculos/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../vehiculos/src/main/java/com/ejerciciosPracticosP2Vivo/vehiculos/VehiculosApplication.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../vehiculos/src/main/java/com/ejerciciosPracticosP2Vivo/vehiculos/controller/VehicleController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../vehiculos/src/main/java/com/ejerciciosPracticosP2Vivo/vehiculos/dto/VehicleDTOReq.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../vehiculos/src/main/java/com/ejerciciosPracticosP2Vivo/vehiculos/dto/VehicleDTORes.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../vehiculos/src/main/java/com/ejerciciosPracticosP2Vivo/vehiculos/entity/Service.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../vehiculos/src/main/java/com/ejerciciosPracticosP2Vivo/vehiculos/entity/Vehicle.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../vehiculos/src/main/java/com/ejerciciosPracticosP2Vivo/vehiculos/repository/IVehicleRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../vehiculos/src/main/java/com/ejerciciosPracticosP2Vivo/vehiculos/repository/VehicleRepositoryImp.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../vehiculos/src/main/java/com/ejerciciosPracticosP2Vivo/vehiculos/service/IVehicleService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../vehiculos/src/main/java/com/ejerciciosPracticosP2Vivo/vehiculos/service/VehicleServiceImp.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../vehiculos/src/main/resources/application.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../vehiculos/src/main/resources/vehicles.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../vehiculos/src/test/java/com/ejerciciosPracticosP2Vivo/vehiculos/VehiculosApplicationTests.java" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Interface" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHome" value="Use Maven wrapper" />
+        <option name="useMavenConfig" value="true" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="ProjectId" id="2Hb5kOUxEqAr16kbKCCjO2YyuTp" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "/Users/MGONCALVESCO/Documents/Repos DH/practicas-w18/3. spring/linkTracker",
+    "settings.editor.selected.configurable": "preferences.keymap",
+    "spring.configuration.checksum": "c969d4a9d927cac8c3a3ebac125f93cf"
+  }
+}]]></component>
+  <component name="RunManager">
+    <configuration default="true" type="GroovyScriptRunConfiguration" factoryName="Groovy">
+      <setting name="path" value="" />
+      <setting name="vmparams" value="" />
+      <setting name="params" value="" />
+      <setting name="workDir" value="file://$PROJECT_DIR$" />
+      <setting name="debug" value="false" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="LinkTrackerApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <option name="ACTIVE_PROFILES" />
+      <module name="linkTracker" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.RecapitulandoSpringP2VIVO.linkTracker.LinkTrackerApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <option name="ACTIVE_PROFILES" />
+      <option name="ENABLE_JMX_AGENT" value="false" />
+      <module name="linkTracker" />
+      <option name="SPRING_BOOT_MAIN_CLASS" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="0e5d335a-11e4-455e-87db-a89f1dfbf18d" name="Changes" comment="" />
+      <created>1668541085500</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1668541085500</updated>
+      <workItem from="1668541086679" duration="3609000" />
+      <workItem from="1668601745681" duration="736000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>

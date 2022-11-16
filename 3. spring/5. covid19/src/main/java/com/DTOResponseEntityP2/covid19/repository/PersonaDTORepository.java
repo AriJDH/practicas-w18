@@ -10,7 +10,7 @@ import java.util.List;
 public class PersonaDTORepository {
 	// TODO terminar
 	// Test
-	PersonaDTO personaDTO1 = new PersonaDTO("Nombre1", "Apellido1", )
+	PersonaDTO personaDTO1 = new PersonaDTO("Nombre1", "Apellido1", 35, "Sintoma1");
 	// Nuestra base de datos Peronas con sintoma (Tabla intermedia)
 	List<PersonaDTO> personasDTO = new ArrayList<>();
 }
