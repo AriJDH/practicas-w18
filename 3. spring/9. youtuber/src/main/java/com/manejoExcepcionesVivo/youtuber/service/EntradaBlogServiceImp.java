@@ -39,10 +39,11 @@ public class EntradaBlogServiceImp implements IEntradaBlogService {
 						EntradaBlogDTO.class)).collect(Collectors.toList());
 	}
 	
-	@Override // TODO pendiente de revisar porque no funciona =(
+	@Override //
 	public EntradaBlogDTO buscarPorId(Long id) {
 		Optional<EntradaBlog> entradaBlog = entradaBlogRepository.buscarPorId(id);
-		return mapper.convertValue(entradaBlog.orElseThrow(NoSuchElementException::new),
+		EntradaBlog entradaBlog1 = entradaBlog.orElseThrow(NoSuchElementException::new);
+		return mapper.convertValue(entradaBlog1,
 						EntradaBlogDTO.class);
 	}
 }

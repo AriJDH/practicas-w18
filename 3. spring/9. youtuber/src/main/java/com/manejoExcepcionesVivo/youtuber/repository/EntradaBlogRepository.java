@@ -22,7 +22,7 @@ public class EntradaBlogRepository implements IEntradaBlogRepository {
 	public EntradaBlog agregarNuevo(EntradaBlog entradaBlog) {
 		// Antes de agregar chequeamos si ya existe el Id
 		for (EntradaBlog eb : entradaBlogList) {
-			eb.getId().equals(entradaBlog.getId());
+			eb.getId().equals(entradaBlog.getId()); // TODO no funciona como se espera
 			// Si el Id existe arrojamos la excepción
 			throw new IdDuplicadoException("Id " + entradaBlog.getId() + " Duplicado");
 		}
@@ -38,10 +38,9 @@ public class EntradaBlogRepository implements IEntradaBlogRepository {
 	
 	@Override
 	public Optional<EntradaBlog> buscarPorId(Long id) {
-		return Optional.of(entradaBlogList
+		return entradaBlogList
 						.stream()
 						.filter(entrada -> entrada.getId().equals(id))
-						.findFirst()
-						.get());
+						.findFirst();
 	}
 }
