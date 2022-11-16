@@ -54,7 +54,8 @@ public class UserController {
             @RequestBody PostDTOreq postDTOreq
             ){
         // US 0005
-        return null;
+        userService.createPost(postDTOreq);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @GetMapping("/products/followed/{userId}/list")

@@ -7,6 +7,9 @@ import com.dh.be_java_hisp_w18_g10.dto.response.UserFollowersListDTOres;
 import com.dh.be_java_hisp_w18_g10.dto.response.UserPostsDTOres;
 import com.dh.be_java_hisp_w18_g10.entity.Post;
 import com.dh.be_java_hisp_w18_g10.entity.User;
+import com.dh.be_java_hisp_w18_g10.exception.ProductNotFoundException;
+import com.dh.be_java_hisp_w18_g10.exception.UserIdNullException;
+import com.dh.be_java_hisp_w18_g10.exception.UserNotFoundException;
 import com.dh.be_java_hisp_w18_g10.repository.*;
 import com.dh.be_java_hisp_w18_g10.util.DTOMapper;
 import org.springframework.stereotype.Service;
@@ -22,17 +25,6 @@ public class UserService implements IUserService {
         this.postRepository = postRepository;
     }
 
-    public void addPost(PostDTOreq postDTO){
-        //TODO implement
-        Post post = new Post();
-        int userId = postDTO.getUser_id();
-        userRepository
-                .getUser(userId)
-                .getPosts()
-                .put(userId, post);
-
-        postRepository.addPost(post);
-    }
     @Override
     public void followUser(int userId, int userIdToFollow) {
 
@@ -54,7 +46,26 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public void createPost(PostDTOreq postDTO) {
+    public void createPost(PostDTOreq postDTOreq) {
+        try {
+            int userId = postDTOreq.getUser_id();
+            int productId = postDTOreq.getProduct().getProduct_id();
+            if (userRepository.getUsers().get(userId) == null)
+                throw new UserNotFoundException("Usuario no encontrado!");
+            if (productRepository.getProductById(productId) == null)
+                throw new ProductNotFoundException("Producto no encontrado.");
+
+            Post post = DTOMapper.mapToPost(postDTOreq);
+
+            Integer postId = postRepository.addPost(post);
+            userRepository
+                    .getUser(userId)
+                    .getPosts()
+                    .put(postId, post);
+        }
+        catch (NullPointerException e) {
+             throw new UserIdNullException("Atributo null en user");
+        }
 
     }
 

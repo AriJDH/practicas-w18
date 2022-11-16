@@ -7,7 +7,7 @@ import java.util.List;
 public interface IPostRepository {
 
     Post getPostById(int id);
-    void addPost(Post post);
+    Integer addPost(Post post);
     List<Post> getPosts();
 
 }

@@ -19,9 +19,10 @@ public class PostRepository implements IPostRepository{
     }
 
     @Override
-    public void addPost(Post post) {
+    public Integer addPost(Post post) {
         posts.put(count, post);
         count++;
+        return count-1;
     }
 
     @Override
