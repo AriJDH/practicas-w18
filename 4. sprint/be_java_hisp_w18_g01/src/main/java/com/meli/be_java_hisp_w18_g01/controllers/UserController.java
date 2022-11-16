@@ -38,6 +38,6 @@ public class UserController {
 
     @GetMapping("/{userId}/followed/list")
     public ResponseEntity<UserFollowedInfoDTO> getFollowedInfo(@PathVariable long userId){
-        return ResponseEntity.ok(userService.handleGetFollowersInfo(userId));
+        return ResponseEntity.ok(userService.handleGetFollowedInfo(userId));
     }
 }
