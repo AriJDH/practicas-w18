@@ -17,5 +17,5 @@ public class Post {
     private Product product;
     private String category;
     private double price;
-    
+
 }
