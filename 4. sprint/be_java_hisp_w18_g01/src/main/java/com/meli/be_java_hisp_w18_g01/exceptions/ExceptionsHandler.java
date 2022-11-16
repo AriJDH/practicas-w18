@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 @ControllerAdvice
 public class ExceptionsHandler {
 
-    @ExceptionHandler({NotSellerException.class})
+    @ExceptionHandler({NotSellerException.class, BadRequestException.class})
     public ResponseEntity<?> handleBadRequest(Exception e){
         return ResponseEntity.badRequest().body(e.getMessage());//TODO: enviarlo en un dto
     }

@@ -6,6 +6,8 @@ import com.meli.be_java_hisp_w18_g01.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class UserDbServiceImpl implements UserDbService{
     @Autowired
@@ -16,5 +18,10 @@ public class UserDbServiceImpl implements UserDbService{
         return userRepository.findById(id).orElseThrow(()->{
             throw new UserNotFoundException("El usuario " + id + " no existe.");
         });
+    }
+
+    @Override
+    public List<User> findAll() {
+        return userRepository.findAll();
     }
 }
