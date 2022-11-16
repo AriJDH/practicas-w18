@@ -69,4 +69,26 @@ public class UserRepositoryImp implements IUserRepository{
         this.users.add(u4);
 
     }
+
+
+    @Override
+    public List<String> follow(Integer userId, Integer userIdToFollow) {
+
+        List<String> nombres = new ArrayList<>();
+
+        for (User u : this.users) {
+            if (u.getUser_id() == userId) {
+                nombres.add(u.getUser_name());
+                for (Seller s : this.sellers) {
+                    if (s.getUser_id() == userIdToFollow) {
+                        nombres.add(s.getUser_name());
+                        u.getFollowed().add(s);
+                        break;
+                    }
+                }
+                break;
+            }
+        }
+        return nombres;
+    }
 }
