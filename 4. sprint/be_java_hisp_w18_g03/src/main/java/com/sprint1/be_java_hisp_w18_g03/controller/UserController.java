@@ -2,6 +2,7 @@ package com.sprint1.be_java_hisp_w18_g03.controller;
 
 import com.sprint1.be_java_hisp_w18_g03.dto.response.FollowedDTO;
 import com.sprint1.be_java_hisp_w18_g03.dto.response.FollowerCountDTO;
+import com.sprint1.be_java_hisp_w18_g03.dto.response.FollowersDTO;
 import com.sprint1.be_java_hisp_w18_g03.dto.response.ResponseDTO;
 import com.sprint1.be_java_hisp_w18_g03.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,5 +47,9 @@ public class UserController {
     }
 
     return new ResponseEntity<>(user, HttpStatus.OK);
+  }
+  @GetMapping( "/{userId}/followers/list")
+  public ResponseEntity<FollowersDTO> getListFollowers(@PathVariable Integer userId){
+    return new ResponseEntity<>(userService.getFollowersList(userId), HttpStatus.OK);
   }
 }
