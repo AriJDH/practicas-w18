@@ -35,4 +35,6 @@ public class Post {
 
     private Double discount;
 
+    public Post(Integer userId, LocalDate date, Product product, Integer category, Double price) {
+    }
 }
