@@ -23,6 +23,10 @@ public class UserServiceImp implements IUserService {
   public FollowerCountDTO followerCount(Integer userId) {
     User user = iUserRepository.findById(userId);
 
+    if (user == null) {
+      return null;
+    }
+
     return new FollowerCountDTO(
       user.getUserId(),
       user.getUserName(),
