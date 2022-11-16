@@ -11,9 +11,22 @@ import java.util.List;
 @NoArgsConstructor
 public class UserFollowersListDTOres {
     //TODO: REQUIRE - US 0003 - GET: /users/{userId}/followers/list
+    // US 0008
 
     private int user_id;
     private String user_name;
-    private List<FollowerDTOres> followers;
+    private List<UserDTOres> followers;
 
 }
+
+// JSON REPRESENTATION
+// {
+//  "user_id": 0,
+//  "user_name": "",
+//  "followers": [
+//    {
+//      "user_id": 0,
+//      "user_name": ""
+//    }
+//  ]
+//}

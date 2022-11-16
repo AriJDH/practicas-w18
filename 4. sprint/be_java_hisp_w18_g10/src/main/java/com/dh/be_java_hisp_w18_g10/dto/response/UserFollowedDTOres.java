@@ -11,9 +11,21 @@ import java.util.List;
 @AllArgsConstructor
 public class UserFollowedDTOres {
     //TODO: REQUIRE - US 0004 - GET: /users/{userId}/followed/list
-
+    // US 0008
     private int user_id;
     private String user_name;
-    private List<FollowedDTOres> followed;
+    private List<UserDTOres> followed;
 
 }
+
+// JSON REPRESENTATION:
+// {
+//  "user_id": 0,
+//  "user_name": "",
+//  "followed": [
+//    {
+//      "user_id": 0,
+//      "user_name": ""
+//    }
+//  ]
+//}

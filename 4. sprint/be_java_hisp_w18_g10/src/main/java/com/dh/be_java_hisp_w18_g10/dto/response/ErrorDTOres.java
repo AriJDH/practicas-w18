@@ -7,7 +7,13 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class FollowerDTOres {
-    private int user_id;
-    private String user_name;
+public class ErrorDTOres {
+    private String message;
+    private int code;
 }
+
+// JSON REPRESENTATION
+// {
+//  "message": "",
+//  "code": 0
+//}
