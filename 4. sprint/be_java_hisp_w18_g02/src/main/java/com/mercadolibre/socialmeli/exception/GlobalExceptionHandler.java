@@ -13,7 +13,13 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(NotFoundException.class)
     public ResponseEntity<?> noEncontrado(NotFoundException e){
-        ErrorDto eDto = new ErrorDto(e.getMessage(), 404);
-        return new ResponseEntity<>(eDto, HttpStatus.valueOf(404));
+        ErrorDto eDto = new ErrorDto(e.getMessage(), 400);
+        return new ResponseEntity<>(eDto, HttpStatus.valueOf(400));
+    }
+
+    @ExceptionHandler(IllegalArgumentException.class)
+    public ResponseEntity<?> IllegalArgument(IllegalArgumentException e){
+        ErrorDto eDto = new ErrorDto(e.getMessage(), 400);
+        return new ResponseEntity<>(eDto, HttpStatus.valueOf(400));
     }
 }
