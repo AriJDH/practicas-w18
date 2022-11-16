@@ -70,4 +70,8 @@ public class User {
         this.posts.add(post);
     }
 
+    public int getFollowersCount(){
+        return this.followers.size();
+    }
+
 }

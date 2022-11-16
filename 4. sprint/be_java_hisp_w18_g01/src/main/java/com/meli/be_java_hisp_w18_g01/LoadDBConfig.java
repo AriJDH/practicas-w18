@@ -31,10 +31,6 @@ public class LoadDBConfig {
             User miguel = new User(2L, "miguel");
             userRepository.add(miguel);
 
-
-
-            //userRepository.add(user); y asi vamos agregando datos mock a la db en memoria
-
         };
     }
 }
