@@ -7,7 +7,7 @@ import java.util.Optional;
 
 @Repository
 public class UserRepository extends ListRepository<User>{
-    public Optional<User> findById(User user) {
-        return super.list.stream().filter(e->e.getUser_id()==user.getUser_id()).findFirst();
+    public Optional<User> findById(long id) {
+        return super.list.stream().filter(e->e.getUser_id()==id).findFirst();
     }
 }
