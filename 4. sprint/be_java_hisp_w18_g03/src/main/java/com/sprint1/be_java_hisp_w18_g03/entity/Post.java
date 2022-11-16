@@ -21,4 +21,5 @@ public class Post {
         this.hasPromo = false;
         this.discount = 0d ;
     }
+
 }
