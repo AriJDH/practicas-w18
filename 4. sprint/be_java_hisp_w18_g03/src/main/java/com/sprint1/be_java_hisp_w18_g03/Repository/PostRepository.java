@@ -19,6 +19,14 @@ public class PostRepository implements IPostRepository {
         return Posts;
     }
 
-    public void addPost(Post post) {
+    public boolean addPost(Post post) {
+        Posts.add(post);
+
+
+        return true;
+    }
+
+    public Integer getPostsSizeList() {
+        return Posts.size();
     }
 }
