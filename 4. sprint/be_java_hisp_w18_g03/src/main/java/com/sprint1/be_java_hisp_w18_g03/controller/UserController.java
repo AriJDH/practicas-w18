@@ -6,10 +6,7 @@ import com.sprint1.be_java_hisp_w18_g03.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/users")
@@ -38,5 +35,13 @@ public class UserController {
     }
 
     return new ResponseEntity<>(user, HttpStatus.OK);
+  }
+
+
+  @PostMapping("/{userId}/unfollow/{userIdToUnfollow}")
+  public ResponseEntity<?> unfollow(@PathVariable Integer userId,@PathVariable Integer userIdToUnfollow){
+
+
+    return new ResponseEntity<?>();
   }
 }

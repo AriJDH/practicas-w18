@@ -63,7 +63,15 @@ public class UserRepository implements IUserRepository {
     return users;
   }
 
-  public void removeFollower(int idUser, int idFollower) {}
+  public void removeFollower(int idUser, int idFollower) {
+
+    User user = findById(idUser);
+    if(user == null){
+
+    }
+    user.getListFollowers().removeIf(u -> u.getUserId().equals(idFollower));
+
+  }
 
   public void addFollower(int idUser, int idFollower) {}
 
