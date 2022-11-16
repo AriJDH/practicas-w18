@@ -34,19 +34,21 @@ public class UserRepository implements IUserRepository {
     userList.add(Juan_Pablo);
     userList.add(Dizzi);
 
+    List<User> userListFollowed = new ArrayList<>();
+
+    userListFollowed.add(Gabriela);
+    userListFollowed.add(Juan_Pablo);
+    userListFollowed.add(Dizzi);
+
     User Julian = new User(4, "Julian", new ArrayList<>(), new ArrayList<>());
     User Jhonier = new User(5, "Jhonier", new ArrayList<>(), new ArrayList<>());
-    User Angel = new User(6, "Angel", new ArrayList<>(), userList);
+    User Angel = new User(6, "Angel", userListFollowed, userList);
     users.add(Gabriela);
     users.add(Dizzi);
     users.add(Juan_Pablo);
     users.add(Julian);
     users.add(Jhonier);
     users.add(Angel);
-  }
-
-  public User findById(int userid) {
-    return users.get(userid);
   }
 
   public User findById(Integer userid) {
