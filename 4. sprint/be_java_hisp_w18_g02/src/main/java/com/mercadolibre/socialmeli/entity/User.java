@@ -17,7 +17,7 @@ public class User {
     private Set<User> followed;
 
     public boolean isSeller(){
-        return !this.posts.isEmpty();
+        return (this.posts!=null && !this.posts.isEmpty());
     }
 
 }

@@ -2,8 +2,10 @@ package com.mercadolibre.socialmeli.repository;
 
 import com.mercadolibre.socialmeli.entity.Post;
 import com.mercadolibre.socialmeli.entity.User;
+import com.mercadolibre.socialmeli.exception.NotFoundException;
 import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -20,7 +22,10 @@ public class UserRepository implements IUserRepository{
 
     @Override
     public User findById(Integer id) {
-        return null;
+
+        if(!users.containsKey(id)) throw new NotFoundException("No encontre el usuario requerido");
+
+            return users.get(id);
     }
 
     @Override
@@ -45,6 +50,15 @@ public class UserRepository implements IUserRepository{
 
     @Override
     public void createPost(Integer userId, Post newPost) {
+        User user = findById(userId);
+        if (user.getPosts()==null){
+            user.setPosts(new ArrayList<Post>());
+        }
+        user.getPosts().add(newPost);
+    }
 
+    @Override
+    public Integer getNextPostId() {
+        return nextPostId++;
     }
 }

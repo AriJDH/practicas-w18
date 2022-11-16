@@ -16,4 +16,9 @@ public class GlobalExceptionHandler {
         ErrorDto eDto = new ErrorDto(e.getMessage(), 404);
         return new ResponseEntity<>(eDto, HttpStatus.valueOf(404));
     }
+    @ExceptionHandler(BadRequestException.class)
+    public ResponseEntity<?> badRequest(BadRequestException e){
+        ErrorDto eDto = new ErrorDto(e.getMessage(), 400);
+        return new ResponseEntity<>(eDto, HttpStatus.valueOf(eDto.getStatus()));
+    }
 }

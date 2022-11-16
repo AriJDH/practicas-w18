@@ -14,5 +14,6 @@ public interface IUserRepository {
     void follow(Integer idFollower, Integer idFollow);
     void unfollow(Integer idFollower, Integer idFollow);
     void createPost(Integer userId, Post newPost);
+    Integer getNextPostId();
     //List<Post> getRecentPost(Integer sellerId);
 }
