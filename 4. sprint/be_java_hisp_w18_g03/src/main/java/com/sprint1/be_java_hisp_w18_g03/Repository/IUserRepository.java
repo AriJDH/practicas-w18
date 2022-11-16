@@ -11,7 +11,7 @@ public interface IUserRepository {
 
     void removeFollower(int idUser, int idFollower);
 
-    void addFollower(int idUser, int idFollower);
+    boolean addFollower(int idUser, int idUserToFollow);
 
     void removeFollowed(int idUser, int idFollowed);
 

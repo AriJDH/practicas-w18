@@ -1,13 +1,16 @@
 package com.sprint1.be_java_hisp_w18_g03.Repository;
 
 import com.sprint1.be_java_hisp_w18_g03.entity.User;
+import com.sprint1.be_java_hisp_w18_g03.exception.NoFoundUserException;
+import org.springframework.stereotype.Repository;
+
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.stereotype.Repository;
 
 @Repository
 public class UserRepository implements IUserRepository {
-  private List<User> users = new ArrayList<User>();
+  private List<User> users = new ArrayList<>();
 
   public UserRepository() {
     addUsers();
@@ -59,23 +62,29 @@ public class UserRepository implements IUserRepository {
       .orElse(null);
   }
 
-  public List<User> selectAll() {
-    return users;
-  }
-
-  public void removeFollower(int idUser, int idFollower) {
-
-    User user = findById(idUser);
-    if(user == null){
-
+    public List<User> selectAll() {
+        return users;
     }
-    user.getListFollowers().removeIf(u -> u.getUserId().equals(idFollower));
+    public void removeFollower(int idUser, int idFollower) {
+    }
+    public boolean addFollower(int idUser, int idUserToFollow) {
+        // Se obtienen los usuarios con el metodo findByID
+        User user = findById(idUser);
+        User userToFollow = findById(idUserToFollow);
 
-  }
+        if(user == null || userToFollow == null) {
+            return false;
+        }
 
-  public void addFollower(int idUser, int idFollower) {}
+        // Se agrega en la lista de seguidos del usuario
+        user.getListFollowed().add(userToFollow);
+        // Se agrega en la lista de seguidores del usuario a seguir.
+        userToFollow.getListFollowers().add(user);
 
-  public void removeFollowed(int idUser, int idFollowed) {}
+        return true;
+    }
 
-  public void addFollowed(int idUser, int idFollowed) {}
+    public void removeFollowed(int idUser, int idFollowed) {}
+
+    public void addFollowed(int idUser, int idFollowed) {}
 }
