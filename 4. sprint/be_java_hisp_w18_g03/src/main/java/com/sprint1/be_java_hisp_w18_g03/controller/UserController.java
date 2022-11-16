@@ -42,6 +42,7 @@ public class UserController {
   public ResponseEntity<?> unfollow(@PathVariable Integer userId,@PathVariable Integer userIdToUnfollow){
 
 
-    return new ResponseEntity<?>();
+    //return new ResponseEntity<>();
+    return null;
   }
 }
