@@ -4,6 +4,7 @@ import com.dh.be_java_hisp_w18_g10.dto.require.PostDTOreq;
 import com.dh.be_java_hisp_w18_g10.service.IUserService;
 import com.dh.be_java_hisp_w18_g10.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -65,13 +66,15 @@ public class UserController {
         return null;
     }
 
-    @GetMapping("/users/{userId}/unfollow/{userIdToUnfollow}")
-    public ResponseEntity<?> getUserFollowedList(
+    @PostMapping("/users/{userId}/unfollow/{userIdToUnfollow}")
+    public ResponseEntity<String> unfollowedUserById(
             @PathVariable int userId,
             @PathVariable int userIdToUnfollow
     ){
         // US 0007
-        return null;
+        userService.unfollowUser(userId, userIdToUnfollow);
+
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
 

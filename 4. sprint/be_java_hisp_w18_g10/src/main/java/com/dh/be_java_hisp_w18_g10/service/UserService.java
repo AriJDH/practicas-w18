@@ -65,6 +65,7 @@ public class UserService implements IUserService {
 
     @Override
     public void unfollowUser(int userId, int userIdToUnfollow) {
+        userRepository.getUser(userId).getFollowed().remove(userIdToUnfollow);
     }
 
 
