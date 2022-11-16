@@ -25,19 +25,18 @@ public class UserController {
     if (user == null) {
       return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
     }
-    return new ResponseEntity<>(
-      userService.followerCount(userId),
-      HttpStatus.OK
-    );
+    return new ResponseEntity<>(user, HttpStatus.OK);
   }
 
   @GetMapping("/{userId}/followed/list")
   public ResponseEntity<FollowedDTO> getFollowedList(
     @PathVariable Integer userId
   ) {
-    return new ResponseEntity<>(
-      userService.getFollowedList(userId),
-      HttpStatus.OK
-    );
+    var user = userService.getFollowedList(userId);
+    if (user == null) {
+      return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+    }
+
+    return new ResponseEntity<>(user, HttpStatus.OK);
   }
 }
