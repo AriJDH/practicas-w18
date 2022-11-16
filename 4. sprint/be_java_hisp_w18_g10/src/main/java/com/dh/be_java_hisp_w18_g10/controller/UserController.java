@@ -74,12 +74,6 @@ public class UserController {
         return null;
     }
 
-    @GetMapping("/users/{UserID}/followers/list")
-    public ResponseEntity<?> getUserFollowersList(
-            @RequestParam
-    ){
-
-    }
 
 
 
