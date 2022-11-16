@@ -30,9 +30,10 @@ public class UserRepository implements IUserRepository {
         users.add(Angel);
     }
 
-    public User findById(int userid) {
-        return users.get(userid);
+    public User findById(Integer userid) {
+        return users.stream().filter(x -> x.getUserId().equals(userid)).findAny().orElse(null);
     }
+
     public List<User> selectAll() {
         return users;
     }
