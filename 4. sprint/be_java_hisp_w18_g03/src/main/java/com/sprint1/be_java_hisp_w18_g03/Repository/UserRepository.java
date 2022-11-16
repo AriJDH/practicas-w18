@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public class UserRepository implements IUserRepository {
-  private List<User> users = new ArrayList<User>();
+  private List<User> users = new ArrayList<>();
 
   public UserRepository() {
     addUsers();
@@ -83,7 +83,8 @@ public class UserRepository implements IUserRepository {
 
         return true;
     }
-    public void removeFollowed(int idUser, int idFollowed) {
 
-  public void addFollowed(int idUser, int idFollowed) {}
+    public void removeFollowed(int idUser, int idFollowed) {}
+
+    public void addFollowed(int idUser, int idFollowed) {}
 }
