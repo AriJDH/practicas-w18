@@ -6,15 +6,15 @@ import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
+import org.springframework.stereotype.Repository;
 
 @Repository
 public class UserRepository implements IUserRepository {
+  private List<User> users = new ArrayList<User>();
 
-    private List<User> users = new ArrayList<User>();
-
-    public UserRepository() {
-        addUsers();
-    }
+  public UserRepository() {
+    addUsers();
+  }
 
     private void addUsers() {
         User Gabriela = new User(1,"Gabriela",new ArrayList<>(),new ArrayList<>());
@@ -31,9 +31,17 @@ public class UserRepository implements IUserRepository {
         users.add(Angel);
     }
 
-    public User findById(Integer userid) {
-        return users.stream().filter(x -> x.getUserId().equals(userid)).findAny().orElse(null);
-    }
+  public User findById(int userid) {
+    return users.get(userid);
+  }
+
+  public User findById(Integer userid) {
+    return users
+      .stream()
+      .filter(x -> x.getUserId().equals(userid))
+      .findAny()
+      .orElse(null);
+  }
 
     public List<User> selectAll() {
         return users;
@@ -58,8 +66,5 @@ public class UserRepository implements IUserRepository {
     }
     public void removeFollowed(int idUser, int idFollowed) {
 
-    }
-    public void addFollowed(int idUser, int idFollowed) {
-
-    }
+  public void addFollowed(int idUser, int idFollowed) {}
 }
