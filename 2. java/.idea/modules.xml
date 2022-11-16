@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/2. java.iml" filepath="$PROJECT_DIR$/.idea/2. java.iml" />
+      <module fileurl="file://$PROJECT_DIR$/carrera/carrera.iml" filepath="$PROJECT_DIR$/carrera/carrera.iml" />
+      <module fileurl="file://$PROJECT_DIR$/crearclases/crearclases.iml" filepath="$PROJECT_DIR$/crearclases/crearclases.iml" />
+      <module fileurl="file://$PROJECT_DIR$/liveCoding/liveCoding.iml" filepath="$PROJECT_DIR$/liveCoding/liveCoding.iml" />
+      <module fileurl="file://$PROJECT_DIR$/untitled/untitled.iml" filepath="$PROJECT_DIR$/untitled/untitled.iml" />
+    </modules>
+  </component>
+</project>
