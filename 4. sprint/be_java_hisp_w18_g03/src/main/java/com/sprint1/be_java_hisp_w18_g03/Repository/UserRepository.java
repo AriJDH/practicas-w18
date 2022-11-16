@@ -9,7 +9,6 @@ import java.util.List;
 @Repository
 public class UserRepository implements IUserRepository {
     private List<User> users = new ArrayList<User>();
-
     private void addUsers() {
         User Gabriela = new User(1,"Gabriela",new ArrayList<>(),new ArrayList<>());
         User Dizzi = new User(2,"Dizzi",new ArrayList<>(),new ArrayList<>());
@@ -24,15 +23,12 @@ public class UserRepository implements IUserRepository {
         users.add(Jhonier);
         users.add(Angel);
     }
-
     public User findById(int userid) {
         return users.get(userid);
     }
-
     public List<User> selectAll() {
         return users;
     }
-
     public void removeFollower(int idUser, int idFollower) {
 
     }
