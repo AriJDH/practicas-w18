@@ -1,6 +1,7 @@
 package com.sprint1.be_java_hisp_w18_g03.Repository;
 
 import com.sprint1.be_java_hisp_w18_g03.entity.User;
+import com.sprint1.be_java_hisp_w18_g03.exception.NoFoundUserException;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
@@ -37,10 +38,15 @@ public class UserRepository implements IUserRepository {
         return users;
     }
     public void removeFollower(int idUser, int idFollower) {
-
     }
     public void addFollower(int idUser, int idFollower) {
+        User userFollower = users.stream().filter(u -> u.getUserId().equals(idFollower)).findFirst().get();
+        User userToFollow = users.stream().filter(u -> u.getUserId().equals(idUser)).findFirst().get();
 
+        if(userToFollow == null || userFollower == null){
+            throw new NoFoundUserException("User id not found");
+        }
+        userToFollow.getListFollowers().add(userFollower);
     }
     public void removeFollowed(int idUser, int idFollowed) {
 
