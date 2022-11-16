@@ -7,16 +7,15 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 @Repository
-public class UserRepository implements IUserRepository {
+public class UserRepository implements IUserRepository{
 
     private Map<Integer, User> users = new HashMap<Integer, User>();
     private Integer count = 0;
-
     public UserRepository() {
         loadUsers();
     }
 
-    private void loadUsers() {
+    private void loadUsers(){
         users.put(count, new User());
         count++;
     }
