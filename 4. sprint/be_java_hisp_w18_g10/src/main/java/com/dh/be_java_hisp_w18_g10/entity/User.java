@@ -19,8 +19,8 @@ public class User {
     @JsonProperty("user_name")
     private String userName;
 
-    private Map<Integer, User> followers = new HashMap<Integer, User>();
-    private Map<Integer, User> follow = new HashMap<Integer, User>();
-    private Map<Integer, Post> posts = new HashMap<Integer, Post>();
+    private Map<Integer, User> followers = new HashMap<>();
+    private Map<Integer, User> follow = new HashMap<>();
+    private Map<Integer, Post> posts = new HashMap<>();
 
 }

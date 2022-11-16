@@ -45,7 +45,7 @@ public class UserService implements IUserService {
 
     @Override
     public UserFollowersListDTOres getUserFollowerList(int userId) {
-        return null;
+       return DTOMapper.mapToUserFollowersRes(userRepository.getUserFollowers(userId));
     }
 
     @Override
