@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Repository
-public class PostRepository extends IpostRepository {
+public class PostRepository implements IPostRepository {
     private List<Post> Posts = new ArrayList<Post>();
 
     public Post findByIdPost(int postId) {
