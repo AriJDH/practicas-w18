@@ -12,4 +12,10 @@ import java.util.List;
 public class Seller extends User{
     private List<Post> posts;
     private List<User> followers;
+
+    public Seller(Integer user_id, String user_name, List<Seller> followed, List<Post> posts, List<User> followers) {
+        super(user_id, user_name, followed);
+        this.posts = posts;
+        this.followers = followers;
+    }
 }
