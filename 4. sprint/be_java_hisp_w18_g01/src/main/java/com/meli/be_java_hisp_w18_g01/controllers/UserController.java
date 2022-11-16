@@ -1,5 +1,6 @@
 package com.meli.be_java_hisp_w18_g01.controllers;
 
+import com.meli.be_java_hisp_w18_g01.dtos.UserFollowedInfoDTO;
 import com.meli.be_java_hisp_w18_g01.dtos.UserFollowersCountDTO;
 import com.meli.be_java_hisp_w18_g01.dtos.UserFollowersInfoDTO;
 import com.meli.be_java_hisp_w18_g01.services.UserService;
@@ -32,6 +33,11 @@ public class UserController {
 
     @GetMapping("/{userId}/followers/list")
     public ResponseEntity<UserFollowersInfoDTO> getFollowersInfo(@PathVariable long userId){
+        return ResponseEntity.ok(userService.handleGetFollowersInfo(userId));
+    }
+
+    @GetMapping("/{userId}/followed/list")
+    public ResponseEntity<UserFollowedInfoDTO> getFollowedInfo(@PathVariable long userId){
         return ResponseEntity.ok(userService.handleGetFollowersInfo(userId));
     }
 }

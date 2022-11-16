@@ -1,6 +1,7 @@
 package com.meli.be_java_hisp_w18_g01.services;
 
 import com.meli.be_java_hisp_w18_g01.dtos.UserDTO;
+import com.meli.be_java_hisp_w18_g01.dtos.UserFollowedInfoDTO;
 import com.meli.be_java_hisp_w18_g01.dtos.UserFollowersCountDTO;
 import com.meli.be_java_hisp_w18_g01.dtos.UserFollowersInfoDTO;
 import com.meli.be_java_hisp_w18_g01.entities.User;
@@ -39,6 +40,14 @@ public class UserServiceImpl implements UserService {
         User user = userDbService.findById(userId);
         return new UserFollowersInfoDTO(user.getUser_id(), user.getUser_name(),
                 user.getFollowers().stream().map(u->new UserDTO(u.getUser_id(), u.getUser_name()))
+                        .collect(Collectors.toList()));
+    }
+
+    @Override
+    public UserFollowedInfoDTO handleGetFollowedInfo(long userId) {
+        User user = userDbService.findById(userId);
+        return new UserFollowedInfoDTO(user.getUser_id(), user.getUser_name(),
+                user.getFollowed().stream().map(u->new UserDTO(u.getUser_id(), u.getUser_name()))
                         .collect(Collectors.toList()));
     }
 }
