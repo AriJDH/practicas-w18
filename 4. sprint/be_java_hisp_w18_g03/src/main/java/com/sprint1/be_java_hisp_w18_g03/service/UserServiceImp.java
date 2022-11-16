@@ -6,6 +6,7 @@ import com.sprint1.be_java_hisp_w18_g03.dto.response.FollowedDTO;
 import com.sprint1.be_java_hisp_w18_g03.dto.response.FollowerCountDTO;
 import com.sprint1.be_java_hisp_w18_g03.dto.response.FollowersDTO;
 import com.sprint1.be_java_hisp_w18_g03.dto.response.ResponseDTO;
+import com.sprint1.be_java_hisp_w18_g03.exception.NoFoundUserException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,8 +17,11 @@ public class UserServiceImp implements IUserService{
     private IUserRepository iUserRepository;
 
     @Override
-    public ResponseDTO follow(Integer userId, Integer followId) {
-        return null;
+    public ResponseDTO follow(Integer userId, Integer userIdToFollow) {
+        if(!iUserRepository.addFollower(userId,userIdToFollow)){
+           throw new NoFoundUserException("Bad Request");
+        }
+        return new ResponseDTO("All ok", 200);
     }
 
     @Override

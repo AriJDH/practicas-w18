@@ -22,7 +22,7 @@ public class UserRepository implements IUserRepository {
         User Juan_Pablo = new User(3,"Juan_Pablo",new ArrayList<>(),new ArrayList<>());
         User Julian = new User(4,"Julian",new ArrayList<>(),new ArrayList<>());
         User Jhonier = new User(5,"Jhonier",new ArrayList<>(),new ArrayList<>());
-        User Angel = new User(5,"Angel",new ArrayList<>(),new ArrayList<>());
+        User Angel = new User(6,"Angel",new ArrayList<>(),new ArrayList<>());
         users.add(Gabriela);
         users.add(Dizzi);
         users.add(Juan_Pablo);
@@ -40,14 +40,21 @@ public class UserRepository implements IUserRepository {
     }
     public void removeFollower(int idUser, int idFollower) {
     }
-    public void addFollower(int idUser, int idFollower) {
-        User userFollower = users.stream().filter(u -> u.getUserId().equals(idFollower)).findFirst().get();
-        User userToFollow = users.stream().filter(u -> u.getUserId().equals(idUser)).findFirst().get();
+    public boolean addFollower(int idUser, int idUserToFollow) {
+        // Se obtienen los usuarios con el metodo findByID
+        User user = findById(idUser);
+        User userToFollow = findById(idUserToFollow);
 
-        if(userToFollow == null || userFollower == null){
-            throw new NoFoundUserException("User id not found");
+        if(user == null || userToFollow == null) {
+            return false;
         }
-        userToFollow.getListFollowers().add(userFollower);
+
+        // Se agrega en la lista de seguidos del usuario
+        user.getListFollowed().add(userToFollow);
+        // Se agrega en la lista de seguidores del usuario a seguir.
+        userToFollow.getListFollowers().add(user);
+
+        return true;
     }
     public void removeFollowed(int idUser, int idFollowed) {
 
