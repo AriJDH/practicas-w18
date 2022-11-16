@@ -19,6 +19,8 @@ public class PostServiceImp implements IPostService {
     @Override
     public ResponseDTO createPost(RequestPostDTO request) {
         Integer sizeList = iPostRepository.getPostsSizeList() + 1;
+        var category = iCategoryRepository.findCategoryById(request.getCategory());
+        if (category == null) return null;;
         Post newPost = new Post(
                 sizeList,
                 request.getProduct().getProductName(),
@@ -26,17 +28,13 @@ public class PostServiceImp implements IPostService {
                 request.getProduct().getBrand(),
                 request.getProduct().getColor(),
                 request.getProduct().getNotes(),
-                iCategoryRepository.findCategoryById(request.getCategory()),
+                category,
                 request.getPrice(),
                 request.getProduct().getHasPromo(),
                 request.getProduct().getDiscount()
         );
-
         boolean responseAdd = iPostRepository.addPost(newPost);
-        if (responseAdd == false) {
-            return new ResponseDTO("Error al agregar el post", 400);
-        }
-
+        if (responseAdd == false) return null;
         return new ResponseDTO("Post agregado correctamente", 200);
     }
 
