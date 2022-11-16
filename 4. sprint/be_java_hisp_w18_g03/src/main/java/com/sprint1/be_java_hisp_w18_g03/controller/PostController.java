@@ -22,7 +22,7 @@ public class PostController {
     public ResponseEntity<ResponseDTO> createPost(@RequestBody RequestPostDTO requestPostDTO) {
         var response = postService.createPost(requestPostDTO);
         if (response==null)
-            return new ResponseEntity<>(new ResponseDTO("Error creado post.",200),HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(new ResponseDTO("Error creado post.",400),HttpStatus.BAD_REQUEST);
         return new ResponseEntity<>(response,HttpStatus.OK);
     }
 }

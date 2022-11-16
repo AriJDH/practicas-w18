@@ -21,9 +21,7 @@ public class UserController {
     private IUserService userService;
 
     @GetMapping("/{userId}/followers/count")
-    public ResponseEntity<FollowerCountDTO> followerCount(
-            @PathVariable Integer userId
-    ) {
+    public ResponseEntity<FollowerCountDTO> followerCount(@PathVariable Integer userId) {
         var user = userService.followerCount(userId);
         if (user == null) {
             return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
@@ -37,34 +35,28 @@ public class UserController {
     }
 
     @GetMapping("/{userId}/followed/list")
-    public ResponseEntity<FollowedDTO> getFollowedList(
-            @PathVariable Integer userId
-    ) {
+    public ResponseEntity<FollowedDTO> getFollowedList(@PathVariable Integer userId) {
         var user = userService.getFollowedList(userId);
         if (user == null) {
             return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
         }
-
         return new ResponseEntity<>(user, HttpStatus.OK);
     }
 
-    return new ResponseEntity<>(user, HttpStatus.OK);
-  }
+    @PostMapping("/{userId}/unfollow/{userIdToUnfollow}")
+    public ResponseEntity<?> unfollow(@PathVariable Integer userId, @PathVariable Integer userIdToUnfollow) {
+        //return new ResponseEntity<>();
+        return null;
+    }
 
-
-  @PostMapping("/{userId}/unfollow/{userIdToUnfollow}")
-  public ResponseEntity<?> unfollow(@PathVariable Integer userId,@PathVariable Integer userIdToUnfollow){
-
-
-    //return new ResponseEntity<>();
-    return null;
-  }
-  @GetMapping( "/{userId}/followers/list")
-  public ResponseEntity<FollowersDTO> getListFollowers(@PathVariable Integer userId){
-    return new ResponseEntity<>(userService.getFollowersList(userId), HttpStatus.OK);
-  }
     @GetMapping("/{userId}/followers/list")
     public ResponseEntity<FollowersDTO> getListFollowers(@PathVariable Integer userId) {
         return new ResponseEntity<>(userService.getFollowersList(userId), HttpStatus.OK);
     }
+
+    @GetMapping("/{userId}/followers/list")
+    public ResponseEntity<FollowersDTO> getListFollowers(@PathVariable Integer userId) {
+        return new ResponseEntity<>(userService.getFollowersList(userId), HttpStatus.OK);
+    }
+
 }
