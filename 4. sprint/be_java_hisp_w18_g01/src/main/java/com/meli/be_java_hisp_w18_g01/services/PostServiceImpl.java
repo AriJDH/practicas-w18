@@ -1,11 +1,11 @@
 package com.meli.be_java_hisp_w18_g01.services;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.meli.be_java_hisp_w18_g01.comparators.LocalDateComparatorAsc;
 import com.meli.be_java_hisp_w18_g01.comparators.LocalDateComparatorDesc;
-import com.meli.be_java_hisp_w18_g01.dtos.PostDTO;
-import com.meli.be_java_hisp_w18_g01.dtos.ProductDTO;
-import com.meli.be_java_hisp_w18_g01.dtos.ResponseDTO;
-import com.meli.be_java_hisp_w18_g01.dtos.SellerDTO;
+import com.meli.be_java_hisp_w18_g01.comparators.StringComparatorAsc;
+import com.meli.be_java_hisp_w18_g01.comparators.StringComparatorDesc;
+import com.meli.be_java_hisp_w18_g01.dtos.*;
 import com.meli.be_java_hisp_w18_g01.entities.Post;
 import com.meli.be_java_hisp_w18_g01.entities.Product;
 import com.meli.be_java_hisp_w18_g01.entities.User;
@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -51,7 +52,7 @@ public class PostServiceImpl implements PostService{
     }
 
     @Override
-    public List<SellerDTO> getRecentPostsFromFollowed(long userId) {
+    public List<SellerDTO> getRecentPostsFromFollowed(long userId, String order) {
         User user = userDbService.findById(userId);
         List<User> sellers = user.getFollowed().stream()
                 .filter(seller->seller.getPosts().stream().anyMatch(post->post.isRecent()))
@@ -60,14 +61,36 @@ public class PostServiceImpl implements PostService{
 
         LocalDate.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
 
-        return sellers.stream().map(seller-> new SellerDTO(seller.getUser_id(),
-                seller.getPosts().stream().filter(post-> post.isRecent())
-                        .sorted((post1, post2)->localDateComparatorDesc.compare(post1.getDate(),post2.getDate()))
-                        .map(post->new PostDTO(post.getUser().getUser_id(),post.getDate().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")).toString(),
-                                mapper.convertValue(post.getProduct(), ProductDTO.class)
-                                , post.getCategory(), post.getPrice())).collect(Collectors.toList())))
+        return sellers.stream().map(seller->{
+            List<Post> sortedPosts = this.sortPosts(seller.getPosts().stream().filter(post-> post.isRecent()).collect(Collectors.toList()),order );
+
+            return new SellerDTO(seller.getUser_id(),
+                sortedPosts.stream().map(post->{
+                    String date = post.getDate().format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+                    ProductDTO productDTO =  mapper.convertValue(post.getProduct(), ProductDTO.class);
+
+                    return new PostDTO(post.getUser().getUser_id(),date,
+                                productDTO, post.getCategory(), post.getPrice());})
+                        .collect(Collectors.toList()));})
                 .collect(Collectors.toList());
 
     }
 
+    public List<Post> sortPosts(List<Post> posts, String order){
+        Comparator comp;
+        if(order==null)
+            return posts;
+        switch(order){
+            case "date_asc":
+                comp = new LocalDateComparatorAsc();
+                break;
+            case "date_desc":
+                comp = new LocalDateComparatorDesc();
+                break;
+            default:
+                throw new BadRequestException("El parámetro " + order + " es inválido.");
+        }
+        posts.sort((p1,p2)->comp.compare(p1.getDate(), p2.getDate()));
+        return posts;
+    }
 }

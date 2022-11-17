@@ -22,5 +22,4 @@ public class Post {
         long weeksBetween = ChronoUnit.WEEKS.between(date, LocalDate.now());
        return weeksBetween>=0 && weeksBetween<3;
     }
-
 }
