@@ -4,6 +4,7 @@ import com.socialmedia.be_java_hisp_w18_g08.dto.FollowedDTO;
 import com.socialmedia.be_java_hisp_w18_g08.dto.SellerDTO;
 import com.socialmedia.be_java_hisp_w18_g08.entity.Seller;
 import com.socialmedia.be_java_hisp_w18_g08.entity.User;
+import com.socialmedia.be_java_hisp_w18_g08.exception.NotFoundUserException;
 import com.socialmedia.be_java_hisp_w18_g08.repository.IUserRepository;
 import com.socialmedia.be_java_hisp_w18_g08.repository.UserRepositoryImp;
 import org.springframework.stereotype.Service;
@@ -39,4 +40,12 @@ public class UserServiceImp implements IUserService{
         }
         return sellers;
     }
+
+    public List<Seller> getFollowedByUserId(Integer userId){
+      List<Seller> lista = userRepository.getUserByID(userId).getFollowed();
+      if(lista.isEmpty())
+          throw new NotFoundUserException("Not found User with id : " + userId );
+      return  lista;
+    }
+
 }
