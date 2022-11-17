@@ -142,6 +142,30 @@ public class UserService implements IUserService {
         }
     }
 
+    @Override
+    public SellerPromoPostsDtoRes getPromoPostsFromSeller(Integer id) {
+        User user = userRepository.findById(id);
+
+        List<PromoPostDtoRes> promoPostDtoRes = userRepository.getPostsFromSeller(id).stream()
+                .filter(p -> p.isHasPromo())
+                .map(p -> new PromoPostDtoRes(id,
+                        p.getId(),
+                        p.getDate(),
+                        new ProductDto(p.getProduct().getId(),
+                                p.getProduct().getName(),
+                                p.getProduct().getType(),
+                                p.getProduct().getBrand(),
+                                p.getProduct().getColor(),
+                                p.getProduct().getNotes()),
+                        p.getCategory(),
+                        p.getPrice(),
+                        p.isHasPromo(),
+                        p.getDiscount()))
+                .collect(Collectors.toList());
+
+        return new SellerPromoPostsDtoRes(id, user.getName(), promoPostDtoRes);
+    }
+
     private void addPost(PromoPostDtoReq promoPostReq, boolean hasPromo) {
         Post post;
         Product prod;
@@ -166,7 +190,6 @@ public class UserService implements IUserService {
             throw new BadRequestException("Posteo invalido");
         }
     }
-
 
 
     /**
@@ -209,7 +232,6 @@ public class UserService implements IUserService {
     }
 
     /**
-     *
      * US0007
      *
      * @param userId

@@ -90,6 +90,12 @@ public class UserController {
         return ResponseEntity.ok().build();
     }
 
+    @GetMapping("/products/promo-post/list")
+    public ResponseEntity<?> getPromoPostsFromSeller(@RequestParam Integer user_id){
+        return ResponseEntity.ok(userService.getPromoPostsFromSeller(user_id));
+    }
+
+
     /**
      * US0006 / US0009
      * Get Recent Posts

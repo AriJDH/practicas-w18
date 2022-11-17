@@ -13,6 +13,6 @@ public interface IUserRepository {
     void follow(Integer idFollower, Integer idFollow);
     void unfollow(Integer idFollower, Integer idUnfollow);
     void createPost(Integer userId, Post newPost);
+    List<Post> getPostsFromSeller(Integer id);
     Integer getNextPostId();
-
 }

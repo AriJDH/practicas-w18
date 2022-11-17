@@ -11,6 +11,7 @@ import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @Repository
 public class UserRepository implements IUserRepository{
@@ -121,6 +122,16 @@ public class UserRepository implements IUserRepository{
             user.setPosts(new ArrayList<Post>());
         }
         user.getPosts().add(newPost);
+    }
+
+    @Override
+    public List<Post> getPostsFromSeller(Integer id) {
+        User user = findById(id);
+        if(user == null) {
+            throw new NotFoundException("El usuario " + id + " no existe");
+        }
+
+        return user.getPosts();
     }
 
     @Override
