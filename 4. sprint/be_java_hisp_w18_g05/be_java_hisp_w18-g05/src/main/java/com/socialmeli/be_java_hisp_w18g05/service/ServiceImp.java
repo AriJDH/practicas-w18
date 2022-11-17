@@ -107,20 +107,7 @@ public class ServiceImp implements IService {
         s.unFollower(b);
     }
 
-    @Override
-    public SellerFollowersCountDTOResponse followersCount(Integer user_id){
 
-        Integer countedFollowers;
-        SellerFollowersCountDTOResponse sellerCount = new SellerFollowersCountDTOResponse();
-        for(Seller seller: repository.getAllSellers()){
-            if(user_id.equals(seller.getUser_id())){
-                countedFollowers = seller.getFollowers().size();
-
-                sellerCount = new SellerFollowersCountDTOResponse(seller.getUser_id(),seller.getName(),countedFollowers);
-            }
-        }
-        return sellerCount;
-    }
 
     @Override
     public SellerPostListDTOResponse followedPostList(Integer user_id) {
@@ -196,36 +183,6 @@ public class ServiceImp implements IService {
         //postList.add(newPost);
         seller.getPosts().add(newPost);
     }
-        @Override
-        public void follow (Integer userId, Integer userIdToFollow){
-
-            Seller s = repository.getByIdSeller(userIdToFollow);
-            Buyer b = repository.getByIdBuyer(userId);
-            if (s == null) {
-                throw new NotFoundException("Seller id " + userId + " not found");
-            }
-            if (b == null) {
-                throw new NotFoundException("Buyer id " + userIdToFollow + " not found");
-            }
-            b.addFollowed(s);
-            s.addFollower(b);
-        }
-
-        @Override
-        public void unfollow (Integer userId, Integer userIdToUnfollow){
-            Seller s = repository.getByIdSeller(userIdToUnfollow);
-            Buyer b = repository.getByIdBuyer(userId);
-            if (s == null) {
-                throw new NotFoundException("Seller id " + userId + " not found");
-            }
-            if (b == null) {
-                throw new NotFoundException("Buyer id " + userIdToUnfollow + " not found");
-            }
-            b.unFollowed(s);
-            s.unFollower(b);
-        }
-        
-
 
 }
 
