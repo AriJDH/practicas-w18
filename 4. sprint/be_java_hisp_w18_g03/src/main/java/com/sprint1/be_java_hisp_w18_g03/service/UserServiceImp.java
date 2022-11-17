@@ -80,9 +80,18 @@ public class UserServiceImp implements IUserService {
 
   @Override
   public ResponseDTO unfollow(Integer userId, Integer unfollowId) {
-      if (!iUserRepository.removeFollower(userId,unfollowId)){
+      User user = iUserRepository.findById(userId);
+      User userToUnfollow = iUserRepository.findById(unfollowId);
+
+      if (user == null || userToUnfollow == null){
         throw new NoFoundException("Bad Request");
       }
+      else if (!userToUnfollow.getListFollowers().contains(user)){
+        throw new NoFoundException("Bad Request");
+      }
+
+    user.getListFollowed().removeIf(u -> u.getUserId().equals(unfollowId));
+    userToUnfollow.getListFollowers().removeIf(u -> u.getUserId().equals(userId));
     return new ResponseDTO("Ok",200);
   }
 }
