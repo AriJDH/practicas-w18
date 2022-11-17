@@ -21,8 +21,6 @@ public class PostRepository implements IPostRepository {
 
     public boolean addPost(Post post) {
         Posts.add(post);
-
-
         return true;
     }
 

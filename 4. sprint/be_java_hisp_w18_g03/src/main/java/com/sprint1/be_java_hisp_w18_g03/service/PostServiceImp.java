@@ -42,7 +42,7 @@ public class PostServiceImp implements IPostService {
         );
         boolean responseAdd = iPostRepository.addPost(newPost);
         if (responseAdd == false) throw new CreationException("Error adding the post");
-        return new ResponseDTO("Post agregado correctamente", 200);
+        return new ResponseDTO("Post added successfully", 200);
     }
 
     @Override
