@@ -32,13 +32,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserFollowersCountDTO handleGetFollowersCount(long userId) {
+    public UserFollowersCountDTO getFollowersCount(long userId) {
         User user = userDbService.findById(userId);
         return new UserFollowersCountDTO(user.getUser_id(), user.getUser_name(), user.getFollowersCount());//TODO: se puede llegar a hacer mas lindo con objectMapper
     }
 
     @Override
-    public UserFollowersInfoDTO handleGetFollowersInfo(long userId, String order) {
+    public UserFollowersInfoDTO getFollowersInfo(long userId, String order) {
         User user = userDbService.findById(userId);
         List<UserDTO> folllowers =  user.getFollowers().stream()
                 .map(u->new UserDTO(u.getUser_id(), u.getUser_name()))
@@ -47,7 +47,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserFollowedInfoDTO handleGetFollowedInfo(long userId, String order) {
+    public UserFollowedInfoDTO getFollowedInfo(long userId, String order) {
         User user = userDbService.findById(userId);
         List<UserDTO> followed =  user.getFollowed().stream()
                 .map(u->new UserDTO(u.getUser_id(), u.getUser_name()))

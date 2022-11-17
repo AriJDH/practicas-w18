@@ -26,9 +26,11 @@ public class PostServiceImpl implements PostService {
     private long postCount = 1L;
 
     @Autowired
-    MapperPostToPostDTO mapperPostToPostDTO;
+    private MapperPostToPostDTO mapperPostToPostDTO;
     @Autowired
-    UserDbService userDbService;
+    private UserDbService userDbService;
+
+    private DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 
     @Override
     public void addPost(PostDTO postDTO) {
@@ -40,12 +42,30 @@ public class PostServiceImpl implements PostService {
         try {
             post = new Post(postCount,
                     user,
-                    LocalDate.parse(postDTO.getDate()),
+                    LocalDate.parse(postDTO.getDate(),dateFormatter),
                     mapper.convertValue(postDTO.getProduct(), Product.class),
                     postDTO.getCategory(),
                     postDTO.getPrice()
             );
         } catch (Exception e) {
+            postCount--;
+            throw new BadRequestException("Los parámetros para la creación de la publicación son inválidos");
+        }
+        user.addPost(post);
+    }
+
+    @Override
+    public void addPromoPost(PromoPostDTO promoPostDTO) {
+        User user = userDbService.findById(promoPostDTO.getUser_id());
+        Post post;
+        ObjectMapper mapper = new ObjectMapper();
+        try{
+            post = new Post(postCount, user,
+                    LocalDate.parse(promoPostDTO.getDate(),dateFormatter), mapper.convertValue(promoPostDTO.getProduct(), Product.class),
+                    promoPostDTO.getCategory(), promoPostDTO.getPrice(),true,promoPostDTO.getDiscount());
+        }catch (Exception e){
+            postCount--;
+            System.out.println(e.getMessage());
             throw new BadRequestException("Los parámetros para la creación de la publicación son inválidos");
         }
         user.addPost(post);
@@ -57,7 +77,6 @@ public class PostServiceImpl implements PostService {
         List<User> sellers = user.getFollowed().stream()
                 .filter(seller -> seller.getPosts().stream().anyMatch(post -> post.isRecent()))
                 .collect(Collectors.toList());
-        ObjectMapper mapper = new ObjectMapper();
 
         LocalDate.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
 
@@ -70,6 +89,12 @@ public class PostServiceImpl implements PostService {
                 })
                 .collect(Collectors.toList());
 
+    }
+
+    @Override
+    public SellerPromoPostCountDTO getSellerPromoPostCount(long userId) {
+        User user = userDbService.findById(userId);
+        return new SellerPromoPostCountDTO(userId, user.getUser_name(), user.getPromoPosts().size());
     }
 
     public List<Post> sortPosts(List<Post> posts, String order) {

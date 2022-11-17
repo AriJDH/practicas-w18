@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Data
 @AllArgsConstructor
@@ -79,6 +80,10 @@ public class User {
 
     public int getFollowersCount(){
         return this.followers.size();
+    }
+
+    public List<Post> getPromoPosts(){
+        return this.posts.stream().filter(post->post.isPromo()).collect(Collectors.toList());
     }
 
 }
