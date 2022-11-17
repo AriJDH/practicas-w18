@@ -5,7 +5,9 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Data
@@ -18,6 +20,11 @@ public class User {
 
     @JsonProperty("user_name")
     private String userName;
+
+    public User(int userId, String userName) {
+        this.userId = userId;
+        this.userName = userName;
+    }
 
     private Map<Integer, User> followers = new HashMap<Integer, User>();
     private Map<Integer, User> followed = new HashMap<Integer, User>();

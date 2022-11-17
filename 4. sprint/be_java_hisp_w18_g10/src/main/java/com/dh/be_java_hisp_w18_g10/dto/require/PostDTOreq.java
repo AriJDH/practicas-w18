@@ -15,6 +15,7 @@ public class PostDTOreq {
     private ProductDTOreq product;
     private int category;
     private double price;
+
 }
 
 //JSON REPRESENTATION

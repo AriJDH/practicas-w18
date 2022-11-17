@@ -11,14 +11,21 @@ import java.util.Map;
 public class ProductRepository implements IProductRepository{
 
     private Map<Integer, Product> products = new HashMap<Integer, Product>();
-    private Integer count = 0;
 
     public ProductRepository() {
-        loadProducts();
     }
 
     public void loadProducts(){
         //TODO add products
+        for (int i = 0; i < 10; i++) {
+            products.put(i, new Product(i,
+                    "product"+i,
+                    "type_"+i,
+                    "brand_"+i,
+                    "color_"+i,
+                    "notes_"+i));
+        }
+
     }
 
     @Override
@@ -29,5 +36,10 @@ public class ProductRepository implements IProductRepository{
     @Override
     public List<Product> getProducts() {
         return null;
+    }
+
+    @Override
+    public void addProduct(Product product) {
+        products.put(product.getProductId(), product);
     }
 }

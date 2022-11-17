@@ -7,4 +7,5 @@ import java.util.List;
 public interface IProductRepository {
     Product getProductById(int id);
     List<Product> getProducts();
+    void addProduct(Product product);
 }

@@ -107,25 +107,24 @@ public class UserService implements IUserService {
 
     @Override
     public void createPost(PostDTOreq postDTOreq) {
-        try {
-            int userId = postDTOreq.getUser_id();
-            int productId = postDTOreq.getProduct().getProduct_id();
-            if (userRepository.getUsers().get(userId) == null)
-                throw new UserNotFoundException("Usuario no encontrado!");
-            if (productRepository.getProductById(productId) == null)
-                throw new ProductNotFoundException("Producto no encontrado.");
 
-            Post post = DTOMapper.mapToPost(postDTOreq);
+        int userId = postDTOreq.getUser_id();
+        int productId = postDTOreq.getProduct().getProduct_id();
+        /* if (userRepository.getUser(userId) == null)
+            throw new UserNotFoundException("Usuario no encontrado!");
+        if (productRepository.getProductById(productId) == null)
+            throw new ProductNotFoundException("Producto no encontrado."); */
 
-            Integer postId = postRepository.addPost(post);
-            userRepository
-                    .getUser(userId)
-                    .getPosts()
-                    .put(postId, post);
-        }
-        catch (NullPointerException e) {
-             throw new UserIdNullException("Atributo null en user");
-        }
+        Post post = DTOMapper.mapToPost(postDTOreq);
+        Integer postId = postRepository.addPost(post);
+
+        /* userRepository
+                .getUser(userId)
+                .getPosts()
+                .put(postId, post);
+        productRepository.addProduct(post.getProduct());*/
+
+
 
     }
 

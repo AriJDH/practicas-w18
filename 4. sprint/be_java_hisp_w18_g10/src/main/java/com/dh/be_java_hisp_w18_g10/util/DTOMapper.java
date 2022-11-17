@@ -18,23 +18,20 @@ public class DTOMapper {
         }
         return mapper;
     }
-    public static UserPostsDTOres mapTo(User user){
-        return mapper.map(user, UserPostsDTOres.class);
+    public static UserPostsDTOres mapToUserPostsDTOres(User user){
+        return getInstance().map(user, UserPostsDTOres.class);
     }
 
     public static UserFollowedListDTOres mapToUserFollowedRes(User user){
-        return mapper.map(user, UserFollowedListDTOres.class);
+        return getInstance().map(user, UserFollowedListDTOres.class);
     }
 
-    public static UserFollowersListDTOres mapToUserFollowersRes(List<User> users){
-        return mapper.map(users, UserFollowersListDTOres.class);
+    public static UserFollowersListDTOres mapToUserFollowersRes(User user){
+        return getInstance().map(user, UserFollowersListDTOres.class);
     }
-
     public static Post mapToPost(PostDTOreq postDTOreq){
-
-
-
-        return null;
+        Post post = getInstance().map(postDTOreq, Post.class);
+        return post;
     }
 
     public static PostDTOres mapTo(Post post){
