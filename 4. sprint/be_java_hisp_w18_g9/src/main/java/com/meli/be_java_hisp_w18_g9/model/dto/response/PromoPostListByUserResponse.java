@@ -23,7 +23,6 @@ public class PromoPostListByUserResponse {
     @JsonProperty("user_name")
     private String userName;
 
-    private UserSimpleResponse user;
-
     private List<PromoPostRequest> posts;
+
 }

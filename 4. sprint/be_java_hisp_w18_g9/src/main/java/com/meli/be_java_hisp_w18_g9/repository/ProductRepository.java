@@ -6,7 +6,6 @@ import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Repository
 public class ProductRepository implements IProductRepository {
@@ -60,6 +59,8 @@ public class ProductRepository implements IProductRepository {
         return productObtained;
 
     }
+
+    // * ===============
 
     @Override
     public void deleteById(Integer id) {
