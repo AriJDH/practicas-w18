@@ -42,24 +42,23 @@ public class UserService implements IUserService {
                     prod);
             userRepository.createPost(postReq.getUserId(), post);
 
-        } catch (NotFoundException nf){
+        } catch (NotFoundException nf) {
             throw nf;
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             throw new BadRequestException("Posteo invalido");
         }
 
     }
 
     @Override
-    public RecentPostsDtoRes getRecentPosts(Integer userId) {
+    public RecentPostsDtoRes getRecentPosts(Integer userId, String order) {
         List<User> followed = userRepository.getFollowed(userId);
         LocalDate now = LocalDate.now();
         LocalDate twoWeeksAgo = now.minusWeeks(2);
 
         List<PostDtoRes> postsRes = followed.stream()
                 .flatMap(f -> f.getPosts().stream())
-                .filter(p-> (p.getDate().isAfter(twoWeeksAgo) && p.getDate().isBefore(now.plusDays(1))))
+                .filter(p -> (p.getDate().isAfter(twoWeeksAgo) && p.getDate().isBefore(now.plusDays(1))))
                 .map(p -> new PostDtoRes(
                         userId,
                         p.getId(),
@@ -73,6 +72,13 @@ public class UserService implements IUserService {
                         p.getCategory(),
                         p.getPrice()))
                 .collect(Collectors.toList());
+
+        if (order != null && order.equals("date_desc")) {
+            postsRes.sort(Comparator.comparing(PostDtoRes::getDate).reversed());
+        } else if (order != null && order.equals("date_asc")) {
+            postsRes.sort(Comparator.comparing(PostDtoRes::getDate));
+        }
+
         return new RecentPostsDtoRes(userId, postsRes);
     }
 

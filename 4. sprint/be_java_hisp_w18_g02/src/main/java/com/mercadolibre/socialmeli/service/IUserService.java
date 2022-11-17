@@ -15,6 +15,6 @@ public interface IUserService {
     UserFollowedListDtoRes getFollowed(Integer id, String order);
     void addPost(PostDtoReq postReq);
 
-    RecentPostsDtoRes getRecentPosts(Integer userId);
+    RecentPostsDtoRes getRecentPosts(Integer userId, String order);
 
 }

@@ -26,17 +26,18 @@ public class UserController {
     @PostMapping("/products/post")
     public ResponseEntity<?> addPost(@RequestBody PostDtoReq postReq){
         userService.addPost(postReq);
-
         return ResponseEntity.ok().build();
     }
 
     /**
      * US0006
-     *
+     * @param userId
+     * @return
      */
     @GetMapping("/products/followed/{userId}/list")
-    public ResponseEntity<RecentPostsDtoRes> getRecentPost(@PathVariable Integer userId){
-        return ResponseEntity.ok(userService.getRecentPosts(userId));
+    public ResponseEntity<RecentPostsDtoRes> getRecentPost(@PathVariable Integer userId,
+                                                           @RequestParam(required = false) String order){
+        return ResponseEntity.ok(userService.getRecentPosts(userId, order));
     }
 
     /**
@@ -48,11 +49,25 @@ public class UserController {
     public ResponseEntity<SellerFollowerCountDtoRes> getCount(@PathVariable Integer userId) {
         return ResponseEntity.status(HttpStatus.OK).body(userService.getCount(userId));
     }
+
+    /**
+     * US0003
+     * @param userId
+     * @param order
+     * @return
+     */
     @GetMapping("/users/{userId}/followers/list")
     public ResponseEntity<SellerFollowerListDtoRes> getFollowers(@PathVariable Integer userId,
                                                                  @RequestParam(required = false) String order) {
         return ResponseEntity.status(HttpStatus.OK).body(userService.getFollowers(userId, order));
     }
+
+    /**
+     * US0004
+     * @param userId
+     * @param order
+     * @return
+     */
     @GetMapping("/users/{userId}/followed/list")
     public ResponseEntity<UserFollowedListDtoRes> getFollowed(@PathVariable Integer userId,
                                                               @RequestParam(required = false) String order) {
