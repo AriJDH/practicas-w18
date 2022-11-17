@@ -32,11 +32,11 @@ public class UserController {
 
     @GetMapping("/{userId}/followers/list")
     public ResponseEntity<UserFollowersInfoDTO> getFollowersInfo(@PathVariable long userId, @RequestParam(required=false) String order){
-        return ResponseEntity.ok(userService.handleGetFollowersInfo(userId));
+        return ResponseEntity.ok(userService.handleGetFollowersInfo(userId, order));
     }
 
     @GetMapping("/{userId}/followed/list")
-    public ResponseEntity<UserFollowedInfoDTO> getFollowedInfo(@PathVariable long userId){
-        return ResponseEntity.ok(userService.handleGetFollowedInfo(userId));
+    public ResponseEntity<UserFollowedInfoDTO> getFollowedInfo(@PathVariable long userId, @RequestParam(required=false) String order){
+        return ResponseEntity.ok(userService.handleGetFollowedInfo(userId, order));
     }
 }

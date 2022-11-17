@@ -9,6 +9,6 @@ public interface UserService {
     ResponseDTO handleFollow(long userId, long userIdToFollow);
     ResponseDTO handleUnfollow(long userId, long userIdToUnfollow);
     UserFollowersCountDTO handleGetFollowersCount(long userId);
-    UserFollowersInfoDTO handleGetFollowersInfo(long userId);
-    UserFollowedInfoDTO handleGetFollowedInfo(long userId);
+    UserFollowersInfoDTO handleGetFollowersInfo(long userId, String order);
+    UserFollowedInfoDTO handleGetFollowedInfo(long userId, String order);
 }
