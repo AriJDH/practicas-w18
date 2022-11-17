@@ -1,5 +1,7 @@
 package com.mercadolibre.socialmeli.dto.request;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.mercadolibre.socialmeli.dto.ProductDto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -11,7 +13,9 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @Data
 public class PostDtoReq {
+    @JsonProperty("user_id")
     private Integer userId;
+    @JsonFormat(pattern = "dd-MM-yyyy")
     private LocalDate date;
     private ProductDto product;
     private Integer category;

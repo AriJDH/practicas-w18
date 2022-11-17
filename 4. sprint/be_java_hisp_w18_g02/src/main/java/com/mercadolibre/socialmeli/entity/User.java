@@ -38,7 +38,7 @@ public class User {
     }
 
     public boolean isSeller(){
-        return !this.posts.isEmpty();
+        return (this.posts!=null && !this.posts.isEmpty());
     }
 
 }

@@ -1,14 +1,20 @@
 package com.mercadolibre.socialmeli.service;
 
+import com.mercadolibre.socialmeli.dto.request.PostDtoReq;
 import com.mercadolibre.socialmeli.dto.response.SellerFollowerCountDtoRes;
 import com.mercadolibre.socialmeli.dto.response.SellerFollowerListDtoRes;
 import com.mercadolibre.socialmeli.dto.response.UserDtoRes;
 import com.mercadolibre.socialmeli.dto.response.UserFollowedListDtoRes;
+import com.mercadolibre.socialmeli.entity.Post;
+import com.mercadolibre.socialmeli.entity.Product;
 import com.mercadolibre.socialmeli.entity.User;
+import com.mercadolibre.socialmeli.exception.BadRequestException;
+import com.mercadolibre.socialmeli.exception.NotFoundException;
 import com.mercadolibre.socialmeli.repository.IUserRepository;
 import com.mercadolibre.socialmeli.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.HttpClientErrorException;
 
 import java.util.Comparator;
 import java.util.List;
@@ -21,6 +27,33 @@ public class UserService implements IUserService {
     private IUserRepository userRepository;
 
     // US 0002
+    @Override
+    public void addPost(PostDtoReq postReq) {
+        Post post;
+        Product prod;
+        try {
+            prod = new Product(postReq.getProduct().getId(),
+                    postReq.getProduct().getName(),
+                    postReq.getProduct().getType(),
+                    postReq.getProduct().getBrand(),
+                    postReq.getProduct().getColor(),
+                    postReq.getProduct().getNotes());
+            post = new Post(userRepository.getNextPostId(),
+                    postReq.getDate(),
+                    postReq.getCategory(),
+                    postReq.getPrice(),
+                    prod);
+            userRepository.createPost(postReq.getUserId(), post);
+
+        } catch (NotFoundException nf){
+            throw nf;
+        }
+        catch (Exception e){
+            throw new BadRequestException("Posteo invalido");
+        }
+
+    }
+
     @Override
     public SellerFollowerCountDtoRes getCount(Integer id) {
         List<User> followers = userRepository.getFollowers(id);

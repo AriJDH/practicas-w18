@@ -12,7 +12,6 @@ import java.time.LocalDate;
 public class Post {
     private Integer id;
     private LocalDate date;
-    private String name;
     private Integer category;
     private Double price;
     private Product product;

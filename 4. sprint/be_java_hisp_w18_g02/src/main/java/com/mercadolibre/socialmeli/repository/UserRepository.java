@@ -32,8 +32,8 @@ public class UserRepository implements IUserRepository{
         Product pr2 = new Product(2, "Bicicleta de montaña R26", "Rodado",
                 "Winner", "Roja", "18 velocidades.");
 
-        Post post1 = new Post(nextPostId++, LocalDate.now(), "Mouse inalámbrico a pila.", 1, 15.5, pr1);
-        Post post2 = new Post(nextPostId++, LocalDate.now(), "Bicicelta de montaña Winner rodado 26.", 2, 15999.99, pr2);
+        Post post1 = new Post(nextPostId++, LocalDate.now(),  1, 15.5, pr1);
+        Post post2 = new Post(nextPostId++, LocalDate.now(),  2, 15999.99, pr2);
 
         User u3 = new User(3, "LaOfertaPerfecta");
         User u4 = new User(4, "Motociclo");
@@ -111,6 +111,18 @@ public class UserRepository implements IUserRepository{
 
     @Override
     public void createPost(Integer userId, Post newPost) {
+        User user = findById(userId);
+        if (user ==null) {
+            throw new NotFoundException("El usuario "+userId+" no existe");
+        }
+        if (user.getPosts()==null){
+            user.setPosts(new ArrayList<Post>());
+        }
+        user.getPosts().add(newPost);
+    }
 
+    @Override
+    public Integer getNextPostId() {
+        return nextPostId++;
     }
 }
