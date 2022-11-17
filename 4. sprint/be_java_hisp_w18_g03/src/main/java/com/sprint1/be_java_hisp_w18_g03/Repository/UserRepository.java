@@ -1,12 +1,10 @@
 package com.sprint1.be_java_hisp_w18_g03.Repository;
 
 import com.sprint1.be_java_hisp_w18_g03.entity.User;
-import com.sprint1.be_java_hisp_w18_g03.exception.NoFoundUserException;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
-import org.springframework.stereotype.Repository;
 
 @Repository
 public class UserRepository implements IUserRepository {
