@@ -1,7 +1,7 @@
 package com.dh.be_java_hisp_w18_g10.util;
 
 import com.dh.be_java_hisp_w18_g10.dto.require.PostDTOreq;
-import com.dh.be_java_hisp_w18_g10.dto.response.UserFollowedDTOres;
+import com.dh.be_java_hisp_w18_g10.dto.response.UserFollowedListDTOres;
 import com.dh.be_java_hisp_w18_g10.dto.response.UserFollowersListDTOres;
 import com.dh.be_java_hisp_w18_g10.dto.response.UserPostsDTOres;
 import com.dh.be_java_hisp_w18_g10.entity.Post;
@@ -22,8 +22,8 @@ public class DTOMapper {
         return mapper.map(user, UserPostsDTOres.class);
     }
 
-    public static UserFollowedDTOres mapToUserFollowedRes(User user){
-        return mapper.map(user, UserFollowedDTOres.class);
+    public static UserFollowedListDTOres mapToUserFollowedRes(User user){
+        return mapper.map(user, UserFollowedListDTOres.class);
     }
 
     public static UserFollowersListDTOres mapToUserFollowersRes(List<User> users){

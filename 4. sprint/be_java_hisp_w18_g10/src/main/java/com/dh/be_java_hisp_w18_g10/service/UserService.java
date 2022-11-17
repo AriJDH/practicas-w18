@@ -1,10 +1,7 @@
 package com.dh.be_java_hisp_w18_g10.service;
 
 import com.dh.be_java_hisp_w18_g10.dto.require.PostDTOreq;
-import com.dh.be_java_hisp_w18_g10.dto.response.UserFollowedDTOres;
-import com.dh.be_java_hisp_w18_g10.dto.response.UserFollowersCountDTOres;
-import com.dh.be_java_hisp_w18_g10.dto.response.UserFollowersListDTOres;
-import com.dh.be_java_hisp_w18_g10.dto.response.UserPostsDTOres;
+import com.dh.be_java_hisp_w18_g10.dto.response.*;
 import com.dh.be_java_hisp_w18_g10.entity.Post;
 import com.dh.be_java_hisp_w18_g10.entity.User;
 import com.dh.be_java_hisp_w18_g10.exception.ProductNotFoundException;
@@ -15,17 +12,36 @@ import com.dh.be_java_hisp_w18_g10.repository.*;
 import com.dh.be_java_hisp_w18_g10.util.DTOMapper;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+
+import static com.dh.be_java_hisp_w18_g10.util.DTOMapper.mapToUserFollowedRes;
+
 @Service
 public class UserService implements IUserService {
     private IUserRepository userRepository;
     private IProductRepository productRepository;
     private IPostRepository postRepository;
+
     public UserService(UserRepository userRepository, ProductRepository productRepository, PostRepository postRepository) {
         this.userRepository = userRepository;
         this.productRepository = productRepository;
         this.postRepository = postRepository;
     }
 
+    public void addPost(PostDTOreq postDTO){
+        //TODO implement
+        Post post = new Post();
+        int userId = postDTO.getUser_id();
+        userRepository
+                .getUser(userId)
+                .getPosts()
+                .put(userId, post);
+
+        postRepository.addPost(post);
+    }
     @Override
     public void followUser(int userId, int userIdToFollow) {
         User user1 = userRepository.getUser(userId);
@@ -61,8 +77,27 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public UserFollowedDTOres getUserFollowed(int userId) {
-        return null;
+    public UserFollowedListDTOres getUserFollowed(int userId) {
+
+        User user = userRepository.getUser(userId);
+
+        int userAuxId = user.getUserId();
+        String userName = user.getUserName();
+        Map<Integer, User> followed = user.getFollowed();
+
+
+        List<UserDTOres> followedList = new ArrayList<>();
+
+        for (Map.Entry<Integer, User> f : followed.entrySet()) {
+            UserDTOres userDTOres = new UserDTOres(f.getValue().getUserId(), f.getValue().getUserName());
+            followedList.add(userDTOres);
+        }
+
+        return new UserFollowedListDTOres(userAuxId, userName, followedList);
+
+       /* User user = userRepository.getUser(userId);
+        UserFollowedListDTOres userFollowedDTOres = mapToUserFollowedRes(user);
+        return userFollowedDTOres;*/
     }
 
     @Override

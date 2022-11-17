@@ -43,11 +43,11 @@ public class UserController {
     @GetMapping("/users/{userId}/followed/list")
     public ResponseEntity<?> getUserFollowedList(
             @RequestParam(required = false) String order,
-            @PathVariable String userId
+            @PathVariable int userId
     ) {
+        return new ResponseEntity<>(userService.getUserFollowed(userId),HttpStatus.OK);
         // US 0004
         // US 0008
-        return null;
     }
 
     @PostMapping("/products/post")

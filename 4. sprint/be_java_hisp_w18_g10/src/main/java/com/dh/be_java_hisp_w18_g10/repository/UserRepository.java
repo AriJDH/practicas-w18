@@ -16,13 +16,44 @@ public class UserRepository implements IUserRepository{
     }
 
     private void loadUsers(){
-        users.put(count, new User());
+
         count++;
+        User user1 = new User();
+        user1.setUserId(count);
+        user1.setUserName("usuario1");
+
+        count++;
+        User user2 = new User();
+        user2.setUserId(count);
+        user2.setUserName("vendedor1");
+
+        count++;
+        User user3 = new User();
+        user3.setUserId(count);
+        user3.setUserName("vendedor2");
+
+        Map<Integer, User> followedUsuer1 = new HashMap<Integer, User>();
+        followedUsuer1.put(user2.getUserId(), user2);
+        followedUsuer1.put(user3.getUserId(), user3);
+        user1.setFollowed(followedUsuer1);
+
+        Map<Integer, User> followedUsuer2 = new HashMap<Integer, User>();
+        followedUsuer2.put(user3.getUserId(), user3);
+        user2.setFollowed(followedUsuer2);
+
+        Map<Integer, User> followedUsuer3 = new HashMap<Integer, User>();
+        followedUsuer3.put(user2.getUserId(), user2);
+        user3.setFollowed(followedUsuer3);
+
+        this.users.put(user1.getUserId(), user1);
+        this.users.put(user2.getUserId(), user2);
+        this.users.put(user3.getUserId(), user3);
     }
 
     @Override
     public User getUser(int id) {
-        return null;
+        User user = users.get(id);
+        return user;
     }
 
     @Override
