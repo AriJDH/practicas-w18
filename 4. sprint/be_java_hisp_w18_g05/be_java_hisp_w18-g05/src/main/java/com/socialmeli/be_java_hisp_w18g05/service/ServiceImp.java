@@ -278,6 +278,9 @@ public class ServiceImp implements IService {
     @Override
     public SellerFollowersCountDTOResponse followersCount(Integer user_id){
         Seller seller = repository.getByIdSeller(user_id); // Get seller from repository
+        if (seller == null) {
+            throw new NotFoundException("Seller id " + user_id + " not found");
+        }
         List<Buyer> followers = seller.getFollowers();
         Integer countedFollowers = followers.size();
 
@@ -287,20 +290,23 @@ public class ServiceImp implements IService {
     }
 
 
+
     @Override
     public void newPost(NewPostDTORequest post){
         Integer user_id = post.getUser_id();
-        System.out.println("user_id: " + user_id);
         Seller seller = repository.getByIdSeller(user_id); // Get seller from repository
-        System.out.println("seller_name" + seller.getName());
-        //List<Post> postList = seller.getPosts();
+
+        if (seller == null) {
+            throw new NotFoundException("Seller id " + user_id + " not found");
+        }
+
         Product product = new Product(post.getProduct().getProduct_id(),post.getProduct().getProduct_name(), post.getProduct().getType(), post.getProduct().getBrand(), post.getProduct().getColor(), post.getProduct().getNotes());
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 
         LocalDate localDate = LocalDate.parse(post.getDate(),formatter);
+
         Post newPost = new Post(post.getUser_id(), localDate,product ,post.getCategory(),post.getPrice());
 
-        //postList.add(newPost);
         seller.getPosts().add(newPost);
     }
 
