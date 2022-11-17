@@ -1,8 +1,15 @@
 package com.socialmeli.be_java_hisp_w18g05.controller;
 
 
+
 import com.socialmeli.be_java_hisp_w18g05.dto.request.NewPostDTORequest;
+
+
+import com.socialmeli.be_java_hisp_w18g05.dto.response.BuyerFollowedListDTOResponse;
+
+
 import com.socialmeli.be_java_hisp_w18g05.dto.response.SellerFollowersCountDTOResponse;
+
 import com.socialmeli.be_java_hisp_w18g05.dto.response.SellerFollowersListDTOResponse;
 import com.socialmeli.be_java_hisp_w18g05.service.IService;
 import com.socialmeli.be_java_hisp_w18g05.service.ServiceImp;
@@ -18,6 +25,10 @@ public class SocialController {
 
     public SocialController(ServiceImp service) {
         this.service = service;
+    }
+    @GetMapping("/users/{userId}/followed/list") // US0004
+    public ResponseEntity<BuyerFollowedListDTOResponse > followedList(@PathVariable Integer userId){
+        return new ResponseEntity<>(service.getFolloweds(userId),HttpStatus.OK);
     }
 
     @GetMapping("/users/{userId}/followers/list")
@@ -43,11 +54,13 @@ public class SocialController {
         return new ResponseEntity<>(service.followersCount(userId), HttpStatus.OK);
     }
 
+
     @PostMapping("/products/post")
     public ResponseEntity<String> addPost(@RequestBody NewPostDTORequest post){
         service.newPost(post);
         return new ResponseEntity<>( "Post realizado correctamente ", HttpStatus.OK);
     }
+
 
 
 }
