@@ -7,6 +7,9 @@ import org.springframework.stereotype.Service;
 
 
 public interface IUserService {
+    public String follow(Integer userId, Integer userIdToFollow);
+    public String unfollow(Integer userId, Integer userIdToFollow);
+
     SellerFollowerCountDtoRes getCount(Integer id);
     SellerFollowerListDtoRes getFollowers(Integer id);
     UserFollowedListDtoRes getFollowed(Integer id);

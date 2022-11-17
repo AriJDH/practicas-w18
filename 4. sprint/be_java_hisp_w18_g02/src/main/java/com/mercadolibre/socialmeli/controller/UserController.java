@@ -18,4 +18,14 @@ public class UserController {
     public ResponseEntity<SellerFollowerCountDtoRes> getCount(@PathVariable Integer userId) {
         return ResponseEntity.status(HttpStatus.OK).body(userService.getCount(userId));
     }
+    @GetMapping("/users/{userId}/follow/{userIdToFollow}")
+    public ResponseEntity<?> follow(@PathVariable Integer userId, @PathVariable Integer userIdToFollow){
+        return new ResponseEntity<>(userService.follow(userId, userIdToFollow), HttpStatus.valueOf(200));
+    }
+
+    @GetMapping("/users/{userId}/unfollow/{userIdToFollow}")
+    public ResponseEntity<?> unfollow(@PathVariable Integer userId, @PathVariable Integer userIdToFollow){
+        return new ResponseEntity<>(userService.unfollow(userId, userIdToFollow), HttpStatus.valueOf(200));
+    }
+
 }
