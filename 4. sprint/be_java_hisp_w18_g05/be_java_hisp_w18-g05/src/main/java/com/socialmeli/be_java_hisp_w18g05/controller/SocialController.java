@@ -73,22 +73,5 @@ public class SocialController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @GetMapping("/users/{userId}/followers/count")
-    public ResponseEntity<SellerFollowersCountDTOResponse> followersCount(@PathVariable Integer userId){
-        return new ResponseEntity<>(service.followersCount(userId), HttpStatus.OK);
-    }
-
-
-    @PostMapping("/products/post")
-    public ResponseEntity<String> addPost(@RequestBody NewPostDTORequest post){
-        service.newPost(post);
-        return new ResponseEntity<>("Post realizado correctamente ", HttpStatus.OK);
-    }
-
-
-    @GetMapping("/products/followed/{userId}/list")
-    public ResponseEntity<SellerPostListDTOResponse> followedPostList(@PathVariable Integer userId, @RequestParam(required = false) String order){
-        return new ResponseEntity<>(service.followedPostList(userId, order), HttpStatus.OK);
-    }
 
 }
