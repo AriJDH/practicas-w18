@@ -93,6 +93,8 @@ public class UserService implements IUserService {
     public UserFollowedListDTOres getUserFollowed(int userId) {
 
         User user = userRepository.getUser(userId);
+        if(user == null)
+            throw new UserNotFoundException("No existe usuario con id " + userId);
 
         int userAuxId = user.getUserId();
         String userName = user.getUserName();
