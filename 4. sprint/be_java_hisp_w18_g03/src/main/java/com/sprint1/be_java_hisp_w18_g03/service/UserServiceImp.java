@@ -61,6 +61,7 @@ public class UserServiceImp implements IUserService {
         if (user.getListFollowers().isEmpty()) {
             throw new NoFoundException("The user hasn't followers");
         }
+
         if(order == null) {
             return new FollowersDTO(
                     user.getUserId(),
@@ -75,7 +76,7 @@ public class UserServiceImp implements IUserService {
             return new FollowersDTO(
                     user.getUserId(),
                     user.getUserName(),
-                    orderByName(user, order)
+                    orderByName(user.getListFollowers(), order)
                             .stream()
                             .map(i -> new UserDTO(i.getUserId(), i.getUserName()))
                             .collect(Collectors.toList())
@@ -105,7 +106,7 @@ public class UserServiceImp implements IUserService {
             return new FollowedDTO(
                     user.getUserId(),
                     user.getUserName(),
-                    orderByName(user, order)
+                    orderByName(user.getListFollowed(), order)
                             .stream()
                             .map(i -> new UserDTO(i.getUserId(), i.getUserName()))
                             .collect(Collectors.toList())
@@ -113,14 +114,14 @@ public class UserServiceImp implements IUserService {
         }
     }
 
-    private List<User> orderByName(User user, String order){
+    private List<User> orderByName(List<User> users, String order){
         if(order.equals("name_asc")) {
-            return user.getListFollowed()
+            return users
                     .stream()
                     .sorted((user1, user2) -> user1.getUserName().compareTo(user2.getUserName()))
                     .collect(Collectors.toList());
         } else if (order.equals("name_desc")) {
-            return user.getListFollowed()
+            return users
                     .stream()
                     .sorted((user1, user2) -> user2.getUserName().compareTo(user1.getUserName()))
                     .collect(Collectors.toList());
