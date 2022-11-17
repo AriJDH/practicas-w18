@@ -1,20 +1,15 @@
 package com.socialmedia.be_java_hisp_w18_g08.repository;
 
 import com.socialmedia.be_java_hisp_w18_g08.entity.Post;
-import com.socialmedia.be_java_hisp_w18_g08.entity.Product;
 import com.socialmedia.be_java_hisp_w18_g08.entity.Seller;
 import com.socialmedia.be_java_hisp_w18_g08.entity.User;
 import com.socialmedia.be_java_hisp_w18_g08.exception.NotFoundUserException;
 import org.springframework.stereotype.Repository;
-
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Repository
-public class UserRepositoryImp implements IUserRepository{
+public class UserRepositoryImp implements IUserRepository {
     List<User> users;
     List<Seller> sellers;
     IPostRepository postRepository;
@@ -49,8 +44,6 @@ public class UserRepositoryImp implements IUserRepository{
         User u3 = new User(3,"User3",followed);
         User u4 = new User(4,"User4",followed);
 
-
-
         followers.add(u1);
         followers.add(u2);
         followers.add(u3);
@@ -74,7 +67,7 @@ public class UserRepositoryImp implements IUserRepository{
     }
 
     @Override
-    public Seller findSellerById(long id) {
+    public Seller findSellerById(Integer id) {
         return sellers.stream()
                 .filter(p -> p.getUser_id()==(id))
                 .findFirst().orElse(null);
@@ -82,6 +75,42 @@ public class UserRepositoryImp implements IUserRepository{
 
     @Override
     public User getUserByID(Integer userId) {
-        return null;
+        User found = null;
+        int i = 0;
+        while (i < users.size() && found == null) {
+            if(users.get(i).getUser_id() == userId)
+                found = users.get(i);
+            i++;
+        }
+        if (found != null) {
+            return found;
+        }
+        throw new NotFoundUserException("There is no user with the ID " + userId);
+    }
+
+
+    @Override
+    public List<String> follow(Integer userId, Integer userIdToFollow) {
+
+        List<String> nombres = new ArrayList<>();
+
+        for (User u : this.users) {
+            if (u.getUser_id() == userId) {
+                nombres.add(u.getUser_name());
+                for (Seller s : this.sellers) {
+                    if (s.getUser_id() == userIdToFollow) {
+                        nombres.add(s.getUser_name());
+                        u.getFollowed().add(s);
+                        break;
+                    }
+                }
+                break;
+            }
+        }
+
+        if (nombres.size() < 2) {
+            return null;
+        }
+        return nombres;
     }
 }

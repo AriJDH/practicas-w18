@@ -38,7 +38,6 @@ public class PostRepositoryImp implements IPostRepository{
         Product pr3 = new Product(3,"Product3","Type3","Brand3","Color3","Notes3");
         Product pr4 = new Product(4,"Product4","Type4","Brand4","Color4","Notes4");
 
-
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
         LocalDate date = LocalDate.parse("12-11-2022", formatter);
         Post ps1 = new Post(1,3,pr1,1,111.11,date);
