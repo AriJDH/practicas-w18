@@ -22,15 +22,15 @@ public class UserRepository implements IUserRepository {
                 new Product(3, "Notebook Asus", "Notebook", "Asus", "White", "Excelent!")
         );
 
-        User user1 = new User(1, "User 1", new ArrayList<>(), new ArrayList<>());
-        User user2 = new User(2, "User 2", new ArrayList<>(), new ArrayList<>());
+        User user1 = new User(1, "User 1", new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
+        User user2 = new User(2, "User 2", new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
 
         users.put(1, user1);
         users.put(2, user2);
 
         List<User> followers = List.of(user1, user2);
 
-        users.put(3, new User(3, "User 3", followers, products));
+        users.put(3, new User(3, "User 3", followers, new ArrayList<>(), products));
 
     }
 

@@ -42,7 +42,7 @@ public class PostService implements IPostService{
     public List<PostDtoResponse> findAll() {
         List<Post> postDtoResponseList = iPostRepository.findAll();
         return postDtoResponseList.stream()
-                .map(post -> mapper.convertValue(post, PostDtoResponse.class))
+                .map(post -> new PostDtoResponse(post.getPostId(), post.getUserId(), post.getDate(), post.getProduct(), post.getCategory(), post.getPrice()))
                 .collect(Collectors.toList());
     }
 

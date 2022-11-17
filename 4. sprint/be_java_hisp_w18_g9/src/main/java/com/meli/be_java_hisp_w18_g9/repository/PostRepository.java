@@ -13,6 +13,7 @@ public class PostRepository implements  IPostRepository{
 
     @Override
     public void addPost(Post post) {
+        post.setPostId(posts.size() + 1);
         posts.add(post);
     }
 

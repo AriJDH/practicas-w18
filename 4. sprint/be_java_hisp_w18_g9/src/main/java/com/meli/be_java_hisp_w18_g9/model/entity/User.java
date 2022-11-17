@@ -21,7 +21,7 @@ public class User {
     private String userName;
 
     private List<User> followers;
-
+    private List<User> followed;
     private List<Product> products;
 
 }
