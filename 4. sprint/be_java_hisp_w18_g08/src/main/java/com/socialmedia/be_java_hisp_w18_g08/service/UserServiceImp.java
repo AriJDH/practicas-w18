@@ -92,9 +92,9 @@ public class UserServiceImp implements IUserService {
         Seller seller = userRepository.findSellerById(id);
         if (seller == null)
             throw new NotFoundUserException("El usuario no fue encontrado");
-        UserDTO userDto = new UserDTO();
         List<UserDTO> usersDTO = new ArrayList<>();
         for (User s : seller.getFollowers()) {
+            UserDTO userDto = new UserDTO();
             userDto.setUser_id(s.getUser_id());
             userDto.setUser_name(s.getUser_name());
             usersDTO.add(userDto);
@@ -111,5 +111,4 @@ public class UserServiceImp implements IUserService {
             throw new NotFoundUserException("Not found User with id : " + userId);
         return lista;
     }
-
 }

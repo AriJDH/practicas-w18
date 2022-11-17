@@ -52,5 +52,8 @@ public class PostRepositoryImp implements IPostRepository{
 
     }
 
-
+    @Override
+    public void save(Post post) {
+        posts.add(post);
+    }
 }

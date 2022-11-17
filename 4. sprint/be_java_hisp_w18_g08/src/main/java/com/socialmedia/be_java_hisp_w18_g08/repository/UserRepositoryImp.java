@@ -3,14 +3,13 @@ package com.socialmedia.be_java_hisp_w18_g08.repository;
 import com.socialmedia.be_java_hisp_w18_g08.entity.Post;
 import com.socialmedia.be_java_hisp_w18_g08.entity.Seller;
 import com.socialmedia.be_java_hisp_w18_g08.entity.User;
-import com.socialmedia.be_java_hisp_w18_g08.exception.NotFoundUserException;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Repository
-public class UserRepositoryImp implements IUserRepository {
+public class UserRepositoryImp implements IUserRepository{
     List<User> users;
     List<Seller> sellers;
     IPostRepository postRepository;
@@ -83,10 +82,7 @@ public class UserRepositoryImp implements IUserRepository {
                 found = users.get(i);
             i++;
         }
-
         return found;
-
-
     }
 
 
