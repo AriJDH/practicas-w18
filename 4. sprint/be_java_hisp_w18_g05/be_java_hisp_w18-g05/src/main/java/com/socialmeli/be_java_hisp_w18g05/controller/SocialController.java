@@ -35,13 +35,13 @@ public class SocialController {
         this.service = service;
     }
     @GetMapping("/users/{userId}/followed/list") // US0004
-    public ResponseEntity<BuyerFollowedListDTOResponse > followedList(@PathVariable Integer userId){
-        return new ResponseEntity<>(service.getFolloweds(userId),HttpStatus.OK);
+    public ResponseEntity<BuyerFollowedListDTOResponse> followedList(@PathVariable Integer userId, @RequestParam(required = false) String order){
+        return new ResponseEntity<>(service.followedsFilter(userId, order),HttpStatus.OK);
     }
 
     @GetMapping("/users/{userId}/followers/list")
-    public ResponseEntity<SellerFollowersListDTOResponse> followersList(@PathVariable Integer userId){
-        return new ResponseEntity<>(service.getFollowers(userId), HttpStatus.OK);
+    public ResponseEntity<SellerFollowersListDTOResponse> followersList(@PathVariable Integer userId, @RequestParam(required = false) String order){
+        return new ResponseEntity<>(service.followersFilter(userId, order), HttpStatus.OK);
     }
 
     @PostMapping("/users/{userId}/follow/{userIdToFollow}")
