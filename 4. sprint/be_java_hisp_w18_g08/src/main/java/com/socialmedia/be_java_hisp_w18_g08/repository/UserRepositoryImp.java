@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
+
 
 @Repository
 public class UserRepositoryImp implements IUserRepository {
@@ -64,6 +64,15 @@ public class UserRepositoryImp implements IUserRepository {
         this.users.add(u2);
         this.users.add(u3);
         this.users.add(u4);
+    }
+
+    @Override
+    public Seller findUserListBySeller(Integer id) {
+        Seller seller = this.sellers.stream()
+                .filter(s -> id == s.getUser_id())
+                .findFirst()
+                .orElse(null);
+        return seller;
     }
 
     @Override
