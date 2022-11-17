@@ -1,7 +1,6 @@
 package com.socialmedia.be_java_hisp_w18_g08.service;
 
-import com.socialmedia.be_java_hisp_w18_g08.dto.FollowedDTO;
-import com.socialmedia.be_java_hisp_w18_g08.dto.PostDtoRes;
+import com.socialmedia.be_java_hisp_w18_g08.dto.response.PostDtoRes;
 import com.socialmedia.be_java_hisp_w18_g08.entity.Post;
 import com.socialmedia.be_java_hisp_w18_g08.entity.Seller;
 import com.socialmedia.be_java_hisp_w18_g08.exception.NotFoundUserException;
@@ -12,12 +11,8 @@ import com.socialmedia.be_java_hisp_w18_g08.repository.UserRepositoryImp;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 @Service
