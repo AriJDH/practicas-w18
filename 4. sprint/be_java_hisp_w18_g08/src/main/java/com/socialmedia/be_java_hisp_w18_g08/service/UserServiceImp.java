@@ -111,4 +111,15 @@ public class UserServiceImp implements IUserService {
             throw new NotFoundUserException("Not found User with id : " + userId);
         return lista;
     }
+
+
+    @Override
+    public String unFollow(Integer userId, Integer userIdToUnfollow) {
+        String message = userRepository.unFollow(userId,userIdToUnfollow);
+        if(message == null)
+            throw new NotFoundUserException("User or Seller not Found");
+        return message;
+    }
+
+
 }

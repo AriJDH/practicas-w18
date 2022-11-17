@@ -9,7 +9,8 @@ import java.util.List;
 public interface IUserRepository {
     Seller findSellerById(Integer id);
 
-
     List<String> follow (Integer userId, Integer userIdToFollow);
     User getUserByID(Integer userId);
+
+    String unFollow(Integer userId,Integer userIdToUnfollow);
 }
