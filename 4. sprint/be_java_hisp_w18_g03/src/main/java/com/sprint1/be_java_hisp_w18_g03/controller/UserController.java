@@ -27,14 +27,14 @@ public class UserController {
     }
 
     @GetMapping("/{userId}/followed/list")
-    public ResponseEntity<FollowedDTO> getFollowedList(@PathVariable Integer userId) {
-        return new ResponseEntity<>(userService.getFollowedList(userId), HttpStatus.OK);
-    }
-
-    @GetMapping("/{userId}/followed/list")
-    public ResponseEntity<FollowedDTO> getFollowedList(@PathVariable Integer userId, @RequestParam String order) {
+    public ResponseEntity<FollowedDTO> getFollowedList(@PathVariable Integer userId, @RequestParam(required = false) String order) {
         return new ResponseEntity<>(userService.getFollowedList(userId, order), HttpStatus.OK);
     }
+
+    /*@GetMapping("/{userId}/followed/list")
+    public ResponseEntity<FollowedDTO> getFollowedList(@PathVariable Integer UserID, @RequestParam(required = true) String order) {
+        return new ResponseEntity<>(userService.getFollowedList(UserID, order), HttpStatus.OK);
+    }*/
 
     @PostMapping("/{userId}/unfollow/{userIdToUnfollow}")
     public ResponseEntity<ResponseDTO> unfollow(@PathVariable Integer userId, @PathVariable Integer userIdToUnfollow) {
