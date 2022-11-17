@@ -23,7 +23,7 @@ import java.util.stream.Collectors;
 
 @Service
 public class PostServiceImpl implements PostService {
-    private long postCount = 1L;
+    private long postCount = 0L;
 
     @Autowired
     MapperPostToPostDTO mapperPostToPostDTO;

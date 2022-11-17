@@ -1,9 +1,6 @@
 package com.meli.be_java_hisp_w18_g01.controllers;
 
-import com.meli.be_java_hisp_w18_g01.dtos.PostDTO;
-import com.meli.be_java_hisp_w18_g01.dtos.ProductDTO;
-import com.meli.be_java_hisp_w18_g01.dtos.ResponseDTO;
-import com.meli.be_java_hisp_w18_g01.dtos.SellerDTO;
+import com.meli.be_java_hisp_w18_g01.dtos.*;
 import com.meli.be_java_hisp_w18_g01.services.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -28,4 +25,21 @@ public class PostController {
     public ResponseEntity<List<SellerDTO>> getRecentPostsFromFollowed(@PathVariable long userId, @RequestParam(required=false) String order){
         return ResponseEntity.ok(postService.getRecentPostsFromFollowed(userId, order));
     }
+
+    @PostMapping("/promo-post")
+    public ResponseEntity<ResponseDTO> addPostPromo(@RequestBody PostPromoDTO postPromoDTO){
+        postService.addPostPromo(postPromoDTO);
+        return ResponseEntity.ok(new ResponseDTO(200,"operación exitosa"));
+    }
+
+    @GetMapping("/promo-post/count")
+    public ResponseEntity<PostPromoCountDTO> getPostPromoCount(@RequestParam long user_id){
+        return ResponseEntity.ok(postService.getPostPromoCount(user_id));
+    }
+
+    @GetMapping("/promo-post/list")
+    public ResponseEntity<SellerPostPromoDTO> getSellerPostPromo(@RequestParam long user_id){
+        return ResponseEntity.ok(postService.getSellerPostPromo(user_id));
+    }
+
 }

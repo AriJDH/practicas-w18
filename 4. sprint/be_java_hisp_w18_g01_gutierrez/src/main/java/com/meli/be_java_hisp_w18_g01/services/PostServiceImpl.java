@@ -23,7 +23,7 @@ import java.util.stream.Collectors;
 
 @Service
 public class PostServiceImpl implements PostService {
-    private long postCount = 1L;
+    private long postCount = 0L;
 
     @Autowired
     MapperPostToPostDTO mapperPostToPostDTO;
@@ -52,6 +52,36 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
+    public void addPostPromo(PostPromoDTO postPromoDTO) {
+        if (!postPromoDTO.isHas_promo()){
+            throw new BadRequestException("Ocurrió un problema al crear la publicación. La promoción no está otorgada.");
+        } else if(postPromoDTO.getDiscount() <= 0 || postPromoDTO.getDiscount() > 1){
+            throw new BadRequestException("Ocurrió un problema al crear la publicación. El valor del descuento no corresponde.");
+        }
+
+        User user = userDbService.findById(postPromoDTO.getUser_id());
+        postCount++;
+        Post post;
+        ObjectMapper mapper = new ObjectMapper();
+
+        try {
+            post = new Post(postCount,
+                    user,
+                    LocalDate.parse(postPromoDTO.getDate()),
+                    mapper.convertValue(postPromoDTO.getProduct(), Product.class),
+                    postPromoDTO.getCategory(),
+                    postPromoDTO.getPrice(),
+                    postPromoDTO.isHas_promo(),
+                    postPromoDTO.getDiscount()
+            );
+        } catch (Exception e) {
+            throw new BadRequestException("Los parámetros para la creación de la publicación son inválidos");
+        }
+        user.addPost(post);
+
+    }
+
+    @Override
     public List<SellerDTO> getRecentPostsFromFollowed(long userId, String order) {
         User user = userDbService.findById(userId);
         List<User> sellers = user.getFollowed().stream()
@@ -71,6 +101,34 @@ public class PostServiceImpl implements PostService {
                 .collect(Collectors.toList());
 
     }
+
+    @Override
+    public PostPromoCountDTO getPostPromoCount(long userId) {
+        User user = userDbService.findById(userId);
+        List<Post> post = user.getPosts().stream().filter(p -> p.isHas_promo() == true).collect(Collectors.toList());
+
+        return new PostPromoCountDTO(user.getUser_id(), user.getUser_name(), post.size());
+    }
+
+    @Override
+    public SellerPostPromoDTO getSellerPostPromo(long userId) {
+        User user = userDbService.findById(userId);
+        ObjectMapper mapper = new ObjectMapper();
+        List<Post> post = user.getPosts().stream().filter(p -> p.isHas_promo() == true).collect(Collectors.toList());
+        List<PostPromoIdDTO> postDto = post.stream().map(p ->
+                new PostPromoIdDTO(p.getUser().getUser_id(),
+                        p.getPost_id(),
+                        p.getDate().toString(),
+                        mapper.convertValue(p.getProduct(), ProductDTO.class),
+                        p.getCategory(),
+                        p.getPrice(),
+                        p.isHas_promo(),
+                        p.getDiscount()
+        )).collect(Collectors.toList());
+
+        return new SellerPostPromoDTO(user.getUser_id(), user.getUser_name(), postDto);
+    }
+
 
     public List<Post> sortPosts(List<Post> posts, String order) {
         Comparator comp;

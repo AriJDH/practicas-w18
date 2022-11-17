@@ -1,5 +1,6 @@
 package com.meli.be_java_hisp_w18_g01.entities;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -8,6 +9,7 @@ import java.time.temporal.ChronoUnit;
 
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
 public class Post {
     private long post_id;
     private User user;
@@ -15,6 +17,8 @@ public class Post {
     private Product product;
     private int category;
     private double price;
+    private boolean has_promo;
+    private double discount;
 
     public Post(long post_id, User user, LocalDate date, Product product, int category, double price) {
         this.post_id = post_id;
@@ -23,6 +27,8 @@ public class Post {
         this.product = product;
         this.category = category;
         this.price = price;
+        this.has_promo = false;
+        this.discount = 0;
     }
 
     public boolean isRecent(){
