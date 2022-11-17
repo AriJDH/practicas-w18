@@ -1,5 +1,6 @@
 package com.sprint1.be_java_hisp_w18_g03.service;
 
+import com.sprint1.be_java_hisp_w18_g03.Repository.IPostRepository;
 import com.sprint1.be_java_hisp_w18_g03.Repository.IUserRepository;
 import com.sprint1.be_java_hisp_w18_g03.dto.response.FollowedDTO;
 import com.sprint1.be_java_hisp_w18_g03.dto.response.FollowerCountDTO;
@@ -19,7 +20,7 @@ public class UserServiceImp implements IUserService {
     @Autowired
     private IUserRepository iUserRepository;
     @Autowired
-    private IPostService iPostService;
+    private IPostRepository iPostRepository;
 
     @Override
     public ResponseDTO follow(Integer userId, Integer userIdToFollow) {
@@ -30,6 +31,8 @@ public class UserServiceImp implements IUserService {
             throw new NoFoundException("Bad Request");
         } else if(userToFollow.getListFollowers().contains(user)){
             throw new NoFoundException("User already follow");
+        } else if(iPostRepository.findByUser(userIdToFollow).size() == 0){
+            throw new NoFoundException("User has not posts");
         }
 
         user.getListFollowed().add(userToFollow);

@@ -5,25 +5,28 @@ import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Repository
 public class PostRepository implements IPostRepository {
-    private List<Post> Posts = new ArrayList<Post>();
+    private List<Post> posts = new ArrayList<Post>();
 
     public Post findByIdPost(int postId) {
-        return Posts.get(postId);
+        return posts.get(postId);
     }
 
     public List<Post> findByUser(int userId) {
-        return Posts;
+        return posts.stream()
+                .filter(post -> post.getUser().getUserId().equals(userId))
+                .collect(Collectors.toList());
     }
 
     public boolean addPost(Post post) {
-        Posts.add(post);
+        posts.add(post);
         return true;
     }
 
     public Integer getPostsSizeList() {
-        return Posts.size();
+        return posts.size();
     }
 }

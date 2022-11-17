@@ -64,45 +64,4 @@ public class UserRepository implements IUserRepository {
         return users;
     }
 
-    public boolean removeFollower(int idUser, int idFollower) {
-
-        User user = findById(idUser);
-        User userToRemoveFollow = findById(idFollower);
-
-        //Comprobacion de que los usuarios existen
-        if (user == null || userToRemoveFollow == null) {
-            return false;
-        }
-
-        //Si el usuario no seguia al otro usuario, retorna falso.
-        if (!user.getListFollowed().removeIf(u -> u.getUserId().equals(idFollower))) {
-            return false;
-        }
-
-        userToRemoveFollow.getListFollowers().removeIf(u -> u.getUserId().equals(idUser));
-        return true;
-    }
-
-    public boolean addFollower(int idUser, int idUserToFollow) {
-        // Se obtienen los usuarios con el metodo findByID
-        User user = findById(idUser);
-        User userToFollow = findById(idUserToFollow);
-
-        if (user == null || userToFollow == null) {
-            return false;
-        }
-
-        // Se agrega en la lista de seguidos del usuario
-        user.getListFollowed().add(userToFollow);
-        // Se agrega en la lista de seguidores del usuario a seguir.
-        userToFollow.getListFollowers().add(user);
-
-        return true;
-    }
-
-    public void removeFollowed(int idUser, int idFollowed) {
-    }
-
-    public void addFollowed(int idUser, int idFollowed) {
-    }
 }
