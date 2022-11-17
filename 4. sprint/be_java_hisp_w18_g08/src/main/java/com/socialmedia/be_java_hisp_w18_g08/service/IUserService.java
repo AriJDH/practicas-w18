@@ -12,7 +12,7 @@ import java.util.List;
 public interface IUserService {
 
     FollowDtoRes follow (FollowDtoReq followDtoReq);
-    FollowedDTO getFollowed(Integer userId);
-    UserListDTO findUserListBySeller(Integer id);
+    FollowedDTO getFollowed(Integer userId, String order);
+    UserListDTO findUserListBySeller(Integer id, String order);
     List<Seller> getFollowedByUserId(Integer userId);
 }

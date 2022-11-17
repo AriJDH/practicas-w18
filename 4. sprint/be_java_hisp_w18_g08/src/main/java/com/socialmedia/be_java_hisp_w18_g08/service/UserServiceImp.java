@@ -5,7 +5,6 @@ import com.socialmedia.be_java_hisp_w18_g08.dto.UserListDTO;
 import com.socialmedia.be_java_hisp_w18_g08.dto.FollowDtoReq;
 import com.socialmedia.be_java_hisp_w18_g08.dto.FollowDtoRes;
 import com.socialmedia.be_java_hisp_w18_g08.dto.FollowedDTO;
-import com.socialmedia.be_java_hisp_w18_g08.dto.SellerDTO;
 import com.socialmedia.be_java_hisp_w18_g08.entity.Seller;
 import com.socialmedia.be_java_hisp_w18_g08.entity.User;
 import com.socialmedia.be_java_hisp_w18_g08.exception.NotFoundUserException;
@@ -14,8 +13,7 @@ import com.socialmedia.be_java_hisp_w18_g08.repository.UserRepositoryImp;
 
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 
 @Service
@@ -33,7 +31,8 @@ public class UserServiceImp implements IUserService {
         FollowDtoRes followDtoRes = new FollowDtoRes();
         res = userRepository.follow(followDtoReq.getUserId(), followDtoReq.getUserIdToFollow());
         if (res == null) {
-            throw new NotFoundUserException("There is no user with the ID " + followDtoReq.getUserId() + " or " + followDtoReq.getUserIdToFollow());
+            throw new NotFoundUserException("There is no user with the ID " + followDtoReq.getUserId() + " or " +
+                    followDtoReq.getUserIdToFollow());
         }
         followDtoRes.setStatusCode(200);
         followDtoRes.setMessage(res.get(0) + " is following " + res.get(1));
@@ -42,26 +41,41 @@ public class UserServiceImp implements IUserService {
 
 
     @Override
-    public FollowedDTO getFollowed(Integer userId) {
+    public FollowedDTO getFollowed(Integer userId, String order) {
         User user = userRepository.getUserByID(userId);
         FollowedDTO response = new FollowedDTO();
         response.setUser_id(user.getUser_id());
         response.setUser_name(user.getUser_name());
-        response.setFollowed(createSellerDTOList(user.getFollowed()));
+        response.setFollowed(createUserDTOList(user.getFollowed(), order));
         return response;
     }
 
-    private List<SellerDTO> createSellerDTOList(List<Seller> followed) {
-        List<SellerDTO> sellers = new ArrayList<>();
+    private List<UserDTO> createUserDTOList(List<Seller> followed, String order) {
+        List<UserDTO> sellers = new ArrayList<>();
         for (Seller s : followed) {
-            SellerDTO aux = new SellerDTO(s.getUser_id(), s.getUser_name());
+            UserDTO aux = new UserDTO(s.getUser_id(), s.getUser_name());
             sellers.add(aux);
         }
+        if(order != null)
+            changeOrder(sellers, order);
         return sellers;
     }
 
+    private void changeOrder(List<UserDTO> list, String order) {
+        Comparator<UserDTO> compareByName =
+                Comparator.comparing(UserDTO::getUser_name);
+        switch (order){
+            case "name_asc":
+                Collections.sort(list, compareByName);
+                break;
+            case "name_desc":
+                Collections.sort(list, compareByName.reversed());
+                break;
+        }
+    }
+
     @Override
-    public UserListDTO findUserListBySeller(Integer id) {
+    public UserListDTO findUserListBySeller(Integer id, String order) {
         Seller seller = userRepository.findUserListBySeller(id);
         if (seller == null)
             throw new NotFoundUserException("El usuario no fue encontrado");
@@ -72,15 +86,17 @@ public class UserServiceImp implements IUserService {
             userDto.setUser_name(s.getUser_name());
             usersDTO.add(userDto);
         }
+        if(order != null)
+            changeOrder(usersDTO, order);
         UserListDTO userListDTO = new UserListDTO(seller.getUser_id(), seller.getUser_name(), usersDTO);
         return userListDTO;
     }
 
-    public List<Seller> getFollowedByUserId(Integer userId){
-      List<Seller> lista = userRepository.getUserByID(userId).getFollowed();
-      if(lista.isEmpty())
-          throw new NotFoundUserException("Not found User with id : " + userId );
-      return  lista;
+    public List<Seller> getFollowedByUserId(Integer userId) {
+        List<Seller> lista = userRepository.getUserByID(userId).getFollowed();
+        if (lista.isEmpty())
+            throw new NotFoundUserException("Not found User with id : " + userId);
+        return lista;
     }
 
 }
