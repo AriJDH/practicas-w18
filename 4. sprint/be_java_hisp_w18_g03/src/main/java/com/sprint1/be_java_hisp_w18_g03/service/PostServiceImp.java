@@ -13,6 +13,9 @@ import com.sprint1.be_java_hisp_w18_g03.exception.NoFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 public class PostServiceImp implements IPostService {
     @Autowired

@@ -21,7 +21,8 @@ public class PostController {
     }
 
     @GetMapping("/followed/{userId}/list")
-    public ResponseEntity<ResponseDTO> getFollowedListDateAsc(@RequestParam) {
-        return new ResponseEntity<>(postService.createPost(requestPostDTO),HttpStatus.OK);
+    public ResponseEntity<ResponseDTO> getFollowedOrderedList(@RequestParam String order) {
+        //return new ResponseEntity<>(postService.createPost(requestPostDTO),HttpStatus.OK);
+        return null;
     }
 }
