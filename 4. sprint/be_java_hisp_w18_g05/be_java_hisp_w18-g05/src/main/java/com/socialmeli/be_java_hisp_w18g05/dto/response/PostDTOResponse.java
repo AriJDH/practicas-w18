@@ -13,7 +13,7 @@ import java.time.LocalDate;
 public class PostDTOResponse {
     private Integer user_id;
     private Integer post_id;
-    private LocalDate date;
+    private String date;
     private ProductDTOResponse product;
     private Integer category;
     private Double price;

@@ -23,6 +23,7 @@ import com.socialmeli.be_java_hisp_w18g05.exceptions.InvalidException;
 import com.socialmeli.be_java_hisp_w18g05.exceptions.NotFoundException;
 import com.socialmeli.be_java_hisp_w18g05.repository.IRepository;
 import lombok.Data;
+import org.springframework.cglib.core.Local;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -145,13 +146,18 @@ public class ServiceImp implements IService {
         if (listSeller == null) {
             throw new NotFoundException("Buyer id " + userId + " doesn´t have followers");
         }
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        String stringDateFormatter;
 
         List<PostDTOResponse> listPostDTO = new ArrayList<>();
         for (Seller s : listSeller) {
             for( Post p: s.getPosts()){
-                listPostDTO.add( new PostDTOResponse(s.getUser_id(), p.getPost_id(), p.getDate(), op.convertValue(p.getProduct(), ProductDTOResponse.class), p.getCategory(), p.getPrice()));
+                stringDateFormatter = p.getDate().format(formatter);
+                listPostDTO.add( new PostDTOResponse(s.getUser_id(), p.getPost_id(), stringDateFormatter, op.convertValue(p.getProduct(), ProductDTOResponse.class), p.getCategory(), p.getPrice()));
             }
         }
+
+
 
         if(order.equals("date_asc")){
             listPostDTO.sort(Comparator.comparing(PostDTOResponse::getDate)); // ordenamiento descenciente por fechas
@@ -163,11 +169,11 @@ public class ServiceImp implements IService {
         // filter by date minus 2 weeks
         List<PostDTOResponse> listPostAux = new ArrayList<>();
         for (PostDTOResponse p : listPostDTO) {
-            if (p.getDate().isAfter(LocalDate.now().minusWeeks(2))) {
+            LocalDate localDateFormatter = LocalDate.parse(p.getDate(), formatter);
+            if (localDateFormatter.isAfter(LocalDate.now().minusWeeks(2))) {
                 listPostAux.add(p);
             }
         }
-
         return new SellerPostListDTOResponse(userId, listPostAux);
     }
 
@@ -305,7 +311,7 @@ public class ServiceImp implements IService {
 
         LocalDate localDate = LocalDate.parse(post.getDate(),formatter);
 
-        Post newPost = new Post(post.getUser_id(), localDate,product ,post.getCategory(),post.getPrice());
+        Post newPost = new Post(repository.addPost(), localDate,product ,post.getCategory(),post.getPrice());
 
         seller.getPosts().add(newPost);
     }

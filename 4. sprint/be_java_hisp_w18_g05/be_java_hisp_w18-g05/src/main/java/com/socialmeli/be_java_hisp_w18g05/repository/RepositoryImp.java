@@ -19,7 +19,10 @@ public class RepositoryImp implements IRepository{
     private final List<Buyer> buyers = new ArrayList<>();
     private final List<Seller> sellers = new ArrayList<>();
 
+    private Integer idPost;
+
     public RepositoryImp() {
+        idPost = 1;
         fillDB();
     }
 
@@ -34,8 +37,8 @@ public class RepositoryImp implements IRepository{
     }
 
     @Override
-    public void addPost(Integer seller_id, Post post) {
-
+    public int addPost() {
+        return idPost ++;
     }
 
     @Override
@@ -61,10 +64,6 @@ public class RepositoryImp implements IRepository{
         sellers.add(new Seller(30, "seller3"));
         sellers.add(new Seller(40, "seller4"));
         sellers.add(new Seller(50, "seller5"));
-
-        sellers.get(1).addPost(new Post(1, LocalDate.parse("2021-01-21"), new Product(62, "Headset RGB Inalámbrico", "Gamer", "Razer", "Green with RGB","Sin Batería"), 100, 2800.69));
-        sellers.get(0).addPost(new Post(2, LocalDate.parse("2022-11-17"), new Product(62, "Silla Gamer", "Gamer", "Razer", "Green with RGB","Special Edition"), 100, 2800.69));
-        sellers.get(1).addPost(new Post(3, LocalDate.parse("2022-11-16"), new Product(62, "Headset RGB Inalámbrico", "Gamer", "Razer", "Green with RGB","Sin Batería"), 100, 2800.69));
-
+        
     }
 }
