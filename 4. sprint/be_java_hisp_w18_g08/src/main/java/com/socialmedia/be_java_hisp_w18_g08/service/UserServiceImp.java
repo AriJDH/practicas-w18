@@ -62,7 +62,7 @@ public class UserServiceImp implements IUserService {
 
     @Override
     public UserListDTO findUserListBySeller(Integer id) {
-        Seller seller = userRepository.findUserListBySeller(id);
+        Seller seller = userRepository.findSellerById(id);
         if (seller == null)
             throw new NotFoundUserException("El usuario no fue encontrado");
         UserDTO userDto = new UserDTO();
@@ -81,6 +81,14 @@ public class UserServiceImp implements IUserService {
       if(lista.isEmpty())
           throw new NotFoundUserException("Not found User with id : " + userId );
       return  lista;
+    }
+
+    @Override
+    public String unFollow(Integer userId, Integer userIdToUnfollow) {
+        String message = userRepository.unFollow(userId,userIdToUnfollow);
+        if(message == null)
+            throw new NotFoundUserException("User or Seller not Found");
+        return message;
     }
 
 }

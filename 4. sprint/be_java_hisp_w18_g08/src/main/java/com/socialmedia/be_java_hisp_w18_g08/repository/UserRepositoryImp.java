@@ -4,6 +4,7 @@ import com.socialmedia.be_java_hisp_w18_g08.entity.Post;
 import com.socialmedia.be_java_hisp_w18_g08.entity.Seller;
 import com.socialmedia.be_java_hisp_w18_g08.entity.User;
 import com.socialmedia.be_java_hisp_w18_g08.exception.NotFoundUserException;
+import lombok.Getter;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
@@ -11,6 +12,7 @@ import java.util.List;
 
 
 @Repository
+@Getter
 public class UserRepositoryImp implements IUserRepository {
     List<User> users;
     List<Seller> sellers;
@@ -66,8 +68,9 @@ public class UserRepositoryImp implements IUserRepository {
         this.users.add(u4);
     }
 
+    //refactorizar nombre
     @Override
-    public Seller findUserListBySeller(Integer id) {
+    public Seller findSellerById(Integer id) {
         Seller seller = this.sellers.stream()
                 .filter(s -> id == s.getUser_id())
                 .findFirst()
@@ -89,7 +92,6 @@ public class UserRepositoryImp implements IUserRepository {
         }
         throw new NotFoundUserException("There is no user with the ID " + userId);
     }
-
 
     @Override
     public List<String> follow(Integer userId, Integer userIdToFollow) {
@@ -114,5 +116,16 @@ public class UserRepositoryImp implements IUserRepository {
             return null;
         }
         return nombres;
+    }
+
+    @Override
+    public String unFollow(Integer userId, Integer userIdToUnfollow) {
+           User user = getUserByID(userId);
+           Seller seller = findSellerById(userIdToUnfollow);
+           if(user == null || seller==null)
+               return null;
+           user.getFollowed().remove(seller);
+           seller.getFollowers().remove(user);
+           return user.getUser_name() +" with id: " + userId + " unfollow to -> " + seller.getUser_name() + " with id: "+ userIdToUnfollow;
     }
 }

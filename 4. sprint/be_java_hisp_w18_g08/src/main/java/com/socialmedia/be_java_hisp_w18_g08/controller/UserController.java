@@ -43,4 +43,9 @@ public class UserController {
         UserListDTO userListDTO = userService.findUserListBySeller(userId);
         return ResponseEntity.ok().body(userListDTO);
     }
+
+    @GetMapping("/{userId}/unfollow/{userIdToUnfollow}")
+    public ResponseEntity<String> unFollow(@PathVariable Integer userId, @PathVariable Integer userIdToUnfollow){
+        return new ResponseEntity<>(userService.unFollow(userId,userIdToUnfollow),HttpStatus.OK);
+    }
 }
