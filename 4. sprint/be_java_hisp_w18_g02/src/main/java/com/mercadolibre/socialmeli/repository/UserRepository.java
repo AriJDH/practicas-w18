@@ -72,6 +72,7 @@ public class UserRepository implements IUserRepository{
 
     @Override
     public List<User> getFollowed(Integer id) {
+        if(findById(id) == null) throw new NotFoundException("No se pudo encontrar al usuario " + id);
         User user = users.get(id);
         Set<User> users = user.getFollowed();
 
