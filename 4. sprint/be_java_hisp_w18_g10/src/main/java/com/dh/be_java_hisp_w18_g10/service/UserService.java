@@ -61,6 +61,8 @@ public class UserService implements IUserService {
 
         if(!user2.getPosts().isEmpty()){
             user1.getFollowed().put(user2.getUserId(),user2);
+        }else{
+            throw new UserGenericException("El usuario con el id: "+userIdToFollow+" no es un vendedor!");
         }
         user2.getFollowers().put(user1.getUserId(), user1);
     }
