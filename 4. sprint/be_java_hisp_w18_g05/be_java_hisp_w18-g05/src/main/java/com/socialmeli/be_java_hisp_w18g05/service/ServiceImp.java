@@ -4,8 +4,8 @@ import com.socialmeli.be_java_hisp_w18g05.dto.response.BuyerDTOResponse;
 import com.socialmeli.be_java_hisp_w18g05.dto.response.SellerFollowersListDTOResponse;
 import com.socialmeli.be_java_hisp_w18g05.entity.Buyer;
 import com.socialmeli.be_java_hisp_w18g05.entity.Seller;
+import com.socialmeli.be_java_hisp_w18g05.exceptions.NotFoundException;
 import com.socialmeli.be_java_hisp_w18g05.repository.IRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -39,4 +39,33 @@ public class ServiceImp implements IService{
         SellerFollowersListDTOResponse sellerFollowersListDTOResponse = new SellerFollowersListDTOResponse(seller.getUser_id(), seller.getName(), followersDTO);
         return sellerFollowersListDTOResponse;
     }
+    @Override
+    public void follow(Integer userId, Integer userIdToFollow) {
+
+        Seller s = repository.getByIdSeller(userIdToFollow);
+        Buyer b = repository.getByIdBuyer(userId);
+        if (s == null) {
+            throw new NotFoundException("Seller id " + userId + " not found");
+        }
+        if (b == null) {
+            throw new NotFoundException("Buyer id " + userIdToFollow + " not found");
+        }
+        b.addFollowed(s);
+        s.addFollower(b);
+    }
+
+    @Override
+    public void unfollow(Integer userId, Integer userIdToUnfollow){
+        Seller s = repository.getByIdSeller(userIdToUnfollow);
+        Buyer b = repository.getByIdBuyer(userId);
+        if (s == null) {
+            throw new NotFoundException("Seller id " + userId + " not found");
+        }
+        if (b == null) {
+            throw new NotFoundException("Buyer id " + userIdToUnfollow + " not found");
+        }
+        b.unFollowed(s);
+        s.unFollower(b);
+    }
+
 }

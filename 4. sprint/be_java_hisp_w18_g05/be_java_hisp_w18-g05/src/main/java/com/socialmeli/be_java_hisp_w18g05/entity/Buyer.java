@@ -28,5 +28,9 @@ public class Buyer extends User {
     public void addFollowed(Seller seller){
         followeds.add(seller);
     }
+
+    public void unFollowed(Seller seller){
+        followeds.remove(seller);
+    }
 }
 

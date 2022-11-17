@@ -13,8 +13,8 @@ import java.util.List;
 @Repository
 public class RepositoryImp implements IRepository{
 
-    private List<Buyer> buyers = new ArrayList<>();
-    private List<Seller> sellers = new ArrayList<>();
+    private final List<Buyer> buyers = new ArrayList<>();
+    private final List<Seller> sellers = new ArrayList<>();
 
     public RepositoryImp() {
         fillDB();
@@ -37,12 +37,12 @@ public class RepositoryImp implements IRepository{
 
     @Override
     public Buyer getByIdBuyer(Integer buyer_id) {
-        return null;
+        return buyers.stream().filter(b->b.getUser_id().equals(buyer_id)).findFirst().orElse(null);
     }
 
     @Override
     public Seller getByIdSeller(Integer seller_id) {
-        return null;
+        return sellers.stream().filter(s->s.getUser_id().equals(seller_id)).findFirst().orElse(null);
     }
 
     void fillDB(){
@@ -52,6 +52,7 @@ public class RepositoryImp implements IRepository{
         buyers.add(new Buyer(3, "buyer3"));
         buyers.add(new Buyer(4, "buyer4"));
         buyers.add(new Buyer(5, "buyer5"));
+
 
         sellers.add(new Seller(1, "seller1"));
         sellers.add(new Seller(2, "seller2"));

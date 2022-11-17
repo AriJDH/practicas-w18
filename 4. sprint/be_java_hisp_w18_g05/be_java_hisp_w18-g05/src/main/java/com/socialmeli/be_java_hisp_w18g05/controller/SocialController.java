@@ -1,5 +1,6 @@
 package com.socialmeli.be_java_hisp_w18g05.controller;
 
+
 import com.socialmeli.be_java_hisp_w18g05.dto.response.SellerFollowersListDTOResponse;
 import com.socialmeli.be_java_hisp_w18g05.service.IService;
 import com.socialmeli.be_java_hisp_w18g05.service.ServiceImp;
@@ -22,6 +23,19 @@ public class SocialController {
     @GetMapping("/users/{userId}/followers/list")
     public ResponseEntity<SellerFollowersListDTOResponse> followersList(@PathVariable Integer userId){
         return new ResponseEntity<>(service.getFollowers(userId), HttpStatus.OK);
+    }
+
+    @PostMapping("/users/{userId}/follow/{userIdToFollow}")
+    public ResponseEntity<?> follow(@PathVariable Integer userId, @PathVariable Integer userIdToFollow){
+        service.follow(userId, userIdToFollow);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @PostMapping("/users/{userId}/unfollow/{userIdToUnfollow}")
+    public ResponseEntity<?> unfollow(@PathVariable Integer userId, @PathVariable Integer userIdToUnfollow){
+        service.unfollow(userId, userIdToUnfollow);
+        return new ResponseEntity<>(HttpStatus.OK);
+
     }
 
 }

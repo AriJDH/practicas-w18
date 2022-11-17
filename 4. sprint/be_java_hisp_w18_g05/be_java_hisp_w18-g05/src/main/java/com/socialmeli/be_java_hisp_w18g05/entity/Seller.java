@@ -32,4 +32,7 @@ public class Seller extends User {
     public void addFollower(Buyer buyer){
         followers.add(buyer);
     }
+    public void unFollower(Buyer buyer){
+        followers.remove(buyer);
+    }
 }

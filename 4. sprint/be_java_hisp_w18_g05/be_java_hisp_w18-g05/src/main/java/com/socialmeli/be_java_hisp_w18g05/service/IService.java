@@ -7,4 +7,8 @@ import java.util.List;
 public interface IService {
 
     SellerFollowersListDTOResponse getFollowers(Integer seller_id);
+
+    void follow(Integer userId, Integer userIdToFollow);
+    void unfollow(Integer userId, Integer userIdToUnfollow);
+
 }
