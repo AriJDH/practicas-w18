@@ -1,24 +1,24 @@
 package com.socialmedia.be_java_hisp_w18_g08.repository;
 
 import com.socialmedia.be_java_hisp_w18_g08.entity.Post;
-import com.socialmedia.be_java_hisp_w18_g08.entity.Product;
 import com.socialmedia.be_java_hisp_w18_g08.entity.Seller;
 import com.socialmedia.be_java_hisp_w18_g08.entity.User;
-import lombok.Getter;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.socialmedia.be_java_hisp_w18_g08.exception.NotFoundUserException;
 import org.springframework.stereotype.Repository;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
+import java.util.Optional;
 
 @Repository
-public class UserRepositoryImp implements IUserRepository{
+public class UserRepositoryImp implements IUserRepository {
     List<User> users;
     List<Seller> sellers;
     IPostRepository postRepository;
-    public UserRepositoryImp(PostRepositoryImp postRepository){
+
+    public UserRepositoryImp(PostRepositoryImp postRepository) {
+        users = new ArrayList<>();
+        sellers = new ArrayList<>();
         //Carga de Datos inicial
         this.postRepository = postRepository;
         List<User> followers = new ArrayList<>();
@@ -34,19 +34,16 @@ public class UserRepositoryImp implements IUserRepository{
         post5.add(postRepository.getPosts().get(2));
         post6.add(postRepository.getPosts().get(3));
 
-
-        Seller s3= new Seller(3,"User3",followed,post3,followers);
-        Seller s4= new Seller(4,"User4",followed,post4,followers);
-        Seller s1= new Seller(5,"User5",followed,post5,followers);
-        Seller s2= new Seller(6,"User6",followed,post6,followers);
-
-
-        User u1 = new User(1,"User1",followed);
-        User u2 = new User(2,"User2",followed);
-        User u3 = new User(3,"User3",followed);
-        User u4 = new User(4,"User4",followed);
+        Seller s3 = new Seller(3, "User3", followed, post3, followers);
+        Seller s4 = new Seller(4, "User4", followed, post4, followers);
+        Seller s1 = new Seller(5, "User5", followed, post5, followers);
+        Seller s2 = new Seller(6, "User6", followed, post6, followers);
 
 
+        User u1 = new User(1, "User1", followed);
+        User u2 = new User(2, "User2", followed);
+        User u3 = new User(3, "User3", followed);
+        User u4 = new User(4, "User4", followed);
 
         followers.add(u1);
         followers.add(u2);
@@ -67,7 +64,21 @@ public class UserRepositoryImp implements IUserRepository{
         this.users.add(u2);
         this.users.add(u3);
         this.users.add(u4);
+    }
 
+    @Override
+    public User getUserByID(Integer userId) {
+        User found = null;
+        int i = 0;
+        while (i < users.size() && found == null) {
+            if(users.get(i).getUser_id() == userId)
+                found = users.get(i);
+            i++;
+        }
+        if (found != null) {
+            return found;
+        }
+        throw new NotFoundUserException("There is no user with the ID " + userId);
     }
 
 
