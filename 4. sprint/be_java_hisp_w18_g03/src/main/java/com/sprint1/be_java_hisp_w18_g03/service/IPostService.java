@@ -9,6 +9,5 @@ public interface IPostService {
 
     ResponseDTO createPost(RequestPostDTO request);
 
-    SellersPostDTO getPostSellers(Integer userId);
-
+    SellersPostDTO getPostSellers(Integer userId, String order);
 }

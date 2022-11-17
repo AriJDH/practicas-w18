@@ -13,8 +13,6 @@ public interface IUserService {
 
     FollowersDTO getFollowersList(Integer userId);
 
-    FollowedDTO getFollowedList(Integer userId);
-
     FollowedDTO getFollowedList(Integer userId, String order);
 
     ResponseDTO unfollow(Integer userId, Integer followId);
