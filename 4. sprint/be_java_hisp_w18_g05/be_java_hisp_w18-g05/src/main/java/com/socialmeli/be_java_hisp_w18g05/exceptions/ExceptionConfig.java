@@ -21,4 +21,12 @@ public class ExceptionConfig {
                 new ErrorExceptionDTOResponse(noFoundException.getMessage(), HttpStatus.NOT_FOUND.value()),
                 HttpStatus.NOT_FOUND);
     }
+
+    @ExceptionHandler
+    public ResponseEntity<ErrorExceptionDTOResponse> invalidParameterException(InvalidParameterException invalidParameterException){
+        return new ResponseEntity<>(
+                new ErrorExceptionDTOResponse(invalidParameterException.getMessage(), HttpStatus.BAD_REQUEST.value()),
+                HttpStatus.BAD_REQUEST);
+
+    }
 }
