@@ -53,6 +53,4 @@ public class UserController {
         return new ResponseEntity<>(userService.getFollowersList(userId), HttpStatus.OK);
     }
 
-
-
 }
