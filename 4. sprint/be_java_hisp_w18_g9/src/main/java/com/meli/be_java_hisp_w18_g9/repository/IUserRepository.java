@@ -11,4 +11,7 @@ public interface IUserRepository{
     User save(User entity);
     void deleteById(Integer id);
     Integer update(User entity);
+
+
+
 }

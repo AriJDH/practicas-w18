@@ -1,5 +1,6 @@
 package com.meli.be_java_hisp_w18_g9.controller;
 
+import com.meli.be_java_hisp_w18_g9.model.dto.response.UserFollowedListResponse;
 import com.meli.be_java_hisp_w18_g9.service.IUserService;
 import com.meli.be_java_hisp_w18_g9.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,11 +14,20 @@ import java.util.List;
 @RequestMapping("/users")
 public class UsersController {
 
-    UserService userService = new UserService();
+    //UserService userService = new UserService();
+    @Autowired
+    IUserService userService;
+
 
     @PostMapping("/{userId}/follow/{userIdToFollow}")
     public ResponseEntity<HttpStatus> getPlatoInfoPlato(@PathVariable Integer userId, @PathVariable Integer userIdToFollow) throws Throwable {
         return new ResponseEntity<>(userService.follow(userId,userIdToFollow));
+    }
+
+    @GetMapping("/{userId}/followed/list")
+    public ResponseEntity<UserFollowedListResponse> userFollowedList(@PathVariable Integer userId){
+
+        return new ResponseEntity<>(userService.findAllFollowed(userId),HttpStatus.OK);
     }
 
 
