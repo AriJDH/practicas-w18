@@ -15,6 +15,7 @@ public class Post {
 
     @JsonProperty("user_id")
     private int userId;
+    private int post_id;
     private LocalDate date;
     private Product product;
     private int category;

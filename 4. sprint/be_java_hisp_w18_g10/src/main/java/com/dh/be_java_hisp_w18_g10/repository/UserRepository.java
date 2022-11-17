@@ -1,8 +1,14 @@
 package com.dh.be_java_hisp_w18_g10.repository;
 
+import com.dh.be_java_hisp_w18_g10.entity.Post;
+import com.dh.be_java_hisp_w18_g10.entity.Product;
 import com.dh.be_java_hisp_w18_g10.entity.User;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDate;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -16,7 +22,6 @@ public class UserRepository implements IUserRepository{
     }
 
     private void loadUsers(){
-
         count++;
         User user1 = new User();
         user1.setUserId(count);
@@ -45,20 +50,41 @@ public class UserRepository implements IUserRepository{
         followedUsuer3.put(user2.getUserId(), user2);
         user3.setFollowed(followedUsuer3);
 
+        user2.getPosts().put(getListPosts().get(0).getPost_id(),getListPosts().get(0));
+        user2.getPosts().put(getListPosts().get(1).getPost_id(),getListPosts().get(1));
+        user2.getPosts().put(getListPosts().get(2).getPost_id(),getListPosts().get(2));
+
         this.users.put(user1.getUserId(), user1);
         this.users.put(user2.getUserId(), user2);
         this.users.put(user3.getUserId(), user3);
+
     }
 
     @Override
     public User getUser(int id) {
-        User user = users.get(id);
-        return user;
+        return this.users.get(id);
     }
 
     @Override
     public List<User> getUsers() {
         return null;
+    }
+
+    private List<Post> getListPosts(){
+
+        LocalDate old = LocalDate.of(2000,12,12);
+        LocalDate lastWeek = LocalDate.of(2022,11,1);
+        Post post1 = new Post(1,1, old,getListProduct().get(0),23,340.00);
+        Post post2 = new Post(1,2, lastWeek,getListProduct().get(1),4,456);
+        Post post3 = new Post(1,3, LocalDate.now(),getListProduct().get(2),77,865);
+        return List.of(post1,post2,post3);
+    }
+    private List<Product> getListProduct(){
+        Product product = new Product(1,"Buzo","Ropa","Nike","Gris","Para usar en invierno");
+        Product product2 = new Product(1,"Pantalon","Ropa","Adida","Negro","Para usar en Otoño");
+        Product product3 = new Product(1,"Remera","Ropa","Levis","Blanco","Para usar en Verano");
+
+        return List.of(product,product2,product3);
     }
 
     @Override

@@ -1,13 +1,13 @@
 package com.dh.be_java_hisp_w18_g10.util;
 
 import com.dh.be_java_hisp_w18_g10.dto.require.PostDTOreq;
-import com.dh.be_java_hisp_w18_g10.dto.response.UserFollowedListDTOres;
-import com.dh.be_java_hisp_w18_g10.dto.response.UserFollowersListDTOres;
-import com.dh.be_java_hisp_w18_g10.dto.response.UserPostsDTOres;
+import com.dh.be_java_hisp_w18_g10.dto.response.*;
 import com.dh.be_java_hisp_w18_g10.entity.Post;
+import com.dh.be_java_hisp_w18_g10.entity.Product;
 import com.dh.be_java_hisp_w18_g10.entity.User;
 import org.modelmapper.ModelMapper;
 
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 public class DTOMapper {
@@ -35,5 +35,33 @@ public class DTOMapper {
 
 
         return null;
+    }
+
+    public static PostDTOres mapTo(Post post){
+        PostDTOres postRes = new PostDTOres();
+        postRes.setUser_id(post.getUserId());
+        postRes.setPost_id(post.getPost_id());
+        //Parse fecha, ya que el DTO la maneja como String
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        String postDate = post.getDate().format(formatter);
+        postRes.setDate(postDate);
+        //Fin de parseo y asignacion de fecha
+        postRes.setPrice(post.getPrice());
+        //Aca tengo que mapear de Product a ProductDTOres
+        postRes.setProduct(mapTo(post.getProduct()));
+        //Fin mapeo
+        postRes.setCategory(post.getCategory());
+        return postRes;
+    }
+
+    public static ProductDTOres mapTo(Product product){
+        ProductDTOres productDTOres = new ProductDTOres();
+        productDTOres.setProduct_id(product.getProductId());
+        productDTOres.setType(product.getType());
+        productDTOres.setProduct_name(product.getProductName());
+        productDTOres.setBrand(product.getBrand());
+        productDTOres.setColor(product.getColor());
+        productDTOres.setNotes(product.getNotes());
+        return productDTOres;
     }
 }
