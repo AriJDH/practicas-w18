@@ -11,7 +11,7 @@ import java.time.LocalDate;
 @Getter
 public class NewPostDTORequest {
     private Integer user_id;
-    private LocalDate date;
+    private String date;
     private ProductDTORequest product;
     private Integer category;
     private Double price;

@@ -11,13 +11,11 @@ import java.util.List;
 @Data
 public class Seller extends User {
 
-    private List<Buyer> followers;
-    private List<Post> posts;
+    private List<Buyer> followers = new ArrayList<>();
+    private List<Post> posts = new ArrayList<>();
 
     public Seller(Integer user_id, String name) {
         super(user_id, name);
-        this.followers = new ArrayList<>();
-        this.posts = new ArrayList<>();
     }
 
     public Seller(Integer user_id, String name, List<Buyer> followers) {

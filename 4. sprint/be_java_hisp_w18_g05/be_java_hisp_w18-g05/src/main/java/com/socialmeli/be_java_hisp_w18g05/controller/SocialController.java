@@ -2,6 +2,15 @@ package com.socialmeli.be_java_hisp_w18g05.controller;
 
 
 import com.socialmeli.be_java_hisp_w18g05.dto.response.SellerFollowersCountDTOResponse;
+
+import com.socialmeli.be_java_hisp_w18g05.dto.request.NewPostDTORequest;
+
+
+import com.socialmeli.be_java_hisp_w18g05.dto.response.BuyerFollowedListDTOResponse;
+
+
+import com.socialmeli.be_java_hisp_w18g05.dto.response.SellerFollowersCountDTOResponse;
+
 import com.socialmeli.be_java_hisp_w18g05.dto.response.SellerFollowersListDTOResponse;
 import com.socialmeli.be_java_hisp_w18g05.dto.response.SellerPostListDTOResponse;
 import com.socialmeli.be_java_hisp_w18g05.service.IService;
@@ -13,6 +22,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.function.EntityResponse;
 
 import java.util.List;
@@ -23,6 +33,10 @@ public class SocialController {
 
     public SocialController(ServiceImp service) {
         this.service = service;
+    }
+    @GetMapping("/users/{userId}/followed/list") // US0004
+    public ResponseEntity<BuyerFollowedListDTOResponse > followedList(@PathVariable Integer userId){
+        return new ResponseEntity<>(service.getFolloweds(userId),HttpStatus.OK);
     }
 
     @GetMapping("/users/{userId}/followers/list")
@@ -40,7 +54,6 @@ public class SocialController {
     public ResponseEntity<?> unfollow(@PathVariable Integer userId, @PathVariable Integer userIdToUnfollow){
         service.unfollow(userId, userIdToUnfollow);
         return new ResponseEntity<>(HttpStatus.OK);
-
     }
 
     @GetMapping("/users/{userId}/followers/count")
@@ -53,5 +66,13 @@ public class SocialController {
     public ResponseEntity<SellerPostListDTOResponse> followedPostList(@PathVariable Integer userId){
         return new ResponseEntity<>(service.followedPostList(userId), HttpStatus.OK);
     }
+
+    @PostMapping("/products/post")
+    public ResponseEntity<String> addPost(@RequestBody NewPostDTORequest post){
+        service.newPost(post);
+        return new ResponseEntity<>( "Post realizado correctamente ", HttpStatus.OK);
+    }
+
+
 
 }
