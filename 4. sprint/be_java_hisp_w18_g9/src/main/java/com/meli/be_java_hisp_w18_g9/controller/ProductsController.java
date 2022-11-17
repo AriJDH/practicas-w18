@@ -36,7 +36,7 @@ public class ProductsController {
     // * ============== *
 
     @GetMapping("/followed/{userId}/list")
-    public ResponseEntity<List<PostListByFollowedResponse>> findFollowedByUserId(@PathVariable Integer userId, @RequestParam(required = false) String order) {
+    public ResponseEntity<PostListByFollowedResponse> findFollowedByUserId(@PathVariable Integer userId, @RequestParam(required = false) String order) {
 
         if(order != null){
             if(order.equals("date_asc")) {
@@ -46,16 +46,16 @@ public class ProductsController {
             }else {
                 throw new BadRequestException(String.format("The order %s is not valid, please use date_asc or date_desc", order));
             }
+        }else{
+            return new ResponseEntity<>(iPostService.findPostsByFollowedAndUserId(userId), HttpStatus.OK);
         }
-
-        return new ResponseEntity<>(iPostService.findPostsByFollowedAndUserId(userId), HttpStatus.OK);
-
     }
+
 
     // * ===== [POST] ===== *
 
     @PostMapping("/post")
-    public ResponseEntity<String> addPost(@RequestBody PostDtoRequest postDtoRequest){
+    public ResponseEntity<PostDtoResponse> addPost(@RequestBody PostDtoRequest postDtoRequest){
         iPostService.addPost(postDtoRequest);
         return new ResponseEntity<>(HttpStatus.OK);
     }

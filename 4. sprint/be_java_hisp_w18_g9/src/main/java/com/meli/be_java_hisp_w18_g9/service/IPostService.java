@@ -15,9 +15,10 @@ public interface IPostService {
 
     void addPost(PostDtoRequest postDtoRequest);
     List<PostDtoResponse> findAll();
-    List<PostListByFollowedResponse> findPostsByFollowedAndUserId(Integer userId); // US-0006
-    List<PostListByFollowedResponse> findPostsByFollowedAndUserIdOrderByDateAsc(Integer userId); // US-0009A
-    List<PostListByFollowedResponse> findPostsByFollowedAndUserIdOrderByDateDesc(Integer userId); // US-0019B
+    List<PostListByFollowedResponse> findListPostsByFollowedAndUserId(Integer userId);
+    PostListByFollowedResponse findPostsByFollowedAndUserId(Integer userId); // US-0006
+    PostListByFollowedResponse findPostsByFollowedAndUserIdOrderByDateAsc(Integer userId); // US-0009A
+    PostListByFollowedResponse findPostsByFollowedAndUserIdOrderByDateDesc(Integer userId); // US-0019B
     PromoPostRequest savePromo(PromoPostRequest promoPostRequest); // US-0010
     PromoProductsCountResponse countPromoByUserId(Integer userId); // US-0011
     List<PromoPostListByUserResponse> findPromoByUserId(Integer userId); // US-0012

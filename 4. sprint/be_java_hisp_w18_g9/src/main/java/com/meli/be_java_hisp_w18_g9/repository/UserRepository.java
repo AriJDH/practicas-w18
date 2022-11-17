@@ -32,7 +32,7 @@ public class UserRepository implements IUserRepository {
         List<User> followed = List.of(user1);
 
         users.put(3, new User(3, "User 3", new ArrayList<>(), new ArrayList<>(), products));
-        users.put(2, new User(2, "User 2", new ArrayList<>(), followed, products));
+        users.put(2, new User(2, "User 2", new ArrayList<>(), new ArrayList<>(), products));
     }
 
 

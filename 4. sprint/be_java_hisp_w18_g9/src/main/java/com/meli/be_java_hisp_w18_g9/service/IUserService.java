@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface IUserService {
     HttpStatus follow(Integer userId, Integer userIdToFollow) throws Throwable;
-
+    HttpStatus unfollow(Integer userId, Integer userIdToUnfollow) throws Throwable;
     UserFollowedListResponse findAllFollowed (Integer id);
     FollowersCountUserResponse findUserFollowedQuantity(Integer id);
 
