@@ -1,6 +1,5 @@
 package com.bootcamp.be_java_hisp_w18_g06.controller;
 
-import com.bootcamp.be_java_hisp_w18_g06.exceptions.NotFoundException;
 import com.bootcamp.be_java_hisp_w18_g06.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -23,6 +22,14 @@ public class UserController {
 
             userService.followUser(userId, userIdToFollow);
             return new ResponseEntity<>(HttpStatus.OK);
+
+    }
+
+    @PostMapping("/{userId}/unfollow/{userIdToUnfollow}")
+    public ResponseEntity<?> unfollowUser(@PathVariable int userId, @PathVariable int userIdToUnfollow) {
+
+        userService.unfollowUser(userId, userIdToUnfollow);
+        return new ResponseEntity<>(HttpStatus.OK);
 
     }
 
