@@ -72,6 +72,7 @@ public class UserRepository implements IUserRepository {
 		posts.add(post2);
 		users.add(user1);
 		users.add(user2);
+		addPostToUser();
 	}
 	
 	public UserRepository() {
@@ -89,5 +90,9 @@ public class UserRepository implements IUserRepository {
 	@Override
 	public void createPost(Post post) {
 		posts.add(post);
+	}
+
+	public void addPostToUser(){
+		user1.setPosts(posts);
 	}
 }
