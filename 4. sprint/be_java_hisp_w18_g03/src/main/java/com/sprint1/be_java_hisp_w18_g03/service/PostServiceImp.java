@@ -7,8 +7,14 @@ import com.sprint1.be_java_hisp_w18_g03.dto.request.RequestPostDTO;
 import com.sprint1.be_java_hisp_w18_g03.dto.response.ResponseDTO;
 import com.sprint1.be_java_hisp_w18_g03.dto.response.SellersPostDTO;
 import com.sprint1.be_java_hisp_w18_g03.entity.Post;
+import com.sprint1.be_java_hisp_w18_g03.entity.User;
+import com.sprint1.be_java_hisp_w18_g03.exception.NoFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class PostServiceImp implements IPostService {
@@ -44,7 +50,34 @@ public class PostServiceImp implements IPostService {
     }
 
     @Override
-    public SellersPostDTO getPostSellet(Integer userId) {
+    public SellersPostDTO getPostSellers(Integer userId) {
+
+        User user = iUserRepository.findById(userId);
+
+        if (user == null){
+            throw new NoFoundException("The user hasn't being found");
+        }
+
+        if (user.getListFollowed().isEmpty()) {
+            throw new NoFoundException("The people followed hasn't being found");
+        }
+
+        List<Post> postSell = new ArrayList<>();
+
+        for (User userFollowed : user.getListFollowed()) {
+
+        }
+        List<Post> postUser = iPostRepository.findByUser(userId);
+
+        if (postUser.isEmpty()) {
+            throw new NoFoundException("The posts hasn't being found");
+        }
+
+        //Obtener post que este entre las dos semanas y la actual
+        LocalDate fechaSistema = LocalDate.now();
+
+
+
         return null;
     }
 }
