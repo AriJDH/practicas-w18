@@ -49,20 +49,20 @@ public class ServiceImp implements IService {
 
 
     @Override
-    public SellerFollowersListDTOResponse followersFilter(Integer seller_id, String order) {
+    public SellerFollowersListDTOResponse followersFilter(Integer seller_id, String order) { // Filter by order
 
         SellerFollowersListDTOResponse response = new SellerFollowersListDTOResponse();
 
         if (order != null){
             if (order.equals("name_asc")){
-                response = getFollowersAZ(seller_id);
+                response = getFollowersAZ(seller_id); // Call the AZ method
             } else if (order.equals("name_desc")) {
-                response = getFollowersZA(seller_id);
+                response = getFollowersZA(seller_id); // Call the ZA method
             } else {
-                throw new InvalidParameterException("The parameter " + order + " isn't valid");
+                throw new InvalidParameterException("The parameter " + order + " isn't valid"); // Exception if order isn't valid
             }
         }else {
-            response = getFollowers(seller_id);
+            response = getFollowers(seller_id); // Call the default method
         }
 
         return response;
@@ -183,16 +183,18 @@ public class ServiceImp implements IService {
 
     @Override
     public SellerFollowersListDTOResponse getFollowersAZ(Integer seller_id) {
-        SellerFollowersListDTOResponse followersDTO = getFollowers(seller_id);
+        SellerFollowersListDTOResponse followersDTO = getFollowers(seller_id); // Call the default method
 
-        Comparator<BuyerDTOResponse> comparator = Comparator.comparing(BuyerDTOResponse::getUser_name);
+        Comparator<BuyerDTOResponse> comparator = Comparator.comparing(BuyerDTOResponse::getUser_name); // Build a comparator with username
 
+        // Order AZ in new sortedList
         List<BuyerDTOResponse> sortedList = followersDTO
                 .getFollowers()
                 .stream()
                 .sorted(comparator)
                 .collect(Collectors.toList());
 
+        // Build DTO with new sortedList
         SellerFollowersListDTOResponse followersDTOAZ = new SellerFollowersListDTOResponse(followersDTO.getUser_id(), followersDTO.getUser_name(), sortedList);
 
         return followersDTOAZ;
@@ -200,10 +202,11 @@ public class ServiceImp implements IService {
 
     @Override
     public SellerFollowersListDTOResponse getFollowersZA(Integer seller_id) {
-        SellerFollowersListDTOResponse followersDTO = getFollowers(seller_id);
+        SellerFollowersListDTOResponse followersDTO = getFollowers(seller_id); // Call the default method
 
-        Comparator<BuyerDTOResponse> comparator = Comparator.comparing(BuyerDTOResponse::getUser_name);
+        Comparator<BuyerDTOResponse> comparator = Comparator.comparing(BuyerDTOResponse::getUser_name); // Build a comparator with username
 
+        // Order ZA in new sortedList
         List<BuyerDTOResponse> sortedList = followersDTO
                 .getFollowers()
                 .stream()
@@ -211,25 +214,26 @@ public class ServiceImp implements IService {
                         .reversed())
                 .collect(Collectors.toList());
 
+        // Build DTO with new sortedList
         SellerFollowersListDTOResponse followersDTOAZ = new SellerFollowersListDTOResponse(followersDTO.getUser_id(), followersDTO.getUser_name(), sortedList);
 
         return followersDTOAZ;
     }
 
     @Override
-    public BuyerFollowedListDTOResponse followedsFilter(Integer seller_id, String order) {
+    public BuyerFollowedListDTOResponse followedsFilter(Integer seller_id, String order) { // Filter by order
         BuyerFollowedListDTOResponse response = new BuyerFollowedListDTOResponse();
 
         if (order != null){
             if (order.equals("name_asc")){
-                response = getFollowedsAZ(seller_id);
+                response = getFollowedsAZ(seller_id); // Call the AZ method
             } else if (order.equals("name_desc")) {
-                response = getFollowedsZA(seller_id);
+                response = getFollowedsZA(seller_id); // Call the ZA method
             }else {
-                throw new InvalidParameterException("The parameter " + order + " isn't valid");
+                throw new InvalidParameterException("The parameter " + order + " isn't valid"); // Throw Exception if order isn't valid
             }
         }else {
-            response = getFolloweds(seller_id);
+            response = getFolloweds(seller_id); // Call the default method
         }
 
         return response;
@@ -240,7 +244,7 @@ public class ServiceImp implements IService {
 
         Buyer buyer = repository.getByIdBuyer(buyer_id); // Get buyer from repository
         if (buyer == null){
-            throw new NotFoundException("Can't found user with id " + buyer_id);
+            throw new NotFoundException("Can't found user with id " + buyer_id); // Throw exception if buyer doesn't exist
         }
         List<Seller> followeds = buyer.getFolloweds(); // Get buyer's followed list
         List<SellerDTOResponse> followedsDTO = new ArrayList<>();
@@ -255,16 +259,18 @@ public class ServiceImp implements IService {
 
     @Override
     public BuyerFollowedListDTOResponse getFollowedsAZ(Integer buyer_id) {
-        BuyerFollowedListDTOResponse followedsDTO = getFolloweds(buyer_id);
+        BuyerFollowedListDTOResponse followedsDTO = getFolloweds(buyer_id); // Call default method
 
-        Comparator<SellerDTOResponse> comparator = Comparator.comparing(SellerDTOResponse::getUser_name);
+        Comparator<SellerDTOResponse> comparator = Comparator.comparing(SellerDTOResponse::getUser_name); // Build a comparator with username
 
+        // Order AZ in new sortedlist
         List<SellerDTOResponse> sortedList = followedsDTO
                 .getFollowed()
                 .stream()
                 .sorted(comparator)
                 .collect(Collectors.toList());
 
+        // Build DTO with sortedList
         BuyerFollowedListDTOResponse followedsDTOAZ = new BuyerFollowedListDTOResponse(followedsDTO.getUser_id(), followedsDTO.getUser_name(), sortedList);
 
         return followedsDTOAZ;
@@ -272,10 +278,11 @@ public class ServiceImp implements IService {
 
     @Override
     public BuyerFollowedListDTOResponse getFollowedsZA(Integer buyer_id) {
-        BuyerFollowedListDTOResponse followedsDTO = getFolloweds(buyer_id);
+        BuyerFollowedListDTOResponse followedsDTO = getFolloweds(buyer_id); // Call default method
 
-        Comparator<SellerDTOResponse> comparator = Comparator.comparing(SellerDTOResponse::getUser_name);
+        Comparator<SellerDTOResponse> comparator = Comparator.comparing(SellerDTOResponse::getUser_name); // Build a comparator with username
 
+        // Order AZ in new sortedlist
         List<SellerDTOResponse> sortedList = followedsDTO
                 .getFollowed()
                 .stream()
@@ -283,6 +290,7 @@ public class ServiceImp implements IService {
                         .reversed())
                 .collect(Collectors.toList());
 
+        // Build DTO with sortedList
         BuyerFollowedListDTOResponse followedsDTOAZ = new BuyerFollowedListDTOResponse(followedsDTO.getUser_id(), followedsDTO.getUser_name(), sortedList);
 
         return followedsDTOAZ;
@@ -293,7 +301,7 @@ public class ServiceImp implements IService {
     public SellerFollowersCountDTOResponse followersCount(Integer user_id){
         Seller seller = repository.getByIdSeller(user_id); // Get seller from repository
         if (seller == null) {
-            throw new NotFoundException("Seller id " + user_id + " not found");
+            throw new NotFoundException("Seller id " + user_id + " not found"); // Throw exception if seller doesn't exist
         }
         List<Buyer> followers = seller.getFollowers();
         Integer countedFollowers = followers.size();

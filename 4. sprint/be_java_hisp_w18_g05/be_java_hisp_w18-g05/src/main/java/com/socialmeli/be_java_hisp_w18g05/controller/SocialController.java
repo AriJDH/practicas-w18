@@ -39,7 +39,7 @@ public class SocialController {
         return new ResponseEntity<>(service.followedsFilter(userId, order),HttpStatus.OK);
     }
 
-    @GetMapping("/users/{userId}/followers/list")
+    @GetMapping("/users/{userId}/followers/list") // US003
     public ResponseEntity<SellerFollowersListDTOResponse> followersList(@PathVariable Integer userId, @RequestParam(required = false) String order){
         return new ResponseEntity<>(service.followersFilter(userId, order), HttpStatus.OK);
     }
