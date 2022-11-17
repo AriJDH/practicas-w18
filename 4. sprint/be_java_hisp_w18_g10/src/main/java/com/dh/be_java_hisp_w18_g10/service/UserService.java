@@ -7,6 +7,7 @@ import com.dh.be_java_hisp_w18_g10.dto.response.UserFollowersListDTOres;
 import com.dh.be_java_hisp_w18_g10.dto.response.UserPostsDTOres;
 import com.dh.be_java_hisp_w18_g10.entity.Post;
 import com.dh.be_java_hisp_w18_g10.entity.User;
+import com.dh.be_java_hisp_w18_g10.exception.NotFoundException;
 import com.dh.be_java_hisp_w18_g10.repository.*;
 import com.dh.be_java_hisp_w18_g10.util.DTOMapper;
 import org.springframework.stereotype.Service;
@@ -41,6 +42,9 @@ public class UserService implements IUserService {
     @Override
     public UserFollowersCountDTOres getUserFollowersCount(int userId) {
         User user = userRepository.getUser(userId);
+        if(user == null){
+            throw new NotFoundException("El usuario con el id: "+userId+" no fue encontrado!");
+        }
         return new UserFollowersCountDTOres(
                 user.getUserId(),
                 user.getUserName(),
