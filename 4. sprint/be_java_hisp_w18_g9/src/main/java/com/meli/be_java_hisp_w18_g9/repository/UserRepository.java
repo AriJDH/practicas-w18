@@ -8,7 +8,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 @Repository
-public class UserRepository implements IEntityRepository<User>{
+public class UserRepository implements IUserRepository {
 
     // ? ================== Attributes ================== ?
 
@@ -62,6 +62,8 @@ public class UserRepository implements IEntityRepository<User>{
     public void deleteById(Integer id) {
         users.remove(id);
     }
+
+    // * ===============
 
     @Override
     public Integer update(User entity) {
