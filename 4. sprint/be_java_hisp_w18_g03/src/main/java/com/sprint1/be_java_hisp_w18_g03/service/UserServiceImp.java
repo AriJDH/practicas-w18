@@ -13,6 +13,7 @@ import com.sprint1.be_java_hisp_w18_g03.entity.User;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import com.sprint1.be_java_hisp_w18_g03.exception.ParamException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -130,24 +131,11 @@ public class UserServiceImp implements IUserService {
         }
     }
 
-    /*@Override
-    public FollowedDTO getFollowedList(Integer userId, String order) {
-        User user = iUserRepository.findById(userId);
-        if(order.equals("name_asc"))
-            return new FollowedDTO(
-                    user.getUserId(),
-                    user.getUserName(),
-                    user.getListFollowed()
-                            .stream()
-                            .sorted((user1, user2) -> user1.getUserName().compareTo(user2.getUserName()))
-                            .map(user1 -> new UserDTO(user1.getUserId(), user1.getUserName()))
-                            .collect(Collectors.toList())
-            );
-        return null;
-    }*/
-
     @Override
     public ResponseDTO unfollow(Integer userId, Integer unfollowId) {
+        if(userId.equals(unfollowId)){
+            throw new ParamException("")
+        }
         User user = iUserRepository.findById(userId);
         User userToFollow = iUserRepository.findById(unfollowId);
         if (user == null || userToFollow == null) {
