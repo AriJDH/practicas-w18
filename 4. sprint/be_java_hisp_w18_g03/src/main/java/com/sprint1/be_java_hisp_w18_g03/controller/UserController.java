@@ -26,15 +26,6 @@ public class UserController {
         return new ResponseEntity<>(userService.follow(userId, userIdToFollow), HttpStatus.ACCEPTED);
     }
 
-    @GetMapping("/{userId}/followed/list")
-    public ResponseEntity<FollowedDTO> getFollowedList(@PathVariable Integer userId) {
-        return new ResponseEntity<>(userService.getFollowedList(userId), HttpStatus.OK);
-    }
-
-    @GetMapping("/{userId}/followed/list")
-    public ResponseEntity<FollowedDTO> getFollowedList(@PathVariable Integer userId, @RequestParam String order) {
-        return new ResponseEntity<>(userService.getFollowedList(userId, order), HttpStatus.OK);
-    }
 
     @PostMapping("/{userId}/unfollow/{userIdToUnfollow}")
     public ResponseEntity<ResponseDTO> unfollow(@PathVariable Integer userId, @PathVariable Integer userIdToUnfollow) {
