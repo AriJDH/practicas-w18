@@ -1,9 +1,10 @@
 package com.meli.be_java_hisp_w18_g9.service;
 
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.meli.be_java_hisp_w18_g9.exception.BadRequestException;
-import com.meli.be_java_hisp_w18_g9.model.dto.response.FollowersCountUserResponse;
-import com.meli.be_java_hisp_w18_g9.model.dto.response.UserFollowedListResponse;
+import com.meli.be_java_hisp_w18_g9.model.dto.request.PostDtoRequest;
+import com.meli.be_java_hisp_w18_g9.model.dto.response.*;
 import com.meli.be_java_hisp_w18_g9.model.entity.User;
 import com.meli.be_java_hisp_w18_g9.repository.IUserRepository;
 import com.meli.be_java_hisp_w18_g9.repository.UserRepository;
@@ -11,8 +12,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Collectors;
+
 
 @Service
 public class UserService implements IUserService {
@@ -83,11 +89,16 @@ public class UserService implements IUserService {
         return mapper.convertValue(userWf, UserFollowedListResponse.class);
     }
 
+    
+
+
     @Override
-    public FollowersCountUserResponse findUserFollowedQuantity(Integer id){
-        User user = userRepository.findById(id).orElseThrow(() -> new BadRequestException("El usuario con Id " + id + " no existe"));
-        Integer userFollowersQuantity = user.getFollowers().size();
-        FollowersCountUserResponse userResponse = new FollowersCountUserResponse(id,user.getUserName(),userFollowersQuantity);
-        return userResponse;
+    public UserFollowerListResponse findAllFollower(Integer id){
+        User userWf = userRepository.findById(id).orElseThrow(() -> new BadRequestException("Usuario no existe"));
+        List<UserSimpleResponse> simpleResponses = userWf.getFollowers().stream().map(user -> UserSimpleResponse.builder().userId(user.getUserId()).userName(user.getUserName()).build()).collect(Collectors.toList());
+        return UserFollowerListResponse.builder().userId(id).userName(userWf.getUserName()).followers(simpleResponses).build();
     }
+
+
+
 }
