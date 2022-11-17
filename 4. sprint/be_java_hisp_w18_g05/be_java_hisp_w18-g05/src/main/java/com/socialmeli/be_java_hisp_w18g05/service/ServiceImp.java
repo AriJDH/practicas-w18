@@ -289,9 +289,7 @@ public class ServiceImp implements IService {
         }
         List<Buyer> followers = seller.getFollowers();
         Integer countedFollowers = followers.size();
-
         SellerFollowersCountDTOResponse sellerCount = new SellerFollowersCountDTOResponse(seller.getUser_id(),seller.getName(),countedFollowers);
-
         return  sellerCount;
     }
 
@@ -314,6 +312,53 @@ public class ServiceImp implements IService {
         Post newPost = new Post(repository.addPost(), localDate,product ,post.getCategory(),post.getPrice());
 
         seller.getPosts().add(newPost);
+    }
+
+    @Override
+    public SellerPostListDTOResponse followedPostList(Integer user_id) {
+        return orderByDate(user_id, "date_desc");
+    }
+
+    @Override
+    public SellerPostListDTOResponse order(Integer userId, String order) {
+        return orderByDate(userId, order);
+    }
+
+    private SellerPostListDTOResponse orderByDate(Integer userId, String order){
+        Buyer b = repository.getByIdBuyer(userId);
+        if (b == null) {
+            throw new NotFoundException("Buyer id " + userId + " not found");
+        }
+        List<Seller> listSeller = b.getFolloweds();
+        if (listSeller == null) {
+            throw new NotFoundException("Buyer id " + userId + " doesn´t have followers");
+        }
+
+        List<PostDTOResponse> listPostDTO = new ArrayList<>();
+        for (Seller s : listSeller) {
+            for( Post p: s.getPosts()){
+                listPostDTO.add( new PostDTOResponse(s.getUser_id(), p.getPost_id(), p.getDate(), op.convertValue(p.getProduct(), ProductDTOResponse.class), p.getCategory(), p.getPrice()));
+            }
+        }
+
+        if(order.equals("date_asc")){
+            listPostDTO.sort(Comparator.comparing(PostDTOResponse::getDate)); // ordenamiento descenciente por fechas
+        } else if (order.equals("date_desc")) {
+            listPostDTO.sort(Comparator.comparing(PostDTOResponse::getDate).reversed());
+        } else{
+            throw new InvalidException("Invalid order");
+        }
+
+
+        // filter by date minus 2 weeks
+        List<PostDTOResponse> listPostAux = new ArrayList<>();
+        for (PostDTOResponse p : listPostDTO) {
+            if (p.getDate().isAfter(LocalDate.now().minusWeeks(2))) {
+                listPostAux.add(p);
+            }
+        }
+
+        return new SellerPostListDTOResponse(userId, listPostAux);
     }
 
 }
