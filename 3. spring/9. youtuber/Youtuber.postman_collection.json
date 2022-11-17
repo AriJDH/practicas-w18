@@ -1,7 +1,7 @@
 {
 	"info": {
 		"_postman_id": "326c48c5-7548-4ab0-9131-05a2b375e742",
-		"name": "Youtuber Copy",
+		"name": "Youtuber",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "24341398"
 	},
@@ -40,7 +40,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"id\": 2,\n    \"titulo\": \"titulo\",\n    \"autor\": \"autor\",\n    \"fechaPublicacion\": \"2020-10-10\"\n}",
+					"raw": "{\n    \"id\": 2,\n    \"titulo\": \"titulo2\",\n    \"autor\": \"autor2\",\n    \"fechaPublicacion\": \"2020-10-12\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -105,14 +105,14 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:8080/blog/1",
+					"raw": "localhost:8080/blog/2",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
 						"blog",
-						"1"
+						"2"
 					]
 				}
 			},
@@ -136,14 +136,14 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:8080/blog/1",
+					"raw": "localhost:8080/blog/11",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
 						"blog",
-						"1"
+						"11"
 					]
 				}
 			},

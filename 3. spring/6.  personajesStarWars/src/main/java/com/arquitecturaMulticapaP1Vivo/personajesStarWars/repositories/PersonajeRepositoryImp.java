@@ -7,12 +7,13 @@ import org.springframework.stereotype.Repository;
 import org.springframework.util.ResourceUtils;
 
 import java.io.File;
+import java.nio.file.Files;
 import java.util.List;
 
 @Repository
 public class PersonajeRepositoryImp implements IPersonajeRepository {
 	
-		List<Personaje> personajes;
+	List<Personaje> personajes;
 	
 	public PersonajeRepositoryImp(List<Personaje> personajes) {
 		this.personajes = personajes;
@@ -24,20 +25,22 @@ public class PersonajeRepositoryImp implements IPersonajeRepository {
 	}
 	
 	@Override
-	public List<Personaje> findAll(){
+	public List<Personaje> findAll() {
 		loadList();
 		return personajes;
 	}
 	
-	@Override
-	public void loadList(){
+	
+	public void loadList() {
 		ObjectMapper mapper = new ObjectMapper();
-		File jsonFile;
+		File jsonFile = null;
 		try {
 			jsonFile = ResourceUtils.getFile("classpath:starwars.json");
-			personajes = mapper.readValue(jsonFile,new TypeReference<List<Personaje>>(){});
-		}catch(Exception ex){
-			System.out.println("No existe el archivo. "+ ex.getMessage());
+			String strings = Files.readString(jsonFile.toPath());
+			personajes = mapper.readValue(strings, new TypeReference<List<Personaje>>() {
+			}); // TODO error de mapeo -> pendiente de resolver
+		} catch (Exception ex) {
+			System.out.println("No existe el archivo. " + ex.getMessage());
 		}
 		
 		
