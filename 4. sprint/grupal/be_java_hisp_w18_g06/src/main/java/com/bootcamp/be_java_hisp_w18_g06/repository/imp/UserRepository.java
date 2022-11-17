@@ -20,7 +20,7 @@ public class UserRepository implements IUserRepository {
 	List<Post> posts = new ArrayList<>();
 	
 	Product product1 = new Product(
-					1,
+					2,
 					"Silla Gamer",
 					"Gamer",
 					"Racer",
@@ -29,7 +29,7 @@ public class UserRepository implements IUserRepository {
 	);
 	
 	Product product2 = new Product(
-					2,
+					3,
 					"Headset RGB inalámbrico",
 					"Gamer",
 					"Racer",
@@ -48,7 +48,6 @@ public class UserRepository implements IUserRepository {
 	);
 	
 	Post post1 = new Post(
-					1,
 					user1.getUser_id(),
 					LocalDate.of(2021, 5, 1),
 					product1,
@@ -57,7 +56,6 @@ public class UserRepository implements IUserRepository {
 	);
 	
 	Post post2 = new Post(
-					2,
 					user1.getUser_id(),
 					LocalDate.of(2021, 4, 29),
 					product2,

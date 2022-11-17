@@ -9,5 +9,5 @@ import java.util.List;
 public class UserPostListDTO {
     //US-006
     private int user_id;
-    List<PostDTO> postDTOList;
+    List<PostResDto> postDTOList;
 }
