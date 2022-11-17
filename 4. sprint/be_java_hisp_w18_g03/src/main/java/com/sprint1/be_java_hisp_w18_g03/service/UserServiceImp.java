@@ -91,6 +91,8 @@ public class UserServiceImp implements IUserService {
 
     @Override
     public FollowedDTO getFollowedList(Integer userId, String order) {
+        User user = iUserRepository.findById(userId);
+        user.getListFollowed().stream().c
         return null;
     }
 
