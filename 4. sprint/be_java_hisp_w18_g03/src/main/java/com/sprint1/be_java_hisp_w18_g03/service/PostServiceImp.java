@@ -80,16 +80,16 @@ public class PostServiceImp implements IPostService {
             postSell.addAll(postUser);
         }
 
-        if (postSell.isEmpty()) {
-            throw new NoFoundException("The posts hasn't being found");
-        }
-
         //Obtener post que este entre las dos semanas y la actual
         LocalDate fechaSin2Semana = LocalDate.now().minusDays(14);
 
         List<Post> recentPost = postSell.stream()
                 .filter(x -> x.getDate().isAfter(fechaSin2Semana))
                 .collect(Collectors.toList());
+
+        if (recentPost.isEmpty()) {
+            throw new NoFoundException("The posts hasn't being found");
+        }
 
         List<ResponsePostDTO> responsePostDTOs = new ArrayList<>();
 
