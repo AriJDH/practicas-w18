@@ -164,7 +164,13 @@ public class UserService implements IUserService {
 
     @Override
     public void unfollowUser(int userId, int userIdToUnfollow) {
-        userRepository.getUser(userId).getFollowed().remove(userIdToUnfollow);
+        if (userRepository.getUser(userId) == null) {
+            throw new UserGenericException("El usuario con el id: " + userId + " no fue encontrado!");
+        }
+        if (userRepository.getUser(userId).getFollowed().containsKey(userIdToUnfollow)) {
+            userRepository.getUser(userId).getFollowed().remove(userIdToUnfollow);
+        } else
+            throw new UserGenericException("El usuario con el id: " + userId + " no sigue al usuario " + userIdToUnfollow);
     }
 
     @Override
