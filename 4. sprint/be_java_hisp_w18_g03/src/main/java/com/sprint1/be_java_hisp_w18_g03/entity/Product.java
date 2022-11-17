@@ -1,5 +1,10 @@
 package com.sprint1.be_java_hisp_w18_g03.entity;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+
+@Data
+@AllArgsConstructor
 public class Product {
 
     private Integer productId;
