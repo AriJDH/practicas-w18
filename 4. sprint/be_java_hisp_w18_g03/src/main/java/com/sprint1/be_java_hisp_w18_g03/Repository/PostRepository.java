@@ -9,24 +9,22 @@ import java.util.stream.Collectors;
 
 @Repository
 public class PostRepository implements IPostRepository {
-    private List<Post> posts = new ArrayList<Post>();
+    private List<Post> postList = new ArrayList<Post>();
 
-    public Post findByIdPost(int postId) {
-        return posts.get(postId);
+    public Post findByIdPost(Integer postId) {
+        return postList.stream().filter(p->p.getPostId().equals(postId)).findFirst().orElse(null);
     }
 
-    public List<Post> findByUser(int userId) {
-        return posts.stream()
-                .filter(post -> post.getUser().getUserId().equals(userId))
-                .collect(Collectors.toList());
+    public List<Post> findByUser(Integer userId) {
+        return postList.stream().filter(p-> p.getUser().getUserId().equals(userId)).collect(Collectors.toList());
     }
 
     public boolean addPost(Post post) {
-        posts.add(post);
+        postList.add(post);
         return true;
     }
 
     public Integer getPostsSizeList() {
-        return posts.size();
+        return postList.size();
     }
 }
