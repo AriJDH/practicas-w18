@@ -36,7 +36,7 @@ public class PostServiceImp implements IPostService{
     public void create(PostDtoReq postDTOReq) {
         User user = userRepository.getUserByID(postDTOReq.getUser_id());
         if(user == null) {
-            throw new BadRequestException("The post was not created. No user with id " + postDTOReq.getUser_id()git );
+            throw new BadRequestException("The post was not created. No user with id " + postDTOReq.getUser_id());
         } else {
             Post post = new Post(postDTOReq.getPost_id(), postDTOReq.getUser_id(), postDTOReq.getProduct(), postDTOReq.getCategory(), postDTOReq.getPrice(), postDTOReq.getDate());
             postRepository.save(post);
