@@ -45,6 +45,24 @@ public class ServiceImp implements IService {
 
 
     @Override
+    public SellerFollowersListDTOResponse followersFilter(Integer seller_id, String order) {
+
+        SellerFollowersListDTOResponse response = new SellerFollowersListDTOResponse();
+
+        if (order != null){
+            if (order.equals("name_asc")){
+                response = getFollowersAZ(seller_id);
+            } else if (order.equals("name_desc")) {
+                response = getFollowersZA(seller_id);
+            }
+        }else {
+            response = getFollowers(seller_id);
+        }
+
+        return response;
+    }
+
+    @Override
     public SellerFollowersListDTOResponse getFollowers(Integer seller_id) {
         Seller seller = repository.getByIdSeller(seller_id); // Get seller from repository
 
@@ -144,13 +162,52 @@ public class ServiceImp implements IService {
     public SellerFollowersListDTOResponse getFollowersAZ(Integer seller_id) {
         SellerFollowersListDTOResponse followersDTO = getFollowers(seller_id);
 
-        List<BuyerDTOResponse> followers = followersDTO.getFollowers();
-        followers.stream()
-                .sorted(Comparator.comparing(BuyerDTOResponse::getUser_name)).collect(Collectors.toList());
+        Comparator<BuyerDTOResponse> comparator = Comparator.comparing(BuyerDTOResponse::getUser_name);
 
-        SellerFollowersListDTOResponse followersDTOAZ = new SellerFollowersListDTOResponse(followersDTO.getUser_id(), followersDTO.getUser_name(), followers);
+        List<BuyerDTOResponse> sortedList = followersDTO
+                .getFollowers()
+                .stream()
+                .sorted(comparator)
+                .collect(Collectors.toList());
+
+        SellerFollowersListDTOResponse followersDTOAZ = new SellerFollowersListDTOResponse(followersDTO.getUser_id(), followersDTO.getUser_name(), sortedList);
 
         return followersDTOAZ;
+    }
+
+    @Override
+    public SellerFollowersListDTOResponse getFollowersZA(Integer seller_id) {
+        SellerFollowersListDTOResponse followersDTO = getFollowers(seller_id);
+
+        Comparator<BuyerDTOResponse> comparator = Comparator.comparing(BuyerDTOResponse::getUser_name);
+
+        List<BuyerDTOResponse> sortedList = followersDTO
+                .getFollowers()
+                .stream()
+                .sorted(comparator
+                        .reversed())
+                .collect(Collectors.toList());
+
+        SellerFollowersListDTOResponse followersDTOAZ = new SellerFollowersListDTOResponse(followersDTO.getUser_id(), followersDTO.getUser_name(), sortedList);
+
+        return followersDTOAZ;
+    }
+
+    @Override
+    public BuyerFollowedListDTOResponse followedsFilter(Integer seller_id, String order) {
+        BuyerFollowedListDTOResponse response = new BuyerFollowedListDTOResponse();
+
+        if (order != null){
+            if (order.equals("name_asc")){
+                response = getFollowedsAZ(seller_id);
+            } else if (order.equals("name_desc")) {
+                response = getFollowedsZA(seller_id);
+            }
+        }else {
+            response = getFolloweds(seller_id);
+        }
+
+        return response;
     }
 
     @Override
@@ -166,6 +223,41 @@ public class ServiceImp implements IService {
 
         }
         return new BuyerFollowedListDTOResponse(buyer.getUser_id(), buyer.getName(), followedsDTO);
+    }
+
+    @Override
+    public BuyerFollowedListDTOResponse getFollowedsAZ(Integer buyer_id) {
+        BuyerFollowedListDTOResponse followedsDTO = getFolloweds(buyer_id);
+
+        Comparator<SellerDTOResponse> comparator = Comparator.comparing(SellerDTOResponse::getUser_name);
+
+        List<SellerDTOResponse> sortedList = followedsDTO
+                .getFollowed()
+                .stream()
+                .sorted(comparator)
+                .collect(Collectors.toList());
+
+        BuyerFollowedListDTOResponse followedsDTOAZ = new BuyerFollowedListDTOResponse(followedsDTO.getUser_id(), followedsDTO.getUser_name(), sortedList);
+
+        return followedsDTOAZ;
+    }
+
+    @Override
+    public BuyerFollowedListDTOResponse getFollowedsZA(Integer buyer_id) {
+        BuyerFollowedListDTOResponse followedsDTO = getFolloweds(buyer_id);
+
+        Comparator<SellerDTOResponse> comparator = Comparator.comparing(SellerDTOResponse::getUser_name);
+
+        List<SellerDTOResponse> sortedList = followedsDTO
+                .getFollowed()
+                .stream()
+                .sorted(comparator
+                        .reversed())
+                .collect(Collectors.toList());
+
+        BuyerFollowedListDTOResponse followedsDTOAZ = new BuyerFollowedListDTOResponse(followedsDTO.getUser_id(), followedsDTO.getUser_name(), sortedList);
+
+        return followedsDTOAZ;
     }
 
 
