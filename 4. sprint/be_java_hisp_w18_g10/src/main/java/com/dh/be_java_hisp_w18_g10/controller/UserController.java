@@ -34,7 +34,8 @@ public class UserController {
 
     @GetMapping("/users/{userId}/followers/list")
     public ResponseEntity<UserFollowersListDTOres> getUserFollowers(
-            @RequestParam(required = false) String order, @PathVariable int userId){
+            @RequestParam(required = false) String order,
+            @PathVariable int userId) {
         // US 0003
         // US 0008
         if(order != null)
@@ -48,9 +49,13 @@ public class UserController {
             @RequestParam(required = false) String order,
             @PathVariable int userId
     ) {
-        return new ResponseEntity<>(userService.getUserFollowed(userId),HttpStatus.OK);
         // US 0004
         // US 0008
+        if(order != null)
+            return new ResponseEntity<>(userService.getUserFollowed(userId, order), HttpStatus.OK);
+
+        return new ResponseEntity<>(userService.getUserFollowed(userId),HttpStatus.OK);
+
     }
 
     @PostMapping("/products/post")

@@ -192,5 +192,20 @@ public class UserService implements IUserService {
             throw new UserGenericException("Parametro no aceptado");
     }
 
-
+    @Override
+    public UserFollowedListDTOres getUserFollowed(int userId, String order) {
+        UserFollowedListDTOres res = getUserFollowed(userId);
+        if(order.equals("name_asc")){
+            res.getFollowed()
+                    .sort(Comparator.comparing(UserDTOres::getUser_name));
+            return res;
+        }
+        else if(order.equals("name_desc")){
+            res.getFollowed()
+                    .sort(Comparator.comparing(UserDTOres::getUser_name).reversed());
+            return res;
+        }
+        else
+            throw new UserGenericException("Parametro no aceptado");
+    }
 }
