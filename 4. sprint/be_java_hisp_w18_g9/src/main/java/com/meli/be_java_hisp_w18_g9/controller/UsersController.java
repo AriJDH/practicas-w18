@@ -14,26 +14,31 @@ import java.util.List;
 @RestController
 @RequestMapping("/users")
 public class UsersController {
-
+    // ? =============== Attributes =============== ?
     //UserService userService = new UserService();
     @Autowired
     IUserService userService;
 
-
-    @PostMapping("/{userId}/follow/{userIdToFollow}")
-    public ResponseEntity<HttpStatus> getPlatoInfoPlato(@PathVariable Integer userId, @PathVariable Integer userIdToFollow) throws Throwable {
-        return new ResponseEntity<>(userService.follow(userId,userIdToFollow));
-    }
-
+    // ? =============== Methods =============== ?
+    // * ===== [GET] ===== *
     @GetMapping("/{userId}/followed/list")
     public ResponseEntity<UserFollowedListResponse> userFollowedList(@PathVariable Integer userId){
 
         return new ResponseEntity<>(userService.findAllFollowed(userId),HttpStatus.OK);
     }
-
+    // * ============== *
     @GetMapping("/{userId}/followers/count")
     public ResponseEntity<FollowersCountUserResponse> userFollowedQuantity(@PathVariable Integer userId, @RequestParam(required = false) String order) {
         return new ResponseEntity<>(userService.findUserFollowedQuantity(userId), HttpStatus.OK);
     }
-
+    // * ===== [POST] ===== *
+    @PostMapping("/{userId}/follow/{userIdToFollow}")
+    public ResponseEntity<HttpStatus> getPlatoInfoPlato(@PathVariable Integer userId, @PathVariable Integer userIdToFollow) throws Throwable {
+        return new ResponseEntity<>(userService.follow(userId,userIdToFollow));
+    }
+    // * ============== *
+    @PostMapping("/{userId}/unfollow/{userIdToUnfollow}")
+    public ResponseEntity<HttpStatus> unfollowUser(@PathVariable Integer userId, @PathVariable Integer userIdToUnfollow) throws Throwable {
+        return new ResponseEntity<>(userService.unfollow(userId,userIdToUnfollow));
+    }
 }

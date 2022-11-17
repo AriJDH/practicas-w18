@@ -7,6 +7,7 @@ import com.meli.be_java_hisp_w18_g9.model.dto.response.UserFollowedListResponse;
 import com.meli.be_java_hisp_w18_g9.model.entity.User;
 import com.meli.be_java_hisp_w18_g9.repository.IUserRepository;
 import com.meli.be_java_hisp_w18_g9.repository.UserRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -15,17 +16,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class UserService implements IUserService {
 
-    ObjectMapper mapper;
-    IUserRepository userRepository;
+    // ? ==================== Attributes ================ ?
 
-    @Autowired
-    public UserService(ObjectMapper mapper, IUserRepository userRepository) {
-        this.mapper = mapper;
-        this.userRepository = userRepository;
-    }
+    private final ObjectMapper mapper;
+    private final IUserRepository userRepository;
 
+    // ? ==================== Methods ================ ?
 
     @Override
     public HttpStatus follow(Integer userId, Integer userIdToFollow) {
@@ -53,6 +52,44 @@ public class UserService implements IUserService {
             return HttpStatus.OK;
         }
 
+        return HttpStatus.BAD_REQUEST;
+    }
+
+    // * ====================
+
+    @Override
+    public HttpStatus unfollow(Integer userId, Integer userIdToUnfollow) {
+        User user = userRepository.findById(userId).orElseThrow(() -> new BadRequestException("El usuario con Id " + userId + " no existe"));
+        User userToUnfollow = userRepository.findById(userIdToUnfollow).orElseThrow(() -> new BadRequestException("El usuario a seguir con Id " + userIdToUnfollow + " no existe"));
+
+        if (user != null && userToUnfollow != null) {
+
+            if (user.getUserId().equals(userToUnfollow.getUserId()))
+                throw new BadRequestException("No te puedes dejar de seguir a ti mismo");
+
+            List<User> userList;
+            if (user.getFollowers().size() > 0) {
+                if (!user.getFollowers().contains(userToUnfollow)) {
+                    throw new BadRequestException("No sigues usuario con el Id " + userIdToUnfollow);
+                } else {
+                    userList = user.getFollowed();
+                    System.out.println(userList);
+                    userList.remove(userToUnfollow);
+                    System.out.println(userList);
+
+                    user.setFollowers(userList);
+                    System.out.println(user);
+                    userRepository.update(user);
+
+                    userList = userToUnfollow.getFollowers();
+                    userList.remove(user);
+                    userToUnfollow.setFollowed(userList);
+                    userRepository.update(userToUnfollow);
+                }
+            }
+
+            return HttpStatus.OK;
+        }
         return HttpStatus.BAD_REQUEST;
     }
 
