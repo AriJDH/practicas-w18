@@ -13,7 +13,7 @@ public interface IUserService {
     UserFollowersListDTOres getUserFollowerList(int userId, String order);
     UserFollowedListDTOres getUserFollowed(int userId);
     void createPost(PostDTOreq postDTO);
-    UserPostsDTOres getUserPosts(int userId);
+    UserPostsDTOres getUserPosts(int userId, String order);
     void unfollowUser(int userId, int userIdToUnfollow);
 
 }
