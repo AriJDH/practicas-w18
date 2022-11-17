@@ -1,7 +1,5 @@
 package com.sprint1.be_java_hisp_w18_g03.Repository;
 
-import com.sprint1.be_java_hisp_w18_g03.entity.Post;
-
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
@@ -21,8 +19,6 @@ public class PostRepository implements IPostRepository {
 
     public boolean addPost(Post post) {
         Posts.add(post);
-
-
         return true;
     }
 

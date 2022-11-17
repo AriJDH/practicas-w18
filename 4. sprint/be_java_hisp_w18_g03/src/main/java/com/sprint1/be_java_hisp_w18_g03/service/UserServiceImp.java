@@ -28,11 +28,7 @@ public class UserServiceImp implements IUserService {
   @Override
   public FollowerCountDTO followerCount(Integer userId) {
     User user = iUserRepository.findById(userId);
-
-    if (user == null) {
-      return null;
-    }
-
+    if (user == null) throw new NoFoundException("The user hasn't being found");
     return new FollowerCountDTO(
       user.getUserId(),
       user.getUserName(),
@@ -62,11 +58,7 @@ public class UserServiceImp implements IUserService {
   @Override
   public FollowedDTO getFollowedList(Integer userId) {
     User user = iUserRepository.findById(userId);
-
-    if (user == null) {
-      return null;
-    }
-
+    if (user == null) throw new NoFoundException("The user hasn't being found");
     return new FollowedDTO(
       user.getUserId(),
       user.getUserName(),
