@@ -11,8 +11,8 @@ public class ExceptionConfig {
     @ExceptionHandler
     public ResponseEntity<ErrorExceptionDTOResponse> invalidException(InvalidException invalidException) {
         return new ResponseEntity<>(
-                new ErrorExceptionDTOResponse(invalidException.getMessage(), HttpStatus.NOT_FOUND.value()),
-                HttpStatus.NOT_FOUND);
+                new ErrorExceptionDTOResponse(invalidException.getMessage(), HttpStatus.BAD_REQUEST.value()),
+                HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler
