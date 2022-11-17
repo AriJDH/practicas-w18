@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import com.socialmedia.be_java_hisp_w18_g08.dto.FollowedDTO;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -15,8 +16,14 @@ import org.springframework.web.bind.annotation.RestController;
 public class UserController {
 
     private IUserService userService;
-    public UserController(UserServiceImp userService) {
-        this.userService = userService;
+
+    public UserController (UserServiceImp service){
+        this.userService = service;
+    }
+
+    @GetMapping("/{userId}/followed/list")
+    public ResponseEntity<FollowedDTO> getFollowed(@PathVariable Integer userId){
+        return new ResponseEntity(userService.getFollowed(userId), HttpStatus.OK);
     }
 
     @GetMapping("/{userId}/followers/list")
