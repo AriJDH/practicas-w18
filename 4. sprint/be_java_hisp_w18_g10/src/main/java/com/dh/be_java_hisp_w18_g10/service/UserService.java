@@ -154,10 +154,10 @@ public class UserService implements IUserService {
         }
 
         //descendente  ******** ME QUEDARIA MNAS COMODO QUE EL DATE DE POSTDTO SEA UN LOCALDATE NO UN STRING
-        postListRes = postListRes.stream().sorted(Comparator.comparing(PostDTOres::getDate).reversed()).collect(Collectors.toList());
+        postListRes = postListRes.stream().sorted(Comparator.comparing(PostDTOres::getDate)).collect(Collectors.toList());
         //ascendente
-        if(order == null || order.equals(TypeOrderHelper.DATE_ASC))
-            postListRes = postListRes.stream().sorted(Comparator.comparing(PostDTOres::getDate)).collect(Collectors.toList());
+        if(order == null || order.equals(TypeOrderHelper.DATE_DESC))
+            postListRes = postListRes.stream().sorted(Comparator.comparing(PostDTOres::getDate).reversed()).collect(Collectors.toList());
 
         userPostsDTOres.setUser_id(userId);
         userPostsDTOres.setPosts(postListRes);

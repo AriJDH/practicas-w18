@@ -74,7 +74,7 @@ public class UserRepository implements IUserRepository{
     private List<Post> getListPosts(){
 
         LocalDate old = LocalDate.of(2000,12,12);
-        LocalDate lastWeek = LocalDate.of(2022,11,1);
+        LocalDate lastWeek = LocalDate.of(2022,11,14);
         Post post1 = new Post(1,1, old,getListProduct().get(0),23,340.00);
         Post post2 = new Post(1,2, lastWeek,getListProduct().get(1),4,456);
         Post post3 = new Post(1,3, LocalDate.now(),getListProduct().get(2),77,865);

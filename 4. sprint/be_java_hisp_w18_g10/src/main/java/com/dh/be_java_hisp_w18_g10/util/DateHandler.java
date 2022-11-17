@@ -11,6 +11,9 @@ public class DateHandler {
 
     public static boolean showPostRecently(LocalDate postDate){
         Period periodo = Period.between(postDate, LocalDate.now());
-        return periodo.getDays()>14?false:true;
+        if(periodo.getYears() > 0 || periodo.getMonths()>0 || periodo.getDays() >14)
+            return false;
+
+        return true;
     }
 }
