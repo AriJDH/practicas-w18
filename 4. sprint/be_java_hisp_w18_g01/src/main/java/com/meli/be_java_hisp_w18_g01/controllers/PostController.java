@@ -1,6 +1,8 @@
 package com.meli.be_java_hisp_w18_g01.controllers;
 
 import com.meli.be_java_hisp_w18_g01.dtos.PostDTO;
+import com.meli.be_java_hisp_w18_g01.dtos.ProductDTO;
+import com.meli.be_java_hisp_w18_g01.dtos.ResponseDTO;
 import com.meli.be_java_hisp_w18_g01.services.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -14,8 +16,7 @@ public class PostController {
     PostService postService;
 
     @PostMapping("/post")
-    public ResponseEntity<?> followUser(@RequestBody PostDTO postDTO){
-        postService.addPost(postDTO);
-        return ResponseEntity.ok().build();
+    public ResponseEntity<ResponseDTO> addPost(@RequestBody PostDTO postDTO){
+        return ResponseEntity.ok(postService.addPost(postDTO));
     }
 }

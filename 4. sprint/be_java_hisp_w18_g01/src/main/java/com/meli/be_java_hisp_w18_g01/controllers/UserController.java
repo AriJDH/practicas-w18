@@ -1,5 +1,6 @@
 package com.meli.be_java_hisp_w18_g01.controllers;
 
+import com.meli.be_java_hisp_w18_g01.dtos.ResponseDTO;
 import com.meli.be_java_hisp_w18_g01.dtos.UserFollowedInfoDTO;
 import com.meli.be_java_hisp_w18_g01.dtos.UserFollowersCountDTO;
 import com.meli.be_java_hisp_w18_g01.dtos.UserFollowersInfoDTO;
@@ -15,15 +16,13 @@ public class UserController {
     @Autowired
     UserService userService;
     @PostMapping("/{userId}/follow/{userIdToFollow}")
-    public ResponseEntity<?> followUser(@PathVariable long userId, @PathVariable long userIdToFollow){
-        userService.handleFollow(userId, userIdToFollow);
-        return new ResponseEntity<>(HttpStatus.OK);
+    public ResponseEntity<ResponseDTO> followUser(@PathVariable long userId, @PathVariable long userIdToFollow){
+        return ResponseEntity.ok(userService.handleFollow(userId, userIdToFollow));
     }
 
     @PostMapping("/{userId}/unfollow/{userIdToUnfollow}")
-    public ResponseEntity<?> unfollowUser(@PathVariable long userId, @PathVariable long userIdToUnfollow){
-        userService.handleUnfollow(userId, userIdToUnfollow);
-        return new ResponseEntity<>(HttpStatus.OK);
+    public ResponseEntity<ResponseDTO> unfollowUser(@PathVariable long userId, @PathVariable long userIdToUnfollow){
+        return ResponseEntity.ok(userService.handleUnfollow(userId, userIdToUnfollow));
     }
 
     @GetMapping("/{userId}/followers/count")

@@ -2,6 +2,7 @@ package com.meli.be_java_hisp_w18_g01.services;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.meli.be_java_hisp_w18_g01.dtos.PostDTO;
+import com.meli.be_java_hisp_w18_g01.dtos.ResponseDTO;
 import com.meli.be_java_hisp_w18_g01.entities.Post;
 import com.meli.be_java_hisp_w18_g01.entities.Product;
 import com.meli.be_java_hisp_w18_g01.entities.User;
@@ -21,7 +22,7 @@ public class PostServiceImpl implements PostService{
     UserDbService userDbService;
 
     @Override
-    public void addPost(PostDTO postDTO) {
+    public ResponseDTO addPost(PostDTO postDTO) {
         User user = userDbService.findById(postDTO.getUser_id());
         postCount++;
         Post post;
@@ -39,5 +40,6 @@ public class PostServiceImpl implements PostService{
             throw new BadRequestException("Los parámetros para la creación de la publicación son inválidos");
         }
         user.addPost(post);
+        return new ResponseDTO(200, "Operación exitosa");
     }
 }

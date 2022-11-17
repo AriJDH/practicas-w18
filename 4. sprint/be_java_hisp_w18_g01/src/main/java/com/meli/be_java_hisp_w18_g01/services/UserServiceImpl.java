@@ -1,9 +1,6 @@
 package com.meli.be_java_hisp_w18_g01.services;
 
-import com.meli.be_java_hisp_w18_g01.dtos.UserDTO;
-import com.meli.be_java_hisp_w18_g01.dtos.UserFollowedInfoDTO;
-import com.meli.be_java_hisp_w18_g01.dtos.UserFollowersCountDTO;
-import com.meli.be_java_hisp_w18_g01.dtos.UserFollowersInfoDTO;
+import com.meli.be_java_hisp_w18_g01.dtos.*;
 import com.meli.be_java_hisp_w18_g01.entities.User;
 import com.meli.be_java_hisp_w18_g01.services.database.UserDbService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,17 +13,19 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserDbService userDbService;
     @Override
-    public void handleFollow(long userId, long userIdToFollow) {
+    public ResponseDTO handleFollow(long userId, long userIdToFollow) {
         User user = userDbService.findById(userId);
         User userToFollow = userDbService.findById(userIdToFollow);
         user.follow(userToFollow);
+        return new ResponseDTO(200,"operación exitosa");
     }
 
     @Override
-    public void handleUnfollow(long userId, long userIdToUnfollow) {
+    public ResponseDTO handleUnfollow(long userId, long userIdToUnfollow) {
         User user = userDbService.findById(userId);
         User userToUnfollow = userDbService.findById(userIdToUnfollow);
         user.unFollow(userToUnfollow);
+        return new ResponseDTO( 200,"operación exitosa");
     }
 
     @Override
