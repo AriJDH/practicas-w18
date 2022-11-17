@@ -34,44 +34,43 @@ public class SocialController {
     public SocialController(ServiceImp service) {
         this.service = service;
     }
-    @GetMapping("/users/{userId}/followed/list") // US0004
-    public ResponseEntity<BuyerFollowedListDTOResponse> followedList(@PathVariable Integer userId, @RequestParam(required = false) String order){
-        return new ResponseEntity<>(service.followedsFilter(userId, order),HttpStatus.OK);
-    }
-
-    @GetMapping("/users/{userId}/followers/list")
-    public ResponseEntity<SellerFollowersListDTOResponse> followersList(@PathVariable Integer userId, @RequestParam(required = false) String order){
-        return new ResponseEntity<>(service.followersFilter(userId, order), HttpStatus.OK);
-    }
-
-    @PostMapping("/users/{userId}/follow/{userIdToFollow}")
+    @PostMapping("/users/{userId}/follow/{userIdToFollow}") //US0001
     public ResponseEntity<?> follow(@PathVariable Integer userId, @PathVariable Integer userIdToFollow){
         service.follow(userId, userIdToFollow);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @PostMapping("/users/{userId}/unfollow/{userIdToUnfollow}")
-    public ResponseEntity<?> unfollow(@PathVariable Integer userId, @PathVariable Integer userIdToUnfollow){
-        service.unfollow(userId, userIdToUnfollow);
-        return new ResponseEntity<>(HttpStatus.OK);
-    }
-
-    @GetMapping("/users/{userId}/followers/count")
+    @GetMapping("/users/{userId}/followers/count") //US0002
     public ResponseEntity<SellerFollowersCountDTOResponse> followersCount(@PathVariable Integer userId){
         return new ResponseEntity<>(service.followersCount(userId), HttpStatus.OK);
     }
 
+    @GetMapping("/users/{userId}/followers/list") //US0003 & US0008
+    public ResponseEntity<SellerFollowersListDTOResponse> followersList(@PathVariable Integer userId, @RequestParam(required = false) String order){
+        return new ResponseEntity<>(service.followersFilter(userId, order), HttpStatus.OK);
+    }
 
-    @PostMapping("/products/post")
+    @GetMapping("/users/{userId}/followed/list") // US0004 & US0008
+    public ResponseEntity<BuyerFollowedListDTOResponse> followedList(@PathVariable Integer userId, @RequestParam(required = false) String order){
+        return new ResponseEntity<>(service.followedsFilter(userId, order),HttpStatus.OK);
+    }
+
+    @PostMapping("/products/post") //US0005
     public ResponseEntity<String> addPost(@RequestBody NewPostDTORequest post){
         service.newPost(post);
         return new ResponseEntity<>( "Post realizado correctamente ", HttpStatus.OK);
     }
 
-
-    @GetMapping("/products/followed/{userId}/list")
+    @GetMapping("/products/followed/{userId}/list") //US0006 & US0009
     public ResponseEntity<SellerPostListDTOResponse> followedPostList(@PathVariable Integer userId, @RequestParam(required = false) String order){
         return new ResponseEntity<>(service.followedPostList(userId, order), HttpStatus.OK);
     }
+
+    @PostMapping("/users/{userId}/unfollow/{userIdToUnfollow}") //US0007
+    public ResponseEntity<?> unfollow(@PathVariable Integer userId, @PathVariable Integer userIdToUnfollow){
+        service.unfollow(userId, userIdToUnfollow);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
 
 }
