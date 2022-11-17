@@ -1,9 +1,10 @@
 package com.dh.be_java_hisp_w18_g10.controller;
 
 import com.dh.be_java_hisp_w18_g10.dto.require.PostDTOreq;
+import com.dh.be_java_hisp_w18_g10.dto.response.UserFollowersListDTOres;
+import com.dh.be_java_hisp_w18_g10.dto.response.UserFollowersCountDTOres;
 import com.dh.be_java_hisp_w18_g10.service.IUserService;
 import com.dh.be_java_hisp_w18_g10.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,27 +17,27 @@ public class UserController {
     }
     @PostMapping("/users/{userId}/follow/{userIdToFollow}")
     public ResponseEntity<?> followUser(
-            @PathVariable String userId,
-            @PathVariable String userIdToFollow
+            @PathVariable int userId,
+            @PathVariable int userIdToFollow
     ) {
-        return null;
+        userService.followUser(userId, userIdToFollow);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
     @GetMapping("/users/{userId}/followers/count")
-    public ResponseEntity<?> getUserFollowersCount(
-      @PathVariable String userId
+    public ResponseEntity<UserFollowersCountDTOres> getUserFollowersCount(
+      @PathVariable int userId
     ){
         // US 0002
-        return null;
+        return new ResponseEntity<>(userService.getUserFollowersCount(userId), HttpStatus.OK);
     }
 
     @GetMapping("/users/{userId}/followers/list")
-    public ResponseEntity<?> getUserFollowers(
-            @RequestParam(required = false) String order,
-            @PathVariable int userId
-    ){
+    public ResponseEntity<UserFollowersListDTOres> getUserFollowers(
+            @RequestParam(required = false) String order, @PathVariable int userId){
         // US 0003
         // US 0008
-        return null;
+
+        return new ResponseEntity<>(userService.getUserFollowerList(userId),HttpStatus.OK);
     }
 
     @GetMapping("/users/{userId}/followed/list")

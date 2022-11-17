@@ -3,9 +3,8 @@ package com.dh.be_java_hisp_w18_g10.repository;
 import com.dh.be_java_hisp_w18_g10.entity.User;
 import org.springframework.stereotype.Repository;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Repository
 public class UserRepository implements IUserRepository{
@@ -31,4 +30,13 @@ public class UserRepository implements IUserRepository{
         return null;
     }
 
+    @Override
+    public List<User> getUserFollowers(int id) {
+        return users.entrySet().stream()
+                .filter(entry -> entry.getKey() == id)
+                .map(entry -> entry.getValue())
+                .map(user -> user.getFollowers().values())
+                .flatMap(userCollection -> userCollection.stream())
+                .collect(Collectors.toList());
+    }
 }

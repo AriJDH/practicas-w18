@@ -10,6 +10,7 @@ import com.dh.be_java_hisp_w18_g10.entity.User;
 import com.dh.be_java_hisp_w18_g10.exception.ProductNotFoundException;
 import com.dh.be_java_hisp_w18_g10.exception.UserIdNullException;
 import com.dh.be_java_hisp_w18_g10.exception.UserNotFoundException;
+import com.dh.be_java_hisp_w18_g10.exception.NotFoundException;
 import com.dh.be_java_hisp_w18_g10.repository.*;
 import com.dh.be_java_hisp_w18_g10.util.DTOMapper;
 import org.springframework.stereotype.Service;
@@ -27,17 +28,36 @@ public class UserService implements IUserService {
 
     @Override
     public void followUser(int userId, int userIdToFollow) {
+        User user1 = userRepository.getUser(userId);
+        User user2 = userRepository.getUser(userIdToFollow);
 
+        if(user1 == null){
+            throw new NotFoundException("El usuario con el id: "+userId+" no fue encontrado!");
+        }
+        if(user2 == null){
+            throw new NotFoundException("El usuario con el id: "+userId+" no fue encontrado!");
+        }
+
+        user1.getFollowed().put(user2.getUserId(),user2);
+        user2.getFollowers().put(user1.getUserId(), user1);
     }
 
     @Override
     public UserFollowersCountDTOres getUserFollowersCount(int userId) {
-        return null;
+        User user = userRepository.getUser(userId);
+        if(user == null){
+            throw new NotFoundException("El usuario con el id: "+userId+" no fue encontrado!");
+        }
+        return new UserFollowersCountDTOres(
+                user.getUserId(),
+                user.getUserName(),
+                user.getFollowers().size()
+        );
     }
 
     @Override
     public UserFollowersListDTOres getUserFollowerList(int userId) {
-        return null;
+       return DTOMapper.mapToUserFollowersRes(userRepository.getUserFollowers(userId));
     }
 
     @Override
