@@ -32,6 +32,8 @@ public class UserRepository implements IUserRepository {
 
         users.put(3, new User(3, "User 3", followers, new ArrayList<>(), products));
 
+        users.replace(1, new User(1, "User 1", new ArrayList<>(), List.of(users.get(3)), new ArrayList<>()));
+
     }
 
 

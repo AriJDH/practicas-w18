@@ -16,6 +16,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -65,6 +66,7 @@ public class PostService implements IPostService{
                         .userId(followed.getUserId())
                         .posts(postRepository.findAllByUserId(followed.getUserId()).stream()
                                 .map(post -> mapper.convertValue(post, PostDtoRequest.class))
+                                .filter(post -> post.getDate().isBefore(LocalDate.now().plusDays(1)) && post.getDate().isAfter(LocalDate.now().minusWeeks(2)))
                                 .sorted(Comparator.comparing(PostDtoRequest::getDate))
                                 .collect(Collectors.toList()))
                         .build())
@@ -84,6 +86,7 @@ public class PostService implements IPostService{
                         .userId(followed.getUserId())
                         .posts(postRepository.findAllByUserId(followed.getUserId()).stream()
                                 .map(post -> mapper.convertValue(post, PostDtoRequest.class))
+                                .filter(post -> post.getDate().isBefore(LocalDate.now().plusDays(1)) && post.getDate().isAfter(LocalDate.now().minusWeeks(2)))
                                 .sorted(Comparator.comparing(PostDtoRequest::getDate).reversed())
                                 .collect(Collectors.toList()))
                         .build())
