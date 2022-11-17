@@ -37,15 +37,15 @@ public class User {
         return new ArrayList<>(followers.values());
     }
 
-    public UserFollowersListDTOres toUserFollowersListDTOres() {
-
-        List<UserDTOres> userDTOresList = getFollowersList()
-                .stream()
-                .map(user -> new UserDTOres(user.getUserId(), user.getUserName()))
-                .collect(Collectors.toList());
-
-        UserFollowersListDTOres userFollowersListDTOres = new UserFollowersListDTOres(userId, userName, userDTOresList);
-
-        return userFollowersListDTOres;
-    }
+//    public UserFollowersListDTOres toUserFollowersListDTOres() {
+//
+//        List<UserDTOres> userDTOresList = getFollowersList()
+//                .stream()
+//                .map(user -> new UserDTOres(user.getUserId(), user.getUserName()))
+//                .collect(Collectors.toList());
+//
+//        UserFollowersListDTOres userFollowersListDTOres = new UserFollowersListDTOres(userId, userName, userDTOresList);
+//
+//        return userFollowersListDTOres;
+//    }
 }

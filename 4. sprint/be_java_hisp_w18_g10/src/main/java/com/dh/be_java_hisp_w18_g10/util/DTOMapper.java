@@ -8,6 +8,8 @@ import com.dh.be_java_hisp_w18_g10.entity.User;
 import org.modelmapper.ModelMapper;
 
 import java.time.format.DateTimeFormatter;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class DTOMapper {
     private static ModelMapper mapper;
@@ -26,8 +28,17 @@ public class DTOMapper {
     }
 
     public static UserFollowersListDTOres mapToUserFollowersRes(User user) {
-        return user.toUserFollowersListDTOres();
+
+        List<UserDTOres> userDTOresList = user.getFollowersList()
+                .stream()
+                .map(entity -> new UserDTOres(entity.getUserId(), entity.getUserName()))
+                .collect(Collectors.toList());
+
+        UserFollowersListDTOres userFollowersListDTOres = new UserFollowersListDTOres(user.getUserId(), user.getUserName(), userDTOresList);
+
+        return userFollowersListDTOres;
     }
+
     public static Post mapToPost(PostDTOreq postDTOreq){
         Post post = getInstance().map(postDTOreq, Post.class);
         return post;
@@ -60,4 +71,5 @@ public class DTOMapper {
         productDTOres.setNotes(product.getNotes());
         return productDTOres;
     }
+
 }
