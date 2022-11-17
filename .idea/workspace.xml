@@ -4,8 +4,32 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="360cb582-a468-4577-a2f3-77a022f9b8ab" name="Changes" comment="">
+    <list default="true" id="7d96bac1-5487-460c-978a-3a69c1ff72b9" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/2. java/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/2. java/.idea/workspace.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/2. java/readme.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/2. java/untitled/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/2. java/untitled/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/2. java/untitled/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/2. java/untitled/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/2. java/untitled/out/production/untitled/CarreraSelva/Participante.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/2. java/untitled/out/production/untitled/Ejercicio_temp/Temperatura.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/2. java/untitled/out/production/untitled/Ejercicios_POO/Main.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/2. java/untitled/out/production/untitled/Ejercicios_POO/Persona.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/2. java/untitled/out/production/untitled/Recapitulando_Java_1/Garaje.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/2. java/untitled/out/production/untitled/Recapitulando_Java_1/Main.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/2. java/untitled/out/production/untitled/Recapitulando_Java_1/Vehiculo.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/2. java/untitled/src/CarreraSelva/Participante.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/2. java/untitled/src/Ejercicio_temp/Temperatura.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/2. java/untitled/src/Ejercicios_POO/Main.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/2. java/untitled/src/Ejercicios_POO/Persona.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/2. java/untitled/src/Recapitulando_Java_1/Garaje.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/2. java/untitled/src/Recapitulando_Java_1/Main.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/2. java/untitled/src/Recapitulando_Java_1/Vehiculo.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/2. java/untitled/untitled.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/3. spring/readme.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/4. sprint/readme.md" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -13,6 +37,11 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="sanchez_nicolas" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="MarkdownSettingsMigration">
@@ -29,7 +58,6 @@
     &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
     &quot;last_opened_file_path&quot;: &quot;/Users/AECIOLAZA/Desktop/practicas-w18/practicas-w18&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
@@ -44,25 +72,10 @@
       <recent name="$PROJECT_DIR$/2. java" />
     </key>
   </component>
-  <component name="RunManager">
-    <configuration default="true" type="JetRunConfigurationType">
-      <module name="practicas-w18" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
-      <module name="practicas-w18" />
-      <option name="filePath" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="360cb582-a468-4577-a2f3-77a022f9b8ab" name="Changes" comment="" />
+      <changelist id="7d96bac1-5487-460c-978a-3a69c1ff72b9" name="Changes" comment="" />
       <created>1666890095983</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
@@ -84,6 +97,9 @@
       <workItem from="1668629416623" duration="64000" />
       <workItem from="1668629524055" duration="205000" />
       <workItem from="1668708851231" duration="386000" />
+      <workItem from="1668711544003" duration="653000" />
+      <workItem from="1668712203269" duration="64000" />
+      <workItem from="1668712270025" duration="385000" />
     </task>
     <servers />
   </component>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/2. java/EjerInt_SupermercadoElEconomico/EjerInt_SupermercadoElEconomico.iml" filepath="$PROJECT_DIR$/2. java/EjerInt_SupermercadoElEconomico/EjerInt_SupermercadoElEconomico.iml" />
+      <module fileurl="file://$PROJECT_DIR$/2. java/LiveCodingInterfacesYAbstractas/LiveCodingInterfacesYAbstractas.iml" filepath="$PROJECT_DIR$/2. java/LiveCodingInterfacesYAbstractas/LiveCodingInterfacesYAbstractas.iml" />
+      <module fileurl="file://$PROJECT_DIR$/2. java/Mod08_Pr_Banco/Mod08_Pr_Banco.iml" filepath="$PROJECT_DIR$/2. java/Mod08_Pr_Banco/Mod08_Pr_Banco.iml" />
+      <module fileurl="file://$PROJECT_DIR$/3. spring/PrGrupal_LinkTracker/PrGrupal_LinkTracker.iml" filepath="$PROJECT_DIR$/3. spring/PrGrupal_LinkTracker/PrGrupal_LinkTracker.iml" />
+      <module fileurl="file://$PROJECT_DIR$/3. spring/Pr_Grupal_CalculadorCalorias/Pr_Grupal_CalculadorCalorias.iml" filepath="$PROJECT_DIR$/3. spring/Pr_Grupal_CalculadorCalorias/Pr_Grupal_CalculadorCalorias.iml" />
+      <module fileurl="file://$PROJECT_DIR$/3. spring/Pr_MultiCapa_Grupal_StarWars/Pr_MultiCapa_Grupal_StarWars.iml" filepath="$PROJECT_DIR$/3. spring/Pr_MultiCapa_Grupal_StarWars/Pr_MultiCapa_Grupal_StarWars.iml" />
+      <module fileurl="file://$PROJECT_DIR$/2. java/Practica1vivo/Practica1vivo.iml" filepath="$PROJECT_DIR$/2. java/Practica1vivo/Practica1vivo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/2. java/PracticoAgenciaTurismo/PracticoAgenciaTurismo.iml" filepath="$PROJECT_DIR$/2. java/PracticoAgenciaTurismo/PracticoAgenciaTurismo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/2. java/PracticoClasesAbstractasSeries/PracticoClasesAbstractasSeries.iml" filepath="$PROJECT_DIR$/2. java/PracticoClasesAbstractasSeries/PracticoClasesAbstractasSeries.iml" />
+      <module fileurl="file://$PROJECT_DIR$/2. java/PracticoDistribuidora/PracticoDistribuidora.iml" filepath="$PROJECT_DIR$/2. java/PracticoDistribuidora/PracticoDistribuidora.iml" />
+      <module fileurl="file://$PROJECT_DIR$/2. java/PracticoGenericsWrapperLambdaStreams/PracticoGenericsWrapperLambdaStreams.iml" filepath="$PROJECT_DIR$/2. java/PracticoGenericsWrapperLambdaStreams/PracticoGenericsWrapperLambdaStreams.iml" />
+      <module fileurl="file://$PROJECT_DIR$/2. java/PracticoMasaCorporal/PracticoMasaCorporal.iml" filepath="$PROJECT_DIR$/2. java/PracticoMasaCorporal/PracticoMasaCorporal.iml" />
+      <module fileurl="file://$PROJECT_DIR$/2. java/SaveTheRopa/SaveTheRopa.iml" filepath="$PROJECT_DIR$/2. java/SaveTheRopa/SaveTheRopa.iml" />
+      <module fileurl="file://$PROJECT_DIR$/2. java/clase2/clase2.iml" filepath="$PROJECT_DIR$/2. java/clase2/clase2.iml" />
+      <module fileurl="file://$PROJECT_DIR$/2. java/CodigoMorse/src/main/main.iml" filepath="$PROJECT_DIR$/2. java/CodigoMorse/src/main/main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/2. java/demo/src/main/main1.iml" filepath="$PROJECT_DIR$/2. java/demo/src/main/main1.iml" />
+      <module fileurl="file://$PROJECT_DIR$/2. java/NumerosRomanos/src/main/main10.iml" filepath="$PROJECT_DIR$/2. java/NumerosRomanos/src/main/main10.iml" />
+      <module fileurl="file://$PROJECT_DIR$/3. spring/NumerosRomanos/src/main/main11.iml" filepath="$PROJECT_DIR$/3. spring/NumerosRomanos/src/main/main11.iml" />
+      <module fileurl="file://$PROJECT_DIR$/3. spring/CodigoMorse/src/main/main2.iml" filepath="$PROJECT_DIR$/3. spring/CodigoMorse/src/main/main2.iml" />
+      <module fileurl="file://$PROJECT_DIR$/3. spring/PR_Grupal_DTO_Deportes/src/main/main3.iml" filepath="$PROJECT_DIR$/3. spring/PR_Grupal_DTO_Deportes/src/main/main3.iml" />
+      <module fileurl="file://$PROJECT_DIR$/3. spring/PrGrupal_Blog_Exceptions/src/main/main4.iml" filepath="$PROJECT_DIR$/3. spring/PrGrupal_Blog_Exceptions/src/main/main4.iml" />
+      <module fileurl="file://$PROJECT_DIR$/3. spring/EdadPersona/src/main/main5.iml" filepath="$PROJECT_DIR$/3. spring/EdadPersona/src/main/main5.iml" />
+      <module fileurl="file://$PROJECT_DIR$/3. spring/demoParams/src/main/main6.iml" filepath="$PROJECT_DIR$/3. spring/demoParams/src/main/main6.iml" />
+      <module fileurl="file://$PROJECT_DIR$/3. spring/MultiCapaVivo/src/main/main7.iml" filepath="$PROJECT_DIR$/3. spring/MultiCapaVivo/src/main/main7.iml" />
+      <module fileurl="file://$PROJECT_DIR$/4. sprint/be_java_hisp_w18_g02_sanchez/src/main/main8.iml" filepath="$PROJECT_DIR$/4. sprint/be_java_hisp_w18_g02_sanchez/src/main/main8.iml" />
+      <module fileurl="file://$PROJECT_DIR$/4. sprint/be_java_hisp_w18_g02/src/main/main9.iml" filepath="$PROJECT_DIR$/4. sprint/be_java_hisp_w18_g02/src/main/main9.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/practicas-w18.iml" filepath="$PROJECT_DIR$/.idea/practicas-w18.iml" />
+      <module fileurl="file://$PROJECT_DIR$/3. spring/MultiCapaVivo/src/test/test.iml" filepath="$PROJECT_DIR$/3. spring/MultiCapaVivo/src/test/test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/3. spring/CodigoMorse/src/test/test1.iml" filepath="$PROJECT_DIR$/3. spring/CodigoMorse/src/test/test1.iml" />
+      <module fileurl="file://$PROJECT_DIR$/4. sprint/be_java_hisp_w18_g02_sanchez/src/test/test10.iml" filepath="$PROJECT_DIR$/4. sprint/be_java_hisp_w18_g02_sanchez/src/test/test10.iml" />
+      <module fileurl="file://$PROJECT_DIR$/2. java/CodigoMorse/src/test/test11.iml" filepath="$PROJECT_DIR$/2. java/CodigoMorse/src/test/test11.iml" />
+      <module fileurl="file://$PROJECT_DIR$/3. spring/EdadPersona/src/test/test2.iml" filepath="$PROJECT_DIR$/3. spring/EdadPersona/src/test/test2.iml" />
+      <module fileurl="file://$PROJECT_DIR$/3. spring/PrGrupal_Blog_Exceptions/src/test/test3.iml" filepath="$PROJECT_DIR$/3. spring/PrGrupal_Blog_Exceptions/src/test/test3.iml" />
+      <module fileurl="file://$PROJECT_DIR$/3. spring/NumerosRomanos/src/test/test4.iml" filepath="$PROJECT_DIR$/3. spring/NumerosRomanos/src/test/test4.iml" />
+      <module fileurl="file://$PROJECT_DIR$/2. java/demo/src/test/test5.iml" filepath="$PROJECT_DIR$/2. java/demo/src/test/test5.iml" />
+      <module fileurl="file://$PROJECT_DIR$/3. spring/demoParams/src/test/test6.iml" filepath="$PROJECT_DIR$/3. spring/demoParams/src/test/test6.iml" />
+      <module fileurl="file://$PROJECT_DIR$/3. spring/PR_Grupal_DTO_Deportes/src/test/test7.iml" filepath="$PROJECT_DIR$/3. spring/PR_Grupal_DTO_Deportes/src/test/test7.iml" />
+      <module fileurl="file://$PROJECT_DIR$/2. java/NumerosRomanos/src/test/test8.iml" filepath="$PROJECT_DIR$/2. java/NumerosRomanos/src/test/test8.iml" />
+      <module fileurl="file://$PROJECT_DIR$/4. sprint/be_java_hisp_w18_g02/src/test/test9.iml" filepath="$PROJECT_DIR$/4. sprint/be_java_hisp_w18_g02/src/test/test9.iml" />
+    </modules>
+  </component>
+</project>
