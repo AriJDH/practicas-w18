@@ -6,8 +6,10 @@ import java.util.List;
 
 public interface IPostRepository {
     Post findByIdPost(int postId);
+
     List<Post> findByUser(int userId);
-     boolean addPost(Post post);
+
+    boolean addPost(Post post);
 
     Integer getPostsSizeList();
 }
