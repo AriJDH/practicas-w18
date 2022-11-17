@@ -25,21 +25,21 @@ public class UserRepositoryImp implements IUserRepository{
         List<User> followers = new ArrayList<>();
         List<Seller> followed = new ArrayList<>();
 
-        List<Post> post3 = new ArrayList<>();
-        List<Post> post4 = new ArrayList<>();
         List<Post> post5 = new ArrayList<>();
         List<Post> post6 = new ArrayList<>();
+        List<Post> post7 = new ArrayList<>();
+        List<Post> post8 = new ArrayList<>();
 
-        post3.add(postRepository.getPosts().get(0));
-        post4.add(postRepository.getPosts().get(1));
-        post5.add(postRepository.getPosts().get(2));
-        post6.add(postRepository.getPosts().get(3));
+        post5.add(postRepository.getPosts().get(0));
+        post6.add(postRepository.getPosts().get(1));
+        post7.add(postRepository.getPosts().get(2));
+        post8.add(postRepository.getPosts().get(3));
 
 
-        Seller s3 = new Seller(3, "User3", followed, post3, followers);
-        Seller s4 = new Seller(4, "User4", followed, post4, followers);
         Seller s1 = new Seller(5, "User5", followed, post5, followers);
         Seller s2 = new Seller(6, "User6", followed, post6, followers);
+        Seller s3 = new Seller(7, "User7", followed, post7, followers);
+        Seller s4 = new Seller(8, "User8", followed, post8, followers);
 
 
         User u1 = new User(1, "User1", followed);
@@ -90,28 +90,22 @@ public class UserRepositoryImp implements IUserRepository{
     }
 
     @Override
-    public List<String> follow(Integer userId, Integer userIdToFollow) {
+    public String follow(Integer userId, Integer userIdToFollow) {
 
-        List<String> nombres = new ArrayList<>();
 
-        for (User u : this.users) {
-            if (u.getUser_id() == userId) {
-                nombres.add(u.getUser_name());
-                for (Seller s : this.sellers) {
-                    if (s.getUser_id() == userIdToFollow) {
-                        nombres.add(s.getUser_name());
-                        u.getFollowed().add(s);
-                        break;
-                    }
-                }
-                break;
-            }
+        User follower = getUserByID(userId);
+        if (follower == null) {
+            follower = findSellerById(userId);
         }
+        Seller seller = findSellerById(userIdToFollow);
 
-        if (nombres.size() < 2) {
+        if(follower == null || seller==null)
             return null;
-        }
-        return nombres;
+
+        follower.getFollowed().add(seller);
+        seller.getFollowers().add(follower);
+
+        return follower.getUser_name() +" with id: " + userId + " is following -> " + seller.getUser_name() + " with id: "+ userIdToFollow;
     }
 
     @Override
