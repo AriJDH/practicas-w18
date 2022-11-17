@@ -7,6 +7,8 @@ import com.sprint1.be_java_hisp_w18_g03.dto.request.RequestPostDTO;
 import com.sprint1.be_java_hisp_w18_g03.dto.response.ResponseDTO;
 import com.sprint1.be_java_hisp_w18_g03.dto.response.SellersPostDTO;
 import com.sprint1.be_java_hisp_w18_g03.entity.Post;
+import com.sprint1.be_java_hisp_w18_g03.exception.CreationException;
+import com.sprint1.be_java_hisp_w18_g03.exception.NoFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,10 +24,10 @@ public class PostServiceImp implements IPostService {
     @Override
     public ResponseDTO createPost(RequestPostDTO request) {
         var user = iUserRepository.findById(request.getUserId());
-        if (user==null) return null;
+        if (user == null) throw new NoFoundException("The user hasn't being found");
         Integer sizeList = iPostRepository.getPostsSizeList() + 1;
         var category = iCategoryRepository.findCategoryById(request.getCategory());
-        if (category == null) return null;;
+        if (category == null) throw new NoFoundException("The category hasn't being found");
         Post newPost = new Post(
                 sizeList,
                 request.getProduct().getProductName(),
@@ -39,7 +41,7 @@ public class PostServiceImp implements IPostService {
                 request.getProduct().getDiscount()
         );
         boolean responseAdd = iPostRepository.addPost(newPost);
-        if (responseAdd == false) return null;
+        if (responseAdd == false) throw new CreationException("Error adding the post");
         return new ResponseDTO("Post agregado correctamente", 200);
     }
 
