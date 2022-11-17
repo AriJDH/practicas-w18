@@ -1,7 +1,11 @@
 package com.socialmeli.be_java_hisp_w18g05.controller;
 
 
+
 import com.socialmeli.be_java_hisp_w18g05.dto.response.BuyerFollowedListDTOResponse;
+
+import com.socialmeli.be_java_hisp_w18g05.dto.response.SellerFollowersCountDTOResponse;
+
 import com.socialmeli.be_java_hisp_w18g05.dto.response.SellerFollowersListDTOResponse;
 import com.socialmeli.be_java_hisp_w18g05.service.IService;
 import com.socialmeli.be_java_hisp_w18g05.service.ServiceImp;
@@ -22,7 +26,7 @@ public class SocialController {
         this.service = service;
     }
     @GetMapping("/users/{userId}/followed/list") // US0004
-    public ResponseEntity<BuyerFollowedListDTOResponse> followedList(@PathVariable Integer userId){
+    public ResponseEntity<BuyerFollowedListDTOResponse > followedList(@PathVariable Integer userId){
         return new ResponseEntity<>(service.getFolloweds(userId),HttpStatus.OK);
     }
 
@@ -41,7 +45,10 @@ public class SocialController {
     public ResponseEntity<?> unfollow(@PathVariable Integer userId, @PathVariable Integer userIdToUnfollow){
         service.unfollow(userId, userIdToUnfollow);
         return new ResponseEntity<>(HttpStatus.OK);
-
     }
 
+    @GetMapping("/users/{userId}/followers/count")
+    public ResponseEntity<SellerFollowersCountDTOResponse> followersCount(@PathVariable Integer userId){
+        return new ResponseEntity<>(service.followersCount(userId), HttpStatus.OK);
+    }
 }

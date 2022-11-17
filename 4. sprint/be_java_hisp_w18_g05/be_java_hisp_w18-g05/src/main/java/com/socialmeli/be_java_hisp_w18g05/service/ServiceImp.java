@@ -1,8 +1,12 @@
 package com.socialmeli.be_java_hisp_w18g05.service;
 
 import com.socialmeli.be_java_hisp_w18g05.dto.response.BuyerDTOResponse;
+
 import com.socialmeli.be_java_hisp_w18g05.dto.response.BuyerFollowedListDTOResponse;
 import com.socialmeli.be_java_hisp_w18g05.dto.response.SellerDTOResponse;
+
+import com.socialmeli.be_java_hisp_w18g05.dto.response.SellerFollowersCountDTOResponse;
+
 import com.socialmeli.be_java_hisp_w18g05.dto.response.SellerFollowersListDTOResponse;
 import com.socialmeli.be_java_hisp_w18g05.entity.Buyer;
 import com.socialmeli.be_java_hisp_w18g05.entity.Seller;
@@ -83,7 +87,24 @@ public class ServiceImp implements IService {
             b.unFollowed(s);
             s.unFollower(b);
         }
+    @Override
+    public SellerFollowersCountDTOResponse followersCount(Integer user_id){
+        Integer countedFollowers;
+        SellerFollowersCountDTOResponse sellerCount = new SellerFollowersCountDTOResponse();
+        for(Seller seller: repository.getAllSellers()){
+            if(user_id.equals(seller.getUser_id())){
+                countedFollowers = seller.getFollowers().size();
+                sellerCount = new SellerFollowersCountDTOResponse(seller.getUser_id(),seller.getName(),countedFollowers);
+            }
+        }
+        return sellerCount;
     }
 
 
+
+
+
+
+
+}
 
