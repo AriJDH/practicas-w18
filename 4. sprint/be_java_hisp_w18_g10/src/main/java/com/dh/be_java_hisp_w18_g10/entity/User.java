@@ -45,8 +45,6 @@ public class User {
                 .collect(Collectors.toList());
 
         UserFollowersListDTOres userFollowersListDTOres = new UserFollowersListDTOres(userId, userName, userDTOresList);
-        userFollowersListDTOres.setUser_id(userId);
-        userFollowersListDTOres.setUser_name(userName);
 
         return userFollowersListDTOres;
     }

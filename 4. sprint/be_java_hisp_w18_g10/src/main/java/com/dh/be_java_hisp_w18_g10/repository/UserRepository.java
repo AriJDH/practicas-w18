@@ -40,6 +40,7 @@ public class UserRepository implements IUserRepository{
         followedUsuer1.put(user2.getUserId(), user2);
         followedUsuer1.put(user3.getUserId(), user3);
         user1.setFollowed(followedUsuer1);
+        user1.setFollowers(followedUsuer1);
 
         Map<Integer, User> followedUsuer2 = new HashMap<Integer, User>();
         followedUsuer2.put(user3.getUserId(), user3);
