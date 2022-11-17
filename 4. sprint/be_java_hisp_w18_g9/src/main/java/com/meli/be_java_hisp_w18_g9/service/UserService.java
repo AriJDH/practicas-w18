@@ -2,6 +2,7 @@ package com.meli.be_java_hisp_w18_g9.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.meli.be_java_hisp_w18_g9.exception.BadRequestException;
+import com.meli.be_java_hisp_w18_g9.model.dto.response.FollowersCountUserResponse;
 import com.meli.be_java_hisp_w18_g9.model.dto.response.UserFollowedListResponse;
 import com.meli.be_java_hisp_w18_g9.model.entity.User;
 import com.meli.be_java_hisp_w18_g9.repository.IUserRepository;
