@@ -1,22 +1,18 @@
 package com.socialmedia.be_java_hisp_w18_g08.repository;
 
 import com.socialmedia.be_java_hisp_w18_g08.entity.Post;
-import com.socialmedia.be_java_hisp_w18_g08.entity.Product;
 import com.socialmedia.be_java_hisp_w18_g08.entity.Seller;
 import com.socialmedia.be_java_hisp_w18_g08.entity.User;
-import lombok.Getter;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
+import java.util.Optional;
 
 @Repository
 public class UserRepositoryImp implements IUserRepository{
-    List<User> users;
-    List<Seller> sellers;
+    List<User> users = new ArrayList<>();
+    List<Seller> sellers = new ArrayList<>();
     IPostRepository postRepository;
     public UserRepositoryImp(PostRepositoryImp postRepository){
         //Carga de Datos inicial
@@ -68,5 +64,14 @@ public class UserRepositoryImp implements IUserRepository{
         this.users.add(u3);
         this.users.add(u4);
 
+    }
+
+    @Override
+    public Seller findUserListBySeller(Integer id) {
+        Seller seller = this.sellers.stream()
+                .filter(s -> id == s.getUser_id())
+                .findFirst()
+                .orElse(null);
+        return seller;
     }
 }
