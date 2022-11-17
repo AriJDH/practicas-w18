@@ -36,7 +36,7 @@ public class UserRepository implements IUserRepository{
         Post post2 = new Post(nextPostId++, LocalDate.now(),  2, 15999.99, pr2);
 
         User u3 = new User(3, "LaOfertaPerfecta");
-        User u4 = new User(4, "Motociclo");
+        User u4 = new User(4, "MotociclosSA");
 
         u3.addPost(post1);
         u4.addPost(post2);
@@ -45,6 +45,9 @@ public class UserRepository implements IUserRepository{
         this.users.put(2, u2);
         this.users.put(3, u3);
         this.users.put(4, u4);
+
+        this.follow(u1.getId(), u3.getId());
+        this.follow(u1.getId(), u4.getId());
     }
 
     @Override
@@ -100,13 +103,13 @@ public class UserRepository implements IUserRepository{
     }
 
     @Override
-    public void unfollow(Integer idFollower, Integer idFollow) {
+    public void unfollow(Integer idFollower, Integer idUnfollow) {
         User userFollower = findById(idFollower);
         if(userFollower == null)
             throw new NotFoundException("No se pudo encontrar el usuario seguidor con id "+idFollower);
 
-        if(!userFollower.getFollowed().removeIf(f -> f.getId()==idFollow))
-            throw new NotFoundException("El usuario seguidor con id "+idFollower+ " no sigue al usuario id "+idFollow);
+        if(!userFollower.getFollowed().removeIf(f -> f.getId()==idUnfollow))
+            throw new NotFoundException("El usuario seguidor con id "+idFollower+ " no sigue al usuario id "+idUnfollow);
     }
 
     @Override

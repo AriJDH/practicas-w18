@@ -2,7 +2,6 @@ package com.mercadolibre.socialmeli.repository;
 
 import com.mercadolibre.socialmeli.entity.Post;
 import com.mercadolibre.socialmeli.entity.User;
-import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
@@ -12,8 +11,8 @@ public interface IUserRepository {
     List<User> getFollowers(Integer id);
     List<User> getFollowed(Integer id);
     void follow(Integer idFollower, Integer idFollow);
-    void unfollow(Integer idFollower, Integer idFollow);
+    void unfollow(Integer idFollower, Integer idUnfollow);
     void createPost(Integer userId, Post newPost);
     Integer getNextPostId();
-    //List<Post> getRecentPost(Integer sellerId);
+
 }

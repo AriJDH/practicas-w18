@@ -23,7 +23,89 @@ public class UserService implements IUserService {
     @Autowired
     private IUserRepository userRepository;
 
-    // US 0002
+    /**
+     * US0001
+     *
+     * @param userId
+     * @param userIdToFollow
+     * @return
+     */
+    @Override
+    public String follow(Integer userId, Integer userIdToFollow) {
+        this.userRepository.follow(userId, userIdToFollow);
+        return "El usuario " + userId + " ahora sigue al usuario " + userIdToFollow;
+    }
+
+    /**
+     * US0002
+     *
+     * @param id
+     * @return
+     */
+    @Override
+    public SellerFollowerCountDtoRes getCount(Integer id) {
+        List<User> followers = userRepository.getFollowers(id);
+        Integer count = followers.size();
+
+        User user = userRepository.findById(id);
+
+        return new SellerFollowerCountDtoRes(id, user.getName(), count);
+    }
+
+    /**
+     * US 0003
+     *
+     * @param id
+     * @param order
+     * @return
+     */
+    @Override
+    public SellerFollowerListDtoRes getFollowers(Integer id, String order) {
+        List<User> followers = userRepository.getFollowers(id);
+        User user = userRepository.findById(id);
+        List<UserDtoRes> usersDtosRes = followers.stream()
+                .map(u -> new UserDtoRes(u.getId(), u.getName()))
+                .collect(Collectors.toList());
+
+        return new SellerFollowerListDtoRes(id, user.getName(), order(usersDtosRes, order));
+    }
+
+    /**
+     * US0004
+     *
+     * @param id
+     * @param order
+     * @return
+     */
+    @Override
+    public UserFollowedListDtoRes getFollowed(Integer id, String order) {
+        List<User> followed = userRepository.getFollowed(id);
+        User user = userRepository.findById(id);
+        List<UserDtoRes> usersDtosRes = followed.stream()
+                .map(u -> new UserDtoRes(u.getId(), u.getName()))
+                .collect(Collectors.toList());
+
+        return new UserFollowedListDtoRes(id, user.getName(), order(usersDtosRes, order));
+    }
+
+    private List<UserDtoRes> order(List<UserDtoRes> usersDtosRes, String order) {
+        if (order != null && order.equals("name_asc")) {
+            usersDtosRes = usersDtosRes.stream()
+                    .sorted((x, y) -> x.getName().compareToIgnoreCase(y.getName()))
+                    .collect(Collectors.toList());
+        } else if (order != null && order.equals("name_desc")) {
+            usersDtosRes = usersDtosRes.stream()
+                    .sorted(Comparator.comparing(UserDtoRes::getName).reversed())
+                    .collect(Collectors.toList());
+        }
+        return usersDtosRes;
+    }
+
+    /**
+     * US0005
+     *
+     * @param postReq
+     */
     @Override
     public void addPost(PostDtoReq postReq) {
         Post post;
@@ -50,6 +132,13 @@ public class UserService implements IUserService {
 
     }
 
+    /**
+     * US0006 / US0009
+     *
+     * @param userId
+     * @param order
+     * @return
+     */
     @Override
     public RecentPostsDtoRes getRecentPosts(Integer userId, String order) {
         List<User> followed = userRepository.getFollowed(userId);
@@ -82,62 +171,17 @@ public class UserService implements IUserService {
         return new RecentPostsDtoRes(userId, postsRes);
     }
 
+    /**
+     * US0007
+     *
+     * @param userId
+     * @param userIdToUnfollow
+     * @return
+     */
     @Override
-    public SellerFollowerCountDtoRes getCount(Integer id) {
-        List<User> followers = userRepository.getFollowers(id);
-        Integer count = followers.size();
-
-        User user = userRepository.findById(id);
-
-        return new SellerFollowerCountDtoRes(id, user.getName(), count);
+    public String unfollow(Integer userId, Integer userIdToUnfollow) {
+        this.userRepository.unfollow(userId, userIdToUnfollow);
+        return "El usuario " + userId + " dejó de seguir al usuario " + userIdToUnfollow;
     }
 
-    // US 0003
-    @Override
-    public SellerFollowerListDtoRes getFollowers(Integer id, String order) {
-        List<User> followers = userRepository.getFollowers(id);
-        User user = userRepository.findById(id);
-        List<UserDtoRes> usersDtosRes = followers.stream()
-                .map(u -> new UserDtoRes(u.getId(), u.getName()))
-                .collect(Collectors.toList());
-
-        return new SellerFollowerListDtoRes(id, user.getName(), order(usersDtosRes, order));
-    }
-
-    // US 0004
-    @Override
-    public UserFollowedListDtoRes getFollowed(Integer id, String order) {
-        List<User> followed = userRepository.getFollowed(id);
-        User user = userRepository.findById(id);
-        List<UserDtoRes> usersDtosRes = followed.stream()
-                .map(u -> new UserDtoRes(u.getId(), u.getName()))
-                .collect(Collectors.toList());
-
-        return new UserFollowedListDtoRes(id, user.getName(), order(usersDtosRes, order));
-    }
-
-    @Override
-    public String follow(Integer userId, Integer userIdToFollow) {
-        this.userRepository.follow(userId, userIdToFollow);
-        return "El usuario " + userId + " ahora sigue al usuario " + userIdToFollow;
-    }
-
-    @Override
-    public String unfollow(Integer userId, Integer userIdToFollow) {
-        this.userRepository.unfollow(userId, userIdToFollow);
-        return "El usuario " + userId + " dejó de seguir al usuario " + userIdToFollow;
-    }
-
-    private List<UserDtoRes> order(List<UserDtoRes> usersDtosRes, String order) {
-        if (order != null && order.equals("name_asc")) {
-            usersDtosRes = usersDtosRes.stream()
-                    .sorted((x, y) -> x.getName().compareToIgnoreCase(y.getName()))
-                    .collect(Collectors.toList());
-        } else if (order != null && order.equals("name_desc")) {
-            usersDtosRes = usersDtosRes.stream()
-                    .sorted(Comparator.comparing(UserDtoRes::getName).reversed())
-                    .collect(Collectors.toList());
-        }
-        return usersDtosRes;
-    }
 }

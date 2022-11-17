@@ -9,12 +9,10 @@ import com.mercadolibre.socialmeli.dto.response.UserFollowedListDtoRes;
 public interface IUserService {
     String follow(Integer userId, Integer userIdToFollow);
     String unfollow(Integer userId, Integer userIdToFollow);
-
     SellerFollowerCountDtoRes getCount(Integer id);
     SellerFollowerListDtoRes getFollowers(Integer id, String order);
     UserFollowedListDtoRes getFollowed(Integer id, String order);
     void addPost(PostDtoReq postReq);
-
     RecentPostsDtoRes getRecentPosts(Integer userId, String order);
 
 }

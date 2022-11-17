@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -19,9 +18,64 @@ public class UserController {
     private IUserService userService;
 
     /**
+     * US0001
+     * Follow Seller
+     * @param userId User ID
+     * @param userIdToFollow Seller ID
+     * @return 200 OK (String message)
+     *         400 Bad Request (ErrorDTO Error details)
+     */
+    @PostMapping("/users/{userId}/follow/{userIdToFollow}")
+    public ResponseEntity<String> follow(@PathVariable Integer userId, @PathVariable Integer userIdToFollow){
+        return ResponseEntity.ok(userService.follow(userId, userIdToFollow));
+    }
+
+    /**
+     * US0002
+     * Count Followers
+     * @param userId Seller ID
+     * @return 200 OK (SellerFollowerCountDtoRes Number of Followers)
+     *         400 Bad Request (ErrorDTO Error details)
+     */
+    @GetMapping("/users/{userId}/followers/count")
+    public ResponseEntity<SellerFollowerCountDtoRes> getCount(@PathVariable Integer userId) {
+        return ResponseEntity.ok(userService.getCount(userId));
+    }
+
+    /**
+     * US0003 / US0008
+     * Get Followers
+     * @param userId Seller ID
+     * @param order (optional) name_asc / name_desc
+     * @return 200 OK (SellerFollowerListDtoRes List of Followers)
+     *         400 Bad Request (ErrorDTO Error details)
+     */
+    @GetMapping("/users/{userId}/followers/list")
+    public ResponseEntity<SellerFollowerListDtoRes> getFollowers(@PathVariable Integer userId,
+                                                                 @RequestParam(required = false) String order) {
+        return ResponseEntity.ok(userService.getFollowers(userId, order));
+    }
+
+    /**
+     * US0004 / US0008
+     * Get Followed
+     * @param userId User ID
+     * @param order (optional) name_asc / name_desc
+     * @return 200 OK (UserFollowedListDtoRes List of followed)
+     *         400 Bad Request (ErrorDTO Error details)
+     */
+    @GetMapping("/users/{userId}/followed/list")
+    public ResponseEntity<UserFollowedListDtoRes> getFollowed(@PathVariable Integer userId,
+                                                              @RequestParam(required = false) String order) {
+        return ResponseEntity.ok(userService.getFollowed(userId, order));
+    }
+
+    /**
      * US0005
-     * @param postReq
-     * @return
+     * Add Post
+     * @param postReq Post
+     * @return 200 OK
+     *         400 Bad Request (ErrorDTO Error details)
      */
     @PostMapping("/products/post")
     public ResponseEntity<?> addPost(@RequestBody PostDtoReq postReq){
@@ -30,9 +84,11 @@ public class UserController {
     }
 
     /**
-     * US0006
-     * @param userId
-     * @return
+     * US0006 / US0009
+     * Get Recent Posts
+     * @param userId User ID
+     * @return 200 OK (RecentPostsDtoRes List of Recent Posts)
+     *         400 Bad Request (ErrorDTO Error details)
      */
     @GetMapping("/products/followed/{userId}/list")
     public ResponseEntity<RecentPostsDtoRes> getRecentPost(@PathVariable Integer userId,
@@ -41,59 +97,16 @@ public class UserController {
     }
 
     /**
-     * US0002
-     * @param userId
-     * @return
-     */
-    @GetMapping("/users/{userId}/followers/count")
-    public ResponseEntity<SellerFollowerCountDtoRes> getCount(@PathVariable Integer userId) {
-        return ResponseEntity.status(HttpStatus.OK).body(userService.getCount(userId));
-    }
-
-    /**
-     * US0003
-     * @param userId
-     * @param order
-     * @return
-     */
-    @GetMapping("/users/{userId}/followers/list")
-    public ResponseEntity<SellerFollowerListDtoRes> getFollowers(@PathVariable Integer userId,
-                                                                 @RequestParam(required = false) String order) {
-        return ResponseEntity.status(HttpStatus.OK).body(userService.getFollowers(userId, order));
-    }
-
-    /**
-     * US0004
-     * @param userId
-     * @param order
-     * @return
-     */
-    @GetMapping("/users/{userId}/followed/list")
-    public ResponseEntity<UserFollowedListDtoRes> getFollowed(@PathVariable Integer userId,
-                                                              @RequestParam(required = false) String order) {
-        return ResponseEntity.status(HttpStatus.OK).body(userService.getFollowed(userId, order));
-    }
-
-    /**
-     * US0001
-     * @param userId
-     * @param userIdToFollow
-     * @return
-     */
-    @PostMapping("/users/{userId}/follow/{userIdToFollow}")
-    public ResponseEntity<?> follow(@PathVariable Integer userId, @PathVariable Integer userIdToFollow){
-        return new ResponseEntity<>(userService.follow(userId, userIdToFollow), HttpStatus.valueOf(200));
-    }
-
-    /**
      * US0007
-     * @param userId
-     * @param userIdToFollow
-     * @return
+     * Unfollow Seller
+     * @param userId User ID
+     * @param userIdToUnfollow Seller ID
+     * @return 200 OK (String message)
+     *         400 Bad Request (ErrorDTO Error details)
      */
-    @PostMapping("/users/{userId}/unfollow/{userIdToFollow}")
-    public ResponseEntity<?> unfollow(@PathVariable Integer userId, @PathVariable Integer userIdToFollow){
-        return new ResponseEntity<>(userService.unfollow(userId, userIdToFollow), HttpStatus.valueOf(200));
+    @PostMapping("/users/{userId}/unfollow/{userIdToUnfollow}")
+    public ResponseEntity<String> unfollow(@PathVariable Integer userId, @PathVariable Integer userIdToUnfollow){
+        return ResponseEntity.ok(userService.unfollow(userId, userIdToUnfollow));
     }
 
 }
