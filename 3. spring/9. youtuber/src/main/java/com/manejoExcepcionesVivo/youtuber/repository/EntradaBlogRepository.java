@@ -6,10 +6,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.NoSuchElementException;
 import java.util.Optional;
-import java.util.concurrent.atomic.LongAccumulator;
-import java.util.concurrent.atomic.LongAdder;
 
 @Repository
 public class EntradaBlogRepository implements IEntradaBlogRepository {
@@ -21,9 +18,8 @@ public class EntradaBlogRepository implements IEntradaBlogRepository {
 	@Override
 	public EntradaBlog agregarNuevo(EntradaBlog entradaBlog) {
 		// Antes de agregar chequeamos si ya existe el Id
-		for (EntradaBlog eb : entradaBlogList) {
-			eb.getId().equals(entradaBlog.getId()); // TODO no funciona como se espera
-			// Si el Id existe arrojamos la excepción
+		Optional<EntradaBlog> entradaBlog1 = buscarPorId(entradaBlog.getId());
+		if (entradaBlog1.isPresent()){
 			throw new IdDuplicadoException("Id " + entradaBlog.getId() + " Duplicado");
 		}
 		// Si el Id no existe, agregamos el elemento

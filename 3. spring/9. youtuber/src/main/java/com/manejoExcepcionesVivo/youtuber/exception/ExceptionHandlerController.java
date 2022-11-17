@@ -24,7 +24,7 @@ public class ExceptionHandlerController {
 	
 	@ExceptionHandler(NoSuchElementException.class)
 	public ResponseEntity<?> notFound(NoSuchElementException e) {
-		log.error("Id no encontrado", e);
+		log.error("Id no encontrado", e); // Va a mostrar error en consola
 		return new ResponseEntity<>(HttpStatus.NOT_FOUND); // otra forma de respuesta
 	}
 }
