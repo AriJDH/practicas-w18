@@ -30,23 +30,23 @@ public class UserService implements IUserService {
 
     @Override
     public HttpStatus follow(Integer userId, Integer userIdToFollow) {
-        User user = userRepository.findById(userId).orElseThrow(()-> new BadRequestException("El usuario con Id "+userId+" no existe"));
-        User userToFollow = userRepository.findById(userIdToFollow).orElseThrow(()-> new BadRequestException("El usuario a seguir con Id "+userIdToFollow+" no existe"));
+        User user = userRepository.findById(userId).orElseThrow(()-> new BadRequestException("User with "+userId+" doesn't exist"));
+        User userToFollow = userRepository.findById(userIdToFollow).orElseThrow(()-> new BadRequestException("user to follow with Id "+userIdToFollow+" doesn't exist"));
 
         if(user != null && userToFollow != null) {
 
             if(user.getUserId().equals(userToFollow.getUserId()))
-                throw new BadRequestException("No te puedes seguir a ti mismo");
+                throw new BadRequestException("you can't follow yourself");
 
             if(userToFollow.getProducts() == null || userToFollow.getProducts().size()==0)
-                throw new BadRequestException("El usuario a seguir no es un vendedor");
+                throw new BadRequestException("User to follow is not a seller");
 
             List<User> userList = new ArrayList<>();
 
             //Se verifica si el usuario sigue a alguien
-            if (user.getFollowed().size() > 0) {
+            if (!user.getFollowed().isEmpty()) {
                 if (user.getFollowed().stream().filter(f-> f.getUserId().equals(userToFollow.getUserId())).count()> 0) {
-                    throw new BadRequestException("El usuario con el Id "+userIdToFollow+" ya es seguido");
+                    throw new BadRequestException("You already follow the user with Id "+userIdToFollow);
                 }else{
                     userList = user.getFollowed();
                 }
@@ -58,9 +58,9 @@ public class UserService implements IUserService {
 
             //Se agrega como seguidor el usuario en la lista del usuario seguido
             userList = new ArrayList<>();
-            if (userToFollow.getFollowers().size() > 0) {
+            if (!userToFollow.getFollowers().isEmpty()) {
                 if (userToFollow.getFollowers().stream().filter(f-> f.getUserId().equals(user.getUserId())).count()> 0) {
-                    System.out.println("Usuario ya es seguidor");
+                    System.out.println("User is a follower");
                 }else{
                     userList = userToFollow.getFollowers();
                 }
@@ -81,18 +81,18 @@ public class UserService implements IUserService {
 
     @Override
     public HttpStatus unfollow(Integer userId, Integer userIdToUnfollow) {
-        User user = userRepository.findById(userId).orElseThrow(() -> new BadRequestException("El usuario con Id " + userId + " no existe"));
-        User userToUnfollow = userRepository.findById(userIdToUnfollow).orElseThrow(() -> new BadRequestException("El usuario a seguir con Id " + userIdToUnfollow + " no existe"));
+        User user = userRepository.findById(userId).orElseThrow(() -> new BadRequestException("User with "+userId+" doesn't exist"));
+        User userToUnfollow = userRepository.findById(userIdToUnfollow).orElseThrow(() -> new BadRequestException("user to follow with Id " + userIdToUnfollow + " doesn't exist"));
 
         if (user != null && userToUnfollow != null) {
 
             if (user.getUserId().equals(userToUnfollow.getUserId()))
-                throw new BadRequestException("No te puedes dejar de seguir a ti mismo");
+                throw new BadRequestException("you can't follow yourself");
 
             List<User> userList;
             if (!user.getFollowed().isEmpty()) {
                 if (!user.getFollowed().contains(userToUnfollow)) {
-                    throw new BadRequestException("No sigues usuario con el Id " + userIdToUnfollow);
+                    throw new BadRequestException("You don't follow the user with id: " + userIdToUnfollow);
                 } else {
 
                     user.getFollowed().remove(userToUnfollow);
@@ -112,7 +112,7 @@ public class UserService implements IUserService {
     @Override
     public UserFollowedListResponse findAllFollowed(Integer id) {
 
-        User userWf = userRepository.findById(id).orElseThrow(() -> new BadRequestException("Usuario no existe"));
+        User userWf = userRepository.findById(id).orElseThrow(() -> new BadRequestException("user doesn't exist"));
 
         return new UserFollowedListResponse(id, userWf.getUserName(), userWf.getFollowed().stream()
                 .map(user -> new UserSimpleResponse(user.getUserId(), user.getUserName()))
