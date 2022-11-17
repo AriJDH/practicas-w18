@@ -36,7 +36,18 @@ public class UserService implements IUserService {
     }
     @Override
     public void followUser(int userId, int userIdToFollow) {
+        User user1 = userRepository.getUser(userId);
+        User user2 = userRepository.getUser(userIdToFollow);
 
+        if(user1 == null){
+            throw new NotFoundException("El usuario con el id: "+userId+" no fue encontrado!");
+        }
+        if(user2 == null){
+            throw new NotFoundException("El usuario con el id: "+userId+" no fue encontrado!");
+        }
+
+        user1.getFollowed().put(user2.getUserId(),user2);
+        user2.getFollowers().put(user1.getUserId(), user1);
     }
 
     @Override

@@ -17,10 +17,11 @@ public class UserController {
     }
     @PostMapping("/users/{userId}/follow/{userIdToFollow}")
     public ResponseEntity<?> followUser(
-            @PathVariable String userId,
-            @PathVariable String userIdToFollow
+            @PathVariable int userId,
+            @PathVariable int userIdToFollow
     ) {
-        return null;
+        userService.followUser(userId, userIdToFollow);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
     @GetMapping("/users/{userId}/followers/count")
     public ResponseEntity<UserFollowersCountDTOres> getUserFollowersCount(
