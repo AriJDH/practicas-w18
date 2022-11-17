@@ -1,21 +1,18 @@
 package com.mercadolibre.socialmeli.service;
 
+import com.mercadolibre.socialmeli.dto.ProductDto;
 import com.mercadolibre.socialmeli.dto.request.PostDtoReq;
-import com.mercadolibre.socialmeli.dto.response.SellerFollowerCountDtoRes;
-import com.mercadolibre.socialmeli.dto.response.SellerFollowerListDtoRes;
-import com.mercadolibre.socialmeli.dto.response.UserDtoRes;
-import com.mercadolibre.socialmeli.dto.response.UserFollowedListDtoRes;
+import com.mercadolibre.socialmeli.dto.response.*;
 import com.mercadolibre.socialmeli.entity.Post;
 import com.mercadolibre.socialmeli.entity.Product;
 import com.mercadolibre.socialmeli.entity.User;
 import com.mercadolibre.socialmeli.exception.BadRequestException;
 import com.mercadolibre.socialmeli.exception.NotFoundException;
 import com.mercadolibre.socialmeli.repository.IUserRepository;
-import com.mercadolibre.socialmeli.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.HttpClientErrorException;
 
+import java.time.LocalDate;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -52,6 +49,31 @@ public class UserService implements IUserService {
             throw new BadRequestException("Posteo invalido");
         }
 
+    }
+
+    @Override
+    public RecentPostsDtoRes getRecentPosts(Integer userId) {
+        List<User> followed = userRepository.getFollowed(userId);
+        LocalDate now = LocalDate.now();
+        LocalDate twoWeeksAgo = now.minusWeeks(2);
+
+        List<PostDtoRes> postsRes = followed.stream()
+                .flatMap(f -> f.getPosts().stream())
+                .filter(p-> (p.getDate().isAfter(twoWeeksAgo) && p.getDate().isBefore(now.plusDays(1))))
+                .map(p -> new PostDtoRes(
+                        userId,
+                        p.getId(),
+                        p.getDate(),
+                        new ProductDto(p.getProduct().getId(),
+                                p.getProduct().getName(),
+                                p.getProduct().getType(),
+                                p.getProduct().getBrand(),
+                                p.getProduct().getColor(),
+                                p.getProduct().getNotes()),
+                        p.getCategory(),
+                        p.getPrice()))
+                .collect(Collectors.toList());
+        return new RecentPostsDtoRes(userId, postsRes);
     }
 
     @Override
