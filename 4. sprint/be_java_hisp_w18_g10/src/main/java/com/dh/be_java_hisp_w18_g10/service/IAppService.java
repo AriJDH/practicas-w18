@@ -6,7 +6,7 @@ import com.dh.be_java_hisp_w18_g10.dto.response.UserFollowersCountDTOres;
 import com.dh.be_java_hisp_w18_g10.dto.response.UserFollowersListDTOres;
 import com.dh.be_java_hisp_w18_g10.dto.response.UserPostsDTOres;
 
-public interface IUserService {
+public interface IAppService {
     void followUser(int userId, int userIdToFollow);
     UserFollowersCountDTOres getUserFollowersCount(int userId);
     UserFollowersListDTOres getUserFollowerList(int userId);

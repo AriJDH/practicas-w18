@@ -16,9 +16,7 @@ import java.time.LocalDate;
 public class PostDTOreq {
     //US 0005
     private int user_id;
-
     private String date;
-
     private ProductDTOreq product;
     private int category;
     private double price;

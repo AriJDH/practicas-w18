@@ -20,11 +20,11 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service
-public class UserService implements IUserService {
+public class AppService implements IAppService {
     private IUserRepository userRepository;
     private IPostRepository postRepository;
 
-    public UserService(UserRepository userRepository, PostRepository postRepository) {
+    public AppService(UserRepository userRepository, PostRepository postRepository) {
         this.userRepository = userRepository;
         this.postRepository = postRepository;
     }

@@ -4,17 +4,16 @@ import com.dh.be_java_hisp_w18_g10.dto.require.PostDTOreq;
 import com.dh.be_java_hisp_w18_g10.dto.response.UserPostsDTOres;
 import com.dh.be_java_hisp_w18_g10.dto.response.UserFollowersListDTOres;
 import com.dh.be_java_hisp_w18_g10.dto.response.UserFollowersCountDTOres;
-import com.dh.be_java_hisp_w18_g10.entity.Post;
-import com.dh.be_java_hisp_w18_g10.service.IUserService;
-import com.dh.be_java_hisp_w18_g10.service.UserService;
+import com.dh.be_java_hisp_w18_g10.service.IAppService;
+import com.dh.be_java_hisp_w18_g10.service.AppService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-public class UserController {
-    private IUserService userService;
-    public UserController(UserService userService) {
+public class AppController {
+    private IAppService userService;
+    public AppController(AppService userService) {
         this.userService = userService;
     }
     @PostMapping("/users/{userId}/follow/{userIdToFollow}")
