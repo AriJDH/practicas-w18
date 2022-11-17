@@ -6,6 +6,5 @@ import lombok.Data;
 @AllArgsConstructor
 public class ErrorExceptionDTOResponse {
     private String message;
-
     private int status;
 }

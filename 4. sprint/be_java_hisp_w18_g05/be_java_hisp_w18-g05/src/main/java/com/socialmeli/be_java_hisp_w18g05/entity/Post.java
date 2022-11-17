@@ -11,7 +11,6 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @Data
 
-
 public class Post {
     private Integer post_id;
     private LocalDate date;

@@ -10,7 +10,7 @@ public interface IRepository {
 
     List<Buyer> getAllBuyers();
     List<Seller> getAllSellers();
-    void addPost(Integer seller_id, Post post);
+    int addPost();
     Buyer getByIdBuyer(Integer buyer_id);
     Seller getByIdSeller(Integer seller_id);
 
