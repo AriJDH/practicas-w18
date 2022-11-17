@@ -10,6 +10,7 @@ public interface IUserService {
     void followUser(int userId, int userIdToFollow);
     UserFollowersCountDTOres getUserFollowersCount(int userId);
     UserFollowersListDTOres getUserFollowerList(int userId);
+    UserFollowersListDTOres getUserFollowerList(int userId, String order);
     UserFollowedListDTOres getUserFollowed(int userId);
     void createPost(PostDTOreq postDTO);
     UserPostsDTOres getUserPosts(int userId);

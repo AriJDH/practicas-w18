@@ -62,12 +62,12 @@ public class UserRepository implements IUserRepository{
 
     @Override
     public User getUser(int id) {
-        return this.users.get(id);
+        return users.get(id);
     }
 
     @Override
     public List<User> getUsers() {
-        return null;
+        return new ArrayList<User>(users.values());
     }
 
     private List<Post> getListPosts(){

@@ -6,9 +6,6 @@ import com.dh.be_java_hisp_w18_g10.entity.Post;
 import com.dh.be_java_hisp_w18_g10.entity.User;
 import com.dh.be_java_hisp_w18_g10.exception.UserGenericException;
 import com.dh.be_java_hisp_w18_g10.exception.UserNotFoundException;
-import com.dh.be_java_hisp_w18_g10.exception.ProductNotFoundException;
-import com.dh.be_java_hisp_w18_g10.exception.UserIdNullException;
-import com.dh.be_java_hisp_w18_g10.exception.UserNotFoundException;
 import com.dh.be_java_hisp_w18_g10.exception.NotFoundException;
 import com.dh.be_java_hisp_w18_g10.repository.*;
 import com.dh.be_java_hisp_w18_g10.util.DTOMapper;
@@ -27,26 +24,13 @@ import static com.dh.be_java_hisp_w18_g10.util.DTOMapper.mapToUserFollowedRes;
 @Service
 public class UserService implements IUserService {
     private IUserRepository userRepository;
-    private IProductRepository productRepository;
     private IPostRepository postRepository;
 
-    public UserService(UserRepository userRepository, ProductRepository productRepository, PostRepository postRepository) {
+    public UserService(UserRepository userRepository, PostRepository postRepository) {
         this.userRepository = userRepository;
-        this.productRepository = productRepository;
         this.postRepository = postRepository;
     }
 
-    public void addPost(PostDTOreq postDTO){
-        //TODO implement
-        Post post = new Post();
-        int userId = postDTO.getUser_id();
-        userRepository
-                .getUser(userId)
-                .getPosts()
-                .put(userId, post);
-
-        postRepository.addPost(post);
-    }
     @Override
     public void followUser(int userId, int userIdToFollow) {
         User user1 = userRepository.getUser(userId);
@@ -119,23 +103,16 @@ public class UserService implements IUserService {
     public void createPost(PostDTOreq postDTOreq) {
 
         int userId = postDTOreq.getUser_id();
-        int productId = postDTOreq.getProduct().getProduct_id();
-        /* if (userRepository.getUser(userId) == null)
-            throw new UserNotFoundException("Usuario no encontrado!");
-        if (productRepository.getProductById(productId) == null)
-            throw new ProductNotFoundException("Producto no encontrado."); */
+        if (userRepository.getUser(userId) == null)
+            throw new UserGenericException("Usuario no encontrado!");
 
         Post post = DTOMapper.mapToPost(postDTOreq);
         Integer postId = postRepository.addPost(post);
 
-        /* userRepository
+        userRepository
                 .getUser(userId)
                 .getPosts()
                 .put(postId, post);
-        productRepository.addProduct(post.getProduct());*/
-
-
-
     }
 
     @Override
@@ -187,6 +164,23 @@ public class UserService implements IUserService {
     @Override
     public void unfollowUser(int userId, int userIdToUnfollow) {
         userRepository.getUser(userId).getFollowed().remove(userIdToUnfollow);
+    }
+
+    @Override
+    public UserFollowersListDTOres getUserFollowerList(int userId, String order) {
+        UserFollowersListDTOres res = getUserFollowerList(userId);
+        if(order.equals("name_asc")){
+            res.getFollowers()
+                    .sort(Comparator.comparing(UserDTOres::getUser_name));
+            return res;
+        }
+        else if(order.equals("name_desc")){
+            res.getFollowers()
+                    .sort(Comparator.comparing(UserDTOres::getUser_name).reversed());
+            return res;
+        }
+        else
+            throw new UserGenericException("Parametro no aceptado");
     }
 
 

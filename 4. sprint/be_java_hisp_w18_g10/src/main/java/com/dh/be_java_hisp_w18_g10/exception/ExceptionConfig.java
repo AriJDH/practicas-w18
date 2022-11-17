@@ -26,11 +26,6 @@ public class ExceptionConfig {
         ErrorDTOres err = new ErrorDTOres(e.getMessage(), HttpStatus.BAD_REQUEST.value());
         return new ResponseEntity<>(err, HttpStatus.BAD_REQUEST);
     }
-    @ExceptionHandler(ProductNotFoundException.class)
-    public ResponseEntity<?> productNotFoundException(ProductNotFoundException e){
-        ErrorDTOres err = new ErrorDTOres(e.getMessage(), HttpStatus.BAD_REQUEST.value());
-        return new ResponseEntity<>(err, HttpStatus.BAD_REQUEST);
-    }
 
     @ExceptionHandler(NotFoundException.class)
     public ResponseEntity<?> NotFoundException(Exception e){
