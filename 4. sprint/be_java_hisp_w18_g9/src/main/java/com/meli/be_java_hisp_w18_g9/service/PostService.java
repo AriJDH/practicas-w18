@@ -1,6 +1,7 @@
 package com.meli.be_java_hisp_w18_g9.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.meli.be_java_hisp_w18_g9.exception.NotFoundException;
 import com.meli.be_java_hisp_w18_g9.model.dto.request.PostDtoRequest;
 import com.meli.be_java_hisp_w18_g9.model.dto.request.PromoPostRequest;
 import com.meli.be_java_hisp_w18_g9.model.dto.response.PostDtoResponse;
@@ -8,39 +9,38 @@ import com.meli.be_java_hisp_w18_g9.model.dto.response.PostListByFollowedRespons
 import com.meli.be_java_hisp_w18_g9.model.dto.response.PromoPostListByUserResponse;
 import com.meli.be_java_hisp_w18_g9.model.dto.response.PromoProductsCountResponse;
 import com.meli.be_java_hisp_w18_g9.model.entity.Post;
+import com.meli.be_java_hisp_w18_g9.model.entity.User;
 import com.meli.be_java_hisp_w18_g9.repository.IPostRepository;
+import com.meli.be_java_hisp_w18_g9.repository.IUserRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 @Service
+@RequiredArgsConstructor
 public class PostService implements IPostService{
 
     // ? =============== Attributes =============== ?
-    @Autowired
-    IPostRepository iPostRepository;
+    private final IPostRepository postRepository;
+    private final IUserRepository userRepository;
     private final ObjectMapper mapper;
-
-    // ? =============== Constructors =============== ?
-
-    public PostService(ObjectMapper mapper) {
-        this.mapper = mapper;
-    }
 
     // ? =============== Methods =============== ?
 
     @Override
     public void addPost(PostDtoRequest postDtoRequest) {
         Post post = mapper.convertValue(postDtoRequest, Post.class);
-        iPostRepository.addPost(post);
+        postRepository.addPost(post);
     }
 
     // * ===============
 
     @Override
     public List<PostDtoResponse> findAll() {
-        List<Post> postDtoResponseList = iPostRepository.findAll();
+        List<Post> postDtoResponseList = postRepository.findAll();
         return postDtoResponseList.stream()
                 .map(post -> new PostDtoResponse(post.getPostId(), post.getUserId(), post.getDate(), post.getProduct(), post.getCategory(), post.getPrice()))
                 .collect(Collectors.toList());
@@ -57,14 +57,38 @@ public class PostService implements IPostService{
 
     @Override
     public List<PostListByFollowedResponse> findPostsByFollowedAndUserIdOrderByDateAsc(Integer userId) {
-        return null;
+
+        User user = userRepository.findById(userId).orElseThrow(() -> new NotFoundException(String.format("User with id %d not found", userId)));
+
+        return user.getFollowed().stream()
+                .map(followed -> PostListByFollowedResponse.builder()
+                        .userId(followed.getUserId())
+                        .posts(postRepository.findAllByUserId(followed.getUserId()).stream()
+                                .map(post -> mapper.convertValue(post, PostDtoRequest.class))
+                                .sorted(Comparator.comparing(PostDtoRequest::getDate))
+                                .collect(Collectors.toList()))
+                        .build())
+                .collect(Collectors.toList());
+
     }
 
     // * ===============
 
     @Override
     public List<PostListByFollowedResponse> findPostsByFollowedAndUserIdOrderByDateDesc(Integer userId) {
-        return null;
+
+        User user = userRepository.findById(userId).orElseThrow(() -> new NotFoundException(String.format("User with id %d not found", userId)));
+
+        return user.getFollowed().stream()
+                .map(followed -> PostListByFollowedResponse.builder()
+                        .userId(followed.getUserId())
+                        .posts(postRepository.findAllByUserId(followed.getUserId()).stream()
+                                .map(post -> mapper.convertValue(post, PostDtoRequest.class))
+                                .sorted(Comparator.comparing(PostDtoRequest::getDate).reversed())
+                                .collect(Collectors.toList()))
+                        .build())
+                .collect(Collectors.toList());
+
     }
 
     // * ===============

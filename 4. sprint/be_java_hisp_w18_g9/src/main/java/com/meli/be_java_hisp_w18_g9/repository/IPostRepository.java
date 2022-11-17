@@ -7,4 +7,6 @@ import java.util.List;
 public interface IPostRepository {
     void addPost(Post post);
     List<Post> findAll();
+    List<Post> findAllById(Integer id);
+    List<Post> findAllByUserId(Integer userId);
 }

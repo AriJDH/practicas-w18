@@ -35,25 +35,22 @@ public class ProductsController {
 
     // * ============== *
 
-    /*@GetMapping("/followed/{userId}/list")
-    public ResponseEntity<List<PostListByFollowedResponse>> findFollowedByUserId(@PathVariable Integer userId) {
-        return new ResponseEntity<>(iPostService.findPostsByFollowedAndUserId(userId), HttpStatus.OK);
-    }*/
+    @GetMapping("/followed/{userId}/list")
+    public ResponseEntity<List<PostListByFollowedResponse>> findFollowedByUserId(@PathVariable Integer userId, @RequestParam(required = false) String order) {
 
-    // * ==============
-
-    /*@GetMapping("/followed/{userId}/list")
-    public ResponseEntity<List<PostListByFollowedResponse>> findFollowedByUserIdOrderByDate(@PathVariable Integer userId, @RequestParam String order) {
-
-        if(order.equals("date_asc")) {
-            return new ResponseEntity<>(iPostService.findPostsByFollowedAndUserIdOrderByDateAsc(userId), HttpStatus.OK);
-        }else if(order.equals("date_desc")) {
-            return new ResponseEntity<>(iPostService.findPostsByFollowedAndUserIdOrderByDateDesc(userId), HttpStatus.OK);
-        }else {
-            throw new BadRequestException(String.format("The order %s is not valid, please use date_asc or date_desc", order));
+        if(order != null){
+            if(order.equals("date_asc")) {
+                return new ResponseEntity<>(iPostService.findPostsByFollowedAndUserIdOrderByDateAsc(userId), HttpStatus.OK);
+            }else if(order.equals("date_desc")) {
+                return new ResponseEntity<>(iPostService.findPostsByFollowedAndUserIdOrderByDateDesc(userId), HttpStatus.OK);
+            }else {
+                throw new BadRequestException(String.format("The order %s is not valid, please use date_asc or date_desc", order));
+            }
         }
 
-    }*/
+        return new ResponseEntity<>(iPostService.findPostsByFollowedAndUserId(userId), HttpStatus.OK);
+
+    }
 
     // * ===== [POST] ===== *
 
