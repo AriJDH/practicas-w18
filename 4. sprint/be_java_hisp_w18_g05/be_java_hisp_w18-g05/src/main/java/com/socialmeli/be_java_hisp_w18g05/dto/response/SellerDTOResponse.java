@@ -8,10 +8,12 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
+
 public class SellerDTOResponse {
 
     private Integer user_id;
     private String user_name;
+
     public SellerDTOResponse(Seller seller){
         this.user_id = seller.getUser_id();
         this.user_name = seller.getName();

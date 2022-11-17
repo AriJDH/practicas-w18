@@ -9,7 +9,9 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
+
 public class SellerFollowersListDTOResponse {
+
     private Integer user_id;
     private String user_name;
     private List<BuyerDTOResponse> followers;

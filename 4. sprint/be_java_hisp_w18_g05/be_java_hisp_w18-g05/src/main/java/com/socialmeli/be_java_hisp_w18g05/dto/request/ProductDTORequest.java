@@ -7,7 +7,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
+
 public class ProductDTORequest {
+
     private Integer product_id;
     private String product_name;
     private String type;

@@ -7,7 +7,9 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
 @ControllerAdvice
+
 public class ExceptionConfig {
+
     @ExceptionHandler
     public ResponseEntity<ErrorExceptionDTOResponse> invalidException(InvalidException invalidException) {
         return new ResponseEntity<>(

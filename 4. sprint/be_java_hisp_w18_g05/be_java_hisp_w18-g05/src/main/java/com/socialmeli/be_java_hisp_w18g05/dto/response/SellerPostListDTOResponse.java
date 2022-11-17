@@ -9,7 +9,9 @@ import java.util.List;
 @AllArgsConstructor
 @Getter
 @NoArgsConstructor
+
 public class SellerPostListDTOResponse {
+
     private Integer user_id;
     private List<PostDTOResponse> posts;
 

@@ -8,9 +8,12 @@ import lombok.NoArgsConstructor;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
+
 public class BuyerDTOResponse {
+
     private Integer user_id;
     private String user_name;
+
     public BuyerDTOResponse(Buyer buyer){
         this.user_id = buyer.getUser_id();
         this.user_name = buyer.getName();

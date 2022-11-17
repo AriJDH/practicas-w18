@@ -6,27 +6,19 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.socialmeli.be_java_hisp_w18g05.dto.response.*;
 import com.socialmeli.be_java_hisp_w18g05.dto.request.NewPostDTORequest;
 import com.socialmeli.be_java_hisp_w18g05.dto.response.BuyerDTOResponse;
-
 import com.socialmeli.be_java_hisp_w18g05.dto.response.BuyerFollowedListDTOResponse;
 import com.socialmeli.be_java_hisp_w18g05.dto.response.SellerDTOResponse;
-
 import com.socialmeli.be_java_hisp_w18g05.dto.response.SellerFollowersCountDTOResponse;
-
 import com.socialmeli.be_java_hisp_w18g05.dto.response.SellerFollowersListDTOResponse;
 import com.socialmeli.be_java_hisp_w18g05.entity.Buyer;
 import com.socialmeli.be_java_hisp_w18g05.entity.Post;
-
 import com.socialmeli.be_java_hisp_w18g05.entity.Product;
-
 import com.socialmeli.be_java_hisp_w18g05.entity.Seller;
 import com.socialmeli.be_java_hisp_w18g05.exceptions.InvalidException;
 import com.socialmeli.be_java_hisp_w18g05.exceptions.InvalidParameterException;
 import com.socialmeli.be_java_hisp_w18g05.exceptions.NotFoundException;
 import com.socialmeli.be_java_hisp_w18g05.repository.IRepository;
-import lombok.Data;
-import org.springframework.cglib.core.Local;
 import org.springframework.stereotype.Service;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -35,6 +27,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
+
 public class ServiceImp implements IService {
 
     private IRepository repository;
@@ -45,7 +38,6 @@ public class ServiceImp implements IService {
         op.registerModule(new JavaTimeModule());
         op.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
     }
-
 
     @Override
     public SellerFollowersListDTOResponse followersFilter(Integer seller_id, String order) { // Filter by order
@@ -86,6 +78,7 @@ public class ServiceImp implements IService {
         SellerFollowersListDTOResponse sellerFollowersListDTOResponse = new SellerFollowersListDTOResponse(seller.getUser_id(), seller.getName(), followersDTO);
         return sellerFollowersListDTOResponse;
     }
+
     @Override
     public void follow(Integer userId, Integer userIdToFollow) {
 
@@ -128,8 +121,6 @@ public class ServiceImp implements IService {
         s.unFollower(b);
     }
 
-
-
     @Override
     public SellerPostListDTOResponse followedPostList(Integer user_id, String order) {
 
@@ -137,7 +128,6 @@ public class ServiceImp implements IService {
             order = "date_desc"; // date_desc by default if order is null
         return orderByDate(user_id, order);
     }
-
 
     private SellerPostListDTOResponse orderByDate(Integer userId, String order){
         Buyer b = repository.getByIdBuyer(userId);
@@ -161,8 +151,6 @@ public class ServiceImp implements IService {
         }
         // Order by date, depending on the order parameter
 
-
-
         if(order.equals("date_asc")){
             listPostDTO.sort(Comparator.comparing(PostDTOResponse::getDate)); // ordenamiento descenciente por fechas
         } else if (order.equals("date_desc")) {
@@ -180,7 +168,6 @@ public class ServiceImp implements IService {
         }
         return new SellerPostListDTOResponse(userId, listPostAux);
     }
-
 
     @Override
     public SellerFollowersListDTOResponse getFollowersAZ(Integer seller_id) {
