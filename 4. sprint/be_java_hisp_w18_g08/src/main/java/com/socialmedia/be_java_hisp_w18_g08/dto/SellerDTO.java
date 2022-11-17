@@ -14,4 +14,5 @@ public class SellerDTO {
     private Integer user_id;
     private String user_name;
 
+
 }
