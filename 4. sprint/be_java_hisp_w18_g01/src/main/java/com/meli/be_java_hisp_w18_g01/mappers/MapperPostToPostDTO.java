@@ -4,14 +4,15 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.meli.be_java_hisp_w18_g01.dtos.PostDTO;
 import com.meli.be_java_hisp_w18_g01.dtos.ProductDTO;
 import com.meli.be_java_hisp_w18_g01.entities.Post;
+import org.springframework.stereotype.Component;
 
 import java.time.format.DateTimeFormatter;
-import java.util.stream.Collectors;
 
+@Component
 public class MapperPostToPostDTO extends ObjectMapper {
     @Override
     public <T> T convertValue(Object fromValue, Class<T> toValueType) throws IllegalArgumentException {
-        if(toValueType.getName().equals("PostDTO") && fromValue.getClass().getName().equals("Post")){
+        if(toValueType.getSimpleName().equals("PostDTO") && fromValue.getClass().getSimpleName().equals("Post")){
             Post post = (Post) fromValue;
             ObjectMapper mapper = new ObjectMapper();
             String date = post.getDate().format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));

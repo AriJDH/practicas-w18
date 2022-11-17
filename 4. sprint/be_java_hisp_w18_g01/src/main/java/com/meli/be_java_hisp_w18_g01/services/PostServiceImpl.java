@@ -10,6 +10,7 @@ import com.meli.be_java_hisp_w18_g01.entities.Post;
 import com.meli.be_java_hisp_w18_g01.entities.Product;
 import com.meli.be_java_hisp_w18_g01.entities.User;
 import com.meli.be_java_hisp_w18_g01.exceptions.BadRequestException;
+import com.meli.be_java_hisp_w18_g01.mappers.MapperPostToPostDTO;
 import com.meli.be_java_hisp_w18_g01.services.database.UserDbService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,7 +26,7 @@ public class PostServiceImpl implements PostService{
     private long postCount = 1L;
 
     @Autowired
-    LocalDateComparatorDesc localDateComparatorDesc;
+    MapperPostToPostDTO mapperPostToPostDTO;
     @Autowired
     UserDbService userDbService;
 
@@ -66,12 +67,18 @@ public class PostServiceImpl implements PostService{
 
             return new SellerDTO(seller.getUser_id(),
                 sortedPosts.stream().map(post->{
+                    return mapperPostToPostDTO.convertValue(post, PostDTO.class);
+                    /*
                     String date = post.getDate().format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
                     ProductDTO productDTO =  mapper.convertValue(post.getProduct(), ProductDTO.class);
 
                     return new PostDTO(post.getUser().getUser_id(),date,
-                                productDTO, post.getCategory(), post.getPrice());})
-                        .collect(Collectors.toList()));})
+                                productDTO, post.getCategory(), post.getPrice());
+
+                */
+                })
+                        .collect(Collectors.toList()));
+        })
                 .collect(Collectors.toList());
 
     }
