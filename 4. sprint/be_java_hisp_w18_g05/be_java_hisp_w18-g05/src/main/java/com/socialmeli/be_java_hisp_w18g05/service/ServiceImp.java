@@ -15,7 +15,10 @@ import com.socialmeli.be_java_hisp_w18g05.dto.response.SellerFollowersCountDTORe
 import com.socialmeli.be_java_hisp_w18g05.dto.response.SellerFollowersListDTOResponse;
 import com.socialmeli.be_java_hisp_w18g05.entity.Buyer;
 import com.socialmeli.be_java_hisp_w18g05.entity.Post;
+<<<<<<< Updated upstream
 import com.socialmeli.be_java_hisp_w18g05.entity.Product;
+=======
+>>>>>>> Stashed changes
 import com.socialmeli.be_java_hisp_w18g05.entity.Seller;
 import com.socialmeli.be_java_hisp_w18g05.exceptions.InvalidException;
 import com.socialmeli.be_java_hisp_w18g05.exceptions.NotFoundException;
