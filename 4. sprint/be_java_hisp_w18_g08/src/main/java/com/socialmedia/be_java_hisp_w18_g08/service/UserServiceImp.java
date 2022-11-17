@@ -27,15 +27,14 @@ public class UserServiceImp implements IUserService {
 
     @Override
     public FollowDtoRes follow(FollowDtoReq followDtoReq) {
-        List<String> res = new ArrayList<>();
+        String res;
         FollowDtoRes followDtoRes = new FollowDtoRes();
         res = userRepository.follow(followDtoReq.getUserId(), followDtoReq.getUserIdToFollow());
         if (res == null) {
-            throw new NotFoundUserException("There is no user with the ID " + followDtoReq.getUserId() + " or " +
-                    followDtoReq.getUserIdToFollow());
+            throw new NotFoundUserException("Something was wrong");
         }
         followDtoRes.setStatusCode(200);
-        followDtoRes.setMessage(res.get(0) + " is following " + res.get(1));
+        followDtoRes.setMessage(res);
         return followDtoRes;
     }
 
