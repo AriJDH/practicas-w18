@@ -7,7 +7,8 @@ import com.socialmedia.be_java_hisp_w18_g08.entity.User;
 import java.util.List;
 
 public interface IUserRepository {
-    Seller findUserListBySeller(Integer id);
+    Seller findSellerById(Integer id);
+
 
     List<String> follow (Integer userId, Integer userIdToFollow);
     User getUserByID(Integer userId);

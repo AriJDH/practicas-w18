@@ -32,6 +32,7 @@ public class UserRepositoryImp implements IUserRepository{
         post5.add(postRepository.getPosts().get(2));
         post6.add(postRepository.getPosts().get(3));
 
+
         Seller s3 = new Seller(3, "User3", followed, post3, followers);
         Seller s4 = new Seller(4, "User4", followed, post4, followers);
         Seller s1 = new Seller(5, "User5", followed, post5, followers);
@@ -62,15 +63,14 @@ public class UserRepositoryImp implements IUserRepository{
         this.users.add(u2);
         this.users.add(u3);
         this.users.add(u4);
+
     }
 
     @Override
-    public Seller findUserListBySeller(Integer id) {
-        Seller seller = this.sellers.stream()
-                .filter(s -> id == s.getUser_id())
-                .findFirst()
-                .orElse(null);
-        return seller;
+    public Seller findSellerById(Integer id) {
+        return sellers.stream()
+                .filter(p -> p.getUser_id() == (id))
+                .findFirst().orElse(null);
     }
 
     @Override
@@ -78,15 +78,11 @@ public class UserRepositoryImp implements IUserRepository{
         User found = null;
         int i = 0;
         while (i < users.size() && found == null) {
-            if(users.get(i).getUser_id() == userId)
+            if (users.get(i).getUser_id() == userId)
                 found = users.get(i);
             i++;
         }
-        if (found != null) {
-            return found;
-        } else {
-            return found;
-        }
+        return found;
     }
 
 

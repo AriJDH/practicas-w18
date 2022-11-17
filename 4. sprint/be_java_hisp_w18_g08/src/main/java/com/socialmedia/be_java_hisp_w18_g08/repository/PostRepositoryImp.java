@@ -15,6 +15,22 @@ import java.util.List;
 public class PostRepositoryImp implements IPostRepository{
 
     List<Post> posts = new ArrayList<>();
+    @Override
+    public List<Post> getAll() {
+        return this.posts;
+    }
+
+    @Override
+    public Post getById(Integer id) {
+        return posts.stream()
+                .filter(p->p.getPost_id().equals(id))
+                .findFirst().orElse(null);
+    }
+
+    @Override
+    public Boolean add(Post post) {
+        return this.posts.add(post);
+    }
 
     public  PostRepositoryImp(){
         Product pr1 = new Product(1,"Product1","Type1","Brand1","Color1","Notes1");
@@ -29,10 +45,10 @@ public class PostRepositoryImp implements IPostRepository{
         Post ps3 = new Post(3,5,pr1,3,333.33,date.plusDays(20));
         Post ps4 = new Post(4,6,pr1,4,444.44,date.minusDays(14));
 
-        posts.add(ps1);
-        posts.add(ps2);
-        posts.add(ps3);
-        posts.add(ps4);
+        add(ps1);
+        add(ps2);
+        add(ps3);
+        add(ps4);
 
     }
 
