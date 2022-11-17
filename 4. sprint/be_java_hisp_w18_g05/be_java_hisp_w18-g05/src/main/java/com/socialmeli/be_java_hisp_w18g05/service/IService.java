@@ -15,6 +15,8 @@ import java.util.List;
 public interface IService {
 
     SellerFollowersListDTOResponse getFollowers(Integer seller_id);
+
+    SellerFollowersListDTOResponse getFollowersAZ(Integer seller_id);
     BuyerFollowedListDTOResponse getFolloweds(Integer buyer_id);
 
     void follow(Integer userId, Integer userIdToFollow);
@@ -22,6 +24,8 @@ public interface IService {
     void newPost(NewPostDTORequest post);
 
     SellerFollowersCountDTOResponse followersCount(Integer user_id);
+
+
 
 
     //SellerFollowersCountDTOResponse followersCount(Integer user_id);

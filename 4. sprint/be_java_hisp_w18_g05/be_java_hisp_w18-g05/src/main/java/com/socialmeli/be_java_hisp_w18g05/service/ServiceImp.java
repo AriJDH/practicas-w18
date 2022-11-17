@@ -21,7 +21,9 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class ServiceImp implements IService {
@@ -47,6 +49,19 @@ public class ServiceImp implements IService {
 
         SellerFollowersListDTOResponse sellerFollowersListDTOResponse = new SellerFollowersListDTOResponse(seller.getUser_id(), seller.getName(), followersDTO);
         return sellerFollowersListDTOResponse;
+    }
+
+    @Override
+    public SellerFollowersListDTOResponse getFollowersAZ(Integer seller_id) {
+        SellerFollowersListDTOResponse followersDTO = getFollowers(seller_id);
+
+        List<BuyerDTOResponse> followers = followersDTO.getFollowers();
+        followers.stream()
+                .sorted(Comparator.comparing(BuyerDTOResponse::getUser_name)).collect(Collectors.toList());
+
+        SellerFollowersListDTOResponse followersDTOAZ = new SellerFollowersListDTOResponse(followersDTO.getUser_id(), followersDTO.getUser_name(), followers);
+
+        return followersDTOAZ;
     }
 
     @Override
@@ -80,7 +95,9 @@ public class ServiceImp implements IService {
     @Override
     public void newPost(NewPostDTORequest post){
         Integer user_id = post.getUser_id();
+        System.out.println("user_id: " + user_id);
         Seller seller = repository.getByIdSeller(user_id); // Get seller from repository
+        System.out.println("seller_name" + seller.getName());
         //List<Post> postList = seller.getPosts();
         Product product = new Product(post.getProduct().getProduct_id(),post.getProduct().getProduct_name(), post.getProduct().getType(), post.getProduct().getBrand(), post.getProduct().getColor(), post.getProduct().getNotes());
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
