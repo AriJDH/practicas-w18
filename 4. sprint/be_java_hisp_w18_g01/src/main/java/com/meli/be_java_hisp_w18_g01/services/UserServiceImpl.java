@@ -18,19 +18,17 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserDbService userDbService;
     @Override
-    public ResponseDTO handleFollow(long userId, long userIdToFollow) {
+    public void handleFollow(long userId, long userIdToFollow) {
         User user = userDbService.findById(userId);
         User userToFollow = userDbService.findById(userIdToFollow);
         user.follow(userToFollow);
-        return new ResponseDTO(200,"operación exitosa");
     }
 
     @Override
-    public ResponseDTO handleUnfollow(long userId, long userIdToUnfollow) {
+    public void handleUnfollow(long userId, long userIdToUnfollow) {
         User user = userDbService.findById(userId);
         User userToUnfollow = userDbService.findById(userIdToUnfollow);
         user.unFollow(userToUnfollow);
-        return new ResponseDTO( 200,"operación exitosa");
     }
 
     @Override

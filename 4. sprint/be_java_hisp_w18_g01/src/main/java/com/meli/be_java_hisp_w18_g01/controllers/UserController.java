@@ -17,12 +17,14 @@ public class UserController {
     UserService userService;
     @PostMapping("/{userId}/follow/{userIdToFollow}")
     public ResponseEntity<ResponseDTO> followUser(@PathVariable long userId, @PathVariable long userIdToFollow){
-        return ResponseEntity.ok(userService.handleFollow(userId, userIdToFollow));
+        userService.handleFollow(userId, userIdToFollow);
+        return ResponseEntity.ok(new ResponseDTO(200,"operación exitosa"));
     }
 
     @PostMapping("/{userId}/unfollow/{userIdToUnfollow}")
     public ResponseEntity<ResponseDTO> unfollowUser(@PathVariable long userId, @PathVariable long userIdToUnfollow){
-        return ResponseEntity.ok(userService.handleUnfollow(userId, userIdToUnfollow));
+        userService.handleUnfollow(userId, userIdToUnfollow);
+        return ResponseEntity.ok(new ResponseDTO(200,"operación exitosa"));
     }
 
     @GetMapping("/{userId}/followers/count")

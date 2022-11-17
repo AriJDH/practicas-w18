@@ -20,7 +20,8 @@ public class PostController {
 
     @PostMapping("/post")
     public ResponseEntity<ResponseDTO> addPost(@RequestBody PostDTO postDTO){
-        return ResponseEntity.ok(postService.addPost(postDTO));
+        postService.addPost(postDTO);
+        return ResponseEntity.ok(new ResponseDTO(200,"operación exitosa"));
     }
 
     @GetMapping("/followed/{userId}/list")

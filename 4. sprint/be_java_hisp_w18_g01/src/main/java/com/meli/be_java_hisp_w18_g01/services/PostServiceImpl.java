@@ -22,7 +22,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class PostServiceImpl implements PostService{
+public class PostServiceImpl implements PostService {
     private long postCount = 1L;
 
     @Autowired
@@ -31,13 +31,13 @@ public class PostServiceImpl implements PostService{
     UserDbService userDbService;
 
     @Override
-    public ResponseDTO addPost(PostDTO postDTO) {
+    public void addPost(PostDTO postDTO) {
         User user = userDbService.findById(postDTO.getUser_id());
         postCount++;
         Post post;
         ObjectMapper mapper = new ObjectMapper();
 
-        try{
+        try {
             post = new Post(postCount,
                     user,
                     LocalDate.parse(postDTO.getDate()),
@@ -45,49 +45,38 @@ public class PostServiceImpl implements PostService{
                     postDTO.getCategory(),
                     postDTO.getPrice()
             );
-        }catch(Exception e) {
+        } catch (Exception e) {
             throw new BadRequestException("Los parámetros para la creación de la publicación son inválidos");
         }
         user.addPost(post);
-        return new ResponseDTO(200, "Operación exitosa");
     }
 
     @Override
     public List<SellerDTO> getRecentPostsFromFollowed(long userId, String order) {
         User user = userDbService.findById(userId);
         List<User> sellers = user.getFollowed().stream()
-                .filter(seller->seller.getPosts().stream().anyMatch(post->post.isRecent()))
+                .filter(seller -> seller.getPosts().stream().anyMatch(post -> post.isRecent()))
                 .collect(Collectors.toList());
         ObjectMapper mapper = new ObjectMapper();
 
         LocalDate.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
 
-        return sellers.stream().map(seller->{
-            List<Post> sortedPosts = this.sortPosts(seller.getPosts().stream().filter(post-> post.isRecent()).collect(Collectors.toList()),order );
+        return sellers.stream().map(seller -> {
+                    List<Post> sortedPosts = this.sortPosts(seller.getPosts().stream().filter(post -> post.isRecent()).collect(Collectors.toList()), order);
 
-            return new SellerDTO(seller.getUser_id(),
-                sortedPosts.stream().map(post->{
-                    return mapperPostToPostDTO.convertValue(post, PostDTO.class);
-                    /*
-                    String date = post.getDate().format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
-                    ProductDTO productDTO =  mapper.convertValue(post.getProduct(), ProductDTO.class);
-
-                    return new PostDTO(post.getUser().getUser_id(),date,
-                                productDTO, post.getCategory(), post.getPrice());
-
-                */
+                    return new SellerDTO(seller.getUser_id(),
+                            sortedPosts.stream().map(post -> mapperPostToPostDTO.convertValue(post, PostDTO.class))
+                                    .collect(Collectors.toList()));
                 })
-                        .collect(Collectors.toList()));
-        })
                 .collect(Collectors.toList());
 
     }
 
-    public List<Post> sortPosts(List<Post> posts, String order){
+    public List<Post> sortPosts(List<Post> posts, String order) {
         Comparator comp;
-        if(order==null)
+        if (order == null)
             return posts;
-        switch(order){
+        switch (order) {
             case "date_asc":
                 comp = new LocalDateComparatorAsc();
                 break;
@@ -97,7 +86,7 @@ public class PostServiceImpl implements PostService{
             default:
                 throw new BadRequestException("El parámetro " + order + " es inválido.");
         }
-        posts.sort((p1,p2)->comp.compare(p1.getDate(), p2.getDate()));
+        posts.sort((p1, p2) -> comp.compare(p1.getDate(), p2.getDate()));
         return posts;
     }
 }

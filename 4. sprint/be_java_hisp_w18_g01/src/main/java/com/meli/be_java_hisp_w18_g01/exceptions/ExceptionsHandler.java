@@ -1,17 +1,19 @@
 package com.meli.be_java_hisp_w18_g01.exceptions;
 
 import com.meli.be_java_hisp_w18_g01.dtos.ResponseDTO;
+import org.springframework.core.Ordered;
+import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
 @ControllerAdvice
+@Order(Ordered.HIGHEST_PRECEDENCE)
 public class ExceptionsHandler {
 
-    @ExceptionHandler({NotSellerException.class, BadRequestException.class})
+    @ExceptionHandler({NotSellerException.class, BadRequestException.class, BadFollowException.class})
     public ResponseEntity<?> handleBadRequest(Exception e){
-        //return ResponseEntity.badRequest().body(e.getMessage());//TODO: enviarlo en un dto
         return new ResponseEntity<>(
                 new ResponseDTO(
                         HttpStatus.BAD_REQUEST.value(),
@@ -37,6 +39,16 @@ public class ExceptionsHandler {
                         HttpStatus.CONFLICT.value(),
                         e.getMessage()),
                 HttpStatus.CONFLICT
+        );
+    }
+
+    @ExceptionHandler({Exception.class})
+    public ResponseEntity<?> handleServersideError(Exception e){
+        return new ResponseEntity<>(
+                new ResponseDTO(
+                        HttpStatus.INTERNAL_SERVER_ERROR.value(),
+                        "Ha ocurrido un error en el servidor. Consulte con un administrador."),
+                HttpStatus.INTERNAL_SERVER_ERROR
         );
     }
 

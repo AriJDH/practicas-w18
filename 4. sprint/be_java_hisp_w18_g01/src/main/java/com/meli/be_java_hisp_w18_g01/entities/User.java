@@ -1,5 +1,6 @@
 package com.meli.be_java_hisp_w18_g01.entities;
 
+import com.meli.be_java_hisp_w18_g01.exceptions.BadFollowException;
 import com.meli.be_java_hisp_w18_g01.exceptions.NotSellerException;
 import com.meli.be_java_hisp_w18_g01.exceptions.UserAlreadyFollowedException;
 import lombok.AllArgsConstructor;
@@ -39,6 +40,7 @@ public class User {
     public void follow(User userToFollow){
         if(userToFollow.isSeller()){
             checkIsNotAlreadyFollowed(userToFollow);
+            checkIsNotThemself(userToFollow);
             this.followed.add(userToFollow);
             userToFollow.addFollower(this);
         }else
@@ -57,6 +59,11 @@ public class User {
     public void checkIsNotAlreadyFollowed(User userToFollow){
         if(this.isAlreadyFollowed(userToFollow))
             throw new UserAlreadyFollowedException("El usuario " + this.getUser_id() + " ya sigue al usuario " + userToFollow.getUser_id());
+    }
+
+    public void checkIsNotThemself(User userToFollow){
+        if(this.equals(userToFollow))
+            throw new BadFollowException("Un usuario no puede seguir a sí mismo.");
     }
 
     public boolean isAlreadyFollowed(User userCouldBeFollowed){

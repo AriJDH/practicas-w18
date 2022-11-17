@@ -8,6 +8,6 @@ import java.util.List;
 
 public interface PostService {
 
-    ResponseDTO addPost(PostDTO postDTO);
+    void addPost(PostDTO postDTO);
     List<SellerDTO> getRecentPostsFromFollowed(long userId, String order);
 }
