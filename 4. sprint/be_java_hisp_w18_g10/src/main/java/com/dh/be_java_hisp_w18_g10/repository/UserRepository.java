@@ -22,20 +22,17 @@ public class UserRepository implements IUserRepository{
 
     private void loadUsers(){
 
-        count++;
         User user1 = new User();
-        user1.setUserId(count);
+        user1.setUserId(1);
         user1.setUserName("usuario1");
 
-        count++;
         User user2 = new User();
-        user2.setUserId(count);
-        user2.setUserName("vendedor1");
+        user2.setUserId(2);
+        user2.setUserName("usuario2");
 
-        count++;
         User user3 = new User();
-        user3.setUserId(count);
-        user3.setUserName("vendedor2");
+        user3.setUserId(3);
+        user3.setUserName("usuario3");
 
         Map<Integer, User> followedUsuer1 = new HashMap<Integer, User>();
         followedUsuer1.put(user2.getUserId(), user2);
@@ -75,9 +72,9 @@ public class UserRepository implements IUserRepository{
 
         LocalDate old = LocalDate.of(2000,12,12);
         LocalDate lastWeek = LocalDate.of(2022,11,14);
-        Post post1 = new Post(1,1, old,getListProduct().get(0),23,340.00);
-        Post post2 = new Post(1,2, lastWeek,getListProduct().get(1),4,456);
-        Post post3 = new Post(1,3, LocalDate.now(),getListProduct().get(2),77,865);
+        Post post1 = new Post(2,4, old, getListProduct().get(0),23,340.00);
+        Post post2 = new Post(2,5, lastWeek, getListProduct().get(1),4,456);
+        Post post3 = new Post(2,6, LocalDate.now(),getListProduct().get(2),77,865);
         return List.of(post1,post2,post3);
     }
     private List<Product> getListProduct(){

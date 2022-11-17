@@ -40,7 +40,15 @@ public class DTOMapper {
     }
 
     public static Post mapToPost(PostDTOreq postDTOreq){
-        Post post = getInstance().map(postDTOreq, Post.class);
+        Post post = new Post();
+        post.setUserId(postDTOreq.getUser_id());
+        post.setDate(DateHandler.StringToDate(postDTOreq.getDate()));
+        Product product = getInstance().map(postDTOreq.getProduct(), Product.class);
+        product.setProductId(postDTOreq.getProduct().getProduct_id());
+        product.setProductName(postDTOreq.getProduct().getProduct_name());
+        post.setProduct(product);
+        post.setCategory(postDTOreq.getCategory());
+        post.setPrice(postDTOreq.getPrice());
         return post;
     }
 
@@ -72,4 +80,7 @@ public class DTOMapper {
         return productDTOres;
     }
 
+    public static PostDTOres mapToPostDTOres(Post post){
+        return getInstance().map(post, PostDTOres.class);
+    }
 }

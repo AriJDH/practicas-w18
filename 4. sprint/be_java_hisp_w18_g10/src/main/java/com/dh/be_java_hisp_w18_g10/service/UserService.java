@@ -12,16 +12,12 @@ import com.dh.be_java_hisp_w18_g10.util.DTOMapper;
 import com.dh.be_java_hisp_w18_g10.util.DateHandler;
 import com.dh.be_java_hisp_w18_g10.util.TypeOrderHelper;
 import org.springframework.stereotype.Service;
-import org.springframework.util.StringUtils;
 
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
-
-import static com.dh.be_java_hisp_w18_g10.util.DTOMapper.mapToUserFollowedRes;
 
 @Service
 public class UserService implements IUserService {
@@ -96,10 +92,6 @@ public class UserService implements IUserService {
         }
 
         return new UserFollowedListDTOres(userAuxId, userName, followedList);
-
-       /* User user = userRepository.getUser(userId);
-        UserFollowedListDTOres userFollowedDTOres = mapToUserFollowedRes(user);
-        return userFollowedDTOres;*/
     }
 
     @Override
@@ -111,6 +103,7 @@ public class UserService implements IUserService {
 
         Post post = DTOMapper.mapToPost(postDTOreq);
         Integer postId = postRepository.addPost(post);
+        post.setPost_id(postId);
 
         userRepository
                 .getUser(userId)
@@ -128,7 +121,7 @@ public class UserService implements IUserService {
         //Chequear que usuario siga a algun vendedor
         if(user.getFollowed().isEmpty()){
             throw new UserGenericException(String.format("El usuario %s no sigue vendedeores"
-                    ,user.getUserName()));
+                    , user.getUserName()));
         }
         //
         //Lista de Post de vendedores que el usaurio sigue
@@ -178,12 +171,12 @@ public class UserService implements IUserService {
     @Override
     public UserFollowersListDTOres getUserFollowerList(int userId, String order) {
         UserFollowersListDTOres res = getUserFollowerList(userId);
-        if(order.equals("name_asc")){
+        if(order.equals(TypeOrderHelper.NAME_ASC)){
             res.getFollowers()
                     .sort(Comparator.comparing(UserDTOres::getUser_name));
             return res;
         }
-        else if(order.equals("name_desc")){
+        else if(order.equals(TypeOrderHelper.NAME_DESC)){
             res.getFollowers()
                     .sort(Comparator.comparing(UserDTOres::getUser_name).reversed());
             return res;
@@ -195,12 +188,12 @@ public class UserService implements IUserService {
     @Override
     public UserFollowedListDTOres getUserFollowed(int userId, String order) {
         UserFollowedListDTOres res = getUserFollowed(userId);
-        if(order.equals("name_asc")){
+        if(order.equals(TypeOrderHelper.NAME_ASC)){
             res.getFollowed()
                     .sort(Comparator.comparing(UserDTOres::getUser_name));
             return res;
         }
-        else if(order.equals("name_desc")){
+        else if(order.equals(TypeOrderHelper.NAME_DESC)){
             res.getFollowed()
                     .sort(Comparator.comparing(UserDTOres::getUser_name).reversed());
             return res;
