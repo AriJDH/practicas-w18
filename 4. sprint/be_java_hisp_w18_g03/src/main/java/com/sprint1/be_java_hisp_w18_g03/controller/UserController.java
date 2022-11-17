@@ -37,8 +37,8 @@ public class UserController {
     }
 
     @GetMapping("/{userId}/followers/list")
-    public ResponseEntity<FollowersDTO> getListFollowers(@PathVariable Integer userId) {
-        return new ResponseEntity<>(userService.getFollowersList(userId), HttpStatus.OK);
+    public ResponseEntity<FollowersDTO> getListFollowers(@PathVariable Integer userId, @RequestParam(required = false) String order) {
+        return new ResponseEntity<>(userService.getFollowersList(userId,order), HttpStatus.OK);
     }
 
 }

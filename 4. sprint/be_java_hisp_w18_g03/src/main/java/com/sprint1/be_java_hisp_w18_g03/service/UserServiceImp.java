@@ -53,7 +53,7 @@ public class UserServiceImp implements IUserService {
     }
 
     @Override
-    public FollowersDTO getFollowersList(Integer userId) {
+    public FollowersDTO getFollowersList(Integer userId, String order) {
         User user = iUserRepository.findById(userId);
         if (user == null) {
             throw new NoFoundException("The user hasn't being found");
@@ -61,13 +61,27 @@ public class UserServiceImp implements IUserService {
         if (user.getListFollowers().isEmpty()) {
             throw new NoFoundException("The user hasn't followers");
         }
-        FollowersDTO followers = new FollowersDTO();
-        followers.setUserName(user.getUserName());
-        followers.setUserId(user.getUserId());
-        for (User followerUser : user.getListFollowers()) {
-            followers.getFollowers().add(new UserDTO(followerUser.getUserId(), followerUser.getUserName()));
+        if(order == null) {
+            return new FollowersDTO(
+                    user.getUserId(),
+                    user.getUserName(),
+                    user
+                            .getListFollowers()
+                            .stream()
+                            .map(i -> new UserDTO(i.getUserId(), i.getUserName()))
+                            .collect(Collectors.toList())
+            );
+        } else {
+            return new FollowersDTO(
+                    user.getUserId(),
+                    user.getUserName(),
+                    orderByName(user, order)
+                            .stream()
+                            .map(i -> new UserDTO(i.getUserId(), i.getUserName()))
+                            .collect(Collectors.toList())
+            );
         }
-        return followers;
+
     }
 
     @Override
