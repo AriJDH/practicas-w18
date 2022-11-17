@@ -6,7 +6,6 @@ import com.sprint1.be_java_hisp_w18_g03.Repository.IUserRepository;
 import com.sprint1.be_java_hisp_w18_g03.dto.request.RequestPostDTO;
 import com.sprint1.be_java_hisp_w18_g03.dto.response.ResponseDTO;
 import com.sprint1.be_java_hisp_w18_g03.dto.response.SellersPostDTO;
-import com.sprint1.be_java_hisp_w18_g03.entity.Post;
 import com.sprint1.be_java_hisp_w18_g03.exception.CreationException;
 import com.sprint1.be_java_hisp_w18_g03.exception.NoFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
