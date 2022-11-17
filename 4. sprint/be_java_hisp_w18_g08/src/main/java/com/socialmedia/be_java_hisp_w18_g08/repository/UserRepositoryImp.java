@@ -3,7 +3,6 @@ package com.socialmedia.be_java_hisp_w18_g08.repository;
 import com.socialmedia.be_java_hisp_w18_g08.entity.Post;
 import com.socialmedia.be_java_hisp_w18_g08.entity.Seller;
 import com.socialmedia.be_java_hisp_w18_g08.entity.User;
-import com.socialmedia.be_java_hisp_w18_g08.exception.NotFoundUserException;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
@@ -66,6 +65,15 @@ public class UserRepositoryImp implements IUserRepository{
     }
 
     @Override
+    public Seller findUserListBySeller(Integer id) {
+        Seller seller = this.sellers.stream()
+                .filter(s -> id == s.getUser_id())
+                .findFirst()
+                .orElse(null);
+        return seller;
+    }
+
+    @Override
     public User getUserByID(Integer userId) {
         User found = null;
         int i = 0;
@@ -79,5 +87,31 @@ public class UserRepositoryImp implements IUserRepository{
         } else {
             return found;
         }
+    }
+
+
+    @Override
+    public List<String> follow(Integer userId, Integer userIdToFollow) {
+
+        List<String> nombres = new ArrayList<>();
+
+        for (User u : this.users) {
+            if (u.getUser_id() == userId) {
+                nombres.add(u.getUser_name());
+                for (Seller s : this.sellers) {
+                    if (s.getUser_id() == userIdToFollow) {
+                        nombres.add(s.getUser_name());
+                        u.getFollowed().add(s);
+                        break;
+                    }
+                }
+                break;
+            }
+        }
+
+        if (nombres.size() < 2) {
+            return null;
+        }
+        return nombres;
     }
 }
