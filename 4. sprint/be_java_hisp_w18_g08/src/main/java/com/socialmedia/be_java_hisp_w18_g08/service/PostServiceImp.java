@@ -43,16 +43,19 @@ public class PostServiceImp implements IPostService{
         }
     }
 
-    public List<PostDtoRes> getPostSellerListByUserId(Integer userId){
+    public PostDtoRes getPostSellerListByUserId(Integer userId){
         List<Seller> followed = userService.getFollowedByUserId(userId);
-        List<PostDtoRes> postDtoRes = new ArrayList<>();
+        PostDtoRes postDtoRes = new PostDtoRes();
         LocalDate date = LocalDate.now();
+
+        postDtoRes.setUser_id(userId);
         for(Seller s:followed){
             List<Post> filtrados = s.getPosts().stream().filter(seller-> seller.getDate().isAfter(date.minusDays(15))).collect(Collectors.toList());
-            PostDtoRes postDtoRes1 = new PostDtoRes(userId,filtrados);
-            postDtoRes.add(postDtoRes1);
+            if(!filtrados.isEmpty()) {
+                postDtoRes.setPosts(filtrados);
+            }
         }
-        if(postDtoRes.isEmpty())
+        if(followed.isEmpty())
             throw new NotFoundUserException("User whith id: " + userId +" sellers post not found ");
         return postDtoRes;
     }
