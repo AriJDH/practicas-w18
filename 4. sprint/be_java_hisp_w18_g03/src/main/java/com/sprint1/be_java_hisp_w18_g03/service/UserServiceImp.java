@@ -69,10 +69,7 @@ public class UserServiceImp implements IUserService {
         return followers;
     }
 
-    @Override
-    public FollowersDTO getFollowersList(Integer userId, String order) {
-        return null;
-    }
+
 
     @Override
     public FollowedDTO getFollowedList(Integer userId) {
