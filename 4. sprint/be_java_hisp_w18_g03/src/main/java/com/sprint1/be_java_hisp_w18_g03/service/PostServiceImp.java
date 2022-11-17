@@ -13,6 +13,7 @@ import com.sprint1.be_java_hisp_w18_g03.entity.User;
 import com.sprint1.be_java_hisp_w18_g03.entity.Product;
 import com.sprint1.be_java_hisp_w18_g03.exception.CreationException;
 import com.sprint1.be_java_hisp_w18_g03.exception.NoFoundException;
+import com.sprint1.be_java_hisp_w18_g03.exception.ParamException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -61,11 +62,11 @@ public class PostServiceImp implements IPostService {
     }
 
     @Override
-    public SellersPostDTO getPostSellers(Integer userId) {
+    public SellersPostDTO getPostSellers(Integer userId, String order) {
 
         User user = iUserRepository.findById(userId);
 
-        if (user == null){
+        if (user == null) {
             throw new NoFoundException("The user hasn't being found");
         }
 
@@ -80,9 +81,6 @@ public class PostServiceImp implements IPostService {
             postSell.addAll(postUser);
         }
 
-        if (postSell.isEmpty()) {
-            throw new NoFoundException("The posts hasn't being found");
-        }
 
         //Obtener post que este entre las dos semanas y la actual
         LocalDate fechaSin2Semana = LocalDate.now().minusDays(14);
@@ -90,6 +88,10 @@ public class PostServiceImp implements IPostService {
         List<Post> recentPost = postSell.stream()
                 .filter(x -> x.getDate().isAfter(fechaSin2Semana))
                 .collect(Collectors.toList());
+
+        if (recentPost.isEmpty()) {
+            throw new NoFoundException("The posts hasn't being found");
+        }
 
         List<ResponsePostDTO> responsePostDTOs = new ArrayList<>();
 
@@ -115,6 +117,20 @@ public class PostServiceImp implements IPostService {
             responsePostDTOs.add(responsePostDTO);
         }
 
+        if (order != null) {
+            switch (order) {
+                case "date_asc":
+                    responsePostDTOs.stream().sorted((x, y) -> x.getDate().compareTo(y.getDate()));
+                    break;
+                case "date_desc":
+                    responsePostDTOs.stream().sorted((x, y) -> y.getDate().compareTo(x.getDate()));
+                    break;
+                default:
+                    throw new ParamException("Ther order variable does not allow the value:" + order);
+            }
+        }
+
         return new SellersPostDTO(user.getUserId(), responsePostDTOs);
     }
+
 }

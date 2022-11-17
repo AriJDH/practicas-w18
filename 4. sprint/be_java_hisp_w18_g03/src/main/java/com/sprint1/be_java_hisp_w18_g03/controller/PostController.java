@@ -22,16 +22,13 @@ public class PostController {
 
     @PostMapping("/post")
     public ResponseEntity<ResponseDTO> createPost(@RequestBody RequestPostDTO requestPostDTO) {
-       return new ResponseEntity<>(postService.createPost(requestPostDTO),HttpStatus.OK);
-    }
-
-    public ResponseEntity<ResponseDTO> getFollowedOrderedList(@RequestParam String order) {
-        //return new ResponseEntity<>(postService.createPost(requestPostDTO),HttpStatus.OK);
-        return null;
+        return new ResponseEntity<>(postService.createPost(requestPostDTO), HttpStatus.OK);
     }
 
     @GetMapping("/followed/{userId}/list")
-    public ResponseEntity<SellersPostDTO> getPostSellers(@PathVariable int userId) {
-        return ResponseEntity.ok(postService.getPostSellers(userId));
+    public ResponseEntity<SellersPostDTO> getPostSellers(@PathVariable Integer userId,
+                                                         @RequestParam(required = false) String order
+    ) {
+        return ResponseEntity.ok(postService.getPostSellers(userId,order));
     }
 }
