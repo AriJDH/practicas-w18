@@ -1,7 +1,7 @@
 package com.sprint1.be_java_hisp_w18_g03.Repository;
 
 import com.sprint1.be_java_hisp_w18_g03.entity.User;
-import com.sprint1.be_java_hisp_w18_g03.exception.NoFoundUserException;
+import com.sprint1.be_java_hisp_w18_g03.exception.NoFoundException;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
@@ -65,7 +65,24 @@ public class UserRepository implements IUserRepository {
     public List<User> selectAll() {
         return users;
     }
-    public void removeFollower(int idUser, int idFollower) {
+    public boolean removeFollower(int idUser, int idFollower) {
+
+      User user = findById(idUser);
+      User userToRemoveFollow = findById(idFollower);
+
+      //Comprobacion de que los usuarios existen
+      if (user == null || userToRemoveFollow == null){
+        return false;
+      }
+
+      //Si el usuario no seguia al otro usuario, retorna falso.
+      if(!user.getListFollowed().removeIf(u -> u.getUserId().equals(idFollower))){
+        return false;
+      }
+
+      userToRemoveFollow.getListFollowers().removeIf(u -> u.getUserId().equals(idUser));
+      return true;
+
     }
     public boolean addFollower(int idUser, int idUserToFollow) {
         // Se obtienen los usuarios con el metodo findByID

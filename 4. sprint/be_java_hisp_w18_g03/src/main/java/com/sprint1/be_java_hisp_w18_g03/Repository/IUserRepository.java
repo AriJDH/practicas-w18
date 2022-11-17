@@ -9,7 +9,7 @@ public interface IUserRepository {
 
     List<User> selectAll();
 
-    void removeFollower(int idUser, int idFollower);
+    boolean removeFollower(int idUser, int idFollower);
 
     boolean addFollower(int idUser, int idUserToFollow);
 
