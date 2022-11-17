@@ -4,15 +4,20 @@ import com.dh.be_java_hisp_w18_g10.dto.require.PostDTOreq;
 import com.dh.be_java_hisp_w18_g10.dto.response.*;
 import com.dh.be_java_hisp_w18_g10.entity.Post;
 import com.dh.be_java_hisp_w18_g10.entity.User;
+import com.dh.be_java_hisp_w18_g10.exception.UserGenericException;
+import com.dh.be_java_hisp_w18_g10.exception.UserNotFoundException;
 import com.dh.be_java_hisp_w18_g10.exception.ProductNotFoundException;
 import com.dh.be_java_hisp_w18_g10.exception.UserIdNullException;
 import com.dh.be_java_hisp_w18_g10.exception.UserNotFoundException;
 import com.dh.be_java_hisp_w18_g10.exception.NotFoundException;
 import com.dh.be_java_hisp_w18_g10.repository.*;
 import com.dh.be_java_hisp_w18_g10.util.DTOMapper;
+import com.dh.be_java_hisp_w18_g10.util.DateHandler;
 import org.springframework.stereotype.Service;
 
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -51,10 +56,14 @@ public class UserService implements IUserService {
             throw new NotFoundException("El usuario con el id: "+userId+" no fue encontrado!");
         }
         if(user2 == null){
-            throw new NotFoundException("El usuario con el id: "+userId+" no fue encontrado!");
+            throw new NotFoundException("El usuario con el id: "+userIdToFollow+" no fue encontrado!");
         }
 
-        user1.getFollowed().put(user2.getUserId(),user2);
+        if(!user2.getPosts().isEmpty()){
+            user1.getFollowed().put(user2.getUserId(),user2);
+        }else{
+            throw new UserGenericException("El usuario con el id: "+userIdToFollow+" no es un vendedor!");
+        }
         user2.getFollowers().put(user1.getUserId(), user1);
     }
 
@@ -102,31 +111,71 @@ public class UserService implements IUserService {
 
     @Override
     public void createPost(PostDTOreq postDTOreq) {
-        try {
-            int userId = postDTOreq.getUser_id();
-            int productId = postDTOreq.getProduct().getProduct_id();
-            if (userRepository.getUsers().get(userId) == null)
-                throw new UserNotFoundException("Usuario no encontrado!");
-            if (productRepository.getProductById(productId) == null)
-                throw new ProductNotFoundException("Producto no encontrado.");
 
-            Post post = DTOMapper.mapToPost(postDTOreq);
+        int userId = postDTOreq.getUser_id();
+        int productId = postDTOreq.getProduct().getProduct_id();
+        /* if (userRepository.getUser(userId) == null)
+            throw new UserNotFoundException("Usuario no encontrado!");
+        if (productRepository.getProductById(productId) == null)
+            throw new ProductNotFoundException("Producto no encontrado."); */
 
-            Integer postId = postRepository.addPost(post);
-            userRepository
-                    .getUser(userId)
-                    .getPosts()
-                    .put(postId, post);
-        }
-        catch (NullPointerException e) {
-             throw new UserIdNullException("Atributo null en user");
-        }
+        Post post = DTOMapper.mapToPost(postDTOreq);
+        Integer postId = postRepository.addPost(post);
+
+        /* userRepository
+                .getUser(userId)
+                .getPosts()
+                .put(postId, post);
+        productRepository.addProduct(post.getProduct());*/
+
+
 
     }
 
     @Override
     public UserPostsDTOres getUserPosts(int userId) {
-        return null;
+        UserPostsDTOres userPostsDTOres = new UserPostsDTOres();
+        //Obtener usuario
+        User user = userRepository.getUser(userId);
+        if(user == null)
+            throw new UserNotFoundException("No existe usuario con id " + userId);
+        //Chequear que usuario siga a algun vendedor
+        if(user.getFollowed().isEmpty()){
+            throw new UserGenericException(String.format("El usuario %s no sigue vendedeores"
+                    ,user.getUserName()));
+        }
+        //
+        //Lista de Post de vendedores que el usaurio sigue
+        List<PostDTOres> postListRes = new ArrayList<>();
+        /*Recorro cada vendedor que el usuario sigue
+        * Recorro sus Post en caso de tener
+        * Asigno los post a la lista postListRes*/
+        for (Map.Entry<Integer, User> entry : user.getFollowed().entrySet()) {
+            User userVendedor = userRepository.getUser(entry.getKey());
+            //Recorro Post para mapearlo y agregarlo a la lista
+            if(!userVendedor.getPosts().isEmpty()){
+                for (Map.Entry<Integer, Post> posts : userVendedor.getPosts().entrySet()){
+                    //Controlo que la fecha de publicacion no se mayor a 2 semanas
+                    if(DateHandler.showPostRecently(posts.getValue().getDate()))
+                        postListRes.add(DTOMapper.mapTo(posts.getValue()));
+                }
+            }
+        }
+        //Chequeo que tengamos algun Post para mostrar
+        if (postListRes.isEmpty()){
+            throw new UserGenericException(String.format("Los vendedores que sigue el usuario %s , no tienen publicaciones en las ultimas 2 semanas"
+                    ,user.getUserName()));
+        }
+
+        //descendente  ******** ME QUEDARIA MNAS COMODO QUE EL DATE DE POSTDTO SEA UN LOCALDATE NO UN STRING
+        postListRes = postListRes.stream().sorted(Comparator.comparing(PostDTOres::getDate).reversed()).collect(Collectors.toList());
+        //ascendente
+        if(false)
+            postListRes = postListRes.stream().sorted(Comparator.comparing(PostDTOres::getDate)).collect(Collectors.toList());
+
+        userPostsDTOres.setUser_id(userId);
+        userPostsDTOres.setPosts(postListRes);
+        return userPostsDTOres;
     }
 
     @Override

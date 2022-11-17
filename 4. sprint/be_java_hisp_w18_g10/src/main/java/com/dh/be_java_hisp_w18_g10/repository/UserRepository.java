@@ -1,10 +1,14 @@
 package com.dh.be_java_hisp_w18_g10.repository;
 
+import com.dh.be_java_hisp_w18_g10.entity.Post;
+import com.dh.be_java_hisp_w18_g10.entity.Product;
 import com.dh.be_java_hisp_w18_g10.entity.User;
 import org.springframework.stereotype.Repository;
 
-import java.util.*;
-import java.util.stream.Collectors;
+import java.time.LocalDate;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Repository
 public class UserRepository implements IUserRepository{
@@ -18,11 +22,6 @@ public class UserRepository implements IUserRepository{
     private void loadUsers(){
 
         count++;
-        User vendedor = new User();
-        vendedor.setUserId(count);
-        vendedor.setUserName("vendedor1");
-
-        count++;
         User user1 = new User();
         user1.setUserId(count);
         user1.setUserName("usuario1");
@@ -30,36 +29,61 @@ public class UserRepository implements IUserRepository{
         count++;
         User user2 = new User();
         user2.setUserId(count);
-        user2.setUserName("usuario2");
+        user2.setUserName("vendedor1");
 
-        vendedor.getFollowers().put(user1.getUserId(), user1);
-        vendedor.getFollowers().put(user2.getUserId(), user2);
+        count++;
+        User user3 = new User();
+        user3.setUserId(count);
+        user3.setUserName("vendedor2");
 
-//        Map<Integer, User> followedUsuer2 = new HashMap<Integer, User>();
-//        followedUsuer2.put(user3.getUserId(), user3);
-//        user2.setFollowed(followedUsuer2);
-//
-//        Map<Integer, User> followedUsuer3 = new HashMap<Integer, User>();
-//        followedUsuer3.put(user2.getUserId(), user2);
-//        user3.setFollowed(followedUsuer3);
-//
-//        Map<Integer, User> follorers1 = new HashMap<Integer, User>();
-//        follorers1.put(user2.getUserId(), user2);
+        Map<Integer, User> followedUsuer1 = new HashMap<Integer, User>();
+        followedUsuer1.put(user2.getUserId(), user2);
+        followedUsuer1.put(user3.getUserId(), user3);
+        user1.setFollowed(followedUsuer1);
 
-        this.users.put(vendedor.getUserId(), vendedor);
+        Map<Integer, User> followedUsuer2 = new HashMap<Integer, User>();
+        followedUsuer2.put(user3.getUserId(), user3);
+        user2.setFollowed(followedUsuer2);
+
+        Map<Integer, User> followedUsuer3 = new HashMap<Integer, User>();
+        followedUsuer3.put(user2.getUserId(), user2);
+        user3.setFollowed(followedUsuer3);
+
+        user2.getPosts().put(getListPosts().get(0).getPost_id(),getListPosts().get(0));
+        user2.getPosts().put(getListPosts().get(1).getPost_id(),getListPosts().get(1));
+        user2.getPosts().put(getListPosts().get(2).getPost_id(),getListPosts().get(2));
+
         this.users.put(user1.getUserId(), user1);
         this.users.put(user2.getUserId(), user2);
+        this.users.put(user3.getUserId(), user3);
+
     }
 
     @Override
     public User getUser(int id) {
-        User user = users.get(id);
-        return user;
+        return this.users.get(id);
     }
 
     @Override
     public List<User> getUsers() {
         return null;
+    }
+
+    private List<Post> getListPosts(){
+
+        LocalDate old = LocalDate.of(2000,12,12);
+        LocalDate lastWeek = LocalDate.of(2022,11,1);
+        Post post1 = new Post(1,1, old,getListProduct().get(0),23,340.00);
+        Post post2 = new Post(1,2, lastWeek,getListProduct().get(1),4,456);
+        Post post3 = new Post(1,3, LocalDate.now(),getListProduct().get(2),77,865);
+        return List.of(post1,post2,post3);
+    }
+    private List<Product> getListProduct(){
+        Product product = new Product(1,"Buzo","Ropa","Nike","Gris","Para usar en invierno");
+        Product product2 = new Product(1,"Pantalon","Ropa","Adida","Negro","Para usar en Otoño");
+        Product product3 = new Product(1,"Remera","Ropa","Levis","Blanco","Para usar en Verano");
+
+        return List.of(product,product2,product3);
     }
 
     @Override

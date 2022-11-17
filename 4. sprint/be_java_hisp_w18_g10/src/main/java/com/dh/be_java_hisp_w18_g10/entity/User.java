@@ -24,9 +24,14 @@ public class User {
     @JsonProperty("user_name")
     private String userName;
 
-    private Map<Integer, User> followers = new HashMap<>();
-    private Map<Integer, User> followed = new HashMap<>();
-    private Map<Integer, Post> posts = new HashMap<>();
+    public User(int userId, String userName) {
+        this.userId = userId;
+        this.userName = userName;
+    }
+
+    private Map<Integer, User> followers = new HashMap<Integer, User>();
+    private Map<Integer, User> followed = new HashMap<Integer, User>();
+    private Map<Integer, Post> posts = new HashMap<Integer, Post>();
 
     public List<User> getFollowersList() {
         return new ArrayList<>(followers.values());
