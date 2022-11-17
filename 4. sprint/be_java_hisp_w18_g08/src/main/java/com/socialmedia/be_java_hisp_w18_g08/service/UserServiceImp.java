@@ -43,6 +43,8 @@ public class UserServiceImp implements IUserService {
     @Override
     public FollowedDTO getFollowed(Integer userId, String order) {
         User user = userRepository.getUserByID(userId);
+        if(user == null)
+            throw new NotFoundUserException("There is no user with the ID " + userId);
         FollowedDTO response = new FollowedDTO();
         response.setUser_id(user.getUser_id());
         response.setUser_name(user.getUser_name());
