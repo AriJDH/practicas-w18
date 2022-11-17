@@ -41,7 +41,7 @@ public class ExceptionsHandler {
                 HttpStatus.CONFLICT
         );
     }
-
+/*
     @ExceptionHandler({Exception.class})
     public ResponseEntity<?> handleServersideError(Exception e){
         return new ResponseEntity<>(
@@ -51,5 +51,5 @@ public class ExceptionsHandler {
                 HttpStatus.INTERNAL_SERVER_ERROR
         );
     }
-
+*/
 }

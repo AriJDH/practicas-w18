@@ -11,8 +11,10 @@ import com.meli.be_java_hisp_w18_g01.entities.Product;
 import com.meli.be_java_hisp_w18_g01.entities.User;
 import com.meli.be_java_hisp_w18_g01.exceptions.BadRequestException;
 import com.meli.be_java_hisp_w18_g01.mappers.MapperPostToPostDTO;
+import com.meli.be_java_hisp_w18_g01.mappers.MapperPostToPromoPostDTO;
 import com.meli.be_java_hisp_w18_g01.services.database.UserDbService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -24,9 +26,6 @@ import java.util.stream.Collectors;
 @Service
 public class PostServiceImpl implements PostService {
     private long postCount = 1L;
-
-    @Autowired
-    private MapperPostToPostDTO mapperPostToPostDTO;
     @Autowired
     private UserDbService userDbService;
 
@@ -80,6 +79,7 @@ public class PostServiceImpl implements PostService {
 
         LocalDate.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
 
+        MapperPostToPostDTO mapperPostToPostDTO = new MapperPostToPostDTO();
         return sellers.stream().map(seller -> {
                     List<Post> sortedPosts = this.sortPosts(seller.getPosts().stream().filter(post -> post.isRecent()).collect(Collectors.toList()), order);
 
@@ -95,6 +95,14 @@ public class PostServiceImpl implements PostService {
     public SellerPromoPostCountDTO getSellerPromoPostCount(long userId) {
         User user = userDbService.findById(userId);
         return new SellerPromoPostCountDTO(userId, user.getUser_name(), user.getPromoPosts().size());
+    }
+
+    @Override
+    public SellerPromoPostInfoDTO getSellerPromoPostInfo(long userId) {
+        User user = userDbService.findById(userId);
+        MapperPostToPromoPostDTO mapperPostToPromoPostDTO = new MapperPostToPromoPostDTO();
+        return new SellerPromoPostInfoDTO(user.getUser_id(), user.getUser_name(),
+                user.getPromoPosts().stream().map(post->mapperPostToPromoPostDTO.convertValue(post, PromoPostDTO.class)).collect(Collectors.toList()));
     }
 
     public List<Post> sortPosts(List<Post> posts, String order) {

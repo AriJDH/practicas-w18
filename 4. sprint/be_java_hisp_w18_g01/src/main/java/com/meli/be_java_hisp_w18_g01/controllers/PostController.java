@@ -31,8 +31,13 @@ public class PostController {
         return ResponseEntity.ok(new ResponseDTO(200, "operación exitosa"));
     }
 
-    @PostMapping("/promo-post/count")
+    @GetMapping("/promo-post/count")
     public ResponseEntity<SellerPromoPostCountDTO> getSellerPromoPostCount(@RequestParam long userId){
         return ResponseEntity.ok(postService.getSellerPromoPostCount(userId));
+    }
+
+    @GetMapping("/promo-post/list")
+    public ResponseEntity<SellerPromoPostInfoDTO> getSellerPromoPostInfo(@RequestParam long userId){
+        return ResponseEntity.ok(postService.getSellerPromoPostInfo(userId));
     }
 }
