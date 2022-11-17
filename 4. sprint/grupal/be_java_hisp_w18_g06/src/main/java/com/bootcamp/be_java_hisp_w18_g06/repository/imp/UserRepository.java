@@ -4,11 +4,14 @@ import com.bootcamp.be_java_hisp_w18_g06.entity.Post;
 import com.bootcamp.be_java_hisp_w18_g06.entity.Product;
 import com.bootcamp.be_java_hisp_w18_g06.entity.User;
 import com.bootcamp.be_java_hisp_w18_g06.repository.IUserRepository;
+import org.springframework.stereotype.Repository;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
+@Repository
 public class UserRepository implements IUserRepository {
 	
 	// Base de datos
@@ -74,12 +77,17 @@ public class UserRepository implements IUserRepository {
 	public UserRepository() {
 		createDB();
 	}
-	
-	private User findUserById(int id) {
+
+	@Override
+	public Optional<User> findUserById(int id) {
 		return users
 						.stream()
 						.filter(user -> user.getUser_id() == id)
-						.findFirst()
-						.get();
+						.findFirst();
+	}
+
+	@Override
+	public void createPost(Post post) {
+		posts.add(post);
 	}
 }
