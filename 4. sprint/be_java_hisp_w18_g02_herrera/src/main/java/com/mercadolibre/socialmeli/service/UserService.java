@@ -2,6 +2,7 @@ package com.mercadolibre.socialmeli.service;
 
 import com.mercadolibre.socialmeli.dto.ProductDto;
 import com.mercadolibre.socialmeli.dto.request.PostDtoReq;
+import com.mercadolibre.socialmeli.dto.request.PromoPostDtoReq;
 import com.mercadolibre.socialmeli.dto.response.*;
 import com.mercadolibre.socialmeli.entity.Post;
 import com.mercadolibre.socialmeli.entity.Product;
@@ -108,29 +109,65 @@ public class UserService implements IUserService {
      */
     @Override
     public void addPost(PostDtoReq postReq) {
+        addPromoPost(new PromoPostDtoReq(postReq));
+    }
+
+    /**
+     * US0010
+     *
+     * @param promoPostReq
+     */
+    @Override
+    public void addPromoPost(PromoPostDtoReq promoPostReq) {
         Post post;
         Product prod;
         try {
-            prod = new Product(postReq.getProduct().getId(),
-                    postReq.getProduct().getName(),
-                    postReq.getProduct().getType(),
-                    postReq.getProduct().getBrand(),
-                    postReq.getProduct().getColor(),
-                    postReq.getProduct().getNotes());
+            prod = new Product(promoPostReq.getProduct().getId(),
+                    promoPostReq.getProduct().getName(),
+                    promoPostReq.getProduct().getType(),
+                    promoPostReq.getProduct().getBrand(),
+                    promoPostReq.getProduct().getColor(),
+                    promoPostReq.getProduct().getNotes());
             post = new Post(userRepository.getNextPostId(),
-                    postReq.getDate(),
-                    postReq.getCategory(),
-                    postReq.getPrice(),
-                    prod);
-            userRepository.createPost(postReq.getUserId(), post);
+                    promoPostReq.getDate(),
+                    promoPostReq.getCategory(),
+                    promoPostReq.getPrice(),
+                    prod, promoPostReq.isHasPromo(), promoPostReq.getDiscount());
+            userRepository.createPost(promoPostReq.getUserId(), post);
 
         } catch (NotFoundException nf) {
             throw nf;
         } catch (Exception e) {
             throw new BadRequestException("Posteo invalido");
         }
-
     }
+
+    private void addPost(PromoPostDtoReq promoPostReq, boolean hasPromo) {
+        Post post;
+        Product prod;
+        Double discount = hasPromo ? promoPostReq.getDiscount() : Double.valueOf(0);
+        try {
+            prod = new Product(promoPostReq.getProduct().getId(),
+                    promoPostReq.getProduct().getName(),
+                    promoPostReq.getProduct().getType(),
+                    promoPostReq.getProduct().getBrand(),
+                    promoPostReq.getProduct().getColor(),
+                    promoPostReq.getProduct().getNotes());
+            post = new Post(userRepository.getNextPostId(),
+                    promoPostReq.getDate(),
+                    promoPostReq.getCategory(),
+                    promoPostReq.getPrice(),
+                    prod, hasPromo, discount);
+            userRepository.createPost(promoPostReq.getUserId(), post);
+
+        } catch (NotFoundException nf) {
+            throw nf;
+        } catch (Exception e) {
+            throw new BadRequestException("Posteo invalido");
+        }
+    }
+
+
 
     /**
      * US0006 / US0009
@@ -172,6 +209,7 @@ public class UserService implements IUserService {
     }
 
     /**
+     *
      * US0007
      *
      * @param userId

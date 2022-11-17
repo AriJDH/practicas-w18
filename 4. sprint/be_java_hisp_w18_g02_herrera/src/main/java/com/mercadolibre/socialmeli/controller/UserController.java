@@ -1,6 +1,7 @@
 package com.mercadolibre.socialmeli.controller;
 
 import com.mercadolibre.socialmeli.dto.request.PostDtoReq;
+import com.mercadolibre.socialmeli.dto.request.PromoPostDtoReq;
 import com.mercadolibre.socialmeli.dto.response.RecentPostsDtoRes;
 import com.mercadolibre.socialmeli.dto.response.SellerFollowerCountDtoRes;
 import com.mercadolibre.socialmeli.dto.response.SellerFollowerListDtoRes;
@@ -80,6 +81,12 @@ public class UserController {
     @PostMapping("/products/post")
     public ResponseEntity<?> addPost(@RequestBody PostDtoReq postReq){
         userService.addPost(postReq);
+        return ResponseEntity.ok().build();
+    }
+
+    @PostMapping("/products/promo-post")
+    public ResponseEntity<?> addPromoPost(@RequestBody PromoPostDtoReq promoPostDtoReq){
+        userService.addPromoPost(promoPostDtoReq);
         return ResponseEntity.ok().build();
     }
 
