@@ -21,5 +21,4 @@ public class PostDtoReq {
     private Integer category;
     private Double price;
 
-
 }

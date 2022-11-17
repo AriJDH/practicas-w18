@@ -12,9 +12,15 @@ import org.springframework.web.bind.annotation.RestController;
 public class GlobalExceptionHandler {
 
     @ExceptionHandler(NotFoundException.class)
-    public ResponseEntity<?> noEncontrado(NotFoundException e){
-        ErrorDto eDto = new ErrorDto(e.getMessage(), 404);
-        return new ResponseEntity<>(eDto, HttpStatus.valueOf(404));
+    public ResponseEntity<?> notFoundHandler(NotFoundException e){
+        ErrorDto eDto = new ErrorDto(e.getMessage(), 400);
+        return new ResponseEntity<>(eDto, HttpStatus.valueOf(400));
+    }
+
+    @ExceptionHandler(IllegalArgumentException.class)
+    public ResponseEntity<?> illegalArgumentHandler(IllegalArgumentException e){
+        ErrorDto eDto = new ErrorDto(e.getMessage(), 400);
+        return new ResponseEntity<>(eDto, HttpStatus.valueOf(400));
     }
     @ExceptionHandler(BadRequestException.class)
     public ResponseEntity<?> badRequest(BadRequestException e){
