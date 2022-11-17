@@ -3,6 +3,7 @@ package com.meli.be_java_hisp_w18_g9.model.entity;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -35,6 +36,6 @@ public class Post {
 
     private Double discount;
 
-    public Post(Integer userId, LocalDate date, Product product, Integer category, Double price) {
+    public Post(Integer userId, Integer postId, LocalDate date, Product product, Integer category, Double price) {
     }
 }

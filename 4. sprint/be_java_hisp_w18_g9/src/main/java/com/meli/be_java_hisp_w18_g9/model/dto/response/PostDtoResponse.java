@@ -1,21 +1,17 @@
-package com.meli.be_java_hisp_w18_g9.model.dto.request;
+package com.meli.be_java_hisp_w18_g9.model.dto.response;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.meli.be_java_hisp_w18_g9.model.entity.Product;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
 
 import java.time.LocalDate;
-
-@Getter
-@Setter
-@AllArgsConstructor
-@NoArgsConstructor
+@Data
 @Builder
-public class PostDtoRequest {
-
-    // ? =============== Attributes =============== ?
-
+@AllArgsConstructor
+public class PostDtoResponse {
     @JsonProperty("post_id")
     private Integer postId;
 
