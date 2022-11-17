@@ -30,9 +30,9 @@ public class UserServiceImp implements IUserService {
         User userToFollow = iUserRepository.findById(userIdToFollow);
 
         if (user == null || userToFollow == null) {
-            throw new NoFoundException("Bad Request");
+            throw new NoFoundException("The user has not being found");
         } else if (userToFollow.getListFollowers().contains(user)) {
-            throw new NoFoundException("User already follow");
+            throw new NoFoundException("User has been already follow");
         } else if (iPostRepository.findByUser(userIdToFollow).size() == 0) {
             throw new NoFoundException("User has not posts");
         }
@@ -139,9 +139,9 @@ public class UserServiceImp implements IUserService {
         User user = iUserRepository.findById(userId);
         User userToFollow = iUserRepository.findById(unfollowId);
         if (user == null || userToFollow == null) {
-            throw new NoFoundException("Bad Request");
+            throw new NoFoundException("The user has not being found");
         } else if (!userToFollow.getListFollowers().contains(user)) {
-            throw new NoFoundException("User already follow");
+            throw new NoFoundException("User has been already unfollow");
         }
 
         user.getListFollowed().removeIf(u -> u.getUserId().equals(unfollowId));

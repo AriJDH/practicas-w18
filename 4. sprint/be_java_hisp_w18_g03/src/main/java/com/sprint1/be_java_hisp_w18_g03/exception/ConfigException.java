@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 public class ConfigException {
 
     @ExceptionHandler(NoFoundException.class)
-    public ResponseEntity<?> noFoundUserException(NoFoundException noFoundException) {
-        return new ResponseEntity<>(new ResponseDTO(noFoundException.getMessage(), HttpStatus.NOT_FOUND.value()), HttpStatus.NOT_FOUND);
+    public ResponseEntity<?> noFoundException(NoFoundException noFoundException) {
+        return new ResponseEntity<>(new ResponseDTO(noFoundException.getMessage(), HttpStatus.BAD_REQUEST.value()), HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(CreationException.class)

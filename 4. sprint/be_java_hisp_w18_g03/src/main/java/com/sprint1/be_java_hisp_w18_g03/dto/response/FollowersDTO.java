@@ -18,5 +18,6 @@ public class FollowersDTO {
     private Integer userId;
     @JsonProperty("user_name")
     private String userName;
+    @JsonProperty("followers")
     private List<UserDTO> followers = new ArrayList<>();
 }
