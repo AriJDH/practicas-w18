@@ -8,7 +8,6 @@ import com.dh.be_java_hisp_w18_g10.entity.User;
 import org.modelmapper.ModelMapper;
 
 import java.time.format.DateTimeFormatter;
-import java.util.List;
 
 public class DTOMapper {
     private static ModelMapper mapper;
@@ -26,8 +25,8 @@ public class DTOMapper {
         return getInstance().map(user, UserFollowedListDTOres.class);
     }
 
-    public static UserFollowersListDTOres mapToUserFollowersRes(User user){
-        return getInstance().map(user, UserFollowersListDTOres.class);
+    public static UserFollowersListDTOres mapToUserFollowersRes(User user) {
+        return user.toUserFollowersListDTOres();
     }
     public static Post mapToPost(PostDTOreq postDTOreq){
         Post post = getInstance().map(postDTOreq, Post.class);

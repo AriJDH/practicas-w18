@@ -9,8 +9,6 @@ import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.*;
-import java.util.stream.Collectors;
 
 @Repository
 public class UserRepository implements IUserRepository{
@@ -22,6 +20,7 @@ public class UserRepository implements IUserRepository{
     }
 
     private void loadUsers(){
+
         count++;
         User user1 = new User();
         user1.setUserId(count);
@@ -89,11 +88,6 @@ public class UserRepository implements IUserRepository{
 
     @Override
     public List<User> getUserFollowers(int id) {
-        return users.entrySet().stream()
-                .filter(entry -> entry.getKey() == id)
-                .map(entry -> entry.getValue())
-                .map(user -> user.getFollowers().values())
-                .flatMap(userCollection -> userCollection.stream())
-                .collect(Collectors.toList());
+        return users.get(id).getFollowersList();
     }
 }
