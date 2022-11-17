@@ -1,14 +1,15 @@
 
-
-                     ,▄▄▄▄╓
-                   ▓█████████µ
-                 ╓████▀╙╙▀████▌
-                 ╫███⌐  ███▄
-                 ╙████µ╙▀█████▌
-                  ╙██████████▀
-                    ╙▀▀█████╨
-                      ▄████┌
-                      ████
+              ,#########M,
+            ;##############m
+           ######M"``"%######
+          @#####     ,  ``````
+          @####[    ####M,
+          ]#####   "@#######M,
+           %######m--e#######
+            `@#############"
+               "=######M"
+                   i    ,
+                 ,######
+                {#####"
 
  :: ${AnsiColor.BRIGHT_GREEN}Spring Boot${AnsiColor.DEFAULT} :: ${AnsiColor.RED}Group Nine${AnsiColor.DEFAULT} :: ${AnsiColor.YELLOW}${spring-boot.formatted-version}${AnsiColor.DEFAULT} ::
-
