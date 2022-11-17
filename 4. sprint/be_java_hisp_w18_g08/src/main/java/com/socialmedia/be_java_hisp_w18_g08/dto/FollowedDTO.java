@@ -15,6 +15,6 @@ public class FollowedDTO {
 
     private Integer user_id;
     private String user_name;
-    private List<SellerDTO> followed;
+    private List<UserDTO> followed;
 
 }

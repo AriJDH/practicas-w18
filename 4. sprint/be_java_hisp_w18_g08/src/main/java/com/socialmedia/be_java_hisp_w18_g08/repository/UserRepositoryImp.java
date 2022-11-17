@@ -10,10 +10,9 @@ import org.springframework.stereotype.Repository;
 import java.util.ArrayList;
 import java.util.List;
 
-
 @Repository
 @Getter
-public class UserRepositoryImp implements IUserRepository {
+public class UserRepositoryImp implements IUserRepository{
     List<User> users;
     List<Seller> sellers;
     IPostRepository postRepository;
@@ -35,6 +34,7 @@ public class UserRepositoryImp implements IUserRepository {
         post4.add(postRepository.getPosts().get(1));
         post5.add(postRepository.getPosts().get(2));
         post6.add(postRepository.getPosts().get(3));
+
 
         Seller s3 = new Seller(3, "User3", followed, post3, followers);
         Seller s4 = new Seller(4, "User4", followed, post4, followers);
@@ -66,16 +66,15 @@ public class UserRepositoryImp implements IUserRepository {
         this.users.add(u2);
         this.users.add(u3);
         this.users.add(u4);
+
     }
 
     //refactorizar nombre
     @Override
     public Seller findSellerById(Integer id) {
-        Seller seller = this.sellers.stream()
-                .filter(s -> id == s.getUser_id())
-                .findFirst()
-                .orElse(null);
-        return seller;
+        return sellers.stream()
+                .filter(p -> p.getUser_id() == (id))
+                .findFirst().orElse(null);
     }
 
     @Override
@@ -83,14 +82,11 @@ public class UserRepositoryImp implements IUserRepository {
         User found = null;
         int i = 0;
         while (i < users.size() && found == null) {
-            if(users.get(i).getUser_id() == userId)
+            if (users.get(i).getUser_id() == userId)
                 found = users.get(i);
             i++;
         }
-        if (found != null) {
-            return found;
-        }
-        throw new NotFoundUserException("There is no user with the ID " + userId);
+        return found;
     }
 
     @Override
