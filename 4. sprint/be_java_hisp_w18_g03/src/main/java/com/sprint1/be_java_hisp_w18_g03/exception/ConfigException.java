@@ -20,7 +20,7 @@ public class ConfigException {
     }
 
     @ExceptionHandler(ParamException.class)
-    public ResponseEntity<?> paramException(CreationException creationException) {
-        return new ResponseEntity<>(new ResponseDTO(creationException.getMessage(), HttpStatus.BAD_REQUEST.value()), HttpStatus.BAD_REQUEST);
+    public ResponseEntity<?> paramException(ParamException paramException) {
+        return new ResponseEntity<>(new ResponseDTO(paramException.getMessage(), HttpStatus.BAD_REQUEST.value()), HttpStatus.BAD_REQUEST);
     }
 }

@@ -7,6 +7,7 @@ import com.sprint1.be_java_hisp_w18_g03.dto.response.FollowerCountDTO;
 import com.sprint1.be_java_hisp_w18_g03.dto.response.FollowersDTO;
 import com.sprint1.be_java_hisp_w18_g03.dto.response.ResponseDTO;
 import com.sprint1.be_java_hisp_w18_g03.dto.response.UserDTO;
+import com.sprint1.be_java_hisp_w18_g03.exception.CreationException;
 import com.sprint1.be_java_hisp_w18_g03.exception.NoFoundException;
 import com.sprint1.be_java_hisp_w18_g03.entity.User;
 
@@ -26,15 +27,19 @@ public class UserServiceImp implements IUserService {
 
     @Override
     public ResponseDTO follow(Integer userId, Integer userIdToFollow) {
+        if(userId.equals(userIdToFollow)){
+            throw new ParamException("The user can't follow to himself");
+        }
+
         User user = iUserRepository.findById(userId);
         User userToFollow = iUserRepository.findById(userIdToFollow);
 
         if (user == null || userToFollow == null) {
             throw new NoFoundException("The user has not being found");
         } else if (userToFollow.getListFollowers().contains(user)) {
-            throw new NoFoundException("User has been already follow");
+            throw new CreationException("User has been already follow");
         } else if (iPostRepository.findByUser(userIdToFollow).size() == 0) {
-            throw new NoFoundException("User has not posts");
+            throw new CreationException("User has not posts");
         }
 
         user.getListFollowed().add(userToFollow);
@@ -134,14 +139,14 @@ public class UserServiceImp implements IUserService {
     @Override
     public ResponseDTO unfollow(Integer userId, Integer unfollowId) {
         if(userId.equals(unfollowId)){
-            throw new ParamException("")
+            throw new ParamException("The user can't unfollow to himself");
         }
         User user = iUserRepository.findById(userId);
         User userToFollow = iUserRepository.findById(unfollowId);
         if (user == null || userToFollow == null) {
             throw new NoFoundException("The user has not being found");
         } else if (!userToFollow.getListFollowers().contains(user)) {
-            throw new NoFoundException("User has been already unfollow");
+            throw new CreationException("User has been already unfollow");
         }
 
         user.getListFollowed().removeIf(u -> u.getUserId().equals(unfollowId));
