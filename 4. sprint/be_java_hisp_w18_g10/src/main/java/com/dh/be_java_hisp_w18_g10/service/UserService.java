@@ -10,7 +10,9 @@ import com.dh.be_java_hisp_w18_g10.exception.NotFoundException;
 import com.dh.be_java_hisp_w18_g10.repository.*;
 import com.dh.be_java_hisp_w18_g10.util.DTOMapper;
 import com.dh.be_java_hisp_w18_g10.util.DateHandler;
+import com.dh.be_java_hisp_w18_g10.util.TypeOrderHelper;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -117,7 +119,7 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public UserPostsDTOres getUserPosts(int userId) {
+    public UserPostsDTOres getUserPosts(int userId, String order) {
         UserPostsDTOres userPostsDTOres = new UserPostsDTOres();
         //Obtener usuario
         User user = userRepository.getUser(userId);
@@ -154,7 +156,7 @@ public class UserService implements IUserService {
         //descendente  ******** ME QUEDARIA MNAS COMODO QUE EL DATE DE POSTDTO SEA UN LOCALDATE NO UN STRING
         postListRes = postListRes.stream().sorted(Comparator.comparing(PostDTOres::getDate).reversed()).collect(Collectors.toList());
         //ascendente
-        if(false)
+        if(order == null || order.equals(TypeOrderHelper.DATE_ASC))
             postListRes = postListRes.stream().sorted(Comparator.comparing(PostDTOres::getDate)).collect(Collectors.toList());
 
         userPostsDTOres.setUser_id(userId);

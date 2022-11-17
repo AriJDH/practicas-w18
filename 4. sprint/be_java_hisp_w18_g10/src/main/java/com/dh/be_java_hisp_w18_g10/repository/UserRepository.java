@@ -68,7 +68,7 @@ public class UserRepository implements IUserRepository{
 
     @Override
     public List<User> getUsers() {
-        return new ArrayList<User>(users.values());
+        return new ArrayList<>(users.values());
     }
 
     private List<Post> getListPosts(){

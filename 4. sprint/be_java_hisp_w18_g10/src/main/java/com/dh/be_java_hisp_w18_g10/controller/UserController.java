@@ -68,7 +68,7 @@ public class UserController {
             @PathVariable int userId){
         // US 0006
         // US 0009
-        return new ResponseEntity<>(userService.getUserPosts(userId), HttpStatus.OK);
+        return new ResponseEntity<>(userService.getUserPosts(userId, order), HttpStatus.OK);
     }
 
     @PostMapping("/users/{userId}/unfollow/{userIdToUnfollow}")
