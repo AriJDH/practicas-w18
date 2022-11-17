@@ -105,9 +105,12 @@ public class UserServiceImp implements IUserService {
     }
 
     public List<Seller> getFollowedByUserId(Integer userId) {
-        List<Seller> lista = userRepository.getUserByID(userId).getFollowed();
-        if (lista.isEmpty())
+        User user = userRepository.getUserByID(userId);
+        if(user == null)
             throw new NotFoundUserException("Not found User with id : " + userId);
+        List<Seller> lista = user.getFollowed();
+        if (lista.isEmpty())
+            throw new NotFoundUserException("Not found followed");
         return lista;
     }
 

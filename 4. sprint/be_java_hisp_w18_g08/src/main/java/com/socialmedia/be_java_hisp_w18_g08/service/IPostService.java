@@ -9,5 +9,5 @@ public interface IPostService {
 
     void create(PostDtoReq postDTOReq);
 
-    public List<PostDtoRes> getPostSellerListByUserId(Integer id);
+    public PostDtoRes getPostSellerListByUserId(Integer id);
 }

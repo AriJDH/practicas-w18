@@ -32,8 +32,8 @@ public class PostController {
     }
 
     @GetMapping("/followed/{userId}/list")
-    public ResponseEntity<List<PostDtoRes>> getPostSellerListByUserId(@PathVariable Integer userId){
-        List<PostDtoRes> response =  postService.getPostSellerListByUserId(userId);
+    public ResponseEntity<PostDtoRes> getPostSellerListByUserId(@PathVariable Integer userId){
+        PostDtoRes response =  postService.getPostSellerListByUserId(userId);
         return new ResponseEntity(response,HttpStatus.OK);
     }
 }
