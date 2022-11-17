@@ -20,6 +20,7 @@ import com.socialmeli.be_java_hisp_w18g05.entity.Product;
 
 import com.socialmeli.be_java_hisp_w18g05.entity.Seller;
 import com.socialmeli.be_java_hisp_w18g05.exceptions.InvalidException;
+import com.socialmeli.be_java_hisp_w18g05.exceptions.InvalidParameterException;
 import com.socialmeli.be_java_hisp_w18g05.exceptions.NotFoundException;
 import com.socialmeli.be_java_hisp_w18g05.repository.IRepository;
 import lombok.Data;
@@ -57,6 +58,8 @@ public class ServiceImp implements IService {
                 response = getFollowersAZ(seller_id);
             } else if (order.equals("name_desc")) {
                 response = getFollowersZA(seller_id);
+            } else {
+                throw new InvalidParameterException("The parameter " + order + " isn't valid");
             }
         }else {
             response = getFollowers(seller_id);
@@ -222,6 +225,8 @@ public class ServiceImp implements IService {
                 response = getFollowedsAZ(seller_id);
             } else if (order.equals("name_desc")) {
                 response = getFollowedsZA(seller_id);
+            }else {
+                throw new InvalidParameterException("The parameter " + order + " isn't valid");
             }
         }else {
             response = getFolloweds(seller_id);
@@ -234,6 +239,9 @@ public class ServiceImp implements IService {
     public BuyerFollowedListDTOResponse getFolloweds(Integer buyer_id) {
 
         Buyer buyer = repository.getByIdBuyer(buyer_id); // Get buyer from repository
+        if (buyer == null){
+            throw new NotFoundException("Can't found user with id " + buyer_id);
+        }
         List<Seller> followeds = buyer.getFolloweds(); // Get buyer's followed list
         List<SellerDTOResponse> followedsDTO = new ArrayList<>();
 
