@@ -74,4 +74,12 @@ public class UserRepository implements IUserRepository {
 	public UserRepository() {
 		createDB();
 	}
+	
+	private User findUserById(int id) {
+		return users
+						.stream()
+						.filter(user -> user.getUser_id() == id)
+						.findFirst()
+						.get();
+	}
 }
