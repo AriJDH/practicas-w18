@@ -22,25 +22,17 @@ public class UserController {
 
     @GetMapping("/{userId}/followers/count")
     public ResponseEntity<FollowerCountDTO> followerCount(@PathVariable Integer userId) {
-        var user = userService.followerCount(userId);
-        if (user == null) {
-            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
-        }
-        return new ResponseEntity<>(user, HttpStatus.OK);
+        return new ResponseEntity<>(userService.followerCount(userId), HttpStatus.OK);
     }
 
-    @PostMapping("{userId}/follow/{userIdToFollow}")
+    @PostMapping("/{userId}/follow/{userIdToFollow}")
     public ResponseEntity<ResponseDTO> follow(@PathVariable Integer userId, @PathVariable Integer userIdToFollow) {
         return new ResponseEntity<>(userService.follow(userId, userIdToFollow), HttpStatus.ACCEPTED);
     }
 
     @GetMapping("/{userId}/followed/list")
     public ResponseEntity<FollowedDTO> getFollowedList(@PathVariable Integer userId) {
-        var user = userService.getFollowedList(userId);
-        if (user == null) {
-            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
-        }
-        return new ResponseEntity<>(user, HttpStatus.OK);
+        return new ResponseEntity<>(userService.getFollowedList(userId), HttpStatus.OK);
     }
 
     @PostMapping("/{userId}/unfollow/{userIdToUnfollow}")

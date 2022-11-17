@@ -7,10 +7,7 @@ import com.sprint1.be_java_hisp_w18_g03.service.IPostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/products")
@@ -20,9 +17,11 @@ public class PostController {
 
     @PostMapping("/post")
     public ResponseEntity<ResponseDTO> createPost(@RequestBody RequestPostDTO requestPostDTO) {
-        var response = postService.createPost(requestPostDTO);
-        if (response==null)
-            return new ResponseEntity<>(new ResponseDTO("Error creado post.",400),HttpStatus.BAD_REQUEST);
-        return new ResponseEntity<>(response,HttpStatus.OK);
+       return new ResponseEntity<>(postService.createPost(requestPostDTO),HttpStatus.OK);
+    }
+
+    @GetMapping("/followed/{userId}/list")
+    public ResponseEntity<ResponseDTO> getFollowedListDateAsc(@RequestParam) {
+        return new ResponseEntity<>(postService.createPost(requestPostDTO),HttpStatus.OK);
     }
 }
