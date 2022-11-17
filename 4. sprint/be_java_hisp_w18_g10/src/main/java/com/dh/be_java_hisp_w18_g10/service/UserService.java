@@ -56,10 +56,12 @@ public class UserService implements IUserService {
             throw new NotFoundException("El usuario con el id: "+userId+" no fue encontrado!");
         }
         if(user2 == null){
-            throw new NotFoundException("El usuario con el id: "+userId+" no fue encontrado!");
+            throw new NotFoundException("El usuario con el id: "+userIdToFollow+" no fue encontrado!");
         }
 
-        user1.getFollowed().put(user2.getUserId(),user2);
+        if(!user2.getPosts().isEmpty()){
+            user1.getFollowed().put(user2.getUserId(),user2);
+        }
         user2.getFollowers().put(user1.getUserId(), user1);
     }
 
@@ -78,7 +80,7 @@ public class UserService implements IUserService {
 
     @Override
     public UserFollowersListDTOres getUserFollowerList(int userId) {
-       return DTOMapper.mapToUserFollowersRes(userRepository.getUserFollowers(userId));
+       return null;
     }
 
     @Override
