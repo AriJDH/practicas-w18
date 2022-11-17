@@ -1,6 +1,7 @@
 package com.socialmeli.be_java_hisp_w18g05.controller;
 
 
+import com.socialmeli.be_java_hisp_w18g05.dto.response.SellerFollowersCountDTOResponse;
 
 import com.socialmeli.be_java_hisp_w18g05.dto.request.NewPostDTORequest;
 
@@ -11,13 +12,20 @@ import com.socialmeli.be_java_hisp_w18g05.dto.response.BuyerFollowedListDTORespo
 import com.socialmeli.be_java_hisp_w18g05.dto.response.SellerFollowersCountDTOResponse;
 
 import com.socialmeli.be_java_hisp_w18g05.dto.response.SellerFollowersListDTOResponse;
+import com.socialmeli.be_java_hisp_w18g05.dto.response.SellerPostListDTOResponse;
 import com.socialmeli.be_java_hisp_w18g05.service.IService;
 import com.socialmeli.be_java_hisp_w18g05.service.ServiceImp;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.function.EntityResponse;
+
+import java.util.List;
 
 @RestController
 public class SocialController {
@@ -48,12 +56,16 @@ public class SocialController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-
     @GetMapping("/users/{userId}/followers/count")
     public ResponseEntity<SellerFollowersCountDTOResponse> followersCount(@PathVariable Integer userId){
         return new ResponseEntity<>(service.followersCount(userId), HttpStatus.OK);
     }
 
+
+    @GetMapping("/products/followed/{userId}/list")
+    public ResponseEntity<SellerPostListDTOResponse> followedPostList(@PathVariable Integer userId){
+        return new ResponseEntity<>(service.followedPostList(userId), HttpStatus.OK);
+    }
 
     @PostMapping("/products/post")
     public ResponseEntity<String> addPost(@RequestBody NewPostDTORequest post){
