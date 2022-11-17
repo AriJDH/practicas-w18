@@ -6,14 +6,15 @@ import com.socialmeli.be_java_hisp_w18g05.entity.Post;
 import com.socialmeli.be_java_hisp_w18g05.entity.Seller;
 import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 @Repository
 public class RepositoryImp implements IRepository{
 
-    private List<Buyer> buyers;
-    private List<Seller> sellers;
+    private List<Buyer> buyers = new ArrayList<>();
+    private List<Seller> sellers = new ArrayList<>();
 
     public RepositoryImp() {
         fillDB();

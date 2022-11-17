@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class SellerDTOResponse {
+
     private Integer user_id;
     private String user_name;
 }
