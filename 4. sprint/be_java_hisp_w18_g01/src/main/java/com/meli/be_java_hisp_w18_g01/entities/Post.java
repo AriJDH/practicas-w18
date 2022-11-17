@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 
 @Data
 @AllArgsConstructor
@@ -16,5 +17,10 @@ public class Post {
     private Product product;
     private int category;
     private double price;
+
+    public boolean isRecent(){
+        long weeksBetween = ChronoUnit.WEEKS.between(date, LocalDate.now());
+       return weeksBetween>=0 && weeksBetween<3;
+    }
 
 }
