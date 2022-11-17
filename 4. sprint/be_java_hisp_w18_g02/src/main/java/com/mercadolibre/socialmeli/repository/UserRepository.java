@@ -54,6 +54,7 @@ public class UserRepository implements IUserRepository{
 
     @Override
     public List<User> getFollowers(Integer id) {
+        if(findById(id) == null) throw new NotFoundException("No se pudo encontrar al vendedor " + id);
         List<User> res = new ArrayList<>();
 
         for(Map.Entry<Integer, User> entry : users.entrySet()) {
@@ -61,6 +62,7 @@ public class UserRepository implements IUserRepository{
 
             for(User u : followed ) {
                 if(u.getId() == id) {
+                    System.out.println(entry.getValue().getId());
                     res.add(entry.getValue());
                 }
             }

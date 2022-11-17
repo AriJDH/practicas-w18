@@ -19,6 +19,7 @@ public class UserService implements IUserService{
     @Autowired
     private IUserRepository userRepository;
 
+    // US 0002
     @Override
     public SellerFollowerCountDtoRes getCount(Integer id) {
         List<User> followers = userRepository.getFollowers(id);
@@ -29,23 +30,25 @@ public class UserService implements IUserService{
         return new SellerFollowerCountDtoRes(id, user.getName(), count);
     }
 
+    // US 0003
     @Override
     public SellerFollowerListDtoRes getFollowers(Integer id) {
         List<User> followers = userRepository.getFollowers(id);
         User user = userRepository.findById(id);
         List<UserDtoRes> usersDtosRes = followers.stream()
-                .map(u -> new UserDtoRes(id, u.getName()))
+                .map(u -> new UserDtoRes(u.getId(), u.getName()))
                 .collect(Collectors.toList());
 
         return new SellerFollowerListDtoRes(id, user.getName(), usersDtosRes);
     }
 
+    // US 0004
     @Override
     public UserFollowedListDtoRes getFollowed(Integer id) {
         List<User> followed = userRepository.getFollowed(id);
         User user = userRepository.findById(id);
         List<UserDtoRes> usersDtosRes = followed.stream()
-                .map(u -> new UserDtoRes(id, u.getName()))
+                .map(u -> new UserDtoRes(u.getId(), u.getName()))
                 .collect(Collectors.toList());
 
         return new UserFollowedListDtoRes(id, user.getName(), usersDtosRes);
