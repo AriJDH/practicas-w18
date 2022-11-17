@@ -8,6 +8,7 @@ import com.sprint1.be_java_hisp_w18_g03.dto.response.ProductResponseDTO;
 import com.sprint1.be_java_hisp_w18_g03.dto.response.ResponseDTO;
 import com.sprint1.be_java_hisp_w18_g03.dto.response.ResponsePostDTO;
 import com.sprint1.be_java_hisp_w18_g03.dto.response.SellersPostDTO;
+import com.sprint1.be_java_hisp_w18_g03.entity.Category;
 import com.sprint1.be_java_hisp_w18_g03.entity.Post;
 import com.sprint1.be_java_hisp_w18_g03.entity.User;
 import com.sprint1.be_java_hisp_w18_g03.entity.Product;
@@ -33,10 +34,10 @@ public class PostServiceImp implements IPostService {
 
     @Override
     public ResponseDTO createPost(RequestPostDTO request) {
-        var user = iUserRepository.findById(request.getUserId());
+        User user = iUserRepository.findById(request.getUserId());
         if (user == null) throw new NoFoundException("The user hasn't being found");
         Integer sizeList = iPostRepository.getPostsSizeList() + 1;
-        var category = iCategoryRepository.findCategoryById(request.getCategory());
+        Category category = iCategoryRepository.findCategoryById(request.getCategory());
         if (category == null) throw new NoFoundException("The category hasn't being found");
         var product = new Product(
                 request.getProduct().getProductId(),
