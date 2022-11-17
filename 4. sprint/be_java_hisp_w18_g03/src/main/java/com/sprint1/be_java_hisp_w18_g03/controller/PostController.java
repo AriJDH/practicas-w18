@@ -25,8 +25,13 @@ public class PostController {
        return new ResponseEntity<>(postService.createPost(requestPostDTO),HttpStatus.OK);
     }
 
+    public ResponseEntity<ResponseDTO> getFollowedOrderedList(@RequestParam String order) {
+        //return new ResponseEntity<>(postService.createPost(requestPostDTO),HttpStatus.OK);
+        return null;
+    }
+
     @GetMapping("/followed/{userId}/list")
-    public ResponseEntity<SellersPostDTO> getPostSellers(@PathVariable int userId){
+    public ResponseEntity<SellersPostDTO> getPostSellers(@PathVariable int userId) {
         return ResponseEntity.ok(postService.getPostSellers(userId));
     }
 }
