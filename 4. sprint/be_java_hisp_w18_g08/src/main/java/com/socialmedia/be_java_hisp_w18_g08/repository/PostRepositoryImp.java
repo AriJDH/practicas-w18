@@ -37,7 +37,7 @@ public class PostRepositoryImp implements IPostRepository{
     }
 
     @Override
-    public Boolean save(Post post) {
-        return posts.add(post);
+    public void save(Post post) {
+        posts.add(post);
     }
 }

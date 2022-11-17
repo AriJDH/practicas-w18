@@ -11,11 +11,14 @@ public class ExceptionConfig {
 
     @ExceptionHandler(NotFoundUserException.class)
     public ResponseEntity<ExceptionDTO> notFoundUserException(Exception e){
-        ExceptionDTO eDTO = new ExceptionDTO(e.getMessage(), 400);
+        ExceptionDTO eDTO = new ExceptionDTO(e.getMessage(), 404);
         return new ResponseEntity<>(eDTO, HttpStatus.NOT_FOUND);
     }
 
-    @ExceptionHandler(BadRequestException.class)
+    @ExceptionHandler({
+            BadRequestException.class,
+            org.springframework.http.converter.HttpMessageNotReadableException.class
+    })
     public ResponseEntity<ExceptionDTO> badRequestException(Exception e){
         ExceptionDTO eDTO = new ExceptionDTO(e.getMessage(), 400);
         return new ResponseEntity<>(eDTO, HttpStatus.BAD_REQUEST);

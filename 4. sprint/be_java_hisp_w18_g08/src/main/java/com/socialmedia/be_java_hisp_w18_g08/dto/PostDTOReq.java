@@ -1,4 +1,4 @@
-package com.socialmedia.be_java_hisp_w18_g08.entity.dto;
+package com.socialmedia.be_java_hisp_w18_g08.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.socialmedia.be_java_hisp_w18_g08.entity.Product;

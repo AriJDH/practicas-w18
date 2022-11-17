@@ -76,7 +76,8 @@ public class UserRepositoryImp implements IUserRepository{
         }
         if (found != null) {
             return found;
+        } else {
+            return found;
         }
-        throw new NotFoundUserException("There is no user with the ID " + userId);
     }
 }
