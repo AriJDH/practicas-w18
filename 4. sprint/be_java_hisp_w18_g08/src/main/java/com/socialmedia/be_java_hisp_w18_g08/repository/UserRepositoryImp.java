@@ -15,8 +15,8 @@ import java.util.Locale;
 
 @Repository
 public class UserRepositoryImp implements IUserRepository{
-    List<User> users;
-    List<Seller> sellers;
+    List<User> users = new ArrayList<>();
+    List<Seller> sellers = new ArrayList<>();
     IPostRepository postRepository;
     public UserRepositoryImp(PostRepositoryImp postRepository){
         //Carga de Datos inicial
