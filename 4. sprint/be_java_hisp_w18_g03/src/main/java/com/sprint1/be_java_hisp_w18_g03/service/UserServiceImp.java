@@ -1,5 +1,6 @@
 package com.sprint1.be_java_hisp_w18_g03.service;
 
+import com.sprint1.be_java_hisp_w18_g03.Repository.IPostRepository;
 import com.sprint1.be_java_hisp_w18_g03.Repository.IUserRepository;
 import com.sprint1.be_java_hisp_w18_g03.dto.response.FollowedDTO;
 import com.sprint1.be_java_hisp_w18_g03.dto.response.FollowerCountDTO;
@@ -8,20 +9,34 @@ import com.sprint1.be_java_hisp_w18_g03.dto.response.ResponseDTO;
 import com.sprint1.be_java_hisp_w18_g03.dto.response.UserDTO;
 import com.sprint1.be_java_hisp_w18_g03.exception.NoFoundException;
 import com.sprint1.be_java_hisp_w18_g03.entity.User;
+
 import java.util.stream.Collectors;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class UserServiceImp implements IUserService {
-  @Autowired
-  private IUserRepository iUserRepository;
+    @Autowired
+    private IUserRepository iUserRepository;
+    @Autowired
+    private IPostRepository iPostRepository;
 
     @Override
     public ResponseDTO follow(Integer userId, Integer userIdToFollow) {
-        if(!iUserRepository.addFollower(userId,userIdToFollow)){
-           throw new NoFoundException("Bad Request");
+        User user = iUserRepository.findById(userId);
+        User userToFollow = iUserRepository.findById(userIdToFollow);
+
+        if(user == null || userToFollow == null){
+            throw new NoFoundException("Bad Request");
+        } else if(userToFollow.getListFollowers().contains(user)){
+            throw new NoFoundException("User already follow");
+        } else if(iPostRepository.findByUser(userIdToFollow).size() == 0){
+            throw new NoFoundException("User has not posts");
         }
+
+        user.getListFollowed().add(userToFollow);
+        userToFollow.getListFollowers().add(user);
         return new ResponseDTO("All ok", 200);
     }
 
@@ -36,23 +51,23 @@ public class UserServiceImp implements IUserService {
     );
   }
 
-  @Override
-  public FollowersDTO getFollowersList(Integer userId) {
-    User user = iUserRepository.findById(userId);
-    if (user == null){
-      throw new NoFoundException("The user hasn't being found");
+    @Override
+    public FollowersDTO getFollowersList(Integer userId) {
+        User user = iUserRepository.findById(userId);
+        if (user == null) {
+            throw new NoFoundException("The user hasn't being found");
+        }
+        if (user.getListFollowers().isEmpty()) {
+            throw new NoFoundException("The user hasn't followers");
+        }
+        FollowersDTO followers = new FollowersDTO();
+        followers.setUserName(user.getUserName());
+        followers.setUserId(user.getUserId());
+        for (User followerUser : user.getListFollowers()) {
+            followers.getFollowers().add(new UserDTO(followerUser.getUserId(), followerUser.getUserName()));
+        }
+        return followers;
     }
-    if(user.getListFollowers().isEmpty()){
-      throw new NoFoundException("The user hasn't followers");
-    }
-    FollowersDTO followers = new FollowersDTO();
-    followers.setUserName(user.getUserName());
-    followers.setUserId(user.getUserId());
-    for (User followerUser:user.getListFollowers()) {
-      followers.getFollowers().add(new UserDTO(followerUser.getUserId(),followerUser.getUserName()));
-    }
-    return followers;
-  }
 
 
   @Override
@@ -70,11 +85,11 @@ public class UserServiceImp implements IUserService {
     );
   }
 
-  @Override
-  public ResponseDTO unfollow(Integer userId, Integer unfollowId) {
-      if (!iUserRepository.removeFollower(userId,unfollowId)){
-        throw new NoFoundException("Bad Request");
-      }
-    return new ResponseDTO("Ok",200);
-  }
+    @Override
+    public ResponseDTO unfollow(Integer userId, Integer unfollowId) {
+        if (!iUserRepository.removeFollower(userId, unfollowId)) {
+            throw new NoFoundException("Bad Request");
+        }
+        return new ResponseDTO("Ok", 200);
+    }
 }

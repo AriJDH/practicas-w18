@@ -25,7 +25,7 @@ public class UserController {
         return new ResponseEntity<>(userService.followerCount(userId), HttpStatus.OK);
     }
 
-    @PostMapping("{userId}/follow/{userIdToFollow}")
+    @PostMapping("/{userId}/follow/{userIdToFollow}")
     public ResponseEntity<ResponseDTO> follow(@PathVariable Integer userId, @PathVariable Integer userIdToFollow) {
         return new ResponseEntity<>(userService.follow(userId, userIdToFollow), HttpStatus.ACCEPTED);
     }
