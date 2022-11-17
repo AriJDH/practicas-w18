@@ -94,7 +94,7 @@ public class ServiceImp implements IService {
         if (b == null) {
             throw new NotFoundException("Buyer id " + userId + " not found");
         }
-
+        // serchs buyer in seller's followers list
         Buyer seguidor = s.getFollowers().stream().filter(x->x.getUser_id().equals(userId)).findFirst().orElse(null);
 
         if (seguidor != null){
@@ -116,7 +116,7 @@ public class ServiceImp implements IService {
         if (b == null) {
             throw new NotFoundException("Buyer id " + userId  + " not found");
         }
-
+        // serchs buyer in seller's followers list
         Buyer seguidor = s.getFollowers().stream().filter(x->x.getUser_id().equals(userId)).findFirst().orElse(null);
 
         if (seguidor == null){
@@ -130,8 +130,9 @@ public class ServiceImp implements IService {
 
     @Override
     public SellerPostListDTOResponse followedPostList(Integer user_id, String order) {
+
         if (order == null)
-            order = "date_desc";
+            order = "date_desc"; // date_desc by default if order is null
         return orderByDate(user_id, order);
     }
 
@@ -145,14 +146,14 @@ public class ServiceImp implements IService {
         if (listSeller == null) {
             throw new NotFoundException("Buyer id " + userId + " doesn´t have followers");
         }
-
+        // Get all posts from all sellers that the buyer follows:
         List<PostDTOResponse> listPostDTO = new ArrayList<>();
         for (Seller s : listSeller) {
             for( Post p: s.getPosts()){
                 listPostDTO.add( new PostDTOResponse(s.getUser_id(), p.getPost_id(), p.getDate(), op.convertValue(p.getProduct(), ProductDTOResponse.class), p.getCategory(), p.getPrice()));
             }
         }
-
+        // Order by date, depending on the order parameter
         if(order.equals("date_asc")){
             listPostDTO.sort(Comparator.comparing(PostDTOResponse::getDate)); // ordenamiento descenciente por fechas
         } else if (order.equals("date_desc")) {

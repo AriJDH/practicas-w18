@@ -65,7 +65,7 @@ public class SocialController {
     @PostMapping("/products/post")
     public ResponseEntity<String> addPost(@RequestBody NewPostDTORequest post){
         service.newPost(post);
-        return new ResponseEntity<>( "Post realizado correctamente ", HttpStatus.OK);
+        return new ResponseEntity<>("Post realizado correctamente ", HttpStatus.OK);
     }
 
 
