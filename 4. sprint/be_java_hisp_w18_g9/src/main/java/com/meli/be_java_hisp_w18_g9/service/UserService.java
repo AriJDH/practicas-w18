@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.meli.be_java_hisp_w18_g9.exception.BadRequestException;
 import com.meli.be_java_hisp_w18_g9.model.dto.response.FollowersCountUserResponse;
 import com.meli.be_java_hisp_w18_g9.model.dto.response.UserFollowedListResponse;
+import com.meli.be_java_hisp_w18_g9.model.dto.response.UserSimpleResponse;
 import com.meli.be_java_hisp_w18_g9.model.entity.User;
 import com.meli.be_java_hisp_w18_g9.repository.IUserRepository;
 import com.meli.be_java_hisp_w18_g9.repository.UserRepository;
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -88,23 +90,17 @@ public class UserService implements IUserService {
                 throw new BadRequestException("No te puedes dejar de seguir a ti mismo");
 
             List<User> userList;
-            if (user.getFollowers().size() > 0) {
-                if (!user.getFollowers().contains(userToUnfollow)) {
+            if (!user.getFollowed().isEmpty()) {
+                if (!user.getFollowed().contains(userToUnfollow)) {
                     throw new BadRequestException("No sigues usuario con el Id " + userIdToUnfollow);
                 } else {
-                    userList = user.getFollowed();
-                    System.out.println(userList);
-                    userList.remove(userToUnfollow);
-                    System.out.println(userList);
 
-                    user.setFollowers(userList);
-                    System.out.println(user);
+                    user.getFollowed().remove(userToUnfollow);
                     userRepository.update(user);
 
-                    userList = userToUnfollow.getFollowers();
-                    userList.remove(user);
-                    userToUnfollow.setFollowed(userList);
+                    userToUnfollow.getFollowers().remove(user);
                     userRepository.update(userToUnfollow);
+
                 }
             }
 
@@ -115,9 +111,13 @@ public class UserService implements IUserService {
 
     @Override
     public UserFollowedListResponse findAllFollowed(Integer id) {
+
         User userWf = userRepository.findById(id).orElseThrow(() -> new BadRequestException("Usuario no existe"));
 
-        return mapper.convertValue(userWf, UserFollowedListResponse.class);
+        return new UserFollowedListResponse(id, userWf.getUserName(), userWf.getFollowed().stream()
+                .map(user -> new UserSimpleResponse(user.getUserId(), user.getUserName()))
+                .collect(Collectors.toList()));
+
     }
 
     @Override
