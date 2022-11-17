@@ -66,9 +66,12 @@ public class PostServiceImp implements IPostService {
         List<Post> postSell = new ArrayList<>();
 
         for (User userFollowed : user.getListFollowed()) {
+            List<Post> postUser = iPostRepository.findByUser(userFollowed.getUserId());
 
+            if () {
+
+            }
         }
-        List<Post> postUser = iPostRepository.findByUser(userId);
 
         if (postUser.isEmpty()) {
             throw new NoFoundException("The posts hasn't being found");
