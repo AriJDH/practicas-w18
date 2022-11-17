@@ -62,11 +62,6 @@ public class SocialController {
     }
 
 
-    @GetMapping("/products/followed/{userId}/list")
-    public ResponseEntity<SellerPostListDTOResponse> followedPostList(@PathVariable Integer userId){
-        return new ResponseEntity<>(service.followedPostList(userId), HttpStatus.OK);
-    }
-
     @PostMapping("/products/post")
     public ResponseEntity<String> addPost(@RequestBody NewPostDTORequest post){
         service.newPost(post);
@@ -74,5 +69,9 @@ public class SocialController {
     }
 
 
+    @GetMapping("/products/followed/{userId}/list")
+    public ResponseEntity<SellerPostListDTOResponse> followedPostList(@PathVariable Integer userId, @RequestParam(required = false) String order){
+        return new ResponseEntity<>(service.followedPostList(userId, order), HttpStatus.OK);
+    }
 
 }

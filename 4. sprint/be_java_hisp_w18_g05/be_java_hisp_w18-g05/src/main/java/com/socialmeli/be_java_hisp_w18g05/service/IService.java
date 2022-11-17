@@ -25,7 +25,10 @@ public interface IService {
 
     SellerFollowersCountDTOResponse followersCount(Integer user_id);
 
-    SellerPostListDTOResponse followedPostList(Integer user_id);
+    SellerPostListDTOResponse followedPostList(Integer user_id, String order);
+
+    //SellerPostListDTOResponse order(Integer userId, String order);
+
 
 
 

@@ -110,15 +110,21 @@ public class ServiceImp implements IService {
 
 
     @Override
-    public SellerPostListDTOResponse followedPostList(Integer user_id) {
+    public SellerPostListDTOResponse followedPostList(Integer user_id, String order) {
+        if (order == null)
+            order = "date_desc";
+        return orderByDate(user_id, order);
+    }
 
-        Buyer b = repository.getByIdBuyer(user_id);
+
+    private SellerPostListDTOResponse orderByDate(Integer userId, String order){
+        Buyer b = repository.getByIdBuyer(userId);
         if (b == null) {
-            throw new NotFoundException("Buyer id " + user_id + " not found");
+            throw new NotFoundException("Buyer id " + userId + " not found");
         }
         List<Seller> listSeller = b.getFolloweds();
         if (listSeller == null) {
-            throw new NotFoundException("Buyer id " + user_id + " doesn´t have followers");
+            throw new NotFoundException("Buyer id " + userId + " doesn´t have followers");
         }
 
         List<PostDTOResponse> listPostDTO = new ArrayList<>();
@@ -128,8 +134,13 @@ public class ServiceImp implements IService {
             }
         }
 
-        listPostDTO.sort(Comparator.comparing(PostDTOResponse::getDate).reversed()); // ordenamiento descenciente por fechas
-
+        if(order.equals("date_asc")){
+            listPostDTO.sort(Comparator.comparing(PostDTOResponse::getDate)); // ordenamiento descenciente por fechas
+        } else if (order.equals("date_desc")) {
+            listPostDTO.sort(Comparator.comparing(PostDTOResponse::getDate).reversed());
+        } else{
+            throw new InvalidException("Invalid order");
+        }
         // filter by date minus 2 weeks
         List<PostDTOResponse> listPostAux = new ArrayList<>();
         for (PostDTOResponse p : listPostDTO) {
@@ -138,8 +149,9 @@ public class ServiceImp implements IService {
             }
         }
 
-        return new SellerPostListDTOResponse(user_id, listPostAux);
+        return new SellerPostListDTOResponse(userId, listPostAux);
     }
+
 
     @Override
     public BuyerFollowedListDTOResponse getFolloweds(Integer buyer_id) {
