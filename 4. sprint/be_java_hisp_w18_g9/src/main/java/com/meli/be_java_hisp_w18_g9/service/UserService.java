@@ -2,6 +2,7 @@ package com.meli.be_java_hisp_w18_g9.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.meli.be_java_hisp_w18_g9.exception.BadRequestException;
+import com.meli.be_java_hisp_w18_g9.model.dto.response.FollowersCountUserResponse;
 import com.meli.be_java_hisp_w18_g9.model.dto.response.UserFollowedListResponse;
 import com.meli.be_java_hisp_w18_g9.model.entity.User;
 import com.meli.be_java_hisp_w18_g9.repository.IUserRepository;
@@ -60,5 +61,13 @@ public class UserService implements IUserService {
         User userWf = userRepository.findById(id).orElseThrow(() -> new BadRequestException("Usuario no existe"));
 
         return mapper.convertValue(userWf, UserFollowedListResponse.class);
+    }
+
+    @Override
+    public FollowersCountUserResponse findUserFollowedQuantity(Integer id){
+        User user = userRepository.findById(id).orElseThrow(() -> new BadRequestException("El usuario con Id " + id + " no existe"));
+        Integer userFollowersQuantity = user.getFollowers().size();
+        FollowersCountUserResponse userResponse = new FollowersCountUserResponse(id,user.getUserName(),userFollowersQuantity);
+        return userResponse;
     }
 }

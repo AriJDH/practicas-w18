@@ -1,5 +1,6 @@
 package com.meli.be_java_hisp_w18_g9.controller;
 
+import com.meli.be_java_hisp_w18_g9.model.dto.response.FollowersCountUserResponse;
 import com.meli.be_java_hisp_w18_g9.model.dto.response.UserFollowedListResponse;
 import com.meli.be_java_hisp_w18_g9.service.IUserService;
 import com.meli.be_java_hisp_w18_g9.service.UserService;
@@ -30,5 +31,9 @@ public class UsersController {
         return new ResponseEntity<>(userService.findAllFollowed(userId),HttpStatus.OK);
     }
 
+    @GetMapping("/{userId}/followers/count")
+    public ResponseEntity<FollowersCountUserResponse> userFollowedQuantity(@PathVariable Integer userId, @RequestParam(required = false) String order) {
+        return new ResponseEntity<>(userService.findUserFollowedQuantity(userId), HttpStatus.OK);
+    }
 
 }
