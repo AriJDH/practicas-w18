@@ -100,6 +100,10 @@ public class UserRepositoryImp implements IUserRepository {
                 break;
             }
         }
+
+        if (nombres.size() < 2) {
+            return null;
+        }
         return nombres;
     }
 }
