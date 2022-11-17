@@ -5,18 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="360cb582-a468-4577-a2f3-77a022f9b8ab" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/2. java/untitled/.idea/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/2. java/untitled/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/2. java/untitled/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/2. java/untitled/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/2. java/untitled/src/CarreraSelva/Participante.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/2. java/untitled/src/Ejercicio_temp/Temperatura.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/2. java/untitled/src/Ejercicios_POO/Main.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/2. java/untitled/src/Ejercicios_POO/Persona.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/2. java/untitled/src/Recapitulando_Java_1/Garaje.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/2. java/untitled/src/Recapitulando_Java_1/Main.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/2. java/untitled/src/Recapitulando_Java_1/Vehiculo.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/2. java/untitled/untitled.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -94,6 +83,7 @@
       <workItem from="1668629335019" duration="64000" />
       <workItem from="1668629416623" duration="64000" />
       <workItem from="1668629524055" duration="205000" />
+      <workItem from="1668708851231" duration="386000" />
     </task>
     <servers />
   </component>
