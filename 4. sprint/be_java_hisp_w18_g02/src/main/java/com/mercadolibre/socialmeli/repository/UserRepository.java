@@ -4,9 +4,7 @@ import com.mercadolibre.socialmeli.entity.Post;
 import com.mercadolibre.socialmeli.entity.User;
 import org.springframework.stereotype.Repository;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Repository
 public class UserRepository implements IUserRepository{
@@ -15,7 +13,6 @@ public class UserRepository implements IUserRepository{
 
     public UserRepository() {
         this.users = new HashMap<Integer, User>();
-
     }
 
     @Override
@@ -25,12 +22,27 @@ public class UserRepository implements IUserRepository{
 
     @Override
     public List<User> getFollowers(Integer id) {
-        return null;
+        List<User> res = new ArrayList<>();
+
+        for(Map.Entry<Integer, User> entry : users.entrySet()) {
+            Set<User> followed = entry.getValue().getFollowed();
+
+            for(User u : followed ) {
+                if(u.getId() == id) {
+                    res.add(entry.getValue());
+                }
+            }
+        }
+        return res;
     }
 
     @Override
     public List<User> getFollowed(Integer id) {
-        return null;
+        User user = users.get(id);
+        Set<User> users = user.getFollowed();
+
+        List<User> res = new ArrayList<>(users);
+        return res;
     }
 
     @Override
