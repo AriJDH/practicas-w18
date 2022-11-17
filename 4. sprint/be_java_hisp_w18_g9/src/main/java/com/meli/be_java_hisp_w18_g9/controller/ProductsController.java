@@ -55,7 +55,7 @@ public class ProductsController {
     // * ===== [POST] ===== *
 
     @PostMapping("/post")
-    public ResponseEntity<String> addPost(@RequestBody PostDtoRequest postDtoRequest){
+    public ResponseEntity<PostDtoResponse> addPost(@RequestBody PostDtoRequest postDtoRequest){
         iPostService.addPost(postDtoRequest);
         return new ResponseEntity<>(HttpStatus.OK);
     }

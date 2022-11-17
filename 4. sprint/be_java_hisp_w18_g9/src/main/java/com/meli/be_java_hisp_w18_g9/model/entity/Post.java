@@ -12,6 +12,7 @@ import java.time.LocalDate;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class Post {
 
     // ? =============== Attributes =============== ?
@@ -36,6 +37,4 @@ public class Post {
 
     private Double discount;
 
-    public Post(Integer userId, Integer postId, LocalDate date, Product product, Integer category, Double price) {
-    }
 }

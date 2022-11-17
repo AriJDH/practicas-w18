@@ -1,6 +1,7 @@
 package com.meli.be_java_hisp_w18_g9.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.meli.be_java_hisp_w18_g9.exception.BadRequestException;
 import com.meli.be_java_hisp_w18_g9.exception.NotFoundException;
 import com.meli.be_java_hisp_w18_g9.model.dto.request.PostDtoRequest;
 import com.meli.be_java_hisp_w18_g9.model.dto.request.PromoPostRequest;
@@ -11,15 +12,17 @@ import com.meli.be_java_hisp_w18_g9.model.dto.response.PromoProductsCountRespons
 import com.meli.be_java_hisp_w18_g9.model.entity.Post;
 import com.meli.be_java_hisp_w18_g9.model.entity.User;
 import com.meli.be_java_hisp_w18_g9.repository.IPostRepository;
+import com.meli.be_java_hisp_w18_g9.repository.IProductRepository;
 import com.meli.be_java_hisp_w18_g9.repository.IUserRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.time.LocalDate;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
 @Service
 @RequiredArgsConstructor
 public class PostService implements IPostService{
@@ -27,6 +30,7 @@ public class PostService implements IPostService{
     // ? =============== Attributes =============== ?
     private final IPostRepository postRepository;
     private final IUserRepository userRepository;
+    private final IProductRepository iProductRepository;
     private final ObjectMapper mapper;
 
     // ? =============== Methods =============== ?
@@ -34,6 +38,10 @@ public class PostService implements IPostService{
     @Override
     public void addPost(PostDtoRequest postDtoRequest) {
         Post post = mapper.convertValue(postDtoRequest, Post.class);
+        if(Stream.of(post.getCategory(),post.getProduct(), post.getDate(), post.getPrice(), post.getUserId()).anyMatch(Objects::isNull)){
+            throw  new BadRequestException("");
+        }
+        iProductRepository.save(post.getProduct());
         postRepository.addPost(post);
     }
 
