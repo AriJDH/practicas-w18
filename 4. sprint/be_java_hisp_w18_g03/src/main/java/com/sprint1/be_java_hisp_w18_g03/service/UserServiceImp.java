@@ -37,20 +37,16 @@ public class UserServiceImp implements IUserService {
         return new ResponseDTO("All ok", 200);
     }
 
-    @Override
-    public FollowerCountDTO followerCount(Integer userId) {
-        User user = iUserRepository.findById(userId);
-
-        if (user == null) {
-            return null;
-        }
-
-        return new FollowerCountDTO(
-                user.getUserId(),
-                user.getUserName(),
-                user.getListFollowers().size()
-        );
-    }
+  @Override
+  public FollowerCountDTO followerCount(Integer userId) {
+    User user = iUserRepository.findById(userId);
+    if (user == null) throw new NoFoundException("The user hasn't being found");
+    return new FollowerCountDTO(
+      user.getUserId(),
+      user.getUserName(),
+      user.getListFollowers().size()
+    );
+  }
 
     @Override
     public FollowersDTO getFollowersList(Integer userId) {
@@ -71,24 +67,20 @@ public class UserServiceImp implements IUserService {
     }
 
 
-    @Override
-    public FollowedDTO getFollowedList(Integer userId) {
-        User user = iUserRepository.findById(userId);
-
-        if (user == null) {
-            return null;
-        }
-
-        return new FollowedDTO(
-                user.getUserId(),
-                user.getUserName(),
-                user
-                        .getListFollowed()
-                        .stream()
-                        .map(i -> new UserDTO(i.getUserId(), i.getUserName()))
-                        .collect(Collectors.toList())
-        );
-    }
+  @Override
+  public FollowedDTO getFollowedList(Integer userId) {
+    User user = iUserRepository.findById(userId);
+    if (user == null) throw new NoFoundException("The user hasn't being found");
+    return new FollowedDTO(
+      user.getUserId(),
+      user.getUserName(),
+      user
+        .getListFollowed()
+        .stream()
+        .map(i -> new UserDTO(i.getUserId(), i.getUserName()))
+        .collect(Collectors.toList())
+    );
+  }
 
     @Override
     public ResponseDTO unfollow(Integer userId, Integer unfollowId) {
