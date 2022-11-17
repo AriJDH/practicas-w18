@@ -18,6 +18,11 @@ public class UserRepository implements IUserRepository{
     private void loadUsers(){
 
         count++;
+        User vendedor = new User();
+        vendedor.setUserId(count);
+        vendedor.setUserName("vendedor1");
+
+        count++;
         User user1 = new User();
         user1.setUserId(count);
         user1.setUserName("usuario1");
@@ -25,29 +30,25 @@ public class UserRepository implements IUserRepository{
         count++;
         User user2 = new User();
         user2.setUserId(count);
-        user2.setUserName("vendedor1");
+        user2.setUserName("usuario2");
 
-        count++;
-        User user3 = new User();
-        user3.setUserId(count);
-        user3.setUserName("vendedor2");
+        vendedor.getFollowers().put(user1.getUserId(), user1);
+        vendedor.getFollowers().put(user2.getUserId(), user2);
 
-        Map<Integer, User> followedUsuer1 = new HashMap<Integer, User>();
-        followedUsuer1.put(user2.getUserId(), user2);
-        followedUsuer1.put(user3.getUserId(), user3);
-        user1.setFollowed(followedUsuer1);
+//        Map<Integer, User> followedUsuer2 = new HashMap<Integer, User>();
+//        followedUsuer2.put(user3.getUserId(), user3);
+//        user2.setFollowed(followedUsuer2);
+//
+//        Map<Integer, User> followedUsuer3 = new HashMap<Integer, User>();
+//        followedUsuer3.put(user2.getUserId(), user2);
+//        user3.setFollowed(followedUsuer3);
+//
+//        Map<Integer, User> follorers1 = new HashMap<Integer, User>();
+//        follorers1.put(user2.getUserId(), user2);
 
-        Map<Integer, User> followedUsuer2 = new HashMap<Integer, User>();
-        followedUsuer2.put(user3.getUserId(), user3);
-        user2.setFollowed(followedUsuer2);
-
-        Map<Integer, User> followedUsuer3 = new HashMap<Integer, User>();
-        followedUsuer3.put(user2.getUserId(), user2);
-        user3.setFollowed(followedUsuer3);
-
+        this.users.put(vendedor.getUserId(), vendedor);
         this.users.put(user1.getUserId(), user1);
         this.users.put(user2.getUserId(), user2);
-        this.users.put(user3.getUserId(), user3);
     }
 
     @Override
@@ -63,11 +64,6 @@ public class UserRepository implements IUserRepository{
 
     @Override
     public List<User> getUserFollowers(int id) {
-        return users.entrySet().stream()
-                .filter(entry -> entry.getKey() == id)
-                .map(entry -> entry.getValue())
-                .map(user -> user.getFollowers().values())
-                .flatMap(userCollection -> userCollection.stream())
-                .collect(Collectors.toList());
+        return users.get(id).getFollowersList();
     }
 }
