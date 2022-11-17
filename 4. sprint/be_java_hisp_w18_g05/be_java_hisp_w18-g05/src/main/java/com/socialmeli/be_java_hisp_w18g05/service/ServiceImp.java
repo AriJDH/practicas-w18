@@ -40,7 +40,6 @@ public class ServiceImp implements IService {
     private IRepository repository;
     private ObjectMapper op = new ObjectMapper();
 
-
     public ServiceImp(IRepository repository) {
         this.repository = repository;
         op.registerModule(new JavaTimeModule());
@@ -98,13 +97,11 @@ public class ServiceImp implements IService {
         if (b == null) {
             throw new NotFoundException("Buyer id " + userId + " not found");
         }
-
         Buyer seguidor = s.getFollowers().stream().filter(x->x.getUser_id().equals(userId)).findFirst().orElse(null);
 
         if (seguidor != null){
             throw new InvalidException("The buyer id " + userId +" is already following the seller id " + userIdToFollow);
         }
-
         b.addFollowed(s);
         s.addFollower(b);
     }
@@ -296,33 +293,37 @@ public class ServiceImp implements IService {
         return followedsDTOAZ;
     }
 
-
+    //For US0002
     @Override
     public SellerFollowersCountDTOResponse followersCount(Integer user_id){
         Seller seller = repository.getByIdSeller(user_id); // Get seller from repository
         if (seller == null) {
             throw new NotFoundException("Seller id " + user_id + " not found"); // Throw exception if seller doesn't exist
         }
-        List<Buyer> followers = seller.getFollowers();
-        Integer countedFollowers = followers.size();
+        List<Buyer> followers = seller.getFollowers(); //Get followers from seller
+        Integer countedFollowers = followers.size(); // Get size of the list of followers
+        //Create DTO response
         SellerFollowersCountDTOResponse sellerCount = new SellerFollowersCountDTOResponse(seller.getUser_id(),seller.getName(),countedFollowers);
         return  sellerCount;
     }
 
+    //For US 0005
     @Override
     public void newPost(NewPostDTORequest post){
-        Integer user_id = post.getUser_id();
+        Integer user_id = post.getUser_id(); // Get post asociated with this id
         Seller seller = repository.getByIdSeller(user_id); // Get seller from repository
 
-        if (seller == null) {
+        if (seller == null) {  //Exception non existing seller
             throw new NotFoundException("Seller id " + user_id + " not found");
         }
-
+        //Create DTO of the product
         Product product = new Product(post.getProduct().getProduct_id(),post.getProduct().getProduct_name(), post.getProduct().getType(), post.getProduct().getBrand(), post.getProduct().getColor(), post.getProduct().getNotes());
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 
+        //Convert the string to date time format
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
         LocalDate localDate = LocalDate.parse(post.getDate(),formatter);
 
+        //Create DTO of the post
         Post newPost = new Post(repository.addPost(), localDate,product ,post.getCategory(),post.getPrice());
 
         seller.getPosts().add(newPost);
