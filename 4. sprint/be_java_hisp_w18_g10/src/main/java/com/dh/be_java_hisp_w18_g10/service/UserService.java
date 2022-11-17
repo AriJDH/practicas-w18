@@ -53,10 +53,14 @@ public class UserService implements IUserService {
         User user2 = userRepository.getUser(userIdToFollow);
 
         if(user1 == null){
-            throw new NotFoundException("El usuario con el id: "+userId+" no fue encontrado!");
+            throw new UserGenericException("El usuario con el id: "+userId+" no fue encontrado!");
         }
         if(user2 == null){
-            throw new NotFoundException("El usuario con el id: "+userIdToFollow+" no fue encontrado!");
+            throw new UserGenericException("El usuario con el id: "+userIdToFollow+" no fue encontrado!");
+        }
+
+        if(userId == userIdToFollow){
+            throw new UserGenericException("Un usuario no se puede seguir a si mismo!");
         }
 
         if(!user2.getPosts().isEmpty()){
