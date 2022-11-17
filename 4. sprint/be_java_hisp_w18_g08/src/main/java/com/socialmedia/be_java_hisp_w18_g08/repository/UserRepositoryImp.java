@@ -80,4 +80,30 @@ public class UserRepositoryImp implements IUserRepository {
         }
         throw new NotFoundUserException("There is no user with the ID " + userId);
     }
+
+
+    @Override
+    public List<String> follow(Integer userId, Integer userIdToFollow) {
+
+        List<String> nombres = new ArrayList<>();
+
+        for (User u : this.users) {
+            if (u.getUser_id() == userId) {
+                nombres.add(u.getUser_name());
+                for (Seller s : this.sellers) {
+                    if (s.getUser_id() == userIdToFollow) {
+                        nombres.add(s.getUser_name());
+                        u.getFollowed().add(s);
+                        break;
+                    }
+                }
+                break;
+            }
+        }
+
+        if (nombres.size() < 2) {
+            return null;
+        }
+        return nombres;
+    }
 }
