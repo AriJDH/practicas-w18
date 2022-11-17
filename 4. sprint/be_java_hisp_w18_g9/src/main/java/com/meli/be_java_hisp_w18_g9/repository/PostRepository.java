@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class PostRepository implements  IPostRepository{
     @Autowired
-    IProductRepository iProductRepository;
+    IEntityRepository productRepository = new ProductRepository();
     @Override
     public void addPost(Post post) {
         Product product = new Product(

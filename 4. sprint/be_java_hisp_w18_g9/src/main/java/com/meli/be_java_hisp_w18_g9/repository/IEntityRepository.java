@@ -8,4 +8,5 @@ public interface IEntityRepository <T>{
     Optional<T> findById(Integer id);
     T save(T entity);
     void deleteById(Integer id);
+    Integer update(T entity);
 }

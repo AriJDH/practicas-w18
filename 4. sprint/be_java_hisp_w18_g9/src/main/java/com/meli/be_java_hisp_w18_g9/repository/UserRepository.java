@@ -63,6 +63,12 @@ public class UserRepository implements IEntityRepository<User>{
         users.remove(id);
     }
 
+    @Override
+    public Integer update(User entity) {
+        users.replace(entity.getUserId(),entity);
+        return entity.getUserId();
+    }
+
     // * ===============
 
 }
