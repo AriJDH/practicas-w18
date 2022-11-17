@@ -7,10 +7,7 @@ import com.mercadolibre.socialmeli.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class UserController {
@@ -22,12 +19,14 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.OK).body(userService.getCount(userId));
     }
     @GetMapping("/users/{userId}/followers/list")
-    public ResponseEntity<SellerFollowerListDtoRes> getFollowers(@PathVariable Integer userId) {
-        return ResponseEntity.status(HttpStatus.OK).body(userService.getFollowers(userId));
+    public ResponseEntity<SellerFollowerListDtoRes> getFollowers(@PathVariable Integer userId,
+                                                                 @RequestParam(required = false) String order) {
+        return ResponseEntity.status(HttpStatus.OK).body(userService.getFollowers(userId, order));
     }
     @GetMapping("/users/{userId}/followed/list")
-    public ResponseEntity<UserFollowedListDtoRes> getFollowed(@PathVariable Integer userId) {
-        return ResponseEntity.status(HttpStatus.OK).body(userService.getFollowed(userId));
+    public ResponseEntity<UserFollowedListDtoRes> getFollowed(@PathVariable Integer userId,
+                                                              @RequestParam(required = false) String order) {
+        return ResponseEntity.status(HttpStatus.OK).body(userService.getFollowed(userId, order));
     }
     @PostMapping("/users/{userId}/follow/{userIdToFollow}")
     public ResponseEntity<?> follow(@PathVariable Integer userId, @PathVariable Integer userIdToFollow){

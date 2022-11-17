@@ -11,6 +11,6 @@ public interface IUserService {
     public String unfollow(Integer userId, Integer userIdToFollow);
 
     SellerFollowerCountDtoRes getCount(Integer id);
-    SellerFollowerListDtoRes getFollowers(Integer id);
-    UserFollowedListDtoRes getFollowed(Integer id);
+    SellerFollowerListDtoRes getFollowers(Integer id, String order);
+    UserFollowedListDtoRes getFollowed(Integer id, String order);
 }
