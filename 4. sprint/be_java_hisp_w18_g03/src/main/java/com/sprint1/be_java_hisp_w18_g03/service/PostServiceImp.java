@@ -81,7 +81,6 @@ public class PostServiceImp implements IPostService {
             postSell.addAll(postUser);
         }
 
-
         //Obtener post que este entre las dos semanas y la actual
         LocalDate fechaSin2Semana = LocalDate.now().minusDays(14);
 
