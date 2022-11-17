@@ -92,7 +92,7 @@ public class UserServiceImp implements IUserService {
     @Override
     public FollowedDTO getFollowedList(Integer userId, String order) {
         User user = iUserRepository.findById(userId);
-        user.getListFollowed().stream().cgi
+        user.getListFollowed().stream();
         return null;
     }
 
