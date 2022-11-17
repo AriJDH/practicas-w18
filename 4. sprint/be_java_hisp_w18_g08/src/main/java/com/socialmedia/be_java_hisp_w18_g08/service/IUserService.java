@@ -13,9 +13,12 @@ import java.util.List;
 public interface IUserService {
 
     FollowDtoRes follow (FollowDtoReq followDtoReq);
-    FollowedDTO getFollowed(Integer userId);
+
+    FollowedDTO getFollowed(Integer userId, String order);
+
+    UserListDTO findUserListBySeller(Integer id, String order);
 
     SellerFollowersCountDTO findAllFollowersQuantity(Integer id);
-    UserListDTO findUserListBySeller(Integer id);
+
     List<Seller> getFollowedByUserId(Integer userId);
 }
