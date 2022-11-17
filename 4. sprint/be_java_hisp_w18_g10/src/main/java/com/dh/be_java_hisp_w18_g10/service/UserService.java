@@ -58,9 +58,7 @@ public class UserService implements IUserService {
     @Override
     public UserFollowersCountDTOres getUserFollowersCount(int userId) {
         User user = userRepository.getUser(userId);
-        if(user == null){
-            throw new NotFoundException("El usuario con el id: "+userId+" no fue encontrado!");
-        }
+        if(user == null) throw new NotFoundException("El usuario con el id: "+userId+" no fue encontrado!");
         return new UserFollowersCountDTOres(
                 user.getUserId(),
                 user.getUserName(),
@@ -70,7 +68,10 @@ public class UserService implements IUserService {
 
     @Override
     public UserFollowersListDTOres getUserFollowerList(int userId) {
-       return DTOMapper.mapToUserFollowersRes(userRepository.getUser(userId));
+        if(userRepository.getUser(userId) == null){
+            throw new UserNotFoundException("No existe usuario con id " + userId);
+        }
+        return DTOMapper.mapToUserFollowersRes(userRepository.getUser(userId));
     }
 
     @Override
