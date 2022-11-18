@@ -32,5 +32,7 @@ public interface IService {
 
     PromoPostCountDTOResponse promoPostCount(Integer user_id);
 
+    InfoSellerDTOResponse infoSeller(Integer user_id);
+
 
 }

@@ -374,6 +374,35 @@ public class ServiceImp implements IService {
 
 
 
+    // US 0012
+    @Override
+    public InfoSellerDTOResponse infoSeller(Integer user_id) {
+
+        Seller seller = repository.getByIdSeller(user_id);
+        if(seller == null){
+            throw new NotFoundException("Seller id " + user_id + " not found");
+        }
+
+        double sum = 0;
+        List<Post> posts = seller.getPosts();
+        for (Post post : posts) {
+            if (post.getHas_promo()) {
+                sum += post.getPrice() * (1 - post.getDiscount());
+            } else {
+                sum += post.getPrice();
+            }
+
+        }
+
+
+        return new InfoSellerDTOResponse(user_id, seller.getName(),posts.size(), sum);
+    }
+
+
+
+
+
+
 
 
 }
