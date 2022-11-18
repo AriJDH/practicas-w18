@@ -67,6 +67,27 @@ public class PostService implements IPostService {
 		//						.collect(Collectors.toList());
 
 	}
+	@Override
+	public List<PostDTO> sortedByAscAndDesc(int id, String order) {
+		User user = userRepository
+				.findUserById(id)
+				.orElseThrow(() -> new BadRequestException("The user id" + id
+						+ "does not exist"));
+		List<Post> postsSeller = getPosts(user)
+				.orElseThrow(() -> new EmptyException("User does not follow Sellers"));
+
+		if (order.equals("date_asc")){
+			return mapperListDto(sortByDate(postsSeller)
+					.orElseThrow(() -> new EmptyException("There are no posts to sort")));
+		}
+		if (order.equals("date_desc")){
+			return mapperListDto(sortByDateDesc(postsSeller)
+					.orElseThrow(() -> new EmptyException("There are no posts to sort")));
+		}else {
+			throw new BadRequestException("Wrong order");
+		}
+
+	}
 
 	// Métodos auxiliares
 	private Optional<List<Post>> sortByDate(List<Post> posts) {
@@ -103,6 +124,20 @@ public class PostService implements IPostService {
 	private PostDTO mapperDTO(Post post) {
 		mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 		return mapper.convertValue(post, PostDTO.class);
+	}
+	private List<PostDTO> mapperListDto(List<Post>posts){
+		return posts.stream()
+				.map(post -> mapperDTO(post))
+				.collect(Collectors.toList());
+	}
+	private Optional<List<Post>> sortByDateDesc(List<Post> posts) {
+		return Optional.of(
+				posts.stream()
+						.sorted(Comparator
+								.comparing(Post::getDate)
+								.reversed()
+						)
+						.collect(Collectors.toList()));
 	}
 
 }

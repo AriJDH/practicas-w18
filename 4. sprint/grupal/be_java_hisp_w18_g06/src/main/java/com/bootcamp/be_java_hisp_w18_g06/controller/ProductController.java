@@ -4,11 +4,7 @@ import com.bootcamp.be_java_hisp_w18_g06.dto.request.PostDTO;
 import com.bootcamp.be_java_hisp_w18_g06.service.IProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -21,11 +17,13 @@ public class ProductController {
 
 	// US006
 	@GetMapping("/followed/{userId}/list")
-	public ResponseEntity<List<PostDTO>> findAllByUser(@PathVariable int userId) {
+	public ResponseEntity<List<PostDTO>> findAllByUser(@PathVariable int userId,
+                                                       @RequestParam(required = false) String order) {
+	    if(order!=null)
+	        return ResponseEntity.ok(productService.sortedByAscAndDesc(userId,order));
+
 		return ResponseEntity.ok(productService.findAllPostsByUser(userId));
 	}
-
-
 
     @PostMapping("/post")
     public ResponseEntity<?> save(PostDTO postDTO){

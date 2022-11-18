@@ -27,4 +27,8 @@ public class ProductService implements IProductService {
 	public List<PostDTO> findAllPostsByUser(int id) {
 		return postService.findAllPostsByUser(id);
 	}
+	@Override
+	public List<PostDTO> sortedByAscAndDesc(int id, String order) {
+		return postService.sortedByAscAndDesc(id,order);
+	}
 }

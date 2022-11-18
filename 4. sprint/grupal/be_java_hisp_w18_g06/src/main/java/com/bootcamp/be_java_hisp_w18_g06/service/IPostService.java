@@ -10,4 +10,5 @@ public interface IPostService {
 
 	// US006
 	List<PostDTO> findAllPostsByUser(int id);
+	List<PostDTO> sortedByAscAndDesc(int id, String order);
 }
