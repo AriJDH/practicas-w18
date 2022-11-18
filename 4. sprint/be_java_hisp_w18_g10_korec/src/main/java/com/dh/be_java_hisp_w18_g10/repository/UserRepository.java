@@ -93,4 +93,10 @@ public class UserRepository implements IUserRepository{
     public List<User> getUserFollowers(int id) {
         return users.get(id).getFollowersList();
     }
+
+    @Override
+    public List<User> getAllUsers() {
+        List<User> listUser = new ArrayList<>(users.values());
+        return listUser;
+    }
 }

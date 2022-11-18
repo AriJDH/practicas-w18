@@ -4,6 +4,8 @@ import com.dh.be_java_hisp_w18_g10.dto.require.PostDTOreq;
 import com.dh.be_java_hisp_w18_g10.dto.require.PostPromoDTOreq;
 import com.dh.be_java_hisp_w18_g10.dto.response.*;
 
+import java.util.List;
+
 public interface IAppService {
     void followUser(int userId, int userIdToFollow);
     UserFollowersCountDTOres getUserFollowersCount(int userId);
@@ -17,4 +19,5 @@ public interface IAppService {
     //-----------------------------AGREGADO PARA INDIVIDUAL-----------------------------------
     void createPromoPost(PostPromoDTOreq postDTO);
     PostPromoCountDTOres getPostPromoCount(int userId);
+    List<UserDTOres> getAllUsers();
 }

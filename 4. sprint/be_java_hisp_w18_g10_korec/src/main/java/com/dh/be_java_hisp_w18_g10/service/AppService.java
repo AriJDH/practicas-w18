@@ -113,7 +113,6 @@ public class AppService implements IAppService {
         userRepository.getUser(userId).getPosts().put(postId, post);
     }
 
-
     @Override
     public UserPostsDTOres getUserPosts(int userId, String order) {
         UserPostsDTOres userPostsDTOres = new UserPostsDTOres();
@@ -231,5 +230,10 @@ public class AppService implements IAppService {
         }
         PostPromoCountDTOres postPromoCountDTOres = new PostPromoCountDTOres(user.getUserId(), user.getUserName(), promo_post);
         return postPromoCountDTOres;
+    }
+
+    @Override
+    public List<UserDTOres> getAllUsers() {
+        return null;
     }
 }

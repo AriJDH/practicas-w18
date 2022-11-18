@@ -8,5 +8,5 @@ public interface IUserRepository {
     User getUser(int id);
     List<User> getUsers();
     List<User> getUserFollowers(int id);
-
+    List<User> getAllUsers();
 }
