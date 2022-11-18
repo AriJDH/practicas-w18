@@ -1,0 +1,320 @@
+{
+	"info": {
+		"_postman_id": "1be6370f-428b-49f2-b503-1e53dbef306b",
+		"name": "practica sprint1",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "US 0001",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/users/{userId}/follow/{userIdToFollow}",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"users",
+						"{userId}",
+						"follow",
+						"{userIdToFollow}"
+					]
+				},
+				"description": "US 0001: Poder realizar la acción de “Follow” (seguir) a un determinado vendedor\n\n\n**Datos de la url**\n\n**_parametro:_** userId\n**_tipo:_** int\n**_descripción:_** Número que identifica al usuario actual\n\n**_parametro:_**userIdToFollow\n**_tipo:_** Int\n**_descripción:_** Número que identifica al usuario a seguir\n"
+			},
+			"response": []
+		},
+		{
+			"name": "US 0002",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/users/{userId}/followers/count",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"users",
+						"{userId}",
+						"followers",
+						"count"
+					]
+				},
+				"description": "US 0002: Obtener el resultado de la cantidad de usuarios que siguen a un determinado vendedor\n\n**datos de la url**\n\n**_parametro:_** userId\n\n**_tipo:_** int\n**_descripción:_** Número que identifica a cada usuario"
+			},
+			"response": []
+		},
+		{
+			"name": "US 0003",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/users/{userId}/followers/list",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"users",
+						"{userId}",
+						"followers",
+						"list"
+					]
+				},
+				"description": "US 0003: Obtener un listado de todos los usuarios que siguen a un determinado vendedor (¿Quién me sigue?)\n\n**datos de la url**\n\n**_parametro:_** userId\n**_tipo:_** int\n**_descripción:_** Número que identifica a cada usuario\n\n"
+			},
+			"response": []
+		},
+		{
+			"name": "US 0004",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/users/{userId}/followed/list",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"users",
+						"{userId}",
+						"followed",
+						"list"
+					]
+				},
+				"description": "US 0004: Obtener un listado de todos los vendedores a los cuales sigue un determinado usuario (¿A quién sigo?)\n\n**datos de la url**\n\n**_parametro:_** userId\n\n**_tipo:_** int\n\n**_descripción:_** Número que identifica a cada usuario"
+			},
+			"response": []
+		},
+		{
+			"name": "US 0005",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"user_id\": 6,\n  \"date\":\"08-11-2022\",\n  \"product\":{\n    \"product_id\":3,\n    \"product_name\":\"product1\",\n    \"type\":\"gamer\",\n    \"brand\":\"racer\",\n    \"color\":\"read & black\",\n    \"notes\":\"special\"\n  },\n  \"category\":100,\n  \"price\":1500\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/products/post",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"products",
+						"post"
+					]
+				},
+				"description": "US 0005: Dar de alta una nueva publicación\n\n**datos de entrada**\n\n**_parametro:_** user_id\n**_tipo:_** int\n**_descripción:_** Número que identifica a cada usuario\n\n**_parametro:_** date\n**_tipo:_** LocalDate\n**_descripción:_** Fecha de la publicación en formato dd-MM-yyyy\n\n**_parametro:_**product_id\n**_tipo:_** int\n**_descripción:_** Número identificatorio de un producto asociado a una publicación\n\n**_parametro:_**product_name\n**_tipo:_** String\n**_descripción:_** Cadena de caracteres que representa el nombre de un producto\n\n**_parametro:_**type\n**_tipo:_** String\n**_descripción:_** Cadena de caracteres que representa el tipo de un producto\n\n**_parametro:_**brand\n**_tipo:_** String\n**_descripción:_** Cadena de caracteres que representa la marca de un producto\n\n**_parametro:_**color\n**_tipo:_** String\n**_descripción:_** Cadena de caracteres que representa el color de un producto\n\n**_parametro:_**notes\n**_tipo:_** String\n**_descripción:_** Cadena de caracteres para colocar notas u observaciones de un producto\n\n**_parametro:_**category\n**_tipo:_** int\n**_descripción:_** Identificador que sirve para conocer la categoría a la que pertenece un producto. Por ejemplo: 100: Sillas, 58: Teclados\n\n**_parametro:_**price\n**_tipo:_** double\n**_descripción:_** Precio del producto\n"
+			},
+			"response": []
+		},
+		{
+			"name": "US 0006",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/products/followed/{userId}/list",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"products",
+						"followed",
+						"{userId}",
+						"list"
+					]
+				},
+				"description": "US 0006: Obtener un listado de las publicaciones realizadas por los vendedores que un usuario sigue en las últimas dos semanas (para esto tener en cuenta ordenamiento por fecha, publicaciones más recientes primero).\n\n**datos de url**\n\n**_parametro:_** userId\n**_tipo:_** int\n**_descripción:_**: Número que identifica a cada usuario\n\n"
+			},
+			"response": []
+		},
+		{
+			"name": "US 0007",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/users/{userId}/unfollow/{userIdToUnfollow}",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"users",
+						"{userId}",
+						"unfollow",
+						"{userIdToUnfollow}"
+					]
+				},
+				"description": "\nUS 0007: Poder realizar la acción de “Unfollow” (dejar de seguir) a un determinado vendedor.\n\n**datos de entrada**\n\n**_parametro:_** userId\n**_tipo:_** int\n**_descripción:_** Número que identifica al usuario actual\n\n**_parametro:_** userIdToUnfollow\n**_tipo:_** int\n**_descripción:_** Número que identifica al usuario a dejar de seguir\n"
+			},
+			"response": []
+		},
+		{
+			"name": "US 0008",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/users/{UserID}/followers/list?order=name_asc",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"users",
+						"{UserID}",
+						"followers",
+						"list"
+					],
+					"query": [
+						{
+							"key": "order",
+							"value": "name_asc"
+						}
+					]
+				},
+				"description": "US 0008: Ordenamiento alfabético ascendente y descendente\n\n**datos de la url**\n\n**_paramentro:_** userId\n**_tipo:_** int\n**_descripción:_** Número que identifica a cada usuario\n\n\n**query_params**\n**_paramentro:_** name_asc\n**_descripción:_** Alfabético ascendente.\n\n**_paramentro:_** name_desc\n**_descripción:_**Alfabético descendente.\n\n\n**Ejemplos:**\n/users/{UserID}/followers/list?order=name_asc\n/users/{UserID}/followers/list?order=name_desc\n/users/{UserID}/followed/list?order=name_asc\n/users/{UserID}/followed/list?order=name_desc"
+			},
+			"response": []
+		},
+		{
+			"name": "US 0009",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/products/followed/{userId}/list?order=date_asc",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"products",
+						"followed",
+						"{userId}",
+						"list"
+					],
+					"query": [
+						{
+							"key": "order",
+							"value": "date_asc"
+						}
+					]
+				},
+				"description": "US 0009: Ordenamiento por fecha ascendente y descendente\n\n**datos de la url**\n\n**_paramentro:_** userId\n**_tipo:_** int\n**_descripción:_** Número que identifica a cada usuario\n\n**query_params**\n**_paramentro:_** date_asc\n**_descripción:_** Fecha ascendente (de más antigua a más nueva).\n\n**_paramentro:_** date_desc\n**_descripción:_**Fecha descendente (de más nueva a más antigua)\n\n\n**ejemplos:**\n/products/followed/{userId}/list?order=date_asc\n/products/followed/{userId}/list?order=date_desc"
+			},
+			"response": []
+		},
+		{
+			"name": "US 0010",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"user_id\": 1,\n    \"date\": \"29-04-2021\",\n    \"product\": {\n        \"product_id\": 1,\n        \"product_name\": \"Silla Gamer\",\n        \"type\": \"Gamer\",\n        \"brand\": \"Racer\",\n        \"color\": \"Red & Black\",\n        \"notes\": \"Special Edition\"\n    },\n    \"category\": 100,\n    \"price\": 1500.50,\n    \"has_promo\": true,\n    \"discount\": 0.25\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/products/promo-post",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"products",
+						"promo-post"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "US 0011",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/products/promo-post/count?user_id=1",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"products",
+						"promo-post",
+						"count"
+					],
+					"query": [
+						{
+							"key": "user_id",
+							"value": "1"
+						}
+					]
+				},
+				"description": "Obtener la cantidad de productos en promoción de un determinado vendedor.\n\nSign:\n\n|Method|Sign|\n| --- | ----------|\n| GET | /products/promo-post/count?user_id={userid} |\n| Response | { <br> \"User_id\":234, <br> \"user_name\": \"vendedor1\", <br> \"promo_products_count\":23 <br> }  |\n\nFiltros/parametros:\n\n|Parámetros|Tipo|Descripcion/ejemplo|\n|----------|----|-------------------|\n|user_id|int|Numero que identifica a cada usuario|\n|user_name|String|Cadena de caracteres que representa el nombre de cada usuario|\n|promo_products_count|int|Cantidad numérica de productos en promocion de un determinado usuario|"
+			},
+			"response": []
+		},
+		{
+			"name": "US 0012",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080//products/{userId}/cheaper",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"",
+						"products",
+						"{userId}",
+						"cheaper"
+					]
+				},
+				"description": "Obtener el producto más barato de un determinado vendedor (Incluyendo descuento si aplica).\n\nSign:\n\n|Method|Sign|\n| --- | ----------|\n| GET | /products/{userId}/cheaper|\n| Response | { <br> \"User_id\":234, <br> \"user_name\": \"vendedor1\", <br> \"product_id\":1 <br> \"product_name\": producto1 <br> \"precio\": 70550.30 <br> }  |\n\nFiltros/parametros:\n\n|Parámetros|Tipo|Descripcion/ejemplo|\n|----------|----|-------------------|\n|user_id|int|Numero que identifica a cada usuario|\n|user_name|String|Cadena de caracteres que representa el nombre de cada usuario|\n|product_id|int|Numero que identifica a cada producto|\n|product_name|String|Cadena de caracteres que representa el nombre de cada producto|\n|precio|double|Valor que representa el costo final del producto (Incluye descuento)"
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "usuarioID",
+			"value": "userId"
+		}
+	]
+}
