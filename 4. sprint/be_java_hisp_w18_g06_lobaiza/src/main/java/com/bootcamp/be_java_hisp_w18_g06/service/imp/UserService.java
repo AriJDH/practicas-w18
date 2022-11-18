@@ -30,7 +30,8 @@ public class UserService implements IUserService {
     // Mapeo -> No modificar por el momento!
     ObjectMapper mapper = JsonMapper.builder()
             .findAndAddModules()
-            .build();
+            .build()
+            .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
 
     //US-001
@@ -155,8 +156,6 @@ public class UserService implements IUserService {
             user.setFollowed(sortList(order, user.getFollowed()));
         }
 
-        mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-
         UserFollowedListDTO userFollowedListDTO = new UserFollowedListDTO();
         userFollowedListDTO.setUser_id(user.getUser_id());
         userFollowedListDTO.setUser_name(user.getUser_name());
@@ -180,7 +179,6 @@ public class UserService implements IUserService {
             user.setFollowers(sortList(order, user.getFollowers()));
         }
 
-        mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
         UserFollowersListDTO userFollowersListDTO = new UserFollowersListDTO();
         userFollowersListDTO.setUser_id(user.getUser_id());
         userFollowersListDTO.setUser_name(user.getUser_name());

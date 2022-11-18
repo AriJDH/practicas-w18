@@ -10,6 +10,7 @@ import java.time.LocalDate;
 public class PostPromoDTO {
     private int post_id;
     private int user_id;
+    @JsonFormat(pattern = "dd-MM-yyyy")
     private LocalDate date;
     private Product product;
     private String category;

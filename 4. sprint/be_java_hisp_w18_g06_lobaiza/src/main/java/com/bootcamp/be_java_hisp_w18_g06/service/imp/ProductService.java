@@ -2,6 +2,7 @@ package com.bootcamp.be_java_hisp_w18_g06.service.imp;
 
 import com.bootcamp.be_java_hisp_w18_g06.dto.request.PostDTO;
 import com.bootcamp.be_java_hisp_w18_g06.dto.request.PostPromoDTO;
+import com.bootcamp.be_java_hisp_w18_g06.dto.response.UserPromoPostCountDTO;
 import com.bootcamp.be_java_hisp_w18_g06.repository.IUserRepository;
 import com.bootcamp.be_java_hisp_w18_g06.service.IPostService;
 import com.bootcamp.be_java_hisp_w18_g06.service.IProductService;
@@ -34,7 +35,13 @@ public class ProductService implements IProductService {
 	}
 
 	@Override
-	public void savePromo(PostPromoDTO postPromoDTO) {
-		postService.savePostPromo(postPromoDTO);
+	public void savePromo(PostPromoDTO postPromoDTO, int userId) {
+		postService.savePostPromo(postPromoDTO, userId);
 	}
+
+	@Override
+	public UserPromoPostCountDTO countPromo(int userId) {
+		return postService.getPromoPostCount(userId);
+	}
+
 }

@@ -1,9 +1,9 @@
 package com.bootcamp.be_java_hisp_w18_g06.repository.imp;
 
 import com.bootcamp.be_java_hisp_w18_g06.entity.Post;
+import com.bootcamp.be_java_hisp_w18_g06.entity.PostPromo;
 import com.bootcamp.be_java_hisp_w18_g06.entity.Product;
 import com.bootcamp.be_java_hisp_w18_g06.entity.User;
-import com.bootcamp.be_java_hisp_w18_g06.exceptions.EmptyException;
 import com.bootcamp.be_java_hisp_w18_g06.exceptions.NotFoundException;
 import com.bootcamp.be_java_hisp_w18_g06.repository.IUserRepository;
 import org.springframework.stereotype.Repository;
@@ -24,6 +24,8 @@ public class UserRepository implements IUserRepository {
 	List<Product> products = new ArrayList<>();
 	List<Post> posts = new ArrayList<>();
 	List<User> followed = new ArrayList<>();
+
+	List<PostPromo> promos = new ArrayList<>();
 	
 	Product product1 = new Product(
 					2,
@@ -105,6 +107,17 @@ public class UserRepository implements IUserRepository {
 	@Override
 	public void createPost(Post post) {
 		posts.add(post);
+	}
+
+	@Override
+	public void createPromoPost(PostPromo promo, int userId) {
+		User user = getUser(userId);
+		if (user.getPromos() == null) {
+			user.setPromos(new ArrayList<>());
+		}
+		promos.add(promo);
+		user.getPromos().add(promo);
+		System.out.println(user.getPromos().size());
 	}
 
 	public void addPostToUser(){

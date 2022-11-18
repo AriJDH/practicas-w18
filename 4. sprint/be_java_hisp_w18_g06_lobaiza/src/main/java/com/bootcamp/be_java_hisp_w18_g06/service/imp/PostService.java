@@ -2,6 +2,7 @@ package com.bootcamp.be_java_hisp_w18_g06.service.imp;
 
 import com.bootcamp.be_java_hisp_w18_g06.dto.request.PostDTO;
 import com.bootcamp.be_java_hisp_w18_g06.dto.request.PostPromoDTO;
+import com.bootcamp.be_java_hisp_w18_g06.dto.response.UserPromoPostCountDTO;
 import com.bootcamp.be_java_hisp_w18_g06.entity.Post;
 import com.bootcamp.be_java_hisp_w18_g06.entity.PostPromo;
 import com.bootcamp.be_java_hisp_w18_g06.entity.User;
@@ -34,7 +35,8 @@ public class PostService implements IPostService {
 	// Mapeo -> No modificar por el momento!
 	ObjectMapper mapper = JsonMapper.builder()
 					.findAndAddModules()
-					.build();
+					.build()
+					.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
     @Override
     public void savePost(PostDTO postDTO) {
         userRepository.createPost(mapper.convertValue(postDTO, Post.class));
@@ -136,7 +138,20 @@ public class PostService implements IPostService {
 	}
 
 	@Override
-	public void savePostPromo(PostPromoDTO postPromoDTO) {
-		userRepository.createPost(mapper.convertValue(postPromoDTO, PostPromo.class));
+	public void savePostPromo(PostPromoDTO postPromoDTO, int userId) {
+		userRepository.createPromoPost(mapper.convertValue(postPromoDTO, PostPromo.class), userId);
+	}
+
+	@Override
+	public UserPromoPostCountDTO getPromoPostCount(int userId) {
+		User user = userRepository.getUser(userId);
+
+		if (user.getPromos() == null) {
+			throw new EmptyException("User is not a buyer");
+		}
+
+		UserPromoPostCountDTO userPromoPostCountDTO = mapper.convertValue(user, UserPromoPostCountDTO.class);
+		userPromoPostCountDTO.setPromo_products_count(user.getPromos().size());
+		return userPromoPostCountDTO;
 	}
 }
