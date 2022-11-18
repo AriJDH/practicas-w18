@@ -4,6 +4,7 @@ import com.socialmedia.be_java_hisp_w18_g08.dto.PostDto;
 import com.socialmedia.be_java_hisp_w18_g08.dto.request.PostDtoReq;
 import com.socialmedia.be_java_hisp_w18_g08.dto.request.PostPromoDtoReq;
 import com.socialmedia.be_java_hisp_w18_g08.dto.response.PostDtoRes;
+import com.socialmedia.be_java_hisp_w18_g08.dto.response.PostPromoDtoRes;
 import com.socialmedia.be_java_hisp_w18_g08.entity.Post;
 import com.socialmedia.be_java_hisp_w18_g08.exception.BadRequestException;
 import com.socialmedia.be_java_hisp_w18_g08.entity.Seller;
@@ -113,21 +114,20 @@ public class PostServiceImp implements IPostService {
     }
 
     @Override
-    public Integer getPostSellerCountByUserId(Integer userId) {
-        List<Seller> followed = userService.getFollowedByUserId(userId);
-        Integer count = 0;
+    public PostPromoDtoRes getPostSellerCountByUserId(Integer userId) {
 
-        for (Seller s : followed) {
-            for(Post p: s.getPosts()){
-                if(p.getHas_promo()!= null && p.getHas_promo()){
-                    count++;
-                }
+        Seller seller = userRepository.findSellerById(userId);
+        Integer count = 0;
+        if (seller == null) {
+            throw new NotFoundUserException("User whith id: " + userId + " post not found ");
+        }
+
+        for(Post p: seller.getPosts()){
+            if(p.getHas_promo()!= null && p.getHas_promo()){
+                count++;
             }
         }
-        if (followed.isEmpty()) {
-            throw new NotFoundUserException("User whith id: " + userId + " sellers post not found ");
-        }
-        return count;
+        return new PostPromoDtoRes(userId,seller.getUser_name(),count);
     }
 
 }
