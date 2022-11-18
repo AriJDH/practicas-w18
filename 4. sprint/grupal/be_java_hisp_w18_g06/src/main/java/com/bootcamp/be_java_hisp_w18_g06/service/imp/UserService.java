@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -175,4 +176,28 @@ public class UserService implements IUserService {
     }
 
     // Falta 008
+
+        @Override
+        public void userSortList(String order, int userId) {
+            User user = userRepository.getUser(userId);
+
+            if (user.getFollowers() == null) {
+                throw new EmptyException("No es comprador");
+            }
+            user.setFollowers(sortLIst(order, user.getFollowers()));
+
+        }
+
+        private List<User> sortLIst(String order, List<User> users) {
+            if (order.equals("name_asc")) {
+                return users.stream().sorted(Comparator.comparing(User::getUser_name)).collect(Collectors.toList());
+            }
+            else if(order.equals("name_desc")){
+                return users.stream().sorted(Comparator.comparing(User::getUser_name).reversed()).collect(Collectors.toList());
+            }
+            else {
+                throw new EmptyException("Invalid param order");
+            }
+        }
+
 }

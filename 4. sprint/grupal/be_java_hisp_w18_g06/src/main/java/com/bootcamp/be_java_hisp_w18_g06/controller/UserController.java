@@ -53,5 +53,9 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.OK).body(userFollowersListDTO);
     }
 
-    // Falta 008
+    @GetMapping("/{userId}/followers/list")
+    public void getFollowersList(@PathVariable int userId, @RequestParam String order) {
+        userService.userSortList(order, userId);
+    }
+
 }
