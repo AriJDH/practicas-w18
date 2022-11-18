@@ -28,14 +28,6 @@ public class UsersController {
     // ? =============== Methods =============== ?
     // * ===== [GET] ===== *
 
-
-
-        @PostMapping("/{userId}/follow/{userIdToFollow}")
-        public ResponseEntity<HttpStatus> getPlatoInfoPlato (@PathVariable Integer userId, @PathVariable Integer
-        userIdToFollow) throws Throwable {
-            return new ResponseEntity<>(userService.follow(userId, userIdToFollow));
-        }
-
         @GetMapping("/{userId}/followed/list")
         public ResponseEntity<UserFollowedListResponse> userFollowedListOrder (@RequestParam(required = false) String
         order, @PathVariable Integer userId){
@@ -83,7 +75,7 @@ public class UsersController {
 
         // * ===== [POST] ===== *
         @PostMapping("/{userId}/follow/{userIdToFollow}")
-        public ResponseEntity<HttpStatus> getPlatoInfoPlato (@PathVariable Integer userId, @PathVariable Integer
+        public ResponseEntity<HttpStatus> follow (@PathVariable Integer userId, @PathVariable Integer
         userIdToFollow) throws Throwable {
             return new ResponseEntity<>(userService.follow(userId, userIdToFollow));
         }

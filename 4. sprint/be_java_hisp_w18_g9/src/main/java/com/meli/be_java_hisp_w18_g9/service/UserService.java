@@ -3,9 +3,7 @@ package com.meli.be_java_hisp_w18_g9.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.meli.be_java_hisp_w18_g9.exception.BadRequestException;
-import com.meli.be_java_hisp_w18_g9.model.dto.response.UserFollowedListResponse;
-import com.meli.be_java_hisp_w18_g9.model.dto.response.UserSimpleResponse;
-import com.meli.be_java_hisp_w18_g9.model.dto.response.UserFollowerListResponse;
+import com.meli.be_java_hisp_w18_g9.model.dto.response.*;
 import com.meli.be_java_hisp_w18_g9.model.dto.response.UserSimpleResponse;
 import com.meli.be_java_hisp_w18_g9.model.entity.User;
 import com.meli.be_java_hisp_w18_g9.repository.IUserRepository;
@@ -13,6 +11,7 @@ import com.meli.be_java_hisp_w18_g9.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -130,6 +129,14 @@ public class UserService implements IUserService {
     }
 
     @Override
+    public FollowersCountUserResponse findUserFollowedQuantity(Integer id){
+        User user = userRepository.findById(id).orElseThrow(() -> new BadRequestException("User with id:" + id + " doesn't exist"));
+        Integer userFollowersQuantity = user.getFollowers().size();
+        FollowersCountUserResponse userResponse = new FollowersCountUserResponse(id,user.getUserName(),userFollowersQuantity);
+        return userResponse;
+    }
+
+    @Override
     public UserFollowedListResponse findAllFollowedOrderAsc(Integer id) {
         User user = userRepository.findById(id)
                 .orElseThrow(()->new BadRequestException(
@@ -183,9 +190,6 @@ public class UserService implements IUserService {
         return new UserFollowedListResponse(id, user.getUserName(), userSimpleResponsesFollowed);
 
     }
-
-    
-
 
     @Override
     public UserFollowerListResponse findAllFollower(Integer id){
