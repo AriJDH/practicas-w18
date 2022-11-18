@@ -38,4 +38,6 @@ public class Post {
     public boolean isPromotion(){
         return this.has_promo;
     }
+
+
 }

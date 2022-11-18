@@ -1,9 +1,6 @@
 package com.meli.be_java_hisp_w18_g01.controllers;
 
-import com.meli.be_java_hisp_w18_g01.dtos.ResponseDTO;
-import com.meli.be_java_hisp_w18_g01.dtos.UserFollowedInfoDTO;
-import com.meli.be_java_hisp_w18_g01.dtos.UserFollowersCountDTO;
-import com.meli.be_java_hisp_w18_g01.dtos.UserFollowersInfoDTO;
+import com.meli.be_java_hisp_w18_g01.dtos.*;
 import com.meli.be_java_hisp_w18_g01.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -14,6 +11,11 @@ import org.springframework.web.bind.annotation.*;
 public class UserController {
     @Autowired
     UserService userService;
+
+    @GetMapping("/userPremium/{userId}")
+    public ResponseEntity<UserPremiumDTO> isUserpremium(@PathVariable long userId){
+        return ResponseEntity.ok(userService.isUserPremium(userId));
+    }
     @PostMapping("/{userId}/follow/{userIdToFollow}")
     public ResponseEntity<ResponseDTO> followUser(@PathVariable long userId, @PathVariable long userIdToFollow){
         userService.handleFollow(userId, userIdToFollow);

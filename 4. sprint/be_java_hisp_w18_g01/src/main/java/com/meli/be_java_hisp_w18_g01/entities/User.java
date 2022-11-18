@@ -1,5 +1,6 @@
 package com.meli.be_java_hisp_w18_g01.entities;
 
+import com.meli.be_java_hisp_w18_g01.dtos.UserPremiumDTO;
 import com.meli.be_java_hisp_w18_g01.exceptions.BadFollowException;
 import com.meli.be_java_hisp_w18_g01.exceptions.NotSellerException;
 import com.meli.be_java_hisp_w18_g01.exceptions.UserAlreadyFollowedException;
@@ -24,6 +25,8 @@ public class User {
     private List<User> followers = new ArrayList<>();
     private List<User> followed = new ArrayList<>();
     private List<Post> posts = new ArrayList<>();
+
+    private boolean isPremium;
 
     public User(long user_id, String user_name) {
         this.user_id = user_id;
@@ -81,7 +84,9 @@ public class User {
     public int getFollowersCount(){
         return this.followers.size();
     }
-
+    public int getPostsCount(){
+        return this.posts.size();
+    }
     }
 
 

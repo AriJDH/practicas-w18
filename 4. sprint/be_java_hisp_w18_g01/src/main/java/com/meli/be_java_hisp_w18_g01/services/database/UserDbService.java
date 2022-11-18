@@ -8,4 +8,5 @@ public interface UserDbService {
     User findById(long id);
 
     List<User> findAll();
+
 }

@@ -4,13 +4,17 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
-
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class SellerPromoPostInfoDTO {
+public class UserPremiumDTO {
+
+    private int level;
     private long user_id;
     private String user_name;
-    private List<PromoPostDTO> posts;
+    private int followers;
+    private int posts;
+
+
+
 }
