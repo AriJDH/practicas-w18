@@ -16,6 +16,6 @@ public class PostPromoDto {
     private Product product;
     private String category;
     private double price;
-    private Boolean has_promo;
+    private boolean has_promo;
     private Double discount;
 }

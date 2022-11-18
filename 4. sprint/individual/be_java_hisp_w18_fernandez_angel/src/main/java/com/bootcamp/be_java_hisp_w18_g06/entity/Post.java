@@ -17,7 +17,7 @@ public class Post {
     private Product product;
     private String category;
     private double price;
-    private Boolean has_promo;
+    private boolean has_promo;
     private Double discount;
 
     public Post( int user_id, LocalDate date, Product product, String category, double price) {
@@ -29,7 +29,7 @@ public class Post {
         this.price = price;
     }
 
-    public Post( int user_id, LocalDate date, Product product, String category, double price, Boolean has_promo, Double discount) {
+    public Post( int user_id, LocalDate date, Product product, String category, double price, boolean has_promo, Double discount) {
         this.post_id +=1;
         this.user_id = user_id;
         this.date = date;

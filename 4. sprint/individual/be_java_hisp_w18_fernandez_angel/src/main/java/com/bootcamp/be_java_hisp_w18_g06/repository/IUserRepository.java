@@ -13,4 +13,5 @@ public interface IUserRepository {
     Optional<User> findUserInList(List<User> list, int idUserInList);
     User getUser(int userId);
     void updateUsers(User userUpdate);
+    Optional<List<Post>> findAllPostInPromo();
 }

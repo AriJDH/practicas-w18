@@ -3,7 +3,6 @@ package com.bootcamp.be_java_hisp_w18_g06.repository.imp;
 import com.bootcamp.be_java_hisp_w18_g06.entity.Post;
 import com.bootcamp.be_java_hisp_w18_g06.entity.Product;
 import com.bootcamp.be_java_hisp_w18_g06.entity.User;
-import com.bootcamp.be_java_hisp_w18_g06.exceptions.EmptyException;
 import com.bootcamp.be_java_hisp_w18_g06.exceptions.NotFoundException;
 import com.bootcamp.be_java_hisp_w18_g06.repository.IUserRepository;
 import org.springframework.stereotype.Repository;
@@ -127,5 +126,16 @@ public class UserRepository implements IUserRepository {
 				.collect(Collectors.toList()));
 
 		users.add(userUpdate);
+	}
+
+
+	@Override
+	public Optional<List<Post>> findAllPostInPromo() {
+		if (posts==null){
+			return Optional.empty();
+		}
+		return Optional.of(posts.stream()
+				.filter(Post::isHas_promo)
+				.collect(Collectors.toList()));
 	}
 }

@@ -2,6 +2,7 @@ package com.bootcamp.be_java_hisp_w18_g06.service.imp;
 
 import com.bootcamp.be_java_hisp_w18_g06.dto.request.PostDTO;
 import com.bootcamp.be_java_hisp_w18_g06.dto.request.PostPromoDto;
+import com.bootcamp.be_java_hisp_w18_g06.dto.response.PostPromoResDto;
 import com.bootcamp.be_java_hisp_w18_g06.entity.Post;
 import com.bootcamp.be_java_hisp_w18_g06.entity.User;
 import com.bootcamp.be_java_hisp_w18_g06.exceptions.BadRequestException;
@@ -85,8 +86,41 @@ public class PostService implements IPostService {
 
 	@Override
 	public void savePromoPost(PostPromoDto postPromoDto) {
+    	userRepository.findUserById(postPromoDto.getUser_id())
+				.orElseThrow(()->new BadRequestException("Id user does not exist"));
 		userRepository.createPost(mapperEntity(postPromoDto));
 	}
+
+	@Override
+	public PostPromoResDto countProductInPromoByUserId(int userId) {
+
+    	User user=userRepository.findUserById(userId)
+				.orElseThrow(()->new BadRequestException("UserId does not exist"));
+    	List<Post>posts=userRepository.findAllPostInPromo()
+				.orElseThrow(()->new EmptyException("There are no products on promo"));
+    	List<Post>postList=getPostByUserId(userId,posts)
+				.orElseThrow(()->new EmptyException("User has no promotions"));
+
+    	return mapperPostPromoRestDto(userId,user.getUser_name(),postList.size());
+
+	}
+	private PostPromoResDto mapperPostPromoRestDto(int userId, String userName, int count){
+		PostPromoResDto postPromoResDto=new PostPromoResDto();
+		postPromoResDto.setUser_id(userId);
+		postPromoResDto.setUser_name(userRepository.getUser(userId).getUser_name());
+		postPromoResDto.setPromo_products_count(count);
+		return postPromoResDto;
+
+	}
+	private Optional<List<Post>> getPostByUserId(int userId,List<Post> posts){
+    	return Optional.of(posts.stream()
+				.filter(post -> post.getUser_id()==userId)
+				.collect(Collectors.toList()));
+	}
+	private void countPromo(List<Post>posts,Integer countProductsInPromo){
+    	 countProductsInPromo=posts.size();
+	}
+
 
 	// Métodos auxiliares
 	private Optional<List<Post>> sortByDate(List<Post> posts) {

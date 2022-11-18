@@ -2,8 +2,10 @@ package com.bootcamp.be_java_hisp_w18_g06.controller;
 
 import com.bootcamp.be_java_hisp_w18_g06.dto.request.PostDTO;
 import com.bootcamp.be_java_hisp_w18_g06.dto.request.PostPromoDto;
+import com.bootcamp.be_java_hisp_w18_g06.dto.response.PostPromoResDto;
 import com.bootcamp.be_java_hisp_w18_g06.service.IProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -35,5 +37,9 @@ public class ProductController {
 	public ResponseEntity<?> savePromoPost(@RequestBody PostPromoDto postDTO){
 		productService.savePromoPost(postDTO);
 		return ResponseEntity.ok("OK");
+	}
+	@GetMapping("/promo-post/count")
+	public ResponseEntity<PostPromoResDto> countPromoPost(@RequestParam("user_id") int user_id){
+		return new ResponseEntity<>(productService.countProductInPromoByUserId(user_id), HttpStatus.OK);
 	}
 }
