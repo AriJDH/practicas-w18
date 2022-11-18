@@ -163,10 +163,10 @@ public class UserService implements IUserService {
      * @return
      */
     @Override
-    public SellerPromoPostsDtoRes getPromoPostsFromSeller(Integer id) {
+    public SellerPromoPostsDtoRes getPromoPostsFromSeller(Integer id, String order) {
         User user = userRepository.findById(id);
 
-        List<PromoPostDtoRes> promoPostDtoRes = userRepository.getPostsFromSeller(id).stream()
+        List<PromoPostDtoRes> promoPostsDtoRes = userRepository.getPostsFromSeller(id).stream()
                 .filter(p -> p.isHasPromo())
                 .map(p -> new PromoPostDtoRes(id,
                         p.getId(),
@@ -183,7 +183,13 @@ public class UserService implements IUserService {
                         p.getDiscount()))
                 .collect(Collectors.toList());
 
-        return new SellerPromoPostsDtoRes(id, user.getName(), promoPostDtoRes);
+        if (order != null && order.equals("date_desc")) {
+            promoPostsDtoRes.sort(Comparator.comparing(PromoPostDtoRes::getDate).reversed());
+        } else if (order != null && order.equals("date_asc")) {
+            promoPostsDtoRes.sort(Comparator.comparing(PromoPostDtoRes::getDate));
+        }
+
+        return new SellerPromoPostsDtoRes(id, user.getName(), promoPostsDtoRes);
     }
 
     /**

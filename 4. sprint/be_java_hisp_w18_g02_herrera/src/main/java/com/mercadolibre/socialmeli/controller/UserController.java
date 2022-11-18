@@ -143,7 +143,8 @@ public class UserController {
      *         400 Bad Request (ErrorDTO Error details)
      */
     @GetMapping("/products/promo-post/list")
-    public ResponseEntity<?> getPromoPostsFromSeller(@RequestParam Integer user_id){
-        return ResponseEntity.ok(userService.getPromoPostsFromSeller(user_id));
+    public ResponseEntity<?> getPromoPostsFromSeller(@RequestParam Integer user_id,
+                                                     @RequestParam(required = false) String order){
+        return ResponseEntity.ok(userService.getPromoPostsFromSeller(user_id, order));
     }
 }
