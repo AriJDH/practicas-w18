@@ -1,5 +1,6 @@
 package com.socialmedia.be_java_hisp_w18_g08.controller;
 
+import com.socialmedia.be_java_hisp_w18_g08.dto.PostDto;
 import com.socialmedia.be_java_hisp_w18_g08.dto.request.PostDiscountDtoReq;
 import com.socialmedia.be_java_hisp_w18_g08.dto.request.PostDtoReq;
 import com.socialmedia.be_java_hisp_w18_g08.dto.response.SellerDiscountCountDto;
@@ -10,6 +11,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import com.socialmedia.be_java_hisp_w18_g08.dto.response.PostDtoRes;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/products")
@@ -50,5 +53,12 @@ public class PostController {
     public ResponseEntity<SellerListDto> getSellerProductDiscount(@RequestParam Integer user_id){
         SellerListDto sellerDiscount = postService.getSellerProductsDiscount(user_id);
         return new ResponseEntity<>(sellerDiscount, HttpStatus.OK);
+    }
+
+    @GetMapping("/promo-post/listAll")
+    public ResponseEntity<List<PostDto>> getSellerProductDiscount(@RequestParam(required = false) String orderPrice,
+                                                                  @RequestParam(required = false) String orderDiscount){
+        List<PostDto> posts = postService.getAllPostOrderByPriceAndDiscount(orderPrice, orderDiscount);
+        return new ResponseEntity<>(posts, HttpStatus.OK);
     }
 }

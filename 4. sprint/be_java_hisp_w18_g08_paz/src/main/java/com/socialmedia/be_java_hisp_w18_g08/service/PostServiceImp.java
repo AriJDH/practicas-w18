@@ -6,7 +6,6 @@ import com.socialmedia.be_java_hisp_w18_g08.dto.request.PostDtoReq;
 import com.socialmedia.be_java_hisp_w18_g08.dto.response.PostDtoRes;
 import com.socialmedia.be_java_hisp_w18_g08.dto.response.SellerDiscountCountDto;
 import com.socialmedia.be_java_hisp_w18_g08.dto.response.SellerListDto;
-import com.socialmedia.be_java_hisp_w18_g08.dto.response.UserDto;
 import com.socialmedia.be_java_hisp_w18_g08.entity.Post;
 import com.socialmedia.be_java_hisp_w18_g08.exception.BadRequestException;
 import com.socialmedia.be_java_hisp_w18_g08.entity.Seller;
@@ -21,6 +20,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -41,14 +41,13 @@ public class PostServiceImp implements IPostService {
 
     private Integer postId = 5;
 
-    private List<Post> changeOrder(List<Post> list, String order) {
+    private List<PostDto> changeOrder(List<PostDto> list, String order) {
 
         Comparator<LocalDate> compareByDate;
 
         if (order == null || order.equals("date_desc")) {
             compareByDate = new OrderDateDesc();
             list.sort((l1, l2) -> compareByDate.compare(l1.getDate(), l2.getDate()));
-            ;
         } else if (order.equals("date_asc")) {
             compareByDate = new OrderDateAsc();
             list.sort((l1, l2) -> compareByDate.compare(l1.getDate(), l2.getDate()));
@@ -75,23 +74,22 @@ public class PostServiceImp implements IPostService {
     @Override
     public PostDtoRes getPostSellerListByUserId(Integer userId, String order) {
         List<Seller> followed = userService.getFollowedByUserId(userId);
+
         PostDtoRes postDtoRes = new PostDtoRes();
         LocalDate date = LocalDate.now();
         postDtoRes.setUser_id(userId);
-        List<Post> filtrados = new ArrayList<>();
+        List<PostDto> filtrados = new ArrayList<>();
+
         for (Seller s : followed) {
-            filtrados =
-                    this.changeOrder(
-                            s.getPosts().stream().filter(seller -> seller.getDate().isAfter(date.minusDays(15)))
-                                    .collect(Collectors.toList()), order);
-            if (!filtrados.isEmpty()) {
-                List<PostDto> response = new ArrayList<>();
-                for (Post p : filtrados) {
-                    PostDto aux = new PostDto(p.getPost_id(), p.getUser_id(), p.getProduct(), p.getCategory(),
-                            p.getPrice(), p.getDate());
-                    response.add(aux);
+            for(Post p: s.getPosts()){
+                if(p.getDate().isAfter((date.minusDays(15)))){
+                    PostDto aux = new PostDto(p.getPost_id(), p.getUser_id(), p.getProduct(),
+                            p.getCategory(),p.getPrice(), p.getDate());
+                    filtrados.add(aux);
                 }
-                postDtoRes.setPosts(response);
+            }
+            if (!filtrados.isEmpty()){
+                postDtoRes.setPosts(changeOrder(filtrados,order));
             }
         }
         if (followed.isEmpty()) {
@@ -134,8 +132,26 @@ public class PostServiceImp implements IPostService {
         return new SellerListDto(seller.getUser_id(), seller.getUser_name(), posts);
     }
 
+    @Override
+    public List<PostDto> getAllPostOrderByPriceAndDiscount(String orderPrice, String orderDiscount) {
+        List<Post> posts = postRepository.getAll();
+        if (posts.isEmpty()) {
+            throw new NotFoundUserException("There are no publications with discounts");
+        }
+        List<PostDto> postsDto = this.toPostDto(posts.stream().filter(p -> p.getHas_promo().equals(Boolean.TRUE)).collect(Collectors.toList()));
+
+        if (orderPrice.equals("date_asc") || orderPrice.equals("date_desc") || orderPrice.isEmpty()) {
+            this.OrderByPrice(postsDto, orderPrice);
+        } else if (orderDiscount.equals("discount_asc") || orderDiscount.equals("discount_desc") || orderDiscount.isEmpty()) {
+            this.OrderByDiscount(postsDto, orderDiscount);
+        } else {
+            throw new NotFoundUserException("The date could not be ordered");
+        }
+
+        return postsDto;
+    }
+
     private List<PostDto> toPostDto(List<Post> posts) {
-        changeOrder(posts, "date_asc");
         List<PostDto> postsDto = new ArrayList<>();
 
         for (Post p : posts) {
@@ -143,7 +159,28 @@ public class PostServiceImp implements IPostService {
                     p.getDate(), p.getHas_promo(), p.getDiscount());
             postsDto.add(i);
         }
-
+        changeOrder(postsDto, "date_asc");
         return postsDto;
+    }
+
+    private void OrderByPrice(List<PostDto> list, String order) {
+        Comparator<PostDto> compareByPrice = Comparator.comparing(PostDto::getPrice);
+
+        if (order == null || order.equals("price_desc")) {
+            Collections.sort(list, compareByPrice);
+        } else {
+            Collections.sort(list, compareByPrice.reversed());
+        }
+    }
+
+    private void OrderByDiscount(List<PostDto> list, String order) {
+
+        Comparator<PostDto> compareByDiscount = Comparator.comparing(PostDto::getDiscount);
+
+        if (order == null || order.equals("discount_asc")) {
+            Collections.sort(list, compareByDiscount);
+        } else {
+            Collections.sort(list, compareByDiscount.reversed());
+        }
     }
 }
