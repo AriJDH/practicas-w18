@@ -1,11 +1,15 @@
 package com.bootcamp.be_java_hisp_w18_g06.service.imp;
 
 import com.bootcamp.be_java_hisp_w18_g06.dto.request.PostDTO;
+import com.bootcamp.be_java_hisp_w18_g06.dto.request.PostPromoDTO;
+import com.bootcamp.be_java_hisp_w18_g06.dto.response.PostPromoCountDTO;
 import com.bootcamp.be_java_hisp_w18_g06.entity.Post;
+import com.bootcamp.be_java_hisp_w18_g06.entity.PostPromo;
 import com.bootcamp.be_java_hisp_w18_g06.entity.User;
 import com.bootcamp.be_java_hisp_w18_g06.exceptions.BadRequestException;
 import com.bootcamp.be_java_hisp_w18_g06.exceptions.EmptyException;
 
+import com.bootcamp.be_java_hisp_w18_g06.exceptions.NotFoundException;
 import com.bootcamp.be_java_hisp_w18_g06.repository.IUserRepository;
 import com.bootcamp.be_java_hisp_w18_g06.service.IPostService;
 import com.fasterxml.jackson.databind.DeserializationFeature;
@@ -80,6 +84,45 @@ public class PostService implements IPostService {
 			throw new BadRequestException("Wrong order");
 		}
 
+	}
+
+
+	//US010
+	@Override
+	public void savePostPromo(PostPromoDTO postPromoDTO) {
+
+		if(userRepository.findUserById(postPromoDTO.getUser_id()).isEmpty()){
+			throw new EmptyException("This user can't post");
+		}
+
+		userRepository.createPost(mapper.convertValue(postPromoDTO, PostPromo.class));
+
+	}
+
+	@Override
+	public PostPromoCountDTO countPostPromo(int sellerId) {
+		Optional<User> user = userRepository.findUserById(sellerId);
+		if(user.isEmpty()){
+			throw new NotFoundException("The user with " + sellerId + "id doesn't exists");
+		}
+
+		int promo_products_count = 0;
+
+		//Buscar lista de promos del seller
+
+		List<Post> posts = user.get().getPosts();
+
+		for (Post p : posts) {
+			//es una instancia de PostPromo
+			//+1
+			if (p instanceof PostPromo){
+				promo_products_count ++;
+			}
+
+		}
+
+		PostPromoCountDTO countPostPromo = new PostPromoCountDTO(user.get().getUser_id(), user.get().getUser_name(), promo_products_count);
+		return countPostPromo;
 	}
 
 	// Métodos auxiliares

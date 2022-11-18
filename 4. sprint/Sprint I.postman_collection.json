@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "ef5f759f-1572-4b4f-81df-051743c2bb48",
+		"_postman_id": "60fa0a76-0804-48a7-b7cb-e51504a30bf5",
 		"name": "Sprint I",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -326,8 +326,8 @@
 							"listen": "prerequest",
 							"script": {
 								"exec": [
-									"pm.collectionVariables.set(\"seller_id\", 2);",
-									"pm.collectionVariables.set(\"client_id\", 3);"
+									"pm.collectionVariables.set(\"seller_id\", 1);",
+									"pm.collectionVariables.set(\"client_id\", 2);"
 								],
 								"type": "text/javascript"
 							}
@@ -338,7 +338,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"user_id\": \"{{seller_id}}\",\n    \"date\": \"01-05-2022\",\n    \"detail\": {\n        \"product_id\": 1,\n        \"product_name\": \"Silla Gamer\",\n        \"type\": \"Gamer\",\n        \"brand\": \"Racer\",\n        \"color\": \"Red & Black\",\n        \"notes\": \"Special Edition\"\n    },\n    \"category\": 100,\n    \"price\": 1500.50\n}",
+							"raw": "{\n    \"user_id\": \"{{seller_id}}\",\n    \"date\": \"01-05-2022\",\n    \"product\": {\n        \"product_id\": 1,\n        \"product_name\": \"Silla Gamer\",\n        \"type\": \"Gamer\",\n        \"brand\": \"Racer\",\n        \"color\": \"Red & Black\",\n        \"notes\": \"Special Edition\"\n    },\n    \"category\": 100,\n    \"price\": 1500.50\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -372,7 +372,7 @@
 							"listen": "prerequest",
 							"script": {
 								"exec": [
-									"pm.collectionVariables.set(\"client_id\", 1);"
+									"pm.collectionVariables.set(\"client_id\", 2);"
 								],
 								"type": "text/javascript"
 							}
@@ -478,8 +478,8 @@
 							"listen": "prerequest",
 							"script": {
 								"exec": [
-									"pm.collectionVariables.set(\"seller_id\", 2);",
-									"pm.collectionVariables.set(\"client_id\", 3);"
+									"pm.collectionVariables.set(\"seller_id\", 1);",
+									"pm.collectionVariables.set(\"client_id\", 2);"
 								],
 								"type": "text/javascript"
 							}
@@ -489,8 +489,13 @@
 						"method": "POST",
 						"header": [],
 						"body": {
-							"mode": "urlencoded",
-							"urlencoded": []
+							"mode": "raw",
+							"raw": "{\n    \"user_id\": \"{{seller_id}}\",\n    \"date\": \"01-05-2022\",\n    \"product\": {\n        \"product_id\": 1,\n        \"product_name\": \"Silla Gamer\",\n        \"type\": \"Gamer\",\n        \"brand\": \"Racer\",\n        \"color\": \"Red & Black\",\n        \"notes\": \"Special Edition\"\n    },\n    \"category\": 100,\n    \"price\": 1500.50,\n    \"has_promo\": true,\n    \"discount\": 0.25\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
 						},
 						"url": {
 							"raw": "{{url}}/products/promo-post",
@@ -512,8 +517,8 @@
 							"listen": "prerequest",
 							"script": {
 								"exec": [
-									"pm.collectionVariables.set(\"seller_id\", 2);",
-									"pm.collectionVariables.set(\"client_id\", 3);"
+									"pm.collectionVariables.set(\"seller_id\", 1);",
+									"pm.collectionVariables.set(\"client_id\", 2);"
 								],
 								"type": "text/javascript"
 							}
@@ -549,8 +554,8 @@
 							"listen": "prerequest",
 							"script": {
 								"exec": [
-									"pm.collectionVariables.set(\"seller_id\", 2);",
-									"pm.collectionVariables.set(\"client_id\", 3);"
+									"pm.collectionVariables.set(\"seller_id\", 1);",
+									"pm.collectionVariables.set(\"client_id\", 2);"
 								],
 								"type": "text/javascript"
 							}

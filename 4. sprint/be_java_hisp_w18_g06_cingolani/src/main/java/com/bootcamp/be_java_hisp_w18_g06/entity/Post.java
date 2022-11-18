@@ -18,6 +18,8 @@ public class Post {
     private String category;
     private double price;
 
+
+
     public Post( int user_id, LocalDate date, Product product, String category, double price) {
         this.post_id += 1;
         this.user_id = user_id;
