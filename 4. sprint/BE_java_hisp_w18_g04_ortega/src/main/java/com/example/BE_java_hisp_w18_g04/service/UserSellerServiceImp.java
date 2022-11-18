@@ -2,10 +2,12 @@ package com.example.BE_java_hisp_w18_g04.service;
 
 
 import com.example.BE_java_hisp_w18_g04.dto.request.PostDTOReq;
+import com.example.BE_java_hisp_w18_g04.dto.request.PostPromoDTOReq;
 import com.example.BE_java_hisp_w18_g04.dto.respose.FollowerCountDTORes;
 import com.example.BE_java_hisp_w18_g04.dto.respose.FollowerListDTORes;
 import com.example.BE_java_hisp_w18_g04.dto.respose.UserDTORes;
 import com.example.BE_java_hisp_w18_g04.entity.Post;
+import com.example.BE_java_hisp_w18_g04.entity.PostPromo;
 import com.example.BE_java_hisp_w18_g04.entity.UserBuyer;
 import com.example.BE_java_hisp_w18_g04.entity.UserSeller;
 import com.example.BE_java_hisp_w18_g04.exception.BadRequestException;
@@ -70,4 +72,13 @@ public class UserSellerServiceImp implements IUserSellerService{
         UserSeller seller = sellerRepository.findById(postDTOReq.getUser_id());
             seller.getPosts().add(post);
     }
+
+    public void publishPromoPost(PostPromoDTOReq postPromoDTOReq) {
+
+        PostPromo postPromo= Mapper.createObjectMapper().convertValue(postPromoDTOReq, PostPromo.class);
+        postRepository.createPostPromo(postPromo);
+        UserSeller seller = sellerRepository.findById(postPromoDTOReq.getPost().getUser_id());
+        seller.getPosts().add(postPromo);
+    }
+
 }
