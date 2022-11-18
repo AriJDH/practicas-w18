@@ -156,11 +156,10 @@ public class AppService implements IAppService {
         if(user == null)
             throw new UserNotFoundException("No se encontro usario con id " + userId);
 
-        List<PostPromotion> listaPromociones = new ArrayList<>(user.getPostsPromotion().values());
-        if (listaPromociones.isEmpty())
+        if (user.getPostsPromotion().isEmpty())
             throw new UserGenericException("El usuario con id " + userId + " no tiene post con promociones");
 
-        PostPromotion promotion = listaPromociones.get(postPromotionId);
+        PostPromotion promotion = user.getPostsPromotion().get(postPromotionId);
         if(promotion == null)
             throw new UserGenericException("No existe promocion con ID " + postPromotionId);
 
@@ -170,6 +169,30 @@ public class AppService implements IAppService {
         promotion.setHasPromo(false);
 
         messageDTO.setMessage("Se desactivo correctamente la promocion con ID " + postPromotionId);
+        messageDTO.setCode(200);
+        return messageDTO;
+    }
+
+    @Override
+    public MessageDTO activatePromotion(int userId, int postPromotionId) {
+        MessageDTO messageDTO = new MessageDTO();
+        User user = userRepository.getUser(userId);
+        if(user == null)
+            throw new UserNotFoundException("No se encontro usario con id " + userId);
+
+        if (user.getPostsPromotion().isEmpty())
+            throw new UserGenericException("El usuario con id " + userId + " no tiene post con promociones");
+
+        PostPromotion promotion = user.getPostsPromotion().get(postPromotionId);
+        if(promotion == null)
+            throw new UserGenericException("No existe promocion con ID " + postPromotionId);
+
+        if(promotion.isHasPromo())
+            throw new UserGenericException("La promocion con ID " + postPromotionId + " ya se encontraba activada");
+
+        promotion.setHasPromo(true);
+
+        messageDTO.setMessage("Se activo correctamente la promocion con ID " + postPromotionId);
         messageDTO.setCode(200);
         return messageDTO;
     }

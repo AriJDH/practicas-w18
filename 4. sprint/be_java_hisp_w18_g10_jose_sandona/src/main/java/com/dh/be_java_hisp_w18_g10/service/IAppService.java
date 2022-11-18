@@ -18,4 +18,6 @@ public interface IAppService {
     PostProductsPromotionDTOres getProductsPromotionCount(int id);
     MessageDTO deactivatePromotion(int userId, int postPromotionId);
 
+    MessageDTO activatePromotion(int userId, int postPromotionId);
+
 }

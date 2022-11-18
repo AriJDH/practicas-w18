@@ -110,5 +110,11 @@ public class AppController {
         return new ResponseEntity<>(userService.deactivatePromotion(userId,postId),HttpStatus.OK);
     }
 
+    @GetMapping("/product/{userId}/activate/{postId}")
+    public ResponseEntity<MessageDTO> activatePromotion(@PathVariable int userId, @PathVariable int postId){
+
+        return new ResponseEntity<>(userService.activatePromotion(userId,postId),HttpStatus.OK);
+    }
+
 
 }
