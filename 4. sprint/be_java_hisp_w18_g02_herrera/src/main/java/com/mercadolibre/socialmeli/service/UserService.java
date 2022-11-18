@@ -174,32 +174,6 @@ public class UserService implements IUserService {
         return new SellerPromoPostsDtoRes(id, user.getName(), promoPostDtoRes);
     }
 
-    private void addPost(PromoPostDtoReq promoPostReq, boolean hasPromo) {
-        Post post;
-        Product prod;
-        Double discount = hasPromo ? promoPostReq.getDiscount() : Double.valueOf(0);
-        try {
-            prod = new Product(promoPostReq.getProduct().getId(),
-                    promoPostReq.getProduct().getName(),
-                    promoPostReq.getProduct().getType(),
-                    promoPostReq.getProduct().getBrand(),
-                    promoPostReq.getProduct().getColor(),
-                    promoPostReq.getProduct().getNotes());
-            post = new Post(userRepository.getNextPostId(),
-                    promoPostReq.getDate(),
-                    promoPostReq.getCategory(),
-                    promoPostReq.getPrice(),
-                    prod, hasPromo, discount);
-            userRepository.createPost(promoPostReq.getUserId(), post);
-
-        } catch (NotFoundException nf) {
-            throw nf;
-        } catch (Exception e) {
-            throw new BadRequestException("Posteo invalido");
-        }
-    }
-
-
     /**
      * US0006 / US0009
      *
