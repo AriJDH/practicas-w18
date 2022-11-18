@@ -17,8 +17,9 @@ public class Post {
     private Product product;
     private int category;
     private double price;
-    private boolean has_promo=false;
-    private double discount=0;
+    private boolean has_promo;
+
+    private double discount;
 
     public Post(long post_id, User user, LocalDate date, Product product, int category, double price) {
         this.post_id = post_id;
@@ -34,7 +35,7 @@ public class Post {
        return weeksBetween>=0 && weeksBetween<3;
     }
 
-    public boolean isPromo(){
+    public boolean isPromotion(){
         return this.has_promo;
     }
 }

@@ -23,12 +23,12 @@ public class LoadDBConfig {
             User lucas = new User(1L, "lucas");
             Product product1 = new Product(1L, "Zapatillas", "Tipo de zapatilla",
                     "Adadis", "Blancas", "Las mejores zapas del condado");
-            Post post1 = new Post(1L, lucas, LocalDate.now(),product1,100, 20000);
+            Post post21 = new Post(1L, lucas, LocalDate.now(),product1,100, 20000);
             Post post2 = new Post(2L, lucas, LocalDate.of(2022,11,11),product1,100, 20000);
             Post post3 = new Post(3L, lucas, LocalDate.of(2022,10,11),product1,100, 20000);
-            lucas.addPost(post1);
+            /*lucas.addPost(post21);
             lucas.addPost(post2);
-            lucas.addPost(post3);
+            lucas.addPost(post3);*/
 
             userRepository.add(lucas);
 

@@ -83,7 +83,7 @@ public class User {
     }
 
     public List<Post> getPromoPosts(){
-        return this.posts.stream().filter(post->post.isPromo()).collect(Collectors.toList());
+        return this.posts.stream().filter(post->post.isPromotion()).collect(Collectors.toList());
     }
 
 }

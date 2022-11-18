@@ -3,18 +3,14 @@ package com.meli.be_java_hisp_w18_g01.services;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.meli.be_java_hisp_w18_g01.comparators.LocalDateComparatorAsc;
 import com.meli.be_java_hisp_w18_g01.comparators.LocalDateComparatorDesc;
-import com.meli.be_java_hisp_w18_g01.comparators.StringComparatorAsc;
-import com.meli.be_java_hisp_w18_g01.comparators.StringComparatorDesc;
 import com.meli.be_java_hisp_w18_g01.dtos.*;
 import com.meli.be_java_hisp_w18_g01.entities.Post;
 import com.meli.be_java_hisp_w18_g01.entities.Product;
 import com.meli.be_java_hisp_w18_g01.entities.User;
 import com.meli.be_java_hisp_w18_g01.exceptions.BadRequestException;
 import com.meli.be_java_hisp_w18_g01.mappers.MapperPostToPostDTO;
-import com.meli.be_java_hisp_w18_g01.mappers.MapperPostToPromoPostDTO;
 import com.meli.be_java_hisp_w18_g01.services.database.UserDbService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -30,6 +26,35 @@ public class PostServiceImpl implements PostService {
     private UserDbService userDbService;
 
     private DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+
+    //Defino el metodo addPostpromo, el cual recibe por parametro un PostPromoDTO
+   @Override
+   public void addPostPromo(PostPromoDTO postPromoDTO){
+       User user = userDbService.findById(postPromoDTO.getUser_id());
+       postCount++;
+       Post post;
+       ObjectMapper mapper = new ObjectMapper();
+
+       try {
+           post = new Post(postCount,
+                   user,
+                   LocalDate.parse(postPromoDTO.getDate(),dateFormatter),
+                    mapper.convertValue(postPromoDTO.getProduct(), Product.class),
+                    postPromoDTO.getCategory(),
+                    postPromoDTO.getPrice(),
+                    postPromoDTO.isHas_promo(),
+                    postPromoDTO.getDiscount()
+           );
+
+       }
+       catch (Exception e) {
+           postCount--;
+           throw new BadRequestException("No se creo el Post en promoción ya que los parametros ingresados son invalidos");
+       }
+        user.addPost(post);
+   }
+
+
 
     @Override
     public void addPost(PostDTO postDTO) {
@@ -48,23 +73,6 @@ public class PostServiceImpl implements PostService {
             );
         } catch (Exception e) {
             postCount--;
-            throw new BadRequestException("Los parámetros para la creación de la publicación son inválidos");
-        }
-        user.addPost(post);
-    }
-
-    @Override
-    public void addPromoPost(PromoPostDTO promoPostDTO) {
-        User user = userDbService.findById(promoPostDTO.getUser_id());
-        Post post;
-        ObjectMapper mapper = new ObjectMapper();
-        try{
-            post = new Post(postCount, user,
-                    LocalDate.parse(promoPostDTO.getDate(),dateFormatter), mapper.convertValue(promoPostDTO.getProduct(), Product.class),
-                    promoPostDTO.getCategory(), promoPostDTO.getPrice(),true,promoPostDTO.getDiscount());
-        }catch (Exception e){
-            postCount--;
-            System.out.println(e.getMessage());
             throw new BadRequestException("Los parámetros para la creación de la publicación son inválidos");
         }
         user.addPost(post);
@@ -91,19 +99,6 @@ public class PostServiceImpl implements PostService {
 
     }
 
-    @Override
-    public SellerPromoPostCountDTO getSellerPromoPostCount(long userId) {
-        User user = userDbService.findById(userId);
-        return new SellerPromoPostCountDTO(userId, user.getUser_name(), user.getPromoPosts().size());
-    }
-
-    @Override
-    public SellerPromoPostInfoDTO getSellerPromoPostInfo(long userId) {
-        User user = userDbService.findById(userId);
-        MapperPostToPromoPostDTO mapperPostToPromoPostDTO = new MapperPostToPromoPostDTO();
-        return new SellerPromoPostInfoDTO(user.getUser_id(), user.getUser_name(),
-                user.getPromoPosts().stream().map(post->mapperPostToPromoPostDTO.convertValue(post, PromoPostDTO.class)).collect(Collectors.toList()));
-    }
 
     public List<Post> sortPosts(List<Post> posts, String order) {
         Comparator comp;

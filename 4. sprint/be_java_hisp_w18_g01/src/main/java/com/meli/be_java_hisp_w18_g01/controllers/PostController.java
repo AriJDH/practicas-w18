@@ -26,18 +26,9 @@ public class PostController {
     }
 
     @PostMapping("/promo-post")
-    public ResponseEntity<ResponseDTO> addPromoPost(@RequestBody PromoPostDTO promoPostDTO){
-        postService.addPromoPost(promoPostDTO);
-        return ResponseEntity.ok(new ResponseDTO(200, "operación exitosa"));
-    }
-
-    @GetMapping("/promo-post/count")
-    public ResponseEntity<SellerPromoPostCountDTO> getSellerPromoPostCount(@RequestParam long userId){
-        return ResponseEntity.ok(postService.getSellerPromoPostCount(userId));
-    }
-
-    @GetMapping("/promo-post/list")
-    public ResponseEntity<SellerPromoPostInfoDTO> getSellerPromoPostInfo(@RequestParam long userId){
-        return ResponseEntity.ok(postService.getSellerPromoPostInfo(userId));
+    public ResponseEntity<ResponseDTO> addPostPromo(@RequestBody PostPromoDTO postPromoDTO){
+        postService.addPostPromo(postPromoDTO);
+        return ResponseEntity.ok(new ResponseDTO(200, "Operación Exitosa, Post en promoción creado"));
     }
 }
+
