@@ -2,10 +2,7 @@ package com.example.BE_java_hisp_w18_g04.service;
 
 
 import com.example.BE_java_hisp_w18_g04.dto.request.PostDTOReq;
-import com.example.BE_java_hisp_w18_g04.dto.respose.FollowerCountDTORes;
-import com.example.BE_java_hisp_w18_g04.dto.respose.FollowerListDTORes;
-import com.example.BE_java_hisp_w18_g04.dto.respose.PostPromoCountDTORes;
-import com.example.BE_java_hisp_w18_g04.dto.respose.UserDTORes;
+import com.example.BE_java_hisp_w18_g04.dto.respose.*;
 import com.example.BE_java_hisp_w18_g04.entity.Post;
 import com.example.BE_java_hisp_w18_g04.entity.UserBuyer;
 import com.example.BE_java_hisp_w18_g04.entity.UserSeller;
@@ -77,5 +74,14 @@ public class UserSellerServiceImp implements IUserSellerService{
         Long countPromoPost =sellerRepository.finAllPostPromo(user_id);
         String name_user = sellerRepository.findById(user_id).getUser_name();
         return new PostPromoCountDTORes(user_id,name_user,countPromoPost);
+    }
+
+    @Override
+    public PostPromoByUserDTORes getPostPromoByUser(Integer user_id) {
+        UserSeller seller = sellerRepository.findById(user_id);
+        List<PostDTORes> postPromo = seller.getPosts().stream()
+                .filter(post -> post.getHas_promo().equals(true)).collect(Collectors.toList()).stream()
+                .map(post -> new PostDTORes(seller.getUser_id(),post)).collect(Collectors.toList());
+        return new PostPromoByUserDTORes(seller.getUser_id(),seller.getUser_name(),postPromo);
     }
 }

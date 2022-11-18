@@ -19,6 +19,7 @@ public class PostDTORes {
     private ProductDTORes product;
     private Integer category;
     private Double price;
+    private Boolean has_promo;
 
     public PostDTORes(Integer user_id, Post post) {
         this.user_id=user_id;
@@ -27,5 +28,6 @@ public class PostDTORes {
         this.product= new ProductDTORes(post.getProduct());
         this.category=post.getCategory();
         this.price=post.getPrice();
+        this.has_promo = post.getHas_promo();
     }
 }
