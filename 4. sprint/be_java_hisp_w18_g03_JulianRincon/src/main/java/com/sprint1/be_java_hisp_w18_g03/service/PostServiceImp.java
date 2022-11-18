@@ -73,7 +73,11 @@ public class PostServiceImp implements IPostService {
             throw new NoFoundException("Category not found");
         }
 
-        Integer postId = iPostRepository.getPostsSizeList() + 1;
+        if (request.getDiscount() > 0 || request.getDiscount() < 1|| request.getHasPromo()){
+            throw new ParamException("Invalid params discount");
+        }
+
+            Integer postId = iPostRepository.getPostsSizeList() + 1;
 
         Product product = new Product(
                 request.getProduct().getProductId(),
@@ -178,8 +182,15 @@ public class PostServiceImp implements IPostService {
 
     @Override
     public PromoPostCountDTO getPostPromoCount(Integer userId) {
-        List<Post> posts = iPostRepository.findPromoPostsByUser(userId);
         User user = iUserRepository.findById(userId);
+
+        if (user == null) {
+            throw new NoFoundException("User Not Found");
+        }
+
+        List<Post> posts = iPostRepository.findPromoPostsByUser(userId);
+
+
         return new PromoPostCountDTO(user.getUserId(), user.getUserName(), posts.size());
     }
 
