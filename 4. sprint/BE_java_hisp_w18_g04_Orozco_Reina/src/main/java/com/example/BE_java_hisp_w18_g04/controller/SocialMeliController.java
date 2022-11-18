@@ -1,8 +1,10 @@
 package com.example.BE_java_hisp_w18_g04.controller;
 
 import com.example.BE_java_hisp_w18_g04.dto.request.PostDTOReq;
-import com.example.BE_java_hisp_w18_g04.dto.request.PromoPostDTOReq;
-import com.example.BE_java_hisp_w18_g04.dto.respose.*;
+import com.example.BE_java_hisp_w18_g04.dto.respose.FollowedListDTORes;
+import com.example.BE_java_hisp_w18_g04.dto.respose.FollowerCountDTORes;
+import com.example.BE_java_hisp_w18_g04.dto.respose.FollowerListDTORes;
+import com.example.BE_java_hisp_w18_g04.dto.respose.PostFollowedByDateDTORes;
 import com.example.BE_java_hisp_w18_g04.service.IPostService;
 import com.example.BE_java_hisp_w18_g04.service.IUserBuyerService;
 import com.example.BE_java_hisp_w18_g04.service.IUserSellerService;
@@ -17,7 +19,6 @@ public class SocialMeliController {
     private final IUserSellerService userSellerService;
 
     private final IPostService postService;
-
 
     public SocialMeliController(IUserBuyerService userBuyerService, IUserSellerService userSellerService, IPostService postService) {
         this.userBuyerService = userBuyerService;
@@ -62,26 +63,5 @@ public class SocialMeliController {
         userBuyerService.unfollow(userId,userIdToUnfollow);
         return new ResponseEntity<>(HttpStatus.OK);
     }
-
-
-    @PostMapping("/products/promo-post")
-    public ResponseEntity<?>publishPromoPost(@RequestBody PromoPostDTOReq promoPostDTOReq){
-        userSellerService.publishPromoPost(promoPostDTOReq);
-        return new ResponseEntity<>(HttpStatus.OK);
-    }
-
-    @GetMapping("/products/promo-post/count")
-    public ResponseEntity<PromoPostCountDTORes> promoPostCount(@RequestParam Integer user_id){
-        System.out.println(user_id);
-        Integer id = Integer.valueOf(String.valueOf(user_id));
-        PromoPostCountDTORes response= userSellerService.promoPostCount(id);
-        return new ResponseEntity<>(response, HttpStatus.OK);
-    }
-
-
-
-
-
-
 
 }

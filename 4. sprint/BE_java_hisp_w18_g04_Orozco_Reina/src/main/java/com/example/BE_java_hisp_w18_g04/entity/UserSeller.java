@@ -12,5 +12,4 @@ import java.util.List;
 public class UserSeller extends User {
     private List<UserBuyer> followers;
     private List<Post> posts;
-    private List<PromoPost> promoPosts;
 }
