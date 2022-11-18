@@ -17,6 +17,8 @@ public class User {
     private List<User> followers;
     private List<User> followed;
     private List<Post> posts;
+    // Agrego una lista de posts promocionales
+    private List<PromoPost> promoPosts;
     
     public User(int user_id, String user_name) {
         this.user_id = user_id;

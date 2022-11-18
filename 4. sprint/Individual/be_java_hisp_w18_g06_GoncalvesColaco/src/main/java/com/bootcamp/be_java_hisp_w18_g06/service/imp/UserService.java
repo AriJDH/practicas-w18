@@ -26,12 +26,12 @@ public class UserService implements IUserService {
 
     @Autowired
     private IUserRepository userRepository;
+ 
 
     // Mapeo -> No modificar por el momento!
     ObjectMapper mapper = JsonMapper.builder()
             .findAndAddModules()
             .build();
-
 
     //US-001
     //userId != userIdToFollow --> Boolean
@@ -48,7 +48,7 @@ public class UserService implements IUserService {
     private boolean userFollowedHasPosts(User user) {
         return user.getPosts() != null;
     }
-
+    
     @Override
     public void followUser(int userId, int userIdToFollow) {
 
@@ -85,7 +85,7 @@ public class UserService implements IUserService {
             throw new BadRequestException("You can't follow yourself");
         }
     }
-
+    
     //US-007
     private void removeFromFollow(User user) {
         user.getFollowed().remove(user.getUser_id());
@@ -205,5 +205,7 @@ public class UserService implements IUserService {
                 throw new EmptyException("Invalid param order");
             }
         }
+        
+        
 
 }

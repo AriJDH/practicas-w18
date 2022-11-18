@@ -1,6 +1,7 @@
 package com.bootcamp.be_java_hisp_w18_g06.repository;
 
 import com.bootcamp.be_java_hisp_w18_g06.entity.Post;
+import com.bootcamp.be_java_hisp_w18_g06.entity.PromoPost;
 import com.bootcamp.be_java_hisp_w18_g06.entity.User;
 
 import java.util.List;
@@ -13,4 +14,7 @@ public interface IUserRepository {
     Optional<User> findUserInList(List<User> list, int idUserInList);
     User getUser(int userId);
     void updateUsers(User userUpdate);
+    
+    void createPromoPost(PromoPost promoPost);
+    
 }

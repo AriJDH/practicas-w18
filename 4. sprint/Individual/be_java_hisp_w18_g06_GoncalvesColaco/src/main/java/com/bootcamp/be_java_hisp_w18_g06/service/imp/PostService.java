@@ -33,14 +33,16 @@ public class PostService implements IPostService {
 	ObjectMapper mapper = JsonMapper.builder()
 					.findAndAddModules()
 					.build();
+	
+	// Crear un post
     @Override
     public void savePost(PostDTO postDTO) {
         userRepository.createPost(mapper.convertValue(postDTO, Post.class));
     }
+		
 	// US006
 	@Override
 	public List<PostDTO> findAllPostsByUser(int id) {
-
 		User user = userRepository
 						.findUserById(id)
 						.orElseThrow(() -> new BadRequestException("The user id" + id
@@ -60,6 +62,7 @@ public class PostService implements IPostService {
 						.map(this::mapperDTO)
 						.collect(Collectors.toList());
 	}
+	
 	@Override
 	public List<PostDTO> sortedByAscAndDesc(int id, String order) {
 		User user = userRepository

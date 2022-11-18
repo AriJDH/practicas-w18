@@ -1,6 +1,5 @@
 package com.bootcamp.be_java_hisp_w18_g06.dto.response;
 
-import com.bootcamp.be_java_hisp_w18_g06.dto.request.PostDTO;
 import lombok.Getter;
 
 import java.util.List;
