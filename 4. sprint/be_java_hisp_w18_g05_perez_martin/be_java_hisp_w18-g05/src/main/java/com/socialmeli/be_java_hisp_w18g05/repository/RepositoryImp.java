@@ -28,7 +28,7 @@ public class RepositoryImp implements IRepository{
 
     @Override
     public List<Seller> getAllSellers() {
-        return null;
+        return sellers;
     }
 
     @Override

@@ -5,6 +5,8 @@ import com.socialmeli.be_java_hisp_w18g05.dto.response.*;
 import com.socialmeli.be_java_hisp_w18g05.dto.request.NewPostDTORequest;
 import com.socialmeli.be_java_hisp_w18g05.dto.response.SellerFollowersCountDTOResponse;
 
+import java.util.List;
+
 public interface IService {
 
     SellerFollowersListDTOResponse followersFilter(Integer seller_id, String order);
@@ -33,6 +35,9 @@ public interface IService {
 
     // Individual US0011
     PostPromoCountDTOResponse postPromoCount(Integer user_id);
+
+    //Bonus US0012
+    List<TotalPostSellerDTOResponse> totalCountPostSeller();
 
 
     SellerFollowersCountDTOResponse followersCount(Integer user_id);

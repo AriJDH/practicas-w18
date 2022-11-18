@@ -355,6 +355,20 @@ public class ServiceImp implements IService {
         return new PostPromoCountDTOResponse(seller.getUser_id(),seller.getName(),countedPromoPost);
     }
 
+    @Override // US0012
+    public List<TotalPostSellerDTOResponse> totalCountPostSeller() {
+        List<Seller> sellerList = repository.getAllSellers();
+        List<TotalPostSellerDTOResponse> totalPostSellerDTOResponses = new ArrayList<>();
+        for (Seller seller:sellerList){
+            List<Post> listPromo = seller.getPosts().stream().filter(x-> x.getHas_promo()).collect(Collectors.toList());
+            Integer countedPromoPost = listPromo.size();
+            Integer postList = seller.getPosts().size();
+            TotalPostSellerDTOResponse totalPostSellerResp = new TotalPostSellerDTOResponse(seller.getUser_id(), seller.getName(),postList,countedPromoPost );
+            totalPostSellerDTOResponses.add(totalPostSellerResp);
+        }
+        return totalPostSellerDTOResponses;
+    }
+
 
 }
 

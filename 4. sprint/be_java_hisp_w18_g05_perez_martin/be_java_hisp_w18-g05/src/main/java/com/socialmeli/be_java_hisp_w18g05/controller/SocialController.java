@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 public class SocialController {
 
@@ -71,5 +73,11 @@ public class SocialController {
     public ResponseEntity<PostPromoCountDTOResponse> postPromoCount(@RequestParam Integer user_id) {
         return new ResponseEntity<>(service.postPromoCount(user_id), HttpStatus.OK);
     }
+
+    @GetMapping("/users/total-post")
+    public ResponseEntity<?> getAllPost(){
+        return new ResponseEntity<>(service.totalCountPostSeller(),HttpStatus.OK);
+    }
+
 
 }
