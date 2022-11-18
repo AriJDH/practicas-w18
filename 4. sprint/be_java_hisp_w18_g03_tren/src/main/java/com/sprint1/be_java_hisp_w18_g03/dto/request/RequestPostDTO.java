@@ -20,4 +20,7 @@ public class RequestPostDTO {
     private ProductRequestDTO product;
     private Integer category;
     private Double price;
+    @JsonProperty("has_promo")
+    private Boolean hasPromo;
+    private Double discount;
 }

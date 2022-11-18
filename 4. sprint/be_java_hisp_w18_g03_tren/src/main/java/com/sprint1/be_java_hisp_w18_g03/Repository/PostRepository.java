@@ -27,4 +27,5 @@ public class PostRepository implements IPostRepository {
     public Integer getPostsSizeList() {
         return postList.size();
     }
+
 }

@@ -4,10 +4,7 @@ import com.sprint1.be_java_hisp_w18_g03.Repository.ICategoryRepository;
 import com.sprint1.be_java_hisp_w18_g03.Repository.IPostRepository;
 import com.sprint1.be_java_hisp_w18_g03.Repository.IUserRepository;
 import com.sprint1.be_java_hisp_w18_g03.dto.request.RequestPostDTO;
-import com.sprint1.be_java_hisp_w18_g03.dto.response.ProductResponseDTO;
-import com.sprint1.be_java_hisp_w18_g03.dto.response.ResponseDTO;
-import com.sprint1.be_java_hisp_w18_g03.dto.response.ResponsePostDTO;
-import com.sprint1.be_java_hisp_w18_g03.dto.response.SellersPostDTO;
+import com.sprint1.be_java_hisp_w18_g03.dto.response.*;
 import com.sprint1.be_java_hisp_w18_g03.entity.Category;
 import com.sprint1.be_java_hisp_w18_g03.entity.Post;
 import com.sprint1.be_java_hisp_w18_g03.entity.User;
@@ -48,8 +45,8 @@ public class PostServiceImp implements IPostService {
                 request.getProduct().getNotes(),
                 category,
                 request.getPrice(),
-                request.getProduct().getHasPromo(),
-                request.getProduct().getDiscount()
+                request.getHasPromo(),
+                request.getDiscount()
         );
         Post newPost = new Post(
                 sizeList,
@@ -131,6 +128,34 @@ public class PostServiceImp implements IPostService {
         }
 
         return new SellersPostDTO(user.getUserId(), responsePostDTOs);
+    }
+
+    @Override
+    public ProductCountPromoDTO findProductsPromo(Integer userId) {
+
+        User user = this.findUserById(userId);
+
+        List<Post> posts = iPostRepository.findByUser(userId);
+
+        if (posts.isEmpty()) {
+            throw new NoFoundException("Not a seller");
+        }
+
+        Long postPromo = posts.stream().filter(x -> x.getProducto().getHasPromo() != null
+                && x.getProducto().getHasPromo().equals(Boolean.TRUE)).count();
+
+        return new ProductCountPromoDTO(user.getUserId(), user.getUserName(), postPromo.intValue());
+    }
+
+    private User findUserById(Integer userId) {
+
+        User user = iUserRepository.findById(userId);
+
+        if (user == null) {
+            throw new NoFoundException("The user hasn't being found");
+        }
+
+        return user;
     }
 
 }

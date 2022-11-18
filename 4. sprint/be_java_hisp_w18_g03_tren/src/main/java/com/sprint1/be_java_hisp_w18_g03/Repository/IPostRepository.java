@@ -10,4 +10,5 @@ public interface IPostRepository {
     boolean addPost(Post post);
 
     Integer getPostsSizeList();
+
 }
