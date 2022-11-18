@@ -18,6 +18,7 @@ public class UserRepository implements IUserRepository {
 	List<User> users = new ArrayList<>();
 	List<Product> products = new ArrayList<>();
 	List<Post> posts = new ArrayList<>();
+	List<User> followed = new ArrayList<>();
 	
 	Product product1 = new Product(
 					1,
@@ -42,6 +43,7 @@ public class UserRepository implements IUserRepository {
 					"usuario1"
 	);
 	
+	
 	User user2 = new User(
 					2,
 					"usuario2"
@@ -50,7 +52,7 @@ public class UserRepository implements IUserRepository {
 	Post post1 = new Post(
 					1,
 					user1.getUser_id(),
-					LocalDate.of(2021, 5, 1),
+					LocalDate.of(2022, 11, 10),
 					product1,
 					"120",
 					2800.69
@@ -70,8 +72,11 @@ public class UserRepository implements IUserRepository {
 		products.add(product2);
 		posts.add(post1);
 		posts.add(post2);
+		user1.setPosts(posts);
 		users.add(user1);
 		users.add(user2);
+		followed.add(user1);
+		user2.setFollowed(followed);
 	}
 	
 	public UserRepository() {
