@@ -2,6 +2,7 @@ package com.bootcamp.be_java_hisp_w18_g06.repository.imp;
 
 import com.bootcamp.be_java_hisp_w18_g06.entity.Post;
 import com.bootcamp.be_java_hisp_w18_g06.entity.Product;
+import com.bootcamp.be_java_hisp_w18_g06.entity.PromoPost;
 import com.bootcamp.be_java_hisp_w18_g06.entity.User;
 import com.bootcamp.be_java_hisp_w18_g06.exceptions.EmptyException;
 import com.bootcamp.be_java_hisp_w18_g06.exceptions.NotFoundException;
@@ -23,6 +24,7 @@ public class UserRepository implements IUserRepository {
 
 	List<Product> products = new ArrayList<>();
 	List<Post> posts = new ArrayList<>();
+	List<PromoPost> promoPosts = new ArrayList<>();
 	List<User> followed = new ArrayList<>();
 	
 	Product product1 = new Product(
@@ -105,6 +107,11 @@ public class UserRepository implements IUserRepository {
 	@Override
 	public void createPost(Post post) {
 		posts.add(post);
+	}
+
+	@Override
+	public void createPromoPost(PromoPost promoPost) {
+		promoPosts.add(promoPost);
 	}
 
 	public void addPostToUser(){

@@ -9,6 +9,7 @@ import java.util.List;
 public interface IProductService {
 
     void save(PostDTO postDTO);
+    void savePromoPost(PostDTO postDTO);
 
 	// US006
 	List<PostDTO> findAllPostsByUser(int id);

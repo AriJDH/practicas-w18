@@ -22,6 +22,12 @@ public class ProductService implements IProductService {
     public void save(PostDTO postDTO) {
         postService.savePost(postDTO);
     }
+
+	@Override
+	public void savePromoPost(PostDTO postDTO) {
+		postService.savePromoPost(postDTO);
+	}
+
 	// US006
 	@Override
 	public List<PostDTO> findAllPostsByUser(int id) {

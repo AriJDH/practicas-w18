@@ -9,11 +9,12 @@ import java.time.LocalDate;
 @Getter
 @Setter
 public class PostDTO {
-    //US-005
     private int user_id;
     @JsonFormat(pattern = "dd-MM-yyyy")
     private LocalDate date;
     private Product product;
     private String category;
     private double price;
+    private boolean has_promo;
+    private double discount;
 }

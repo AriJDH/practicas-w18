@@ -30,4 +30,11 @@ public class ProductController {
         productService.save(postDTO);
         return ResponseEntity.ok("OK");
     }
+
+	@PostMapping("/promo-post")
+	public ResponseEntity<?> savePromoPost(PostDTO postDTO){
+		productService.savePromoPost(postDTO);
+		return ResponseEntity.ok("OK");
+	}
+
 }
