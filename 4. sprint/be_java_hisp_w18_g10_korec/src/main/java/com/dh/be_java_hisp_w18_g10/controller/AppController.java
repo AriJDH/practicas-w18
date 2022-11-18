@@ -2,15 +2,14 @@ package com.dh.be_java_hisp_w18_g10.controller;
 
 import com.dh.be_java_hisp_w18_g10.dto.require.PostDTOreq;
 import com.dh.be_java_hisp_w18_g10.dto.require.PostPromoDTOreq;
-import com.dh.be_java_hisp_w18_g10.dto.response.PostPromoCountDTOres;
-import com.dh.be_java_hisp_w18_g10.dto.response.UserPostsDTOres;
-import com.dh.be_java_hisp_w18_g10.dto.response.UserFollowersListDTOres;
-import com.dh.be_java_hisp_w18_g10.dto.response.UserFollowersCountDTOres;
+import com.dh.be_java_hisp_w18_g10.dto.response.*;
 import com.dh.be_java_hisp_w18_g10.service.IAppService;
 import com.dh.be_java_hisp_w18_g10.service.AppService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 public class AppController {
@@ -100,8 +99,9 @@ public class AppController {
         return new ResponseEntity<>(iAppService.getPostPromoCount(user_id), HttpStatus.OK);
     }
 
-   /* @GetMapping("/users")
-    public ResponseEntity<?> getUsers(){
-
-    }*/
+    @GetMapping("/users/")
+    public ResponseEntity<List<UserDTOres>> getUsers() {
+    //US 0012
+        return new ResponseEntity<>(iAppService.getAllUsers(), HttpStatus.OK);
+    }
 }

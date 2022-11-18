@@ -9,6 +9,7 @@ import com.dh.be_java_hisp_w18_g10.entity.User;
 import org.modelmapper.ModelMapper;
 
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -40,6 +41,24 @@ public class DTOMapper {
         UserFollowersListDTOres userFollowersListDTOres = new UserFollowersListDTOres(user.getUserId(), user.getUserName(), userDTOresList);
 
         return userFollowersListDTOres;
+    }
+
+    //----------------------------AGREGADO PARA EL INDIVIDUAL---------------------------
+
+    public static List<UserDTOres> mapToLListUser(List<User> userList){
+        List<UserDTOres> userDTOresList = new ArrayList<>();
+
+/*
+* for (Map.Entry<Integer, User> f : followed.entrySet()) {
+            UserDTOres userDTOres = new UserDTOres(f.getValue().getUserId(), f.getValue().getUserName());
+            followedList.add(userDTOres);
+        }
+*/
+        for (User user : userList) {
+            UserDTOres userDTOres = new UserDTOres(user.getUserId(),user.getUserName());
+            userDTOresList.add(userDTOres);
+        }
+        return userDTOresList;
     }
 
     public static Post mapToPost(PostDTOreq postDTOreq) {

@@ -234,6 +234,10 @@ public class AppService implements IAppService {
 
     @Override
     public List<UserDTOres> getAllUsers() {
-        return null;
+        List<User> listUser = userRepository.getAllUsers();
+
+        List<UserDTOres> userDTOresList = DTOMapper.mapToLListUser(listUser);
+
+        return userDTOresList;
     }
 }
