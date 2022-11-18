@@ -30,13 +30,13 @@ public class UserController {
     @PostMapping("/{userId}/follow/{userIdToFollow}")
     public ResponseEntity<FollowDtoRes> follow(@PathVariable Integer userId, @PathVariable Integer userIdToFollow) {
         FollowDtoReq followDtoReq = new FollowDtoReq(userId, userIdToFollow);
-        return new ResponseEntity(userService.follow(followDtoReq), HttpStatus.OK);
+        return new ResponseEntity<>(userService.follow(followDtoReq), HttpStatus.OK);
     }
 
     @GetMapping("/{userId}/followed/list")
     public ResponseEntity<FollowedDTO> getFollowed(@PathVariable Integer userId,
                                                    @RequestParam(required = false) String order) {
-        return new ResponseEntity(userService.getFollowed(userId, order), HttpStatus.OK);
+        return new ResponseEntity<>(userService.getFollowed(userId, order), HttpStatus.OK);
     }
 
 

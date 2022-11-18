@@ -85,6 +85,10 @@ public class UserRepositoryImp implements IUserRepository{
         return found;
     }
 
+    @Override
+    public void createPost(Post post, Integer id) {
+        findSellerById(id).getPosts().add(post);
+    }
 
     @Override
     public List<String> follow(Integer userId, Integer userIdToFollow) {
