@@ -36,15 +36,10 @@ public class PostController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
-//    @PostMapping("/promo-post")
-//    public ResponseEntity<GenericResdto> createPostPromo(@RequestBody PostPromoDtoReq post) {
-//        postService.createPromoPost(post);
-//        return new ResponseEntity<>(new GenericResdto("Post-promo created with success", 200), HttpStatus.OK);
-//    }
-
     @PostMapping("/promo-post")
-    public Post createPostPromo(@RequestBody PostPromoDtoReq post) {
-        return postService.createPromoPost(post);
+    public ResponseEntity<GenericResdto> createPostPromo(@RequestBody PostPromoDtoReq post) {
+        postService.createPromoPost(post);
+        return new ResponseEntity<>(new GenericResdto("Post-promo created with success", 200), HttpStatus.OK);
     }
 
     @GetMapping("/promo-post/count")

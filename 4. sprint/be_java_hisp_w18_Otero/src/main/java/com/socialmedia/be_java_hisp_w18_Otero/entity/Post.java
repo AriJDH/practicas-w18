@@ -33,7 +33,7 @@ public class Post {
 
     public Post(Integer postId, Integer user_id, LocalDate date, Product product, int category, double price, boolean b,
                 double discount) {
-        super();
+        this(postId,user_id,date,product,category,price);
         this.has_promo = b;
         this.discount= discount;
     }
