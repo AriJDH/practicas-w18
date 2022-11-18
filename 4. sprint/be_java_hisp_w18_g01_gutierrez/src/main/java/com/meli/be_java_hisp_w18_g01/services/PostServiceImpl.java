@@ -13,7 +13,6 @@ import com.meli.be_java_hisp_w18_g01.services.database.UserDbService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Comparator;
@@ -46,6 +45,7 @@ public class PostServiceImpl implements PostService {
                     postDTO.getPrice()
             );
         } catch (Exception e) {
+            postCount--;
             throw new BadRequestException("Los parámetros para la creación de la publicación son inválidos");
         }
         user.addPost(post);
@@ -75,6 +75,7 @@ public class PostServiceImpl implements PostService {
                     postPromoDTO.getDiscount()
             );
         } catch (Exception e) {
+            postCount++;
             throw new BadRequestException("Los parámetros para la creación de la publicación son inválidos");
         }
         user.addPost(post);
@@ -87,7 +88,6 @@ public class PostServiceImpl implements PostService {
         List<User> sellers = user.getFollowed().stream()
                 .filter(seller -> seller.getPosts().stream().anyMatch(post -> post.isRecent()))
                 .collect(Collectors.toList());
-        ObjectMapper mapper = new ObjectMapper();
 
         LocalDate.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
 
