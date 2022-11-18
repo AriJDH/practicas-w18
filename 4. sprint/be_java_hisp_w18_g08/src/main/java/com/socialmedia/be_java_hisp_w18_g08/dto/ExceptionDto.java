@@ -9,7 +9,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
-public class ExceptionDTO {
+public class ExceptionDto {
 
     private String message;
     private int status;
