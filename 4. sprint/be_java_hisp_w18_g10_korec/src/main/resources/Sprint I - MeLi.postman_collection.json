@@ -1,9 +1,8 @@
 {
 	"info": {
-		"_postman_id": "c9713a7c-7801-4757-9c93-c019d28c7583",
+		"_postman_id": "9cdc6bfc-6ed2-49f3-94eb-eaccf1286da6",
 		"name": "Sprint I - MeLi",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "23885368"
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
 		{
@@ -328,6 +327,28 @@
 						"unfollow",
 						"2"
 					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "US0010- Post Promo",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": ""
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "US 0011 - Count Promo post",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": ""
 				}
 			},
 			"response": []
