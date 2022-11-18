@@ -1,0 +1,64 @@
+[
+  {
+    "id": 1,
+    "name": "Marcos",
+    "surname": "Galperín",
+    "symptoms": [
+      {
+        "code": "1",
+        "name": "fever",
+        "severityLevel": "medium"
+      }
+    ],
+    "age": 60
+  },
+  {
+    "id": 2,
+    "name": "Mauricio",
+    "surname": "Macri",
+    "symptoms": [
+      {
+        "code": "2",
+        "name": "Shortness of breath or difficulty breathing",
+        "severityLevel": "high"
+      },
+      {
+        "code": "3",
+        "name": "Muscle or body aches",
+        "severityLevel": "high"
+      }
+    ],
+    "age": 65
+  },
+  {
+    "id": 3,
+    "name": "Mirtha",
+    "surname": "Legrand",
+    "symptoms": [
+      {
+        "code": "2",
+        "name": "Shortness of breath or difficulty breathing",
+        "severityLevel": "high"
+      },
+      {
+        "code": "1",
+        "name": "fever",
+        "severityLevel": "medium"
+      }
+    ],
+    "age": 95
+  },
+  {
+    "id": 4,
+    "name": "Homero",
+    "surname": "Simpson",
+    "symptoms": [
+      {
+        "code": "4",
+        "name": "Congestion or runny nose",
+        "severityLevel": "low"
+      }
+    ],
+    "age": 45
+  }
+]
