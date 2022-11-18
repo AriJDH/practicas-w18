@@ -1,13 +1,10 @@
 package com.socialmedia.be_java_hisp_w18_g08.controller;
 
-import com.socialmedia.be_java_hisp_w18_g08.dto.response.UserListDto;
+import com.socialmedia.be_java_hisp_w18_g08.dto.response.*;
 import com.socialmedia.be_java_hisp_w18_g08.dto.request.FollowDtoReq;
-import com.socialmedia.be_java_hisp_w18_g08.dto.response.FollowDtoRes;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import com.socialmedia.be_java_hisp_w18_g08.dto.response.FollowedDto;
-import com.socialmedia.be_java_hisp_w18_g08.dto.response.SellerFollowersCountDto;
 import com.socialmedia.be_java_hisp_w18_g08.service.IUserService;
 import com.socialmedia.be_java_hisp_w18_g08.service.UserServiceImp;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -49,5 +46,10 @@ public class UserController {
     @PostMapping("/{userId}/unfollow/{userIdToUnfollow}")
     public ResponseEntity<String> unFollow(@PathVariable Integer userId, @PathVariable Integer userIdToUnfollow){
         return new ResponseEntity<>(userService.unFollow(userId,userIdToUnfollow),HttpStatus.OK);
+    }
+
+    @GetMapping("/sellers-promo")
+    public ResponseEntity<SellerPromoDtoRes> listSellersPromo(){
+        return new ResponseEntity<>(userService.listSellersPromo(),HttpStatus.OK);
     }
 }

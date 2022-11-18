@@ -1,11 +1,8 @@
 package com.socialmedia.be_java_hisp_w18_g08.service;
 
-import com.socialmedia.be_java_hisp_w18_g08.dto.response.UserListDto;
+import com.socialmedia.be_java_hisp_w18_g08.dto.response.*;
 import com.socialmedia.be_java_hisp_w18_g08.entity.Seller;
 import com.socialmedia.be_java_hisp_w18_g08.dto.request.FollowDtoReq;
-import com.socialmedia.be_java_hisp_w18_g08.dto.response.FollowDtoRes;
-import com.socialmedia.be_java_hisp_w18_g08.dto.response.FollowedDto;
-import com.socialmedia.be_java_hisp_w18_g08.dto.response.SellerFollowersCountDto;
 
 import java.util.List;
 
@@ -22,4 +19,6 @@ public interface IUserService {
     List<Seller> getFollowedByUserId(Integer userId);
 
     String unFollow(Integer userId,Integer userIdToUnfollow);
+
+    SellerPromoDtoRes listSellersPromo();
 }

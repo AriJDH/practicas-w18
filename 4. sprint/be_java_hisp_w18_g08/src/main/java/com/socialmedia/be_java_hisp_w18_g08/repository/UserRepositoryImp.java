@@ -1,5 +1,6 @@
 package com.socialmedia.be_java_hisp_w18_g08.repository;
 
+import com.socialmedia.be_java_hisp_w18_g08.dto.response.SellerPromoDtoRes;
 import com.socialmedia.be_java_hisp_w18_g08.entity.Post;
 import com.socialmedia.be_java_hisp_w18_g08.entity.Seller;
 import com.socialmedia.be_java_hisp_w18_g08.entity.User;
@@ -117,5 +118,10 @@ public class UserRepositoryImp implements IUserRepository{
            user.getFollowed().remove(seller);
            seller.getFollowers().remove(user);
            return user.getUser_name() +" with id: " + userId + " unfollow to -> " + seller.getUser_name() + " with id: "+ userIdToUnfollow;
+    }
+
+    @Override
+    public List<Seller> listSellers() {
+        return this.sellers;
     }
 }
