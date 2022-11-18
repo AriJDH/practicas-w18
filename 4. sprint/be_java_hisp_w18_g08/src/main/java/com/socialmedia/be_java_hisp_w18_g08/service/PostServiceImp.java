@@ -15,8 +15,6 @@ import com.socialmedia.be_java_hisp_w18_g08.util.OrderDateDesc;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -65,16 +63,18 @@ public class PostServiceImp implements IPostService{
         }
     }
 
-    public List<PostDtoRes> getPostSellerListByUserId(Integer userId, String order){
+    public PostDtoRes getPostSellerListByUserId(Integer userId, String order){
         List<Seller> followed = userService.getFollowedByUserId(userId);
-        List<PostDtoRes> postDtoRes = new ArrayList<>();
+        PostDtoRes postDtoRes = new PostDtoRes();
         LocalDate date = LocalDate.now();
+        postDtoRes.setUser_id(userId);
         for(Seller s:followed){
             List<Post> filtrados = this.changeOrder(s.getPosts().stream().filter(seller-> seller.getDate().isAfter(date.minusDays(15))).collect(Collectors.toList()), order);
-            PostDtoRes postDtoRes1 = new PostDtoRes(userId,filtrados);
-            postDtoRes.add(postDtoRes1);
+            if(!filtrados.isEmpty()) {
+                postDtoRes.setPosts(filtrados);
+            }
         }
-        if(postDtoRes.isEmpty())
+        if(followed.isEmpty())
             throw new NotFoundUserException("User whith id: " + userId +" sellers post not found ");
         return postDtoRes;
     }

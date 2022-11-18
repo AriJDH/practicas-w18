@@ -3,7 +3,7 @@ package com.socialmedia.be_java_hisp_w18_g08.service;
 import com.socialmedia.be_java_hisp_w18_g08.dto.UserDTO;
 import com.socialmedia.be_java_hisp_w18_g08.dto.UserListDTO;
 import com.socialmedia.be_java_hisp_w18_g08.dto.request.FollowDtoReq;
-import com.socialmedia.be_java_hisp_w18_g08.dto.FollowDtoRes;
+import com.socialmedia.be_java_hisp_w18_g08.dto.response.FollowDtoRes;
 import com.socialmedia.be_java_hisp_w18_g08.dto.FollowedDTO;
 import com.socialmedia.be_java_hisp_w18_g08.dto.SellerFollowersCountDTO;
 import com.socialmedia.be_java_hisp_w18_g08.entity.Seller;
@@ -27,18 +27,16 @@ public class UserServiceImp implements IUserService {
 
     @Override
     public FollowDtoRes follow(FollowDtoReq followDtoReq) {
-        List<String> res = new ArrayList<>();
+        String res;
         FollowDtoRes followDtoRes = new FollowDtoRes();
         res = userRepository.follow(followDtoReq.getUserId(), followDtoReq.getUserIdToFollow());
         if (res == null) {
-            throw new NotFoundUserException("There is no user with the ID " + followDtoReq.getUserId() + " or " +
-                    followDtoReq.getUserIdToFollow());
+            throw new NotFoundUserException("Something was wrong");
         }
         followDtoRes.setStatusCode(200);
-        followDtoRes.setMessage(res.get(0) + " is following " + res.get(1));
+        followDtoRes.setMessage(res);
         return followDtoRes;
     }
-
 
     @Override
     public FollowedDTO getFollowed(Integer userId, String order) {
@@ -106,9 +104,20 @@ public class UserServiceImp implements IUserService {
     }
 
     public List<Seller> getFollowedByUserId(Integer userId) {
-        List<Seller> lista = userRepository.getUserByID(userId).getFollowed();
-        if (lista.isEmpty())
+        User user = userRepository.getUserByID(userId);
+        if(user == null)
             throw new NotFoundUserException("Not found User with id : " + userId);
+        List<Seller> lista = user.getFollowed();
+        if (lista.isEmpty())
+            throw new NotFoundUserException("Not found followed");
         return lista;
+    }
+
+    @Override
+    public String unFollow(Integer userId, Integer userIdToUnfollow) {
+        String message = userRepository.unFollow(userId,userIdToUnfollow);
+        if(message == null)
+            throw new NotFoundUserException("User or Seller not Found");
+        return message;
     }
 }

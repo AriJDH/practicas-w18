@@ -8,8 +8,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import com.socialmedia.be_java_hisp_w18_g08.dto.response.PostDtoRes;
 
-import java.util.List;
-
 @RestController
 @RequestMapping("/products")
 public class PostController {
@@ -27,9 +25,9 @@ public class PostController {
     }
 
     @GetMapping("/followed/{userId}/list")
-    public ResponseEntity<List<PostDtoRes>> getPostSellerListByUserId(@PathVariable Integer userId,
+    public ResponseEntity<PostDtoRes> getPostSellerListByUserId(@PathVariable Integer userId,
                                                                       @RequestParam(required = false) String order){
-        List<PostDtoRes> response =  postService.getPostSellerListByUserId(userId, order);
+        PostDtoRes response =  postService.getPostSellerListByUserId(userId, order);
         return new ResponseEntity<>(response,HttpStatus.OK);
     }
 }
