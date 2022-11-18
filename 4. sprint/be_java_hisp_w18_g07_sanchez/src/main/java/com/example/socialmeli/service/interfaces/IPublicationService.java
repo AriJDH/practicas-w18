@@ -1,4 +1,4 @@
-package com.example.socialmeli.service;
+package com.example.socialmeli.service.interfaces;
 
 import com.example.socialmeli.dto.request.PublicationRequest;
 import com.example.socialmeli.dto.response.UserFollowedPublicationResponse;
@@ -10,7 +10,6 @@ public interface IPublicationService {
      * @param publicationRequest json with publication data and product data
      */
     void registerPublication(PublicationRequest publicationRequest);
-
     UserFollowedPublicationResponse getUserFollowedPublicationsById(Integer userId, String order);
 
 }

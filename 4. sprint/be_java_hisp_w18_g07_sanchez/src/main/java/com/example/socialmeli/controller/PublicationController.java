@@ -2,7 +2,7 @@ package com.example.socialmeli.controller;
 
 import com.example.socialmeli.dto.request.PublicationRequest;
 import com.example.socialmeli.dto.response.UserFollowedPublicationResponse;
-import com.example.socialmeli.service.IPublicationService;
+import com.example.socialmeli.service.interfaces.IPublicationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

@@ -1,4 +1,4 @@
-package com.example.socialmeli.service;
+package com.example.socialmeli.service.interfaces;
 
 import com.example.socialmeli.dto.response.UserFollowedListResponse;
 import com.example.socialmeli.dto.response.UserFollowerCountResponse;
