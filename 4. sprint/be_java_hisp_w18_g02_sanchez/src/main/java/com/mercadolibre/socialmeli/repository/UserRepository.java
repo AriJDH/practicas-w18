@@ -32,8 +32,8 @@ public class UserRepository implements IUserRepository{
         Product pr2 = new Product(2, "Bicicleta de montaña R26", "Rodado",
                 "Winner", "Roja", "18 velocidades.");
 
-        Post post1 = new Post(nextPostId++, LocalDate.now(),  1, 15.5, pr1);
-        Post post2 = new Post(nextPostId++, LocalDate.now(),  2, 15999.99, pr2);
+        Post post1 = new Post(nextPostId++, LocalDate.now(),  1, 15.5, pr1, false, 0);
+        Post post2 = new Post(nextPostId++, LocalDate.now(),  2, 15999.99, pr2, false, 0);
 
         User u3 = new User(3, "LaOfertaPerfecta");
         User u4 = new User(4, "MotociclosSA");
@@ -65,7 +65,6 @@ public class UserRepository implements IUserRepository{
 
             for(User u : followed ) {
                 if(u.getId() == id) {
-                    System.out.println(entry.getValue().getId());
                     res.add(entry.getValue());
                 }
             }
@@ -122,6 +121,18 @@ public class UserRepository implements IUserRepository{
             user.setPosts(new ArrayList<Post>());
         }
         user.getPosts().add(newPost);
+    }
+
+    @Override
+    public List<User> getAllSellers(){
+        List<User> res = new ArrayList<User>();
+
+        for(Map.Entry<Integer, User> entry : users.entrySet()) {
+            if(entry.getValue().isSeller()){
+                res.add(entry.getValue());
+            }
+        }
+        return res;
     }
 
     @Override

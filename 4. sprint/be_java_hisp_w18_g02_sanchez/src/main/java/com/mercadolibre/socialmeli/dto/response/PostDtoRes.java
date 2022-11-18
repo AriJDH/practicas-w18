@@ -22,4 +22,7 @@ public class PostDtoRes {
     private ProductDto product;
     private Integer category;
     private Double price;
+    @JsonProperty("has_promo")
+    private boolean hasPromo;
+    private double discount;
 }

@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -41,4 +42,7 @@ public class User {
         return (this.posts!=null && !this.posts.isEmpty());
     }
 
+    public List<Post> getPromoPosts(){
+        return this.posts.stream().filter(p -> p.isHasPromo()).collect(Collectors.toList());
+    }
 }

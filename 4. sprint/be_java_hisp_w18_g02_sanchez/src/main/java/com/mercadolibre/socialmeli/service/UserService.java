@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -102,12 +103,17 @@ public class UserService implements IUserService {
     }
 
     /**
-     * US0005
+     * US0005 y US0010
      *
      * @param postReq
      */
     @Override
     public void addPost(PostDtoReq postReq) {
+        if(postReq.getDiscount()<0 || postReq.getDiscount() > 100)
+            throw new IllegalArgumentException("El descuento debe ser un valor entre 0 y 100.");
+        if(postReq.getPrice()<0)
+            throw new IllegalArgumentException("El precio debe ser mayor a 0.");
+
         Post post;
         Product prod;
         try {
@@ -121,7 +127,9 @@ public class UserService implements IUserService {
                     postReq.getDate(),
                     postReq.getCategory(),
                     postReq.getPrice(),
-                    prod);
+                    prod,
+                    postReq.isHasPromo(),
+                    postReq.getDiscount());
             userRepository.createPost(postReq.getUserId(), post);
 
         } catch (NotFoundException nf) {
@@ -140,7 +148,7 @@ public class UserService implements IUserService {
      * @return
      */
     @Override
-    public RecentPostsDtoRes getRecentPosts(Integer userId, String order) {
+    public PostsGroupedByUserDtoRes getRecentPosts(Integer userId, String order) {
         List<User> followed = userRepository.getFollowed(userId);
         LocalDate now = LocalDate.now();
         LocalDate twoWeeksAgo = now.minusWeeks(2);
@@ -148,19 +156,7 @@ public class UserService implements IUserService {
         List<PostDtoRes> postsRes = followed.stream()
                 .flatMap(f -> f.getPosts().stream())
                 .filter(p -> (p.getDate().isAfter(twoWeeksAgo) && p.getDate().isBefore(now.plusDays(1))))
-                .map(p -> new PostDtoRes(
-                        userId,
-                        p.getId(),
-                        p.getDate(),
-                        new ProductDto(p.getProduct().getId(),
-                                p.getProduct().getName(),
-                                p.getProduct().getType(),
-                                p.getProduct().getBrand(),
-                                p.getProduct().getColor(),
-                                p.getProduct().getNotes()),
-                        p.getCategory(),
-                        p.getPrice()))
-                .collect(Collectors.toList());
+                .map(p -> getPostDtoRes(p, userId)).collect(Collectors.toList());
 
         if (order != null && order.equals("date_desc")) {
             postsRes.sort(Comparator.comparing(PostDtoRes::getDate).reversed());
@@ -168,7 +164,7 @@ public class UserService implements IUserService {
             postsRes.sort(Comparator.comparing(PostDtoRes::getDate));
         }
 
-        return new RecentPostsDtoRes(userId, postsRes);
+        return new PostsGroupedByUserDtoRes(userId, null, postsRes);
     }
 
     /**
@@ -182,6 +178,83 @@ public class UserService implements IUserService {
     public String unfollow(Integer userId, Integer userIdToUnfollow) {
         this.userRepository.unfollow(userId, userIdToUnfollow);
         return "El usuario " + userId + " dejó de seguir al usuario " + userIdToUnfollow;
+    }
+
+    /**
+     * US0011
+     * @param userId
+     * @return
+     */
+    @Override
+    public SellerPromoCountDtoRes getSellerPromoCount(Integer userId){
+        User seller = this.userRepository.findById(userId);
+        if(seller == null) throw new NotFoundException("No se encontró un usuario con id "+userId);
+        return new SellerPromoCountDtoRes(seller.getId(), seller.getName(), (int)seller.getPosts().stream().filter(p -> p.isHasPromo()).count());
+    }
+
+    /**
+     * US0012
+     * @param userId
+     * @param order
+     * @return
+     */
+    @Override
+    public PostsGroupedByUserDtoRes getSellerPromoList(Integer userId, String order){
+        User user = this.userRepository.findById(userId);
+        if(user == null) throw new NotFoundException("No se encontró un usuario con id "+userId);
+        if(!user.isSeller())throw new IllegalArgumentException("El usuario id "+userId+" no es vendedor");
+
+        List<Post> promos = user.getPromoPosts();
+        if(promos.size() == 0) throw new NotFoundException("El vendedor con id "+userId+" no tiene ninguna promoción actualmente.");
+
+        List<PostDtoRes> promosDto = promos.stream().map(p -> getPostDtoRes(p, userId)).collect(Collectors.toList());
+        sortPostByName(promosDto, order);
+        return new PostsGroupedByUserDtoRes(user.getId(), user.getName(), promosDto);
+    }
+
+    /**
+     * US0013 Get All Promos.
+     * @param order
+     * @return
+     */
+    @Override
+    public List<PostDtoRes> getAllPromos(String order){
+        List<User> sellers = userRepository.getAllSellers();
+        List<PostDtoRes> promos = new ArrayList<>();
+
+        for(User seller : sellers){
+            for(Post p : seller.getPosts()){
+                if(p.isHasPromo())promos.add(getPostDtoRes(p, seller.getId()));
+            }
+        }
+        if(promos.size()== 0)throw new NotFoundException("No hay promociones para mostrar.");
+        sortPostByName(promos, order);
+        return promos;
+    }
+
+    private PostDtoRes getPostDtoRes(Post p, Integer userId){
+        return new PostDtoRes(
+                userId,
+                p.getId(),
+                p.getDate(),
+                new ProductDto(p.getProduct().getId(),
+                        p.getProduct().getName(),
+                        p.getProduct().getType(),
+                        p.getProduct().getBrand(),
+                        p.getProduct().getColor(),
+                        p.getProduct().getNotes()),
+                p.getCategory(),
+                p.getPrice(),
+                p.isHasPromo(),
+                p.getDiscount());
+    }
+
+    private void sortPostByName(List<PostDtoRes> postsRes, String order){
+        if (order != null && order.equals("name_desc")) {
+            postsRes.sort((x, y) ->-1* x.getProduct().getName().compareToIgnoreCase(y.getProduct().getName()));
+        } else if (order != null && order.equals("name_asc")) {
+            postsRes.sort((x, y) -> x.getProduct().getName().compareToIgnoreCase(y.getProduct().getName()));
+        }
     }
 
 }

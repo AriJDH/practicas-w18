@@ -1,10 +1,9 @@
 package com.mercadolibre.socialmeli.service;
 
-import com.mercadolibre.socialmeli.dto.response.RecentPostsDtoRes;
+import com.mercadolibre.socialmeli.dto.response.*;
 import com.mercadolibre.socialmeli.dto.request.PostDtoReq;
-import com.mercadolibre.socialmeli.dto.response.SellerFollowerCountDtoRes;
-import com.mercadolibre.socialmeli.dto.response.SellerFollowerListDtoRes;
-import com.mercadolibre.socialmeli.dto.response.UserFollowedListDtoRes;
+
+import java.util.List;
 
 public interface IUserService {
     String follow(Integer userId, Integer userIdToFollow);
@@ -13,6 +12,9 @@ public interface IUserService {
     SellerFollowerListDtoRes getFollowers(Integer id, String order);
     UserFollowedListDtoRes getFollowed(Integer id, String order);
     void addPost(PostDtoReq postReq);
-    RecentPostsDtoRes getRecentPosts(Integer userId, String order);
+    PostsGroupedByUserDtoRes getRecentPosts(Integer userId, String order);
+    SellerPromoCountDtoRes getSellerPromoCount(Integer userId);
+    PostsGroupedByUserDtoRes getSellerPromoList(Integer userId, String order);
+    List<PostDtoRes> getAllPromos(String order);
 
 }
