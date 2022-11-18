@@ -11,6 +11,7 @@ public interface IRepository {
     List<Buyer> getAllBuyers();
     List<Seller> getAllSellers();
     int addPost();
+    int addPromotionPost();
     Buyer getByIdBuyer(Integer buyer_id);
     Seller getByIdSeller(Integer seller_id);
 

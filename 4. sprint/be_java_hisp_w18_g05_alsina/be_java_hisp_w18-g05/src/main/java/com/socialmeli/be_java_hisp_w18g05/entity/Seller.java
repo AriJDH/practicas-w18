@@ -13,6 +13,8 @@ public class Seller extends User {
 
     private List<Buyer> followers = new ArrayList<>();
     private List<Post> posts = new ArrayList<>();
+    private List<PromotionPost> promotionPost = new ArrayList<>();
+
 
     public Seller(Integer user_id, String name) {
         super(user_id, name);
@@ -25,6 +27,9 @@ public class Seller extends User {
 
     public void addPost(Post post){
         posts.add(post);
+    }
+    public void addPromotionPost(PromotionPost promotionPost){
+        this.promotionPost.add(promotionPost);
     }
 
     public void addFollower(Buyer buyer){

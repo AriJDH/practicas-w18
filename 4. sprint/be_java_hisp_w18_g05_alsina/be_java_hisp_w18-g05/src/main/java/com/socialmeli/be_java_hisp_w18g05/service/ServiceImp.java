@@ -3,6 +3,7 @@ package com.socialmeli.be_java_hisp_w18g05.service;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import com.socialmeli.be_java_hisp_w18g05.dto.request.NewPromotionPostDTORequest;
 import com.socialmeli.be_java_hisp_w18g05.dto.response.*;
 import com.socialmeli.be_java_hisp_w18g05.dto.request.NewPostDTORequest;
 import com.socialmeli.be_java_hisp_w18g05.dto.response.BuyerDTOResponse;
@@ -13,12 +14,8 @@ import com.socialmeli.be_java_hisp_w18g05.dto.response.SellerDTOResponse;
 import com.socialmeli.be_java_hisp_w18g05.dto.response.SellerFollowersCountDTOResponse;
 
 import com.socialmeli.be_java_hisp_w18g05.dto.response.SellerFollowersListDTOResponse;
-import com.socialmeli.be_java_hisp_w18g05.entity.Buyer;
-import com.socialmeli.be_java_hisp_w18g05.entity.Post;
+import com.socialmeli.be_java_hisp_w18g05.entity.*;
 
-import com.socialmeli.be_java_hisp_w18g05.entity.Product;
-
-import com.socialmeli.be_java_hisp_w18g05.entity.Seller;
 import com.socialmeli.be_java_hisp_w18g05.exceptions.InvalidException;
 import com.socialmeli.be_java_hisp_w18g05.exceptions.InvalidParameterException;
 import com.socialmeli.be_java_hisp_w18g05.exceptions.NotFoundException;
@@ -332,6 +329,48 @@ public class ServiceImp implements IService {
 
         seller.getPosts().add(newPost);
     }
+
+
+    //PARTE INDIVIDUAL
+
+    //For US 0010
+    @Override
+    public void newPromotionPost(NewPromotionPostDTORequest post) {
+        Integer user_id = post.getUser_id(); // Get post asociated with this id
+        Seller seller = repository.getByIdSeller(user_id); // Get seller from repository
+
+        if (seller == null) {  //Exception non existing seller
+            throw new NotFoundException("Seller id " + user_id + " not found");
+        }
+        //Create DTO of the product
+        Product product = new Product(post.getProduct().getProduct_id(),post.getProduct().getProduct_name(), post.getProduct().getType(), post.getProduct().getBrand(), post.getProduct().getColor(), post.getProduct().getNotes());
+
+        //Convert the string to date time format
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        LocalDate localDate = LocalDate.parse(post.getDate(),formatter);
+
+        //Create DTO of the post
+        PromotionPost newPromotionPost = new PromotionPost(repository.addPromotionPost(), localDate, product, post.getCategory(), post.getPrice(),post.isHas_promo(), post.getDiscount());
+
+        seller.addPromotionPost(newPromotionPost);
+    }
+
+    //For US0011
+    @Override
+    public SellerPromotionProductsCountDTOResponse promotionPostCount(Integer user_id){
+        Seller seller = repository.getByIdSeller(user_id); // Get seller from repository
+        if (seller == null) {
+            throw new NotFoundException("Seller id " + user_id + " not found"); // Throw exception if seller doesn't exist
+        }
+        List<PromotionPost> promotionPost = seller.getPromotionPost(); //Get promotion post from seller
+        Integer countedPromotionProducts = promotionPost.size(); // Get size of the list of promotion post
+
+        //Create DTO response
+        SellerPromotionProductsCountDTOResponse productPromotionCount = new SellerPromotionProductsCountDTOResponse(seller.getUser_id(),seller.getName(), countedPromotionProducts);
+        return  productPromotionCount;
+    }
+
+
 
 }
 
