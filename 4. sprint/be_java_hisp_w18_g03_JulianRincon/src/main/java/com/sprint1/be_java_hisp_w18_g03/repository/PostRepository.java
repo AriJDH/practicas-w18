@@ -1,4 +1,4 @@
-package com.sprint1.be_java_hisp_w18_g03.Repository;
+package com.sprint1.be_java_hisp_w18_g03.repository;
 
 import com.sprint1.be_java_hisp_w18_g03.entity.Post;
 import org.springframework.stereotype.Repository;
@@ -22,6 +22,13 @@ public class PostRepository implements IPostRepository {
     public boolean addPost(Post post) {
         postList.add(post);
         return true;
+    }
+
+    public List<Post> findPromoPostsByUser(Integer userId){
+        return postList.stream()
+                //.filter(post -> post.getUser().getUserId().equals(userId))
+                .filter(post -> post.isHasPromo())
+                .collect(Collectors.toList());
     }
 
     public Integer getPostsSizeList() {

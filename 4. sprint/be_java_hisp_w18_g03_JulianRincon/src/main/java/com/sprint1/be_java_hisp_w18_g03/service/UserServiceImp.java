@@ -1,7 +1,7 @@
 package com.sprint1.be_java_hisp_w18_g03.service;
 
-import com.sprint1.be_java_hisp_w18_g03.Repository.IPostRepository;
-import com.sprint1.be_java_hisp_w18_g03.Repository.IUserRepository;
+import com.sprint1.be_java_hisp_w18_g03.repository.IPostRepository;
+import com.sprint1.be_java_hisp_w18_g03.repository.IUserRepository;
 import com.sprint1.be_java_hisp_w18_g03.dto.response.FollowedDTO;
 import com.sprint1.be_java_hisp_w18_g03.dto.response.FollowerCountDTO;
 import com.sprint1.be_java_hisp_w18_g03.dto.response.FollowersDTO;

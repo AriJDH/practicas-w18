@@ -1,4 +1,4 @@
-package com.sprint1.be_java_hisp_w18_g03.Repository;
+package com.sprint1.be_java_hisp_w18_g03.repository;
 
 import com.sprint1.be_java_hisp_w18_g03.entity.Post;
 
@@ -8,6 +8,6 @@ public interface IPostRepository {
     Post findByIdPost(Integer postId);
     List<Post> findByUser(Integer userId);
     boolean addPost(Post post);
-
     Integer getPostsSizeList();
+    List<Post> findPromoPostsByUser(Integer userId);
 }

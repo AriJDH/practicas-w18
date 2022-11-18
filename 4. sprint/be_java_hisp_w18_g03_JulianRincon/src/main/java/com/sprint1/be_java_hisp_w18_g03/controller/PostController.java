@@ -1,6 +1,8 @@
 package com.sprint1.be_java_hisp_w18_g03.controller;
 
+import com.sprint1.be_java_hisp_w18_g03.dto.request.PromoPostDTORequest;
 import com.sprint1.be_java_hisp_w18_g03.dto.request.RequestPostDTO;
+import com.sprint1.be_java_hisp_w18_g03.dto.response.PromoPostCountDTO;
 import com.sprint1.be_java_hisp_w18_g03.dto.response.ResponseDTO;
 import com.sprint1.be_java_hisp_w18_g03.dto.response.SellersPostDTO;
 import com.sprint1.be_java_hisp_w18_g03.service.IPostService;
@@ -29,5 +31,15 @@ public class PostController {
                                                          @RequestParam(required = false) String order
     ) {
         return ResponseEntity.ok(postService.getPostSellers(userId,order));
+    }
+
+    @PostMapping("/promo-post")
+    public ResponseEntity<ResponseDTO> createPromoPost(@RequestBody PromoPostDTORequest promoPostDTORequest){
+        return new ResponseEntity<>(postService.createPromoPost(promoPostDTORequest), HttpStatus.OK);
+    }
+
+    @GetMapping("/promo-post/count")
+    public ResponseEntity<PromoPostCountDTO> getCouuntPromoPost(@RequestParam Integer user_id){
+        return new ResponseEntity<>(postService.getPostPromoCount(user_id),HttpStatus.OK);
     }
 }

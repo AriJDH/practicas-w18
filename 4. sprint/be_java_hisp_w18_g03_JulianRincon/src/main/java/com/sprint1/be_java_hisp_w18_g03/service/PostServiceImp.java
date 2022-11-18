@@ -1,13 +1,11 @@
 package com.sprint1.be_java_hisp_w18_g03.service;
 
-import com.sprint1.be_java_hisp_w18_g03.Repository.ICategoryRepository;
-import com.sprint1.be_java_hisp_w18_g03.Repository.IPostRepository;
-import com.sprint1.be_java_hisp_w18_g03.Repository.IUserRepository;
+import com.sprint1.be_java_hisp_w18_g03.dto.request.PromoPostDTORequest;
+import com.sprint1.be_java_hisp_w18_g03.dto.response.*;
+import com.sprint1.be_java_hisp_w18_g03.repository.ICategoryRepository;
+import com.sprint1.be_java_hisp_w18_g03.repository.IPostRepository;
+import com.sprint1.be_java_hisp_w18_g03.repository.IUserRepository;
 import com.sprint1.be_java_hisp_w18_g03.dto.request.RequestPostDTO;
-import com.sprint1.be_java_hisp_w18_g03.dto.response.ProductResponseDTO;
-import com.sprint1.be_java_hisp_w18_g03.dto.response.ResponseDTO;
-import com.sprint1.be_java_hisp_w18_g03.dto.response.ResponsePostDTO;
-import com.sprint1.be_java_hisp_w18_g03.dto.response.SellersPostDTO;
 import com.sprint1.be_java_hisp_w18_g03.entity.Category;
 import com.sprint1.be_java_hisp_w18_g03.entity.Post;
 import com.sprint1.be_java_hisp_w18_g03.entity.User;
@@ -39,7 +37,7 @@ public class PostServiceImp implements IPostService {
         Integer sizeList = iPostRepository.getPostsSizeList() + 1;
         Category category = iCategoryRepository.findCategoryById(request.getCategory());
         if (category == null) throw new NoFoundException("The category hasn't being found");
-        var product = new Product(
+        Product product = new Product(
                 request.getProduct().getProductId(),
                 request.getProduct().getProductName(),
                 request.getProduct().getType(),
@@ -47,19 +45,64 @@ public class PostServiceImp implements IPostService {
                 request.getProduct().getColor(),
                 request.getProduct().getNotes(),
                 category,
-                request.getPrice(),
-                request.getProduct().getHasPromo(),
-                request.getProduct().getDiscount()
+                request.getPrice()
         );
+
         Post newPost = new Post(
                 sizeList,
                 user,
                 request.getDate(),
-                product
+                product,
+                false,
+                0f
         );
         boolean responseAdd = iPostRepository.addPost(newPost);
         if (responseAdd == false) throw new CreationException("Error adding the post");
         return new ResponseDTO("Post added successfully", 200);
+    }
+
+    @Override
+    public ResponseDTO createPromoPost(PromoPostDTORequest request) {
+        User user = iUserRepository.findById(request.getUserId());
+        if(user == null){
+            throw new NoFoundException("User not found");
+        }
+
+        Category category = iCategoryRepository.findCategoryById(request.getCategory());
+        if(category == null){
+            throw new NoFoundException("Category not found");
+        }
+
+        Integer postId = iPostRepository.getPostsSizeList() + 1;
+
+        Product product = new Product(
+                request.getProduct().getProductId(),
+                request.getProduct().getProductName(),
+                request.getProduct().getType(),
+                request.getProduct().getBrand(),
+                request.getProduct().getColor(),
+                request.getProduct().getNotes(),
+                category,
+                request.getPrice()
+        );
+
+
+        Post newPost = new Post(
+                postId,
+                user,
+                request.getDate(),
+                product,
+                request.getHasPromo(),
+                request.getDiscount()
+        );
+
+        boolean responseAdd = iPostRepository.addPost(newPost);
+
+        if(!responseAdd){
+            throw new CreationException("Error creating post");
+        }
+
+        return new ResponseDTO("Post added succesfully", 200);
     }
 
     @Override
@@ -132,5 +175,10 @@ public class PostServiceImp implements IPostService {
 
         return new SellersPostDTO(user.getUserId(), responsePostDTOs);
     }
-
+    @Override
+    public PromoPostCountDTO getPostPromoCount(Integer userId){
+        List<Post> posts = iPostRepository.findPromoPostsByUser(userId);
+        User user = iUserRepository.findById(userId);
+        return new PromoPostCountDTO(user.getUserId(), user.getUserName(), posts.size());
+    }
 }
