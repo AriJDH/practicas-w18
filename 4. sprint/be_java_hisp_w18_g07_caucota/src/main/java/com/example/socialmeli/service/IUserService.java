@@ -3,6 +3,7 @@ package com.example.socialmeli.service;
 import com.example.socialmeli.dto.response.UserFollowedListResponse;
 import com.example.socialmeli.dto.response.UserFollowerCountResponse;
 import com.example.socialmeli.dto.response.UserFollowersListResponse;
+import com.example.socialmeli.dto.response.UserSaleResponse;
 
 public interface IUserService {
 

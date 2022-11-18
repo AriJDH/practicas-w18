@@ -10,6 +10,7 @@ public interface IPublicationRepository {
 
     PublicationEntity getEntityById(Integer publicationId);
 
-    Map<Integer, PublicationEntity> getAllEntity();
+    Map<Integer, PublicationEntity> getAll();
+
 
 }

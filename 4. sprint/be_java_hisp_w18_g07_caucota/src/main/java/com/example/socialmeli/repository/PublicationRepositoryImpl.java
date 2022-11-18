@@ -31,8 +31,9 @@ public class PublicationRepositoryImpl implements IPublicationRepository {
     }
 
     @Override
-    public Map<Integer, PublicationEntity> getAllEntity() {
-        return publications;
+    public Map<Integer, PublicationEntity> getAll() {
+        return this.publications;
     }
+
 
 }

@@ -1,12 +1,12 @@
 package com.example.socialmeli.service;
 
-import com.example.socialmeli.dto.response.UserBasicResponse;
-import com.example.socialmeli.dto.response.UserFollowedListResponse;
-import com.example.socialmeli.dto.response.UserFollowerCountResponse;
-import com.example.socialmeli.dto.response.UserFollowersListResponse;
+import com.example.socialmeli.dto.response.*;
+import com.example.socialmeli.entity.PublicationEntity;
 import com.example.socialmeli.entity.UserEntity;
 import com.example.socialmeli.exception.NotFoundException;
+import com.example.socialmeli.repository.IPublicationRepository;
 import com.example.socialmeli.repository.IUserRepository;
+import com.example.socialmeli.repository.PublicationRepositoryImpl;
 import com.example.socialmeli.util.UserMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -130,5 +130,6 @@ public class UserServiceImpl implements IUserService {
 
         return UserMapper.userEntity2UserFollowedListResponse(entity, followedList);
     }
+
 
 }

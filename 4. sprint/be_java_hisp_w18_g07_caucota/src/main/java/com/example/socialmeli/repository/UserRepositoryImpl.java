@@ -1,11 +1,13 @@
 package com.example.socialmeli.repository;
 
+import com.example.socialmeli.entity.PublicationEntity;
 import com.example.socialmeli.entity.UserEntity;
 import com.example.socialmeli.exception.NotFoundException;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Repository
@@ -39,8 +41,6 @@ public class UserRepositoryImpl implements IUserRepository {
         return users;
     }
 
-
-
     @Override
     public void followSeller(Integer userId, Integer userIdToFollow) {
 
@@ -70,5 +70,13 @@ public class UserRepositoryImpl implements IUserRepository {
     public Boolean isSeller(Integer userId) {
         return users.get(userId).getPublicationList().size() > 0;
     }
+
+
+    @Override
+    public List<Integer> getNumbersOfSales(Integer userId) {
+        return this.users.get(userId).getPublicationList();
+    }
+
+
 
 }

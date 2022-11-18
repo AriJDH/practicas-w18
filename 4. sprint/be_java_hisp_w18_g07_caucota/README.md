@@ -20,3 +20,44 @@ Se plantea creación de una API Rest que permita:
 Por otra parte, dado que se pretende una buena experiencia de usuario con respecto a la forma de presentación de los resultados de cada consulta, se necesita que los mismos puedan ser ordenados mediante cualquiera de los siguientes criterios:
 8. Alfabético Ascendente y Descendente
 9. Fecha Ascendente y Descendente
+
+
+
+C. Ejemplo Requerimiento Bonus (Desarrollo INDIVIDUAL)
+US 0012:
+Obtener un listado de todas las publicaciones con su categoría nombre y precio  sin importar de que vendedor sean.
+
+
+Sign:  SIGN GET	/products/getall
+
+RESPONSE:	      
+
+
+
+        {   
+            
+            {
+            "product_name": "Silla Gamer",
+            "category": "100",
+            "price": 35300.50,
+            },
+            {
+            "product_name": "Licuadora",
+            "category": "200",
+            "price": 1500.50,
+            }
+            {
+            "product_name": "Ventilador",
+            "category": "20",
+            "price": 15000.50,
+            },
+            { 
+            "product_name": "Agua",
+            "category": "10",
+            "price": 200.50,
+            }
+        },
+
+
+
+

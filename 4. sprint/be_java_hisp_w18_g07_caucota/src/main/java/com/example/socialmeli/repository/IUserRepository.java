@@ -1,7 +1,9 @@
 package com.example.socialmeli.repository;
 
+import com.example.socialmeli.entity.PublicationEntity;
 import com.example.socialmeli.entity.UserEntity;
 
+import java.util.List;
 import java.util.Map;
 
 public interface IUserRepository {
@@ -17,5 +19,7 @@ public interface IUserRepository {
     UserEntity getEntityById(Integer userId);
 
     Map<Integer, UserEntity> getAllEntity();
+
+    List<Integer> getNumbersOfSales(Integer userId);
 
 }

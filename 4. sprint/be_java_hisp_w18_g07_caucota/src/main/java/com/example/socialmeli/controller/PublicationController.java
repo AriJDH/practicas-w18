@@ -1,12 +1,20 @@
 package com.example.socialmeli.controller;
 
 import com.example.socialmeli.dto.request.PublicationRequest;
+import com.example.socialmeli.dto.request.PublicationSaleRequest;
+import com.example.socialmeli.dto.response.PublicationAllResponse;
 import com.example.socialmeli.dto.response.UserFollowedPublicationResponse;
+import com.example.socialmeli.dto.response.UserSaleResponse;
+import com.example.socialmeli.entity.PublicationEntity;
 import com.example.socialmeli.service.IPublicationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequiredArgsConstructor
@@ -38,5 +46,29 @@ public class PublicationController {
         UserFollowedPublicationResponse response = publicationService.getUserFollowedPublicationsById(userId, order);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
+
+    /**
+     * US 0010: URL=/products/promo-post
+     * @param publicationSaleRequest json with SALE publication data and product data
+     * @return
+     */
+    @PostMapping("/products/promo-post")
+    public ResponseEntity<Void> createSale(@RequestBody PublicationSaleRequest publicationSaleRequest){
+
+        this.publicationService.registerPublication(publicationSaleRequest);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @GetMapping("/products/promo-post/count")
+    public ResponseEntity<UserSaleResponse> getSaleCount(@RequestParam("user_id") Integer userId){
+        return new ResponseEntity<>(this.publicationService.getSaleCount(userId), HttpStatus.OK);
+    }
+
+    @GetMapping("/products/getall")
+    public ResponseEntity<List<PublicationAllResponse>> getAll(){
+        return new ResponseEntity<>(this.publicationService.getAll(), HttpStatus.OK);
+    }
+
+
 
 }

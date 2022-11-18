@@ -1,9 +1,13 @@
 package com.example.socialmeli.service;
 
 import com.example.socialmeli.dto.request.PublicationRequest;
+import com.example.socialmeli.dto.request.PublicationSaleRequest;
+import com.example.socialmeli.dto.response.PublicationAllResponse;
 import com.example.socialmeli.dto.response.PublicationResponse;
 import com.example.socialmeli.dto.response.UserFollowedPublicationResponse;
+import com.example.socialmeli.dto.response.UserSaleResponse;
 import com.example.socialmeli.entity.PublicationEntity;
+import com.example.socialmeli.entity.PublicationSaleEntity;
 import com.example.socialmeli.entity.UserEntity;
 import com.example.socialmeli.repository.IProductRepository;
 import com.example.socialmeli.repository.IPublicationRepository;
@@ -19,6 +23,7 @@ import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service
@@ -44,6 +49,8 @@ public class PublicationServiceImpl implements IPublicationService {
         publicationRepository.addEntity(publication);
         entity.getPublicationList().add(publication.getId());
     }
+
+
 
     /**
      * US 0006: Obtain a list of the publications made by the sellers that a
@@ -91,5 +98,58 @@ public class PublicationServiceImpl implements IPublicationService {
 
         return new UserFollowedPublicationResponse(userId, publicationResponseList);
     }
+
+    /**
+     * US 0010: URL=/products/promo-post
+     * @param publicationSaleRequest json with SALE publication data and product data
+     */
+
+    @Override
+    public void registerPublication(PublicationSaleRequest publicationSaleRequest) {
+        UserEntity entity = this.userRepository.getEntityById(publicationSaleRequest.getUserId());
+        this.productRepository.getEntityById(publicationSaleRequest.getProductRequest().getId());
+        PublicationSaleEntity sale = PublicationMapper.publicationRequest2PublicationSaleEntity(publicationSaleRequest);
+        this.publicationRepository.addEntity(sale);
+        entity.getPublicationList().add(sale.getId());
+    }
+
+    /**
+     * US 0011: URL=//products/promo-post/count?user_id={userId}
+     *
+     * This method takes the number of sales publications
+     * @param userId user identification number
+     * @return the number of sales.
+     */
+
+    @Override
+    public UserSaleResponse getSaleCount(Integer userId){
+        boolean esSale = false;
+        int sales = 0;
+        UserEntity userEntity = this.userRepository.getEntityById(userId);
+
+        for(int i = 1; i < userEntity.getPublicationList().size(); i++){
+            if(this.publicationRepository.getEntityById(i) instanceof PublicationSaleEntity){
+                sales++;
+            }
+        }
+
+        UserSaleResponse userSaleResponse = new UserSaleResponse(userEntity.getId(),userEntity.getName(), sales);
+
+        return userSaleResponse;
+    }
+
+    @Override
+    public List<PublicationAllResponse> getAll(){
+        List<PublicationAllResponse> publicationAllResponses = new ArrayList<>();
+
+        this.publicationRepository.getAll().forEach((k,v) ->publicationAllResponses.add(new PublicationAllResponse(this.productRepository.getEntityById(k).getName(), v.getCategory(), v.getPrice())));
+
+        return publicationAllResponses;
+    }
+
+
+
+
+
 
 }
