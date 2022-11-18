@@ -4,6 +4,7 @@ package com.example.BE_java_hisp_w18_g04.service;
 import com.example.BE_java_hisp_w18_g04.dto.request.PostDTOReq;
 import com.example.BE_java_hisp_w18_g04.dto.respose.FollowerCountDTORes;
 import com.example.BE_java_hisp_w18_g04.dto.respose.FollowerListDTORes;
+import com.example.BE_java_hisp_w18_g04.dto.respose.PostPromoCountDTORes;
 import com.example.BE_java_hisp_w18_g04.dto.respose.UserDTORes;
 import com.example.BE_java_hisp_w18_g04.entity.Post;
 import com.example.BE_java_hisp_w18_g04.entity.UserBuyer;
@@ -69,5 +70,12 @@ public class UserSellerServiceImp implements IUserSellerService{
         postRepository.createPost(post);
         UserSeller seller = sellerRepository.findById(postDTOReq.getUser_id());
             seller.getPosts().add(post);
+    }
+
+    @Override
+    public PostPromoCountDTORes countPostPromo(Integer user_id) {
+        Long countPromoPost =sellerRepository.finAllPostPromo(user_id);
+        String name_user = sellerRepository.findById(user_id).getUser_name();
+        return new PostPromoCountDTORes(user_id,name_user,countPromoPost);
     }
 }

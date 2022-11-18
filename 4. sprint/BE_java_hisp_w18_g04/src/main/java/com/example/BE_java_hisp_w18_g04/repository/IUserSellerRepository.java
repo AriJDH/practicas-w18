@@ -8,4 +8,5 @@ public interface IUserSellerRepository{
     UserSeller findById(Integer id);
 
     List<UserSeller> findAll();
+    Long finAllPostPromo(Integer user_id);
 }

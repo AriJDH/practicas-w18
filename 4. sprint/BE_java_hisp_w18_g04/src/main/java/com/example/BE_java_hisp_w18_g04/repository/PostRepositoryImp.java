@@ -24,6 +24,7 @@ public class PostRepositoryImp implements IPostRepository{
             post.setPost_id(posts.get(posts.size()-1).getPost_id()+1);
         posts.add(post);
     }
+
     private void loadPosts(){
         File jsonFile= null;
         try {
