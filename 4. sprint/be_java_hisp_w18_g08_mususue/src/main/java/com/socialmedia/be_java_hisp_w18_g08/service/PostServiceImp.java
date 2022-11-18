@@ -37,7 +37,7 @@ public class PostServiceImp implements IPostService {
 
     private Integer postId = 5;
 
-    private List<Post> changeOrder(List<Post> list, String order) {
+    private List<PostDto> changeOrder(List<PostDto> list, String order) {
 
         Comparator<LocalDate> compareByDate;
 
@@ -71,23 +71,22 @@ public class PostServiceImp implements IPostService {
     @Override
     public PostDtoRes getPostSellerListByUserId(Integer userId, String order) {
         List<Seller> followed = userService.getFollowedByUserId(userId);
+
         PostDtoRes postDtoRes = new PostDtoRes();
         LocalDate date = LocalDate.now();
         postDtoRes.setUser_id(userId);
-        List<Post> filtrados = new ArrayList<>();
+        List<PostDto> filtrados = new ArrayList<>();
+
         for (Seller s : followed) {
-            filtrados =
-                    this.changeOrder(
-                            s.getPosts().stream().filter(seller -> seller.getDate().isAfter(date.minusDays(15)))
-                                    .collect(Collectors.toList()), order);
-            if (!filtrados.isEmpty()) {
-                List<PostDto> response = new ArrayList<>();
-                for (Post p : filtrados) {
-                    PostDto aux = new PostDto(p.getPost_id(), p.getUser_id(), p.getProduct(), p.getCategory(),
-                            p.getPrice(), p.getDate());
-                    response.add(aux);
+            for(Post p: s.getPosts()){
+                if(p.getDate().isAfter((date.minusDays(15)))){
+                    PostDto aux = new PostDto(p.getPost_id(), p.getUser_id(), p.getProduct(),
+                            p.getCategory(),p.getPrice(), p.getDate());
+                    filtrados.add(aux);
                 }
-                postDtoRes.setPosts(response);
+            }
+            if (!filtrados.isEmpty()){
+                postDtoRes.setPosts(changeOrder(filtrados,order));
             }
         }
         if (followed.isEmpty()) {

@@ -14,4 +14,8 @@ public interface IUserRepository {
     void createPost(Post post, Integer id);
 
     String unFollow(Integer userId,Integer userIdToUnfollow);
+
+    Seller getSellerById(Integer userId);
+
+
 }

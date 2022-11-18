@@ -14,7 +14,7 @@ import java.util.List;
 @AllArgsConstructor
 @Getter
 @Setter
-public class UserDtoRes {
+public class SellerDtoRes {
     private Integer user_id;
     private String user_name;
     private List<Seller> followed;
