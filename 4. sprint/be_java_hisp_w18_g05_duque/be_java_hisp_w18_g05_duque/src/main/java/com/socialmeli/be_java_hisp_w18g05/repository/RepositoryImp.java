@@ -64,6 +64,5 @@ public class RepositoryImp implements IRepository{
         sellers.add(new Seller(30, "seller3"));
         sellers.add(new Seller(40, "seller4"));
         sellers.add(new Seller(50, "seller5"));
-
     }
 }
