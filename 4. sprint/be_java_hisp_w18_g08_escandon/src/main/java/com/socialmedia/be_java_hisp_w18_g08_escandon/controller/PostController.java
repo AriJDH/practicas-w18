@@ -47,7 +47,6 @@ public class PostController {
         return ResponseEntity.ok().body(dto);
     }
 
-    //Obtener todos los productos con descuento por categoría
     @GetMapping("/promo-post/list")
     public ResponseEntity<PromoPostDtoRes> getAllProductsByCategory(@RequestParam Integer user_id, Integer category){
         PromoPostDtoRes dto =  postService.getAllProductsByCategory(user_id, category);
