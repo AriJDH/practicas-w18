@@ -23,5 +23,21 @@ public class Post {
     private Product product;
     private int category;
     private double price;
+    //Agregado para el individual
+    private boolean has_promo;
+    private double discount;
 
+    public Post(int userId, int post_id, LocalDate date, Product product, int category, double price) {
+        this.userId = userId;
+        this.post_id = post_id;
+        this.date = date;
+        this.product = product;
+        this.category = category;
+        this.price = price;
+
+    }
+
+    public boolean getHas_promo() {
+        return this.has_promo;
+    }
 }

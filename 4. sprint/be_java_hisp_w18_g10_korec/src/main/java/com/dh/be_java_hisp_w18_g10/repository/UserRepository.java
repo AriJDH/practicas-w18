@@ -71,16 +71,20 @@ public class UserRepository implements IUserRepository{
     private List<Post> getListPosts(){
 
         LocalDate old = LocalDate.of(2000,12,12);
+       // LocalDate intermedio = LocalDate.of(2022,11,15);
         LocalDate lastWeek = LocalDate.of(2022,11,14);
+
         Post post1 = new Post(2,4, old, getListProduct().get(0),23,340.00);
         Post post2 = new Post(2,5, lastWeek, getListProduct().get(1),4,456);
         Post post3 = new Post(2,6, LocalDate.now(),getListProduct().get(2),77,865);
+
         return List.of(post1,post2,post3);
+        //return List.of(post1);
     }
     private List<Product> getListProduct(){
         Product product = new Product(1,"Buzo","Ropa","Nike","Gris","Para usar en invierno");
-        Product product2 = new Product(1,"Pantalon","Ropa","Adida","Negro","Para usar en Otoño");
-        Product product3 = new Product(1,"Remera","Ropa","Levis","Blanco","Para usar en Verano");
+        Product product2 = new Product(2,"Pollera","Ropa","Adida","Negro","Para usar en Otoño");
+        Product product3 = new Product(3,"Remera","Ropa","Levis","Blanco","Para usar en Verano");
 
         return List.of(product,product2,product3);
     }

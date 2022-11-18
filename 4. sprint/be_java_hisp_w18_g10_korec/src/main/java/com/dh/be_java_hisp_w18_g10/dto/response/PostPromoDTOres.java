@@ -9,7 +9,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class PostDTOres {
+public class PostPromoDTOres {
 
     private int user_id;
     private int post_id;
@@ -17,4 +17,7 @@ public class PostDTOres {
     private ProductDTOres product;
     private int category;
     private double price;
+    //----------------------------AGREGADO PARA EL INDIVIDUAL------------------------------------
+    private boolean has_promo;
+    private double discount;
 }

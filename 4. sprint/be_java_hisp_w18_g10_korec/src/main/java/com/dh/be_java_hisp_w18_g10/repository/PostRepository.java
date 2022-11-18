@@ -18,7 +18,7 @@ public class PostRepository implements IPostRepository{
     public Post getPostById(int id) {
         return null;
     }
-
+//metodo a usar para el individual
     @Override
     public Integer addPost(Post post) {
         posts.put(count, post);
@@ -28,6 +28,6 @@ public class PostRepository implements IPostRepository{
 
     @Override
     public List<Post> getPosts() {
-        return new ArrayList<Post>(posts.values());
+        return new ArrayList<>(posts.values());
     }
 }

@@ -13,6 +13,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @Getter
 @Setter
+
 public class PostDTOreq {
     //US 0005
     private int user_id;
@@ -20,6 +21,7 @@ public class PostDTOreq {
     private ProductDTOreq product;
     private int category;
     private double price;
+
 }
 
 //JSON REPRESENTATION
@@ -36,5 +38,8 @@ public class PostDTOreq {
 //  },
 //  "category": 0,
 //  "price": 0.0
-//}
+//  "has_promo": false,
+//  "discount": 0.0
+// }
+
 

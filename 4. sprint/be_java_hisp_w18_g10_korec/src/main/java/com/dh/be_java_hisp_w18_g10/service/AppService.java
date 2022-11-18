@@ -1,6 +1,7 @@
 package com.dh.be_java_hisp_w18_g10.service;
 
 import com.dh.be_java_hisp_w18_g10.dto.require.PostDTOreq;
+import com.dh.be_java_hisp_w18_g10.dto.require.PostPromoDTOreq;
 import com.dh.be_java_hisp_w18_g10.dto.response.*;
 import com.dh.be_java_hisp_w18_g10.entity.Post;
 import com.dh.be_java_hisp_w18_g10.entity.User;
@@ -63,7 +64,21 @@ public class AppService implements IAppService {
                 user.getFollowers().size()
         );
     }
+    @Override
+    public PostPromoCountDTOres getPostPromoCount(int userId) {
+        User user = userRepository.getUser(userId);
 
+        if(user == null) throw new NotFoundException("El usuario con el id: "+userId+" no fue encontrado!");
+
+        int promo_post = 0;
+        for(Post postNew: user.getPosts().values()){
+            if(postNew.getHas_promo() == true){
+                promo_post += 1;
+            }
+        }
+        PostPromoCountDTOres postPromoCountDTOres = new PostPromoCountDTOres(user.getUserId(), user.getUserName(), promo_post);
+        return postPromoCountDTOres;
+    }
     @Override
     public UserFollowersListDTOres getUserFollowerList(int userId) {
         if(userRepository.getUser(userId) == null){
@@ -94,21 +109,37 @@ public class AppService implements IAppService {
         return new UserFollowedListDTOres(userAuxId, userName, followedList);
     }
 
+
+    //Post a usar en el la parte individual
     @Override
     public void createPost(PostDTOreq postDTOreq) {
 
         int userId = postDTOreq.getUser_id();
+
         if (userRepository.getUser(userId) == null)
-            throw new UserGenericException("Usuario no encontrado!");
+            throw new UserGenericException("Usuario no encontrado!"); //funciona
 
         Post post = DTOMapper.mapToPost(postDTOreq);
+
         Integer postId = postRepository.addPost(post);
         post.setPost_id(postId);
 
-        userRepository
-                .getUser(userId)
-                .getPosts()
-                .put(postId, post);
+        userRepository.getUser(userId).getPosts().put(postId, post);
+    }
+
+    @Override
+    public void createPromoPost(PostPromoDTOreq postPromoDTOreq) {
+        int userId = postPromoDTOreq.getUser_id();
+
+        if (userRepository.getUser(userId) == null)
+            throw new UserGenericException("Usuario no encontrado!"); //funciona
+
+        Post post = DTOMapper.mapToPostPromo(postPromoDTOreq);
+
+        Integer postId = postRepository.addPost(post);
+        post.setPost_id(postId);
+
+        userRepository.getUser(userId).getPosts().put(postId, post);
     }
 
     @Override
