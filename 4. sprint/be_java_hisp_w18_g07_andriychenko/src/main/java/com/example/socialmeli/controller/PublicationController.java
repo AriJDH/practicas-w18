@@ -3,6 +3,7 @@ package com.example.socialmeli.controller;
 import com.example.socialmeli.dto.request.PublicationPromoRequest;
 import com.example.socialmeli.dto.request.PublicationRequest;
 import com.example.socialmeli.dto.response.PromoCountResponse;
+import com.example.socialmeli.dto.response.TopSellersResponse;
 import com.example.socialmeli.dto.response.UserFollowedPublicationResponse;
 import com.example.socialmeli.service.IPublicationService;
 import lombok.RequiredArgsConstructor;
@@ -53,12 +54,22 @@ public class PublicationController {
     }
 
     /**
-     * US 0006: URL=/products/promo-post/count
+     * US 0011: URL=/products/promo-post/count
      */
     @GetMapping("/products/promo-post/count")
-    public ResponseEntity<PromoCountResponse> getPromoCount(@RequestParam Integer userId) {
+    public ResponseEntity<PromoCountResponse> getPromoCount(@RequestParam Integer user_id) {
 
-        return new ResponseEntity<>(publicationService.getPromoCount(userId), HttpStatus.OK);
+        return new ResponseEntity<>(publicationService.getPromoCount(user_id), HttpStatus.OK);
+    }
+
+
+    /**
+     * US 0012: URL=/products/promo-post/top-sellers?order={order}
+     */
+    @GetMapping("/products/promo-post/top-sellers")
+    public ResponseEntity<TopSellersResponse> getTopSellers(@RequestParam(defaultValue = "name_asc") String order) {
+
+        return new ResponseEntity<>(publicationService.getTopSellers(order), HttpStatus.OK);
     }
 
 }

@@ -2,9 +2,7 @@ package com.example.socialmeli.service;
 
 import com.example.socialmeli.dto.request.PublicationPromoRequest;
 import com.example.socialmeli.dto.request.PublicationRequest;
-import com.example.socialmeli.dto.response.PromoCountResponse;
-import com.example.socialmeli.dto.response.PublicationResponse;
-import com.example.socialmeli.dto.response.UserFollowedPublicationResponse;
+import com.example.socialmeli.dto.response.*;
 import com.example.socialmeli.entity.PublicationEntity;
 import com.example.socialmeli.entity.PublicationPromoEntity;
 import com.example.socialmeli.entity.UserEntity;
@@ -20,9 +18,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -66,6 +62,47 @@ public class PublicationServiceImpl implements IPublicationService {
         publicationRepository.addEntity(publication);
 
         entity.getPublicationList().add(publication.getId());
+    }
+
+    /**
+     * US 0012
+     */
+    public TopSellersResponse getTopSellers(String order){
+
+        Map<Integer, UserEntity> allUsers = userRepository.getAllEntity();
+//        busco mayor cant promos
+        int topPromoPost = 0;
+        for (UserEntity user: allUsers.values()) {
+            int userPromoPost = getNumPromoPosts(user.getId());
+            if (userPromoPost > topPromoPost){
+                topPromoPost = userPromoPost;
+            }
+        }
+//        busco los usuarios que tengan esa cantidad
+        List<UserBasicResponse> topSellers = new ArrayList<>();
+        for (UserEntity user: allUsers.values()
+             ) {
+            if (topPromoPost == getNumPromoPosts(user.getId())){
+                topSellers.add(new UserBasicResponse(user.getId(),user.getName()));
+            }
+        }
+
+//        ordeno segun parametro
+        if (order.equals("name_asc")) {
+            topSellers.sort((p1, p2) -> p1.getName().compareTo(p2.getName()));
+        }
+        if (order.equals("name_desc")) {
+            topSellers.sort((p1, p2) -> p2.getName().compareTo(p1.getName()));
+        }
+        if (order.equals("id_asc")) {
+            topSellers.sort((p1, p2) -> p1.getId().compareTo(p2.getId()));
+        }
+        if (order.equals("id_desc")) {
+            topSellers.sort((p1, p2) -> p2.getId().compareTo(p1.getId()));
+        }
+
+        return new TopSellersResponse(topPromoPost, topSellers);
+
     }
 
     /**
