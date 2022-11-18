@@ -23,6 +23,11 @@ public class PostRepositoryImp implements IPostRepository{
         promoPosts.add(post);
     }
 
+    @Override
+    public List<PromoPost> findAllPromoPost() {
+        return promoPosts;
+    }
+
     public void createPost(Post post){
         if(posts.isEmpty())
             post.setPost_id(1);

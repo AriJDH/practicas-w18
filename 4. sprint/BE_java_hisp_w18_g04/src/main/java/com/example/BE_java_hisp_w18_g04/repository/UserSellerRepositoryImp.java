@@ -21,6 +21,7 @@ public class UserSellerRepositoryImp implements IUserSellerRepository{
 
     public UserSeller findById(Integer id) {
         return sellers.stream().filter(buyer -> buyer.getUser_id().equals(id)).findFirst().get();
+        //Filtramos la lista para obtener un usuario por su id
     }
 
 
@@ -29,7 +30,7 @@ public class UserSellerRepositoryImp implements IUserSellerRepository{
         return sellers;
     }
 
-    private void loadSellers(){
+    private void loadSellers(){ //Cargamos nuestras listas mediante un JSON
         File jsonFile= null;
         try {
             jsonFile = ResourceUtils.getFile("classpath:sellers.json");

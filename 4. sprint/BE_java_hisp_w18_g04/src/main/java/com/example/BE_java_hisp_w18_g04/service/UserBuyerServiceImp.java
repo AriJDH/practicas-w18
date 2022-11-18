@@ -30,7 +30,7 @@ public class UserBuyerServiceImp implements IUserBuyerService{
         this.userSellerRepository = userSellerRepository;
     }
 
-    private Boolean validateBuyer(Integer id){
+    private Boolean validateBuyer(Integer id){ //Metodos auxiliares para ahorrar codigo
         Boolean valid = false;
         List<UserBuyer> buyers = userBuyerRepository.findAll();
         for(UserBuyer buyer: buyers){
@@ -40,7 +40,7 @@ public class UserBuyerServiceImp implements IUserBuyerService{
         }
         return valid;
     }
-    private Boolean validateSeller(Integer id){
+    private Boolean validateSeller(Integer id){ //Metodos auxiliares para ahorrar codigo
         Boolean valid = false;
         List<UserSeller> sellers = userSellerRepository.findAll();
         for(UserSeller seller: sellers){
@@ -53,6 +53,7 @@ public class UserBuyerServiceImp implements IUserBuyerService{
 
     @Override
     public void follow(Integer userId, Integer userIdToFollow) {
+        //Agregamos a un comprador a la lista de seguidos de un vendedor, validamos que no se pueda seguir mas de una (1) vez
             if(validateBuyer(userId) && validateSeller(userIdToFollow)) {
                 UserBuyer buyer = userBuyerRepository.findById(userId);
                 UserSeller seller = userSellerRepository.findById(userIdToFollow);
@@ -70,6 +71,7 @@ public class UserBuyerServiceImp implements IUserBuyerService{
 
     @Override
     public FollowedListDTORes getFollowed(Integer userId, String order) {
+        //Obtenemos a los vendedor que sigue un comprador, tambien ordenamos segun {order}
         if(validateBuyer(userId)) {
             UserBuyer buyer = userBuyerRepository.findById(userId);
             List<UserSeller> sellers = buyer.getFollowed();
@@ -86,6 +88,7 @@ public class UserBuyerServiceImp implements IUserBuyerService{
 
     @Override
     public PostFollowedByDateDTORes getLastPosts(Integer userId, String order) {
+        //Obtenemos los posts de cuyos vendedor un usuario siga, filtrando que no hayan pasado mas de 2 semanas y ordenandolo segun {order}
         if(validateBuyer(userId)) {
             UserBuyer buyer = userBuyerRepository.findById(userId);
             List<UserSeller> followed = buyer.getFollowed();
@@ -104,8 +107,11 @@ public class UserBuyerServiceImp implements IUserBuyerService{
 
     private List<PostDTORes> filterPostByDate(List<PostDTORes> postDTOResList){
         return postDTOResList.stream().
+                //Conseguimos la fecha del postDTO y le preguntamos si ya paso 2 semanas
                 filter(postDTORes->postDTORes.getDate().isAfter(LocalDate.now().minusWeeks(2)))
+
                 .collect(Collectors.toList());
+
     }
     private void getPostListSeller(List<UserSeller> followed, List<PostDTORes> postsFollowed){
         for (UserSeller seller: followed) {
@@ -117,15 +123,15 @@ public class UserBuyerServiceImp implements IUserBuyerService{
 
     @Override
     public void unfollow(Integer userId, Integer userIdToUnfollow) {
-        if(validateBuyer(userId) && validateSeller(userIdToUnfollow)) {
-        UserBuyer buyer = userBuyerRepository.findById(userId);
-        UserSeller seller = userSellerRepository.findById(userIdToUnfollow);
+        if(validateBuyer(userId) && validateSeller(userIdToUnfollow)) {     //Validamos que existan los usuarios que se comunicaran
+        UserBuyer buyer = userBuyerRepository.findById(userId); //Encontramos al comprador
+        UserSeller seller = userSellerRepository.findById(userIdToUnfollow); //Encontramos al vendedor
         if (buyer.getFollowed().contains(seller) && (seller.getFollowers().contains(buyer))) {
             buyer.getFollowed().remove(seller);
-            seller.getFollowers().remove(buyer);
+            seller.getFollowers().remove(buyer);    // Si en sus respectivas listas de seguidos y seguidores existen estos usuarios, seran removidos de ahi
         } else {
             throw new BadRequestException("The user "+userIdToUnfollow+" is not in your following list");
-        }
+        }       //De no ser encontrados tiraran alguna de estas dos excepciones segun el caso
     } else {
             throw new BadRequestException("The user_id not exist");
         }}

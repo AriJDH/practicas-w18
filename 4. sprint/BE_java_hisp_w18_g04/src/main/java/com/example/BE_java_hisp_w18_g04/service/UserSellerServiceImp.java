@@ -3,9 +3,7 @@ package com.example.BE_java_hisp_w18_g04.service;
 
 import com.example.BE_java_hisp_w18_g04.dto.request.PostDTOReq;
 import com.example.BE_java_hisp_w18_g04.dto.request.PromoPostDTOReq;
-import com.example.BE_java_hisp_w18_g04.dto.respose.FollowerCountDTORes;
-import com.example.BE_java_hisp_w18_g04.dto.respose.FollowerListDTORes;
-import com.example.BE_java_hisp_w18_g04.dto.respose.UserDTORes;
+import com.example.BE_java_hisp_w18_g04.dto.respose.*;
 import com.example.BE_java_hisp_w18_g04.entity.Post;
 import com.example.BE_java_hisp_w18_g04.entity.PromoPost;
 import com.example.BE_java_hisp_w18_g04.entity.UserBuyer;
@@ -25,7 +23,7 @@ public class UserSellerServiceImp implements IUserSellerService{
     private final IUserSellerRepository sellerRepository;
     private final IPostRepository postRepository;
 
-    public UserSellerServiceImp(IUserSellerRepository sellerRepository, IPostRepository postRepository) {
+    public UserSellerServiceImp(IUserSellerRepository sellerRepository, IPostRepository postRepository) { //Inyectamos los repositorios
         this.sellerRepository = sellerRepository;
         this.postRepository = postRepository;
     }
@@ -33,11 +31,11 @@ public class UserSellerServiceImp implements IUserSellerService{
 
     @Override
     public FollowerCountDTORes followersCount(Integer userId) {
-        if(validateSeller(userId)) {
+        if(validateSeller(userId)) {    //Validamos que el usuario exista
             UserSeller seller = sellerRepository.findById(userId);
-            return new FollowerCountDTORes(seller.getUser_id(), seller.getUser_name(), seller.getFollowers().size());
+            return new FollowerCountDTORes(seller.getUser_id(), seller.getUser_name(), seller.getFollowers().size());   //Encontramos y retornamos el DTO
         } else {
-            throw new BadRequestException("The user_id not exist");
+            throw new BadRequestException("The user_id not exist"); // En caso de que no exista, lanzamos excepcion
         }
     }
     private Boolean validateSeller(Integer id){
@@ -48,26 +46,27 @@ public class UserSellerServiceImp implements IUserSellerService{
                 valid = true;
             }
         }
-        return valid;
+        return valid;           //Buscamos al usuario en nuestra 'Base de datos' para validar su existencia
     }
     @Override
     public FollowerListDTORes getFollowers(Integer userId, String order) {
         if(validateSeller(userId)) {
-            UserSeller seller = sellerRepository.findById(userId);
-            List<UserBuyer> buyers = seller.getFollowers();
-            List<UserDTORes> userDTOResList = buyers.stream().map(buyer -> new UserDTORes(buyer)).collect(Collectors.toList());
+            UserSeller seller = sellerRepository.findById(userId);  //Obtenemos al vendedor
+            List<UserBuyer> buyers = seller.getFollowers(); //Obtenemos los seguidores del vendedor
+            List<UserDTORes> userDTOResList = buyers.stream().map(buyer -> new UserDTORes(buyer)).collect(Collectors.toList());   // Creamos el DTO
             if (!order.equals("invalid"))
-                Sorter.sortedByName(userDTOResList, order);
+                Sorter.sortedByName(userDTOResList, order);  //Ordenamos segun el parametro recibido
             else
                 throw new BadRequestException("Enter 'name_asc' for ascending alphabetical ordering or 'name_desc' for descending ordering.");
-            return new FollowerListDTORes(seller.getUser_id(), seller.getUser_name(), userDTOResList);
+            //Excepcion en caso de recibir un parametro incorrecto
+            return new FollowerListDTORes(seller.getUser_id(), seller.getUser_name(), userDTOResList); //Retornamos el DTO ordenado
         } else {
             throw new BadRequestException("The user_id not exist");
         }
     }
 
     @Override
-    public void publishPost(PostDTOReq postDTOReq) {
+    public void publishPost(PostDTOReq postDTOReq) {        //Con ayuda de ObjectMapper convertimos el DTO en una entidad Post y la agregamos a la 'Base de datos'
         Post post= Mapper.createObjectMapper().convertValue(postDTOReq, Post.class);
         postRepository.createPost(post);
         UserSeller seller = sellerRepository.findById(postDTOReq.getUser_id());
@@ -80,6 +79,12 @@ public class UserSellerServiceImp implements IUserSellerService{
         PromoPost post = Mapper.createObjectMapper().convertValue(promoPostDTOReq, PromoPost.class);
         postRepository.createPromoPost(post);
     }
+
+public PromoPostCountDTORes promoPostCount(Integer user_id){ //Me quede sin tiempo y me puse a comentar u.u
+
+
+        return null;
+}
 
 
 }

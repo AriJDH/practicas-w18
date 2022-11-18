@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 public class GlobalExceptionHandler {
     @ExceptionHandler(BadRequestException.class)
     public ResponseEntity<ErrorDTO> BadRequestException(Exception e){
-        ErrorDTO errorDTO = new ErrorDTO(400,e.getMessage());
+        ErrorDTO errorDTO = new ErrorDTO(400,e.getMessage());   //Desde aca manejamos las excepciones de codigo 400 (Bad Request)
         return new ResponseEntity<>(errorDTO, HttpStatus.BAD_REQUEST);
     }
 }

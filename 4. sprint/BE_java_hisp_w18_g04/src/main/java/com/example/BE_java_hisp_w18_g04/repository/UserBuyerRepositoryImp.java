@@ -22,6 +22,7 @@ public class UserBuyerRepositoryImp implements IUserBuyerRepository{
     @Override
     public UserBuyer findById(Integer id) {
         return buyers.stream().filter(buyer -> buyer.getUser_id().equals(id)).findFirst().get();
+        //Filtramos la lista para obtener un usuario por su id
     }
 
     public List<UserBuyer> findAll(){

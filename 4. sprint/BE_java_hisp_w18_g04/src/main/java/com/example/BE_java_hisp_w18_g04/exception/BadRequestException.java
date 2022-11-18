@@ -6,5 +6,5 @@ public class BadRequestException extends RuntimeException{
 
     public BadRequestException(String message) {
         super(message);
-    }
+    } //Para poder personalizar el mensaje a la hora de dar la excepcion, usamos este constructor
 }
