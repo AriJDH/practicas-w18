@@ -1,152 +1,16 @@
 {
 	"info": {
-		"_postman_id": "ef5f759f-1572-4b4f-81df-051743c2bb48",
+		"_postman_id": "7dbe0854-4415-40bf-8941-5b687d4279f6",
 		"name": "Sprint I",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "24341398"
 	},
 	"item": [
-		{
-			"name": "User 01 - 07",
-			"item": [
-				{
-					"name": "Follow User It's Self",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:8080/users/1/follow/1",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"users",
-								"1",
-								"follow",
-								"1"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Follow User without post",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:8080/users/1/follow/2",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"users",
-								"1",
-								"follow",
-								"2"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Follow User with post",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:8080/users/2/follow/1",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"users",
-								"2",
-								"follow",
-								"1"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Unfollow User It's Self",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:8080/users/1/unfollow/1",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"users",
-								"1",
-								"unfollow",
-								"1"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Unfollow User unexist",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:8080/users/1/unfollow/2",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"users",
-								"1",
-								"unfollow",
-								"2"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Unfollow User Succes",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:8080/users/2/unfollow/1",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"users",
-								"2",
-								"unfollow",
-								"1"
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
 		{
 			"name": "Main",
 			"item": [
 				{
-					"name": "US 01 - Follow",
+					"name": "US 01 - Follow OK User2 Seller1",
 					"event": [
 						{
 							"listen": "prerequest",
@@ -180,6 +44,86 @@
 								"{{client_id}}",
 								"follow",
 								"{{seller_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "US 01 - Follow OK User3 Seller1 Copy",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.collectionVariables.set(\"client_id\", 3);",
+									"pm.collectionVariables.set(\"seller_id\", 1);",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "linkid",
+								"value": "1",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "{{url}}/users/{{client_id}}/follow/{{seller_id}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"users",
+								"{{client_id}}",
+								"follow",
+								"{{seller_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "US 01 - Follow Bad Request",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.collectionVariables.set(\"client_id\", 2);",
+									"pm.collectionVariables.set(\"seller_id\", 1);",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "linkid",
+								"value": "1",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "{{url}}/users/{{client_id}}/follow/3",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"users",
+								"{{client_id}}",
+								"follow",
+								"3"
 							]
 						}
 					},
@@ -242,7 +186,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{url}}/users/{{seller_id}}/followers/list?order=name_desc",
+							"raw": "{{url}}/users/{{seller_id}}/followers/list",
 							"host": [
 								"{{url}}"
 							],
@@ -260,7 +204,8 @@
 								},
 								{
 									"key": "order",
-									"value": "name_desc"
+									"value": "name_desc",
+									"disabled": true
 								},
 								{
 									"key": "oder",
@@ -320,7 +265,53 @@
 					"response": []
 				},
 				{
-					"name": "US 05 - New Post",
+					"name": "US 05 - New Post OK",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.collectionVariables.set(\"seller_id\", 1);",
+									"pm.collectionVariables.set(\"client_id\", 3);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"user_id\": \"{{seller_id}}\",\n    \"date\": \"01-05-2022\",\n    \"product\": {\n        \"product_id\": 1,\n        \"product_name\": \"Silla Gamer\",\n        \"type\": \"Gamer\",\n        \"brand\": \"Racer\",\n        \"color\": \"Red & Black\",\n        \"notes\": \"Special Edition\"\n    },\n    \"category\": 100,\n    \"price\": 1500.50\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/products/post",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"products",
+								"post"
+							],
+							"query": [
+								{
+									"key": "clientId",
+									"value": "5001",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "US 05 - New Post Bad Request",
 					"event": [
 						{
 							"listen": "prerequest",
@@ -338,7 +329,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"user_id\": \"{{seller_id}}\",\n    \"date\": \"01-05-2022\",\n    \"detail\": {\n        \"product_id\": 1,\n        \"product_name\": \"Silla Gamer\",\n        \"type\": \"Gamer\",\n        \"brand\": \"Racer\",\n        \"color\": \"Red & Black\",\n        \"notes\": \"Special Edition\"\n    },\n    \"category\": 100,\n    \"price\": 1500.50\n}",
+							"raw": "{\n    \"userid\": \"\",\n    \"date\": \"01-05-2022\",\n    \"detail\": {\n        \"product_id\": 1,\n        \"product_name\": \"Silla Gamer\",\n        \"type\": \"Gamer\",\n        \"brand\": \"Racer\",\n        \"color\": \"Red & Black\",\n        \"notes\": \"Special Edition\"\n    },\n    \"category\": 100,\n    \"price\": 1500.50\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -372,7 +363,7 @@
 							"listen": "prerequest",
 							"script": {
 								"exec": [
-									"pm.collectionVariables.set(\"client_id\", 1);"
+									"pm.collectionVariables.set(\"client_id\", 2);"
 								],
 								"type": "text/javascript"
 							}
@@ -421,7 +412,7 @@
 							"script": {
 								"exec": [
 									"pm.collectionVariables.set(\"seller_id\", 1);",
-									"pm.collectionVariables.set(\"client_id\", 2);"
+									"pm.collectionVariables.set(\"client_id\", 3);"
 								],
 								"type": "text/javascript"
 							}
@@ -446,12 +437,60 @@
 					"response": []
 				},
 				{
+					"name": "US 03 - Followers / US 08 Verificación UnFollow",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.collectionVariables.set(\"seller_id\", 1);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/users/{{seller_id}}/followers/list",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"users",
+								"{{seller_id}}",
+								"followers",
+								"list"
+							],
+							"query": [
+								{
+									"key": "oder",
+									"value": "name_asc",
+									"disabled": true
+								},
+								{
+									"key": "order",
+									"value": "name_desc",
+									"disabled": true
+								},
+								{
+									"key": "oder",
+									"value": "invalid",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "GetAllPostsByUser",
 					"request": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:8080/products/followed/2/list",
+							"raw": "localhost:8080/products/followed/3/list",
 							"host": [
 								"localhost"
 							],
@@ -459,7 +498,7 @@
 							"path": [
 								"products",
 								"followed",
-								"2",
+								"3",
 								"list"
 							]
 						}
@@ -478,7 +517,7 @@
 							"listen": "prerequest",
 							"script": {
 								"exec": [
-									"pm.collectionVariables.set(\"seller_id\", 2);",
+									"pm.collectionVariables.set(\"seller_id\", 1);",
 									"pm.collectionVariables.set(\"client_id\", 3);"
 								],
 								"type": "text/javascript"
@@ -489,8 +528,13 @@
 						"method": "POST",
 						"header": [],
 						"body": {
-							"mode": "urlencoded",
-							"urlencoded": []
+							"mode": "raw",
+							"raw": "{\n    \"user_id\": 1,\n    \"date\": \"01-05-2022\",\n    \"product\": {\n        \"product_id\": 1,\n        \"product_name\": \"Silla Gamer\",\n        \"type\": \"Gamer\",\n        \"brand\": \"Racer\",\n        \"color\": \"Red & Black\",\n        \"notes\": \"Special Edition\"\n    },\n    \"category\": 100,\n    \"price\": 1500.50,\n    \"has_promo\": true,\n    \"discount\": 0.25\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
 						},
 						"url": {
 							"raw": "{{url}}/products/promo-post",
@@ -512,7 +556,7 @@
 							"listen": "prerequest",
 							"script": {
 								"exec": [
-									"pm.collectionVariables.set(\"seller_id\", 2);",
+									"pm.collectionVariables.set(\"seller_id\", 1);",
 									"pm.collectionVariables.set(\"client_id\", 3);"
 								],
 								"type": "text/javascript"
