@@ -1,0 +1,503 @@
+{
+	"info": {
+		"_postman_id": "c583d9e4-8d0f-4e13-bf60-e98deeb08a04",
+		"name": "Bootcamp JAVA",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "24507152"
+	},
+	"item": [
+		{
+			"name": "Sprint 1",
+			"item": [
+				{
+					"name": "US01 - Follow",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/users/1/follow/4",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"users",
+								"1",
+								"follow",
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "US02 - Count followers by user ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/users/3/followers/count",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"users",
+								"3",
+								"followers",
+								"count"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "US03 - List followers by user ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/users/3/followers/list",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"users",
+								"3",
+								"followers",
+								"list"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "US04 - List followed by user ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/users/1/followed/list",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"users",
+								"1",
+								"followed",
+								"list"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "US05 - New Post",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"user_id\": 3,\n    \"date\": \"16-11-2022\",\n    \"product\": {\n        \"product_id\": 1,\n        \"product_name\": \"Silla Gamer\",\n        \"type\": \"Gamer\",\n        \"brand\": \"Racer\",\n        \"color\": \"Red & Black\",\n        \"notes\": \"Special Edition\"\n    },\n    \"category\": 100,\n    \"price\": 1500.50\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/products/post",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"products",
+								"post"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "US06 - Product List followed by user id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/products/followed/1/list",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"products",
+								"followed",
+								"1",
+								"list"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "US07 - Unfollow",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/users/1/unfollow/3",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"users",
+								"1",
+								"unfollow",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "US08A - List followers by user ID order by name asc",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/users/3/followers/list?order=name_asc",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"users",
+								"3",
+								"followers",
+								"list"
+							],
+							"query": [
+								{
+									"key": "order",
+									"value": "name_asc"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "US08B - List followers by user ID order by name desc",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/users/3/followers/list?order=name_desc",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"users",
+								"3",
+								"followers",
+								"list"
+							],
+							"query": [
+								{
+									"key": "order",
+									"value": "name_desc"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "US08C - List followers by user ID order filter invalid",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/users/3/followers/list?order=anything",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"users",
+								"3",
+								"followers",
+								"list"
+							],
+							"query": [
+								{
+									"key": "order",
+									"value": "anything"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "US08D - List followed by user ID order by name asc",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/users/1/followed/list?order=name_asc",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"users",
+								"1",
+								"followed",
+								"list"
+							],
+							"query": [
+								{
+									"key": "order",
+									"value": "name_asc"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "US08E - List followed by user ID order by name desc",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/users/1/followed/list?order=name_desc",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"users",
+								"1",
+								"followed",
+								"list"
+							],
+							"query": [
+								{
+									"key": "order",
+									"value": "name_desc"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "US08F - List followed by user ID order filter invalid",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/users/1/followed/list?order=name_desc",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"users",
+								"1",
+								"followed",
+								"list"
+							],
+							"query": [
+								{
+									"key": "order",
+									"value": "name_desc"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "US09A - Product List followed by user id order by date asc",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/products/followed/1/list?order=date_asc",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"products",
+								"followed",
+								"1",
+								"list"
+							],
+							"query": [
+								{
+									"key": "order",
+									"value": "date_asc"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "US09B - Product List followed by user id order by date desc",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/products/followed/1/list?order=date_desc",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"products",
+								"followed",
+								"1",
+								"list"
+							],
+							"query": [
+								{
+									"key": "order",
+									"value": "date_desc"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "US09C - Product List followed by user id order filter invalid",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/products/followed/1/list?order=anything",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"products",
+								"followed",
+								"1",
+								"list"
+							],
+							"query": [
+								{
+									"key": "order",
+									"value": "anything"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "US10 - Save new promo-post",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"user_id\": 3,\n    \"date\": \"18-11-2022\",\n    \"product\": {\n        \"product_id\": 1,\n        \"product_name\": \"Silla Gamer\",\n        \"type\": \"Gamer\",\n        \"brand\": \"Racer\",\n        \"color\": \"Red & Black\",\n        \"notes\": \"Special Edition\"\n    },\n    \"category\": 100,\n    \"price\": 1500.50,\n    \"has_promo\": true,\n    \"discount\":0.50\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL_DEV}}/products/promo-post",
+							"host": [
+								"{{URL_DEV}}"
+							],
+							"path": [
+								"products",
+								"promo-post"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "US11 - Count promo-post count by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL_DEV}}/products/promo-post/count?user_id=3",
+							"host": [
+								"{{URL_DEV}}"
+							],
+							"path": [
+								"products",
+								"promo-post",
+								"count"
+							],
+							"query": [
+								{
+									"key": "user_id",
+									"value": "3"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "US12 - Seller promos list",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL_DEV}}/products/promo-post/list?user_id=3",
+							"host": [
+								"{{URL_DEV}}"
+							],
+							"path": [
+								"products",
+								"promo-post",
+								"list"
+							],
+							"query": [
+								{
+									"key": "user_id",
+									"value": "3"
+								},
+								{
+									"key": "",
+									"value": "",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "US13 - Disable seller promo",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{URL_DEV}}/products/promo-post/disable?promo_id=2",
+							"host": [
+								"{{URL_DEV}}"
+							],
+							"path": [
+								"products",
+								"promo-post",
+								"disable"
+							],
+							"query": [
+								{
+									"key": "promo_id",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
