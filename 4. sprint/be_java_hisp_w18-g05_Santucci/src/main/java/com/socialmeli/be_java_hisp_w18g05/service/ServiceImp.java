@@ -382,7 +382,6 @@ public class ServiceImp implements IService {
         if(seller == null){
             throw new NotFoundException("Seller id " + user_id + " not found");
         }
-
         double sum = 0;
         List<Post> posts = seller.getPosts();
         for (Post post : posts) {
@@ -393,8 +392,6 @@ public class ServiceImp implements IService {
             }
 
         }
-
-
         return new InfoSellerDTOResponse(user_id, seller.getName(),posts.size(), sum);
     }
 

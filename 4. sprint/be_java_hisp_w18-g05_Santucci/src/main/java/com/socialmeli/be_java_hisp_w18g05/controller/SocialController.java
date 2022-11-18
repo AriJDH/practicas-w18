@@ -77,8 +77,6 @@ public class SocialController {
     public ResponseEntity<PromoPostCountDTOResponse> countPromoPost(@RequestParam Integer user_id){
         return new ResponseEntity<>(service.promoPostCount(user_id), HttpStatus.OK);
     }
-
-    // calculate the amount of posts of a seller and the price of the products that the seller has posted (with discount)
     @GetMapping("/products/followed/{userId}/infoSeller") //US0012
     public ResponseEntity<InfoSellerDTOResponse> infoSeller(@PathVariable Integer userId){
         return new ResponseEntity<>(service.infoSeller(userId), HttpStatus.OK);
