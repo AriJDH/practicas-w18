@@ -84,4 +84,9 @@ public class SocialController {
     public ResponseEntity<SellerPromoPostListDTOResponse> allPromos(@PathVariable Integer userId){
         return new ResponseEntity<>(service.allPromoPost(userId), HttpStatus.OK);
     }
+
+    @GetMapping("/products/allpost/{userId}/list")//US0012
+    public ResponseEntity<SellerPromoPostListDTOResponse> allpost(@PathVariable Integer userId){
+        return new ResponseEntity<>(service.allPost(userId), HttpStatus.OK);
+    }
 }

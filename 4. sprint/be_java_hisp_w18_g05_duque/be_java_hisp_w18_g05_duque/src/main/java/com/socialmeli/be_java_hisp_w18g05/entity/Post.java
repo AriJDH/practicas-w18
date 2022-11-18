@@ -16,8 +16,8 @@ public class Post {
     private Product product;
     private Integer category;
     private Double price;
-    private Boolean has_promo; //It is false by default
-    private Double discount; // It is null by default
+    private Boolean has_promo=Boolean.FALSE;
+    private Double discount=0.0;
 
     public Post(Integer post_id, LocalDate date, Product product, Integer category, Double price) {
         this.post_id = post_id;

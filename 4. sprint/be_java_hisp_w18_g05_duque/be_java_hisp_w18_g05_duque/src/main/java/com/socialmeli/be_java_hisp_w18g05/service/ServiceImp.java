@@ -351,12 +351,12 @@ public class ServiceImp implements IService {
         LocalDate localDate = LocalDate.parse(promoPost.getDate(), formatter);
 
         //Exception non existing promo
-        if (promoPost.getHas_promo()==Boolean.FALSE) {
+        if (promoPost.getHas_promo() == Boolean.FALSE) {
             throw new NotPromoException("This post doesn't have a promotion. You should upload it as a normal post");
         }
 
         //Create DTO of the post
-        Post newPromoPost = new Post(repository.addPost(), localDate, product, promoPost.getCategory(), promoPost.getPrice(), promoPost.getHas_promo(),promoPost.getDiscount());
+        Post newPromoPost = new Post(repository.addPost(), localDate, product, promoPost.getCategory(), promoPost.getPrice(), promoPost.getHas_promo(), promoPost.getDiscount());
 
         seller.addPromoPost(newPromoPost);
     }
@@ -370,12 +370,12 @@ public class ServiceImp implements IService {
         }
         List<Post> promoPost = seller.getPromoPost();
         Integer countPromos = promoPost.size();
-        SellerPromoPostCountDTOResponse sellersPromoCount = new SellerPromoPostCountDTOResponse(seller.getUser_id(),seller.getName(),countPromos);
+        SellerPromoPostCountDTOResponse sellersPromoCount = new SellerPromoPostCountDTOResponse(seller.getUser_id(), seller.getName(), countPromos);
         return sellersPromoCount;
 
     }
 
-    //For US0012 QUE MUESTRE TODOS LOS DE PROMO
+    //For US0012
     @Override
     public SellerPromoPostListDTOResponse allPromoPost(Integer userId) {
         Buyer b = repository.getByIdBuyer(userId);
@@ -394,17 +394,45 @@ public class ServiceImp implements IService {
         for (Seller s : listSeller) {
             for (Post p : s.getPromoPost()) {
                 stringDateFormatter = p.getDate().format(formatter);
-                listPromoPostDTO.add(new PromoPostDTOResponse(s.getUser_id(), p.getPost_id(), stringDateFormatter, op.convertValue(p.getProduct(), ProductDTOResponse.class), p.getCategory(), p.getPrice(),p.getHas_promo(),p.getDiscount()));
+                listPromoPostDTO.add(new PromoPostDTOResponse(s.getUser_id(), p.getPost_id(), stringDateFormatter, op.convertValue(p.getProduct(), ProductDTOResponse.class), p.getCategory(), p.getPrice(), p.getHas_promo(), p.getDiscount()));
             }
         }
 
         listPromoPostDTO.sort(Comparator.comparing(PromoPostDTOResponse::getDate)); // order by date
 
-
-        return new SellerPromoPostListDTOResponse(userId,listPromoPostDTO);
+        return new SellerPromoPostListDTOResponse(userId, listPromoPostDTO);
     }
 
     //For US0013 QUE MUESTRE PROMO Y NO PROMO(ALL POST)
+    @Override
+    public SellerPromoPostListDTOResponse allPost(Integer userId) {
+        Buyer b = repository.getByIdBuyer(userId);
+        if (b == null) {
+            throw new NotFoundException("Buyer id " + userId + " not found");
+        }
+        List<Seller> listSeller = b.getFolloweds();
+        if (listSeller == null) {
+            throw new NotFoundException("Buyer id " + userId + " doesn´t have followers");
+        }
+        // Get all posts from all sellers that the buyer follows:
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        String stringDateFormatter;
 
+        List<PromoPostDTOResponse> listAllPost = new ArrayList<>();
+        for (Seller s : listSeller) {
+            for (Post p : s.getPromoPost()) {
+                stringDateFormatter = p.getDate().format(formatter);
+                listAllPost.add(new PromoPostDTOResponse(s.getUser_id(), p.getPost_id(), stringDateFormatter, op.convertValue(p.getProduct(), ProductDTOResponse.class), p.getCategory(), p.getPrice(), p.getHas_promo(), p.getDiscount()));
+            }
+            for (Post p : s.getPosts()) {
+                stringDateFormatter = p.getDate().format(formatter);
+                listAllPost.add(new PromoPostDTOResponse(s.getUser_id(), p.getPost_id(), stringDateFormatter, op.convertValue(p.getProduct(), ProductDTOResponse.class), p.getCategory(), p.getPrice(), p.getHas_promo(), p.getDiscount()));
+            }
+        }
+
+        listAllPost.sort(Comparator.comparing(PromoPostDTOResponse::getDate)); // order by date
+
+        return new SellerPromoPostListDTOResponse(userId, listAllPost);
+    }
 }
 
