@@ -1,5 +1,6 @@
 package com.socialmeli.be_java_hisp_w18g05.service;
 
+import com.socialmeli.be_java_hisp_w18g05.dto.request.NewPromoPostDTORequest;
 import com.socialmeli.be_java_hisp_w18g05.dto.response.*;
 
 import com.socialmeli.be_java_hisp_w18g05.dto.request.NewPostDTORequest;
@@ -31,12 +32,7 @@ public interface IService {
 
     SellerPostListDTOResponse followedPostList(Integer user_id, String order);
 
-    //SellerPostListDTOResponse order(Integer userId, String order);
+    void newPromoPost(NewPromoPostDTORequest post);
 
-
-
-
-
-
-    //SellerFollowersCountDTOResponse followersCount(Integer user_id);
+    PromoPostCountDTOResponse promoPostCount(Integer user_id);
 }

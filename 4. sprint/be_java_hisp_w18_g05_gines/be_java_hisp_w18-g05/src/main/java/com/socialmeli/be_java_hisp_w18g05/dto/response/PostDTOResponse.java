@@ -4,6 +4,7 @@ package com.socialmeli.be_java_hisp_w18g05.dto.response;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.springframework.cglib.core.Local;
 
 import java.time.LocalDate;
 

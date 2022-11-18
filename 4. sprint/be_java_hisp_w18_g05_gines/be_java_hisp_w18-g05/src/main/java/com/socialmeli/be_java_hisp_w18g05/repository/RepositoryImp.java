@@ -41,6 +41,7 @@ public class RepositoryImp implements IRepository{
         return idPost ++;
     }
 
+
     @Override
     public Buyer getByIdBuyer(Integer buyer_id) {
         return buyers.stream().filter(b->b.getUser_id().equals(buyer_id)).findFirst().orElse(null);

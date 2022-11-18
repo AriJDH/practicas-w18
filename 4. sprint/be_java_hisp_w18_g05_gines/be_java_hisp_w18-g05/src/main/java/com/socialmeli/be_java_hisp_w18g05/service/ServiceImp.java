@@ -3,6 +3,7 @@ package com.socialmeli.be_java_hisp_w18g05.service;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import com.socialmeli.be_java_hisp_w18g05.dto.request.NewPromoPostDTORequest;
 import com.socialmeli.be_java_hisp_w18g05.dto.response.*;
 import com.socialmeli.be_java_hisp_w18g05.dto.request.NewPostDTORequest;
 import com.socialmeli.be_java_hisp_w18g05.dto.response.BuyerDTOResponse;
@@ -23,8 +24,6 @@ import com.socialmeli.be_java_hisp_w18g05.exceptions.InvalidException;
 import com.socialmeli.be_java_hisp_w18g05.exceptions.InvalidParameterException;
 import com.socialmeli.be_java_hisp_w18g05.exceptions.NotFoundException;
 import com.socialmeli.be_java_hisp_w18g05.repository.IRepository;
-import lombok.Data;
-import org.springframework.cglib.core.Local;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -160,9 +159,6 @@ public class ServiceImp implements IService {
             }
         }
         // Order by date, depending on the order parameter
-
-
-
         if(order.equals("date_asc")){
             listPostDTO.sort(Comparator.comparing(PostDTOResponse::getDate)); // ordenamiento descenciente por fechas
         } else if (order.equals("date_desc")) {
@@ -328,9 +324,40 @@ public class ServiceImp implements IService {
         LocalDate localDate = LocalDate.parse(post.getDate(),formatter);
 
         //Create DTO of the post
-        Post newPost = new Post(repository.addPost(), localDate,product ,post.getCategory(),post.getPrice());
+        Post newPost = new Post(repository.addPost(), localDate,product ,post.getCategory(),post.getPrice(), false, 0.0);
 
         seller.getPosts().add(newPost);
+    }
+
+    //For US 0010
+    @Override
+    public void newPromoPost(NewPromoPostDTORequest post) {
+        Integer user_id = post.getUser_id();
+        Seller seller = repository.getByIdSeller(user_id);
+        if (seller == null) {  //Exception non existing seller
+            throw new NotFoundException("Seller id " + user_id + " not found");
+        }
+        Product product = op.convertValue(post.getProduct(), Product.class);
+
+        //Convert the string to date time format
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        LocalDate localDate = LocalDate.parse(post.getDate(),formatter);
+
+        //Create DTO of the post
+        Post newPost = new Post(repository.addPost(),localDate,product ,post.getCategory(),post.getPrice(), post.getHas_promo(), post.getDiscount());
+        seller.getPosts().add(newPost);
+    }
+
+    @Override
+    public PromoPostCountDTOResponse promoPostCount(Integer user_id) {
+        Seller seller = repository.getByIdSeller(user_id); // Get seller from repository
+        if (seller == null) {
+            throw new NotFoundException("Seller id " + user_id + " not found"); // Throw exception if seller doesn't exist
+        }
+        // List filtered count
+        Integer promoPostCount = (int) seller.getPosts().stream().filter(Post::getHas_promo).count();
+        //Create DTO response
+        return new PromoPostCountDTOResponse(user_id, seller.getName(), promoPostCount);
     }
 
 }

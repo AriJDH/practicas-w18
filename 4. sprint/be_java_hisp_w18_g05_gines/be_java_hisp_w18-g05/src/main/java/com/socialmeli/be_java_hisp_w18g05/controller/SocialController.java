@@ -1,18 +1,14 @@
 package com.socialmeli.be_java_hisp_w18g05.controller;
 
 
-import com.socialmeli.be_java_hisp_w18g05.dto.response.SellerFollowersCountDTOResponse;
+import com.socialmeli.be_java_hisp_w18g05.dto.request.NewPromoPostDTORequest;
+import com.socialmeli.be_java_hisp_w18g05.dto.response.*;
 
 import com.socialmeli.be_java_hisp_w18g05.dto.request.NewPostDTORequest;
 
 
-import com.socialmeli.be_java_hisp_w18g05.dto.response.BuyerFollowedListDTOResponse;
-
-
 import com.socialmeli.be_java_hisp_w18g05.dto.response.SellerFollowersCountDTOResponse;
 
-import com.socialmeli.be_java_hisp_w18g05.dto.response.SellerFollowersListDTOResponse;
-import com.socialmeli.be_java_hisp_w18g05.dto.response.SellerPostListDTOResponse;
 import com.socialmeli.be_java_hisp_w18g05.service.IService;
 import com.socialmeli.be_java_hisp_w18g05.service.ServiceImp;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -71,6 +67,17 @@ public class SocialController {
     public ResponseEntity<?> unfollow(@PathVariable Integer userId, @PathVariable Integer userIdToUnfollow){
         service.unfollow(userId, userIdToUnfollow);
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @PostMapping("/products/promo-post") //US0010
+    public ResponseEntity<?> addPromoPost(@RequestBody NewPromoPostDTORequest post){
+        service.newPromoPost(post);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @GetMapping("/products/promo-post/count") //US0011
+    public ResponseEntity<PromoPostCountDTOResponse> promoPostCount(@RequestParam Integer userId){
+        return new ResponseEntity<>(service.promoPostCount(userId), HttpStatus.OK);
     }
 
 

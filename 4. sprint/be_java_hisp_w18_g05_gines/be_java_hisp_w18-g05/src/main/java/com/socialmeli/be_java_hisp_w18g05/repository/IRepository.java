@@ -11,14 +11,9 @@ public interface IRepository {
     List<Buyer> getAllBuyers();
     List<Seller> getAllSellers();
     int addPost();
+
     Buyer getByIdBuyer(Integer buyer_id);
     Seller getByIdSeller(Integer seller_id);
 
-    /*
-    void addFollow(Integer buyer_id, Integer seller_id);
-    void unfollow(Integer buyer_id, Integer seller_id);
-    Integer followersCount(Integer seller_id);
-
-     */
 
 }
