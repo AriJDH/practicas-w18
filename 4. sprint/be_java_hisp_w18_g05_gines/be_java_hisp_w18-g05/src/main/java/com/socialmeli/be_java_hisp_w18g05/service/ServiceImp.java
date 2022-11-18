@@ -31,6 +31,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -324,7 +325,7 @@ public class ServiceImp implements IService {
         LocalDate localDate = LocalDate.parse(post.getDate(),formatter);
 
         //Create DTO of the post
-        Post newPost = new Post(repository.addPost(), localDate,product ,post.getCategory(),post.getPrice(), false, 0.0);
+        Post newPost = new Post(repository.addPost(), localDate,product ,post.getCategory(), post.getPrice(), false, 0.0);
 
         seller.getPosts().add(newPost);
     }
@@ -359,6 +360,12 @@ public class ServiceImp implements IService {
         //Create DTO response
         return new PromoPostCountDTOResponse(user_id, seller.getName(), promoPostCount);
     }
+
+    @Override
+    public void addListPost(List<NewPromoPostDTORequest> postList) {
+        postList.forEach(p-> newPromoPost(p));
+    }
+
 
 }
 

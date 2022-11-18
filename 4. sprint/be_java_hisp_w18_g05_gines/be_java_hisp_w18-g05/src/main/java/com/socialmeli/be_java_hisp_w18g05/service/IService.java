@@ -35,4 +35,6 @@ public interface IService {
     void newPromoPost(NewPromoPostDTORequest post);
 
     PromoPostCountDTOResponse promoPostCount(Integer user_id);
+
+    void addListPost(List<NewPromoPostDTORequest> postList);
 }

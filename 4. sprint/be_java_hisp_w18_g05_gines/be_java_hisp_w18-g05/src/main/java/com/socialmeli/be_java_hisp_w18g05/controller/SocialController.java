@@ -80,5 +80,11 @@ public class SocialController {
         return new ResponseEntity<>(service.promoPostCount(userId), HttpStatus.OK);
     }
 
+    @PostMapping("/products/posts") //US0012
+    public ResponseEntity<?> addListPost(@RequestBody List<NewPromoPostDTORequest> postList){
+        service.addListPost(postList);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
 
 }
