@@ -4,6 +4,7 @@ import com.example.socialmeli.dto.request.PublicationPromoRequest;
 import com.example.socialmeli.dto.request.PublicationRequest;
 import com.example.socialmeli.dto.response.PublicationResponse;
 import com.example.socialmeli.dto.response.UserFollowedPublicationResponse;
+import com.example.socialmeli.dto.response.UserPublicationPromoCountResponse;
 import com.example.socialmeli.entity.PublicationEntity;
 import com.example.socialmeli.entity.PublicationPromoEntity;
 import com.example.socialmeli.entity.UserEntity;
@@ -33,9 +34,9 @@ public class PublicationServiceImpl implements IPublicationService {
 
     private final ObjectMapper mapper = new ObjectMapper();
 
-
     /**
      * US 0005: URL=/products/post
+     *
      * @param publicationRequest json with publication data and product data
      */
     @Override
@@ -50,7 +51,7 @@ public class PublicationServiceImpl implements IPublicationService {
     /**
      * US 0010: Carry out the publication of a new product on promotion
      *
-     * @param publicationPromoRequest   publication with promotion request DTO
+     * @param publicationPromoRequest publication with promotion request DTO
      */
     @Override
     public void addPublicationPromo(PublicationPromoRequest publicationPromoRequest) {
@@ -62,12 +63,27 @@ public class PublicationServiceImpl implements IPublicationService {
     }
 
     /**
+     * US 0011: Get the quantity of products on promotion of a certain seller
+     *
+     * @param userId user identification number
+     * @return user publications with promotion count
+     */
+    @Override
+    public UserPublicationPromoCountResponse getUserPublicationPromoCount(Integer userId) {
+        long count = userRepository.getEntityById(userId).getPublicationList().stream()
+                .map(publicationRepository::getEntityById)
+                .filter(publicationEntity -> (publicationEntity instanceof PublicationPromoEntity))
+                .count();
+        return new UserPublicationPromoCountResponse(userId, userRepository.getEntityById(userId).getName(), (int) count);
+    }
+
+    /**
      * US 0006: Obtain a list of the publications made by the sellers that a
      * user follows in the last two weeks (ordering by date).
      *
-     * @param userId    user identification number
-     * @param order     publication response order by date: name_asc=ascending; name_desc=descending
-     * @return          user followed publication response DTO
+     * @param userId user identification number
+     * @param order  publication response order by date: name_asc=ascending; name_desc=descending
+     * @return user followed publication response DTO
      */
     @Override
     public UserFollowedPublicationResponse getUserFollowedPublicationsById(Integer userId, String order) {

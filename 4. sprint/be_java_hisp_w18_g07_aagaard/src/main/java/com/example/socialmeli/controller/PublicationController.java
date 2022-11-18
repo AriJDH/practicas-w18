@@ -3,6 +3,7 @@ package com.example.socialmeli.controller;
 import com.example.socialmeli.dto.request.PublicationPromoRequest;
 import com.example.socialmeli.dto.request.PublicationRequest;
 import com.example.socialmeli.dto.response.UserFollowedPublicationResponse;
+import com.example.socialmeli.dto.response.UserPublicationPromoCountResponse;
 import com.example.socialmeli.service.IPublicationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -17,8 +18,9 @@ public class PublicationController {
 
     /**
      * US 0005: URL=/products/post
-     * @param publicationRequest    requestbody - json with publication data and product data
-     * @return          respose entity -  OK status code if registry was succesful, Bad_Request if registry could not be added
+     *
+     * @param publicationRequest requestbody - json with publication data and product data
+     * @return respose entity - OK status code if registry was succesful, Bad_Request if registry could not be added
      */
     @PostMapping("/products/post")
     public ResponseEntity<Void> createPublication(@RequestBody PublicationRequest publicationRequest) {
@@ -29,9 +31,10 @@ public class PublicationController {
 
     /**
      * US 0006: URL=/products/followed/{userId}/list
-     * @param userId    pathvariable - user identification number
-     * @param order     pathvariable - publication response order by date: name_asc=ascending; name_desc=descending
-     * @return          respose entity - "user followed publication response DTO" & OK status code
+     *
+     * @param userId pathvariable - user identification number
+     * @param order  pathvariable - publication response order by date: name_asc=ascending; name_desc=descending
+     * @return respose entity - "user followed publication response DTO" & OK status code
      */
     @GetMapping("/products/followed/{userId}/list")
     public ResponseEntity<UserFollowedPublicationResponse> getUserFollowedPublicationsById(@PathVariable Integer userId, @RequestParam(defaultValue = "") String order) {
@@ -42,13 +45,25 @@ public class PublicationController {
 
     /**
      * US 0010: URL=/products/promo-post
-     * @param publicationPromoRequest   requestbody - json with publication data and product data
-     * @return                          respose entity -  OK status code if registry was succesful, Bad_Request if registry could not be added
+     *
+     * @param publicationPromoRequest requestbody - json with publication data and product data
+     * @return respose entity -  OK status code if registry was succesful, Bad_Request if registry could not be added
      */
     @PostMapping("/products/promo-post")
     public ResponseEntity<Void> addPublicationPromo(@RequestBody PublicationPromoRequest publicationPromoRequest) {
         publicationService.addPublicationPromo(publicationPromoRequest);
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    /**
+     * US 0011: GET=/products/promo-post/count?user_id={userId}
+     *
+     * @param userId "user_id" request param - user identification number
+     * @return respose entity - OK status code if user exists, Bad_Request not
+     */
+    @GetMapping("/products/promo-post/count")
+    public ResponseEntity<UserPublicationPromoCountResponse> getUserPublicationPromoCount(@RequestParam("user_id") Integer userId) {
+        return new ResponseEntity<>(publicationService.getUserPublicationPromoCount(userId), HttpStatus.OK);
     }
 
 }
