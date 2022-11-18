@@ -18,5 +18,7 @@ public class Post {
     private Double price;
     @JsonFormat(pattern="dd-MM-yyyy")
     private LocalDate date;
+    private Boolean has_promo;
+    private Double discount;
 
 }
