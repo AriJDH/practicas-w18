@@ -1,14 +1,12 @@
 package com.meli.be_java_hisp_w18_g01.controllers;
 
-import com.meli.be_java_hisp_w18_g01.dtos.ResponseDTO;
-import com.meli.be_java_hisp_w18_g01.dtos.UserFollowedInfoDTO;
-import com.meli.be_java_hisp_w18_g01.dtos.UserFollowersCountDTO;
-import com.meli.be_java_hisp_w18_g01.dtos.UserFollowersInfoDTO;
+import com.meli.be_java_hisp_w18_g01.dtos.*;
 import com.meli.be_java_hisp_w18_g01.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/users")
@@ -40,5 +38,10 @@ public class UserController {
     @GetMapping("/{userId}/followed/list")
     public ResponseEntity<UserFollowedInfoDTO> getFollowedInfo(@PathVariable long userId, @RequestParam(required=false) String order){
         return ResponseEntity.ok(userService.handleGetFollowedInfo(userId, order));
+    }
+
+    @GetMapping("/list")
+    public ResponseEntity<List<AllUserDTO>> findAllUsers(){
+        return ResponseEntity.ok(userService.findAllUsers());
     }
 }

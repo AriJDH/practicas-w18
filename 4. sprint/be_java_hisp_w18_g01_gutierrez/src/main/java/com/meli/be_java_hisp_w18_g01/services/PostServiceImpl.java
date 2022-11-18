@@ -3,8 +3,6 @@ package com.meli.be_java_hisp_w18_g01.services;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.meli.be_java_hisp_w18_g01.comparators.LocalDateComparatorAsc;
 import com.meli.be_java_hisp_w18_g01.comparators.LocalDateComparatorDesc;
-import com.meli.be_java_hisp_w18_g01.comparators.StringComparatorAsc;
-import com.meli.be_java_hisp_w18_g01.comparators.StringComparatorDesc;
 import com.meli.be_java_hisp_w18_g01.dtos.*;
 import com.meli.be_java_hisp_w18_g01.entities.Post;
 import com.meli.be_java_hisp_w18_g01.entities.Product;
@@ -15,6 +13,7 @@ import com.meli.be_java_hisp_w18_g01.services.database.UserDbService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Comparator;
@@ -24,6 +23,7 @@ import java.util.stream.Collectors;
 @Service
 public class PostServiceImpl implements PostService {
     private long postCount = 0L;
+    private DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 
     @Autowired
     MapperPostToPostDTO mapperPostToPostDTO;
@@ -40,7 +40,7 @@ public class PostServiceImpl implements PostService {
         try {
             post = new Post(postCount,
                     user,
-                    LocalDate.parse(postDTO.getDate()),
+                    LocalDate.parse(postDTO.getDate(),dateFormatter),
                     mapper.convertValue(postDTO.getProduct(), Product.class),
                     postDTO.getCategory(),
                     postDTO.getPrice()
@@ -67,7 +67,7 @@ public class PostServiceImpl implements PostService {
         try {
             post = new Post(postCount,
                     user,
-                    LocalDate.parse(postPromoDTO.getDate()),
+                    LocalDate.parse(postPromoDTO.getDate(), dateFormatter),
                     mapper.convertValue(postPromoDTO.getProduct(), Product.class),
                     postPromoDTO.getCategory(),
                     postPromoDTO.getPrice(),
@@ -118,7 +118,7 @@ public class PostServiceImpl implements PostService {
         List<PostPromoIdDTO> postDto = post.stream().map(p ->
                 new PostPromoIdDTO(p.getUser().getUser_id(),
                         p.getPost_id(),
-                        p.getDate().toString(),
+                        p.getDate().format(dateFormatter),
                         mapper.convertValue(p.getProduct(), ProductDTO.class),
                         p.getCategory(),
                         p.getPrice(),

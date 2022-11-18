@@ -14,4 +14,5 @@ public interface PostService {
 
     SellerPostPromoDTO getSellerPostPromo(long userId);
 
+
 }

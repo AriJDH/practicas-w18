@@ -9,6 +9,7 @@ import com.meli.be_java_hisp_w18_g01.services.database.UserDbService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -53,6 +54,20 @@ public class UserServiceImpl implements UserService {
                 .map(u->new UserDTO(u.getUser_id(), u.getUser_name()))
                 .collect(Collectors.toList());
         return new UserFollowedInfoDTO(user.getUser_id(), user.getUser_name(), this.sortUsers(followed, order));
+    }
+
+    @Override
+    public List<AllUserDTO> findAllUsers() {
+        List<User> users = userDbService.findAll();
+        List<AllUserDTO> usersDTO = users.stream().map(
+                u -> new AllUserDTO(u.getUser_name(),
+                        u.getFollowers().size(),
+                        u.getFollowed().size(),
+                        u.getPosts().size())
+        ).collect(Collectors.toList());
+        Collections.sort(usersDTO, (x, y) -> x.getUser_name().compareToIgnoreCase(y.getUser_name()));
+        return usersDTO;
+
     }
 
     public List<UserDTO> sortUsers(List<UserDTO> users, String order){
