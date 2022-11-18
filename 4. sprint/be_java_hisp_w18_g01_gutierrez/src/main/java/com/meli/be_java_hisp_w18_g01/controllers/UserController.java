@@ -41,7 +41,7 @@ public class UserController {
     }
 
     @GetMapping("/list")
-    public ResponseEntity<List<AllUserDTO>> findAllUsers(){
-        return ResponseEntity.ok(userService.findAllUsers());
+    public ResponseEntity<List<AllUserDTO>> findAllUsers(@RequestParam(required=false) Integer user_id){
+        return ResponseEntity.ok(userService.findAllUsers(user_id));
     }
 }

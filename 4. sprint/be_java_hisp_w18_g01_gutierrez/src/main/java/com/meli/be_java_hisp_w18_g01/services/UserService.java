@@ -10,5 +10,5 @@ public interface UserService {
     UserFollowersCountDTO handleGetFollowersCount(long userId);
     UserFollowersInfoDTO handleGetFollowersInfo(long userId, String order);
     UserFollowedInfoDTO handleGetFollowedInfo(long userId, String order);
-    List<AllUserDTO> findAllUsers();
+    List<AllUserDTO> findAllUsers(Integer userId);
 }
