@@ -119,8 +119,4 @@ public class UserRepositoryImp implements IUserRepository{
            return user.getUser_name() +" with id: " + userId + " unfollow to -> " + seller.getUser_name() + " with id: "+ userIdToUnfollow;
     }
 
-    @Override
-    public Seller getSellerById(Integer userId) {
-        return findSellerById(userId);
-    }
 }

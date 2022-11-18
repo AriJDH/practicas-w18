@@ -20,5 +20,5 @@ public interface IUserService {
 
     String unFollow(Integer userId,Integer userIdToUnfollow);
 
-    SellerDtoRes getSellerById(Integer UserId);
+    ListPostSellerDtoRes getListPostsBySeller(Integer UserId);
 }

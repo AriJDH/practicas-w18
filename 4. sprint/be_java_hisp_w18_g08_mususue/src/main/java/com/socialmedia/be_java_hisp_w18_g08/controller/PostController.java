@@ -2,6 +2,7 @@ package com.socialmedia.be_java_hisp_w18_g08.controller;
 
 import com.socialmedia.be_java_hisp_w18_g08.dto.request.PostDtoReq;
 import com.socialmedia.be_java_hisp_w18_g08.dto.request.PostPromoDtoReq;
+import com.socialmedia.be_java_hisp_w18_g08.dto.response.PostPromoCountDtoRes;
 import com.socialmedia.be_java_hisp_w18_g08.service.IPostService;
 import com.socialmedia.be_java_hisp_w18_g08.service.PostServiceImp;
 import org.springframework.http.HttpStatus;
@@ -36,5 +37,10 @@ public class PostController {
                                                                       @RequestParam(required = false) String order){
         PostDtoRes response =  postService.getPostSellerListByUserId(userId, order);
         return new ResponseEntity<>(response,HttpStatus.OK);
+    }
+
+    @GetMapping("/promo-post/count")
+    public ResponseEntity<PostPromoCountDtoRes> getCountPostPromoBySeller(@RequestParam Integer user_id) {
+        return new ResponseEntity<>(postService.getCountPostPromoBySeller(user_id), HttpStatus.OK);
     }
 }

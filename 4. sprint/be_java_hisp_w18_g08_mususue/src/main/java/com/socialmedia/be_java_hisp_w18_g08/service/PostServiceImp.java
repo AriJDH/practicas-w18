@@ -4,6 +4,7 @@ import com.socialmedia.be_java_hisp_w18_g08.dto.PostDto;
 import com.socialmedia.be_java_hisp_w18_g08.dto.request.PostDtoReq;
 import com.socialmedia.be_java_hisp_w18_g08.dto.request.PostPromoDtoReq;
 import com.socialmedia.be_java_hisp_w18_g08.dto.response.PostDtoRes;
+import com.socialmedia.be_java_hisp_w18_g08.dto.response.PostPromoCountDtoRes;
 import com.socialmedia.be_java_hisp_w18_g08.entity.Post;
 import com.socialmedia.be_java_hisp_w18_g08.entity.PostPromo;
 import com.socialmedia.be_java_hisp_w18_g08.exception.BadRequestException;
@@ -109,4 +110,22 @@ public class PostServiceImp implements IPostService {
         }
         return postDtoRes;
     }
+
+    @Override
+    public PostPromoCountDtoRes getCountPostPromoBySeller(Integer userId) {
+        Seller seller = userRepository.findSellerById(userId);
+        if(seller == null)
+            throw new NotFoundUserException("Seller not Found");
+
+        Integer count = 0;
+
+        for (int i = 0; i < seller.getPosts().size(); i++) {
+            PostPromo postPromo = new PostPromo();
+            if (seller.getPosts().get(i).getClass().equals(postPromo.getClass())) {
+                count++;
+            }
+        }
+        return new PostPromoCountDtoRes(seller.getUser_id(), seller.getUser_name(), count);
+    }
+
 }

@@ -16,7 +16,4 @@ public interface IUserRepository {
 
     String unFollow(Integer userId,Integer userIdToUnfollow);
 
-    Seller getSellerById(Integer userId);
-
-
 }

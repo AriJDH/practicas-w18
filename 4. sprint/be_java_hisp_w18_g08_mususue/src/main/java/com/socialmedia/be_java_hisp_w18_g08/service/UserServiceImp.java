@@ -118,12 +118,12 @@ public class UserServiceImp implements IUserService {
     }
 
     @Override
-    public SellerDtoRes getSellerById(Integer userId) {
-        Seller seller = userRepository.getSellerById(userId);
+    public ListPostSellerDtoRes getListPostsBySeller(Integer userId) {
+        Seller seller = userRepository.findSellerById(userId);
         if(seller == null)
             throw new NotFoundUserException("Seller not Found");
-        SellerDtoRes sellerDtoRes = new SellerDtoRes(seller.getUser_id(), seller.getUser_name(), seller.getPosts());
-        return sellerDtoRes;
+        ListPostSellerDtoRes listPostSellerDtoRes = new ListPostSellerDtoRes(seller.getUser_id(), seller.getUser_name(), seller.getPosts());
+        return listPostSellerDtoRes;
     }
 
 

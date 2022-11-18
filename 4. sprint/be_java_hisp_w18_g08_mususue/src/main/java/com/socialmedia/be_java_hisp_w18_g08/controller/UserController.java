@@ -48,8 +48,8 @@ public class UserController {
         return new ResponseEntity<>(userService.unFollow(userId,userIdToUnfollow),HttpStatus.OK);
     }
 
-    @GetMapping("/sellers/{userId}")
-    public ResponseEntity<SellerDtoRes> getSellerById(@PathVariable Integer userId) {
-        return new ResponseEntity<>(userService.getSellerById(userId), HttpStatus.OK);
+    @GetMapping("/sellers/{userId}/posts")
+    public ResponseEntity<ListPostSellerDtoRes> getListPostsBySeller(@PathVariable Integer userId) {
+        return new ResponseEntity<>(userService.getListPostsBySeller(userId), HttpStatus.OK);
     }
 }
