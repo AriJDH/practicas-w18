@@ -69,12 +69,12 @@ public class SocialController {
         return new ResponseEntity<>( HttpStatus.OK);
     }
 
-    @GetMapping("/products/promo-post/count") //US0002
+    @GetMapping("/products/promo-post/count") //US0011
     public ResponseEntity<PostPromoCountDTOResponse> postPromoCount(@RequestParam Integer user_id) {
         return new ResponseEntity<>(service.postPromoCount(user_id), HttpStatus.OK);
     }
 
-    @GetMapping("/users/total-post")
+    @GetMapping("/users/total-post") // US0012
     public ResponseEntity<?> getAllPost(){
         return new ResponseEntity<>(service.totalCountPostSeller(),HttpStatus.OK);
     }
