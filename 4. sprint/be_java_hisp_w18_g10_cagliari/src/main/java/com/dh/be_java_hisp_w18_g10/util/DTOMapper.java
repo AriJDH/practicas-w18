@@ -31,18 +31,18 @@ public class DTOMapper {
         return modelMapper.map(user, UserPostsDTOres.class);
     }
 
-    public static UserFollowedListDTOres mapToUserFollowedRes(User user){
-        return modelMapper.map(user, UserFollowedListDTOres.class);
+    public static UserFollowedDTOres mapToUserFollowedRes(User user){
+        return modelMapper.map(user, UserFollowedDTOres.class);
     }
 
-    public static UserFollowersListDTOres mapToFollowersListDTO(User user, List<User> userFollowers) {
+    public static UserFollowersDTOres mapToFollowersDTO(User user, List<User> userFollowers) {
 
         List<UserDTOres> userDTOresList = userFollowers
                 .stream()
                 .map(entity -> new UserDTOres(entity.getUserId(), entity.getUserName()))
                 .collect(Collectors.toList());
 
-        return new UserFollowersListDTOres(user.getUserId(), user.getUserName(), userDTOresList);
+        return new UserFollowersDTOres(user.getUserId(), user.getUserName(), userDTOresList);
     }
 
     public static Post mapTo(PostDTOreq postDTOreq){
@@ -103,9 +103,9 @@ public class DTOMapper {
         return modelMapper.map(post, PostPromoDTOres.class);
     }
 
-    public static UserFollowedListDTOres mapToUserFollowed(User user, List<User> userFollowed){
+    public static UserFollowedDTOres mapToUserFollowed(User user, List<User> userFollowed){
         mapperConfigCamelToUnder();
-        UserFollowedListDTOres usersFollowedList = modelMapper.map(user, UserFollowedListDTOres.class);
+        UserFollowedDTOres usersFollowedList = modelMapper.map(user, UserFollowedDTOres.class);
 
         List<UserDTOres> userDTOres = userFollowed
                 .stream()

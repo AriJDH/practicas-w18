@@ -10,9 +10,7 @@ import java.util.List;
 @Getter @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserFollowedListDTOres {
-    //TODO: REQUIRE - US 0004 - GET: /users/{userId}/followed/list
-    // US 0008
+public class UserFollowedDTOres {
     private int user_id;
     private String user_name;
     private List<UserDTOres> followed;

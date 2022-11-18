@@ -31,7 +31,7 @@ public class AppController {
     }
 
     @GetMapping("/users/{userId}/followers/list")
-    public ResponseEntity<UserFollowersListDTOres> getUserFollowers(
+    public ResponseEntity<UserFollowersDTOres> getUserFollowers(
             @RequestParam(required = false) String order,
             @PathVariable int userId) {
         // US 0003

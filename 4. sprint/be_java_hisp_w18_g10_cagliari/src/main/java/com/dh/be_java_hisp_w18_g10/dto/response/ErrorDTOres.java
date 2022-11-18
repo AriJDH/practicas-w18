@@ -9,8 +9,8 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ErrorDTOres {
-    private String message;
     private int code;
+    private String message;
 }
 
 // JSON REPRESENTATION

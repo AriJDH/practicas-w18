@@ -32,14 +32,12 @@ public class AppService implements IAppService {
     public void followUser(int userId, int userIdToFollow) {
         User user1 = userRepository.getUser(userId);
         User user2 = userRepository.getUser(userIdToFollow);
-
         if(user1 == null){
             throw new GenericException("El usuario con el id: "+userId+" no fue encontrado!");
         }
         if(user2 == null){
             throw new GenericException("El usuario con el id: "+userIdToFollow+" no fue encontrado!");
         }
-
         if(userId == userIdToFollow){
             throw new GenericException("Un usuario no se puede seguir a si mismo!");
         }
@@ -54,9 +52,7 @@ public class AppService implements IAppService {
 
     @Override
     public UserFollowersCountDTOres getUserFollowersCount(int userId) {
-        User user = userRepository.getUser(userId);
-        if(user == null)
-            throw new UserNotFoundException();
+        User user = getUser(userId);
 
         return new UserFollowersCountDTOres(
                 user.getUserId(),
@@ -66,14 +62,14 @@ public class AppService implements IAppService {
     }
 
     @Override
-    public UserFollowersListDTOres getUserFollowerList(int userId) {
+    public UserFollowersDTOres getUserFollowerList(int userId) {
         User user = getUser(userId);
         List<User> userFollowers = userRepository.getUserFollowers(userId);
-        return DTOMapper.mapToFollowersListDTO(user, userFollowers);
+        return DTOMapper.mapToFollowersDTO(user, userFollowers);
     }
 
     @Override
-    public UserFollowedListDTOres getUserFollowed(int userId) {
+    public UserFollowedDTOres getUserFollowed(int userId) {
         User user = getUser(userId);
         List<User> userFollowed = userRepository.getUserFollowers(userId);
         return DTOMapper.mapToUserFollowed(user, userFollowed);
@@ -98,10 +94,7 @@ public class AppService implements IAppService {
     @Override
     public UserPostsDTOres getUserPosts(int userId, String order) {
         UserPostsDTOres userPostsDTOres = new UserPostsDTOres();
-
-        User user = userRepository.getUser(userId);
-        if(user == null)
-            throw new UserNotFoundException();
+        User user = getUser(userId);
 
         if(user.getFollowed().isEmpty()){
             throw new GenericException(String.format("El usuario %s no sigue vendedeores"
@@ -151,8 +144,8 @@ public class AppService implements IAppService {
     }
 
     @Override
-    public UserFollowersListDTOres getUserFollowerList(int userId, String order) {
-        UserFollowersListDTOres res = getUserFollowerList(userId);
+    public UserFollowersDTOres getUserFollowerList(int userId, String order) {
+        UserFollowersDTOres res = getUserFollowerList(userId);
         if(order.equals(TypeOrderHelper.NAME_ASC)){
             res.getFollowers()
                     .sort(Comparator.comparing(UserDTOres::getUser_name));
@@ -168,8 +161,8 @@ public class AppService implements IAppService {
     }
 
     @Override
-    public UserFollowedListDTOres getUserFollowed(int userId, String order) {
-        UserFollowedListDTOres res = getUserFollowed(userId);
+    public UserFollowedDTOres getUserFollowed(int userId, String order) {
+        UserFollowedDTOres res = getUserFollowed(userId);
         if(order.equals(TypeOrderHelper.NAME_ASC)){
             res.getFollowed()
                     .sort(Comparator.comparing(UserDTOres::getUser_name));
@@ -199,7 +192,7 @@ public class AppService implements IAppService {
     private User getUser(int userId){
         User user = userRepository.getUser(userId);
         if (user == null)
-            throw new UserNotFoundException();
+            throw new UserNotFoundException(userId);
         return user;
     }
 
