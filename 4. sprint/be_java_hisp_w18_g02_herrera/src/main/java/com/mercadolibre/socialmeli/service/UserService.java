@@ -142,6 +142,14 @@ public class UserService implements IUserService {
         }
     }
 
+    public SellerPromoPostsCountDtoRes getPromoPostsCount(Integer id) {
+        User user = userRepository.findById(id);
+        Integer count = (int)userRepository.getPostsFromSeller(id).stream()
+                .filter(p -> p.isHasPromo())
+                .count();
+        return new SellerPromoPostsCountDtoRes(id, user.getName(), count);
+    }
+
     @Override
     public SellerPromoPostsDtoRes getPromoPostsFromSeller(Integer id) {
         User user = userRepository.findById(id);

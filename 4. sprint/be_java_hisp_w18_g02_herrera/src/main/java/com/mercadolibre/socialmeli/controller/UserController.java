@@ -90,6 +90,11 @@ public class UserController {
         return ResponseEntity.ok().build();
     }
 
+    @GetMapping("/products/promo-post/count")
+    public ResponseEntity<?> getPromoPostsCount(@RequestParam Integer user_id) {
+        return ResponseEntity.ok(userService.getPromoPostsCount(user_id));
+    }
+
     @GetMapping("/products/promo-post/list")
     public ResponseEntity<?> getPromoPostsFromSeller(@RequestParam Integer user_id){
         return ResponseEntity.ok(userService.getPromoPostsFromSeller(user_id));

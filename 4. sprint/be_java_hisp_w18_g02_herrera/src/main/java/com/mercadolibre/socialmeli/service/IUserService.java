@@ -15,6 +15,7 @@ public interface IUserService {
     UserFollowedListDtoRes getFollowed(Integer id, String order);
     void addPost(PostDtoReq postReq);
     void addPromoPost(PromoPostDtoReq promoPostReq);
+    SellerPromoPostsCountDtoRes getPromoPostsCount(Integer id);
     SellerPromoPostsDtoRes getPromoPostsFromSeller(Integer id);
     RecentPostsDtoRes getRecentPosts(Integer userId, String order);
 
