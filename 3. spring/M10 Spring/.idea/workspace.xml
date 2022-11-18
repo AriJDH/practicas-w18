@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="78d0d615-f123-426b-94fc-928831c312f7" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/../../2. java/M8 Java P2/CarreraDeLaSelva/out/production/CarreraDeLaSelva/Main$CategoriaCircuito.class" beforeDir="false" afterPath="$PROJECT_DIR$/../../2. java/M8 Java P2/CarreraDeLaSelva/out/production/CarreraDeLaSelva/Main$CategoriaCircuito.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../2. java/M8 Java P2/CarreraDeLaSelva/out/production/CarreraDeLaSelva/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/../../2. java/M8 Java P2/CarreraDeLaSelva/out/production/CarreraDeLaSelva/Main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../2. java/M8 Java P2/CarreraDeLaSelva/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../2. java/M8 Java P2/CarreraDeLaSelva/src/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../1. Intro Spring/numeros-romanos/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../1. Intro Spring/numeros-romanos/.mvn/wrapper/maven-wrapper.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../1. Intro Spring/numeros-romanos/.mvn/wrapper/maven-wrapper.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../1. Intro Spring/numeros-romanos/mvnw" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../1. Intro Spring/numeros-romanos/mvnw.cmd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../1. Intro Spring/numeros-romanos/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../1. Intro Spring/numeros-romanos/src/main/java/com/example/demo/DemoApplication.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../1. Intro Spring/numeros-romanos/src/main/java/com/example/demo/controller/HolaRestController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../1. Intro Spring/numeros-romanos/src/main/java/com/example/demo/controller/RomanosController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../1. Intro Spring/numeros-romanos/src/main/java/com/example/demo/service/RomanosUtil.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../1. Intro Spring/numeros-romanos/src/main/resources/application.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../1. Intro Spring/numeros-romanos/src/test/java/com/example/demo/DemoApplicationTests.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../1. Intro Spring/roman-numerals/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../1. Intro Spring/roman-numerals/.mvn/wrapper/MavenWrapperDownloader.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../1. Intro Spring/roman-numerals/.mvn/wrapper/maven-wrapper.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../1. Intro Spring/roman-numerals/.mvn/wrapper/maven-wrapper.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../1. Intro Spring/roman-numerals/mvnw" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../1. Intro Spring/roman-numerals/mvnw.cmd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../1. Intro Spring/roman-numerals/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../1. Intro Spring/roman-numerals/src/main/java/com/mercadolibre/romannumerals/RomanNumeralsApplication.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../1. Intro Spring/roman-numerals/src/main/java/com/mercadolibre/romannumerals/RomanNumeralsRestController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../1. Intro Spring/roman-numerals/src/main/resources/application.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../1. Intro Spring/roman-numerals/src/test/java/com/mercadolibre/romannumerals/RomanNumeralsApplicationTests.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../P1 - Vivo/demo/.idea/workspace.xml" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2HaahDr8d070qD8KmdZ2me5EIo7" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="showLibraryContents" value="true" />
+    <option name="showMembers" value="true" />
+    <option name="showVisibilityIcons" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "/Users/ICINGOLANI/Documents/BOOTCAMP/practicas-w18/3. spring/M10 Spring"
+  }
+}]]></component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="78d0d615-f123-426b-94fc-928831c312f7" name="Changes" comment="" />
+      <created>1668525765146</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1668525765146</updated>
+      <workItem from="1668525766354" duration="121000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>
