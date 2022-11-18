@@ -122,7 +122,7 @@ public class UserServiceImp implements IUserService {
         Seller seller = userRepository.getSellerById(userId);
         if(seller == null)
             throw new NotFoundUserException("Seller not Found");
-        SellerDtoRes sellerDtoRes = new SellerDtoRes(seller.getUser_id(), seller.getUser_name(), seller.getFollowed(), seller.getPosts(), seller.getFollowers());
+        SellerDtoRes sellerDtoRes = new SellerDtoRes(seller.getUser_id(), seller.getUser_name(), seller.getPosts());
         return sellerDtoRes;
     }
 

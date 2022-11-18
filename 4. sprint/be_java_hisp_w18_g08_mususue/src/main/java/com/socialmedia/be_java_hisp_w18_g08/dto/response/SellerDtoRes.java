@@ -17,7 +17,5 @@ import java.util.List;
 public class SellerDtoRes {
     private Integer user_id;
     private String user_name;
-    private List<Seller> followed;
     private List<Post> posts;
-    private List<User> followers;
 }
