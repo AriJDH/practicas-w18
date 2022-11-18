@@ -1,15 +1,22 @@
 package com.bootcamp.be_java_hisp_w18_g06.service.imp;
 
+import com.bootcamp.be_java_hisp_w18_g06.dto.response.UserFollowDTO;
+import com.bootcamp.be_java_hisp_w18_g06.dto.response.UserFollowedListDTO;
+import com.bootcamp.be_java_hisp_w18_g06.dto.response.UserFollowersCountDTO;
+import com.bootcamp.be_java_hisp_w18_g06.dto.response.UserFollowersListDTO;
 import com.bootcamp.be_java_hisp_w18_g06.entity.User;
 import com.bootcamp.be_java_hisp_w18_g06.exceptions.BadRequestException;
+import com.bootcamp.be_java_hisp_w18_g06.exceptions.EmptyException;
 import com.bootcamp.be_java_hisp_w18_g06.repository.IUserRepository;
 import com.bootcamp.be_java_hisp_w18_g06.service.IUserService;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class UserService implements IUserService {
@@ -106,4 +113,66 @@ public class UserService implements IUserService {
         }
     }
 
+
+    @Override
+    public UserFollowersCountDTO getFollowersCount(int userId) {
+        User user = userRepository.getUser(userId);
+
+        if (user.getFollowers() == null) {
+            throw new EmptyException("No es comprador aaaaaaaaaaa");
+        }
+
+        // Temporal
+        UserFollowersCountDTO userFollowersCountDTO = new UserFollowersCountDTO();
+        userFollowersCountDTO.setUser_id(userId);
+        userFollowersCountDTO.setUser_name(user.getUser_name());
+        userFollowersCountDTO.setFollowers_count(user.getFollowers().size());
+        //
+
+        return userFollowersCountDTO;
+    }
+
+    @Override
+    public UserFollowedListDTO getFollowedList(int userId) {
+        User user = userRepository.getUser(userId);
+
+        if (user.getFollowed() == null) {
+            throw new EmptyException("aaaaaaaa");
+        }
+
+        // Temporal
+        ObjectMapper om = new ObjectMapper();  // !!!
+        UserFollowedListDTO userFollowedListDTO = new UserFollowedListDTO();
+        userFollowedListDTO.setUser_id(user.getUser_id());
+        userFollowedListDTO.setUser_name(user.getUser_name());
+        userFollowedListDTO.setFollowed(user.getFollowed().stream()
+                .map( x -> om.convertValue(x, UserFollowDTO.class))
+                .collect(Collectors.toList()));
+        //
+
+        return userFollowedListDTO;
+    }
+
+    @Override
+    public UserFollowersListDTO getFollowersList(int userId) {
+        User user = userRepository.getUser(userId);
+
+        if (user.getFollowers() == null) {
+            throw new EmptyException("No es comprador aaaaaaaaaaa");
+        }
+
+        // Temporal
+        ObjectMapper om = new ObjectMapper(); // !!!
+        UserFollowersListDTO userFollowersListDTO = new UserFollowersListDTO();
+        userFollowersListDTO.setUser_id(user.getUser_id());
+        userFollowersListDTO.setUser_name(user.getUser_name());
+        userFollowersListDTO.setFollowers(user.getFollowers().stream()
+                .map( x -> om.convertValue(x, UserFollowDTO.class))
+                .collect(Collectors.toList()));
+        //
+
+        return userFollowersListDTO;
+    }
+
+    // Falta 008
 }

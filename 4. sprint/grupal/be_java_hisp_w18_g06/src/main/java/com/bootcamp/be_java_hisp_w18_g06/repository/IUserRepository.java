@@ -11,5 +11,5 @@ public interface IUserRepository {
     void createPost(Post post);
     Optional<User> findUserById(int id);
     Optional<User> findUserInList(List<User> list, int idUserInList);
-
+    User getUser(int userId);
 }

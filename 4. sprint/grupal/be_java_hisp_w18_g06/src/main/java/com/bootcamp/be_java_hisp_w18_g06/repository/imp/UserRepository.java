@@ -4,6 +4,7 @@ import com.bootcamp.be_java_hisp_w18_g06.entity.Post;
 import com.bootcamp.be_java_hisp_w18_g06.entity.Product;
 import com.bootcamp.be_java_hisp_w18_g06.entity.User;
 import com.bootcamp.be_java_hisp_w18_g06.exceptions.EmptyException;
+import com.bootcamp.be_java_hisp_w18_g06.exceptions.NotFoundException;
 import com.bootcamp.be_java_hisp_w18_g06.repository.IUserRepository;
 import org.springframework.stereotype.Repository;
 
@@ -109,5 +110,14 @@ public class UserRepository implements IUserRepository {
 
 	public void addPostToUser(){
 		user1.setPosts(posts);
+	}
+
+	@Override
+	public User getUser(int userId) {
+		Optional<User> user = findUserById(userId);
+		if (user.isEmpty()) {
+			throw new NotFoundException("The user id: " + userId + " doesn't exists");
+		}
+		return user.get();
 	}
 }
