@@ -63,6 +63,8 @@ public class UserService implements IUserService {
                     userAddedFollowed.add(usFollower.get());
                     usFollowed.get().setFollowers(userAddedFollowed);  //vendedor <- comprador
 
+                    userRepository.updateUsers(usFollower.get());
+                    userRepository.updateUsers(usFollowed.get());
 
                 } else {
                     throw new BadRequestException("You can't follow this user because he doesn't have any posts");
