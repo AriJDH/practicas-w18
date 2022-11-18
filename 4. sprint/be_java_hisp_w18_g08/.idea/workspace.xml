@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="94a24d91-89ea-4fa5-93b1-1ff6ddcccc9b" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.mvn/wrapper/maven-wrapper.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.mvn/wrapper/maven-wrapper.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mvnw" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mvnw.cmd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/socialmedia/be_java_hisp_w18_g08/BeJavaHispW18G08Application.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/socialmedia/be_java_hisp_w18_g08/controller/PostController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/socialmedia/be_java_hisp_w18_g08/controller/UserController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/socialmedia/be_java_hisp_w18_g08/dto/ExceptionDto.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/socialmedia/be_java_hisp_w18_g08/dto/PostDto.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/socialmedia/be_java_hisp_w18_g08/dto/request/FollowDtoReq.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/socialmedia/be_java_hisp_w18_g08/dto/request/PostDtoReq.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/socialmedia/be_java_hisp_w18_g08/dto/response/FollowDtoRes.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/socialmedia/be_java_hisp_w18_g08/dto/response/FollowedDto.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/socialmedia/be_java_hisp_w18_g08/dto/response/PostDtoRes.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/socialmedia/be_java_hisp_w18_g08/dto/response/SellerFollowersCountDto.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/socialmedia/be_java_hisp_w18_g08/dto/response/UserDto.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/socialmedia/be_java_hisp_w18_g08/dto/response/UserListDto.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/socialmedia/be_java_hisp_w18_g08/entity/Post.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/socialmedia/be_java_hisp_w18_g08/entity/Product.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/socialmedia/be_java_hisp_w18_g08/entity/Seller.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/socialmedia/be_java_hisp_w18_g08/entity/User.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/socialmedia/be_java_hisp_w18_g08/exception/BadRequestException.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/socialmedia/be_java_hisp_w18_g08/exception/ExceptionConfig.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/socialmedia/be_java_hisp_w18_g08/exception/NotFoundUserException.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/socialmedia/be_java_hisp_w18_g08/repository/IPostRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/socialmedia/be_java_hisp_w18_g08/repository/IUserRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/socialmedia/be_java_hisp_w18_g08/repository/PostRepositoryImp.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/socialmedia/be_java_hisp_w18_g08/repository/UserRepositoryImp.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/socialmedia/be_java_hisp_w18_g08/service/IPostService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/socialmedia/be_java_hisp_w18_g08/service/IUserService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/socialmedia/be_java_hisp_w18_g08/service/PostServiceImp.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/socialmedia/be_java_hisp_w18_g08/service/UserServiceImp.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/socialmedia/be_java_hisp_w18_g08/util/OrderDateAsc.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/socialmedia/be_java_hisp_w18_g08/util/OrderDateDesc.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Sprint 1.postman_collection.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/socialmedia/be_java_hisp_w18_g08/BeJavaHispW18G08ApplicationTests.java" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHome" value="Use Maven wrapper" />
+        <option name="useMavenConfig" value="true" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="ProjectId" id="2HdmfkKJUeTEY2s2Og8qvJE9Se9" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="autoscrollFromSource" value="false" />
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "/Users/jootero/Documents/Bootcamp/practicas-w18/4. sprint/be_java_hisp_w18_g08/pom.xml",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
+    "settings.editor.selected.configurable": "Runtime.Targets.Configurable",
+    "spring.configuration.checksum": "6b2073aa4fc3fd6c912a7b50a271d23a"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/../../../../practicas-w18/4. sprint" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="BeJavaHispW18G08Application" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="be_java_hisp_w18_Otero" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.socialmedia.be_java_hisp_w18_g08.BeJavaHispW18G08Application" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="94a24d91-89ea-4fa5-93b1-1ff6ddcccc9b" name="Changes" comment="" />
+      <created>1668623441014</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1668623441014</updated>
+      <workItem from="1668623442201" duration="27444000" />
+      <workItem from="1668782832122" duration="16829000" />
+      <workItem from="1668803159334" duration="18000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>
