@@ -142,6 +142,12 @@ public class UserService implements IUserService {
         }
     }
 
+    /**
+     * US 0011
+     *
+     * @param id
+     * @return
+     */
     public SellerPromoPostsCountDtoRes getPromoPostsCount(Integer id) {
         User user = userRepository.findById(id);
         Integer count = (int)userRepository.getPostsFromSeller(id).stream()
@@ -150,6 +156,12 @@ public class UserService implements IUserService {
         return new SellerPromoPostsCountDtoRes(id, user.getName(), count);
     }
 
+    /**
+     * US 0012
+     *
+     * @param id
+     * @return
+     */
     @Override
     public SellerPromoPostsDtoRes getPromoPostsFromSeller(Integer id) {
         User user = userRepository.findById(id);

@@ -84,23 +84,6 @@ public class UserController {
         return ResponseEntity.ok().build();
     }
 
-    @PostMapping("/products/promo-post")
-    public ResponseEntity<?> addPromoPost(@RequestBody PromoPostDtoReq promoPostDtoReq){
-        userService.addPromoPost(promoPostDtoReq);
-        return ResponseEntity.ok().build();
-    }
-
-    @GetMapping("/products/promo-post/count")
-    public ResponseEntity<?> getPromoPostsCount(@RequestParam Integer user_id) {
-        return ResponseEntity.ok(userService.getPromoPostsCount(user_id));
-    }
-
-    @GetMapping("/products/promo-post/list")
-    public ResponseEntity<?> getPromoPostsFromSeller(@RequestParam Integer user_id){
-        return ResponseEntity.ok(userService.getPromoPostsFromSeller(user_id));
-    }
-
-
     /**
      * US0006 / US0009
      * Get Recent Posts
@@ -127,4 +110,40 @@ public class UserController {
         return ResponseEntity.ok(userService.unfollow(userId, userIdToUnfollow));
     }
 
+    /**
+     * US0010
+     * Add Promo Post
+     * @param promoPostDtoReq
+     * @return 200 OK
+     *         400 Bad Request (ErrorDTO Error details)
+     */
+    @PostMapping("/products/promo-post")
+    public ResponseEntity<?> addPromoPost(@RequestBody PromoPostDtoReq promoPostDtoReq){
+        userService.addPromoPost(promoPostDtoReq);
+        return ResponseEntity.ok().build();
+    }
+
+    /**
+     * US0011
+     * Get Promo Post Count From Seller
+     * @param user_id
+     * @return 200 OK
+     *         400 Bad Request (ErrorDTO Error details)
+     */
+    @GetMapping("/products/promo-post/count")
+    public ResponseEntity<?> getPromoPostsCount(@RequestParam Integer user_id) {
+        return ResponseEntity.ok(userService.getPromoPostsCount(user_id));
+    }
+
+    /**
+     * US0012
+     * Get Promo Posts From Seller
+     * @param user_id
+     * @return 200 OK
+     *         400 Bad Request (ErrorDTO Error details)
+     */
+    @GetMapping("/products/promo-post/list")
+    public ResponseEntity<?> getPromoPostsFromSeller(@RequestParam Integer user_id){
+        return ResponseEntity.ok(userService.getPromoPostsFromSeller(user_id));
+    }
 }
