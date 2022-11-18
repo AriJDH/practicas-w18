@@ -10,11 +10,13 @@ import com.socialmedia.be_java_hisp_w18_g08.repository.IPostRepository;
 import com.socialmedia.be_java_hisp_w18_g08.repository.IUserRepository;
 import com.socialmedia.be_java_hisp_w18_g08.repository.PostRepositoryImp;
 import com.socialmedia.be_java_hisp_w18_g08.repository.UserRepositoryImp;
+import com.socialmedia.be_java_hisp_w18_g08.util.OrderDateAsc;
+import com.socialmedia.be_java_hisp_w18_g08.util.OrderDateDesc;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -34,18 +36,20 @@ public class PostServiceImp implements IPostService{
 
     private Integer postId = 5;
 
-    private void changeOrder(List<Post> list, String order) {
-        /*Comparator<Post> compareByDate = Comparator.comparing(Post::getDate);*/
-        Comparator<Post> compareByDate;
-        switch (order){
-            case "date_asc":
-                compareByDate = compareDateAsc(Post::getDate);
-                /*Collections.sort(list, compareByDate);*/
-                break;
-            case "date_desc":
-                /*Collections.sort(list, compareByDate.reversed());*/
-                break;
+    private List<Post> changeOrder(List<Post> list, String order) {
+
+        Comparator<LocalDate> compareByDate;
+
+        if(order == null || order.equals("date_desc")){
+            compareByDate = new OrderDateDesc();
+            list.sort((l1, l2) -> compareByDate.compare(l1.getDate(), l2.getDate()));;
+        } else if (order.equals("date_asc")){
+            compareByDate = new OrderDateAsc();
+            list.sort((l1, l2) -> compareByDate.compare(l1.getDate(), l2.getDate()));
+        } else {
+            throw new NotFoundUserException("The date could not be ordered ");
         }
+        return list;
     }
 
     @Override
@@ -66,29 +70,12 @@ public class PostServiceImp implements IPostService{
         List<PostDtoRes> postDtoRes = new ArrayList<>();
         LocalDate date = LocalDate.now();
         for(Seller s:followed){
-            if(order != null)
-                changeOrder(s.getPosts(), order);
-                Collections.sort(s, new Comparator<>());
-            List<Post> filtrados = s.getPosts().stream().filter(seller-> seller.getDate().isAfter(date.minusDays(15))).collect(Collectors.toList());
+            List<Post> filtrados = this.changeOrder(s.getPosts().stream().filter(seller-> seller.getDate().isAfter(date.minusDays(15))).collect(Collectors.toList()), order);
             PostDtoRes postDtoRes1 = new PostDtoRes(userId,filtrados);
             postDtoRes.add(postDtoRes1);
         }
         if(postDtoRes.isEmpty())
             throw new NotFoundUserException("User whith id: " + userId +" sellers post not found ");
         return postDtoRes;
-    }
-
-    public int compareDateAsc(Post p1, Post p2) {
-        if(p1.getDate() == null || p2.getDate() == null){
-            throw new NotFoundUserException("No dates to order");
-        }
-        return p1.getDate().compareTo(p2.getDate());
-    }
-
-    public int compareDateDesc(Post p1, Post p2) {
-        if(p1.getDate() == null || p2.getDate() == null){
-            throw new NotFoundUserException("No dates to order");
-        }
-        return p2.getDate().compareTo(p1.getDate());
     }
 }
