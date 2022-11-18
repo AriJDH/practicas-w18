@@ -43,7 +43,6 @@ public class UserRepository implements IUserRepository {
 					"usuario1"
 	);
 	
-	
 	User user2 = new User(
 					2,
 					"usuario2"
@@ -72,11 +71,9 @@ public class UserRepository implements IUserRepository {
 		products.add(product2);
 		posts.add(post1);
 		posts.add(post2);
-		user1.setPosts(posts);
 		users.add(user1);
 		users.add(user2);
-		followed.add(user1);
-		user2.setFollowed(followed);
+		addPostToUser();
 	}
 	
 	public UserRepository() {
@@ -92,7 +89,22 @@ public class UserRepository implements IUserRepository {
 	}
 
 	@Override
+	public Optional<User> findUserInList(List<User> list, int idUserInList) {
+		if(list == null)
+			return Optional.empty();
+
+		return list
+				.stream()
+				.filter(user -> user.getUser_id() == idUserInList)
+				.findFirst();
+	}
+
+	@Override
 	public void createPost(Post post) {
 		posts.add(post);
+	}
+
+	public void addPostToUser(){
+		user1.setPosts(posts);
 	}
 }
