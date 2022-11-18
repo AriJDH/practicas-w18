@@ -1,6 +1,7 @@
 package com.bootcamp.be_java_hisp_w18_g06.service.imp;
 
 import com.bootcamp.be_java_hisp_w18_g06.dto.request.PostDTO;
+import com.bootcamp.be_java_hisp_w18_g06.dto.request.PostPromoDto;
 import com.bootcamp.be_java_hisp_w18_g06.entity.Post;
 import com.bootcamp.be_java_hisp_w18_g06.entity.User;
 import com.bootcamp.be_java_hisp_w18_g06.exceptions.BadRequestException;
@@ -82,6 +83,11 @@ public class PostService implements IPostService {
 
 	}
 
+	@Override
+	public void savePromoPost(PostPromoDto postPromoDto) {
+		userRepository.createPost(mapperEntity(postPromoDto));
+	}
+
 	// Métodos auxiliares
 	private Optional<List<Post>> sortByDate(List<Post> posts) {
 		return Optional.of(
@@ -122,6 +128,14 @@ public class PostService implements IPostService {
 		return posts.stream()
 				.map(post -> mapperDTO(post))
 				.collect(Collectors.toList());
+	}
+	private PostPromoDto mapperPromoDTO(Post post) {
+		mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+		return mapper.convertValue(post, PostPromoDto.class);
+	}
+	private Post mapperEntity(PostPromoDto postPromoDto) {
+		mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+		return mapper.convertValue(postPromoDto, Post.class);
 	}
 	private Optional<List<Post>> sortByDateDesc(List<Post> posts) {
 		return Optional.of(
