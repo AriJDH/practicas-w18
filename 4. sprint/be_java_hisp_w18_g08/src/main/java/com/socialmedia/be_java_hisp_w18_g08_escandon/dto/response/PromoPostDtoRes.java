@@ -15,5 +15,6 @@ import java.util.List;
 @Setter
 public class PromoPostDtoRes {
     private Integer user_id;
+    private String user_name;
     private List<PromoPostDto> posts;
 }

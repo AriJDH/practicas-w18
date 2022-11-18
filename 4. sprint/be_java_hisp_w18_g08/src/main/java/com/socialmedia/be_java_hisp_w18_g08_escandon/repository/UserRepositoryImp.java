@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Repository
 @Getter
@@ -65,7 +66,6 @@ public class UserRepositoryImp implements IUserRepository{
         this.users.add(u4);
     }
 
-    //refactorizar nombre
     @Override
     public Seller findSellerById(Integer id) {
         return sellers.stream()
@@ -118,4 +118,15 @@ public class UserRepositoryImp implements IUserRepository{
            seller.getFollowers().remove(user);
            return user.getUser_name() +" with id: " + userId + " unfollow to -> " + seller.getUser_name() + " with id: "+ userIdToUnfollow;
     }
+
+    @Override
+    public List<Post> getAllPromoProductsByCategory(Integer idSeller, Integer category){
+        Seller seller = findSellerById(idSeller);
+        return seller.getPosts().stream()
+                .filter(p -> p.getHas_promo())
+                .collect(Collectors.toList())
+                .stream().filter(p -> p.getCategory() == category)
+                .collect(Collectors.toList());
+    }
+
 }

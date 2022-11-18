@@ -111,14 +111,10 @@ public class PostServiceImp implements IPostService {
    @Override
     public PromoPostDtoRes getAllProductsByCategory(Integer userId, Integer category) {
         Seller seller = userRepository.findSellerById(userId);
-        if(seller == null){
+        if(seller == null)
             throw new NotFoundUserException("Not found User with id " + userId);
-        }
-        List<Post> promoPosts = seller.getPosts().stream()
-                .filter(p -> p.getHas_promo())
-                .collect(Collectors.toList())
-                .stream().filter(p -> p.getCategory() == category)
-                .collect(Collectors.toList());
+
+        List<Post> promoPosts = userRepository.getAllPromoProductsByCategory(userId, category);
         if(promoPosts.isEmpty())
             throw new NotFoundUserException("Not found category " + category);
 
@@ -128,7 +124,7 @@ public class PostServiceImp implements IPostService {
                     p.getCategory(),p.getPrice(), p.getHas_promo(), p.getDiscount());
             postsDtos.add(aux);
         }
-        PromoPostDtoRes dto = new PromoPostDtoRes(seller.getUser_id(), postsDtos);
+        PromoPostDtoRes dto = new PromoPostDtoRes(seller.getUser_id(), seller.getUser_name(), postsDtos);
         return dto;
 
     }
