@@ -1,2 +1,4 @@
-package com.mercadolibre.covid.service;public interface ISaludService {
+package com.mercadolibre.covid.service;
+
+public interface ISaludService {
 }

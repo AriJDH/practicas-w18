@@ -1,4 +1,4 @@
-package com.mercadolibre.deportistas.model;
+package com.mercadolibre.deportistas.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

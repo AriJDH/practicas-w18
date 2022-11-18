@@ -1,2 +1,19 @@
-package com.mercadolibre.covid.entity;public class Persona {
+package com.mercadolibre.covid.entity;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import java.util.ArrayList;
+import java.util.List;
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+public class Persona {
+    private Long id;
+    private String nombre;
+    private String apellido;
+    private Integer edad;
+    private List<Sintoma> sintomas = new ArrayList<>();
 }

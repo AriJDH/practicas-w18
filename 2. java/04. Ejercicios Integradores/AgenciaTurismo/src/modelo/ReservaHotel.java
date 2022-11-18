@@ -1,9 +1,9 @@
-package agencia;
+package modelo;
 
 public class ReservaHotel extends TipoReserva{
 
-    @Override
-    public Double getPrecio() {
-        return null;
+    public ReservaHotel(String idNombre, Double precio) {
+        super(idNombre, precio);
     }
+
 }

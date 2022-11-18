@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class Flota implements AtackUnit{
+public class Flota implements INave {
     private List<Nave> flota = new ArrayList<>();
 
     public void agregarNave(Nave nave){

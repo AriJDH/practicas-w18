@@ -1,29 +1,29 @@
-package series;
+import series.Serie;
+import series.SerieDe2;
 
 public class App {
     public static void main(String[] args) {
-        Serie s = new SerieDe2();
-        s.setValorInicial(1);
-        s.reiniciar();
-        System.out.println(s.devolverNroSiguiente());
-        System.out.println(s.devolverNroSiguiente());
-        System.out.println(s.devolverNroSiguiente());
-        System.out.println(s.devolverNroSiguiente());
-        System.out.println(s.devolverNroSiguiente());
-        System.out.println(s.devolverNroSiguiente());
-        System.out.println(s.devolverNroSiguiente());
-
+        Serie<Long> sl = new SerieDe2();
+        System.out.println(sl.devolverNroSiguiente());
+        System.out.println(sl.devolverNroSiguiente());
+        System.out.println(sl.devolverNroSiguiente());
         System.out.println("*********************");
-        s = new SerieDe3();
-        s.setValorInicial(5);
-        s.reiniciar();
-        System.out.println(s.devolverNroSiguiente());
-        System.out.println(s.devolverNroSiguiente());
-        System.out.println(s.devolverNroSiguiente());
-        System.out.println(s.devolverNroSiguiente());
-        System.out.println(s.devolverNroSiguiente());
-        System.out.println(s.devolverNroSiguiente());
-        System.out.println(s.devolverNroSiguiente());
+        Serie<Integer> si = new SerieDe2();
+        //Integer i = si.devolverNroSiguiente();
+        System.out.println(si.devolverNroSiguiente());
+        System.out.println(si.devolverNroSiguiente());
+        System.out.println(si.devolverNroSiguiente());
+        System.out.println("*********************");
+        Serie<Float> sf = new SerieDe2<>();
+        System.out.println(sf.devolverNroSiguiente());
+        System.out.println(sf.devolverNroSiguiente());
+        System.out.println(sf.devolverNroSiguiente());
+        System.out.println("*********************");
+        Serie<Double> sd = new SerieDe2<>();
+        System.out.println(sd.devolverNroSiguiente());
+        System.out.println(sd.devolverNroSiguiente());
+        System.out.println(sd.devolverNroSiguiente());
+
 
     }
 }

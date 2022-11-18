@@ -1,9 +1,16 @@
 package series;
 
-public abstract class Prototipo {
+public abstract class Serie<N extends Number> {
+    protected Number valor=0.0;
+    protected Number valorInicial=0.0;
 
-    public abstract int devolverNroSiguiente();
-    public abstract void reiniciar();
-    public abstract void setValorInicial
+    public abstract N devolverNroSiguiente();
 
+    public void reiniciar() {
+        this.valor = this.valorInicial;
+    }
+
+    public void setValorInicial(N valorInicial) {
+        this.valorInicial = valorInicial;
+    }
 }

@@ -1,2 +1,7 @@
-package repositorio;public interface IClienteRepository {
+package repositorio;
+
+import modelo.Cliente;
+
+public interface IClienteRepository extends IRepository<Cliente> {
+
 }

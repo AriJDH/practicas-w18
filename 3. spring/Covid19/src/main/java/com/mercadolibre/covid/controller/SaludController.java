@@ -1,2 +1,6 @@
-package com.mercadolibre.covid.controller;public class SaludController {
+package com.mercadolibre.covid.controller;
+
+@RestController
+public class SaludController {
+
 }

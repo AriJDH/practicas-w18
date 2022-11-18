@@ -1,2 +1,4 @@
-package com.mercadolibre.cuentacalorias.service;public interface IIngredienteService {
+package com.mercadolibre.cuentacalorias.service;
+
+public interface IIngredienteService {
 }

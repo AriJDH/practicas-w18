@@ -1,6 +1,6 @@
 package juego;
 
-public interface AtackUnit {
+public interface INave {
 
     double calcularDistancia(Coordenada blanco);
 

@@ -1,5 +1,6 @@
 package com.mercadolibre.covid.repository;
 
-public class Repository implements IRepository{
+@org.springframework.stereotype.Repository
+public class SaludRepository implements ISaludRepository {
 
 }

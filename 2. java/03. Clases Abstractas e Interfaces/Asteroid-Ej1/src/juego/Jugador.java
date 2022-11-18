@@ -5,16 +5,16 @@ import java.util.List;
 
 public class Jugador implements Comparable<Jugador>{
     private String nombre;
-    private AtackUnit unidadDeAtaque;
+    private INave unidadDeAtaque;
     private int puntuacion = 0;
     private List<Double> logDistancias = new ArrayList<>();
 
-    public Jugador(String nombre, AtackUnit unit) {
+    public Jugador(String nombre, INave unit) {
         this.nombre = nombre;
         this.unidadDeAtaque = unit;
     }
 
-    public AtackUnit getUnidadDeAtaque() {
+    public INave getUnidadDeAtaque() {
         return unidadDeAtaque;
     }
 

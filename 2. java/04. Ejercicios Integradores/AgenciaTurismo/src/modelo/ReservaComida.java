@@ -1,8 +1,8 @@
-package agencia;
+package modelo;
 
 public class ReservaComida extends TipoReserva{
-    @Override
-    public Double getPrecio() {
-        return null;
+    public ReservaComida(String idNombre, Double precio) {
+        super(idNombre, precio);
     }
+
 }

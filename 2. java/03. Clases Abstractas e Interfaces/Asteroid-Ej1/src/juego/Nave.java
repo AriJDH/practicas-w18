@@ -1,6 +1,6 @@
 package juego;
 
-public class Nave implements AtackUnit {
+public class Nave implements INave {
     private String nombre;
     private Coordenada coordenada;
 
