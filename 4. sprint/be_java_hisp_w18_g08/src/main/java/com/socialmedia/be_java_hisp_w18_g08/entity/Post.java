@@ -19,4 +19,16 @@ public class Post {
     private Double price;
     @JsonFormat(pattern="dd-MM-yyyy")
     private LocalDate date;
+    private Boolean has_promo;
+    private Double discount;
+
+    public Post(Integer post_id, Integer user_id, Product product, Integer category, Double price, LocalDate date) {
+        this.post_id = post_id;
+        this.user_id = user_id;
+        this.product = product;
+        this.category = category;
+        this.price = price;
+        this.date = date;
+    }
 }
+

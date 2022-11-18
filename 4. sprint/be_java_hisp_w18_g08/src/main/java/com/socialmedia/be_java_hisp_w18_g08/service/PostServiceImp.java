@@ -2,6 +2,7 @@ package com.socialmedia.be_java_hisp_w18_g08.service;
 
 import com.socialmedia.be_java_hisp_w18_g08.dto.PostDto;
 import com.socialmedia.be_java_hisp_w18_g08.dto.request.PostDtoReq;
+import com.socialmedia.be_java_hisp_w18_g08.dto.request.PostwithPromoDtoReq;
 import com.socialmedia.be_java_hisp_w18_g08.dto.response.PostDtoRes;
 import com.socialmedia.be_java_hisp_w18_g08.entity.Post;
 import com.socialmedia.be_java_hisp_w18_g08.exception.BadRequestException;
@@ -37,7 +38,7 @@ public class PostServiceImp implements IPostService {
 
     private Integer postId = 5;
 
-    private List<Post> changeOrder(List<Post> list, String order) {
+    private List<PostDto> changeOrder(List<PostDto> list, String order) {
 
         Comparator<LocalDate> compareByDate;
 
@@ -69,25 +70,38 @@ public class PostServiceImp implements IPostService {
     }
 
     @Override
+    public void createPostWithPromo(PostwithPromoDtoReq postwithPromoDtoReq) {
+        Seller seller = userRepository.findSellerById(postwithPromoDtoReq.getUser_id());
+        if (seller == null) {
+            throw new BadRequestException("The post was not created. No user with id " + postwithPromoDtoReq.getUser_id());
+        } else {
+            Post post = new Post(postId, postwithPromoDtoReq.getUser_id(), postwithPromoDtoReq.getProduct(), postwithPromoDtoReq.getCategory(),
+                    postwithPromoDtoReq.getPrice(), postwithPromoDtoReq.getDate(), postwithPromoDtoReq.getHas_promo(),postwithPromoDtoReq.getDiscount());
+            postRepository.save(post);
+            userRepository.createPost(post, postwithPromoDtoReq.getUser_id());
+            postId++;
+        }
+    }
+
+    @Override
     public PostDtoRes getPostSellerListByUserId(Integer userId, String order) {
         List<Seller> followed = userService.getFollowedByUserId(userId);
+
         PostDtoRes postDtoRes = new PostDtoRes();
         LocalDate date = LocalDate.now();
         postDtoRes.setUser_id(userId);
-        List<Post> filtrados = new ArrayList<>();
+        List<PostDto> filtrados = new ArrayList<>();
+
         for (Seller s : followed) {
-            filtrados =
-                    this.changeOrder(
-                            s.getPosts().stream().filter(seller -> seller.getDate().isAfter(date.minusDays(15)))
-                                    .collect(Collectors.toList()), order);
-            if (!filtrados.isEmpty()) {
-                List<PostDto> response = new ArrayList<>();
-                for (Post p : filtrados) {
-                    PostDto aux = new PostDto(p.getPost_id(), p.getUser_id(), p.getProduct(), p.getCategory(),
-                            p.getPrice(), p.getDate());
-                    response.add(aux);
+            for(Post p: s.getPosts()){
+                if(p.getDate().isAfter((date.minusDays(115)))){
+                    PostDto aux = new PostDto(p.getPost_id(), p.getUser_id(), p.getProduct(),
+                            p.getCategory(),p.getPrice(), p.getDate());
+                    filtrados.add(aux);
                 }
-                postDtoRes.setPosts(response);
+            }
+            if (!filtrados.isEmpty()){
+                postDtoRes.setPosts(changeOrder(filtrados,order));
             }
         }
         if (followed.isEmpty()) {
@@ -95,4 +109,5 @@ public class PostServiceImp implements IPostService {
         }
         return postDtoRes;
     }
+
 }

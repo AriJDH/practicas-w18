@@ -45,10 +45,19 @@ public class PostRepositoryImp implements IPostRepository{
         Post ps3 = new Post(3,7,pr1,3,333.33,date.plusDays(20));
         Post ps4 = new Post(4,8,pr1,4,444.44,date.minusDays(14));
 
+        Post ps5 = new Post(5,9,pr1,5,555.55,date.minusDays(1),true,0.25);
+        Post ps6 = new Post(6,10,pr1,6,666.66,date.minusDays(1),true,0.30);
+        Post ps7 = new Post(7,11,pr1,7,777.77,date.minusDays(2),true,0.35);
+        Post ps8 = new Post(8,12,pr1,8,888.88,date.minusDays(3),true,0.40);
+
         posts.add(ps1);
         posts.add(ps2);
         posts.add(ps3);
         posts.add(ps4);
+        posts.add(ps5);
+        posts.add(ps6);
+        posts.add(ps7);
+        posts.add(ps8);
 
     }
 

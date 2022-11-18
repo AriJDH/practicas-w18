@@ -1,11 +1,7 @@
 package com.socialmedia.be_java_hisp_w18_g08.service;
 
-import com.socialmedia.be_java_hisp_w18_g08.dto.response.UserDto;
-import com.socialmedia.be_java_hisp_w18_g08.dto.response.UserListDto;
+import com.socialmedia.be_java_hisp_w18_g08.dto.response.*;
 import com.socialmedia.be_java_hisp_w18_g08.dto.request.FollowDtoReq;
-import com.socialmedia.be_java_hisp_w18_g08.dto.response.FollowDtoRes;
-import com.socialmedia.be_java_hisp_w18_g08.dto.response.FollowedDto;
-import com.socialmedia.be_java_hisp_w18_g08.dto.response.SellerFollowersCountDto;
 import com.socialmedia.be_java_hisp_w18_g08.entity.Seller;
 import com.socialmedia.be_java_hisp_w18_g08.entity.User;
 import com.socialmedia.be_java_hisp_w18_g08.exception.NotFoundUserException;
@@ -84,6 +80,18 @@ public class UserServiceImp implements IUserService {
         int quantity = seller.getFollowers().size();
         return new SellerFollowersCountDto(seller.getUser_id(),seller.getUser_name(), quantity);
     }
+
+    /*@Override
+    public SellerPostCountDto findAllPostBySeller(Integer id) {
+        Seller seller = userRepository.findSellerById(id);
+
+
+        if(seller == null){
+            throw new NotFoundUserException("Not found User with id " + id );
+        }
+        int quantity = seller.getPosts().size();
+        return new SellerPostCountDto(seller.getUser_id(),seller.getUser_name(), quantity);
+    }*/
 
     @Override
     public UserListDto findUserListBySeller(Integer id, String order) {
