@@ -7,8 +7,10 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class SellerPromoPostCountDTO {
+public class PostPromoCounterDTO {
+
     private long user_id;
     private String user_name;
     private int promo_products_count;
+
 }

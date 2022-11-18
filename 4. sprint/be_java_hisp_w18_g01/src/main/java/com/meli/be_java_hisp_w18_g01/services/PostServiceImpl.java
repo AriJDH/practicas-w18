@@ -21,11 +21,22 @@ import java.util.stream.Collectors;
 
 @Service
 public class PostServiceImpl implements PostService {
-    private long postCount = 1L;
+    private long postCount = 0;
     @Autowired
     private UserDbService userDbService;
 
     private DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+
+    @Override
+    public PostPromoCounterDTO getPromoPostCountForSeller(long user_id){
+        User user = userDbService.findById((user_id));
+        int postPromoCount = user.getPosts().stream().filter(p -> p.isPromotion() == true).
+                collect(Collectors.toList()).
+                size();
+        return new PostPromoCounterDTO(user_id, user.getUser_name(), postPromoCount);
+
+    }
+
 
     //Defino el metodo addPostpromo, el cual recibe por parametro un PostPromoDTO
    @Override

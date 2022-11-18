@@ -6,6 +6,8 @@ import java.util.List;
 
 public interface PostService {
 
+    PostPromoCounterDTO getPromoPostCountForSeller(long user_id);
+
     void addPost(PostDTO postDTO);
 
     void addPostPromo(PostPromoDTO postPromoDTO);

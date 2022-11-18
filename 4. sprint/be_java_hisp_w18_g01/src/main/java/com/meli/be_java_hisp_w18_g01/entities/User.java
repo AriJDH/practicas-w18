@@ -82,8 +82,6 @@ public class User {
         return this.followers.size();
     }
 
-    public List<Post> getPromoPosts(){
-        return this.posts.stream().filter(post->post.isPromotion()).collect(Collectors.toList());
     }
 
-}
+
