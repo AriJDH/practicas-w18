@@ -10,8 +10,8 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
-public class SellersPostDTO {
+public class SellerPostDTO {
     @JsonProperty("user_id")
     private Integer userId;
-    private List<ResponsePostDTO> posts;
+    private List<PostResponseDTO> posts;
 }

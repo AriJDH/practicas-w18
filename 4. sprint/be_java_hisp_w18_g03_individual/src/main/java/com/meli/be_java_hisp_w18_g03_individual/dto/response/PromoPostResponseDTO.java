@@ -10,13 +10,21 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class ResponsePostDTO {
+public class PromoPostResponseDTO {
     @JsonProperty("user_id")
     private Integer userId;
-    private LocalDate date;
-    private ProductResponseDTO product;
-    private Integer category;
-    private Double price;
     @JsonProperty("post_id")
     private Integer postId;
+    @JsonProperty("date")
+    private LocalDate date;
+    @JsonProperty("product")
+    private ProductResponseDTO product;
+    @JsonProperty("category")
+    private Integer category;
+    @JsonProperty("price")
+    private Double price;
+    @JsonProperty("hasPromo")
+    private Boolean hasPromo;
+    @JsonProperty("discount")
+    private Double discount;
 }

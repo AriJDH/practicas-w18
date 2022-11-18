@@ -22,4 +22,15 @@ public class Product {
         this.hasPromo = false;
         this.discount = 0d;
     }
+
+    public Product(Integer productId, String productName, String type, String brand, String color, String notes, Category category, Double price) {
+        this.productId = productId;
+        this.productName = productName;
+        this.type = type;
+        this.brand = brand;
+        this.color = color;
+        this.notes = notes;
+        this.category = category;
+        this.price = price;
+    }
 }
