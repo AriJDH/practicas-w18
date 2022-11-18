@@ -73,7 +73,7 @@ public class UserRepository implements IUserRepository{
         LocalDate old = LocalDate.of(2000,12,12);
         LocalDate lastWeek = LocalDate.of(2022,11,14);
         Post post1 = new Post(2,4, old, getListProduct().get(0),23,340.00,false,0.0);
-        Post post2 = new Post(2,5, lastWeek, getListProduct().get(1),4,456,true, 0.20);
+        Post post2 = new Post(2,5, lastWeek, getListProduct().get(1),4,456,false, 0.00);
         Post post3 = new Post(2,6, LocalDate.now(),getListProduct().get(2),77,865, false, 0.00);
         return List.of(post1,post2,post3);
     }
@@ -87,6 +87,7 @@ public class UserRepository implements IUserRepository{
 
     @Override
     public List<User> getUserFollowers(int id) {
+
         return users.get(id).getFollowersList();
     }
 }

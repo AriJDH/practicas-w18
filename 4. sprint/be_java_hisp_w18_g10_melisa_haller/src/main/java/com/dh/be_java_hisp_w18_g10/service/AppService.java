@@ -163,8 +163,10 @@ public class AppService implements IAppService {
         if (userRepository.getUser(userId) == null) {
             throw new UserGenericException("El usuario con el id: " + userId + " no fue encontrado!");
         }
-        if (userRepository.getUser(userId).getFollowed().containsKey(userIdToUnfollow)) {
-            userRepository.getUser(userId).getFollowed().remove(userIdToUnfollow);
+        if (userRepository.getUser(userId).getFollowers().containsKey(userIdToUnfollow)) {
+            userRepository.getUser(userId).getFollowers().remove(userIdToUnfollow);
+            userRepository.getUser(userIdToUnfollow).getFollowed().remove(userId);
+
         } else
             throw new UserGenericException("El usuario con el id: " + userId + " no sigue al usuario " + userIdToUnfollow);
     }
@@ -236,4 +238,23 @@ public class AppService implements IAppService {
                 promoPostList.size()
         );
     }
+
+    public List<PostPromoDTOres> getPromoPostList(){
+
+        List<User> users = userRepository.getUsers();
+        List<Post> postsList = new ArrayList<>();
+        for(User user: users){
+            postsList.addAll(user.getPosts()
+                .values().stream().filter(post -> post.isHas_promo() == true)
+                .collect(Collectors.toList()));}
+
+        if(postsList.isEmpty()){
+            throw new UserGenericException("No hay Posts con descuento que mostrar");
+        }
+        return postsList.stream().map(post -> DTOMapper.mapToPostPromo(post))
+                .collect(Collectors.toList());
+
+    }
+
+
 }

@@ -101,4 +101,20 @@ public class DTOMapper {
         post.setDiscount(postPromoDTOreq.getDiscount());
         return post;
     }
+
+    public static PostPromoDTOres mapToPostPromo(Post post){
+        PostPromoDTOres postPromoDTORes = new PostPromoDTOres();
+        postPromoDTORes.setUser_id(post.getUserId());
+        postPromoDTORes.setPost_id(post.getPost_id());
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        String postDate = post.getDate().format(formatter);
+        postPromoDTORes.setDate(postDate);
+        postPromoDTORes.setProduct(mapTo(post.getProduct()));
+        postPromoDTORes.setCategory(post.getCategory());
+        postPromoDTORes.setPrice(post.getPrice());
+        postPromoDTORes.setHas_promo(post.isHas_promo());
+        postPromoDTORes.setDiscount(post.getDiscount());
+
+        return postPromoDTORes;
+    }
 }
