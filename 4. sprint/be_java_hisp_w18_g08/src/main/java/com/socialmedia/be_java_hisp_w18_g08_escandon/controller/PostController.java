@@ -1,6 +1,7 @@
 package com.socialmedia.be_java_hisp_w18_g08_escandon.controller;
 
 import com.socialmedia.be_java_hisp_w18_g08_escandon.dto.request.PostDtoReq;
+import com.socialmedia.be_java_hisp_w18_g08_escandon.dto.request.PromoPostDtoReq;
 import com.socialmedia.be_java_hisp_w18_g08_escandon.service.IPostService;
 import com.socialmedia.be_java_hisp_w18_g08_escandon.service.PostServiceImp;
 import org.springframework.http.HttpStatus;
@@ -29,5 +30,11 @@ public class PostController {
                                                                       @RequestParam(required = false) String order){
         PostDtoRes response =  postService.getPostSellerListByUserId(userId, order);
         return new ResponseEntity<>(response,HttpStatus.OK);
+    }
+
+    @PostMapping("/promo-post")
+    public ResponseEntity<String>createPromoPost(@RequestBody PromoPostDtoReq promoPostDto) {
+        postService.createPromoPost(promoPostDto);
+        return new ResponseEntity<>("Post created with success", HttpStatus.OK);
     }
 }
