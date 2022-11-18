@@ -69,15 +69,19 @@ public class SocialController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @PostMapping("/products/promo-post") //US0011
+    @PostMapping("/products/promo-post") //US0010
     public ResponseEntity<?> addPromoPost(@RequestBody NewPromoPostDTORequest promoPost){
         service.newPost(promoPost);
         return new ResponseEntity<>( HttpStatus.OK);
     }
 
-    @GetMapping("/products/promo-post/count") //US0012
+    @GetMapping("/products/promo-post/count") //US0011
     public ResponseEntity<SellerPromoPostCountDTOResponse> promosCount(@RequestParam Integer user_id){
         return new ResponseEntity<>(service.promosCount(user_id), HttpStatus.OK);
     }
 
+    @GetMapping("/products/promo-post/{userId}/list")//US0012
+    public ResponseEntity<SellerPromoPostListDTOResponse> allPromos(@PathVariable Integer userId){
+        return new ResponseEntity<>(service.allPromoPost(userId), HttpStatus.OK);
+    }
 }

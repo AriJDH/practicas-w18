@@ -376,6 +376,33 @@ public class ServiceImp implements IService {
     }
 
     //For US0012 QUE MUESTRE TODOS LOS DE PROMO
+    @Override
+    public SellerPromoPostListDTOResponse allPromoPost(Integer userId) {
+        Buyer b = repository.getByIdBuyer(userId);
+        if (b == null) {
+            throw new NotFoundException("Buyer id " + userId + " not found");
+        }
+        List<Seller> listSeller = b.getFolloweds();
+        if (listSeller == null) {
+            throw new NotFoundException("Buyer id " + userId + " doesn´t have followers");
+        }
+        // Get all posts from all sellers that the buyer follows:
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        String stringDateFormatter;
+
+        List<PromoPostDTOResponse> listPromoPostDTO = new ArrayList<>();
+        for (Seller s : listSeller) {
+            for (Post p : s.getPromoPost()) {
+                stringDateFormatter = p.getDate().format(formatter);
+                listPromoPostDTO.add(new PromoPostDTOResponse(s.getUser_id(), p.getPost_id(), stringDateFormatter, op.convertValue(p.getProduct(), ProductDTOResponse.class), p.getCategory(), p.getPrice(),p.getHas_promo(),p.getDiscount()));
+            }
+        }
+
+        listPromoPostDTO.sort(Comparator.comparing(PromoPostDTOResponse::getDate)); // order by date
+
+
+        return new SellerPromoPostListDTOResponse(userId,listPromoPostDTO);
+    }
 
     //For US0013 QUE MUESTRE PROMO Y NO PROMO(ALL POST)
 
