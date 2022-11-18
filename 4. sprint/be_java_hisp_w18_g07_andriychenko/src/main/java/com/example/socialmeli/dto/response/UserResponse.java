@@ -1,4 +1,4 @@
-package com.example.clase2dto.DTO;
+package com.example.socialmeli.dto.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -6,11 +6,10 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @AllArgsConstructor
-@NoArgsConstructor
 @Getter
 @Setter
-public class EmployeeDTO {
+@NoArgsConstructor
+public class UserResponse {
+    private int id;
     private String name;
-    private String lastname;
-    private String message;
 }
