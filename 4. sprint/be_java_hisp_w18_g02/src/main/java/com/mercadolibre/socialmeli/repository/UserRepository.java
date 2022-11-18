@@ -65,7 +65,6 @@ public class UserRepository implements IUserRepository{
 
             for(User u : followed ) {
                 if(u.getId() == id) {
-                    System.out.println(entry.getValue().getId());
                     res.add(entry.getValue());
                 }
             }

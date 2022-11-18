@@ -1,10 +1,7 @@
 package com.mercadolibre.socialmeli.controller;
 
 import com.mercadolibre.socialmeli.dto.request.PostDtoReq;
-import com.mercadolibre.socialmeli.dto.response.RecentPostsDtoRes;
-import com.mercadolibre.socialmeli.dto.response.SellerFollowerCountDtoRes;
-import com.mercadolibre.socialmeli.dto.response.SellerFollowerListDtoRes;
-import com.mercadolibre.socialmeli.dto.response.UserFollowedListDtoRes;
+import com.mercadolibre.socialmeli.dto.response.*;
 import com.mercadolibre.socialmeli.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -26,8 +23,10 @@ public class UserController {
      *         400 Bad Request (ErrorDTO Error details)
      */
     @PostMapping("/users/{userId}/follow/{userIdToFollow}")
-    public ResponseEntity<String> follow(@PathVariable Integer userId, @PathVariable Integer userIdToFollow){
-        return ResponseEntity.ok(userService.follow(userId, userIdToFollow));
+    public ResponseEntity<ResponseDto> follow(@PathVariable Integer userId,
+                                         @PathVariable Integer userIdToFollow){
+        ResponseDto res = new ResponseDto(userService.follow(userId, userIdToFollow), 200);
+        return ResponseEntity.ok(res);
     }
 
     /**
@@ -78,9 +77,9 @@ public class UserController {
      *         400 Bad Request (ErrorDTO Error details)
      */
     @PostMapping("/products/post")
-    public ResponseEntity<?> addPost(@RequestBody PostDtoReq postReq){
-        userService.addPost(postReq);
-        return ResponseEntity.ok().build();
+    public ResponseEntity<ResponseDto> addPost(@RequestBody PostDtoReq postReq){
+        ResponseDto res = new ResponseDto(userService.addPost(postReq), 200);
+        return ResponseEntity.ok(res);
     }
 
     /**
@@ -105,8 +104,9 @@ public class UserController {
      *         400 Bad Request (ErrorDTO Error details)
      */
     @PostMapping("/users/{userId}/unfollow/{userIdToUnfollow}")
-    public ResponseEntity<String> unfollow(@PathVariable Integer userId, @PathVariable Integer userIdToUnfollow){
-        return ResponseEntity.ok(userService.unfollow(userId, userIdToUnfollow));
+    public ResponseEntity<ResponseDto> unfollow(@PathVariable Integer userId, @PathVariable Integer userIdToUnfollow){
+        ResponseDto res = new ResponseDto(userService.unfollow(userId, userIdToUnfollow), 200);
+        return ResponseEntity.ok(res);
     }
 
 }

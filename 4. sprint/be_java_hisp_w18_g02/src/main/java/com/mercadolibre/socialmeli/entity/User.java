@@ -33,10 +33,6 @@ public class User {
         return this.followed.add(u);
     }
 
-    public User findFollowedById(Integer id){
-        return this.followed.stream().filter(f -> f.getId()==id).findFirst().orElse(null);
-    }
-
     public boolean isSeller(){
         return (this.posts!=null && !this.posts.isEmpty());
     }

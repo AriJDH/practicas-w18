@@ -1,13 +1,13 @@
-package com.mercadolibre.socialmeli.dto;
+package com.mercadolibre.socialmeli.dto.response;
 
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
-public class ErrorDto {
+@Getter
+public class ResponseDto {
     private String message;
     private int status;
 }
