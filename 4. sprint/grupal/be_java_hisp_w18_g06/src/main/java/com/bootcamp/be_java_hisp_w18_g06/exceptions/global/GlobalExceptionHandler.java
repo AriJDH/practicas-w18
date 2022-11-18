@@ -17,21 +17,18 @@ public class GlobalExceptionHandler {
     public ResponseEntity<ExceptionResponseDto> badRequestException(BadRequestException e) {
 
         return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                .body(new ExceptionResponseDto(e.getMessage()
-                        , HttpStatus.BAD_REQUEST.value()));
+                .body(new ExceptionResponseDto(e.getMessage()));
     }
     @ExceptionHandler(EmptyException.class)
     public ResponseEntity<ExceptionResponseDto> emptyException(EmptyException e) {
 
         return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                .body(new ExceptionResponseDto(e.getMessage()
-                        , HttpStatus.NO_CONTENT.value()));
+                .body(new ExceptionResponseDto(e.getMessage()));
     }
     @ExceptionHandler(NotFoundException.class)
     public ResponseEntity<ExceptionResponseDto> notFoundException(NotFoundException e) {
 
         return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                .body(new ExceptionResponseDto(e.getMessage()
-                        , HttpStatus.NOT_FOUND.value()));
+                .body(new ExceptionResponseDto(e.getMessage()));
     }
 }
