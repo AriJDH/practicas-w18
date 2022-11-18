@@ -15,14 +15,13 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
 public class PostServiceImpl implements PostService {
-    private long postCount = 1L;
+    private long postCount = 0L;
 
     @Autowired
     MapperPostToPostDTO mapperPostToPostDTO;
@@ -77,6 +76,7 @@ public class PostServiceImpl implements PostService {
 
     }
 
+    /* US 0010 Post post isHas_promo */
     @Override
     public void addPostPromo(PostDiscountDTO postDiscountDTO) {
         User user = userDbService.findById(postDiscountDTO.getUser_id());
@@ -102,6 +102,7 @@ public class PostServiceImpl implements PostService {
         user.addPost(post);
     }
 
+    /* Ejercicio US 0011 count isHas_promo */
     @Override
     public CountPostDiscountDTO getPostsWithDiscountAtSeller(long userId) {
         User user = userDbService.findById(userId);
@@ -111,31 +112,29 @@ public class PostServiceImpl implements PostService {
         return new CountPostDiscountDTO(user.getUser_id(), user.getUser_name(), countPostDiscount);
     }
 
+    /* Ejercicio US 0012 get posts isHas_promo */
     @Override
-    public PostDiscountLisDTO getDiscountPostAtSeller(long userId) {
+    public PostDiscountListDTO getDiscountPostAtSeller(long userId) {
         User user = userDbService.findById(userId);
 
-        List<Post> posts = user.getPosts().stream()
-                .filter(post -> post.isHas_promo() == true)
-                .collect(Collectors.toList());
-        List <PostsDiscountDTO> postsDiscountDTO = new ArrayList<>();
+        //List <PostsDiscountDTO> postsDiscountDTO = new ArrayList<>();
         ObjectMapper mapper = new ObjectMapper();
-        for (Post p: posts
-             ) {
-            postsDiscountDTO.add(
-                    new PostsDiscountDTO(
+
+        List <PostsDiscountDTO> postsDiscountDTO = user.getPosts().stream()
+                .filter(post -> post.isHas_promo() == true)
+                .map(p -> new PostsDiscountDTO(
                             user.getUser_id(),
                             p.getPost_id(),
-                            p.getDate().toString(),
+                            dateFormatter.format(p.getDate()).toString(),
                             mapper.convertValue(p.getProduct(), ProductDTO.class),
                             p.getCategory() + "",
                             p.getPrice(),
                             p.isHas_promo(),
                             p.getDiscount()
-                    )
-            );
-        }
-        return new PostDiscountLisDTO(user.getUser_id(), user.getUser_name(), postsDiscountDTO);
+                        )
+                ).collect(Collectors.toList());
+
+        return new PostDiscountListDTO(user.getUser_id(), user.getUser_name(), postsDiscountDTO);
      }
 
     public List<Post> sortPosts(List<Post> posts, String order) {

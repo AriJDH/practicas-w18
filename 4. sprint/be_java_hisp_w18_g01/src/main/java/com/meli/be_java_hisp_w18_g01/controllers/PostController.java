@@ -37,7 +37,7 @@ public class PostController {
     }
 
     @GetMapping("/promo-post/list")
-    public ResponseEntity<PostDiscountLisDTO> getDiscountPostAtSeller(@RequestParam long user_id) {
+    public ResponseEntity<PostDiscountListDTO> getDiscountPostAtSeller(@RequestParam long user_id) {
         return ResponseEntity.ok(postService.getDiscountPostAtSeller(user_id));
     }
 }

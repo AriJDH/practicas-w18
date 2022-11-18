@@ -13,7 +13,7 @@ public interface PostService {
 
     CountPostDiscountDTO getPostsWithDiscountAtSeller(long userId);
 
-    PostDiscountLisDTO getDiscountPostAtSeller(long userId);
+    PostDiscountListDTO getDiscountPostAtSeller(long userId);
 
 
 }

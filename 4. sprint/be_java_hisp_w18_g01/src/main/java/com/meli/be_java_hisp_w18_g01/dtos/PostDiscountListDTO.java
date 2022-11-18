@@ -8,7 +8,7 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class PostDiscountLisDTO {
+public class PostDiscountListDTO {
     private long user_id;
     private String user_name;
     private List<PostsDiscountDTO> posts;
