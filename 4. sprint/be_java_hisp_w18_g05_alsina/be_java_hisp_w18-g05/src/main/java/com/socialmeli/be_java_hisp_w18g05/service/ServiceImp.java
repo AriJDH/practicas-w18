@@ -366,8 +366,8 @@ public class ServiceImp implements IService {
         Integer countedPromotionProducts = promotionPost.size(); // Get size of the list of promotion post
 
         //Create DTO response
-        SellerPromotionProductsCountDTOResponse productPromotionCount = new SellerPromotionProductsCountDTOResponse(seller.getUser_id(),seller.getName(), countedPromotionProducts);
-        return  productPromotionCount;
+        SellerPromotionProductsCountDTOResponse productPromotionDTOCount = new SellerPromotionProductsCountDTOResponse(seller.getUser_id(),seller.getName(), countedPromotionProducts);
+        return  productPromotionDTOCount;
     }
 
 
