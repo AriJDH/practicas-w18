@@ -55,16 +55,15 @@ public class PostServiceImpl implements PostService {
     public List<SellerDTO> getRecentPostsFromFollowed(long userId, String order) {
         User user = userDbService.findById(userId);
         List<User> sellers = user.getFollowed().stream()
-                .filter(seller -> seller.getPosts().stream().anyMatch(post -> post.isRecent()))
+                .filter(seller -> seller.getPosts().stream().anyMatch(Post::isRecent))
                 .collect(Collectors.toList());
-        ObjectMapper mapper = new ObjectMapper();
 
         LocalDate.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
 
         return sellers.stream().map(seller -> {
                     List<Post> sortedPosts = this.sortPosts(
                             seller.getPosts().stream().filter(
-                                    post -> post.isRecent())
+                                            Post::isRecent)
                                     .collect(Collectors.toList()), order);
 
                     return new SellerDTO(seller.getUser_id(),
@@ -107,7 +106,7 @@ public class PostServiceImpl implements PostService {
     public CountPostDiscountDTO getPostsWithDiscountAtSeller(long userId) {
         User user = userDbService.findById(userId);
         int countPostDiscount = (int) user.getPosts().stream()
-                .filter(post -> post.isHas_promo() == true)
+                .filter(Post::isHas_promo)
                 .count();
         return new CountPostDiscountDTO(user.getUser_id(), user.getUser_name(), countPostDiscount);
     }
@@ -121,11 +120,11 @@ public class PostServiceImpl implements PostService {
         ObjectMapper mapper = new ObjectMapper();
 
         List <PostsDiscountDTO> postsDiscountDTO = user.getPosts().stream()
-                .filter(post -> post.isHas_promo() == true)
+                .filter(Post::isHas_promo)
                 .map(p -> new PostsDiscountDTO(
                             user.getUser_id(),
                             p.getPost_id(),
-                            dateFormatter.format(p.getDate()).toString(),
+                        dateFormatter.format(p.getDate()),
                             mapper.convertValue(p.getProduct(), ProductDTO.class),
                             p.getCategory() + "",
                             p.getPrice(),
