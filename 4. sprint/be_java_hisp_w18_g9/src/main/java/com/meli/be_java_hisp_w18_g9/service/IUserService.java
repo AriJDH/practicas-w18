@@ -12,7 +12,10 @@ public interface IUserService {
     HttpStatus unfollow(Integer userId, Integer userIdToUnfollow) throws Throwable;
     UserFollowedListResponse findAllFollowed (Integer id);
     FollowersCountUserResponse findUserFollowedQuantity(Integer id);
-
+    UserFollowedListResponse findAllFollowedOrderAsc (Integer id);
+    UserFollowerListResponse findAllFollowerOrderAsc (Integer id);
+    UserFollowerListResponse findAllFollowerOrderDesc (Integer id);
+    UserFollowedListResponse findAllFollowedOrderDesc (Integer id);
     UserFollowerListResponse findAllFollower(Integer id );
 
 }

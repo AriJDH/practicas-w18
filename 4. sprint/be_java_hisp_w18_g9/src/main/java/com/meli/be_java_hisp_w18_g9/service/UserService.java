@@ -3,14 +3,10 @@ package com.meli.be_java_hisp_w18_g9.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.meli.be_java_hisp_w18_g9.exception.BadRequestException;
-
-import com.meli.be_java_hisp_w18_g9.model.dto.request.PostDtoRequest;
-import com.meli.be_java_hisp_w18_g9.model.dto.response.*;
-
-import com.meli.be_java_hisp_w18_g9.model.dto.response.FollowersCountUserResponse;
 import com.meli.be_java_hisp_w18_g9.model.dto.response.UserFollowedListResponse;
 import com.meli.be_java_hisp_w18_g9.model.dto.response.UserSimpleResponse;
-
+import com.meli.be_java_hisp_w18_g9.model.dto.response.UserFollowerListResponse;
+import com.meli.be_java_hisp_w18_g9.model.dto.response.UserSimpleResponse;
 import com.meli.be_java_hisp_w18_g9.model.entity.User;
 import com.meli.be_java_hisp_w18_g9.repository.IUserRepository;
 import com.meli.be_java_hisp_w18_g9.repository.UserRepository;
@@ -24,9 +20,6 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
-
-import java.util.stream.Collectors;
-
 
 @Service
 @RequiredArgsConstructor
@@ -123,11 +116,71 @@ public class UserService implements IUserService {
     @Override
     public UserFollowedListResponse findAllFollowed(Integer id) {
 
+
         User userWf = userRepository.findById(id).orElseThrow(() -> new BadRequestException("user doesn't exist"));
 
         return new UserFollowedListResponse(id, userWf.getUserName(), userWf.getFollowed().stream()
                 .map(user -> new UserSimpleResponse(user.getUserId(), user.getUserName()))
                 .collect(Collectors.toList()));
+
+
+  /*   Preguntar(?)   User user = userRepository.findById(id).orElseThrow(() -> new BadRequestException("user doesn't exist"));
+
+        return mapper.convertValue(user, UserFollowedListResponse.class);*/
+    }
+
+    @Override
+    public UserFollowedListResponse findAllFollowedOrderAsc(Integer id) {
+        User user = userRepository.findById(id)
+                .orElseThrow(()->new BadRequestException(
+                        "Cannot find user with id " + id));
+
+        List<UserSimpleResponse> userSimpleResponsesFollowed = user.getFollowed()
+                .stream()
+                .sorted(Comparator.comparing(User::getUserName))
+                .map(user1 -> mapper.convertValue(user1 , UserSimpleResponse.class))
+                .collect(Collectors.toList());
+        return new UserFollowedListResponse(id, user.getUserName(), userSimpleResponsesFollowed);
+    }
+
+    @Override
+    public UserFollowerListResponse findAllFollowerOrderAsc(Integer id) {
+        User user = userRepository.findById(id)
+                .orElseThrow(()-> new BadRequestException(
+                "Cannot find user with id" + id ));
+        List<UserSimpleResponse> userSimpleResponsesFollowers = user.getFollowers()
+                .stream()
+                .sorted(Comparator.comparing(User::getUserName))
+                .map(user1 -> mapper.convertValue(user1, UserSimpleResponse.class))
+                .collect(Collectors.toList());
+        return new UserFollowerListResponse(id, user.getUserName(),userSimpleResponsesFollowers);
+    }
+
+    @Override
+    public UserFollowerListResponse findAllFollowerOrderDesc(Integer id) {
+        User user = userRepository.findById(id)
+                .orElseThrow(()-> new BadRequestException(
+                        "Cannot find user with id" + id ));
+        List<UserSimpleResponse> userSimpleResponsesFollowers = user.getFollowers()
+                .stream()
+                .sorted(Comparator.comparing(User::getUserName).reversed())
+                .map(user1 -> mapper.convertValue(user1, UserSimpleResponse.class))
+                .collect(Collectors.toList());
+        return new UserFollowerListResponse(id, user.getUserName(),userSimpleResponsesFollowers);
+    }
+
+    @Override
+    public UserFollowedListResponse findAllFollowedOrderDesc(Integer id) {
+        User user = userRepository.findById(id)
+                .orElseThrow(()-> new BadRequestException(
+                        "Cannot find user with id "+ id));
+        List<UserSimpleResponse> userSimpleResponsesFollowed = user.getFollowed()
+                .stream()
+                .sorted(Comparator.comparing(User::getUserName).reversed())
+                .map(user1 -> mapper.convertValue(user1, UserSimpleResponse.class))
+                .collect(Collectors.toList());
+
+        return new UserFollowedListResponse(id, user.getUserName(), userSimpleResponsesFollowed);
 
     }
 
