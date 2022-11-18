@@ -138,6 +138,14 @@ public class PublicationServiceImpl implements IPublicationService {
         return userSaleResponse;
     }
 
+    /**
+     * US 0012 URL = /products/getall
+     *
+     * This method takes all the publications with the name, category and price
+     *
+     * @return This return a json list with all the publications.
+     */
+
     @Override
     public List<PublicationAllResponse> getAll(){
         List<PublicationAllResponse> publicationAllResponses = new ArrayList<>();
