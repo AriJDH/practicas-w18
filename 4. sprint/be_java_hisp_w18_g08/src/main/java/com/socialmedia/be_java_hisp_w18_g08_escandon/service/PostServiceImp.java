@@ -4,6 +4,8 @@ import com.socialmedia.be_java_hisp_w18_g08_escandon.dto.PostDto;
 import com.socialmedia.be_java_hisp_w18_g08_escandon.dto.request.PostDtoReq;
 import com.socialmedia.be_java_hisp_w18_g08_escandon.dto.request.PromoPostDtoReq;
 import com.socialmedia.be_java_hisp_w18_g08_escandon.dto.response.PostDtoRes;
+import com.socialmedia.be_java_hisp_w18_g08_escandon.dto.response.PromoPostQuantityDto;
+import com.socialmedia.be_java_hisp_w18_g08_escandon.dto.response.SellerFollowersCountDto;
 import com.socialmedia.be_java_hisp_w18_g08_escandon.entity.Post;
 import com.socialmedia.be_java_hisp_w18_g08_escandon.exception.BadRequestException;
 import com.socialmedia.be_java_hisp_w18_g08_escandon.entity.Seller;
@@ -87,6 +89,22 @@ public class PostServiceImp implements IPostService {
             userRepository.createPost(post, promoPostDtoReq.getUser_id());
             postId++;
         }
+    }
+
+    @Override
+    public PromoPostQuantityDto findAllPromoPostQuantity(Integer id) {
+        Seller seller = userRepository.findSellerById(id);
+        if(seller == null){
+            throw new NotFoundUserException("Not found User with id " + id );
+        }
+        Integer quantityPromoPosts = seller.getPosts().stream()
+                .filter(p -> p.getHas_promo()).
+                collect(Collectors.toList()).size();
+
+        PromoPostQuantityDto dto = new PromoPostQuantityDto(seller.getUser_id(),
+                seller.getUser_name(),
+                quantityPromoPosts);
+        return dto;
     }
 
     @Override
