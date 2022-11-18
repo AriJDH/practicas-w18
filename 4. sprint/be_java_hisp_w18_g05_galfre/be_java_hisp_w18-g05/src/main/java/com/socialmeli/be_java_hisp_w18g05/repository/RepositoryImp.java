@@ -28,12 +28,12 @@ public class RepositoryImp implements IRepository{
 
     @Override
     public List<Buyer> getAllBuyers() {
-        return null;
+        return buyers;
     }
 
     @Override
     public List<Seller> getAllSellers() {
-        return null;
+        return sellers;
     }
 
     @Override
@@ -50,6 +50,28 @@ public class RepositoryImp implements IRepository{
     public Seller getByIdSeller(Integer seller_id) {
         return sellers.stream().filter(s->s.getUser_id().equals(seller_id)).findFirst().orElse(null);
     }
+
+    @Override
+    public void addBuyer(Buyer buyer) {
+        buyers.add(buyer);
+    }
+
+    @Override
+    public void addSeller(Seller seller) {
+        sellers.add(seller);
+    }
+
+    @Override
+    public void deleteBuyer(Buyer buyer) {
+        buyers.remove(buyer);
+    }
+
+    @Override
+    public void deleteSeller(Seller seller) {
+        sellers.remove(seller);
+    }
+
+
 
     void fillDB(){
 

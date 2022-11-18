@@ -3,6 +3,8 @@ package com.socialmeli.be_java_hisp_w18g05.service;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import com.socialmeli.be_java_hisp_w18g05.dto.request.NewPromoPostDTORequest;
+import com.socialmeli.be_java_hisp_w18g05.dto.request.CrudUserDTORequest;
 import com.socialmeli.be_java_hisp_w18g05.dto.response.*;
 import com.socialmeli.be_java_hisp_w18g05.dto.request.NewPostDTORequest;
 import com.socialmeli.be_java_hisp_w18g05.dto.response.BuyerDTOResponse;
@@ -13,20 +15,16 @@ import com.socialmeli.be_java_hisp_w18g05.dto.response.SellerDTOResponse;
 import com.socialmeli.be_java_hisp_w18g05.dto.response.SellerFollowersCountDTOResponse;
 
 import com.socialmeli.be_java_hisp_w18g05.dto.response.SellerFollowersListDTOResponse;
-import com.socialmeli.be_java_hisp_w18g05.entity.Buyer;
-import com.socialmeli.be_java_hisp_w18g05.entity.Post;
+import com.socialmeli.be_java_hisp_w18g05.entity.*;
 
-import com.socialmeli.be_java_hisp_w18g05.entity.Product;
-
-import com.socialmeli.be_java_hisp_w18g05.entity.Seller;
+import com.socialmeli.be_java_hisp_w18g05.exceptions.AlreadyExistsException;
 import com.socialmeli.be_java_hisp_w18g05.exceptions.InvalidException;
 import com.socialmeli.be_java_hisp_w18g05.exceptions.InvalidParameterException;
 import com.socialmeli.be_java_hisp_w18g05.exceptions.NotFoundException;
 import com.socialmeli.be_java_hisp_w18g05.repository.IRepository;
-import lombok.Data;
-import org.springframework.cglib.core.Local;
 import org.springframework.stereotype.Service;
 
+import java.sql.PreparedStatement;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -137,6 +135,8 @@ public class ServiceImp implements IService {
             order = "date_desc"; // date_desc by default if order is null
         return orderByDate(user_id, order);
     }
+
+
 
 
     private SellerPostListDTOResponse orderByDate(Integer userId, String order){
@@ -331,6 +331,254 @@ public class ServiceImp implements IService {
         Post newPost = new Post(repository.addPost(), localDate,product ,post.getCategory(),post.getPrice());
 
         seller.getPosts().add(newPost);
+    }
+
+    @Override
+    public void addNewPromoPost(NewPromoPostDTORequest post) { // US0010
+        Seller seller = repository.getByIdSeller(post.getUser_id()); // Get seller from repo
+
+        if (seller == null){
+            throw new NotFoundException("Seller id " + post.getUser_id() + " not found"); // Throw exception if seller not found
+        }
+
+        Product product = new Product(post.getProduct().getProduct_id(), // Extract product from bodyrequest
+                post.getProduct().getProduct_name(),
+                post.getProduct().getType(),
+                post.getProduct().getBrand(),
+                post.getProduct().getColor(),
+                post.getProduct().getNotes());
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        LocalDate localDate = LocalDate.parse(post.getDate(), formatter); // LocalDate to String
+
+        PromoPost newPromoPost = new PromoPost(repository.addPost(), localDate, product, post.getCategory(), post.getPrice(), post.getHas_promo(), post.getDiscount()); // Create new PromoPost
+
+        seller.getPromoPosts().add(newPromoPost);
+    }
+
+    @Override
+    public PromoProductsCountDTOResponse countPromoProducts(Integer user_id) { // US0011
+        Seller seller = repository.getByIdSeller(user_id);
+        if (seller == null) {
+            throw new NotFoundException("Seller id " + user_id + " not found");
+        }
+
+        List<PromoPost> promoList = seller.getPromoPosts();
+        Integer promoPosts = promoList.size();
+
+        PromoProductsCountDTOResponse dtoResponse = new PromoProductsCountDTOResponse(user_id, seller.getName(), promoPosts);
+        return dtoResponse;
+    }
+
+    @Override
+    public PromoPostListDTOResponse allPromoPosts(Integer user_id) { // US0012
+        Seller seller = repository.getByIdSeller(user_id);
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MMM/yyyy");
+        if (seller == null){
+            throw new NotFoundException("Seller id" + user_id + " not found");
+        }
+
+        List<PromoPostDTOResponse> promoPostDTO = new ArrayList<>();
+
+        for (PromoPost post : seller.getPromoPosts()){
+            ProductDTOResponse productDTO = new ProductDTOResponse(post.getProduct().getProduct_id(),
+                    post.getProduct().getProduct_name(),
+                    post.getProduct().getType(),
+                    post.getProduct().getBrand(),
+                    post.getProduct().getColor(),
+                    post.getProduct().getNotes());
+
+            String date = post.getDate().format(formatter);
+            PromoPostDTOResponse postDTO = new PromoPostDTOResponse(user_id, post.getPost_id(), date, productDTO, post.getCategory(), post.getPrice(), post.getHas_promo(), post.getDiscount());
+            promoPostDTO.add(postDTO);
+        }
+
+        PromoPostListDTOResponse promoPostListDTOResponse = new PromoPostListDTOResponse(user_id, seller.getName(), promoPostDTO);
+
+        return promoPostListDTOResponse;
+    }
+
+    @Override
+    public void addNewUser(CrudUserDTORequest user) {
+        if (user.getUser_type().equals("seller")){
+            addSeller(user);
+        } else if (user.getUser_type().equals("buyer")) {
+            addBuyer(user);
+        } else {
+            throw new InvalidParameterException("Parameter " + user.getUser_type() + " isn't valid");
+        }
+    }
+
+    public void addSeller(CrudUserDTORequest seller){
+        Seller sellertest = repository.getByIdSeller(seller.getUser_id());
+
+        if (sellertest != null){
+            throw new AlreadyExistsException("User id " + sellertest.getUser_id() + " already exists");
+        }
+        Seller sellerFinal = new Seller(seller.getUser_id(), seller.getUser_name());
+        repository.addSeller(sellerFinal);
+    }
+
+    public void addBuyer(CrudUserDTORequest buyer){
+        Buyer buyertest = repository.getByIdBuyer(buyer.getUser_id());
+
+        if (buyertest != null){
+            throw new AlreadyExistsException("User id " + buyer.getUser_id() + " already exists");
+        }
+
+        Buyer buyerFinal = new Buyer(buyer.getUser_id(), buyer.getUser_name());
+        repository.addBuyer(buyerFinal);
+    }
+
+    @Override
+    public void deleteBuyer(Integer user_id) {
+        Buyer buyer = repository.getByIdBuyer(user_id);
+        if (buyer == null){
+            throw new NotFoundException("Buyer id" + user_id + " not found");
+        }
+        repository.deleteBuyer(buyer);
+    }
+
+    @Override
+    public void deleteSeller(Integer user_id) {
+        Seller seller = repository.getByIdSeller(user_id);
+        if (seller == null){
+            throw new NotFoundException("Seller id" + user_id + " not found");
+        }
+        repository.deleteSeller(seller);
+    }
+
+    @Override
+    public void updateUser(CrudUserDTORequest user) {
+        if(user.getUser_type().equals("seller")){
+            updateSeller(user);
+        } else if (user.getUser_type().equals("buyer")) {
+            updateBuyer(user);
+        }else {
+            throw new InvalidParameterException("Parameter " + user.getUser_type() + " not valid");
+        }
+    }
+
+    @Override
+    public void updateBuyer(CrudUserDTORequest user) {
+        Buyer buyer = repository.getByIdBuyer(user.getUser_id());
+        if (buyer == null){
+            throw new NotFoundException("Buyer id " + user.getUser_id() + " not found");
+        }
+        buyer.setName(user.getUser_name());
+    }
+
+    @Override
+    public void updateSeller(CrudUserDTORequest user) {
+        Seller seller = repository.getByIdSeller(user.getUser_id());
+        if (seller == null){
+            throw new NotFoundException("Buyer id " + user.getUser_id() + " not found");
+        }
+        seller.setName(user.getUser_name());
+    }
+
+    @Override
+    public BuyerDTOResponse infoBuyer(Integer user_id) {
+        Buyer buyer = repository.getByIdBuyer(user_id);
+
+        if (buyer == null){
+            throw new NotFoundException("Buyer id " + user_id + " not found");
+        }
+
+        BuyerDTOResponse response = new BuyerDTOResponse(buyer);
+
+        return response;
+    }
+
+    @Override
+    public InfoSellerDTOResponse infoSeller(Integer user_id) {
+        Seller seller = repository.getByIdSeller(user_id);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MMM/yyyy");
+
+        if (seller == null){
+            throw new NotFoundException("Buyer id " + user_id + " not found");
+        }
+
+        List<PostDTOResponse> postsDTO = new ArrayList<>();
+        for (Post post : seller.getPosts()){
+            ProductDTOResponse productDTO = new ProductDTOResponse(post.getProduct().getProduct_id(),
+                    post.getProduct().getProduct_name(),
+                    post.getProduct().getType(),
+                    post.getProduct().getBrand(),
+                    post.getProduct().getColor(),
+                    post.getProduct().getNotes());
+
+            String date = post.getDate().format(formatter);
+
+            PostDTOResponse postDTO = new PostDTOResponse(seller.getUser_id(),
+                    post.getPost_id(),
+                    date,
+                    productDTO,
+                    post.getCategory(),
+                    post.getPrice());
+
+            postsDTO.add(postDTO);
+        }
+        List<PromoPostDTOResponse> promoPostsDTO = new ArrayList<>();
+        for (PromoPost post : seller.getPromoPosts()){
+            ProductDTOResponse productDTO = new ProductDTOResponse(post.getProduct().getProduct_id(),
+                    post.getProduct().getProduct_name(),
+                    post.getProduct().getType(),
+                    post.getProduct().getBrand(),
+                    post.getProduct().getColor(),
+                    post.getProduct().getNotes());
+
+            String date = post.getDate().format(formatter);
+
+            PromoPostDTOResponse promoPostDTO = new PromoPostDTOResponse(seller.getUser_id(),
+                    post.getPost_id(),
+                    date,
+                    productDTO,
+                    post.getCategory(),
+                    post.getPrice(),
+                    post.getHas_promo(),
+                    post.getDiscount());
+
+            promoPostsDTO.add(promoPostDTO);
+        }
+
+        InfoSellerDTOResponse response = new InfoSellerDTOResponse(seller.getUser_id(), seller.getName(), postsDTO, promoPostsDTO);
+
+        return response;
+    }
+
+    @Override
+    public AllBuyersDTOResponse allBuyers() {
+        List<Buyer> buyers = repository.getAllBuyers();
+        List<BuyerDTOResponse> buyersDTO = new ArrayList<>();
+        if (buyers == null){
+            throw new NotFoundException("No hay users");
+        }
+
+        for (Buyer buyer : buyers){
+            BuyerDTOResponse dto = new BuyerDTOResponse(buyer.getUser_id(), buyer.getName());
+            buyersDTO.add(dto);
+        }
+
+        AllBuyersDTOResponse response = new AllBuyersDTOResponse(buyersDTO);
+        return response;
+    }
+
+    @Override
+    public AllSellersDTOResponse allSellers() {
+        List<Seller> sellers = repository.getAllSellers();
+        List<InfoSellerDTOResponse> responseList = new ArrayList<>();
+        if (sellers == null){
+            throw new NotFoundException("No hay sellers");
+        }
+
+        for (Seller seller : sellers){
+            responseList.add(infoSeller(seller.getUser_id()));
+        }
+
+        AllSellersDTOResponse response = new AllSellersDTOResponse(responseList);
+        return response;
     }
 
 }

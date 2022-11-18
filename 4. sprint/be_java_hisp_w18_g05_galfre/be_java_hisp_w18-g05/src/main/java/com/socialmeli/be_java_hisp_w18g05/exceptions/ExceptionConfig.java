@@ -29,4 +29,12 @@ public class ExceptionConfig {
                 HttpStatus.BAD_REQUEST);
 
     }
+
+    @ExceptionHandler
+    public ResponseEntity<ErrorExceptionDTOResponse> alreadyExistsException(AlreadyExistsException alreadyExistsException) {
+        return new ResponseEntity<>(
+                new ErrorExceptionDTOResponse(alreadyExistsException.getMessage(), HttpStatus.BAD_REQUEST.value()),
+                HttpStatus.BAD_REQUEST);
+
+    }
 }

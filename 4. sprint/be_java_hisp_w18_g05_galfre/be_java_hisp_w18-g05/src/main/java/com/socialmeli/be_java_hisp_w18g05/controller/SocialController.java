@@ -1,6 +1,8 @@
 package com.socialmeli.be_java_hisp_w18g05.controller;
 
 
+import com.socialmeli.be_java_hisp_w18g05.dto.request.NewPromoPostDTORequest;
+import com.socialmeli.be_java_hisp_w18g05.dto.request.CrudUserDTORequest;
 import com.socialmeli.be_java_hisp_w18g05.dto.response.SellerFollowersCountDTOResponse;
 
 import com.socialmeli.be_java_hisp_w18g05.dto.request.NewPostDTORequest;
@@ -9,13 +11,11 @@ import com.socialmeli.be_java_hisp_w18g05.dto.request.NewPostDTORequest;
 import com.socialmeli.be_java_hisp_w18g05.dto.response.BuyerFollowedListDTOResponse;
 
 
-import com.socialmeli.be_java_hisp_w18g05.dto.response.SellerFollowersCountDTOResponse;
-
 import com.socialmeli.be_java_hisp_w18g05.dto.response.SellerFollowersListDTOResponse;
 import com.socialmeli.be_java_hisp_w18g05.dto.response.SellerPostListDTOResponse;
 import com.socialmeli.be_java_hisp_w18g05.service.IService;
 import com.socialmeli.be_java_hisp_w18g05.service.ServiceImp;
-import org.springframework.beans.factory.annotation.Qualifier;
+import lombok.Getter;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,9 +23,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.function.EntityResponse;
-
-import java.util.List;
 
 @RestController
 public class SocialController {
@@ -62,6 +59,17 @@ public class SocialController {
         return new ResponseEntity<>( HttpStatus.OK);
     }
 
+    @PostMapping("/products/promo-post") //US0010
+    public ResponseEntity<?> addPromoPost(@RequestBody NewPromoPostDTORequest post){
+        service.addNewPromoPost(post);
+        return new ResponseEntity<>("Post ok", HttpStatus.OK);
+    }
+
+    @GetMapping("/products/promo-post/count")
+    public ResponseEntity<?> countPromoPosts(@RequestParam Integer user_id){
+        return new ResponseEntity<>(service.countPromoProducts(user_id), HttpStatus.OK);
+    }
+
     @GetMapping("/products/followed/{userId}/list") //US0006 & US0009
     public ResponseEntity<SellerPostListDTOResponse> followedPostList(@PathVariable Integer userId, @RequestParam(required = false) String order){
         return new ResponseEntity<>(service.followedPostList(userId, order), HttpStatus.OK);
@@ -73,5 +81,50 @@ public class SocialController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+    @GetMapping("/products/promo-post/list") // US0012
+    public ResponseEntity<?> getAllPromoPosts(@RequestParam Integer user_id){
+        return new ResponseEntity<>(service.allPromoPosts(user_id), HttpStatus.OK);
+    }
 
+    @PostMapping("/users/new")
+    public ResponseEntity<?> newUser(@RequestBody CrudUserDTORequest user){
+        service.addNewUser(user);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @PostMapping("/users/delete/seller/{userId}")
+    public ResponseEntity<?> deleteSeller(@PathVariable Integer userId){
+        service.deleteSeller(userId);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+    @PostMapping("/users/delete/buyer/{userId}")
+    public ResponseEntity<?> deleteBuyer(@PathVariable Integer userId){
+        service.deleteBuyer(userId);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @PostMapping("/users/update")
+    public ResponseEntity<?> updateUser(@RequestBody CrudUserDTORequest user){
+        service.updateUser(user);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @GetMapping("/users/getinfo/buyers/{userId}")
+    public ResponseEntity<?> infoBuyer(@PathVariable Integer userId){
+        return new ResponseEntity<>(service.infoBuyer(userId), HttpStatus.OK);
+    }
+    @GetMapping("/users/getinfo/sellers/{userId}")
+    public ResponseEntity<?> infoSeller(@PathVariable Integer userId){
+        return new ResponseEntity<>(service.infoSeller(userId), HttpStatus.OK);
+    }
+
+    @GetMapping("/users/all/buyers")
+    public ResponseEntity<?> allBuyers(){
+        return new ResponseEntity<>(service.allBuyers(), HttpStatus.OK);
+    }
+
+    @GetMapping("/users/all/sellers")
+    public ResponseEntity<?> allSellers(){
+        return new ResponseEntity<>(service.allSellers(), HttpStatus.OK);
+    }
 }

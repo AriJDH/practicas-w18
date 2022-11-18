@@ -1,13 +1,13 @@
 package com.socialmeli.be_java_hisp_w18g05.service;
 
+import com.socialmeli.be_java_hisp_w18g05.dto.request.NewPromoPostDTORequest;
+import com.socialmeli.be_java_hisp_w18g05.dto.request.CrudUserDTORequest;
 import com.socialmeli.be_java_hisp_w18g05.dto.response.*;
 
 import com.socialmeli.be_java_hisp_w18g05.dto.request.NewPostDTORequest;
 
 
 import com.socialmeli.be_java_hisp_w18g05.dto.response.SellerFollowersCountDTOResponse;
-
-import java.util.List;
 
 public interface IService {
 
@@ -31,12 +31,30 @@ public interface IService {
 
     SellerPostListDTOResponse followedPostList(Integer user_id, String order);
 
-    //SellerPostListDTOResponse order(Integer userId, String order);
+    // INDIVIDUALES
+
+    void addNewPromoPost(NewPromoPostDTORequest post);
+    PromoProductsCountDTOResponse countPromoProducts(Integer user_id);
+
+    PromoPostListDTOResponse allPromoPosts(Integer user_id);
+
+    void addNewUser(CrudUserDTORequest user);
+
+    void addSeller(CrudUserDTORequest seller);
+    void addBuyer(CrudUserDTORequest buyer);
+
+    void deleteBuyer(Integer user_id);
+    void deleteSeller(Integer user_id);
+
+    void updateUser(CrudUserDTORequest user);
+    void updateBuyer(CrudUserDTORequest user);
+    void updateSeller(CrudUserDTORequest user);
+
+    BuyerDTOResponse infoBuyer(Integer user_id);
+    InfoSellerDTOResponse infoSeller(Integer user_id);
+
+    AllBuyersDTOResponse allBuyers();
+    AllSellersDTOResponse allSellers();
 
 
-
-
-
-
-    //SellerFollowersCountDTOResponse followersCount(Integer user_id);
 }
