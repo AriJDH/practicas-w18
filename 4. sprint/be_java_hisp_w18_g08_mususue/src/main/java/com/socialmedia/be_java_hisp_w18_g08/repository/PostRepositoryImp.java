@@ -1,6 +1,7 @@
 package com.socialmedia.be_java_hisp_w18_g08.repository;
 
 import com.socialmedia.be_java_hisp_w18_g08.entity.Post;
+import com.socialmedia.be_java_hisp_w18_g08.entity.PostPromo;
 import com.socialmedia.be_java_hisp_w18_g08.entity.Product;
 import lombok.Getter;
 import org.springframework.stereotype.Repository;
@@ -56,4 +57,5 @@ public class PostRepositoryImp implements IPostRepository{
     public void save(Post post) {
         posts.add(post);
     }
+
 }

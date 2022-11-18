@@ -2,8 +2,10 @@ package com.socialmedia.be_java_hisp_w18_g08.service;
 
 import com.socialmedia.be_java_hisp_w18_g08.dto.PostDto;
 import com.socialmedia.be_java_hisp_w18_g08.dto.request.PostDtoReq;
+import com.socialmedia.be_java_hisp_w18_g08.dto.request.PostPromoDtoReq;
 import com.socialmedia.be_java_hisp_w18_g08.dto.response.PostDtoRes;
 import com.socialmedia.be_java_hisp_w18_g08.entity.Post;
+import com.socialmedia.be_java_hisp_w18_g08.entity.PostPromo;
 import com.socialmedia.be_java_hisp_w18_g08.exception.BadRequestException;
 import com.socialmedia.be_java_hisp_w18_g08.entity.Seller;
 import com.socialmedia.be_java_hisp_w18_g08.exception.NotFoundUserException;
@@ -64,6 +66,19 @@ public class PostServiceImp implements IPostService {
                     postDTOReq.getPrice(), postDTOReq.getDate());
             postRepository.save(post);
             userRepository.createPost(post, postDTOReq.getUser_id());
+            postId++;
+        }
+    }
+
+    public void createPostPromo(PostPromoDtoReq postPromoDtoReq) {
+        Seller seller = userRepository.findSellerById(postPromoDtoReq.getUser_id());
+        if (seller == null) {
+            throw new BadRequestException("The post was not created. No user with id " + postPromoDtoReq.getUser_id());
+        } else {
+            PostPromo post = new PostPromo(postId, postPromoDtoReq.getUser_id(), postPromoDtoReq.getProduct(), postPromoDtoReq.getCategory(),
+                    postPromoDtoReq.getPrice(), postPromoDtoReq.getDate(), postPromoDtoReq.getHas_promo(), postPromoDtoReq.getDiscount());
+            postRepository.save(post);
+            userRepository.createPost(post, postPromoDtoReq.getUser_id());
             postId++;
         }
     }

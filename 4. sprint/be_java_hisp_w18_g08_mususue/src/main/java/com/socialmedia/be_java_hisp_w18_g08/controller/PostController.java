@@ -1,6 +1,7 @@
 package com.socialmedia.be_java_hisp_w18_g08.controller;
 
 import com.socialmedia.be_java_hisp_w18_g08.dto.request.PostDtoReq;
+import com.socialmedia.be_java_hisp_w18_g08.dto.request.PostPromoDtoReq;
 import com.socialmedia.be_java_hisp_w18_g08.service.IPostService;
 import com.socialmedia.be_java_hisp_w18_g08.service.PostServiceImp;
 import org.springframework.http.HttpStatus;
@@ -21,7 +22,13 @@ public class PostController {
     @PostMapping("/post")
     public ResponseEntity<String>createPost(@RequestBody PostDtoReq postDTOReq) {
         postService.create(postDTOReq);
-        return new ResponseEntity<>("Post created with success", HttpStatus.OK);
+        return new ResponseEntity<>("Post created successfully", HttpStatus.OK);
+    }
+
+    @PostMapping("/promo-post")
+    public ResponseEntity<String>createPost(@RequestBody PostPromoDtoReq postPromoDtoReq) {
+        postService.createPostPromo(postPromoDtoReq);
+        return new ResponseEntity<>("Promo post created successfully", HttpStatus.OK);
     }
 
     @GetMapping("/followed/{userId}/list")
