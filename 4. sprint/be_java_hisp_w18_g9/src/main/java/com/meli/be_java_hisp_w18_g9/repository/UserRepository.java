@@ -16,11 +16,10 @@ public class UserRepository implements IUserRepository {
 
     static {
 
-        List<Product> products = List.of(
-                new Product(1, "Notebook Mac", "Notebook", "Apple", "Gray", "Excelent!"),
-                new Product(2, "Notebook Dell", "Notebook", "Dell", "Black", "Excelent!"),
-                new Product(3, "Notebook Asus", "Notebook", "Asus", "White", "Excelent!")
-        );
+        List<Product> products = new ArrayList<>();
+        products.add(new Product(1, "Notebook Mac", "Notebook", "Apple", "Gray", "Excelent!"));
+        products.add(new Product(2, "Notebook Dell", "Notebook", "Dell", "Black", "Excelent!"));
+        products.add(new Product(3, "Notebook Asus", "Notebook", "Asus", "White", "Excelent!"));
 
         User user1 = new User(1, "Zonia", new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
         User user2 = new User(2, "Pedro", new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
@@ -28,11 +27,9 @@ public class UserRepository implements IUserRepository {
         users.put(1, user1);
         users.put(2, user2);
 
-        List<User> followers = List.of(user1, user2);
-        List<User> followed = List.of(user1,user2);
-
         users.put(3, new User(3, "User 3", new ArrayList<>(), new ArrayList<>(), products));
-        users.put(2, new User(2, "User 2", new ArrayList<>(), new ArrayList<>(), products));
+        users.put(4, new User(4, "Charly", new ArrayList<>(), new ArrayList<>(), products));
+
     }
 
 
@@ -40,7 +37,7 @@ public class UserRepository implements IUserRepository {
 
     @Override
     public List<User> findAll() {
-        return users.values().stream().collect(Collectors.toList());
+        return new ArrayList<>(users.values());
     }
 
     // * ===============

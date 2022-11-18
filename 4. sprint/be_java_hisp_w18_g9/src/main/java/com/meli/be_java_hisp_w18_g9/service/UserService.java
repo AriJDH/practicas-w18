@@ -39,7 +39,7 @@ public class UserService implements IUserService {
         if(user != null && userToFollow != null) {
 
             if(user.getUserId().equals(userToFollow.getUserId()))
-                throw new BadRequestException("you can't follow yourself");
+                throw new BadRequestException("You can't follow yourself");
 
             if(userToFollow.getProducts() == null || userToFollow.getProducts().size()==0)
                 throw new BadRequestException("User to follow is not a seller");
@@ -62,10 +62,9 @@ public class UserService implements IUserService {
             //Se agrega como seguidor el usuario en la lista del usuario seguido
             userList = new ArrayList<>();
             if (!userToFollow.getFollowers().isEmpty()) {
-                if (userToFollow.getFollowers().stream().filter(f-> f.getUserId().equals(user.getUserId())).count()> 0) {
-                    System.out.println("User is a follower");
-                }else{
-                    userList = userToFollow.getFollowers();
+                userList = userToFollow.getFollowers();
+                if (userToFollow.getFollowers().stream().filter(f-> f.getUserId().equals(user.getUserId())).count() > 0) {
+                    throw new BadRequestException("You already followed by the user with Id "+userId);
                 }
             }
 
@@ -90,11 +89,10 @@ public class UserService implements IUserService {
         if (user != null && userToUnfollow != null) {
 
             if (user.getUserId().equals(userToUnfollow.getUserId()))
-                throw new BadRequestException("you can't follow yourself");
+                throw new BadRequestException("You can't unfollow yourself");
 
-            List<User> userList;
             if (!user.getFollowed().isEmpty()) {
-                if (!user.getFollowed().contains(userToUnfollow)) {
+                if (userToUnfollow.getFollowers().stream().noneMatch(f -> f.getUserId().equals(user.getUserId()))) {
                     throw new BadRequestException("You don't follow the user with id: " + userIdToUnfollow);
                 } else {
 
@@ -105,6 +103,11 @@ public class UserService implements IUserService {
                     userRepository.update(userToUnfollow);
 
                 }
+            }else {
+                if(userToUnfollow.getFollowers().stream().noneMatch(f -> f.getUserId().equals(user.getUserId()))){
+                    throw new BadRequestException("You don't follow the user with id: " + userIdToUnfollow);
+                }
+                throw new BadRequestException("You don't follow anyone");
             }
 
             return HttpStatus.OK;
@@ -115,85 +118,68 @@ public class UserService implements IUserService {
     @Override
     public UserFollowedListResponse findAllFollowed(Integer id) {
 
-
         User userWf = userRepository.findById(id).orElseThrow(() -> new BadRequestException("user doesn't exist"));
 
         return new UserFollowedListResponse(id, userWf.getUserName(), userWf.getFollowed().stream()
                 .map(user -> new UserSimpleResponse(user.getUserId(), user.getUserName()))
                 .collect(Collectors.toList()));
 
-
-  /*   Preguntar(?)   User user = userRepository.findById(id).orElseThrow(() -> new BadRequestException("user doesn't exist"));
-
-        return mapper.convertValue(user, UserFollowedListResponse.class);*/
     }
 
     @Override
     public FollowersCountUserResponse findUserFollowedQuantity(Integer id){
+
         User user = userRepository.findById(id).orElseThrow(() -> new BadRequestException("User with id:" + id + " doesn't exist"));
         Integer userFollowersQuantity = user.getFollowers().size();
-        FollowersCountUserResponse userResponse = new FollowersCountUserResponse(id,user.getUserName(),userFollowersQuantity);
-        return userResponse;
+
+        return new FollowersCountUserResponse(id,user.getUserName(),userFollowersQuantity);
+
     }
 
     @Override
     public UserFollowedListResponse findAllFollowedOrderAsc(Integer id) {
-        User user = userRepository.findById(id)
-                .orElseThrow(()->new BadRequestException(
-                        "Cannot find user with id " + id));
 
-        List<UserSimpleResponse> userSimpleResponsesFollowed = user.getFollowed()
-                .stream()
-                .sorted(Comparator.comparing(User::getUserName))
-                .map(user1 -> mapper.convertValue(user1 , UserSimpleResponse.class))
-                .collect(Collectors.toList());
-        return new UserFollowedListResponse(id, user.getUserName(), userSimpleResponsesFollowed);
+        UserFollowedListResponse userFollowedListResponse = findAllFollowed(id);
+        userFollowedListResponse.getFollowed().sort(Comparator.comparing(UserSimpleResponse::getUserName));
+        return userFollowedListResponse;
+
     }
 
     @Override
     public UserFollowerListResponse findAllFollowerOrderAsc(Integer id) {
-        User user = userRepository.findById(id)
-                .orElseThrow(()-> new BadRequestException(
-                "Cannot find user with id" + id ));
-        List<UserSimpleResponse> userSimpleResponsesFollowers = user.getFollowers()
-                .stream()
-                .sorted(Comparator.comparing(User::getUserName))
-                .map(user1 -> mapper.convertValue(user1, UserSimpleResponse.class))
-                .collect(Collectors.toList());
-        return new UserFollowerListResponse(id, user.getUserName(),userSimpleResponsesFollowers);
+
+        UserFollowerListResponse userFollowedListResponses = findAllFollower(id);
+        userFollowedListResponses.getFollowers().sort(Comparator.comparing(UserSimpleResponse::getUserName));
+        return userFollowedListResponses;
+
     }
 
     @Override
     public UserFollowerListResponse findAllFollowerOrderDesc(Integer id) {
-        User user = userRepository.findById(id)
-                .orElseThrow(()-> new BadRequestException(
-                        "Cannot find user with id" + id ));
-        List<UserSimpleResponse> userSimpleResponsesFollowers = user.getFollowers()
-                .stream()
-                .sorted(Comparator.comparing(User::getUserName).reversed())
-                .map(user1 -> mapper.convertValue(user1, UserSimpleResponse.class))
-                .collect(Collectors.toList());
-        return new UserFollowerListResponse(id, user.getUserName(),userSimpleResponsesFollowers);
+
+        UserFollowerListResponse userFollowedListResponses = findAllFollower(id);
+        userFollowedListResponses.getFollowers().sort(Comparator.comparing(UserSimpleResponse::getUserName).reversed());
+        return userFollowedListResponses;
+
     }
 
     @Override
     public UserFollowedListResponse findAllFollowedOrderDesc(Integer id) {
-        User user = userRepository.findById(id)
-                .orElseThrow(()-> new BadRequestException(
-                        "Cannot find user with id "+ id));
-        List<UserSimpleResponse> userSimpleResponsesFollowed = user.getFollowed()
-                .stream()
-                .sorted(Comparator.comparing(User::getUserName).reversed())
-                .map(user1 -> mapper.convertValue(user1, UserSimpleResponse.class))
-                .collect(Collectors.toList());
 
-        return new UserFollowedListResponse(id, user.getUserName(), userSimpleResponsesFollowed);
+        UserFollowedListResponse userFollowedListResponse = findAllFollowed(id);
+        userFollowedListResponse.getFollowed().sort(Comparator.comparing(UserSimpleResponse::getUserName).reversed());
+        return userFollowedListResponse;
 
     }
 
     @Override
     public UserFollowerListResponse findAllFollower(Integer id){
-        User userWf = userRepository.findById(id).orElseThrow(() -> new BadRequestException("Usuario no existe"));
+        User userWf = userRepository.findById(id).orElseThrow(() -> new BadRequestException(String.format("User with id %d doesn't exist", id)));
+
+        if(userWf.getProducts().isEmpty()){
+            throw new BadRequestException(String.format("User with id %d is not a seller", id));
+        }
+
         List<UserSimpleResponse> simpleResponses = userWf.getFollowers().stream().map(user -> UserSimpleResponse.builder().userId(user.getUserId()).userName(user.getUserName()).build()).collect(Collectors.toList());
         return UserFollowerListResponse.builder().userId(id).userName(userWf.getUserName()).followers(simpleResponses).build();
     }

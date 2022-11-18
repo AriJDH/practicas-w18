@@ -20,6 +20,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.time.Period;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -33,52 +34,70 @@ import java.util.stream.Stream;
 public class PostService implements IPostService{
 
     // ? =============== Attributes =============== ?
+
     private final IPostRepository postRepository;
     private final IUserRepository userRepository;
-    private final IProductRepository iProductRepository;
+    private final IProductRepository productRepository;
     private final ObjectMapper mapper;
 
     // ? =============== Methods =============== ?
 
     @Override
     public void addPost(PostDtoRequest postDtoRequest) {
+
         Post post = mapper.convertValue(postDtoRequest, Post.class);
-        if(Stream.of(post.getCategory(),post.getProduct(), post.getDate(), post.getPrice(), post.getUserId()).anyMatch(Objects::isNull)){
-            throw  new BadRequestException("");
+
+        User user = userRepository.findById(post.getUserId()).orElseThrow(() -> new NotFoundException(String.format("User with id %d not found", post.getUserId())));
+
+        if(Stream.of(post.getCategory(),post.getProduct(), post.getPrice(), post.getUserId()).anyMatch(Objects::isNull)){
+            throw new BadRequestException("All fields are required");
         }
-        iProductRepository.save(post.getProduct());
+
+        if(user.getProducts().stream().noneMatch(product -> product.getProductId().equals(post.getProduct().getProductId()))){
+            throw new BadRequestException("Product not associated with user");
+        }
+
         postRepository.addPost(post);
+
+        if(user.getProducts() == null){
+            user.setProducts(List.of(post.getProduct()));
+        }else{
+            user.getProducts().add(post.getProduct());
+        }
+
+        userRepository.update(user);
+
     }
 
     // * ===============
 
     @Override
     public List<PostDtoResponse> findAll() {
+
         List<Post> postDtoResponseList = postRepository.findAll();
+
         return postDtoResponseList.stream()
                 .map(post -> new PostDtoResponse(post.getPostId(), post.getUserId(), post.getDate(), post.getProduct(), post.getCategory(), post.getPrice()))
                 .collect(Collectors.toList());
-    }
 
-    @Override
-    public List<PostListByFollowedResponse> findListPostsByFollowedAndUserId(Integer userId) {
-        return null;
     }
 
     // * ===============
 
     @Override
     public PostListByFollowedResponse findPostsByFollowedAndUserId(Integer userId) {
+
         User user = userRepository.findById(userId).orElseThrow(() -> new NotFoundException(String.format("User with id %d not found", userId)));
 
         PostListByFollowedResponse postListByFollowedResponse = new PostListByFollowedResponse();
         postListByFollowedResponse.setUserId(userId);
         List<PostDtoRequest> postDtoRequestList = new ArrayList<>();
 
+
         for (User userSeller: user.getFollowed()) {
             postDtoRequestList.addAll(postRepository.findAllByUserId(userSeller.getUserId()).stream()
-                    .map(post -> mapper.convertValue(post, PostDtoRequest.class))
                     .filter(post -> post.getDate().isBefore(LocalDate.now().plusDays(1)) && post.getDate().isAfter(LocalDate.now().minusWeeks(2)))
+                    .map(post -> mapper.convertValue(post, PostDtoRequest.class))
                     .sorted(Comparator.comparingInt(c->c.getProduct().getProductId()))
                     .collect(Collectors.toList()));
         }
@@ -86,6 +105,7 @@ public class PostService implements IPostService{
         postListByFollowedResponse.setPosts(postDtoRequestList);
 
         return postListByFollowedResponse;
+
     }
 
     // * ===============
@@ -93,19 +113,9 @@ public class PostService implements IPostService{
     @Override
     public PostListByFollowedResponse findPostsByFollowedAndUserIdOrderByDateAsc(Integer userId) {
 
-        User user = userRepository.findById(userId).orElseThrow(() -> new NotFoundException(String.format("User with id %d not found", userId)));
-
-        return user.getFollowed().stream()
-                .map(followed -> PostListByFollowedResponse.builder()
-                        .userId(followed.getUserId())
-                        .posts(postRepository.findAllByUserId(followed.getUserId()).stream()
-                                .map(post -> mapper.convertValue(post, PostDtoRequest.class))
-                                .filter(post -> post.getDate().isBefore(LocalDate.now().plusDays(1)) && post.getDate().isAfter(LocalDate.now().minusWeeks(2)))
-                                .sorted(Comparator.comparing(PostDtoRequest::getDate))
-                                .collect(Collectors.toList()))
-                        .build())
-                        .findFirst()
-                        .get();
+        PostListByFollowedResponse postListByFollowedResponse = findPostsByFollowedAndUserId(userId);
+        postListByFollowedResponse.getPosts().sort(Comparator.comparing(PostDtoRequest::getDate));
+        return postListByFollowedResponse;
 
     }
 
@@ -114,19 +124,9 @@ public class PostService implements IPostService{
     @Override
     public PostListByFollowedResponse findPostsByFollowedAndUserIdOrderByDateDesc(Integer userId) {
 
-        User user = userRepository.findById(userId).orElseThrow(() -> new NotFoundException(String.format("User with id %d not found", userId)));
-
-        return user.getFollowed().stream()
-                .map(followed -> PostListByFollowedResponse.builder()
-                        .userId(followed.getUserId())
-                        .posts(postRepository.findAllByUserId(followed.getUserId()).stream()
-                                .map(post -> mapper.convertValue(post, PostDtoRequest.class))
-                                .filter(post -> post.getDate().isBefore(LocalDate.now().plusDays(1)) && post.getDate().isAfter(LocalDate.now().minusWeeks(2)))
-                                .sorted(Comparator.comparing(PostDtoRequest::getDate).reversed())
-                                .collect(Collectors.toList()))
-                        .build())
-                        .findFirst()
-                        .get();
+        PostListByFollowedResponse postListByFollowedResponse = findPostsByFollowedAndUserId(userId);
+        postListByFollowedResponse.getPosts().sort(Comparator.comparing(PostDtoRequest::getDate).reversed());
+        return postListByFollowedResponse;
 
     }
 

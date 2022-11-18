@@ -15,7 +15,6 @@ public interface IPostService {
 
     void addPost(PostDtoRequest postDtoRequest);
     List<PostDtoResponse> findAll();
-    List<PostListByFollowedResponse> findListPostsByFollowedAndUserId(Integer userId);
     PostListByFollowedResponse findPostsByFollowedAndUserId(Integer userId); // US-0006
     PostListByFollowedResponse findPostsByFollowedAndUserIdOrderByDateAsc(Integer userId); // US-0009A
     PostListByFollowedResponse findPostsByFollowedAndUserIdOrderByDateDesc(Integer userId); // US-0019B
