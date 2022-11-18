@@ -2,7 +2,9 @@ package com.socialmedia.be_java_hisp_w18_g08.service;
 
 import com.socialmedia.be_java_hisp_w18_g08.dto.PostDto;
 import com.socialmedia.be_java_hisp_w18_g08.dto.request.PostDtoReq;
+import com.socialmedia.be_java_hisp_w18_g08.dto.request.PostPromoDtoReq;
 import com.socialmedia.be_java_hisp_w18_g08.dto.response.PostDtoRes;
+import com.socialmedia.be_java_hisp_w18_g08.dto.response.PostPromoDtoRes;
 import com.socialmedia.be_java_hisp_w18_g08.entity.Post;
 import com.socialmedia.be_java_hisp_w18_g08.exception.BadRequestException;
 import com.socialmedia.be_java_hisp_w18_g08.entity.Seller;
@@ -94,4 +96,38 @@ public class PostServiceImp implements IPostService {
         }
         return postDtoRes;
     }
+
+    @Override
+    public void createPromo(PostPromoDtoReq postDTOReq) {
+        Seller seller = userRepository.findSellerById(postDTOReq.getUser_id());
+
+        if (seller == null) {
+            throw new BadRequestException("The post was not created. No user with id " + postDTOReq.getUser_id());
+        } else {
+            Integer post_id = seller.getPosts().get(seller.getPosts().size()-1).getPost_id()+1;
+            Post post = new Post(post_id, postDTOReq.getUser_id(), postDTOReq.getProduct(), postDTOReq.getCategory(),
+                    postDTOReq.getPrice(), postDTOReq.getDate(),postDTOReq.getHas_promo(),postDTOReq.getDiscount());
+            postRepository.save(post);
+            userRepository.createPost(post, postDTOReq.getUser_id());
+
+        }
+    }
+
+    @Override
+    public PostPromoDtoRes getPostSellerCountByUserId(Integer userId) {
+
+        Seller seller = userRepository.findSellerById(userId);
+        Integer count = 0;
+        if (seller == null) {
+            throw new NotFoundUserException("User whith id: " + userId + " post not found ");
+        }
+
+        for(Post p: seller.getPosts()){
+            if(p.getHas_promo()!= null && p.getHas_promo()){
+                count++;
+            }
+        }
+        return new PostPromoDtoRes(userId,seller.getUser_name(),count);
+    }
+
 }

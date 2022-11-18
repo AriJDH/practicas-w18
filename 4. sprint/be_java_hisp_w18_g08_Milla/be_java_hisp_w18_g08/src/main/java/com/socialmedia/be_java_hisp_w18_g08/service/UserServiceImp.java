@@ -1,11 +1,8 @@
 package com.socialmedia.be_java_hisp_w18_g08.service;
 
-import com.socialmedia.be_java_hisp_w18_g08.dto.response.UserDto;
-import com.socialmedia.be_java_hisp_w18_g08.dto.response.UserListDto;
+import com.socialmedia.be_java_hisp_w18_g08.dto.response.*;
 import com.socialmedia.be_java_hisp_w18_g08.dto.request.FollowDtoReq;
-import com.socialmedia.be_java_hisp_w18_g08.dto.response.FollowDtoRes;
-import com.socialmedia.be_java_hisp_w18_g08.dto.response.FollowedDto;
-import com.socialmedia.be_java_hisp_w18_g08.dto.response.SellerFollowersCountDto;
+import com.socialmedia.be_java_hisp_w18_g08.entity.Post;
 import com.socialmedia.be_java_hisp_w18_g08.entity.Seller;
 import com.socialmedia.be_java_hisp_w18_g08.entity.User;
 import com.socialmedia.be_java_hisp_w18_g08.exception.NotFoundUserException;
@@ -120,4 +117,30 @@ public class UserServiceImp implements IUserService {
             throw new NotFoundUserException("User or Seller not Found");
         return message;
     }
+
+    @Override
+    public SellerPromoDtoRes listSellersPromo() {
+        SellerPromoDtoRes response = new SellerPromoDtoRes();
+        Integer count = 0;
+        List<Seller> sellers = userRepository.listSellers();
+        if(sellers.isEmpty()){
+            throw new NotFoundUserException("Sellers not found");
+        }
+
+        for(Seller s: sellers){
+            response.setUser_id(s.getUser_id());
+            response.setUser_name(s.getUser_name());
+            for(Post p: s.getPosts()){
+                if(p.getHas_promo()!= null && p.getHas_promo())
+                    count++;
+            }
+
+            if(count == 0){
+                throw new NotFoundUserException("Sellers with promo not found");
+            }
+            response.setPromo_products_count(count);
+        }
+        return response;
+    }
+
 }
