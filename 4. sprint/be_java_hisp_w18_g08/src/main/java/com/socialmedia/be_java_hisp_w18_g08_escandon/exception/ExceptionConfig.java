@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 @ControllerAdvice
 public class ExceptionConfig {
 
-    @ExceptionHandler(NotFoundUserException.class)
+    @ExceptionHandler(NotFoundException.class)
     public ResponseEntity<ExceptionDto> notFoundUserException(Exception e){
         ExceptionDto eDTO = new ExceptionDto(e.getMessage(), 404);
         return new ResponseEntity<>(eDTO, HttpStatus.NOT_FOUND);

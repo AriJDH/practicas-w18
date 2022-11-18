@@ -10,7 +10,7 @@ import com.socialmedia.be_java_hisp_w18_g08_escandon.dto.response.PromoPostQuant
 import com.socialmedia.be_java_hisp_w18_g08_escandon.entity.Post;
 import com.socialmedia.be_java_hisp_w18_g08_escandon.exception.BadRequestException;
 import com.socialmedia.be_java_hisp_w18_g08_escandon.entity.Seller;
-import com.socialmedia.be_java_hisp_w18_g08_escandon.exception.NotFoundUserException;
+import com.socialmedia.be_java_hisp_w18_g08_escandon.exception.NotFoundException;
 import com.socialmedia.be_java_hisp_w18_g08_escandon.repository.IPostRepository;
 import com.socialmedia.be_java_hisp_w18_g08_escandon.repository.IUserRepository;
 import com.socialmedia.be_java_hisp_w18_g08_escandon.repository.PostRepositoryImp;
@@ -54,7 +54,7 @@ public class PostServiceImp implements IPostService {
             compareByDate = new OrderDateAsc();
             list.sort((l1, l2) -> compareByDate.compare(l1.getDate(), l2.getDate()));
         } else {
-            throw new NotFoundUserException("The date could not be ordered ");
+            throw new NotFoundException("The date could not be ordered ");
         }
         return list;
     }
@@ -97,7 +97,7 @@ public class PostServiceImp implements IPostService {
     public PromoPostQuantityDto findAllPromoPostQuantity(Integer id) {
         Seller seller = userRepository.findSellerById(id);
         if(seller == null){
-            throw new NotFoundUserException("Not found User with id " + id );
+            throw new NotFoundException("Not found User with id " + id );
         }
         Integer quantityPromoPosts = seller.getPosts().stream()
                 .filter(p -> p.getHas_promo())
@@ -112,11 +112,11 @@ public class PostServiceImp implements IPostService {
     public PromoPostDtoRes getAllProductsByCategory(Integer userId, Integer category) {
         Seller seller = userRepository.findSellerById(userId);
         if(seller == null)
-            throw new NotFoundUserException("Not found User with id " + userId);
+            throw new NotFoundException("Not found User with id " + userId);
 
         List<Post> promoPosts = userRepository.getAllPromoProductsByCategory(userId, category);
         if(promoPosts.isEmpty())
-            throw new NotFoundUserException("Not found category " + category);
+            throw new NotFoundException("Not found category " + category);
 
         List<PromoPostDto> postsDtos = new ArrayList<>();
         for (Post p : promoPosts){
@@ -151,7 +151,7 @@ public class PostServiceImp implements IPostService {
             }
         }
         if (followed.isEmpty()) {
-            throw new NotFoundUserException("User whith id: " + userId + " sellers post not found ");
+            throw new NotFoundException("User whith id: " + userId + " sellers post not found ");
         }
         return postDtoRes;
     }

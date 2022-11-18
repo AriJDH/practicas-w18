@@ -8,7 +8,7 @@ import com.socialmedia.be_java_hisp_w18_g08_escandon.dto.response.FollowedDto;
 import com.socialmedia.be_java_hisp_w18_g08_escandon.dto.response.SellerFollowersCountDto;
 import com.socialmedia.be_java_hisp_w18_g08_escandon.entity.Seller;
 import com.socialmedia.be_java_hisp_w18_g08_escandon.entity.User;
-import com.socialmedia.be_java_hisp_w18_g08_escandon.exception.NotFoundUserException;
+import com.socialmedia.be_java_hisp_w18_g08_escandon.exception.NotFoundException;
 import com.socialmedia.be_java_hisp_w18_g08_escandon.repository.IUserRepository;
 import com.socialmedia.be_java_hisp_w18_g08_escandon.repository.UserRepositoryImp;
 
@@ -31,7 +31,7 @@ public class UserServiceImp implements IUserService {
         FollowDtoRes followDtoRes = new FollowDtoRes();
         res = userRepository.follow(followDtoReq.getUserId(), followDtoReq.getUserIdToFollow());
         if (res == null) {
-            throw new NotFoundUserException("Something was wrong");
+            throw new NotFoundException("Something was wrong");
         }
         followDtoRes.setStatusCode(200);
         followDtoRes.setMessage(res);
@@ -42,7 +42,7 @@ public class UserServiceImp implements IUserService {
     public FollowedDto getFollowed(Integer userId, String order) {
         User user = userRepository.getUserByID(userId);
         if(user == null)
-            throw new NotFoundUserException("There is no user with the ID " + userId);
+            throw new NotFoundException("There is no user with the ID " + userId);
         FollowedDto response = new FollowedDto();
         response.setUser_id(user.getUser_id());
         response.setUser_name(user.getUser_name());
@@ -79,7 +79,7 @@ public class UserServiceImp implements IUserService {
         Seller seller = userRepository.findSellerById(id);
 
         if(seller == null){
-            throw new NotFoundUserException("Not found User with id " + id );
+            throw new NotFoundException("Not found User with id " + id );
         }
         int quantity = seller.getFollowers().size();
         return new SellerFollowersCountDto(seller.getUser_id(),seller.getUser_name(), quantity);
@@ -89,7 +89,7 @@ public class UserServiceImp implements IUserService {
     public UserListDto findUserListBySeller(Integer id, String order) {
         Seller seller = userRepository.findSellerById(id);
         if (seller == null)
-            throw new NotFoundUserException("Not found User with id " + id );
+            throw new NotFoundException("Not found User with id " + id );
         List<UserDto> usersDTO = new ArrayList<>();
         for (User s : seller.getFollowers()) {
             UserDto userDto = new UserDto();
@@ -106,10 +106,10 @@ public class UserServiceImp implements IUserService {
     public List<Seller> getFollowedByUserId(Integer userId) {
         User user = userRepository.getUserByID(userId);
         if(user == null)
-            throw new NotFoundUserException("Not found User with id : " + userId);
+            throw new NotFoundException("Not found User with id : " + userId);
         List<Seller> lista = user.getFollowed();
         if (lista.isEmpty())
-            throw new NotFoundUserException("Not found followed");
+            throw new NotFoundException("Not found followed");
         return lista;
     }
 
@@ -117,7 +117,7 @@ public class UserServiceImp implements IUserService {
     public String unFollow(Integer userId, Integer userIdToUnfollow) {
         String message = userRepository.unFollow(userId,userIdToUnfollow);
         if(message == null)
-            throw new NotFoundUserException("User or Seller not Found");
+            throw new NotFoundException("User or Seller not Found");
         return message;
     }
 }
