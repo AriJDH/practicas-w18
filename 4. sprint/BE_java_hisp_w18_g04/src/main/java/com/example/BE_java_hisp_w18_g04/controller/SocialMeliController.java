@@ -2,10 +2,7 @@ package com.example.BE_java_hisp_w18_g04.controller;
 
 import com.example.BE_java_hisp_w18_g04.dto.request.PostDTOReq;
 import com.example.BE_java_hisp_w18_g04.dto.request.PromoPostDTOReq;
-import com.example.BE_java_hisp_w18_g04.dto.respose.FollowedListDTORes;
-import com.example.BE_java_hisp_w18_g04.dto.respose.FollowerCountDTORes;
-import com.example.BE_java_hisp_w18_g04.dto.respose.FollowerListDTORes;
-import com.example.BE_java_hisp_w18_g04.dto.respose.PostFollowedByDateDTORes;
+import com.example.BE_java_hisp_w18_g04.dto.respose.*;
 import com.example.BE_java_hisp_w18_g04.service.IPostService;
 import com.example.BE_java_hisp_w18_g04.service.IUserBuyerService;
 import com.example.BE_java_hisp_w18_g04.service.IUserSellerService;
@@ -65,6 +62,7 @@ public class SocialMeliController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+    // Ejercicios individuales
     @PostMapping("/products/promo-post")
     public ResponseEntity<?> publishPromoPost(@RequestBody PromoPostDTOReq postDTOReq) {
         userSellerService.publishPromoPost(postDTOReq);
@@ -72,11 +70,26 @@ public class SocialMeliController {
     }
 
     @GetMapping("/products/promo-post/count")
-    public ResponseEntity<?> promoPostCount(@RequestParam String userId) {
-        Integer id = Integer.valueOf(String.valueOf(userId));
-        userSellerService.promoPostCount(id);
-        return new ResponseEntity<>(HttpStatus.OK);
+    public ResponseEntity<PromoPostCountDTORes> promoPostCount(@RequestParam String user_id) {
+        System.out.println(user_id);
+        Integer id = Integer.valueOf(String.valueOf(user_id));
+       PromoPostCountDTORes response =   userSellerService.promoPostCount(id);
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
+    @GetMapping("/products/promo-post/list")
+    public ResponseEntity<PromoPostListoDTORes> promoPostlist(@RequestParam String user_id) {
+        System.out.println(user_id);
+        Integer id = Integer.valueOf(String.valueOf(user_id));
+        PromoPostListoDTORes response = userSellerService.promoPostList(id);
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
 
+    @GetMapping("/products/products-to-promotion")
+    public ResponseEntity<PromoPostListoDTORes> productsToPromotion(@RequestParam String user_id) {
+        System.out.println(user_id);
+        Integer id = Integer.valueOf(String.valueOf(user_id));
+        PromoPostListoDTORes response = userSellerService.productsToPromotion(id);
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
 }

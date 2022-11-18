@@ -3,10 +3,9 @@ package com.example.BE_java_hisp_w18_g04.service;
 
 import com.example.BE_java_hisp_w18_g04.dto.request.PostDTOReq;
 import com.example.BE_java_hisp_w18_g04.dto.request.PromoPostDTOReq;
-import com.example.BE_java_hisp_w18_g04.dto.respose.FollowerCountDTORes;
-import com.example.BE_java_hisp_w18_g04.dto.respose.FollowerListDTORes;
-import com.example.BE_java_hisp_w18_g04.dto.respose.UserDTORes;
+import com.example.BE_java_hisp_w18_g04.dto.respose.*;
 import com.example.BE_java_hisp_w18_g04.entity.Post;
+import com.example.BE_java_hisp_w18_g04.entity.PostPromo;
 import com.example.BE_java_hisp_w18_g04.entity.UserBuyer;
 import com.example.BE_java_hisp_w18_g04.entity.UserSeller;
 import com.example.BE_java_hisp_w18_g04.exception.BadRequestException;
@@ -81,14 +80,16 @@ public class UserSellerServiceImp implements IUserSellerService{
 
     @Override
     public void publishPromoPost(PromoPostDTOReq postDTOReq) {
-        if (!postDTOReq.getHas_promo()) throw new BadRequestException("The product is not on promotion");
-        postRepository.createPromoPost(postDTOReq);
+       //if (!postDTOReq.getHas_promo()) throw new BadRequestException("The product is not on promotion");
+        PostPromo post= Mapper.createObjectMapper().convertValue(postDTOReq, PostPromo.class);
+        postRepository.createPromoPost(post);
     }
 
     @Override
-    public void promoPostCount(Integer userId) {
-        List<PromoPostDTOReq> promoPost = postRepository.findAllPromoPosts();
-        List<PromoPostDTOReq> promoPostByUser = promoPost.stream()
+    public PromoPostCountDTORes promoPostCount(Integer userId) {
+        int cont;
+        List<PostPromo> promoPost = postRepository.findAllPromoPosts();
+        List<PostPromo> promoPostByUser = promoPost.stream()
                 .filter(pp -> pp.getUser_id().equals(userId))
                 .collect(Collectors.toList());
 
@@ -96,6 +97,45 @@ public class UserSellerServiceImp implements IUserSellerService{
             throw new BadRequestException("this user has no posts");
         }
 
+        String userName = sellerRepository.findById(userId).getUser_name();
+        cont = (int) promoPostByUser.stream().filter(PostPromo::getHas_promo).count();
 
+        return new PromoPostCountDTORes(userId, userName, cont);
     }
+
+    @Override
+    public PromoPostListoDTORes promoPostList(Integer userId) {
+        List<PostPromo> promoPost = postRepository.findAllPromoPosts();
+        List<PostPromo> promoPostByUser = promoPost.stream()
+                .filter(pp -> pp.getUser_id().equals(userId) && pp.getHas_promo())
+                .collect(Collectors.toList());
+
+        if (promoPostByUser.isEmpty()){
+            throw new BadRequestException("this user has no posts");
+        }
+        String userName = sellerRepository.findById(userId).getUser_name();
+
+        return new PromoPostListoDTORes(userId, userName, promoPostByUser);
+    }
+
+    @Override
+    public PromoPostListoDTORes productsToPromotion(Integer userId) {
+        List<PostPromo> promoPost = postRepository.findAllPromoPosts();
+        List<PostPromo> promoPostByUser = promoPost.stream()
+                .filter(pp -> pp.getUser_id().equals(userId) && !pp.getHas_promo())
+                .collect(Collectors.toList());
+
+        if (promoPostByUser.isEmpty()){
+            throw new BadRequestException("this user has no posts");
+        }
+
+        promoPostByUser.stream()
+                .forEach(pp -> pp.setHas_promo(true));
+
+        String userName = sellerRepository.findById(userId).getUser_name();
+
+        return new PromoPostListoDTORes(userId, userName, promoPostByUser);
+    }
+
+
 }

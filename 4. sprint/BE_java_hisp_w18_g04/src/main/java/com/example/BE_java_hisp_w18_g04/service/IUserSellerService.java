@@ -4,6 +4,8 @@ import com.example.BE_java_hisp_w18_g04.dto.request.PostDTOReq;
 import com.example.BE_java_hisp_w18_g04.dto.request.PromoPostDTOReq;
 import com.example.BE_java_hisp_w18_g04.dto.respose.FollowerCountDTORes;
 import com.example.BE_java_hisp_w18_g04.dto.respose.FollowerListDTORes;
+import com.example.BE_java_hisp_w18_g04.dto.respose.PromoPostCountDTORes;
+import com.example.BE_java_hisp_w18_g04.dto.respose.PromoPostListoDTORes;
 
 public interface IUserSellerService {
 
@@ -17,5 +19,9 @@ public interface IUserSellerService {
 
     void publishPromoPost(PromoPostDTOReq postDTOReq);
 
-    void promoPostCount(Integer userId);
+    PromoPostCountDTORes promoPostCount(Integer userId);
+
+    PromoPostListoDTORes promoPostList(Integer userId);
+
+    PromoPostListoDTORes productsToPromotion(Integer userId);
 }

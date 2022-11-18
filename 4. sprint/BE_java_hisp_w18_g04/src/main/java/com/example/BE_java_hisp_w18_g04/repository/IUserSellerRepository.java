@@ -6,6 +6,5 @@ import java.util.List;
 
 public interface IUserSellerRepository{
     UserSeller findById(Integer id);
-
     List<UserSeller> findAll();
 }
