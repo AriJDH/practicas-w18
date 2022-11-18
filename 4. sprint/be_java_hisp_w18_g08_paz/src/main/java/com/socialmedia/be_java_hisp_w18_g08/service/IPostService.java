@@ -4,6 +4,7 @@ import com.socialmedia.be_java_hisp_w18_g08.dto.request.PostDiscountDtoReq;
 import com.socialmedia.be_java_hisp_w18_g08.dto.request.PostDtoReq;
 import com.socialmedia.be_java_hisp_w18_g08.dto.response.PostDtoRes;
 import com.socialmedia.be_java_hisp_w18_g08.dto.response.SellerDiscountCountDto;
+import com.socialmedia.be_java_hisp_w18_g08.dto.response.SellerListDto;
 
 public interface IPostService {
 
@@ -14,4 +15,6 @@ public interface IPostService {
     void createDiscount(PostDiscountDtoReq postDiscountDtoReq);
 
     SellerDiscountCountDto getCountDiscount(Integer id);
+
+    SellerListDto getSellerProductsDiscount (Integer id);
 }

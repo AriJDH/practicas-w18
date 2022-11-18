@@ -5,6 +5,8 @@ import com.socialmedia.be_java_hisp_w18_g08.dto.request.PostDiscountDtoReq;
 import com.socialmedia.be_java_hisp_w18_g08.dto.request.PostDtoReq;
 import com.socialmedia.be_java_hisp_w18_g08.dto.response.PostDtoRes;
 import com.socialmedia.be_java_hisp_w18_g08.dto.response.SellerDiscountCountDto;
+import com.socialmedia.be_java_hisp_w18_g08.dto.response.SellerListDto;
+import com.socialmedia.be_java_hisp_w18_g08.dto.response.UserDto;
 import com.socialmedia.be_java_hisp_w18_g08.entity.Post;
 import com.socialmedia.be_java_hisp_w18_g08.exception.BadRequestException;
 import com.socialmedia.be_java_hisp_w18_g08.entity.Seller;
@@ -120,5 +122,28 @@ public class PostServiceImp implements IPostService {
         }
         Long count = seller.getPosts().stream().filter(p -> p.getHas_promo().equals(Boolean.TRUE)).count();
         return new SellerDiscountCountDto(seller.getUser_id(),seller.getUser_name(), count);
+    }
+
+    @Override
+    public SellerListDto getSellerProductsDiscount(Integer id) {
+        Seller seller = userRepository.findSellerById(id);
+        if(seller == null){
+            throw new NotFoundUserException("Not found seller with id " + id );
+        }
+        List<PostDto> posts = this.toPostDto(seller.getPosts().stream().filter(p -> p.getHas_promo().equals(Boolean.TRUE)).collect(Collectors.toList()));
+        return new SellerListDto(seller.getUser_id(), seller.getUser_name(), posts);
+    }
+
+    private List<PostDto> toPostDto(List<Post> posts) {
+        changeOrder(posts, "date_asc");
+        List<PostDto> postsDto = new ArrayList<>();
+
+        for (Post p : posts) {
+            PostDto i = new PostDto(p.getPost_id(), p.getUser_id(), p.getProduct(), p.getCategory(), p.getPrice(),
+                    p.getDate(), p.getHas_promo(), p.getDiscount());
+            postsDto.add(i);
+        }
+
+        return postsDto;
     }
 }

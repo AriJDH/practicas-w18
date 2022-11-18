@@ -3,6 +3,7 @@ package com.socialmedia.be_java_hisp_w18_g08.controller;
 import com.socialmedia.be_java_hisp_w18_g08.dto.request.PostDiscountDtoReq;
 import com.socialmedia.be_java_hisp_w18_g08.dto.request.PostDtoReq;
 import com.socialmedia.be_java_hisp_w18_g08.dto.response.SellerDiscountCountDto;
+import com.socialmedia.be_java_hisp_w18_g08.dto.response.SellerListDto;
 import com.socialmedia.be_java_hisp_w18_g08.service.IPostService;
 import com.socialmedia.be_java_hisp_w18_g08.service.PostServiceImp;
 import org.springframework.http.HttpStatus;
@@ -42,6 +43,12 @@ public class PostController {
     @GetMapping("/promo-post/count")
     public ResponseEntity<SellerDiscountCountDto> getCountSellerDiscount(@RequestParam Integer user_id){
         SellerDiscountCountDto sellerDiscount = postService.getCountDiscount(user_id);
+        return new ResponseEntity<>(sellerDiscount, HttpStatus.OK);
+    }
+
+    @GetMapping("/promo-post/list")
+    public ResponseEntity<SellerListDto> getSellerProductDiscount(@RequestParam Integer user_id){
+        SellerListDto sellerDiscount = postService.getSellerProductsDiscount(user_id);
         return new ResponseEntity<>(sellerDiscount, HttpStatus.OK);
     }
 }

@@ -22,4 +22,15 @@ public class PostDto {
     private Double price;
     @JsonFormat(pattern = "dd-MM-yyyy")
     private LocalDate date;
+    private Boolean has_promo=false;
+    private Double discount=0.0;
+
+    public PostDto(Integer post_id, Integer user_id, Product product, Integer category, Double price, LocalDate date) {
+        this.post_id = post_id;
+        this.user_id = user_id;
+        this.product = product;
+        this.category = category;
+        this.price = price;
+        this.date = date;
+    }
 }
