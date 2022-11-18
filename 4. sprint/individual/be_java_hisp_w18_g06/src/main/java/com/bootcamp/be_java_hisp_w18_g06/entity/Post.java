@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import java.time.LocalDate;
 
 @NoArgsConstructor
+@AllArgsConstructor
 @Data
 public class Post {
     private int post_id=0;
@@ -17,6 +18,10 @@ public class Post {
     private Product product;
     private String category;
     private double price;
+
+    private boolean has_promo;;
+    private double discount;;
+
 
     public Post( int user_id, LocalDate date, Product product, String category, double price) {
         this.post_id += 1;

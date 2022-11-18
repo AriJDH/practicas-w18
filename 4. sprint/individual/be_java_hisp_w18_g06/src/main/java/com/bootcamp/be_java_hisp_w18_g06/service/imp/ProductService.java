@@ -1,6 +1,7 @@
 package com.bootcamp.be_java_hisp_w18_g06.service.imp;
 
 import com.bootcamp.be_java_hisp_w18_g06.dto.request.PostDTO;
+import com.bootcamp.be_java_hisp_w18_g06.dto.request.PostPromoDTO;
 import com.bootcamp.be_java_hisp_w18_g06.repository.IUserRepository;
 import com.bootcamp.be_java_hisp_w18_g06.service.IPostService;
 import com.bootcamp.be_java_hisp_w18_g06.service.IProductService;
@@ -22,6 +23,12 @@ public class ProductService implements IProductService {
     public void save(PostDTO postDTO) {
         postService.savePost(postDTO);
     }
+
+	@Override
+	public void savePromo(PostPromoDTO postPromoDTO) {
+		postService.savePostPromo(postPromoDTO);
+	}
+
 	// US006
 	@Override
 	public List<PostDTO> findAllPostsByUser(int id) {
