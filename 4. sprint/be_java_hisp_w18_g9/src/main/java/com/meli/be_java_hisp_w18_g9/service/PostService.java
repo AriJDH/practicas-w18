@@ -137,12 +137,19 @@ public class PostService implements IPostService{
             throw  new BadRequestException("All fields are required");
         }
         User user = userRepository.findById(post.getUserId()).orElseThrow(()->new BadRequestException("User with id not exist"));
-        List<Post> postList = postRepository.findAllByUserId(user.getUserId()).stream().collect(Collectors.toList());
-        if(postList.isEmpty())
-        {
-            throw new NotFoundException(String.format("No post associated with id found " ,user.getUserId()));
+        if(user.getProducts().stream().noneMatch(product -> product.getProductId().equals(post.getProduct().getProductId()))){
+            throw new BadRequestException("Product not associated with user");
         }
+
         postRepository.addPost(post);
+
+        if(user.getProducts() == null){
+            user.setProducts(List.of(post.getProduct()));
+        }else{
+            user.getProducts().add(post.getProduct());
+        }
+
+        userRepository.update(user);
 
     }
 
