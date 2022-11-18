@@ -84,7 +84,7 @@ public class DTOMapper {
         return userPromoDTO;
     }
 
-    public static UserPromoPostsDTOres mapTo(User user, List<Post> promoPost){
+    public static UserPromoPostsDTOres mapToPromoPost(User user, List<Post> promoPost){
         mapperConfigCamelToUnder();
         UserPromoPostsDTOres userPromoDTO = modelMapper.map(user, UserPromoPostsDTOres.class);
 
@@ -101,6 +101,25 @@ public class DTOMapper {
     public static PostPromoDTOres mapToPostPromo(Post post){
         mapperConfigCamelToUnder();
         return modelMapper.map(post, PostPromoDTOres.class);
+    }
+
+    public static UserFollowedListDTOres mapToUserFollowed(User user, List<User> userFollowed){
+        mapperConfigCamelToUnder();
+        UserFollowedListDTOres usersFollowedList = modelMapper.map(user, UserFollowedListDTOres.class);
+
+        List<UserDTOres> userDTOres = userFollowed
+                .stream()
+                .map(DTOMapper::mapTo)
+                .collect(Collectors.toList());
+
+        usersFollowedList.setFollowed(userDTOres);
+
+        return usersFollowedList;
+    }
+
+    public static UserDTOres mapTo(User user){
+        mapperConfigCamelToUnder();
+        return modelMapper.map(user, UserDTOres.class);
     }
 
 }

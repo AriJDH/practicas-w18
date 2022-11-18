@@ -32,7 +32,7 @@ public class ExceptionConfig {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
     }
 
-    @ExceptionHandler(UserGenericException.class)
+    @ExceptionHandler(GenericException.class)
     public ResponseEntity<ErrorDTOres> userGenericException(Exception ex){
         ErrorDTOres error = new ErrorDTOres(ex.getMessage(), 404);
         return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);

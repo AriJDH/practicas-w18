@@ -19,44 +19,38 @@ public class UserRepository implements IUserRepository{
 
     public UserRepository() {
         loadUsers();
+        loadUsersFollowers();
+        loadUsersFollowed();
     }
+    private void loadUsersFollowers(){
+        for (int i = 2; i < 4; i++) {
+            users
+                .get(1)
+                .getFollowers()
+                .put(i, users.get(i));
+            users
+                    .get(2)
+                    .getFollowers()
+                    .put(i+1, users.get(i+1));
 
+        }
+    }
     private void loadUsers(){
-
-        User user1 = new User();
-        user1.setUserId(1);
-        user1.setUserName("usuario1");
-
-        User user2 = new User();
-        user2.setUserId(2);
-        user2.setUserName("usuario2");
-
-        User user3 = new User();
-        user3.setUserId(3);
-        user3.setUserName("usuario3");
-
-        Map<Integer, User> followedUser1 = new HashMap<Integer, User>();
-        followedUser1.put(user2.getUserId(), user2);
-        followedUser1.put(user3.getUserId(), user3);
-        user1.setFollowed(followedUser1);
-        user1.setFollowers(followedUser1);
-
-        Map<Integer, User> followedUser2 = new HashMap<Integer, User>();
-        followedUser2.put(user3.getUserId(), user3);
-        user2.setFollowed(followedUser2);
-
-        Map<Integer, User> followedUser3 = new HashMap<Integer, User>();
-        followedUser3.put(user2.getUserId(), user2);
-        user3.setFollowed(followedUser3);
-
-        user2.getPosts().put(getListPosts().get(0).getPost_id(),getListPosts().get(0));
-        user2.getPosts().put(getListPosts().get(1).getPost_id(),getListPosts().get(1));
-        user2.getPosts().put(getListPosts().get(2).getPost_id(),getListPosts().get(2));
-
-        this.users.put(user1.getUserId(), user1);
-        this.users.put(user2.getUserId(), user2);
-        this.users.put(user3.getUserId(), user3);
-
+        for (int i = 1; i < 10; i++) {
+            users.put(i, new User(i, "usuario_"+i));
+        }
+    }
+    private void loadUsersFollowed(){
+        for (int i = 2; i < 4; i++) {
+            users
+                    .get(4)
+                    .getFollowed()
+                    .put(i, users.get(i));
+            users
+                    .get(1)
+                    .getFollowed()
+                    .put(i+2, users.get(i+2));
+        }
     }
 
     @Override
