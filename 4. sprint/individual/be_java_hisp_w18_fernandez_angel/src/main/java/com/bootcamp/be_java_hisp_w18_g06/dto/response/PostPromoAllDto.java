@@ -10,7 +10,7 @@ import java.time.LocalDate;
 @Getter
 @Setter
 public class PostPromoAllDto {
-    private int post_id=0;
+
     private int user_id;
     @JsonFormat(pattern = "dd-MM-yyyy")
     private LocalDate date;
