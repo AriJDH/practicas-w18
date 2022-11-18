@@ -3,7 +3,6 @@ package com.socialmedia.be_java_hisp_w18_g08.repository;
 import com.socialmedia.be_java_hisp_w18_g08.entity.Post;
 import com.socialmedia.be_java_hisp_w18_g08.entity.Seller;
 import com.socialmedia.be_java_hisp_w18_g08.entity.User;
-import com.socialmedia.be_java_hisp_w18_g08.exception.NotFoundUserException;
 import lombok.Getter;
 import org.springframework.stereotype.Repository;
 
@@ -35,12 +34,10 @@ public class UserRepositoryImp implements IUserRepository{
         post7.add(postRepository.getPosts().get(2));
         post8.add(postRepository.getPosts().get(3));
 
-
         Seller s1 = new Seller(5, "User5", followed, post5, followers);
         Seller s2 = new Seller(6, "User6", followed, post6, followers);
         Seller s3 = new Seller(7, "User7", followed, post7, followers);
         Seller s4 = new Seller(8, "User8", followed, post8, followers);
-
 
         User u1 = new User(1, "User1", followed);
         User u2 = new User(2, "User2", followed);
@@ -66,7 +63,6 @@ public class UserRepositoryImp implements IUserRepository{
         this.users.add(u2);
         this.users.add(u3);
         this.users.add(u4);
-
     }
 
     //refactorizar nombre
@@ -90,8 +86,12 @@ public class UserRepositoryImp implements IUserRepository{
     }
 
     @Override
-    public String follow(Integer userId, Integer userIdToFollow) {
+    public void createPost(Post post, Integer id) {
+        findSellerById(id).getPosts().add(post);
+    }
 
+    @Override
+    public String follow(Integer userId, Integer userIdToFollow) {
 
         User follower = getUserByID(userId);
         if (follower == null) {

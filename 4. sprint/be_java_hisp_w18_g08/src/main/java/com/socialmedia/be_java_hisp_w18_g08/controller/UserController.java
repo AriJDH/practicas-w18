@@ -2,7 +2,7 @@ package com.socialmedia.be_java_hisp_w18_g08.controller;
 
 import com.socialmedia.be_java_hisp_w18_g08.dto.UserListDTO;
 import com.socialmedia.be_java_hisp_w18_g08.dto.request.FollowDtoReq;
-import com.socialmedia.be_java_hisp_w18_g08.dto.FollowDtoRes;
+import com.socialmedia.be_java_hisp_w18_g08.dto.response.FollowDtoRes;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -11,10 +11,6 @@ import com.socialmedia.be_java_hisp_w18_g08.dto.SellerFollowersCountDTO;
 import com.socialmedia.be_java_hisp_w18_g08.service.IUserService;
 import com.socialmedia.be_java_hisp_w18_g08.service.UserServiceImp;
 import org.springframework.web.bind.annotation.GetMapping;
-
-
-
-
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -30,15 +26,14 @@ public class UserController {
     @PostMapping("/{userId}/follow/{userIdToFollow}")
     public ResponseEntity<FollowDtoRes> follow(@PathVariable Integer userId, @PathVariable Integer userIdToFollow) {
         FollowDtoReq followDtoReq = new FollowDtoReq(userId, userIdToFollow);
-        return new ResponseEntity(userService.follow(followDtoReq), HttpStatus.OK);
+        return new ResponseEntity<>(userService.follow(followDtoReq), HttpStatus.OK);
     }
 
     @GetMapping("/{userId}/followed/list")
     public ResponseEntity<FollowedDTO> getFollowed(@PathVariable Integer userId,
                                                    @RequestParam(required = false) String order) {
-        return new ResponseEntity(userService.getFollowed(userId, order), HttpStatus.OK);
+        return new ResponseEntity<>(userService.getFollowed(userId, order), HttpStatus.OK);
     }
-
 
     @GetMapping("/{userId}/followers/count")
     public ResponseEntity<SellerFollowersCountDTO> findAllFollowersQuantity(@PathVariable Integer userId){

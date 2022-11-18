@@ -3,7 +3,7 @@ package com.socialmedia.be_java_hisp_w18_g08.service;
 import com.socialmedia.be_java_hisp_w18_g08.dto.UserDTO;
 import com.socialmedia.be_java_hisp_w18_g08.dto.UserListDTO;
 import com.socialmedia.be_java_hisp_w18_g08.dto.request.FollowDtoReq;
-import com.socialmedia.be_java_hisp_w18_g08.dto.FollowDtoRes;
+import com.socialmedia.be_java_hisp_w18_g08.dto.response.FollowDtoRes;
 import com.socialmedia.be_java_hisp_w18_g08.dto.FollowedDTO;
 import com.socialmedia.be_java_hisp_w18_g08.dto.SellerFollowersCountDTO;
 import com.socialmedia.be_java_hisp_w18_g08.entity.Seller;
@@ -37,7 +37,6 @@ public class UserServiceImp implements IUserService {
         followDtoRes.setMessage(res);
         return followDtoRes;
     }
-
 
     @Override
     public FollowedDTO getFollowed(Integer userId, String order) {
@@ -114,7 +113,6 @@ public class UserServiceImp implements IUserService {
         return lista;
     }
 
-
     @Override
     public String unFollow(Integer userId, Integer userIdToUnfollow) {
         String message = userRepository.unFollow(userId,userIdToUnfollow);
@@ -122,6 +120,4 @@ public class UserServiceImp implements IUserService {
             throw new NotFoundUserException("User or Seller not Found");
         return message;
     }
-
-
 }
