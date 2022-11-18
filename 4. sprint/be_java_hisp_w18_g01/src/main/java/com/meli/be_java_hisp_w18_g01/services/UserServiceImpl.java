@@ -6,16 +6,14 @@ import com.meli.be_java_hisp_w18_g01.comparators.UserComparator;
 import com.meli.be_java_hisp_w18_g01.dtos.*;
 import com.meli.be_java_hisp_w18_g01.entities.User;
 import com.meli.be_java_hisp_w18_g01.exceptions.BadRequestException;
-import com.meli.be_java_hisp_w18_g01.exceptions.EmptyUsersRepositoryException;
+import com.meli.be_java_hisp_w18_g01.exceptions.EmptyUsersListException;
 import com.meli.be_java_hisp_w18_g01.mappers.MapperPostToPostDTO;
-import com.meli.be_java_hisp_w18_g01.mappers.MapperPostToPromoPostDTO;
 import com.meli.be_java_hisp_w18_g01.services.database.UserDbService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Comparator;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service
@@ -63,8 +61,8 @@ public class UserServiceImpl implements UserService {
     @Override
     public SellerDTO getBestSeller() {
         Comparator userComparator = new UserComparator();
-        User user = userDbService.findAll().stream().max(userComparator::compare)
-                .orElseThrow(()->{throw new EmptyUsersRepositoryException("No se puede obtener el mejor usuario porque no existen usuarios.");
+        User user = userDbService.findAll().stream().filter(u->u.isSeller()).max(userComparator::compare)
+                .orElseThrow(()->{throw new EmptyUsersListException("No se puede obtener el mejor usuario porque no existen vendedores.");
         });
         MapperPostToPostDTO mapperPostToPostDTO = new MapperPostToPostDTO();
 

@@ -22,7 +22,7 @@ public class ExceptionsHandler {
         );
     }
 
-    @ExceptionHandler({UserNotFoundException.class, EmptyUsersRepositoryException.class})
+    @ExceptionHandler({UserNotFoundException.class, EmptyUsersListException.class})
     public ResponseEntity<?> handleNotFound(Exception e){
         return new ResponseEntity<>(
                 new ResponseDTO(
