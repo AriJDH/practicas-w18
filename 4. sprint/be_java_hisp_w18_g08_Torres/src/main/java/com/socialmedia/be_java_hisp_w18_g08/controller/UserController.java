@@ -2,7 +2,6 @@ package com.socialmedia.be_java_hisp_w18_g08.controller;
 
 import com.socialmedia.be_java_hisp_w18_g08.dto.response.*;
 import com.socialmedia.be_java_hisp_w18_g08.dto.request.FollowDtoReq;
-import com.socialmedia.be_java_hisp_w18_g08.entity.Seller;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

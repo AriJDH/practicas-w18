@@ -20,6 +20,6 @@ public class PostWithPromoDto {
     private Double price;
     @JsonFormat(pattern="dd-MM-yyyy")
     private LocalDate date;
-    private Boolean has_promo;
-    private Double discount;
+    private Boolean has_promo = false;
+    private Double discount = 0.0;
 }

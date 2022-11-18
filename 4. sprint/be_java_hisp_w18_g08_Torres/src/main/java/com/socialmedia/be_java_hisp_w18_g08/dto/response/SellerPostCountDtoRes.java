@@ -10,11 +10,11 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
-public class SellerPostCountDto {
-    private String user_id;
+public class SellerPostCountDtoRes {
+    private Integer user_id;
     private String user_name;
     private Integer promo_products_count;
 
-    public SellerPostCountDto(Integer user_id, String user_name, int quantity) {
+    public SellerPostCountDtoRes(Integer user_id, String user_name, int quantity) {
     }
 }

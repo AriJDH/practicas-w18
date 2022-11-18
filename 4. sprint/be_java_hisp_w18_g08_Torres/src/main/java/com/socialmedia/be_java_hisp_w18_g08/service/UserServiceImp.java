@@ -81,17 +81,6 @@ public class UserServiceImp implements IUserService {
         return new SellerFollowersCountDto(seller.getUser_id(),seller.getUser_name(), quantity);
     }
 
-    /*@Override
-    public SellerPostCountDto findAllPostBySeller(Integer id) {
-        Seller seller = userRepository.findSellerById(id);
-
-
-        if(seller == null){
-            throw new NotFoundUserException("Not found User with id " + id );
-        }
-        int quantity = seller.getPosts().size();
-        return new SellerPostCountDto(seller.getUser_id(),seller.getUser_name(), quantity);
-    }*/
 
     @Override
     public UserListDto findUserListBySeller(Integer id, String order) {

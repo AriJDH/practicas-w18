@@ -40,10 +40,10 @@ public class PostRepositoryImp implements IPostRepository{
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
         LocalDate date = LocalDate.parse("12-11-2022", formatter);
-        Post ps1 = new Post(1,5,pr1,1,111.11,date);
-        Post ps2 = new Post(2,6,pr1,2,222.22,date.plusDays(15));
-        Post ps3 = new Post(3,7,pr1,3,333.33,date.plusDays(20));
-        Post ps4 = new Post(4,8,pr1,4,444.44,date.minusDays(14));
+        Post ps1 = new Post(1,5,pr1,1,111.11,date,false,0.0);
+        Post ps2 = new Post(2,6,pr1,2,222.22,date.plusDays(15),false,0.0);
+        Post ps3 = new Post(3,7,pr1,3,333.33,date.plusDays(20),false,0.0);
+        Post ps4 = new Post(4,8,pr1,4,444.44,date.minusDays(14),false,0.0);
 
         Post ps5 = new Post(5,9,pr1,5,555.55,date.minusDays(1),true,0.25);
         Post ps6 = new Post(6,10,pr1,6,666.66,date.minusDays(1),true,0.30);

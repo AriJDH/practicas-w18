@@ -4,6 +4,8 @@ import com.socialmedia.be_java_hisp_w18_g08.dto.PostDto;
 import com.socialmedia.be_java_hisp_w18_g08.dto.request.PostDtoReq;
 import com.socialmedia.be_java_hisp_w18_g08.dto.request.PostwithPromoDtoReq;
 import com.socialmedia.be_java_hisp_w18_g08.dto.response.PostDtoRes;
+import com.socialmedia.be_java_hisp_w18_g08.dto.response.SellerFollowersCountDto;
+import com.socialmedia.be_java_hisp_w18_g08.dto.response.SellerPostCountDtoRes;
 import com.socialmedia.be_java_hisp_w18_g08.entity.Post;
 import com.socialmedia.be_java_hisp_w18_g08.exception.BadRequestException;
 import com.socialmedia.be_java_hisp_w18_g08.entity.Seller;
@@ -62,7 +64,7 @@ public class PostServiceImp implements IPostService {
             throw new BadRequestException("The post was not created. No user with id " + postDTOReq.getUser_id());
         } else {
             Post post = new Post(postId, postDTOReq.getUser_id(), postDTOReq.getProduct(), postDTOReq.getCategory(),
-                    postDTOReq.getPrice(), postDTOReq.getDate());
+                    postDTOReq.getPrice(), postDTOReq.getDate(), false, 0.0);
             postRepository.save(post);
             userRepository.createPost(post, postDTOReq.getUser_id());
             postId++;
@@ -81,6 +83,18 @@ public class PostServiceImp implements IPostService {
             userRepository.createPost(post, postwithPromoDtoReq.getUser_id());
             postId++;
         }
+    }
+
+    @Override
+    public SellerPostCountDtoRes findAllPostBySeller(Integer id) {
+        Seller seller = userRepository.findSellerById(id);
+
+        if(seller == null){
+            throw new NotFoundUserException("Not found User with id " + id );
+        }
+        Integer quantity = seller.getPosts().stream()
+                .filter(p -> p.getHas_promo()).collect(Collectors.toList()).size();
+        return new SellerPostCountDtoRes(seller.getUser_id(),seller.getUser_name(), quantity);
     }
 
     @Override
