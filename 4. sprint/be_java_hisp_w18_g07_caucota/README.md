@@ -59,5 +59,12 @@ RESPONSE:
         },
 
 
+Filtros/Parámetros:
+
+String "product_name" : Cadena de caracteres que representa el nombre del producto.
+
+Integer "category" : Número que identifica a la categoria de la publicación.
+
+Double "price" : Número que identifica al precio de la publicación.
 
 
