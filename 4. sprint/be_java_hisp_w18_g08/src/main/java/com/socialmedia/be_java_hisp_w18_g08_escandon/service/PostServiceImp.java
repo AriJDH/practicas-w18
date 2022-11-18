@@ -1,11 +1,12 @@
 package com.socialmedia.be_java_hisp_w18_g08_escandon.service;
 
 import com.socialmedia.be_java_hisp_w18_g08_escandon.dto.PostDto;
+import com.socialmedia.be_java_hisp_w18_g08_escandon.dto.PromoPostDto;
 import com.socialmedia.be_java_hisp_w18_g08_escandon.dto.request.PostDtoReq;
 import com.socialmedia.be_java_hisp_w18_g08_escandon.dto.request.PromoPostDtoReq;
 import com.socialmedia.be_java_hisp_w18_g08_escandon.dto.response.PostDtoRes;
+import com.socialmedia.be_java_hisp_w18_g08_escandon.dto.response.PromoPostDtoRes;
 import com.socialmedia.be_java_hisp_w18_g08_escandon.dto.response.PromoPostQuantityDto;
-import com.socialmedia.be_java_hisp_w18_g08_escandon.dto.response.SellerFollowersCountDto;
 import com.socialmedia.be_java_hisp_w18_g08_escandon.entity.Post;
 import com.socialmedia.be_java_hisp_w18_g08_escandon.exception.BadRequestException;
 import com.socialmedia.be_java_hisp_w18_g08_escandon.entity.Seller;
@@ -16,6 +17,7 @@ import com.socialmedia.be_java_hisp_w18_g08_escandon.repository.PostRepositoryIm
 import com.socialmedia.be_java_hisp_w18_g08_escandon.repository.UserRepositoryImp;
 import com.socialmedia.be_java_hisp_w18_g08_escandon.util.OrderDateAsc;
 import com.socialmedia.be_java_hisp_w18_g08_escandon.util.OrderDateDesc;
+import com.socialmedia.be_java_hisp_w18_g08_escandon.util.Converter;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -79,7 +81,7 @@ public class PostServiceImp implements IPostService {
         } else {
             Post post = new Post(postId,
                     promoPostDtoReq.getUser_id(),
-                    promoPostDtoReq.getProduct(),
+                    Converter.convertProductDtoToProduct(promoPostDtoReq.getProduct()),
                     promoPostDtoReq.getCategory(),
                     promoPostDtoReq.getPrice(),
                     promoPostDtoReq.getDate(),
@@ -98,13 +100,37 @@ public class PostServiceImp implements IPostService {
             throw new NotFoundUserException("Not found User with id " + id );
         }
         Integer quantityPromoPosts = seller.getPosts().stream()
-                .filter(p -> p.getHas_promo()).
-                collect(Collectors.toList()).size();
-
+                .filter(p -> p.getHas_promo())
+                .collect(Collectors.toList()).size();
         PromoPostQuantityDto dto = new PromoPostQuantityDto(seller.getUser_id(),
                 seller.getUser_name(),
                 quantityPromoPosts);
         return dto;
+    }
+
+   @Override
+    public PromoPostDtoRes getAllProductsByCategory(Integer userId, Integer category) {
+        Seller seller = userRepository.findSellerById(userId);
+        if(seller == null){
+            throw new NotFoundUserException("Not found User with id " + userId);
+        }
+        List<Post> promoPosts = seller.getPosts().stream()
+                .filter(p -> p.getHas_promo())
+                .collect(Collectors.toList())
+                .stream().filter(p -> p.getCategory() == category)
+                .collect(Collectors.toList());
+        if(promoPosts.isEmpty())
+            throw new NotFoundUserException("Not found category " + category);
+
+        List<PromoPostDto> postsDtos = new ArrayList<>();
+        for (Post p : promoPosts){
+            PromoPostDto aux = new PromoPostDto(p.getUser_id(), p.getPost_id(), p.getDate(), Converter.convertProductToProductDto(p.getProduct()),
+                    p.getCategory(),p.getPrice(), p.getHas_promo(), p.getDiscount());
+            postsDtos.add(aux);
+        }
+        PromoPostDtoRes dto = new PromoPostDtoRes(seller.getUser_id(), postsDtos);
+        return dto;
+
     }
 
     @Override

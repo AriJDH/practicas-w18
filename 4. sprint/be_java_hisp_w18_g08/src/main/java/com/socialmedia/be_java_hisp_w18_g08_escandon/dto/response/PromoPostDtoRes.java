@@ -1,6 +1,7 @@
 package com.socialmedia.be_java_hisp_w18_g08_escandon.dto.response;
 
 import com.socialmedia.be_java_hisp_w18_g08_escandon.dto.PostDto;
+import com.socialmedia.be_java_hisp_w18_g08_escandon.dto.PromoPostDto;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -12,7 +13,7 @@ import java.util.List;
 @AllArgsConstructor
 @Getter
 @Setter
-public class PostDtoRes {
+public class PromoPostDtoRes {
     private Integer user_id;
-    private List<PostDto> posts;
+    private List<PromoPostDto> posts;
 }

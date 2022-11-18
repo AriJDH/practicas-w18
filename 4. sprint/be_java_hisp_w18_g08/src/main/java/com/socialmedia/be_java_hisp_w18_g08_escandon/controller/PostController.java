@@ -1,7 +1,9 @@
 package com.socialmedia.be_java_hisp_w18_g08_escandon.controller;
 
+import com.socialmedia.be_java_hisp_w18_g08_escandon.dto.PromoPostDto;
 import com.socialmedia.be_java_hisp_w18_g08_escandon.dto.request.PostDtoReq;
 import com.socialmedia.be_java_hisp_w18_g08_escandon.dto.request.PromoPostDtoReq;
+import com.socialmedia.be_java_hisp_w18_g08_escandon.dto.response.PromoPostDtoRes;
 import com.socialmedia.be_java_hisp_w18_g08_escandon.dto.response.PromoPostQuantityDto;
 import com.socialmedia.be_java_hisp_w18_g08_escandon.service.IPostService;
 import com.socialmedia.be_java_hisp_w18_g08_escandon.service.PostServiceImp;
@@ -42,6 +44,13 @@ public class PostController {
     @GetMapping("/promo-post/count")
     public ResponseEntity<PromoPostQuantityDto> getAllPromoProductsBySeller(@RequestParam Integer user_id) {
         PromoPostQuantityDto dto = postService.findAllPromoPostQuantity(user_id);
+        return ResponseEntity.ok().body(dto);
+    }
+
+    //Obtener todos los productos con descuento por categoría
+    @GetMapping("/promo-post/list")
+    public ResponseEntity<PromoPostDtoRes> getAllProductsByCategory(@RequestParam Integer user_id, Integer category){
+        PromoPostDtoRes dto =  postService.getAllProductsByCategory(user_id, category);
         return ResponseEntity.ok().body(dto);
     }
 }
