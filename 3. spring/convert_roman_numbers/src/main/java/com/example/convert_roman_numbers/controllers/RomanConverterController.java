@@ -45,25 +45,4 @@ public class RomanConverterController {
     System.out.println(numbers);
     return ("The Roman number is: " + this.numbers.get(number));
   }
-
-  @PostMapping("/convertDate/{day}/{month}/{year}")
-  public String convertDate(
-    @PathVariable String day,
-    String month,
-    String year
-  ) {
-    // 01/01/2000
-    DateTimeFormatter fmt = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-    LocalDate fechaNac = LocalDate.parse(day + "/" + month + "/" + year, fmt);
-    LocalDate ahora = LocalDate.now();
-
-    Period periodo = Period.between(fechaNac, ahora);
-    String resultado =
-      "Tu edad es: %s años, %s meses y %s días" +
-      periodo.getYears() +
-      periodo.getMonths() +
-      periodo.getDays();
-
-    return (resultado);
-  }
 }
