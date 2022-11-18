@@ -6,8 +6,8 @@ import com.dh.be_java_hisp_w18_g10.dto.response.*;
 public interface IAppService {
     void followUser(int userId, int userIdToFollow);
     UserFollowersCountDTOres getUserFollowersCount(int userId);
-    UserFollowersDTOres getUserFollowerList(int userId);
-    UserFollowersDTOres getUserFollowerList(int userId, String order);
+    UserFollowersDTOres getUserFollowers(int userId);
+    UserFollowersDTOres getUserFollowers(int userId, String order);
     UserFollowedDTOres getUserFollowed(int userId);
     UserFollowedDTOres getUserFollowed(int userId, String order);
     void createPost(PostDTOreq postDTO);

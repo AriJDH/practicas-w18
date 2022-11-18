@@ -29,9 +29,9 @@ public class UserRepository implements IUserRepository{
                 .getFollowers()
                 .put(i, users.get(i));
             users
-                    .get(2)
-                    .getFollowers()
-                    .put(i+1, users.get(i+1));
+                .get(2)
+                .getFollowers()
+                .put(i+1, users.get(i+1));
 
         }
     }
@@ -104,4 +104,5 @@ public class UserRepository implements IUserRepository{
                 .filter(Post::isHasPromo)
                 .collect(Collectors.toList());
     }
+
 }

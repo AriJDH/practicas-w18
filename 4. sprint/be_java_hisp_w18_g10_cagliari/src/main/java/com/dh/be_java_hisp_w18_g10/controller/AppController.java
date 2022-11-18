@@ -36,10 +36,12 @@ public class AppController {
             @PathVariable int userId) {
         // US 0003
         // US 0008
-        if(order != null)
-            return new ResponseEntity<>(appService.getUserFollowerList(userId, order), HttpStatus.OK);
+        if(order != null){
+            UserFollowersDTOres userFollowersDTO = appService.getUserFollowers(userId, order);
+            return new ResponseEntity<>(userFollowersDTO, HttpStatus.OK);
+        }
 
-        return new ResponseEntity<>(appService.getUserFollowerList(userId), HttpStatus.OK);
+        return new ResponseEntity<>(appService.getUserFollowers(userId), HttpStatus.OK);
     }
 
     @GetMapping("/users/{userId}/followed/list")

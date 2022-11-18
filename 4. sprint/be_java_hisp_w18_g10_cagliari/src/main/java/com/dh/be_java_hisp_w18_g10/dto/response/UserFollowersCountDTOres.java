@@ -9,11 +9,9 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class UserFollowersCountDTOres {
-    //TODO US 0002 - GET - /users/{userId}/followers/count
     private int user_id;
     private String user_name;
     private int followers_count;
-
 }
 
 // JSON REPRESENTATION

@@ -12,4 +12,5 @@ public interface IUserRepository {
     int countUserPromoPosts(int userId);
     List<Post> getUserPosts(int userId);
     List<Post> getPromoPostByUser(int userId);
+
 }

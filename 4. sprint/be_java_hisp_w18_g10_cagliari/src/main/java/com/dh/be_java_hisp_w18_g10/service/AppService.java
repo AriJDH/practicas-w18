@@ -30,24 +30,17 @@ public class AppService implements IAppService {
 
     @Override
     public void followUser(int userId, int userIdToFollow) {
-        User user1 = userRepository.getUser(userId);
-        User user2 = userRepository.getUser(userIdToFollow);
-        if(user1 == null){
-            throw new GenericException("El usuario con el id: "+userId+" no fue encontrado!");
-        }
-        if(user2 == null){
-            throw new GenericException("El usuario con el id: "+userIdToFollow+" no fue encontrado!");
-        }
+        User user = getUser(userId);
+        User userToFollow = getUser(userIdToFollow);
         if(userId == userIdToFollow){
             throw new GenericException("Un usuario no se puede seguir a si mismo!");
         }
-
-        if(!user2.getPosts().isEmpty()){
-            user1.getFollowed().put(user2.getUserId(),user2);
+        if(!userToFollow.getPosts().isEmpty()){
+            user.getFollowed().put(userToFollow.getUserId(), userToFollow);
         }else{
             throw new GenericException("El usuario con el id: "+userIdToFollow+" no es un vendedor!");
         }
-        user2.getFollowers().put(user1.getUserId(), user1);
+        userToFollow.getFollowers().put(user.getUserId(), user);
     }
 
     @Override
@@ -62,7 +55,7 @@ public class AppService implements IAppService {
     }
 
     @Override
-    public UserFollowersDTOres getUserFollowerList(int userId) {
+    public UserFollowersDTOres getUserFollowers(int userId) {
         User user = getUser(userId);
         List<User> userFollowers = userRepository.getUserFollowers(userId);
         return DTOMapper.mapToFollowersDTO(user, userFollowers);
@@ -112,8 +105,9 @@ public class AppService implements IAppService {
         }
 
         if (postListRes.isEmpty()){
-            throw new GenericException(String.format("Los vendedores que sigue el usuario %s , no tienen publicaciones en las ultimas 2 semanas"
-                    , user.getUserName()));
+            throw new GenericException(
+                    String.format("Los vendedores que sigue el usuario %s , no tienen publicaciones en las ultimas 2 semanas",
+                            user.getUserName()));
         }
 
         postListRes = postListRes
@@ -123,9 +117,9 @@ public class AppService implements IAppService {
 
         if(order == null || order.equals(TypeOrderHelper.DATE_DESC))
             postListRes = postListRes
-                    .stream()
-                    .sorted(Comparator.comparing(PostDTOres::getDate).reversed())
-                    .collect(Collectors.toList());
+                .stream()
+                .sorted(Comparator.comparing(PostDTOres::getDate).reversed())
+                .collect(Collectors.toList());
 
         userPostsDTOres.setUser_id(userId);
         userPostsDTOres.setPosts(postListRes);
@@ -143,38 +137,17 @@ public class AppService implements IAppService {
             throw new GenericException("El usuario con el id: " + userId + " no sigue al usuario " + userIdToUnfollow);
     }
 
-    @Override
-    public UserFollowersDTOres getUserFollowerList(int userId, String order) {
-        UserFollowersDTOres res = getUserFollowerList(userId);
-        if(order.equals(TypeOrderHelper.NAME_ASC)){
-            res.getFollowers()
-                    .sort(Comparator.comparing(UserDTOres::getUser_name));
-            return res;
-        }
-        else if(order.equals(TypeOrderHelper.NAME_DESC)){
-            res.getFollowers()
-                    .sort(Comparator.comparing(UserDTOres::getUser_name).reversed());
-            return res;
-        }
-        else
-            throw new GenericException("Parametro no aceptado");
+    public UserFollowersDTOres getUserFollowers(int userId, String order) {
+        UserFollowersDTOres res = getUserFollowers(userId);
+        sortUserListBy(res.getFollowers(), order);
+        return res;
     }
 
     @Override
     public UserFollowedDTOres getUserFollowed(int userId, String order) {
         UserFollowedDTOres res = getUserFollowed(userId);
-        if(order.equals(TypeOrderHelper.NAME_ASC)){
-            res.getFollowed()
-                    .sort(Comparator.comparing(UserDTOres::getUser_name));
-            return res;
-        }
-        else if(order.equals(TypeOrderHelper.NAME_DESC)){
-            res.getFollowed()
-                    .sort(Comparator.comparing(UserDTOres::getUser_name).reversed());
-            return res;
-        }
-        else
-            throw new GenericException("Parametro no aceptado");
+        sortUserListBy(res.getFollowed(), order);
+        return res;
     }
     @Override
     public UserPromoPostCountDTOres getUserPromoPostCount(int userId) {
@@ -195,6 +168,20 @@ public class AppService implements IAppService {
             throw new UserNotFoundException(userId);
         return user;
     }
+    
+    private void sortUserListBy(List<UserDTOres> userList, String order){
+        if(order.equals(TypeOrderHelper.NAME_ASC)){
+            userList
+                    .sort(Comparator.comparing(UserDTOres::getUser_name));
+        }
+        else if(order.equals(TypeOrderHelper.NAME_DESC)){
+            userList
+                    .sort(Comparator.comparing(UserDTOres::getUser_name).reversed());
+        }
+        else
+            throw new GenericException("Parametro no aceptado");
+    }
+
 
 
 }
