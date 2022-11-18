@@ -1,11 +1,7 @@
 package com.socialmedia.be_java_hisp_w18_g08.service;
 
-import com.socialmedia.be_java_hisp_w18_g08.dto.response.UserDto;
-import com.socialmedia.be_java_hisp_w18_g08.dto.response.UserListDto;
+import com.socialmedia.be_java_hisp_w18_g08.dto.response.*;
 import com.socialmedia.be_java_hisp_w18_g08.dto.request.FollowDtoReq;
-import com.socialmedia.be_java_hisp_w18_g08.dto.response.FollowDtoRes;
-import com.socialmedia.be_java_hisp_w18_g08.dto.response.FollowedDto;
-import com.socialmedia.be_java_hisp_w18_g08.dto.response.SellerFollowersCountDto;
 import com.socialmedia.be_java_hisp_w18_g08.entity.Seller;
 import com.socialmedia.be_java_hisp_w18_g08.entity.User;
 import com.socialmedia.be_java_hisp_w18_g08.exception.NotFoundUserException;
@@ -120,4 +116,15 @@ public class UserServiceImp implements IUserService {
             throw new NotFoundUserException("User or Seller not Found");
         return message;
     }
+
+    @Override
+    public SellerDtoRes getSellerById(Integer userId) {
+        Seller seller = userRepository.getSellerById(userId);
+        if(seller == null)
+            throw new NotFoundUserException("Seller not Found");
+        SellerDtoRes sellerDtoRes = new SellerDtoRes(seller.getUser_id(), seller.getUser_name(), seller.getFollowed(), seller.getPosts(), seller.getFollowers());
+        return sellerDtoRes;
+    }
+
+
 }
