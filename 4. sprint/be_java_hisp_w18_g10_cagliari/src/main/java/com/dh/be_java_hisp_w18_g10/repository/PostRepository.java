@@ -12,7 +12,7 @@ import java.util.Map;
 public class PostRepository implements IPostRepository{
 
     private Map<Integer, Post> posts = new HashMap<Integer, Post>();
-    private Integer count = 0;
+    private Integer count = 1;
 
     @Override
     public Post getPostById(int id) {

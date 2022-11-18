@@ -1,18 +1,12 @@
 package com.dh.be_java_hisp_w18_g10.dto.require;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
-
-import java.time.LocalDate;
 
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
-@Setter
 public class PostDTOreq {
     //US 0005
     private int user_id;
@@ -20,6 +14,8 @@ public class PostDTOreq {
     private ProductDTOreq product;
     private int category;
     private double price;
+    private boolean has_promo;
+    private double discount;
 }
 
 //JSON REPRESENTATION

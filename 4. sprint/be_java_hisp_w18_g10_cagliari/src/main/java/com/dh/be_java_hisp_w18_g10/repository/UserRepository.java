@@ -10,12 +10,13 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @Repository
 public class UserRepository implements IUserRepository{
 
     private Map<Integer, User> users = new HashMap<Integer, User>();
-    private Integer count = 0;
+
     public UserRepository() {
         loadUsers();
     }
@@ -34,19 +35,19 @@ public class UserRepository implements IUserRepository{
         user3.setUserId(3);
         user3.setUserName("usuario3");
 
-        Map<Integer, User> followedUsuer1 = new HashMap<Integer, User>();
-        followedUsuer1.put(user2.getUserId(), user2);
-        followedUsuer1.put(user3.getUserId(), user3);
-        user1.setFollowed(followedUsuer1);
-        user1.setFollowers(followedUsuer1);
+        Map<Integer, User> followedUser1 = new HashMap<Integer, User>();
+        followedUser1.put(user2.getUserId(), user2);
+        followedUser1.put(user3.getUserId(), user3);
+        user1.setFollowed(followedUser1);
+        user1.setFollowers(followedUser1);
 
-        Map<Integer, User> followedUsuer2 = new HashMap<Integer, User>();
-        followedUsuer2.put(user3.getUserId(), user3);
-        user2.setFollowed(followedUsuer2);
+        Map<Integer, User> followedUser2 = new HashMap<Integer, User>();
+        followedUser2.put(user3.getUserId(), user3);
+        user2.setFollowed(followedUser2);
 
-        Map<Integer, User> followedUsuer3 = new HashMap<Integer, User>();
-        followedUsuer3.put(user2.getUserId(), user2);
-        user3.setFollowed(followedUsuer3);
+        Map<Integer, User> followedUser3 = new HashMap<Integer, User>();
+        followedUser3.put(user2.getUserId(), user2);
+        user3.setFollowed(followedUser3);
 
         user2.getPosts().put(getListPosts().get(0).getPost_id(),getListPosts().get(0));
         user2.getPosts().put(getListPosts().get(1).getPost_id(),getListPosts().get(1));
@@ -69,12 +70,11 @@ public class UserRepository implements IUserRepository{
     }
 
     private List<Post> getListPosts(){
-
         LocalDate old = LocalDate.of(2000,12,12);
         LocalDate lastWeek = LocalDate.of(2022,11,14);
-        Post post1 = new Post(2,4, old, getListProduct().get(0),23,340.00);
-        Post post2 = new Post(2,5, lastWeek, getListProduct().get(1),4,456);
-        Post post3 = new Post(2,6, LocalDate.now(),getListProduct().get(2),77,865);
+        Post post1 = new Post(2,4, old, getListProduct().get(0), 23,340.00, false, 0);
+        Post post2 = new Post(2,5, lastWeek, getListProduct().get(1),4,456, false, 0);
+        Post post3 = new Post(2,6, LocalDate.now(),getListProduct().get(2),77,865, false, 0);
         return List.of(post1,post2,post3);
     }
     private List<Product> getListProduct(){
@@ -87,6 +87,27 @@ public class UserRepository implements IUserRepository{
 
     @Override
     public List<User> getUserFollowers(int id) {
-        return users.get(id).getFollowersList();
+        return new ArrayList<>(users.get(id).getFollowers().values()) ;
+    }
+
+    @Override
+    public int countUserPromoPosts(int userId) {
+        return (int) getUserPosts(userId)
+                .stream()
+                .filter(Post::isHasPromo)
+                .count();
+    }
+
+    @Override
+    public List<Post> getUserPosts(int userId) {
+        return new ArrayList<>(users.get(userId).getPosts().values());
+    }
+
+    @Override
+    public List<Post> getPromoPostByUser(int userId) {
+        return getUserPosts(userId)
+                .stream()
+                .filter(Post::isHasPromo)
+                .collect(Collectors.toList());
     }
 }

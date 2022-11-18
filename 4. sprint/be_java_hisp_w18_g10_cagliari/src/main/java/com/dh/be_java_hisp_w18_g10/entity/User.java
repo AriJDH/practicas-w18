@@ -33,8 +33,5 @@ public class User {
     private Map<Integer, User> followed = new HashMap<Integer, User>();
     private Map<Integer, Post> posts = new HashMap<Integer, Post>();
 
-    public List<User> getFollowersList() {
-        return new ArrayList<>(followers.values());
-    }
 
 }

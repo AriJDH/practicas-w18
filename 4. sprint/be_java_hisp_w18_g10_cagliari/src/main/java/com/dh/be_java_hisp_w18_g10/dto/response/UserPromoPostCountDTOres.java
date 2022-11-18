@@ -8,7 +8,8 @@ import lombok.Setter;
 @Getter @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserDTOres {
+public class UserPromoPostCountDTOres {
     private int user_id;
     private String user_name;
+    private int promo_products_count;
 }

@@ -69,7 +69,7 @@ public class AppService implements IAppService {
         if(userRepository.getUser(userId) == null){
             throw new UserNotFoundException("No existe usuario con id " + userId);
         }
-        return DTOMapper.mapToUserFollowersRes(userRepository.getUser(userId));
+        return DTOMapper.mapTo(userRepository.getUser(userId), userRepository.getUserFollowers(userId));
     }
 
     @Override
@@ -96,12 +96,11 @@ public class AppService implements IAppService {
 
     @Override
     public void createPost(PostDTOreq postDTOreq) {
-
         int userId = postDTOreq.getUser_id();
         if (userRepository.getUser(userId) == null)
             throw new UserGenericException("Usuario no encontrado!");
 
-        Post post = DTOMapper.mapToPost(postDTOreq);
+        Post post = DTOMapper.mapTo(postDTOreq);
         Integer postId = postRepository.addPost(post);
         post.setPost_id(postId);
 
@@ -114,43 +113,41 @@ public class AppService implements IAppService {
     @Override
     public UserPostsDTOres getUserPosts(int userId, String order) {
         UserPostsDTOres userPostsDTOres = new UserPostsDTOres();
-        //Obtener usuario
+
         User user = userRepository.getUser(userId);
         if(user == null)
             throw new UserNotFoundException("No existe usuario con id " + userId);
-        //Chequear que usuario siga a algun vendedor
+
         if(user.getFollowed().isEmpty()){
             throw new UserGenericException(String.format("El usuario %s no sigue vendedeores"
                     , user.getUserName()));
         }
-        //
-        //Lista de Post de vendedores que el usaurio sigue
         List<PostDTOres> postListRes = new ArrayList<>();
-        /*Recorro cada vendedor que el usuario sigue
-        * Recorro sus Post en caso de tener
-        * Asigno los post a la lista postListRes*/
         for (Map.Entry<Integer, User> entry : user.getFollowed().entrySet()) {
             User userVendedor = userRepository.getUser(entry.getKey());
-            //Recorro Post para mapearlo y agregarlo a la lista
             if(!userVendedor.getPosts().isEmpty()){
                 for (Map.Entry<Integer, Post> posts : userVendedor.getPosts().entrySet()){
-                    //Controlo que la fecha de publicacion no se mayor a 2 semanas
                     if(DateHandler.showPostRecently(posts.getValue().getDate()))
                         postListRes.add(DTOMapper.mapTo(posts.getValue()));
                 }
             }
         }
-        //Chequeo que tengamos algun Post para mostrar
+
         if (postListRes.isEmpty()){
             throw new UserGenericException(String.format("Los vendedores que sigue el usuario %s , no tienen publicaciones en las ultimas 2 semanas"
-                    ,user.getUserName()));
+                    , user.getUserName()));
         }
 
-        //descendente  ******** ME QUEDARIA MNAS COMODO QUE EL DATE DE POSTDTO SEA UN LOCALDATE NO UN STRING
-        postListRes = postListRes.stream().sorted(Comparator.comparing(PostDTOres::getDate)).collect(Collectors.toList());
-        //ascendente
+        postListRes = postListRes
+                .stream()
+                .sorted(Comparator.comparing(PostDTOres::getDate))
+                .collect(Collectors.toList());
+
         if(order == null || order.equals(TypeOrderHelper.DATE_DESC))
-            postListRes = postListRes.stream().sorted(Comparator.comparing(PostDTOres::getDate).reversed()).collect(Collectors.toList());
+            postListRes = postListRes
+                    .stream()
+                    .sorted(Comparator.comparing(PostDTOres::getDate).reversed())
+                    .collect(Collectors.toList());
 
         userPostsDTOres.setUser_id(userId);
         userPostsDTOres.setPosts(postListRes);
@@ -201,4 +198,13 @@ public class AppService implements IAppService {
         else
             throw new UserGenericException("Parametro no aceptado");
     }
+    @Override
+    public UserPromoPostCountDTOres getUserPromoPostCount(int userId) {
+        User user = userRepository.getUser(userId);
+        int promoCount = userRepository.countUserPromoPosts(userId);
+        return DTOMapper.mapTo(user, promoCount);
+    }
+
+
+
 }
