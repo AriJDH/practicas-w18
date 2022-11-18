@@ -147,7 +147,7 @@ public class PostService implements IPostService{
     // * ===============
 
     @Override
-    public List<PromoPostListByUserResponse> findPromoByUserId(Integer userId) {
+    public PromoPostListByUserResponse findPromoByUserId(Integer userId) {
         return null;
     }
 

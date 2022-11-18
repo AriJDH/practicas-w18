@@ -50,6 +50,20 @@ public class ProductsController {
         }
     }
 
+    // * ============== *
+
+    @GetMapping("/promo-post/count")
+    public ResponseEntity<PromoProductsCountResponse> countPromoByUserId(@RequestParam(name = "user_id") Integer userId){
+        return new ResponseEntity<>(postService.countPromoByUserId(userId), HttpStatus.OK);
+    }
+
+    // * ============== *
+
+    @GetMapping("/promo-post/list")
+    public ResponseEntity<PromoPostListByUserResponse> findPromoByUserId(@RequestParam(name = "user_id") Integer userId){
+        return new ResponseEntity<>(postService.findPromoByUserId(userId), HttpStatus.OK);
+    }
+
     // * ===== [POST] ===== *
 
     @PostMapping("/post")
@@ -67,17 +81,6 @@ public class ProductsController {
 
     // * ==============
 
-    @PostMapping("/promo-post/count")
-    public ResponseEntity<PromoProductsCountResponse> countPromoByUserId(@RequestParam Integer userId){
-        return new ResponseEntity<>(postService.countPromoByUserId(userId), HttpStatus.OK);
-    }
-
-    // * ==============
-
-    @PostMapping("/promo-post/list")
-    public ResponseEntity<List<PromoPostListByUserResponse>> findPromoByUserId(@RequestParam Integer userId){
-        return new ResponseEntity<>(postService.findPromoByUserId(userId), HttpStatus.OK);
-    }
 
     // * ===== [PUT] ===== *
 
