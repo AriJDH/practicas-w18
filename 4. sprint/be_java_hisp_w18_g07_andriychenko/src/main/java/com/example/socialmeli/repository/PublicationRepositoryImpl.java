@@ -4,36 +4,30 @@ import com.example.socialmeli.entity.PublicationEntity;
 import com.example.socialmeli.exception.NotFoundException;
 import org.springframework.stereotype.Repository;
 
-import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Map;
 
 @Repository
 public class PublicationRepositoryImpl implements IPublicationRepository {
 
-
-    Map<Integer, PublicationEntity> publications = new HashMap<>();
-
-    public PublicationRepositoryImpl() {
-        publications.put(1, new PublicationEntity(1, LocalDate.parse("2022-11-16"), 4, 1, 1, 50.));
-        publications.put(2, new PublicationEntity(2, LocalDate.parse("2022-11-01"), 6, 2, 10, 30.));
-        publications.put(3, new PublicationEntity(3, LocalDate.parse("2022-11-10"), 6, 3, 2, 10.));
-    }
+    private Map<Integer, PublicationEntity> publications = new HashMap<>();
+    private Integer publicationId = 0;
 
     @Override
-    public Boolean addPublication(PublicationEntity publicationEntity) {
-        PublicationEntity publication = new PublicationEntity(publicationEntity.getId(), publicationEntity.getDate(),publicationEntity.getUserId(), publicationEntity.getProductId(),publicationEntity.getCategory(),publicationEntity.getPrice() );
-        publications.put(publicationEntity.getId(), publication);
+    public Boolean addEntity(PublicationEntity publicationEntity) {
+        publicationId++;
+        publicationEntity.setId(publicationId);
+        publications.put(publicationId, publicationEntity);
         return true;
     }
 
     @Override
-    public PublicationEntity getEntityById(Integer id) {
-        if (this.publications.get(id) == null){
-            throw new NotFoundException("No existe publicacion con ID: " + id);
+    public PublicationEntity getEntityById(Integer publicationId) {
+        if (this.publications.get(publicationId) == null) {
+            throw new NotFoundException("No existe publicacion con ID: " + publicationId);
         }
 
-        return publications.get(id);
+        return publications.get(publicationId);
     }
 
     @Override

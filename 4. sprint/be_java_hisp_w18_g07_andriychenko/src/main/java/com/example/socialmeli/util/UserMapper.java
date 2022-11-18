@@ -2,6 +2,8 @@ package com.example.socialmeli.util;
 
 import com.example.socialmeli.dto.response.UserBasicResponse;
 import com.example.socialmeli.dto.response.UserFollowedListResponse;
+import com.example.socialmeli.dto.response.UserFollowerCountResponse;
+import com.example.socialmeli.dto.response.UserFollowersListResponse;
 import com.example.socialmeli.entity.UserEntity;
 
 import java.util.ArrayList;
@@ -28,11 +30,31 @@ public class UserMapper {
         return response;
     }
 
-    public static UserFollowedListResponse entity2UserFollowedListResponse(UserEntity entity, List<UserBasicResponse> followedList) {
+    public static UserFollowerCountResponse userEntity2UserFollowerCountResponse(UserEntity entity){
 
-        UserFollowedListResponse response = new UserFollowedListResponse();
+        UserFollowerCountResponse response = new UserFollowerCountResponse();
         response.setId(entity.getId());
         response.setName(entity.getName());
+        response.setFollowersCount(entity.getFollowersList().size());
+
+        return response;
+    }
+
+    public static UserFollowersListResponse userEntity2UserFollowersListResponse(UserEntity entity, List<UserBasicResponse> followedList) {
+
+        UserFollowersListResponse response = new UserFollowersListResponse();
+        response.setUserId(entity.getId());
+        response.setUserName(entity.getName());
+        response.setUserBasicResponseList(followedList);
+
+        return response;
+    }
+
+    public static UserFollowedListResponse userEntity2UserFollowedListResponse(UserEntity entity, List<UserBasicResponse> followedList) {
+
+        UserFollowedListResponse response = new UserFollowedListResponse();
+        response.setUserId(entity.getId());
+        response.setUserName(entity.getName());
         response.setUserBasicResponseList(followedList);
 
         return response;

@@ -15,35 +15,41 @@ public class UserController {
 
     private final IUserService userService;
 
-    @GetMapping("/users/{userId}/followed/list")
-    public ResponseEntity<UserFollowedListResponse> getFollowedUsersById(@PathVariable Integer userId, @RequestParam(defaultValue = "") String order){
-
-        UserFollowedListResponse response = userService.getFollowedUsersById(userId , order);
-        return new ResponseEntity<>(response, HttpStatus.OK);
-    }
-
-    //    US 0003  y US 0008
-    @GetMapping("/users/{userId}/followers/list")
-    public ResponseEntity<UserFollowersListResponse> getUserFollowers(@PathVariable int userId, @RequestParam(defaultValue = "") String order){
-        return ResponseEntity.ok(userService.getUserFollowers(userId, order));
-    }
-
-//    US 0001
+    //US 001
     @PostMapping("/users/{userId}/follow/{userIdToFollow}")
-    public void followSeller(@PathVariable Integer userId, @PathVariable Integer userIdToFollow){
-        userService.followSeller(userId, userIdToFollow);
+    public ResponseEntity<Void> followUserSeller(@PathVariable Integer userId, @PathVariable Integer userIdToFollow) {
+
+        userService.followUserSeller(userId, userIdToFollow);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
-// US 002
+    //US 007
+    @PostMapping("/users/{userId}/unfollow/{userIdToUnfollow}")
+    public ResponseEntity<Void> unfollowUserSeller(@PathVariable Integer userId, @PathVariable Integer userIdToUnfollow) {
+
+        userService.unfollowUserSeller(userId, userIdToUnfollow);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    //US 004
+    @GetMapping("/users/{userId}/followed/list")
+    public ResponseEntity<UserFollowedListResponse> getUsersFollowed(@PathVariable Integer userId, @RequestParam(defaultValue = "") String order) {
+
+        return new ResponseEntity<>(userService.getFollowedUsersById(userId, order), HttpStatus.OK);
+    }
+
+    //US 003
+    @GetMapping("/users/{userId}/followers/list")
+    public ResponseEntity<UserFollowersListResponse> getUsersFollowers(@PathVariable int userId, @RequestParam(defaultValue = "") String order) {
+
+        return new ResponseEntity<>(userService.getFollowersUsersById(userId, order), HttpStatus.OK);
+    }
+
+    //US 002
     @GetMapping("/users/{userId}/followers/count")
-    public ResponseEntity<UserFollowerCountResponse> getUserFollowersCount(@PathVariable int userId){
-        return new ResponseEntity<>(this.userService.getUserFollowersCount(userId), HttpStatus.CREATED);
-    }
+    public ResponseEntity<UserFollowerCountResponse> getUserFollowersCount(@PathVariable int userId) {
 
-    @PostMapping("/{userId}/unfollow/{userIdToUnfollow}")
-    public ResponseEntity<String> unfollowUser(@PathVariable int userId, @PathVariable int userIdToUnfollow){
-        this.userService.unfollowUser(userId, userIdToUnfollow);
-        return new ResponseEntity<>("Usuario removido", HttpStatus.OK);
+        return new ResponseEntity<>(userService.getUserFollowersCount(userId), HttpStatus.OK);
     }
 
 }

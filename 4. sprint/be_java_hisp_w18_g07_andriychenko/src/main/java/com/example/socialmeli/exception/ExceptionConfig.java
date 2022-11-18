@@ -13,14 +13,14 @@ public class ExceptionConfig {
 
     @ExceptionHandler(NotFoundException.class)
     public ResponseEntity<?> NotFoundException(Exception e){
-        ErrorResponse errorResponse = new ErrorResponse(e.getMessage(), 404);
-        return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
+        ErrorResponse errorResponse = new ErrorResponse(e.getMessage(), 400);
+        return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(MethodArgumentTypeMismatchException.class)
     public ResponseEntity<?> MethodArgumentTypeMismatchException(Exception e){
         ErrorResponse errorResponse = new ErrorResponse("Se introdujo un tipo de parámetro incorrecto al requerido", 404);
-        return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
     }
 
 }

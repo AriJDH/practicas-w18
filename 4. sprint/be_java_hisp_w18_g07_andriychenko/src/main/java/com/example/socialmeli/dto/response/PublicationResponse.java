@@ -8,9 +8,10 @@ import lombok.NoArgsConstructor;
 import java.time.LocalDate;
 
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 public class PublicationResponse {
+
     private Integer id;
     @JsonFormat(pattern = "dd-MM-yyyy")
     private LocalDate date;
@@ -18,4 +19,5 @@ public class PublicationResponse {
     private Integer productId;
     private Integer category;
     private Double price;
+
 }

@@ -2,20 +2,19 @@ package com.example.socialmeli.dto.response;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import java.util.List;
 
-@Getter
-@Setter
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class UserFollowedPublicationResponse {
 
     @JsonProperty("user_id")
-    private int userId;
+    private Integer userId;
     @JsonProperty("post")
     private List<PublicationResponse> publicationResponseList;
+
 }

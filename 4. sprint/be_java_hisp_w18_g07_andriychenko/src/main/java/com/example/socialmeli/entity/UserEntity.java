@@ -22,11 +22,16 @@ public class UserEntity {
         followersList.add(userId);
     }
 
-    public void addFollowedList(Integer userId){
-           followedList.add(userId);
+    public void removeFollowersToList(Integer userId){
+        followersList.remove(userId);
     }
 
-    public boolean isSeller(){
-        return publicationList.size() > 0;
+    public void addFollowedList(Integer userId){
+        followedList.add(userId);
     }
+
+    public void removeFollowedToList(Integer userId){
+        followedList.remove(userId);
+    }
+
 }

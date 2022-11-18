@@ -6,11 +6,16 @@ import java.util.Map;
 
 public interface IUserRepository {
 
-    UserEntity getEntityByID(Integer id);
+    void followSeller(Integer userId, Integer userIdToFollow);
+
+    void unfollowSeller(Integer userId, Integer userIdToUnfollow);
+
+    Boolean exist(Integer userId);
+
+    Boolean isSeller(Integer userId);
+
+    UserEntity getEntityById(Integer userId);
 
     Map<Integer, UserEntity> getAllEntity();
 
-    void followSeller(Integer userId, Integer userIdToFollow);
-    boolean isSeller(Integer userIdToFollow);
-    boolean exist(Integer userId);
 }

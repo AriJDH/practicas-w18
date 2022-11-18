@@ -6,9 +6,9 @@ import java.util.Map;
 
 public interface IPublicationRepository {
 
-    Boolean addPublication(PublicationEntity publicationEntity);
+    Boolean addEntity(PublicationEntity publicationEntity);
 
-    PublicationEntity getEntityById(Integer id);
+    PublicationEntity getEntityById(Integer publicationId);
 
     Map<Integer, PublicationEntity> getAllEntity();
 

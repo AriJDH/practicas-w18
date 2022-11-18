@@ -2,19 +2,16 @@ package com.example.socialmeli.dto.response;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
-@Getter
-@Setter
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class UserBasicResponse {
 
     @JsonProperty("user_id")
-    private Integer Id;
-
+    private Integer id;
     @JsonProperty("user_name")
     private String name;
 

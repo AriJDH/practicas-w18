@@ -1,17 +1,23 @@
 package com.example.socialmeli.service;
 
-import com.example.socialmeli.dto.response.UserFollowerCountResponse;
 import com.example.socialmeli.dto.response.UserFollowedListResponse;
+import com.example.socialmeli.dto.response.UserFollowerCountResponse;
 import com.example.socialmeli.dto.response.UserFollowersListResponse;
 
 public interface IUserService {
 
-    UserFollowerCountResponse getUserFollowersCount(int id);
 
-    void unfollowUser(int userId, int userIdToUnfollow);
+    void followUserSeller(Integer userId, Integer userIdToFollow);
 
-    UserFollowersListResponse getUserFollowers(int userId, String order);
+
+    void unfollowUserSeller(Integer userId, Integer userIdToUnfollow);
+
+
+    UserFollowerCountResponse getUserFollowersCount(Integer userId);
+
+    UserFollowersListResponse getFollowersUsersById(Integer userId, String order);
+
+
     UserFollowedListResponse getFollowedUsersById(Integer id, String order);
-    void followSeller(Integer userId, Integer userIdToFollow);
 
 }

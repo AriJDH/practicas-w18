@@ -6,7 +6,7 @@ import java.util.Map;
 
 public interface IProductRepository {
 
-    ProductEntity getEntityById(Integer id);
+    ProductEntity getEntityById(Integer productId);
 
     Map<Integer, ProductEntity> getAllEntity();
 
