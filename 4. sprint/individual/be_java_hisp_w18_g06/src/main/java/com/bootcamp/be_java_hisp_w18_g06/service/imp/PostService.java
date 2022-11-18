@@ -41,7 +41,7 @@ public class PostService implements IPostService {
 
 	@Override
 	public void savePostPromo(PostPromoDTO postPromoDTO) {
-		userRepository.createPost(mapper.convertValue(postPromoDTO, Post.class));
+			userRepository.createPost(mapper.convertValue(postPromoDTO, Post.class));
 	}
 
 	// US006

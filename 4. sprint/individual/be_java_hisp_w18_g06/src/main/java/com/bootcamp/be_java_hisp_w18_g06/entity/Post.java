@@ -19,8 +19,8 @@ public class Post {
     private String category;
     private double price;
 
-    private boolean has_promo;;
-    private double discount;;
+    private boolean has_promo;
+    private double discount;
 
 
     public Post( int user_id, LocalDate date, Product product, String category, double price) {
