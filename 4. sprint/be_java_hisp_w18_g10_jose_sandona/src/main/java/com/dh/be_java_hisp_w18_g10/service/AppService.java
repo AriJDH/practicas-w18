@@ -150,6 +150,31 @@ public class AppService implements IAppService {
     }
 
     @Override
+    public MessageDTO deactivatePromotion(int userId, int postPromotionId) {
+        MessageDTO messageDTO = new MessageDTO();
+        User user = userRepository.getUser(userId);
+        if(user == null)
+            throw new UserNotFoundException("No se encontro usario con id " + userId);
+
+        List<PostPromotion> listaPromociones = new ArrayList<>(user.getPostsPromotion().values());
+        if (listaPromociones.isEmpty())
+            throw new UserGenericException("El usuario con id " + userId + " no tiene post con promociones");
+
+        PostPromotion promotion = listaPromociones.get(postPromotionId);
+        if(promotion == null)
+            throw new UserGenericException("No existe promocion con ID " + postPromotionId);
+
+        if(!promotion.isHasPromo())
+            throw new UserGenericException("La promocion con ID " + postPromotionId + " ya se encontraba desactivada");
+
+        promotion.setHasPromo(false);
+
+        messageDTO.setMessage("Se desactivo correctamente la promocion con ID " + postPromotionId);
+        messageDTO.setCode(200);
+        return messageDTO;
+    }
+
+    @Override
     public UserPostsDTOres getUserPosts(int userId, String order) {
         UserPostsDTOres userPostsDTOres = new UserPostsDTOres();
         //Obtener usuario

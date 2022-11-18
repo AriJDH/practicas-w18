@@ -15,7 +15,7 @@ public interface IAppService {
     UserPostsDTOres getUserPosts(int userId, String order);
     void unfollowUser(int userId, int userIdToUnfollow);
     void createPostPromotion(PostPromotionDTOreq postPromotionDTOreq);
-
     PostProductsPromotionDTOres getProductsPromotionCount(int id);
+    MessageDTO deactivatePromotion(int userId, int postPromotionId);
 
 }

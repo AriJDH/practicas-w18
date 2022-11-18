@@ -2,10 +2,7 @@ package com.dh.be_java_hisp_w18_g10.controller;
 
 import com.dh.be_java_hisp_w18_g10.dto.require.PostDTOreq;
 import com.dh.be_java_hisp_w18_g10.dto.require.PostPromotionDTOreq;
-import com.dh.be_java_hisp_w18_g10.dto.response.PostProductsPromotionDTOres;
-import com.dh.be_java_hisp_w18_g10.dto.response.UserPostsDTOres;
-import com.dh.be_java_hisp_w18_g10.dto.response.UserFollowersListDTOres;
-import com.dh.be_java_hisp_w18_g10.dto.response.UserFollowersCountDTOres;
+import com.dh.be_java_hisp_w18_g10.dto.response.*;
 import com.dh.be_java_hisp_w18_g10.service.IAppService;
 import com.dh.be_java_hisp_w18_g10.service.AppService;
 import org.springframework.http.HttpStatus;
@@ -105,6 +102,12 @@ public class AppController {
     public ResponseEntity<PostProductsPromotionDTOres> getPromoCount(@RequestParam int user_id){
 
         return new ResponseEntity<>(userService.getProductsPromotionCount(user_id), HttpStatus.OK);
+    }
+
+    @GetMapping("/product/{userId}/deactivate/{postId}")
+    public ResponseEntity<MessageDTO> deactivatePromotion(@PathVariable int userId, @PathVariable int postId){
+
+        return new ResponseEntity<>(userService.deactivatePromotion(userId,postId),HttpStatus.OK);
     }
 
 
