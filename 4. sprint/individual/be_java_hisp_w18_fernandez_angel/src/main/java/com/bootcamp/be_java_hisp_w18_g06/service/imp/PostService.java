@@ -2,7 +2,9 @@ package com.bootcamp.be_java_hisp_w18_g06.service.imp;
 
 import com.bootcamp.be_java_hisp_w18_g06.dto.request.PostDTO;
 import com.bootcamp.be_java_hisp_w18_g06.dto.request.PostPromoDto;
+import com.bootcamp.be_java_hisp_w18_g06.dto.response.PostPromoAllDto;
 import com.bootcamp.be_java_hisp_w18_g06.dto.response.PostPromoResDto;
+import com.bootcamp.be_java_hisp_w18_g06.dto.response.PostPromosListDto;
 import com.bootcamp.be_java_hisp_w18_g06.entity.Post;
 import com.bootcamp.be_java_hisp_w18_g06.entity.User;
 import com.bootcamp.be_java_hisp_w18_g06.exceptions.BadRequestException;
@@ -104,6 +106,49 @@ public class PostService implements IPostService {
     	return mapperPostPromoRestDto(userId,user.getUser_name(),postList.size());
 
 	}
+
+	@Override
+	public PostPromosListDto findPromos(String discount) {
+    	List<Post>postsPromos=userRepository.findAllPostInPromo()
+				.orElseThrow(()->new EmptyException("no promotions"));
+    	if (discount != null){
+    		if (findByDiscount(discount).size()==0)
+    			throw new EmptyException("No hay descuentos con ese porcentaje");
+			return mapperPostPromosListDto(findByDiscount(discount));
+		}
+
+		return mapperPostPromosListDto(postsPromos);
+	}
+	private PostPromosListDto mapperPostPromosListDto(List<Post>posts){
+    	List<PostPromoAllDto>postPromoAllDtos=new ArrayList<>();
+    	posts.forEach(post -> postPromoAllDtos.add(mapperPostPromoAllDto(post)));
+    	PostPromosListDto postPromosListDto=new PostPromosListDto();
+		postPromosListDto.setPosts(postPromoAllDtos);
+    	return postPromosListDto;
+	}
+	private PostPromoAllDto mapperPostPromoAllDto(Post post){
+		mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+		return mapper.convertValue(post, PostPromoAllDto.class);
+	}
+	private List<Post> findByDiscount(String discount){
+    	List<Post>posts=userRepository.findAllPostInPromo()
+				.orElseThrow(()->new EmptyException("no promotions"));
+    	if (discount.equals("menor_50")){
+			return posts.stream()
+					.filter(post -> post.getDiscount()<=0.5)
+					.collect(Collectors.toList());
+		}
+		if (discount.equals("mayor_50")){
+			return posts.stream()
+					.filter(post -> post.getDiscount()>0.5)
+					.collect(Collectors.toList());
+		}else {
+			throw new BadRequestException("discount is incorrect");
+		}
+
+
+	}
+
 	private PostPromoResDto mapperPostPromoRestDto(int userId, String userName, int count){
 		PostPromoResDto postPromoResDto=new PostPromoResDto();
 		postPromoResDto.setUser_id(userId);
