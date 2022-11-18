@@ -2,6 +2,7 @@ package com.example.BE_java_hisp_w18_g04.service;
 
 
 import com.example.BE_java_hisp_w18_g04.dto.request.PostDTOReq;
+import com.example.BE_java_hisp_w18_g04.dto.request.PostPromoDTOReq;
 import com.example.BE_java_hisp_w18_g04.dto.respose.FollowerCountDTORes;
 import com.example.BE_java_hisp_w18_g04.dto.respose.FollowerListDTORes;
 import com.example.BE_java_hisp_w18_g04.dto.respose.UserDTORes;
@@ -37,6 +38,13 @@ public class UserSellerServiceImp implements IUserSellerService{
             throw new BadRequestException("The user_id not exist");
         }
     }
+
+
+
+
+
+
+
     private Boolean validateSeller(Integer id){
         Boolean valid = false;
         List<UserSeller> sellers = sellerRepository.findAll();
@@ -63,6 +71,9 @@ public class UserSellerServiceImp implements IUserSellerService{
         }
     }
 
+
+
+
     @Override
     public void publishPost(PostDTOReq postDTOReq) {
         Post post= Mapper.createObjectMapper().convertValue(postDTOReq, Post.class);
@@ -70,4 +81,13 @@ public class UserSellerServiceImp implements IUserSellerService{
         UserSeller seller = sellerRepository.findById(postDTOReq.getUser_id());
             seller.getPosts().add(post);
     }
+
+    @Override
+    public void publishPromoPost(PostPromoDTOReq postPromoDTOReq) {
+        if(postPromoDTOReq.getHas_promo()){
+            throw new BadRequestException("The post is not a promo!");
+        }else postRepository.createPostPromo(postPromoDTOReq);
+    }
+
+
 }

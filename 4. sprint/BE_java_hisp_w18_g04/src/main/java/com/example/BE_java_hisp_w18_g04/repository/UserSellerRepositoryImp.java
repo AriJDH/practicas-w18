@@ -1,6 +1,7 @@
 package com.example.BE_java_hisp_w18_g04.repository;
 
 
+import com.example.BE_java_hisp_w18_g04.dto.respose.PostPromoCountDTORes;
 import com.example.BE_java_hisp_w18_g04.entity.UserSeller;
 import com.example.BE_java_hisp_w18_g04.util.Mapper;
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -26,6 +27,8 @@ public class UserSellerRepositoryImp implements IUserSellerRepository{
     public List<UserSeller> findAll(){
         return sellers;
     }
+
+
 
     private void loadSellers(){
         File jsonFile= null;

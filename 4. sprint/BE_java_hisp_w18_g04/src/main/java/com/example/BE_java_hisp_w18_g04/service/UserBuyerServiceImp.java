@@ -1,10 +1,7 @@
 package com.example.BE_java_hisp_w18_g04.service;
 
 
-import com.example.BE_java_hisp_w18_g04.dto.respose.FollowedListDTORes;
-import com.example.BE_java_hisp_w18_g04.dto.respose.PostDTORes;
-import com.example.BE_java_hisp_w18_g04.dto.respose.PostFollowedByDateDTORes;
-import com.example.BE_java_hisp_w18_g04.dto.respose.UserDTORes;
+import com.example.BE_java_hisp_w18_g04.dto.respose.*;
 import com.example.BE_java_hisp_w18_g04.entity.Post;
 import com.example.BE_java_hisp_w18_g04.entity.UserBuyer;
 import com.example.BE_java_hisp_w18_g04.entity.UserSeller;
@@ -129,4 +126,6 @@ public class UserBuyerServiceImp implements IUserBuyerService{
     } else {
             throw new BadRequestException("The user_id not exist");
         }}
+
+
 }
