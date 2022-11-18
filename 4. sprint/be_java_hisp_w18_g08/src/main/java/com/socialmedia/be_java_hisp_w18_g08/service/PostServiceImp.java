@@ -79,7 +79,7 @@ public class PostServiceImp implements IPostService {
 
         for (Seller s : followed) {
            for(Post p: s.getPosts()){
-               if(p.getDate().isAfter((date.minusDays(115)))){
+               if(p.getDate().isAfter((date.minusDays(15)))){
                    PostDto aux = new PostDto(p.getPost_id(), p.getUser_id(), p.getProduct(),
                                              p.getCategory(),p.getPrice(), p.getDate());
                    filtrados.add(aux);
