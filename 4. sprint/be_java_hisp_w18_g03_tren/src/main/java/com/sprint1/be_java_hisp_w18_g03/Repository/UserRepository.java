@@ -51,4 +51,9 @@ public class UserRepository implements IUserRepository {
         return users;
     }
 
+    @Override
+    public void createUsers(List<User> users) {
+        this.users.addAll(users);
+    }
+
 }

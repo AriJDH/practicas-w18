@@ -1,9 +1,7 @@
 package com.sprint1.be_java_hisp_w18_g03.controller;
 
-import com.sprint1.be_java_hisp_w18_g03.dto.response.FollowedDTO;
-import com.sprint1.be_java_hisp_w18_g03.dto.response.FollowerCountDTO;
-import com.sprint1.be_java_hisp_w18_g03.dto.response.FollowersDTO;
-import com.sprint1.be_java_hisp_w18_g03.dto.response.ResponseDTO;
+import com.sprint1.be_java_hisp_w18_g03.dto.request.CreateUsersDTO;
+import com.sprint1.be_java_hisp_w18_g03.dto.response.*;
 import com.sprint1.be_java_hisp_w18_g03.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -41,4 +39,13 @@ public class UserController {
         return new ResponseEntity<>(userService.getFollowersList(userId,order), HttpStatus.OK);
     }
 
+    @PostMapping("/createUsers")
+    public ResponseEntity<ResponseDTO> createUsers(@RequestBody CreateUsersDTO createUsersDTO) {
+        return new ResponseEntity<>(userService.createUsers(createUsersDTO), HttpStatus.OK);
+    }
+
+    @GetMapping("/list")
+    public ResponseEntity<UsersDTO> listUsers() {
+        return new ResponseEntity<>(userService.listUsers(), HttpStatus.OK);
+    }
 }

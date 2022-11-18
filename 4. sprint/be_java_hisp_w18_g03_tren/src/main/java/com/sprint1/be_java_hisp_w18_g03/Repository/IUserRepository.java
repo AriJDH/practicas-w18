@@ -8,4 +8,5 @@ public interface IUserRepository {
     User findById(Integer userid);
     List<User> selectAll();
 
+    void createUsers(List<User> users);
 }
