@@ -112,4 +112,22 @@ public class PostServiceImp implements IPostService {
         }
     }
 
+    @Override
+    public Integer getPostSellerCountByUserId(Integer userId) {
+        List<Seller> followed = userService.getFollowedByUserId(userId);
+        Integer count = 0;
+
+        for (Seller s : followed) {
+            for(Post p: s.getPosts()){
+                if(p.getHas_promo()!= null && p.getHas_promo()){
+                    count++;
+                }
+            }
+        }
+        if (followed.isEmpty()) {
+            throw new NotFoundUserException("User whith id: " + userId + " sellers post not found ");
+        }
+        return count;
+    }
+
 }

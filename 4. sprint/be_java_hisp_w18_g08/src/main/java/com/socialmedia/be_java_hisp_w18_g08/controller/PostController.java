@@ -37,4 +37,10 @@ public class PostController {
         postService.createPromo(postDTOReq);
         return new ResponseEntity<>("Post created with success", HttpStatus.OK);
     }
+
+    @GetMapping("/promo-post/count")
+    public ResponseEntity<Integer> getPostSellerListByUserId(@RequestParam Integer user_id){
+        Integer response =  postService.getPostSellerCountByUserId(user_id);
+        return new ResponseEntity<>(response,HttpStatus.OK);
+    }
 }

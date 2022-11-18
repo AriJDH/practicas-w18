@@ -11,4 +11,6 @@ public interface IPostService {
     PostDtoRes getPostSellerListByUserId(Integer id, String order);
 
     void createPromo(PostPromoDtoReq postDTOReq);
+
+    Integer getPostSellerCountByUserId(Integer userId);
 }
