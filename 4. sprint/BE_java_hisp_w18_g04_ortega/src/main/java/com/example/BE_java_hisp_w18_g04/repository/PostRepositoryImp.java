@@ -1,6 +1,8 @@
 package com.example.BE_java_hisp_w18_g04.repository;
+import com.example.BE_java_hisp_w18_g04.dto.request.PostPromoDTOReq;
 import com.example.BE_java_hisp_w18_g04.entity.Post;
 import com.example.BE_java_hisp_w18_g04.entity.PostPromo;
+import com.example.BE_java_hisp_w18_g04.exception.BadRequestException;
 import com.example.BE_java_hisp_w18_g04.util.Mapper;
 import com.fasterxml.jackson.core.type.TypeReference;
 import org.springframework.stereotype.Repository;
@@ -29,12 +31,12 @@ public class PostRepositoryImp implements IPostRepository{
     }
 
     @Override
-    public void createPostPromo(PostPromo postPromo){
-        if(postPromos.isEmpty())
-            postPromo.setPost_id(1);
-        else
-            postPromo.setPost_id(postPromos.get(postPromos.size()-1).getPost_id()+1);
-        postPromos.add(postPromo);
+    public void createPostPromo(PostPromo postPromo){ postPromos.add(postPromo);
+    }
+
+    @Override
+    public List<PostPromo> findAll() {
+        return postPromos;
     }
 
 

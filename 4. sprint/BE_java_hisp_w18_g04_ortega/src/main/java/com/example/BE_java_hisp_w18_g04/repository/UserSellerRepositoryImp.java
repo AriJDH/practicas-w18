@@ -19,10 +19,12 @@ public class UserSellerRepositoryImp implements IUserSellerRepository{
         loadSellers();
     }
 
+    @Override
     public UserSeller findById(Integer id) {
         return sellers.stream().filter(buyer -> buyer.getUser_id().equals(id)).findFirst().get();
     }
 
+    @Override
     public List<UserSeller> findAll(){
         return sellers;
     }

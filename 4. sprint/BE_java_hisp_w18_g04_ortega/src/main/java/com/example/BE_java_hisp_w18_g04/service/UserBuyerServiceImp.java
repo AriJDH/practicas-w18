@@ -101,13 +101,14 @@ public class UserBuyerServiceImp implements IUserBuyerService{
             throw new BadRequestException("The user_id not exist");
         }
     }
-
-    private List<PostDTORes> filterPostByDate(List<PostDTORes> postDTOResList){
+    @Override
+    public List<PostDTORes> filterPostByDate(List<PostDTORes> postDTOResList){
         return postDTOResList.stream().
                 filter(postDTORes->postDTORes.getDate().isAfter(LocalDate.now().minusWeeks(2)))
                 .collect(Collectors.toList());
     }
-    private void getPostListSeller(List<UserSeller> followed, List<PostDTORes> postsFollowed){
+    @Override
+    public void getPostListSeller(List<UserSeller> followed, List<PostDTORes> postsFollowed){
         for (UserSeller seller: followed) {
             for ( Post post: seller.getPosts()) {
                 postsFollowed.add(new PostDTORes(seller.getUser_id(),post));

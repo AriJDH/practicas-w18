@@ -2,10 +2,7 @@ package com.example.BE_java_hisp_w18_g04.controller;
 
 import com.example.BE_java_hisp_w18_g04.dto.request.PostDTOReq;
 import com.example.BE_java_hisp_w18_g04.dto.request.PostPromoDTOReq;
-import com.example.BE_java_hisp_w18_g04.dto.respose.FollowedListDTORes;
-import com.example.BE_java_hisp_w18_g04.dto.respose.FollowerCountDTORes;
-import com.example.BE_java_hisp_w18_g04.dto.respose.FollowerListDTORes;
-import com.example.BE_java_hisp_w18_g04.dto.respose.PostFollowedByDateDTORes;
+import com.example.BE_java_hisp_w18_g04.dto.respose.*;
 import com.example.BE_java_hisp_w18_g04.service.IPostService;
 import com.example.BE_java_hisp_w18_g04.service.IUserBuyerService;
 import com.example.BE_java_hisp_w18_g04.service.IUserSellerService;
@@ -70,4 +67,10 @@ public class SocialMeliController {
         userSellerService.publishPromoPost(postPromoDTOReq);
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
+    @GetMapping("/products/promo-post/count")
+    public ResponseEntity<CountPromoDTO> countPromoPost(@RequestParam Integer user_id){
+           return new ResponseEntity<>(userSellerService.countPromoPost(user_id),HttpStatus.OK);
+    }
+
 }

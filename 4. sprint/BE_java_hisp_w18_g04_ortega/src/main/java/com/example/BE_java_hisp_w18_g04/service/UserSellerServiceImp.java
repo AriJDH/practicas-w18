@@ -3,9 +3,8 @@ package com.example.BE_java_hisp_w18_g04.service;
 
 import com.example.BE_java_hisp_w18_g04.dto.request.PostDTOReq;
 import com.example.BE_java_hisp_w18_g04.dto.request.PostPromoDTOReq;
-import com.example.BE_java_hisp_w18_g04.dto.respose.FollowerCountDTORes;
-import com.example.BE_java_hisp_w18_g04.dto.respose.FollowerListDTORes;
-import com.example.BE_java_hisp_w18_g04.dto.respose.UserDTORes;
+import com.example.BE_java_hisp_w18_g04.dto.request.ProductDTOReq;
+import com.example.BE_java_hisp_w18_g04.dto.respose.*;
 import com.example.BE_java_hisp_w18_g04.entity.Post;
 import com.example.BE_java_hisp_w18_g04.entity.PostPromo;
 import com.example.BE_java_hisp_w18_g04.entity.UserBuyer;
@@ -73,12 +72,21 @@ public class UserSellerServiceImp implements IUserSellerService{
             seller.getPosts().add(post);
     }
 
+    @Override
     public void publishPromoPost(PostPromoDTOReq postPromoDTOReq) {
 
-        PostPromo postPromo= Mapper.createObjectMapper().convertValue(postPromoDTOReq, PostPromo.class);
-        postRepository.createPostPromo(postPromo);
-        UserSeller seller = sellerRepository.findById(postPromoDTOReq.getPost().getUser_id());
-        seller.getPosts().add(postPromo);
+        if(postPromoDTOReq.getHas_promo().equals(true)){
+            postRepository.createPostPromo(Mapper.createObjectMapper().convertValue(postPromoDTOReq, PostPromo.class));
+        } else {
+            throw new BadRequestException("The product is not on sale");
+        }
     }
+    @Override
 
+    public CountPromoDTO countPromoPost(Integer user_id) {
+       List<PostPromo> promos = postRepository.findAll();
+       List<PostPromo> filtered = promos.stream().filter(e-> e.getHas_promo().equals(true)).collect(Collectors.toList());
+       String user_name = sellerRepository.findById(user_id).getUser_name();
+            return new CountPromoDTO(user_id,user_name,filtered.size());
+    }
 }
