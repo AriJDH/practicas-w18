@@ -86,4 +86,8 @@ public class User {
         return this.posts.stream().filter(post->post.isPromo()).collect(Collectors.toList());
     }
 
+    public int getPostsCount(){
+        return this.posts.size();
+    }
+
 }

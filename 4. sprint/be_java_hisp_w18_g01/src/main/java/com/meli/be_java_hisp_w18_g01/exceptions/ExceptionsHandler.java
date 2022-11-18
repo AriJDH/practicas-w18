@@ -22,7 +22,7 @@ public class ExceptionsHandler {
         );
     }
 
-    @ExceptionHandler({UserNotFoundException.class})
+    @ExceptionHandler({UserNotFoundException.class, EmptyUsersRepositoryException.class})
     public ResponseEntity<?> handleNotFound(Exception e){
         return new ResponseEntity<>(
                 new ResponseDTO(
@@ -41,7 +41,6 @@ public class ExceptionsHandler {
                 HttpStatus.CONFLICT
         );
     }
-/*
     @ExceptionHandler({Exception.class})
     public ResponseEntity<?> handleServersideError(Exception e){
         return new ResponseEntity<>(
@@ -51,5 +50,4 @@ public class ExceptionsHandler {
                 HttpStatus.INTERNAL_SERVER_ERROR
         );
     }
-*/
 }
