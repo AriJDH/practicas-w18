@@ -1,0 +1,46 @@
+US 0012: Obtener un listado de las publicaciones realizadas por los vendedores que un usuario sigue
+con descuentos mayor o igual al seleccionado.
+
+Method: GET    |   SIGN: /products/promo-post/highPromoList?user_id={userId}&discount={discount}
+
+RESPONSE:
+{
+    "user_id": 1,
+    "user_name": "usuario1",
+    "posts": [
+        {
+            "user_id": 2,
+            "post_id": 1,
+            "date": "16-11-2022",
+            "product": {
+                "product_id": 10,
+                "product_name": "Silla Gamer Promo",
+                "type": "Gamer",
+                "brand": "Racer",
+                "color": "Red & Black",
+                "notes": "Special Edition"
+            },
+            "category": 100,
+            "price": 1500.5,
+            "has_promo": true,
+            "discount": 0.65
+        },
+        {
+            "user_id": 2,
+            "post_id": 5,
+            "date": "14-11-2022",
+            "product": {
+                "product_id": 2,
+                "product_name": "Pantalon",
+                "type": "Ropa",
+                "brand": "Adida",
+                "color": "Negro",
+                "notes": "Para usar en Otoño"
+            },
+            "category": 4,
+            "price": 456.0,
+            "has_promo": true,
+            "discount": 0.5
+        }
+    ]
+}
