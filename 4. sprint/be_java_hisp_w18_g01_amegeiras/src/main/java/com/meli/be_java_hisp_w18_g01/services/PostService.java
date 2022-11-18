@@ -12,6 +12,8 @@ public interface PostService {
 
     SellerPostDiscountCountDTO getPromoPostCount(long userId);
 
+    SellerPostsDiscountInfoDTO getPromoPosts(long userId);
+
     List<SellerDTO> getRecentPostsFromFollowed(long userId, String order);
 
 

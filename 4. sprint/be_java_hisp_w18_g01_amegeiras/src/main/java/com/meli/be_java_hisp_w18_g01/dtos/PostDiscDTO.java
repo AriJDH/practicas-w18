@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class PostDiscDTO {
     private long user_id;
+    private long post_id;
     private String date;
     private ProductDTO product;
     private int category;

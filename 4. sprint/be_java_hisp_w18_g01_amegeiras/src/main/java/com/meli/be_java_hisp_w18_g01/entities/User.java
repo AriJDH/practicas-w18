@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Data
 @AllArgsConstructor
@@ -83,6 +84,10 @@ public class User {
 
     public int getPostDiscountCount(){
        return (int) posts.stream().filter(Post::isHas_promo).count();
+    }
+
+    public List<Post> getPostDiscount(){
+        return posts.stream().filter(Post::isHas_promo).collect(Collectors.toList());
     }
 
 }

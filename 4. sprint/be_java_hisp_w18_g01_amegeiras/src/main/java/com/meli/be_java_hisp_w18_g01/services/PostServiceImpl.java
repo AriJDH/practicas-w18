@@ -11,6 +11,7 @@ import com.meli.be_java_hisp_w18_g01.entities.Product;
 import com.meli.be_java_hisp_w18_g01.entities.User;
 import com.meli.be_java_hisp_w18_g01.exceptions.BadRequestException;
 import com.meli.be_java_hisp_w18_g01.mappers.MapperPostToPostDTO;
+import com.meli.be_java_hisp_w18_g01.mappers.MapperPostToPostDiscDTO;
 import com.meli.be_java_hisp_w18_g01.services.database.UserDbService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,6 +28,9 @@ public class PostServiceImpl implements PostService {
 
     @Autowired
     MapperPostToPostDTO mapperPostToPostDTO;
+
+    @Autowired
+    MapperPostToPostDiscDTO mapperPostToPostDiscDTO;
     @Autowired
     UserDbService userDbService;
 
@@ -84,17 +88,32 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
+    public SellerPostsDiscountInfoDTO getPromoPosts(long userId) {
+        User user = userDbService.findById(userId);
+
+        LocalDate.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+        ObjectMapper mapper = new ObjectMapper();
+
+        List<Post> promoPost = user.getPostDiscount();
+
+
+        return new SellerPostsDiscountInfoDTO(user.getUser_id(),user.getUser_name(),promoPost.stream()
+                .map(post -> mapperPostToPostDiscDTO.convertValue(post, PostDiscDTO.class))
+                .collect(Collectors.toList()));
+    }
+
+    @Override
     public List<SellerDTO> getRecentPostsFromFollowed(long userId, String order) {
         User user = userDbService.findById(userId);
         List<User> sellers = user.getFollowed().stream()
-                .filter(seller -> seller.getPosts().stream().anyMatch(post -> post.isRecent()))
+                .filter(seller -> seller.getPosts().stream().anyMatch(Post::isRecent))
                 .collect(Collectors.toList());
         ObjectMapper mapper = new ObjectMapper();
 
         LocalDate.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
 
         return sellers.stream().map(seller -> {
-                    List<Post> sortedPosts = this.sortPosts(seller.getPosts().stream().filter(post -> post.isRecent()).collect(Collectors.toList()), order);
+                    List<Post> sortedPosts = this.sortPosts(seller.getPosts().stream().filter(Post::isRecent).collect(Collectors.toList()), order);
 
                     return new SellerDTO(seller.getUser_id(),
                             sortedPosts.stream().map(post -> mapperPostToPostDTO.convertValue(post, PostDTO.class))
