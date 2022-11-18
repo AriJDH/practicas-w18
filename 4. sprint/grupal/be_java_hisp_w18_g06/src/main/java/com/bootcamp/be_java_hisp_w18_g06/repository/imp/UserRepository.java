@@ -3,8 +3,10 @@ package com.bootcamp.be_java_hisp_w18_g06.repository.imp;
 import com.bootcamp.be_java_hisp_w18_g06.entity.Post;
 import com.bootcamp.be_java_hisp_w18_g06.entity.Product;
 import com.bootcamp.be_java_hisp_w18_g06.entity.User;
+import com.bootcamp.be_java_hisp_w18_g06.exceptions.EmptyException;
 import com.bootcamp.be_java_hisp_w18_g06.repository.IUserRepository;
 import org.springframework.stereotype.Repository;
+
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -16,6 +18,7 @@ public class UserRepository implements IUserRepository {
 	
 	// Base de datos
 	List<User> users = new ArrayList<>();
+
 	List<Product> products = new ArrayList<>();
 	List<Post> posts = new ArrayList<>();
 	List<User> followed = new ArrayList<>();
