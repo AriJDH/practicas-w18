@@ -12,4 +12,5 @@ public interface IUserRepository {
     Optional<User> findUserById(int id);
     Optional<User> findUserInList(List<User> list, int idUserInList);
     User getUser(int userId);
+    void updateUsers(User userUpdate);
 }

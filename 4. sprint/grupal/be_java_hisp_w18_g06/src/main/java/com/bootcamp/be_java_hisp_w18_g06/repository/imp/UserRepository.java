@@ -13,6 +13,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Repository
 public class UserRepository implements IUserRepository {
@@ -117,5 +118,14 @@ public class UserRepository implements IUserRepository {
 			throw new NotFoundException("The user id: " + userId + " doesn't exists");
 		}
 		return user.get();
+	}
+
+	@Override
+	public void updateUsers(User userUpdate){
+		users.addAll(users.stream()
+				.filter(user -> user.getUser_id()!=userUpdate.getUser_id())
+				.collect(Collectors.toList()));
+
+		users.add(userUpdate);
 	}
 }
