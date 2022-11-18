@@ -20,4 +20,12 @@ public class PublicationEntity {
     private Integer category;
     private Double price;
 
+    public PublicationEntity(PublicationEntity other) {
+        this.id = other.id;
+        this.date = other.date;
+        this.userId = other.userId;
+        this.productId = other.productId;
+        this.category = other.category;
+        this.price = other.price;
+    }
 }

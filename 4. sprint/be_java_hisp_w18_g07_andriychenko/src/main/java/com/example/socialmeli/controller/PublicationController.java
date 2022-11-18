@@ -1,5 +1,6 @@
 package com.example.socialmeli.controller;
 
+import com.example.socialmeli.dto.request.PublicationPromoRequest;
 import com.example.socialmeli.dto.request.PublicationRequest;
 import com.example.socialmeli.dto.response.UserFollowedPublicationResponse;
 import com.example.socialmeli.service.IPublicationService;
@@ -23,6 +24,17 @@ public class PublicationController {
     public ResponseEntity<Void> createPublication(@RequestBody PublicationRequest publicationRequest) {
 
         publicationService.registerPublication(publicationRequest);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+    /**
+     * US 0010: URL=/products/promo-post
+     * @param publicationPromoRequest    requestbody - json with publication data and product data
+     * @return          respose entity -  OK status code if registry was succesful, Bad_Request if registry could not be added
+     */
+    @PostMapping("/products/promo-post")
+    public ResponseEntity<Void> createPromoPublication(@RequestBody PublicationPromoRequest publicationPromoRequest) {
+
+        publicationService.registerPromoPublication(publicationPromoRequest);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 

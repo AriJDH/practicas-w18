@@ -1,10 +1,13 @@
 package com.example.socialmeli.service;
 
+import com.example.socialmeli.dto.request.PublicationPromoRequest;
 import com.example.socialmeli.dto.request.PublicationRequest;
 import com.example.socialmeli.dto.response.PublicationResponse;
 import com.example.socialmeli.dto.response.UserFollowedPublicationResponse;
 import com.example.socialmeli.entity.PublicationEntity;
+import com.example.socialmeli.entity.PublicationPromoEntity;
 import com.example.socialmeli.entity.UserEntity;
+import com.example.socialmeli.exception.NotFoundException;
 import com.example.socialmeli.repository.IProductRepository;
 import com.example.socialmeli.repository.IPublicationRepository;
 import com.example.socialmeli.repository.IUserRepository;
@@ -42,6 +45,23 @@ public class PublicationServiceImpl implements IPublicationService {
         productRepository.getEntityById(publicationRequest.getProductRequest().getId());
         PublicationEntity publication = PublicationMapper.publicationRequest2PublicationEntity(publicationRequest);
         publicationRepository.addEntity(publication);
+        entity.getPublicationList().add(publication.getId());
+    }
+
+//    US 0010
+    @Override
+    public void registerPromoPublication(PublicationPromoRequest publicationPromoRequest) {
+        UserEntity entity = userRepository.getEntityById(publicationPromoRequest.getUserId());
+        productRepository.getEntityById(publicationPromoRequest.getProductRequest().getId());
+
+        if (!publicationPromoRequest.getHasPromo() ){
+            System.out.println(publicationPromoRequest.getHasPromo());
+            throw new NotFoundException("debe tener promo");
+        }
+
+        PublicationPromoEntity publication = new PublicationPromoEntity(PublicationMapper.publicationRequest2PublicationEntity(publicationPromoRequest), publicationPromoRequest.getDiscount()) ;
+        publicationRepository.addEntity(publication);
+
         entity.getPublicationList().add(publication.getId());
     }
 

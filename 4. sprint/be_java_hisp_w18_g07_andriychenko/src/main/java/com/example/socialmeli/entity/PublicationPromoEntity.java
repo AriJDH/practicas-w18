@@ -10,4 +10,9 @@ import lombok.NoArgsConstructor;
 
 public class PublicationPromoEntity extends  PublicationEntity{
     private double discount;
+
+    public PublicationPromoEntity(PublicationEntity other, double discount) {
+        super(other);
+        this.discount = discount;
+    }
 }

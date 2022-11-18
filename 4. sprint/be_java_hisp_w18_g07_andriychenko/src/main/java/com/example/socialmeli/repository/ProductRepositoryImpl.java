@@ -20,6 +20,10 @@ public class ProductRepositoryImpl implements IProductRepository {
         products.put(4, new ProductEntity(4, "Audifonos gamer", "Gamer", "Redragon Ares", "Red & Black", "Special Edition"));
         products.put(5, new ProductEntity(5, "Monitor", "Gamer", "Samsung F22T35 led 22", "dark blue gray 100V/240V", "Una experiencia visual de calidad"));
 
+        products.put(13, new ProductEntity(13, "sTeclado", "sGamer", "Racer", "Yelow & White", "Special Edition"));
+        products.put(14, new ProductEntity(14, "sAudifonos gamer", "sGamer", "Redragon Ares", "Red & Black", "Special Edition"));
+        products.put(15, new ProductEntity(15, "sMonitor", "sGamer", "Samsung F22T35 led 22", "dark blue gray 100V/240V", "Una experiencia visual de calidad"));
+
     }
 
     @Override
