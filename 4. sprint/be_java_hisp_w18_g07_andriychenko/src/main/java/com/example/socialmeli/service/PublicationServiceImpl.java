@@ -89,10 +89,10 @@ public class PublicationServiceImpl implements IPublicationService {
 
 //        ordeno segun parametro
         if (order.equals("name_asc")) {
-            topSellers.sort((p1, p2) -> p1.getName().compareTo(p2.getName()));
+            topSellers.sort((p1, p2) -> p1.getName().toLowerCase().compareTo(p2.getName().toLowerCase()));
         }
         if (order.equals("name_desc")) {
-            topSellers.sort((p1, p2) -> p2.getName().compareTo(p1.getName()));
+            topSellers.sort((p1, p2) -> p2.getName().toLowerCase().compareTo(p1.getName().toLowerCase()));
         }
         if (order.equals("id_asc")) {
             topSellers.sort((p1, p2) -> p1.getId().compareTo(p2.getId()));
