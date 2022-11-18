@@ -1,7 +1,9 @@
 package com.bootcamp.be_java_hisp_w18_g06.service.imp;
 
 import com.bootcamp.be_java_hisp_w18_g06.dto.request.PostDTO;
+import com.bootcamp.be_java_hisp_w18_g06.dto.request.PostPromoDTO;
 import com.bootcamp.be_java_hisp_w18_g06.entity.Post;
+import com.bootcamp.be_java_hisp_w18_g06.entity.PostPromo;
 import com.bootcamp.be_java_hisp_w18_g06.entity.User;
 import com.bootcamp.be_java_hisp_w18_g06.exceptions.BadRequestException;
 import com.bootcamp.be_java_hisp_w18_g06.exceptions.EmptyException;
@@ -133,4 +135,8 @@ public class PostService implements IPostService {
 						.collect(Collectors.toList()));
 	}
 
+	@Override
+	public void savePostPromo(PostPromoDTO postPromoDTO) {
+		userRepository.createPost(mapper.convertValue(postPromoDTO, PostPromo.class));
+	}
 }

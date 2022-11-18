@@ -1,6 +1,7 @@
 package com.bootcamp.be_java_hisp_w18_g06.controller;
 
 import com.bootcamp.be_java_hisp_w18_g06.dto.request.PostDTO;
+import com.bootcamp.be_java_hisp_w18_g06.dto.request.PostPromoDTO;
 import com.bootcamp.be_java_hisp_w18_g06.service.IProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -30,4 +31,10 @@ public class ProductController {
         productService.save(postDTO);
         return ResponseEntity.ok("OK");
     }
+
+	@PostMapping("/promo-post")
+	public ResponseEntity<?> savePromo(PostPromoDTO postPromoDTO) {
+		productService.savePromo(postPromoDTO);
+		return ResponseEntity.ok("OK");
+	}
 }
