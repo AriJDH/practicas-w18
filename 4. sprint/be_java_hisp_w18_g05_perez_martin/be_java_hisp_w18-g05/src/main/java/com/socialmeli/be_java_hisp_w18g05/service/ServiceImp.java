@@ -3,6 +3,7 @@ package com.socialmeli.be_java_hisp_w18g05.service;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import com.socialmeli.be_java_hisp_w18g05.dto.request.PostPromoDTORequest;
 import com.socialmeli.be_java_hisp_w18g05.dto.response.*;
 import com.socialmeli.be_java_hisp_w18g05.dto.request.NewPostDTORequest;
 import com.socialmeli.be_java_hisp_w18g05.dto.response.BuyerDTOResponse;
@@ -315,10 +316,45 @@ public class ServiceImp implements IService {
         LocalDate localDate = LocalDate.parse(post.getDate(),formatter);
 
         //Create DTO of the post
-        Post newPost = new Post(repository.addPost(), localDate,product ,post.getCategory(),post.getPrice());
+        Post newPost = new Post(repository.addPost(), localDate,product ,post.getCategory(),post.getPrice(),false,0.0);
 
         seller.getPosts().add(newPost);
     }
+
+    @Override // Individual US0010
+    public void postPromo(PostPromoDTORequest post) {
+        Integer user_id = post.getUser_id(); // Get post asociated with this id
+        Seller seller = repository.getByIdSeller(user_id); // Get seller from repository
+
+        if (seller == null) {  //Exception non existing seller
+            throw new NotFoundException("Seller id " + user_id + " not found");
+        }
+        //Create DTO of the product
+        Product product = new Product(post.getProduct().getProduct_id(),post.getProduct().getProduct_name(), post.getProduct().getType(), post.getProduct().getBrand(), post.getProduct().getColor(), post.getProduct().getNotes());
+
+        //Convert the string to date time format
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        LocalDate localDate = LocalDate.parse(post.getDate(),formatter);
+
+        //Create DTO of the post
+        Post postPromo = new Post(repository.addPost(), localDate,product ,post.getCategory(),post.getPrice(), post.getHas_promo(),post.getDiscount());
+
+        seller.getPosts().add(postPromo);
+
+    }
+
+    @Override //US0011
+    public PostPromoCountDTOResponse postPromoCount(Integer user_id) {
+        Seller seller = repository.getByIdSeller(user_id); // Get seller from repository
+        if (seller == null) {
+            throw new NotFoundException("Seller id " + user_id + " not found"); // Throw exception if seller doesn't exist
+        }
+        List<Post> postList = seller.getPosts().stream().filter(x-> x.getHas_promo()).collect(Collectors.toList()); //Get only have HasPromo
+        Integer countedPromoPost = postList.size(); // Get size of the list of post promos.
+        //Create DTO response
+        return new PostPromoCountDTOResponse(seller.getUser_id(),seller.getName(),countedPromoPost);
+    }
+
 
 }
 
