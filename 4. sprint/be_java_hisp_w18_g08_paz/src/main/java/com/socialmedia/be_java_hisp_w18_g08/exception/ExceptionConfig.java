@@ -1,6 +1,6 @@
 package com.socialmedia.be_java_hisp_w18_g08.exception;
 
-import com.socialmedia.be_java_hisp_w18_g08.dto.ExceptionDTO;
+import com.socialmedia.be_java_hisp_w18_g08.dto.ExceptionDto;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 public class ExceptionConfig {
 
     @ExceptionHandler(NotFoundUserException.class)
-    public ResponseEntity<ExceptionDTO> notFoundUserException(Exception e){
-        ExceptionDTO eDTO = new ExceptionDTO(e.getMessage(), 404);
+    public ResponseEntity<ExceptionDto> notFoundUserException(Exception e){
+        ExceptionDto eDTO = new ExceptionDto(e.getMessage(), 404);
         return new ResponseEntity<>(eDTO, HttpStatus.NOT_FOUND);
     }
 
@@ -19,8 +19,8 @@ public class ExceptionConfig {
             BadRequestException.class,
             org.springframework.http.converter.HttpMessageNotReadableException.class
     })
-    public ResponseEntity<ExceptionDTO> badRequestException(Exception e){
-        ExceptionDTO eDTO = new ExceptionDTO(e.getMessage(), 400);
+    public ResponseEntity<ExceptionDto> badRequestException(Exception e){
+        ExceptionDto eDTO = new ExceptionDto(e.getMessage(), 400);
         return new ResponseEntity<>(eDTO, HttpStatus.BAD_REQUEST);
     }
 }

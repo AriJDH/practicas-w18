@@ -19,8 +19,8 @@ public class Post {
     private Double price;
     @JsonFormat(pattern="dd-MM-yyyy")
     private LocalDate date;
-    private Boolean has_promo;
-    private Double discount;
+    private Boolean has_promo=false;
+    private Double discount=0.0;
 
     public Post(Integer post_id, Integer user_id, Product product, Integer category, Double price, LocalDate date) {
         this.post_id = post_id;
