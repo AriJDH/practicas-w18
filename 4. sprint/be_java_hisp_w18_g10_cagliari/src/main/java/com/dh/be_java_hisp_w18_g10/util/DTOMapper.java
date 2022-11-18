@@ -78,6 +78,7 @@ public class DTOMapper {
     }
 
     public static UserPromoPostCountDTOres mapTo(User user, int promoCount){
+        mapperConfigCamelToUnder();
         UserPromoPostCountDTOres userPromoDTO = modelMapper.map(user, UserPromoPostCountDTOres.class);
         userPromoDTO.setPromo_products_count(promoCount);
         return userPromoDTO;
