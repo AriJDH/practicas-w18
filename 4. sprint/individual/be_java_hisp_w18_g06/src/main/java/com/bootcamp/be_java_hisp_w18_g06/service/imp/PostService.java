@@ -1,6 +1,7 @@
 package com.bootcamp.be_java_hisp_w18_g06.service.imp;
 
 import com.bootcamp.be_java_hisp_w18_g06.dto.request.PostDTO;
+import com.bootcamp.be_java_hisp_w18_g06.dto.request.PromoPostDTO;
 import com.bootcamp.be_java_hisp_w18_g06.dto.response.UserPromotionCountDTO;
 import com.bootcamp.be_java_hisp_w18_g06.entity.Post;
 import com.bootcamp.be_java_hisp_w18_g06.entity.PromoPost;
@@ -41,8 +42,8 @@ public class PostService implements IPostService {
     }
 
 	@Override
-	public void savePromoPost(PostDTO postDTO) {
-		userRepository.createPromoPost(mapper.convertValue(postDTO, PromoPost.class));
+	public void savePromoPost(PromoPostDTO promoPostDTO) {
+		userRepository.createPromoPost(mapper.convertValue(promoPostDTO, PromoPost.class));
 	}
 
 	// US006

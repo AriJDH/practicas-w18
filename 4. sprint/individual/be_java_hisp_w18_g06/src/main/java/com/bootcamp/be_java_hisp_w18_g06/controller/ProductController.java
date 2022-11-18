@@ -1,6 +1,7 @@
 package com.bootcamp.be_java_hisp_w18_g06.controller;
 
 import com.bootcamp.be_java_hisp_w18_g06.dto.request.PostDTO;
+import com.bootcamp.be_java_hisp_w18_g06.dto.request.PromoPostDTO;
 import com.bootcamp.be_java_hisp_w18_g06.dto.response.UserPromotionCountDTO;
 import com.bootcamp.be_java_hisp_w18_g06.service.IProductService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,14 +35,14 @@ public class ProductController {
     }
 
 	@PostMapping("/promo-post")
-	public ResponseEntity<?> savePromoPost(@RequestBody PostDTO postDTO){
-		productService.savePromoPost(postDTO);
+	public ResponseEntity<?> savePromoPost(@RequestBody PromoPostDTO promoPostDTO){
+		productService.savePromoPost(promoPostDTO);
 		return ResponseEntity.ok("OK");
 	}
 
 	@GetMapping("/promo-post/count")
-	public ResponseEntity<?> countPromotionProducts(@PathVariable int userId){
-		UserPromotionCountDTO userPromotionCountDTO = productService.countPromotionProducts(userId);
+	public ResponseEntity<?> countPromotionProducts(@RequestParam int user_id){
+		UserPromotionCountDTO userPromotionCountDTO = productService.countPromotionProducts(user_id);
 		return ResponseEntity.status(HttpStatus.OK).body(userPromotionCountDTO);
 	}
 
