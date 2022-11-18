@@ -239,6 +239,11 @@ public class AppService implements IAppService {
         );
     }
 
+
+    /** Lista todos los post con decuentos de todos los usuarios
+     *
+     * @return List<PostPromoDTOres>
+     * */
     public List<PostPromoDTOres> getPromoPostList(){
 
         List<User> users = userRepository.getUsers();
