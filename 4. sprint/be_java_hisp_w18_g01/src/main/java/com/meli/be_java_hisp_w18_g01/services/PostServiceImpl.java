@@ -77,8 +77,6 @@ public class PostServiceImpl implements PostService {
                 .filter(seller -> seller.getPosts().stream().anyMatch(post -> post.isRecent()))
                 .collect(Collectors.toList());
 
-        LocalDate.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
-
         MapperPostToPostDTO mapperPostToPostDTO = new MapperPostToPostDTO();
         return sellers.stream().map(seller -> {
                     List<Post> sortedPosts = this.sortPosts(seller.getPosts().stream().filter(post -> post.isRecent()).collect(Collectors.toList()), order);
