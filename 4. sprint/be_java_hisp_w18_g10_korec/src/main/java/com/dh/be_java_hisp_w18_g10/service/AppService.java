@@ -68,7 +68,7 @@ public class AppService implements IAppService {
     public PostPromoCountDTOres getPostPromoCount(int userId) {
         User user = userRepository.getUser(userId);
 
-        if(user == null) throw new NotFoundException("El usuario con el id: "+userId+" no fue encontrado!");
+        if(user == null) throw new UserGenericException("Usuario no encontrado!");
 
         int promo_post = 0;
         for(Post postNew: user.getPosts().values()){

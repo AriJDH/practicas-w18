@@ -100,4 +100,8 @@ public class AppController {
         return new ResponseEntity<>(iAppService.getPostPromoCount(user_id), HttpStatus.OK);
     }
 
+   /* @GetMapping("/users")
+    public ResponseEntity<?> getUsers(){
+
+    }*/
 }
