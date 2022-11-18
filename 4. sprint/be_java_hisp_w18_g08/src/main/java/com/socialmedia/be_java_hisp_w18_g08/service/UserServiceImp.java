@@ -1,11 +1,11 @@
 package com.socialmedia.be_java_hisp_w18_g08.service;
 
-import com.socialmedia.be_java_hisp_w18_g08.dto.UserDTO;
-import com.socialmedia.be_java_hisp_w18_g08.dto.UserListDTO;
+import com.socialmedia.be_java_hisp_w18_g08.dto.response.UserDto;
+import com.socialmedia.be_java_hisp_w18_g08.dto.response.UserListDto;
 import com.socialmedia.be_java_hisp_w18_g08.dto.request.FollowDtoReq;
 import com.socialmedia.be_java_hisp_w18_g08.dto.response.FollowDtoRes;
-import com.socialmedia.be_java_hisp_w18_g08.dto.FollowedDTO;
-import com.socialmedia.be_java_hisp_w18_g08.dto.SellerFollowersCountDTO;
+import com.socialmedia.be_java_hisp_w18_g08.dto.response.FollowedDto;
+import com.socialmedia.be_java_hisp_w18_g08.dto.response.SellerFollowersCountDto;
 import com.socialmedia.be_java_hisp_w18_g08.entity.Seller;
 import com.socialmedia.be_java_hisp_w18_g08.entity.User;
 import com.socialmedia.be_java_hisp_w18_g08.exception.NotFoundUserException;
@@ -39,21 +39,21 @@ public class UserServiceImp implements IUserService {
     }
 
     @Override
-    public FollowedDTO getFollowed(Integer userId, String order) {
+    public FollowedDto getFollowed(Integer userId, String order) {
         User user = userRepository.getUserByID(userId);
         if(user == null)
             throw new NotFoundUserException("There is no user with the ID " + userId);
-        FollowedDTO response = new FollowedDTO();
+        FollowedDto response = new FollowedDto();
         response.setUser_id(user.getUser_id());
         response.setUser_name(user.getUser_name());
         response.setFollowed(createUserDTOList(user.getFollowed(), order));
         return response;
     }
 
-    private List<UserDTO> createUserDTOList(List<Seller> followed, String order) {
-        List<UserDTO> sellers = new ArrayList<>();
+    private List<UserDto> createUserDTOList(List<Seller> followed, String order) {
+        List<UserDto> sellers = new ArrayList<>();
         for (Seller s : followed) {
-            UserDTO aux = new UserDTO(s.getUser_id(), s.getUser_name());
+            UserDto aux = new UserDto(s.getUser_id(), s.getUser_name());
             sellers.add(aux);
         }
         if(order != null)
@@ -61,9 +61,9 @@ public class UserServiceImp implements IUserService {
         return sellers;
     }
 
-    private void changeOrder(List<UserDTO> list, String order) {
-        Comparator<UserDTO> compareByName =
-                Comparator.comparing(UserDTO::getUser_name);
+    private void changeOrder(List<UserDto> list, String order) {
+        Comparator<UserDto> compareByName =
+                Comparator.comparing(UserDto::getUser_name);
         switch (order){
             case "name_asc":
                 Collections.sort(list, compareByName);
@@ -75,31 +75,31 @@ public class UserServiceImp implements IUserService {
     }
 
     @Override
-    public SellerFollowersCountDTO findAllFollowersQuantity(Integer id) {
+    public SellerFollowersCountDto findAllFollowersQuantity(Integer id) {
         Seller seller = userRepository.findSellerById(id);
 
         if(seller == null){
-            throw new NullPointerException();
+            throw new NotFoundUserException("Not found User with id " + id );
         }
         int quantity = seller.getFollowers().size();
-        return new SellerFollowersCountDTO(seller.getUser_id(),seller.getUser_name(), quantity);
+        return new SellerFollowersCountDto(seller.getUser_id(),seller.getUser_name(), quantity);
     }
 
     @Override
-    public UserListDTO findUserListBySeller(Integer id, String order) {
+    public UserListDto findUserListBySeller(Integer id, String order) {
         Seller seller = userRepository.findSellerById(id);
         if (seller == null)
-            throw new NotFoundUserException("El usuario no fue encontrado");
-        List<UserDTO> usersDTO = new ArrayList<>();
+            throw new NotFoundUserException("Not found User with id " + id );
+        List<UserDto> usersDTO = new ArrayList<>();
         for (User s : seller.getFollowers()) {
-            UserDTO userDto = new UserDTO();
+            UserDto userDto = new UserDto();
             userDto.setUser_id(s.getUser_id());
             userDto.setUser_name(s.getUser_name());
             usersDTO.add(userDto);
         }
         if(order != null)
             changeOrder(usersDTO, order);
-        UserListDTO userListDTO = new UserListDTO(seller.getUser_id(), seller.getUser_name(), usersDTO);
+        UserListDto userListDTO = new UserListDto(seller.getUser_id(), seller.getUser_name(), usersDTO);
         return userListDTO;
     }
 

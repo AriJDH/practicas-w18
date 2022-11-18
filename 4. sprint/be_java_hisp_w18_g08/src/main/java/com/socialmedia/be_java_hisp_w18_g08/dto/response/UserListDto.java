@@ -1,17 +1,19 @@
-package com.socialmedia.be_java_hisp_w18_g08.dto;
+package com.socialmedia.be_java_hisp_w18_g08.dto.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@AllArgsConstructor
+import java.util.List;
+
 @NoArgsConstructor
-@Getter
-@Setter
-public class SellerFollowersCountDTO{
+@AllArgsConstructor
+@Getter @Setter
+public class UserListDto {
 
     private Integer user_id;
     private String user_name;
-    private Integer followers_count;
+    private List<UserDto> followers;
+
 }
