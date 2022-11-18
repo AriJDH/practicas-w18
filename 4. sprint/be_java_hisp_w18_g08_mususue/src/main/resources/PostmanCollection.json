@@ -538,7 +538,7 @@
 					"response": []
 				},
 				{
-					"name": "CreatePromoPost BadRequest",
+					"name": "CreatePromoPost NotFoundUser",
 					"request": {
 						"method": "POST",
 						"header": [],
@@ -592,7 +592,7 @@
 					"response": []
 				},
 				{
-					"name": "GetCountPromoPostBySeller BadRequest",
+					"name": "GetCountPromoPostBySeller NotFoundUser",
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -639,7 +639,7 @@
 					"response": []
 				},
 				{
-					"name": "GetListPostsBySeller BadRequest",
+					"name": "GetListPostsBySeller NotFoundUser",
 					"request": {
 						"method": "GET",
 						"header": [],
