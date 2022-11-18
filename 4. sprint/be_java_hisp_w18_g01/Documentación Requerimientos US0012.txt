@@ -1,0 +1,85 @@
+﻿Requerimientos Opcionales US 0012 Miguel Avalle Grupo 1
+
+
+
+
+US 0012 A El usuario debe ser capaz de poder eliminar sus propios posts
+
+
+Method
+	SIGN
+	DELETE
+	/products/post?user_id={userId}&post_id={postId}
+	Ejemplo: /products/post?user_id=1&post_id=1
+	Response
+	{
+   "status": 200,
+   "message": "operación exitosa"
+}
+	
+
+
+
+Filtros/Parámetros
+
+
+Parámetros
+	Tipo
+	Descripción/Ejemplo
+	user_id
+	int
+	Número que identifica a cada usuario
+	post_id
+	int
+	Número que identifica a cada post
+	
+
+
+
+12 B Obtener un listado de Productos en Promoción
+
+
+Method
+	SIGN
+	GET
+	/products/promo-post/list?user_id={userId}
+	Ejemplo: /products/promo-post/list?user_id=1
+	Response
+	{
+   "user_id": 1,
+   "user_name": "lucas",
+   "posts": [
+       {
+           "user_id": 1,
+           "post_id": 2,
+           "date": "11-11-2022",
+           "product": {
+               "product_id": 1,
+               "product_name": "Silla Gamer",
+               "type": "Gamer",
+               "brand": "Racer",
+               "color": "Red & Black",
+               "notes": "Special Edition"
+           },
+           "category": "100",
+           "price": 1496.74875,
+           "has_promo": true,
+           "discount": 0.25
+       }
+   ]
+}
+
+
+	
+
+
+
+Filtros/Parámetros
+
+
+Parámetros
+	Tipo
+	Descripción/Ejemplo
+	user_id
+	int
+	Número que identifica a cada usuario

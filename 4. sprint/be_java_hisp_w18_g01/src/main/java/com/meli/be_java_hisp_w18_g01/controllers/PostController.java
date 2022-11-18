@@ -40,4 +40,10 @@ public class PostController {
     public ResponseEntity<PostDiscountListDTO> getDiscountPostAtSeller(@RequestParam long user_id) {
         return ResponseEntity.ok(postService.getDiscountPostAtSeller(user_id));
     }
+
+    @DeleteMapping("/post")
+    public ResponseEntity<ResponseDTO> deletePost(@RequestParam long user_id, int post_id) {
+        postService.deletePost(user_id, post_id);
+        return ResponseEntity.ok(new ResponseDTO(200,"operación exitosa"));
+    }
 }

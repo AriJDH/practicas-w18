@@ -15,5 +15,7 @@ public interface PostService {
 
     PostDiscountListDTO getDiscountPostAtSeller(long userId);
 
+    void deletePost(long userId, int nro_post);
+
 
 }

@@ -22,7 +22,7 @@ public class ExceptionsHandler {
         );
     }
 
-    @ExceptionHandler({UserNotFoundException.class})
+    @ExceptionHandler({UserNotFoundException.class, PostNotFoundException.class})
     public ResponseEntity<?> handleNotFound(Exception e){
         return new ResponseEntity<>(
                 new ResponseDTO(

@@ -1,6 +1,7 @@
 package com.meli.be_java_hisp_w18_g01.entities;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
@@ -8,6 +9,7 @@ import java.time.temporal.ChronoUnit;
 
 @Data
 @NoArgsConstructor
+@EqualsAndHashCode
 public class Post {
     private long post_id;
     private User user;

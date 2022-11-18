@@ -8,27 +8,34 @@ import com.meli.be_java_hisp_w18_g01.entities.Post;
 import com.meli.be_java_hisp_w18_g01.entities.Product;
 import com.meli.be_java_hisp_w18_g01.entities.User;
 import com.meli.be_java_hisp_w18_g01.exceptions.BadRequestException;
+import com.meli.be_java_hisp_w18_g01.exceptions.PostNotFoundException;
+import com.meli.be_java_hisp_w18_g01.exceptions.UserNotFoundException;
 import com.meli.be_java_hisp_w18_g01.mappers.MapperPostToPostDTO;
 import com.meli.be_java_hisp_w18_g01.services.database.UserDbService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
 public class PostServiceImpl implements PostService {
     private long postCount = 0L;
 
-    @Autowired
+    final
     MapperPostToPostDTO mapperPostToPostDTO;
-    @Autowired
+    final
     UserDbService userDbService;
 
-    private DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+    private final DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+
+    public PostServiceImpl(MapperPostToPostDTO mapperPostToPostDTO, UserDbService userDbService) {
+        this.mapperPostToPostDTO = mapperPostToPostDTO;
+        this.userDbService = userDbService;
+    }
 
     @Override
     public void addPost(PostDTO postDTO) {
@@ -121,19 +128,34 @@ public class PostServiceImpl implements PostService {
         List <PostsDiscountDTO> postsDiscountDTO = user.getPosts().stream()
                 .filter(Post::isHas_promo)
                 .map(p -> new PostsDiscountDTO(
-                            user.getUser_id(),
-                            p.getPost_id(),
+                        user.getUser_id(),
+                        p.getPost_id(),
                         dateFormatter.format(p.getDate()),
-                            mapper.convertValue(p.getProduct(), ProductDTO.class),
-                            p.getCategory() + "",
-                            p.getPrice(),
-                            p.isHas_promo(),
-                            p.getDiscount()
-                        )
+                        mapper.convertValue(p.getProduct(), ProductDTO.class),
+                        Integer.toString(p.getCategory()),
+                        p.getPrice(),
+                        p.isHas_promo(),
+                        p.getDiscount())
                 ).collect(Collectors.toList());
 
         return new PostDiscountListDTO(user.getUser_id(), user.getUser_name(), postsDiscountDTO);
      }
+
+     /*Delete post*/
+    @Override
+    public void deletePost(long userId, int nro_post) {
+
+        User user = userDbService.findById(userId);
+        Optional<Post> post = user.getPosts().stream()
+                .filter(p -> p.getPost_id() == nro_post)
+                .findFirst();
+
+        if (post.isPresent()) {
+            user.getPosts().remove(post.get());
+        } else {
+            throw new PostNotFoundException("No se encuentra el Post a eliminar");
+        }
+    }
 
     public List<Post> sortPosts(List<Post> posts, String order) {
         Comparator comp;
