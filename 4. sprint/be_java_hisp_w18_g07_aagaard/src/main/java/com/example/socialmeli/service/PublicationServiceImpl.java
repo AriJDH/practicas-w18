@@ -1,9 +1,11 @@
 package com.example.socialmeli.service;
 
+import com.example.socialmeli.dto.request.PublicationPromoRequest;
 import com.example.socialmeli.dto.request.PublicationRequest;
 import com.example.socialmeli.dto.response.PublicationResponse;
 import com.example.socialmeli.dto.response.UserFollowedPublicationResponse;
 import com.example.socialmeli.entity.PublicationEntity;
+import com.example.socialmeli.entity.PublicationPromoEntity;
 import com.example.socialmeli.entity.UserEntity;
 import com.example.socialmeli.repository.IProductRepository;
 import com.example.socialmeli.repository.IPublicationRepository;
@@ -43,6 +45,20 @@ public class PublicationServiceImpl implements IPublicationService {
         PublicationEntity publication = PublicationMapper.publicationRequest2PublicationEntity(publicationRequest);
         publicationRepository.addEntity(publication);
         entity.getPublicationList().add(publication.getId());
+    }
+
+    /**
+     * US 0010: Carry out the publication of a new product on promotion
+     *
+     * @param publicationPromoRequest   publication with promotion request DTO
+     */
+    @Override
+    public void addPublicationPromo(PublicationPromoRequest publicationPromoRequest) {
+        UserEntity userEntity = userRepository.getEntityById(publicationPromoRequest.getUserId());
+        productRepository.getEntityById(publicationPromoRequest.getProductRequest().getId());
+        PublicationPromoEntity publicationPromoEntity = PublicationMapper.publicationPromoRequest2PublicationPromoEntity(publicationPromoRequest);
+        publicationRepository.addEntity(publicationPromoEntity);
+        userEntity.getPublicationList().add(publicationPromoEntity.getId());
     }
 
     /**

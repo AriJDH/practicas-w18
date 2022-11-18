@@ -20,3 +20,15 @@ Se plantea creación de una API Rest que permita:
 Por otra parte, dado que se pretende una buena experiencia de usuario con respecto a la forma de presentación de los resultados de cada consulta, se necesita que los mismos puedan ser ordenados mediante cualquiera de los siguientes criterios:
 8. Alfabético Ascendente y Descendente
 9. Fecha Ascendente y Descendente
+
+### Requerimientos incrementales (Desarrollo INDIVIDUAL)
+SocialMeli tiene como objetivo extra lograr permitir a los vendedores la posibilidad de publicar nuevos productos con ofertas o descuentos especiales exclusivos para sus seguidores por un determinado período de tiempo. Para ello propone los siguientes requerimientos:
+
+10. Llevar a cabo la publicación de un nuevo producto en promoción.
+11. Obtener la cantidad de productos en promoción de un determinado vendedor
+
+Estos requerimientos están pensados para ser llevados a cabo de manera individual por un especialista.
+
+Tener en cuenta que, como son requerimientos incrementales al trabajo que se haya hecho en equipo, se debe respetar el desarrollo base que se haya logrado en éste.
+
+Por otro lado, tener en cuenta para estos requerimientos la posibilidad de poder ordenarlos alfabéticamente por nombre de cada producto tanto de forma ascendente como descendente.
