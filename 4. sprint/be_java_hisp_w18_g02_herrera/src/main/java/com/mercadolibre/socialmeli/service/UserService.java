@@ -199,6 +199,32 @@ public class UserService implements IUserService {
         return new SellerPromoPostsDtoRes(id, user.getName(), promoPostsDtoRes);
     }
 
+    @Override
+    public PostsDtoRes getAllPostsFromSeller(Integer id, String order) {
+        List<PostDtoRes> postsDtoRes = userRepository.getPostsFromSeller(id).stream()
+                .map(p -> new PostDtoRes(id,
+                        p.getId(),
+                        p.getDate(),
+                        new ProductDto(p.getProduct().getId(),
+                                p.getProduct().getName(),
+                                p.getProduct().getType(),
+                                p.getProduct().getBrand(),
+                                p.getProduct().getColor(),
+                                p.getProduct().getNotes()),
+                        p.getCategory(),
+                        p.getPrice()))
+                .collect(Collectors.toList());
+
+        if (order != null && order.equals("date_desc")) {
+            postsDtoRes.sort(Comparator.comparing(PostDtoRes::getDate).reversed());
+        } else if (order != null && order.equals("date_asc")) {
+            postsDtoRes.sort(Comparator.comparing(PostDtoRes::getDate));
+        }
+
+        return new PostsDtoRes(id, postsDtoRes);
+
+    }
+
     /**
      * US0006 / US0009
      *

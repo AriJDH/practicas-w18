@@ -152,4 +152,10 @@ public class UserController {
     public ResponseEntity<?> getAllUsers(){
         return ResponseEntity.ok(userService.getAllUsers());
     }
+
+    @GetMapping("/products/post")
+    public ResponseEntity<?> getAllPostsFromSeller(@RequestParam Integer user_id,
+                                                   @RequestParam(required = false) String order){
+        return ResponseEntity.ok(userService.getAllPostsFromSeller(user_id, order));
+    }
 }

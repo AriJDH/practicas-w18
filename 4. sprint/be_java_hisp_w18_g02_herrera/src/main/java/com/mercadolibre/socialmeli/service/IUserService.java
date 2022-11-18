@@ -19,6 +19,7 @@ public interface IUserService {
     void addPromoPost(PromoPostDtoReq promoPostReq);
     SellerPromoPostsCountDtoRes getPromoPostsCount(Integer id);
     SellerPromoPostsDtoRes getPromoPostsFromSeller(Integer id, String order);
+    PostsDtoRes getAllPostsFromSeller(Integer id, String order);
     RecentPostsDtoRes getRecentPosts(Integer userId, String order);
 
 }
