@@ -1,0 +1,6 @@
+spring:
+  application:
+    name: social-meli
+
+server:
+  port: 8080
