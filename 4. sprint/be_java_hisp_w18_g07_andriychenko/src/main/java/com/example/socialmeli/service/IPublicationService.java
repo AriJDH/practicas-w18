@@ -2,6 +2,7 @@ package com.example.socialmeli.service;
 
 import com.example.socialmeli.dto.request.PublicationPromoRequest;
 import com.example.socialmeli.dto.request.PublicationRequest;
+import com.example.socialmeli.dto.response.PromoCountResponse;
 import com.example.socialmeli.dto.response.UserFollowedPublicationResponse;
 
 public interface IPublicationService {
@@ -12,6 +13,10 @@ public interface IPublicationService {
      */
     void registerPublication(PublicationRequest publicationRequest);
     void registerPromoPublication(PublicationPromoRequest publicationPromoRequest);
+
+    PromoCountResponse getPromoCount(int userId);
+
+    int getNumPromoPosts(int userId);
 
     UserFollowedPublicationResponse getUserFollowedPublicationsById(Integer userId, String order);
 

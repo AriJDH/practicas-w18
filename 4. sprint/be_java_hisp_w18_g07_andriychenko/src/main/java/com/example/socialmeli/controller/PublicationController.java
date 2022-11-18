@@ -2,6 +2,7 @@ package com.example.socialmeli.controller;
 
 import com.example.socialmeli.dto.request.PublicationPromoRequest;
 import com.example.socialmeli.dto.request.PublicationRequest;
+import com.example.socialmeli.dto.response.PromoCountResponse;
 import com.example.socialmeli.dto.response.UserFollowedPublicationResponse;
 import com.example.socialmeli.service.IPublicationService;
 import lombok.RequiredArgsConstructor;
@@ -49,6 +50,15 @@ public class PublicationController {
 
         UserFollowedPublicationResponse response = publicationService.getUserFollowedPublicationsById(userId, order);
         return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    /**
+     * US 0006: URL=/products/promo-post/count
+     */
+    @GetMapping("/products/promo-post/count")
+    public ResponseEntity<PromoCountResponse> getPromoCount(@RequestParam Integer userId) {
+
+        return new ResponseEntity<>(publicationService.getPromoCount(userId), HttpStatus.OK);
     }
 
 }

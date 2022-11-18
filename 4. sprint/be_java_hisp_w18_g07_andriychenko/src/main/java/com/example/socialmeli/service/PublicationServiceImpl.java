@@ -2,6 +2,7 @@ package com.example.socialmeli.service;
 
 import com.example.socialmeli.dto.request.PublicationPromoRequest;
 import com.example.socialmeli.dto.request.PublicationRequest;
+import com.example.socialmeli.dto.response.PromoCountResponse;
 import com.example.socialmeli.dto.response.PublicationResponse;
 import com.example.socialmeli.dto.response.UserFollowedPublicationResponse;
 import com.example.socialmeli.entity.PublicationEntity;
@@ -48,7 +49,9 @@ public class PublicationServiceImpl implements IPublicationService {
         entity.getPublicationList().add(publication.getId());
     }
 
-//    US 0010
+    /**
+     * US 0010
+     */
     @Override
     public void registerPromoPublication(PublicationPromoRequest publicationPromoRequest) {
         UserEntity entity = userRepository.getEntityById(publicationPromoRequest.getUserId());
@@ -63,6 +66,35 @@ public class PublicationServiceImpl implements IPublicationService {
         publicationRepository.addEntity(publication);
 
         entity.getPublicationList().add(publication.getId());
+    }
+
+    /**
+     * US 0011
+     */
+
+    @Override
+    public PromoCountResponse getPromoCount(int userId) {
+        int promoProductsCount = getNumPromoPosts(userId);
+        UserEntity user = userRepository.getEntityById(userId);
+        return new PromoCountResponse(user.getId(), user.getName(), promoProductsCount);
+    }
+
+
+    @Override
+    public int getNumPromoPosts(int userId) {
+        int countPromo = 0;
+
+        UserEntity user = userRepository.getEntityById(userId);
+
+        for (int publicationId: user.getPublicationList()
+             ) {
+            PublicationEntity publication = publicationRepository.getEntityById(publicationId);
+            if (publication instanceof PublicationPromoEntity) {
+                countPromo++;
+            }
+        }
+
+        return countPromo;
     }
 
     /**
