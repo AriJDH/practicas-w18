@@ -1,6 +1,6 @@
 package com.example.BE_java_hisp_w18_g04.repository;
-import com.example.BE_java_hisp_w18_g04.dto.request.PostPromoDTOReq;
 import com.example.BE_java_hisp_w18_g04.entity.Post;
+import com.example.BE_java_hisp_w18_g04.entity.PromoPost;
 import com.example.BE_java_hisp_w18_g04.util.Mapper;
 import com.fasterxml.jackson.core.type.TypeReference;
 import org.springframework.stereotype.Repository;
@@ -13,9 +13,14 @@ import java.util.List;
 @Repository
 public class PostRepositoryImp implements IPostRepository{
     List<Post> posts = new ArrayList<>();
-    List<PostPromoDTOReq> postsPromo = new ArrayList<>();
+    List<PromoPost> promoPosts = new ArrayList<>();
+
     public PostRepositoryImp() {
         loadPosts();
+    }
+
+    public void createPromoPost(PromoPost post){
+        promoPosts.add(post);
     }
 
     public void createPost(Post post){
@@ -25,12 +30,6 @@ public class PostRepositoryImp implements IPostRepository{
             post.setPost_id(posts.get(posts.size()-1).getPost_id()+1);
         posts.add(post);
     }
-
-    @Override
-    public void createPostPromo(PostPromoDTOReq postPromoDTOReq) {
-        postsPromo.add(postPromoDTOReq);
-    }
-
     private void loadPosts(){
         File jsonFile= null;
         try {
@@ -40,4 +39,6 @@ public class PostRepositoryImp implements IPostRepository{
             System.out.println("Posts not found " + ex.getMessage());
         }
     }
+
+
 }

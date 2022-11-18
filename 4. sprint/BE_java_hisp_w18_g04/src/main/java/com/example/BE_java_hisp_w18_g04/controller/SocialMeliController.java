@@ -1,11 +1,12 @@
 package com.example.BE_java_hisp_w18_g04.controller;
 
 import com.example.BE_java_hisp_w18_g04.dto.request.PostDTOReq;
-import com.example.BE_java_hisp_w18_g04.dto.request.PostPromoDTOReq;
+import com.example.BE_java_hisp_w18_g04.dto.request.PromoPostDTOReq;
 import com.example.BE_java_hisp_w18_g04.dto.respose.FollowedListDTORes;
 import com.example.BE_java_hisp_w18_g04.dto.respose.FollowerCountDTORes;
 import com.example.BE_java_hisp_w18_g04.dto.respose.FollowerListDTORes;
 import com.example.BE_java_hisp_w18_g04.dto.respose.PostFollowedByDateDTORes;
+import com.example.BE_java_hisp_w18_g04.entity.PromoPost;
 import com.example.BE_java_hisp_w18_g04.service.IPostService;
 import com.example.BE_java_hisp_w18_g04.service.IUserBuyerService;
 import com.example.BE_java_hisp_w18_g04.service.IUserSellerService;
@@ -26,8 +27,6 @@ public class SocialMeliController {
         this.userSellerService = userSellerService;
         this.postService = postService;
     }
-
-
 
     @PostMapping("/users/{userId}/follow/{userIdToFollow}")
     public ResponseEntity<?> follow(@PathVariable Integer userId, @PathVariable Integer userIdToFollow){
@@ -66,9 +65,13 @@ public class SocialMeliController {
         userBuyerService.unfollow(userId,userIdToUnfollow);
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
     @PostMapping("/products/promo-post")
-    public ResponseEntity<?> publishPostPromo(@RequestBody PostPromoDTOReq postPromoDTOReq){
-        userSellerService.publishPromoPost(postPromoDTOReq);
+    public ResponseEntity<?> publishPromoPost(@RequestBody PromoPostDTOReq promoPostDTOReq){
+        userSellerService.publishPromoPost(promoPostDTOReq);
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
+
+
 }

@@ -2,11 +2,12 @@ package com.example.BE_java_hisp_w18_g04.service;
 
 
 import com.example.BE_java_hisp_w18_g04.dto.request.PostDTOReq;
-import com.example.BE_java_hisp_w18_g04.dto.request.PostPromoDTOReq;
+import com.example.BE_java_hisp_w18_g04.dto.request.PromoPostDTOReq;
 import com.example.BE_java_hisp_w18_g04.dto.respose.FollowerCountDTORes;
 import com.example.BE_java_hisp_w18_g04.dto.respose.FollowerListDTORes;
 import com.example.BE_java_hisp_w18_g04.dto.respose.UserDTORes;
 import com.example.BE_java_hisp_w18_g04.entity.Post;
+import com.example.BE_java_hisp_w18_g04.entity.PromoPost;
 import com.example.BE_java_hisp_w18_g04.entity.UserBuyer;
 import com.example.BE_java_hisp_w18_g04.entity.UserSeller;
 import com.example.BE_java_hisp_w18_g04.exception.BadRequestException;
@@ -29,6 +30,7 @@ public class UserSellerServiceImp implements IUserSellerService{
         this.postRepository = postRepository;
     }
 
+
     @Override
     public FollowerCountDTORes followersCount(Integer userId) {
         if(validateSeller(userId)) {
@@ -38,13 +40,6 @@ public class UserSellerServiceImp implements IUserSellerService{
             throw new BadRequestException("The user_id not exist");
         }
     }
-
-
-
-
-
-
-
     private Boolean validateSeller(Integer id){
         Boolean valid = false;
         List<UserSeller> sellers = sellerRepository.findAll();
@@ -71,9 +66,6 @@ public class UserSellerServiceImp implements IUserSellerService{
         }
     }
 
-
-
-
     @Override
     public void publishPost(PostDTOReq postDTOReq) {
         Post post= Mapper.createObjectMapper().convertValue(postDTOReq, Post.class);
@@ -83,10 +75,10 @@ public class UserSellerServiceImp implements IUserSellerService{
     }
 
     @Override
-    public void publishPromoPost(PostPromoDTOReq postPromoDTOReq) {
-        if(postPromoDTOReq.getHas_promo()){
-            throw new BadRequestException("The post is not a promo!");
-        }else postRepository.createPostPromo(postPromoDTOReq);
+    public void publishPromoPost(PromoPostDTOReq promoPostDTOReq) {
+
+        PromoPost post = Mapper.createObjectMapper().convertValue(promoPostDTOReq, PromoPost.class);
+        postRepository.createPromoPost(post);
     }
 
 
