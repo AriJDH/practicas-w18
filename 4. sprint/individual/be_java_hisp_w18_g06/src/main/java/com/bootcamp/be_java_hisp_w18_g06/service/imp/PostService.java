@@ -1,6 +1,7 @@
 package com.bootcamp.be_java_hisp_w18_g06.service.imp;
 
 import com.bootcamp.be_java_hisp_w18_g06.dto.request.PostDTO;
+import com.bootcamp.be_java_hisp_w18_g06.dto.response.UserPromotionCountDTO;
 import com.bootcamp.be_java_hisp_w18_g06.entity.Post;
 import com.bootcamp.be_java_hisp_w18_g06.entity.PromoPost;
 import com.bootcamp.be_java_hisp_w18_g06.entity.User;
@@ -88,6 +89,22 @@ public class PostService implements IPostService {
 		}
 
 	}
+
+	@Override
+	public UserPromotionCountDTO countPromotionProducts(int id){
+		User user = userRepository.getUser(id);
+
+		if (user.getPromotions() == null) {
+			throw new EmptyException("User has no active promotion");
+		}
+
+		UserPromotionCountDTO userPromoPostCountDTO = mapper.convertValue(user, UserPromotionCountDTO.class);
+		userPromoPostCountDTO.setPromo_products_count(user.getPromotions().size());
+		return userPromoPostCountDTO;
+
+
+	}
+
 
 	// Métodos auxiliares
 	private Optional<List<Post>> sortByDate(List<Post> posts) {

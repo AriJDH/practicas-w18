@@ -17,6 +17,7 @@ public class User {
     private List<User> followers;
     private List<User> followed;
     private List<Post> posts;
+    private List<PromoPost> promotions;
     
     public User(int user_id, String user_name) {
         this.user_id = user_id;
