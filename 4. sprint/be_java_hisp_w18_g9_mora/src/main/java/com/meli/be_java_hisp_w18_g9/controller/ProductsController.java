@@ -76,7 +76,8 @@ public class ProductsController {
 
     @PostMapping("/promo-post")
     public ResponseEntity<PromoPostRequest> savePromo(@RequestBody PromoPostRequest promoPostRequest){
-        return new ResponseEntity<>(postService.savePromo(promoPostRequest), HttpStatus.OK);
+          postService.savePromo(promoPostRequest);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     // * ==============

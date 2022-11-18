@@ -18,7 +18,7 @@ public interface IPostService {
     PostListByFollowedResponse findPostsByFollowedAndUserId(Integer userId); // US-0006
     PostListByFollowedResponse findPostsByFollowedAndUserIdOrderByDateAsc(Integer userId); // US-0009A
     PostListByFollowedResponse findPostsByFollowedAndUserIdOrderByDateDesc(Integer userId); // US-0019B
-    PromoPostRequest savePromo(PromoPostRequest promoPostRequest); // US-0010
+    void savePromo(PromoPostRequest promoPostRequest); // US-0010
     PromoProductsCountResponse countPromoByUserId(Integer userId); // US-0011
     PromoPostListByUserResponse findPromoByUserId(Integer userId); // US-0012
 

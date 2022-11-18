@@ -21,10 +21,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.time.Period;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import java.util.stream.Stream;
@@ -130,28 +127,77 @@ public class PostService implements IPostService{
 
     }
 
+
     // * ===============
 
     @Override
-    public PromoPostRequest savePromo(PromoPostRequest promoPostRequest) {
-        return null;
+    public void savePromo(PromoPostRequest promoPostRequest) {
+
+        Post postPromo = mapper.convertValue(promoPostRequest, Post.class);
+        //valido si usuario existe
+        User user = userRepository.findById(postPromo.getUserId()).orElseThrow(()->new NotFoundException(String.format("User whit id %d not found", postPromo.getUserId())));
+
+       if(Stream.of(postPromo.getCategory(), postPromo.getHasPromo(),postPromo.getDiscount(),postPromo.getPrice(),
+               postPromo.getProduct(), postPromo.getUserId()).anyMatch(Objects::isNull)){
+       
+            throw new BadRequestException("All fields are required");
+        } else if (user.getProducts().stream().noneMatch(product -> product.getProductId().equals(postPromo.getProduct().getProductId()))) {
+
+           throw new BadRequestException("Product not associated with user");
+       }
+
+
+       postRepository.addPost(postPromo);
+
+        if(user.getProducts() == null){
+            user.setProducts(List.of(postPromo.getProduct()));
+        }else{
+            user.getProducts().add(postPromo.getProduct());
+        }
+
+        userRepository.update(user);
     }
 
     // * ===============
 
     @Override
     public PromoProductsCountResponse countPromoByUserId(Integer userId) {
-        return null;
+        User user = userRepository.findById(userId).orElseThrow(()->new NotFoundException("no encontrado"));
+        Integer promoPostListCount = findPromoByUserId(userId).getPosts().size();
+
+        return new PromoProductsCountResponse(user.getUserId(),user.getUserName(), promoPostListCount);
     }
 
     // * ===============
 
     @Override
     public PromoPostListByUserResponse findPromoByUserId(Integer userId) {
-        return null;
+        User user = userRepository.findById(userId).orElseThrow(()->new NotFoundException("No se encontro"));
+
+        List<Post> post = postRepository.findAllByUserId(userId)
+                .stream()
+                .filter(post1 -> post1.getDiscount()>0)
+                .collect(Collectors.toList());
+        List<PromoPostRequest> promoPostRequests = new ArrayList<>();
+        for (Post postPromo:
+             post) {
+            promoPostRequests.add(mapper.convertValue(postPromo, PromoPostRequest.class));
+        }
+
+
+        PromoPostListByUserResponse promoPostListByUserResponse = new PromoPostListByUserResponse(userId,
+                user.getUserName(),promoPostRequests);
+
+        return promoPostListByUserResponse ;
     }
 
     // * ===============
 
 
 }
+
+
+
+
+
+

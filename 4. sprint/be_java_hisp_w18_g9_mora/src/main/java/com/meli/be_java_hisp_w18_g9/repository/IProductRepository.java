@@ -11,4 +11,5 @@ public interface IProductRepository {
     Product save(Product entity);
     Product update(Integer id, Product entity);
     void deleteById(Integer id);
+
 }
