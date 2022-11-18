@@ -5,6 +5,7 @@ import com.socialmedia.be_java_hisp_w18_Otero.dto.request.PostPromoDtoReq;
 import com.socialmedia.be_java_hisp_w18_Otero.dto.response.GenericResdto;
 import com.socialmedia.be_java_hisp_w18_Otero.dto.response.PromoPostCountDto;
 import com.socialmedia.be_java_hisp_w18_Otero.dto.response.RankingLikesDto;
+import com.socialmedia.be_java_hisp_w18_Otero.entity.Post;
 import com.socialmedia.be_java_hisp_w18_Otero.service.IPostService;
 import com.socialmedia.be_java_hisp_w18_Otero.service.PostServiceImp;
 import org.springframework.http.HttpStatus;
@@ -35,10 +36,15 @@ public class PostController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
+//    @PostMapping("/promo-post")
+//    public ResponseEntity<GenericResdto> createPostPromo(@RequestBody PostPromoDtoReq post) {
+//        postService.createPromoPost(post);
+//        return new ResponseEntity<>(new GenericResdto("Post-promo created with success", 200), HttpStatus.OK);
+//    }
+
     @PostMapping("/promo-post")
-    public ResponseEntity<GenericResdto> createPostPromo(@RequestBody PostPromoDtoReq post) {
-        postService.createPromoPost(post);
-        return new ResponseEntity<>(new GenericResdto("Post-promo created with success", 200), HttpStatus.OK);
+    public Post createPostPromo(@RequestBody PostPromoDtoReq post) {
+        return postService.createPromoPost(post);
     }
 
     @GetMapping("/promo-post/count")

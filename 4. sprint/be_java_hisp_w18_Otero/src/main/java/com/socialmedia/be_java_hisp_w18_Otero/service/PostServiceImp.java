@@ -100,18 +100,19 @@ public class PostServiceImp implements IPostService {
     }
 
     @Override
-    public void createPromoPost(PostPromoDtoReq p) {
+    public Post createPromoPost(PostPromoDtoReq p) {
+        Post post;
         Seller seller = userRepository.findSellerById(p.getUser_id());
         if (seller == null) {
             throw new BadRequestException("The post was not created. No user with id " + p.getUser_id());
         } else {
-            Post post =
-                    new Post(postId, p.getUser_id(), p.getDate(), p.getProduct(), p.getCategory(), p.getPrice(),
-                            p.isHas_promo(), p.getDiscount());
+            post = new Post(postId, p.getUser_id(), p.getDate(), p.getProduct(), p.getCategory(), p.getPrice(),
+                    p.isHas_promo(), p.getDiscount());
             postRepository.save(post);
             userRepository.createPost(post, p.getUser_id());
             postId++;
         }
+        return post;
     }
 
     @Override

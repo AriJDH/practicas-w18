@@ -5,6 +5,7 @@ import com.socialmedia.be_java_hisp_w18_Otero.dto.request.PostPromoDtoReq;
 import com.socialmedia.be_java_hisp_w18_Otero.dto.response.PostDtoRes;
 import com.socialmedia.be_java_hisp_w18_Otero.dto.response.PromoPostCountDto;
 import com.socialmedia.be_java_hisp_w18_Otero.dto.response.RankingLikesDto;
+import com.socialmedia.be_java_hisp_w18_Otero.entity.Post;
 
 public interface IPostService {
 
@@ -12,7 +13,7 @@ public interface IPostService {
 
     PostDtoRes getPostSellerListByUserId(Integer id, String order);
 
-    void createPromoPost(PostPromoDtoReq post);
+    Post createPromoPost(PostPromoDtoReq post);
 
     PromoPostCountDto getPromoPostCountBySeller(Integer userId);
 
