@@ -1,0 +1,19 @@
+package com.example.BE_java_hisp_w18_g04.dto.request;
+
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
+public class ProductDTOReq {
+    private Integer product_id;
+    private String product_name;
+    private String type;
+    private String brand;
+    private String color;
+    private String notes;
+}

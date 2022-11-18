@@ -17,7 +17,7 @@ public class NumerosRomanosRestController {
             for (;number >= spanishNum[i]; number -= spanishNum[i])
                 romanNumb.append(romanNumbs[i]);
 
-        return romanNumbs.toString();
+        return romanNumb.toString();
 
 
     }
