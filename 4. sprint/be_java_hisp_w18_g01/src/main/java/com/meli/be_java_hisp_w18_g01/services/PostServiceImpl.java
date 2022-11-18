@@ -84,7 +84,6 @@ public class PostServiceImpl implements PostService {
         ObjectMapper mapper = new ObjectMapper();
 
         try {
-            System.out.println(postDiscountDTO.getDate());
             post = new Post(
                     postCount,
                     user,
