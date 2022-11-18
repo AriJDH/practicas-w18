@@ -12,7 +12,7 @@ public interface IUserService {
     SellerFollowerCountDtoRes getCount(Integer id);
     SellerFollowerListDtoRes getFollowers(Integer id, String order);
     UserFollowedListDtoRes getFollowed(Integer id, String order);
-    void addPost(PostDtoReq postReq);
+    String addPost(PostDtoReq postReq);
     RecentPostsDtoRes getRecentPosts(Integer userId, String order);
 
 }

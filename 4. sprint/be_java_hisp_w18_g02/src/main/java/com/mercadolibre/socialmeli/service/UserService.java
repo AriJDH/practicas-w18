@@ -107,7 +107,7 @@ public class UserService implements IUserService {
      * @param postReq
      */
     @Override
-    public void addPost(PostDtoReq postReq) {
+    public String addPost(PostDtoReq postReq) {
         Post post;
         Product prod;
         try {
@@ -129,7 +129,7 @@ public class UserService implements IUserService {
         } catch (Exception e) {
             throw new BadRequestException("Posteo invalido");
         }
-
+        return "Post creado correctamente";
     }
 
     /**
