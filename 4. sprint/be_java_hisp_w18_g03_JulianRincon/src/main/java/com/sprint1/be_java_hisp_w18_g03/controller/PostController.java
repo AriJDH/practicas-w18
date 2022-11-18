@@ -39,7 +39,12 @@ public class PostController {
     }
 
     @GetMapping("/promo-post/count")
-    public ResponseEntity<PromoPostCountDTO> getCouuntPromoPost(@RequestParam Integer user_id){
+    public ResponseEntity<PromoPostCountDTO> getCountPromoPost(@RequestParam Integer user_id){
         return new ResponseEntity<>(postService.getPostPromoCount(user_id),HttpStatus.OK);
+    }
+
+    @GetMapping("/promo-post/followed")
+    public ResponseEntity<?> getPromoPostsFollowed(@RequestParam Integer user_id){
+        return new ResponseEntity<>(postService.getPromoPostFollowed(user_id),HttpStatus.OK);
     }
 }

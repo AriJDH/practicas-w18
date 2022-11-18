@@ -2,7 +2,8 @@
 	"info": {
 		"_postman_id": "3248b94b-2185-43f4-8198-8a1508b337cf",
 		"name": "practica sprint1",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "24491077"
 	},
 	"item": [
 		{
@@ -230,6 +231,68 @@
 					]
 				},
 				"description": "US 0009: Ordenamiento por fecha ascendente y descendente\n\n**datos de la url**\n\n**_paramentro:_** userId\n**_tipo:_** int\n**_descripción:_** Número que identifica a cada usuario\n\n**query_params**\n**_paramentro:_** date_asc\n**_descripción:_** Fecha ascendente (de más antigua a más nueva).\n\n**_paramentro:_** date_desc\n**_descripción:_**Fecha descendente (de más nueva a más antigua)\n\n\n**ejemplos:**\n/products/followed/{userId}/list?order=date_asc\n/products/followed/{userId}/list?order=date_desc"
+			},
+			"response": []
+		},
+		{
+			"name": "US 0010",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"user_id\": 1,\n    \"date\": \"29-04-2021\",\n    \"product\": {\n        \"product_id\": 1,\n        \"product_name\": \"Silla Gamer\",\n        \"type\": \"Gamer\",\n        \"brand\": \"Racer\",\n        \"color\": \"Red & Black\",\n        \"notes\": \"Special Edition\"\n    },\n    \"category\": 100,\n    \"price\": 1500.50,\n    \"has_promo\": true,\n    \"discount\": 0.25\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/products/promo-post",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"products",
+						"promo-post"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "US 0011",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "US 0012",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/products/promo-post/followed?user_id=2",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"products",
+						"promo-post",
+						"followed"
+					],
+					"query": [
+						{
+							"key": "user_id",
+							"value": "2"
+						}
+					]
+				}
 			},
 			"response": []
 		}

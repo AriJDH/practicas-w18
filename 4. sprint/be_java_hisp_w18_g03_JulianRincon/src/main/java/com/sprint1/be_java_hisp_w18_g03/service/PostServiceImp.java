@@ -64,12 +64,12 @@ public class PostServiceImp implements IPostService {
     @Override
     public ResponseDTO createPromoPost(PromoPostDTORequest request) {
         User user = iUserRepository.findById(request.getUserId());
-        if(user == null){
+        if (user == null) {
             throw new NoFoundException("User not found");
         }
 
         Category category = iCategoryRepository.findCategoryById(request.getCategory());
-        if(category == null){
+        if (category == null) {
             throw new NoFoundException("Category not found");
         }
 
@@ -98,7 +98,7 @@ public class PostServiceImp implements IPostService {
 
         boolean responseAdd = iPostRepository.addPost(newPost);
 
-        if(!responseAdd){
+        if (!responseAdd) {
             throw new CreationException("Error creating post");
         }
 
@@ -175,10 +175,52 @@ public class PostServiceImp implements IPostService {
 
         return new SellersPostDTO(user.getUserId(), responsePostDTOs);
     }
+
     @Override
-    public PromoPostCountDTO getPostPromoCount(Integer userId){
+    public PromoPostCountDTO getPostPromoCount(Integer userId) {
         List<Post> posts = iPostRepository.findPromoPostsByUser(userId);
         User user = iUserRepository.findById(userId);
         return new PromoPostCountDTO(user.getUserId(), user.getUserName(), posts.size());
+    }
+
+    @Override
+    public List<PromoPostDTORes> getPromoPostFollowed(Integer userId) {
+        User user = iUserRepository.findById(userId);
+        if (user == null) {
+            throw new NoFoundException("User not found");
+        }
+
+        if (user.getListFollowed().size() == 0) {
+            throw new NoFoundException("Followeds not found");
+        }
+
+        List<User> usersFollowed = user.getListFollowed();
+        List<Post> postsFollowed = new ArrayList<>();
+
+        for (User userFollowed : usersFollowed) {
+            postsFollowed.addAll(iPostRepository.findPromoPostsByUser(userFollowed.getUserId()));
+        }
+
+        return postsFollowed.stream()
+                .map(post ->
+                        new PromoPostDTORes(
+                                userId,
+                                post.getDate(),
+                                new ProductResponseDTO(
+                                        post.getProducto().getProductId(),
+                                        post.getProducto().getProductName(),
+                                        post.getProducto().getBrand(),
+                                        post.getProducto().getColor(),
+                                        post.getProducto().getNotes(),
+                                        post.getProducto().getType()
+                                ),
+                                post.getProducto().getCategory().getCategoryId(),
+                                post.getProducto().getPrice(),
+                                post.getPostId(),
+                                post.isHasPromo(),
+                                post.getDiscount()
+
+                        )
+                ).collect(Collectors.toList());
     }
 }

@@ -3,9 +3,9 @@ package com.sprint1.be_java_hisp_w18_g03.service;
 
 import com.sprint1.be_java_hisp_w18_g03.dto.request.PromoPostDTORequest;
 import com.sprint1.be_java_hisp_w18_g03.dto.request.RequestPostDTO;
-import com.sprint1.be_java_hisp_w18_g03.dto.response.PromoPostCountDTO;
-import com.sprint1.be_java_hisp_w18_g03.dto.response.ResponseDTO;
-import com.sprint1.be_java_hisp_w18_g03.dto.response.SellersPostDTO;
+import com.sprint1.be_java_hisp_w18_g03.dto.response.*;
+
+import java.util.List;
 
 public interface IPostService {
 
@@ -16,4 +16,6 @@ public interface IPostService {
     SellersPostDTO getPostSellers(Integer userId, String order);
 
     PromoPostCountDTO getPostPromoCount(Integer userId);
+
+    List<PromoPostDTORes> getPromoPostFollowed(Integer userId);
 }
