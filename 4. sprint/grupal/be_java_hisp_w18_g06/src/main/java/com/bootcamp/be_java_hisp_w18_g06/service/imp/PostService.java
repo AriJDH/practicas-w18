@@ -43,29 +43,22 @@ public class PostService implements IPostService {
 
 		User user = userRepository
 						.findUserById(id)
-						.orElseThrow(() -> new BadRequestException("El usuario con ID" + id
-										+ "no existe"));
+						.orElseThrow(() -> new BadRequestException("The user id" + id
+										+ " does not exist"));
 
 		List<Post> postsSeller = getPosts(user)
-						.orElseThrow(() -> new EmptyException("El usuario no sigue a Vendedores"));
+						.orElseThrow(() -> new EmptyException("User does not follow Sellers"));
 
 		List<Post> postsOrder = sortByDate(postsSeller)
-						.orElseThrow(() -> new EmptyException("No hay posteos para ordenar"));
+						.orElseThrow(() -> new EmptyException("There are no posts to sort"));
 
 		List<Post> postsFilter = filterLastTwoWeeks(postsOrder)
-						.orElseThrow(() -> new EmptyException("No existen posts en las últimas dos semanas"));
+						.orElseThrow(() -> new EmptyException("There are no posts to sort in the last two weeks"));
 
 		return postsFilter
 						.stream()
 						.map(this::mapperDTO)
 						.collect(Collectors.toList());
-
-		//		return filterLastTwoWeeks(sortByDate(getPosts(user)))
-		//						.stream()
-		//						.map(this::mapperDTO
-		//						)
-		//						.collect(Collectors.toList());
-
 	}
 	@Override
 	public List<PostDTO> sortedByAscAndDesc(int id, String order) {
@@ -112,7 +105,7 @@ public class PostService implements IPostService {
 	private Optional<List<Post>> getPosts(User user) {
 		List<Post> postList = new ArrayList<>();
 		List<User> users = Optional.ofNullable(user.getFollowed())
-						.orElseThrow(()-> new EmptyException("El usuario no sigue a vendedores"));
+						.orElseThrow(()-> new EmptyException("User does not follow Sellers"));
 
 		user.getFollowed()
 						.forEach(u -> postList.addAll(u.getPosts()));

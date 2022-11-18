@@ -41,21 +41,16 @@ public class UserController {
     }
 
     @GetMapping("/{userId}/followed/list")
-    public ResponseEntity<UserFollowedListDTO> getFollowedList(@PathVariable int userId) {
-        UserFollowedListDTO userFollowedListDTO = userService.getFollowedList(userId);
+    public ResponseEntity<UserFollowedListDTO> getFollowedList(@PathVariable int userId, @RequestParam(required = false) String order) {
+        UserFollowedListDTO userFollowedListDTO = userService.getFollowedList(userId, order);
         // Agregar/Aclarar en el readme que devuelve un status...
         return ResponseEntity.status(HttpStatus.OK).body(userFollowedListDTO);
     }
 
     @GetMapping("/{userId}/followers/list")
-    public ResponseEntity<UserFollowersListDTO> getFollowersList(@PathVariable int userId) {
-        UserFollowersListDTO userFollowersListDTO = userService.getFollowersList(userId);
-        return ResponseEntity.status(HttpStatus.OK).body(userFollowersListDTO);
+    public ResponseEntity<UserFollowersListDTO> getFollowersList(@PathVariable int userId, @RequestParam(required = false) String order) {
+        return ResponseEntity.status(HttpStatus.OK).body(userService.getFollowersList(userId, order));
     }
 
-    @GetMapping("/{userId}/followers/list")
-    public void getFollowersList(@PathVariable int userId, @RequestParam String order) {
-        userService.userSortList(order, userId);
-    }
 
 }

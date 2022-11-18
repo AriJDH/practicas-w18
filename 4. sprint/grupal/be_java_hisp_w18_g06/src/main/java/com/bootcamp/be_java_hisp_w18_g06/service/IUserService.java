@@ -11,8 +11,8 @@ public interface IUserService {
     void followUser(int userId, int userIdToFollow);
     void unfollowUser(int userId, int userIdToUnfollow);
     UserFollowersCountDTO getFollowersCount(int userId);
-    UserFollowedListDTO getFollowedList(int userId);
-    UserFollowersListDTO getFollowersList(int userId);
-    void userSortList(String order, int userId);
+    UserFollowedListDTO getFollowedList(int userId, String order);
+    UserFollowersListDTO getFollowersList(int userId, String order);
+//    void userSortList(String order, int userId);
 
 }
