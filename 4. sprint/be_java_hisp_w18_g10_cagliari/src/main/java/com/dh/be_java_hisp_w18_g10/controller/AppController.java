@@ -1,10 +1,7 @@
 package com.dh.be_java_hisp_w18_g10.controller;
 
 import com.dh.be_java_hisp_w18_g10.dto.require.PostDTOreq;
-import com.dh.be_java_hisp_w18_g10.dto.response.UserPostsDTOres;
-import com.dh.be_java_hisp_w18_g10.dto.response.UserFollowersListDTOres;
-import com.dh.be_java_hisp_w18_g10.dto.response.UserFollowersCountDTOres;
-import com.dh.be_java_hisp_w18_g10.dto.response.UserPromoPostCountDTOres;
+import com.dh.be_java_hisp_w18_g10.dto.response.*;
 import com.dh.be_java_hisp_w18_g10.service.IAppService;
 import com.dh.be_java_hisp_w18_g10.service.AppService;
 import org.springframework.http.HttpStatus;
@@ -108,8 +105,8 @@ public class AppController {
     public ResponseEntity<?> getListPromoPostByUser(
             @RequestParam int user_id
     ) {
-
-        return null;
+        UserPromoPostsDTOres userPromoDTO = appService.getUserPromoPosts(user_id);
+        return new ResponseEntity<>(userPromoDTO, HttpStatus.OK);
     }
 
 }

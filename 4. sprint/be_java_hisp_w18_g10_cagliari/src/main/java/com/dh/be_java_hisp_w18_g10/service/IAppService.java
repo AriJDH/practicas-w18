@@ -14,6 +14,6 @@ public interface IAppService {
     UserPostsDTOres getUserPosts(int userId, String order);
     void unfollowUser(int userId, int userIdToUnfollow);
     UserPromoPostCountDTOres getUserPromoPostCount(int userId);
-
+    UserPromoPostsDTOres getUserPromoPosts(int userId);
 
 }

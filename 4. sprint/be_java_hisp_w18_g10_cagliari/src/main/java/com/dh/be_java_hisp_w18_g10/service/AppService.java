@@ -69,7 +69,7 @@ public class AppService implements IAppService {
         if(userRepository.getUser(userId) == null){
             throw new UserNotFoundException("No existe usuario con id " + userId);
         }
-        return DTOMapper.mapTo(userRepository.getUser(userId), userRepository.getUserFollowers(userId));
+        return DTOMapper.mapToFollowersListDTO(userRepository.getUser(userId), userRepository.getUserFollowers(userId));
     }
 
     @Override
@@ -204,7 +204,10 @@ public class AppService implements IAppService {
         int promoCount = userRepository.countUserPromoPosts(userId);
         return DTOMapper.mapTo(user, promoCount);
     }
-
-
-
+    @Override
+    public UserPromoPostsDTOres getUserPromoPosts(int userId) {
+        User user = userRepository.getUser(userId);
+        List<Post> promoPosts = userRepository.getPromoPostByUser(userId);
+        return DTOMapper.mapTo(user, promoPosts);
+    }
 }
