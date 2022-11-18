@@ -57,6 +57,13 @@ public class UserRepository implements IUserRepository{
     }
 
     @Override
+    public List<User> getAllUsers() {
+        return users.entrySet().stream()
+                .map(e -> e.getValue())
+                .collect(Collectors.toList());
+    }
+
+    @Override
     public List<User> getFollowers(Integer id) {
         if(findById(id) == null) throw new NotFoundException("No se pudo encontrar al vendedor " + id);
         List<User> res = new ArrayList<>();

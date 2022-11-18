@@ -24,6 +24,13 @@ public class UserService implements IUserService {
     @Autowired
     private IUserRepository userRepository;
 
+    @Override
+    public List<UserDtoRes> getAllUsers() {
+        return userRepository.getAllUsers().stream()
+                .map(u -> new UserDtoRes(u.getId(), u.getName()))
+                .collect(Collectors.toList());
+    }
+
     /**
      * US0001
      *

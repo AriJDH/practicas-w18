@@ -147,4 +147,9 @@ public class UserController {
                                                      @RequestParam(required = false) String order){
         return ResponseEntity.ok(userService.getPromoPostsFromSeller(user_id, order));
     }
+
+    @GetMapping("/users")
+    public ResponseEntity<?> getAllUsers(){
+        return ResponseEntity.ok(userService.getAllUsers());
+    }
 }

@@ -8,6 +8,7 @@ import java.util.List;
 
 public interface IUserRepository {
     User findById(Integer id);
+    List<User> getAllUsers();
     List<User> getFollowers(Integer id);
     List<User> getFollowed(Integer id);
     void follow(Integer idFollower, Integer idFollow);
