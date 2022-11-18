@@ -2,6 +2,7 @@ package com.mercadolibre.socialmeli.service;
 
 import com.mercadolibre.socialmeli.dto.ProductDto;
 import com.mercadolibre.socialmeli.dto.request.PostDtoReq;
+import com.mercadolibre.socialmeli.dto.request.PromoDtoReq;
 import com.mercadolibre.socialmeli.dto.response.*;
 import com.mercadolibre.socialmeli.entity.Post;
 import com.mercadolibre.socialmeli.entity.Product;
@@ -108,10 +109,10 @@ public class UserService implements IUserService {
      */
     @Override
     public void addPost(PostDtoReq postReq) {
-        Post post;
+        Post post; //primero declaro un post y un product
         Product prod;
         try {
-            prod = new Product(postReq.getProduct().getId(),
+            prod = new Product(postReq.getProduct().getId(), //lo inicializo
                     postReq.getProduct().getName(),
                     postReq.getProduct().getType(),
                     postReq.getProduct().getBrand(),
@@ -121,7 +122,8 @@ public class UserService implements IUserService {
                     postReq.getDate(),
                     postReq.getCategory(),
                     postReq.getPrice(),
-                    prod);
+                    prod, false, 0.0);
+            System.out.println(post);
             userRepository.createPost(postReq.getUserId(), post);
 
         } catch (NotFoundException nf) {
@@ -159,7 +161,9 @@ public class UserService implements IUserService {
                                 p.getProduct().getColor(),
                                 p.getProduct().getNotes()),
                         p.getCategory(),
-                        p.getPrice()))
+                        p.getPrice(),
+                        p.getPromo(),
+                        p.getDiscount()))
                 .collect(Collectors.toList());
 
         if (order != null && order.equals("date_desc")) {
@@ -182,6 +186,55 @@ public class UserService implements IUserService {
     public String unfollow(Integer userId, Integer userIdToUnfollow) {
         this.userRepository.unfollow(userId, userIdToUnfollow);
         return "El usuario " + userId + " dejó de seguir al usuario " + userIdToUnfollow;
+    }
+
+    /**
+     * US0010
+     *
+     * @param promoReq
+     */
+    @Override
+    public void addPromo(PromoDtoReq promoReq) {
+        Post post; //primero declaro un post y un product
+        Product prod;
+        try {
+            prod = new Product(promoReq.getProduct().getId(), //lo inicializo
+                    promoReq.getProduct().getName(),
+                    promoReq.getProduct().getType(),
+                    promoReq.getProduct().getBrand(),
+                    promoReq.getProduct().getColor(),
+                    promoReq.getProduct().getNotes());
+            post = new Post(userRepository.getNextPostId(),
+                    promoReq.getDate(),
+                    promoReq.getCategory(),
+                    promoReq.getPrice(),
+                    prod,
+                    promoReq.getPromo(),
+                    promoReq.getDiscount());
+            System.out.println(post);
+            userRepository.createPost(promoReq.getUserId(), post);
+
+        } catch (NotFoundException nf) {
+            throw nf;
+        } catch (Exception e) {
+            throw new BadRequestException("Posteo invalido");
+        }
+
+
+
+    }
+
+    public PromoCountDtoRes promoCount(Integer userId){
+        User user = userRepository.findById(userId);
+        long count = user.getPosts().stream()
+                .filter(p -> p.getPromo())
+                .count();
+        PromoCountDtoRes res = new PromoCountDtoRes(
+                userId,
+                user.getName(),
+                count
+        );
+        return res;
     }
 
 }

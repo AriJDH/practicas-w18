@@ -1,4 +1,4 @@
-package com.mercadolibre.socialmeli.dto.response;
+package com.mercadolibre.socialmeli.dto.request;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -12,16 +12,16 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class PostDtoRes {
+public class PromoDtoReq {
     @JsonProperty("user_id")
     private Integer userId;
-    @JsonProperty("post_id")
-    private Integer postId;
     @JsonFormat(pattern = "dd-MM-yyyy")
     private LocalDate date;
     private ProductDto product;
     private Integer category;
     private Double price;
+    @JsonProperty("has_promo")
     private Boolean promo;
     private Double discount;
+
 }

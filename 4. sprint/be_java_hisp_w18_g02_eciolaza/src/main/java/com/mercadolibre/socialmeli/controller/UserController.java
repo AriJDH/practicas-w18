@@ -1,11 +1,13 @@
 package com.mercadolibre.socialmeli.controller;
 
 import com.mercadolibre.socialmeli.dto.request.PostDtoReq;
+import com.mercadolibre.socialmeli.dto.request.PromoDtoReq;
 import com.mercadolibre.socialmeli.dto.response.RecentPostsDtoRes;
 import com.mercadolibre.socialmeli.dto.response.SellerFollowerCountDtoRes;
 import com.mercadolibre.socialmeli.dto.response.SellerFollowerListDtoRes;
 import com.mercadolibre.socialmeli.dto.response.UserFollowedListDtoRes;
 import com.mercadolibre.socialmeli.service.IUserService;
+import com.mercadolibre.socialmeli.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -109,4 +111,24 @@ public class UserController {
         return ResponseEntity.ok(userService.unfollow(userId, userIdToUnfollow));
     }
 
+    /**
+     * US0010
+     * Add Post Promo
+     * @param promoReq Post
+     * @return 200 OK
+     *         400 Bad Request (ErrorDTO Error details)
+     */
+    @PostMapping("/products/promo-post")
+    public ResponseEntity<?> addPromo(@RequestBody PromoDtoReq promoReq){
+        userService.addPromo(promoReq);
+        System.out.println(promoReq);
+        return ResponseEntity.ok().build();
+    }
+
+    @GetMapping("/products/promo-post/count")
+    public ResponseEntity<?> promoCount(@RequestParam Integer user_id){
+        return ResponseEntity.ok(userService.promoCount(user_id));
+    }
+
 }
+
