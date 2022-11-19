@@ -3,6 +3,7 @@ package com.example.socialmeli.service.interfaces;
 import com.example.socialmeli.dto.response.UserFollowedListResponse;
 import com.example.socialmeli.dto.response.UserFollowerCountResponse;
 import com.example.socialmeli.dto.response.UserFollowersListResponse;
+import com.example.socialmeli.dto.response.UserPostPromoCountResponse;
 
 public interface IUserService {
 
@@ -14,6 +15,7 @@ public interface IUserService {
 
 
     UserFollowerCountResponse getUserFollowersCount(Integer userId);
+
 
     UserFollowersListResponse getFollowersUsersById(Integer userId, String order);
 

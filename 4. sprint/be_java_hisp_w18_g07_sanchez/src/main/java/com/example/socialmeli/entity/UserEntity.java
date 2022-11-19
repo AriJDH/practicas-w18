@@ -16,6 +16,7 @@ public class UserEntity {
     private List<Integer> followersList;   //Almacena los ids de los usuarios que nos siguen
     private List<Integer> followedList;   //Almacena los ids de los usuarios que seguimos
     private List<Integer> publicationList; //Almacena los ids de las publicaciones relacionadas al usuario
+    private List<Integer> promProductsList; //Almacena los ids de los productos en promocion del usuario
 
 
     public void addFollowersToList(Integer userId){
@@ -30,8 +31,10 @@ public class UserEntity {
         followedList.add(userId);
     }
 
+
     public void removeFollowedToList(Integer userId){
         followedList.remove(userId);
     }
 
+    public void addPromProductsList(Integer userId){promProductsList.add(userId);}
 }

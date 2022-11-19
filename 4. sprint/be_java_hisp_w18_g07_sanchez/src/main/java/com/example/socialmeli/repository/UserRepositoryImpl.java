@@ -2,6 +2,7 @@ package com.example.socialmeli.repository;
 
 import com.example.socialmeli.entity.UserEntity;
 import com.example.socialmeli.exception.NotFoundException;
+import com.example.socialmeli.repository.interfaces.IUserRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
@@ -15,12 +16,12 @@ public class UserRepositoryImpl implements IUserRepository {
 
     public UserRepositoryImpl() {
 
-        users.put(1, new UserEntity(1, "Carlos", new ArrayList<>(), new ArrayList<>(), new ArrayList<>()));
-        users.put(2, new UserEntity(2, "Felipe", new ArrayList<>(), new ArrayList<>(), new ArrayList<>()));
-        users.put(3, new UserEntity(3, "Maria", new ArrayList<>(), new ArrayList<>(), new ArrayList<>()));
-        users.put(4, new UserEntity(4, "Elisa", new ArrayList<>(), new ArrayList<>(), new ArrayList<>()));
-        users.put(5, new UserEntity(5, "Raul", new ArrayList<>(), new ArrayList<>(), new ArrayList<>()));
-        users.put(6, new UserEntity(6, "Florencia", new ArrayList<>(), new ArrayList<>(), new ArrayList<>()));
+        users.put(1, new UserEntity(1, "Carlos", new ArrayList<>(), new ArrayList<>(), new ArrayList<>(),new ArrayList<>()));
+        users.put(2, new UserEntity(2, "Felipe", new ArrayList<>(), new ArrayList<>(), new ArrayList<>(),new ArrayList<>()));
+        users.put(3, new UserEntity(3, "Maria", new ArrayList<>(), new ArrayList<>(), new ArrayList<>(),new ArrayList<>()));
+        users.put(4, new UserEntity(4, "Elisa", new ArrayList<>(), new ArrayList<>(), new ArrayList<>(),new ArrayList<>()));
+        users.put(5, new UserEntity(5, "Raul", new ArrayList<>(), new ArrayList<>(), new ArrayList<>(),new ArrayList<>()));
+        users.put(6, new UserEntity(6, "Florencia", new ArrayList<>(), new ArrayList<>(), new ArrayList<>(),new ArrayList<>()));
 
     }
 

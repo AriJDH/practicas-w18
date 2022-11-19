@@ -3,6 +3,7 @@ package com.example.socialmeli.controller;
 import com.example.socialmeli.dto.response.UserFollowedListResponse;
 import com.example.socialmeli.dto.response.UserFollowerCountResponse;
 import com.example.socialmeli.dto.response.UserFollowersListResponse;
+import com.example.socialmeli.dto.response.UserPostPromoCountResponse;
 import com.example.socialmeli.service.interfaces.IUserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -51,5 +52,4 @@ public class UserController {
 
         return new ResponseEntity<>(userService.getUserFollowersCount(userId), HttpStatus.OK);
     }
-
 }

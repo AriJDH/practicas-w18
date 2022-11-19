@@ -1,9 +1,6 @@
 package com.example.socialmeli.util;
 
-import com.example.socialmeli.dto.response.UserBasicResponse;
-import com.example.socialmeli.dto.response.UserFollowedListResponse;
-import com.example.socialmeli.dto.response.UserFollowerCountResponse;
-import com.example.socialmeli.dto.response.UserFollowersListResponse;
+import com.example.socialmeli.dto.response.*;
 import com.example.socialmeli.entity.UserEntity;
 
 import java.util.ArrayList;
@@ -37,6 +34,14 @@ public class UserMapper {
         response.setName(entity.getName());
         response.setFollowersCount(entity.getFollowersList().size());
 
+        return response;
+    }
+    public static UserPostPromoCountResponse userPublicationPromCountResponse(UserEntity entity){
+
+        UserPostPromoCountResponse response = new UserPostPromoCountResponse();
+        response.setId(entity.getId());
+        response.setName(entity.getName());
+        response.setPromoProductsCount(entity.getPromProductsList().size());
         return response;
     }
 

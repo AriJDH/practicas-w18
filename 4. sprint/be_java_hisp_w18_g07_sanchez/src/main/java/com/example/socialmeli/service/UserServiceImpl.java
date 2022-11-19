@@ -1,9 +1,6 @@
 package com.example.socialmeli.service;
 
-import com.example.socialmeli.dto.response.UserBasicResponse;
-import com.example.socialmeli.dto.response.UserFollowedListResponse;
-import com.example.socialmeli.dto.response.UserFollowerCountResponse;
-import com.example.socialmeli.dto.response.UserFollowersListResponse;
+import com.example.socialmeli.dto.response.*;
 import com.example.socialmeli.entity.UserEntity;
 import com.example.socialmeli.exception.NotFoundException;
 import com.example.socialmeli.repository.interfaces.IUserRepository;
@@ -72,7 +69,6 @@ public class UserServiceImpl implements IUserService {
         UserEntity userCount = userRepository.getEntityById(userId);
         return UserMapper.userEntity2UserFollowerCountResponse(userCount);
     }
-
     /**
      * This method when is called will return a user_id with its user_name
      * and a list of users followed with user_id and user_name.

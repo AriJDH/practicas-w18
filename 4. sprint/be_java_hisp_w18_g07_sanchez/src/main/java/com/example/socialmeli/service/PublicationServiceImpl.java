@@ -13,6 +13,7 @@ import com.example.socialmeli.util.PublicationMapper;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -62,7 +63,7 @@ public class PublicationServiceImpl implements IPublicationService {
         UserEntity userEntity = userRepository.getEntityById(userId);
         List<Integer> followedList = userEntity.getFollowedList();
 
-        // get all publications from all followed users (list of list of publications)
+        // get all publications from all followed users (list of publications)
         List<List<PublicationEntity>> publicationListList = followedList.stream()
                 .map(userRepository::getEntityById)
                 .map(userEntity1 -> userEntity1.getPublicationList().stream()

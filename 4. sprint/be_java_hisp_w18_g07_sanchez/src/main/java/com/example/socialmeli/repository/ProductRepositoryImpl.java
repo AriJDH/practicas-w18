@@ -2,6 +2,7 @@ package com.example.socialmeli.repository;
 
 import com.example.socialmeli.entity.ProductEntity;
 import com.example.socialmeli.exception.NotFoundException;
+import com.example.socialmeli.repository.interfaces.IProductRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.HashMap;
