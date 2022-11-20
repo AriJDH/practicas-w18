@@ -2,10 +2,7 @@ package com.example.BE_java_hisp_w18_g04.controller;
 
 import com.example.BE_java_hisp_w18_g04.dto.request.PostDTOReq;
 import com.example.BE_java_hisp_w18_g04.dto.request.PromoPostDTOReq;
-import com.example.BE_java_hisp_w18_g04.dto.respose.FollowedListDTORes;
-import com.example.BE_java_hisp_w18_g04.dto.respose.FollowerCountDTORes;
-import com.example.BE_java_hisp_w18_g04.dto.respose.FollowerListDTORes;
-import com.example.BE_java_hisp_w18_g04.dto.respose.PostFollowedByDateDTORes;
+import com.example.BE_java_hisp_w18_g04.dto.respose.*;
 import com.example.BE_java_hisp_w18_g04.service.IPostService;
 import com.example.BE_java_hisp_w18_g04.service.IUserBuyerService;
 import com.example.BE_java_hisp_w18_g04.service.IUserSellerService;
@@ -66,8 +63,13 @@ public class SocialMeliController {
     }
 
     @PostMapping("/products/promo-post")
-    public ResponseEntity<?> pusblishPromoPost(@RequestBody PromoPostDTOReq promoPostDTOReq){
+    public ResponseEntity<?> publishPromoPost(@RequestBody PromoPostDTOReq promoPostDTOReq){
         userSellerService.publishPromoPost(promoPostDTOReq);
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @GetMapping("/products/promo-post/count")
+    private ResponseEntity<PromoPostCountDTORes> getPromoProductsCount(@RequestParam Integer user_id){
+        return new ResponseEntity<>(userSellerService.getPromoPostCount(user_id),HttpStatus.OK);
     }
 }

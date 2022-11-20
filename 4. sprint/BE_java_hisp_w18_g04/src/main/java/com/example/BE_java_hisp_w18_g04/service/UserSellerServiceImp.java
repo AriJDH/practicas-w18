@@ -5,6 +5,7 @@ import com.example.BE_java_hisp_w18_g04.dto.request.PostDTOReq;
 import com.example.BE_java_hisp_w18_g04.dto.request.PromoPostDTOReq;
 import com.example.BE_java_hisp_w18_g04.dto.respose.FollowerCountDTORes;
 import com.example.BE_java_hisp_w18_g04.dto.respose.FollowerListDTORes;
+import com.example.BE_java_hisp_w18_g04.dto.respose.PromoPostCountDTORes;
 import com.example.BE_java_hisp_w18_g04.dto.respose.UserDTORes;
 import com.example.BE_java_hisp_w18_g04.entity.Post;
 import com.example.BE_java_hisp_w18_g04.entity.PromoPost;
@@ -80,5 +81,34 @@ public class UserSellerServiceImp implements IUserSellerService{
             postRepository.createPromoPost(promoPost);
         }
         else throw new BadRequestException("This product is not in promo");
+    }
+
+    @Override
+    public PromoPostCountDTORes getPromoPostCount(Integer user_id) {
+        if (validateSeller(user_id)){
+            return promoPostCountBySeller(user_id);
+        }
+        else
+            throw new BadRequestException("The user_id not exist");
+    }
+
+    private PromoPostCountDTORes promoPostCountBySeller(Integer user_id){
+        Integer countPromoPost=getCountPromoPostBySeller(user_id);
+        return generateSellerWithCountPosts(user_id,countPromoPost);
+    }
+    private PromoPostCountDTORes generateSellerWithCountPosts(Integer user_id, Integer countPosts){
+        return new PromoPostCountDTORes(user_id, sellerRepository.findById(user_id).getUser_name(),countPosts);
+    }
+
+    private Integer getCountPromoPostBySeller(Integer user_id){
+        List<PromoPost> promoPosts = postRepository.findAllPromoPost();
+        return filterPromoPostBySeller(user_id, promoPosts);
+    }
+
+    private Integer filterPromoPostBySeller(Integer user_id, List<PromoPost> promoPosts){
+        return promoPosts.stream().
+                filter(promoPost -> promoPost.getUser_id().equals(user_id) && promoPost.isHas_promo())
+                        .collect(Collectors.toList())
+                .size();
     }
 }

@@ -32,6 +32,11 @@ public class PostRepositoryImp implements IPostRepository{
         promoPosts.add(promoPost);
     }
 
+    @Override
+    public List<PromoPost> findAllPromoPost() {
+        return promoPosts;
+    }
+
     private void loadPosts(){
         File jsonFile= null;
         try {
