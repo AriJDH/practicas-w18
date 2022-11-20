@@ -1,6 +1,7 @@
 package com.example.BE_java_hisp_w18_g04.controller;
 
 import com.example.BE_java_hisp_w18_g04.dto.request.PostDTOReq;
+import com.example.BE_java_hisp_w18_g04.dto.request.PromoPostDTOReq;
 import com.example.BE_java_hisp_w18_g04.dto.respose.FollowedListDTORes;
 import com.example.BE_java_hisp_w18_g04.dto.respose.FollowerCountDTORes;
 import com.example.BE_java_hisp_w18_g04.dto.respose.FollowerListDTORes;
@@ -64,4 +65,9 @@ public class SocialMeliController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+    @PostMapping("/products/promo-post")
+    public ResponseEntity<?> pusblishPromoPost(@RequestBody PromoPostDTOReq promoPostDTOReq){
+        userSellerService.publishPromoPost(promoPostDTOReq);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 }

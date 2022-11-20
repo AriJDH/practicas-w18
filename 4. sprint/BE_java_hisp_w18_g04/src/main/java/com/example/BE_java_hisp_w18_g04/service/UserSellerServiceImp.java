@@ -2,10 +2,12 @@ package com.example.BE_java_hisp_w18_g04.service;
 
 
 import com.example.BE_java_hisp_w18_g04.dto.request.PostDTOReq;
+import com.example.BE_java_hisp_w18_g04.dto.request.PromoPostDTOReq;
 import com.example.BE_java_hisp_w18_g04.dto.respose.FollowerCountDTORes;
 import com.example.BE_java_hisp_w18_g04.dto.respose.FollowerListDTORes;
 import com.example.BE_java_hisp_w18_g04.dto.respose.UserDTORes;
 import com.example.BE_java_hisp_w18_g04.entity.Post;
+import com.example.BE_java_hisp_w18_g04.entity.PromoPost;
 import com.example.BE_java_hisp_w18_g04.entity.UserBuyer;
 import com.example.BE_java_hisp_w18_g04.entity.UserSeller;
 import com.example.BE_java_hisp_w18_g04.exception.BadRequestException;
@@ -69,5 +71,14 @@ public class UserSellerServiceImp implements IUserSellerService{
         postRepository.createPost(post);
         UserSeller seller = sellerRepository.findById(postDTOReq.getUser_id());
             seller.getPosts().add(post);
+    }
+
+    @Override
+    public void publishPromoPost(PromoPostDTOReq promoPostDTOReq) {
+        if (promoPostDTOReq.isHas_promo()){
+            PromoPost promoPost = Mapper.createObjectMapper().convertValue(promoPostDTOReq,PromoPost.class);
+            postRepository.createPromoPost(promoPost);
+        }
+        else throw new BadRequestException("This product is not in promo");
     }
 }

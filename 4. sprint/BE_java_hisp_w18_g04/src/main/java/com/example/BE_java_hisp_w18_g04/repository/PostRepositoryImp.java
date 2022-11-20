@@ -1,5 +1,6 @@
 package com.example.BE_java_hisp_w18_g04.repository;
 import com.example.BE_java_hisp_w18_g04.entity.Post;
+import com.example.BE_java_hisp_w18_g04.entity.PromoPost;
 import com.example.BE_java_hisp_w18_g04.util.Mapper;
 import com.fasterxml.jackson.core.type.TypeReference;
 import org.springframework.stereotype.Repository;
@@ -12,6 +13,7 @@ import java.util.List;
 @Repository
 public class PostRepositoryImp implements IPostRepository{
     List<Post> posts = new ArrayList<>();
+    List<PromoPost> promoPosts = new ArrayList<>();
 
     public PostRepositoryImp() {
         loadPosts();
@@ -24,6 +26,12 @@ public class PostRepositoryImp implements IPostRepository{
             post.setPost_id(posts.get(posts.size()-1).getPost_id()+1);
         posts.add(post);
     }
+
+    @Override
+    public void createPromoPost(PromoPost promoPost) {
+        promoPosts.add(promoPost);
+    }
+
     private void loadPosts(){
         File jsonFile= null;
         try {
