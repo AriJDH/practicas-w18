@@ -3,10 +3,12 @@ package com.playground.app.repository;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.playground.app.entity.Vehicle;
+import org.springframework.cglib.core.Local;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.ResourceUtils;
 
 import java.io.File;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -22,6 +24,7 @@ public class VehicleRepository implements IVehicleRepository {
 
     private void loadlist() {
         ObjectMapper mapper = new ObjectMapper();
+        mapper.findAndRegisterModules();
         File jsonFile= null;
         try {
             jsonFile = ResourceUtils.getFile("classpath:vehicles.json");
@@ -51,10 +54,10 @@ public class VehicleRepository implements IVehicleRepository {
     }
 
     @Override
-    public List<Vehicle> getByDates(Date since, Date to) {
+    public List<Vehicle> getByDates(LocalDate since, LocalDate to) {
         List<Vehicle> auxListVehicleByDates = new ArrayList<>();
         for(Vehicle vehicle: vehicles){
-            if(vehicle.getManufacturingDate().after(since) && vehicle.getManufacturingDate().before(to)){
+            if(vehicle.getManufacturingDate().isAfter(since) && vehicle.getManufacturingDate().isBefore(to)){
                 auxListVehicleByDates.add(vehicle);
             }
         }

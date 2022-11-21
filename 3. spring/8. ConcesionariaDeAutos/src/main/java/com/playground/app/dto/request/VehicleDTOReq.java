@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -19,7 +20,7 @@ public class VehicleDTOReq {
     private String brand;
     private String model;
     @JsonFormat(pattern = "yyyy-MM-dd")
-    private Date manufacturingDate;
+    private LocalDate manufacturingDate;
     private Integer numberOfKilometers;
     private Integer doors;
     private Integer price;

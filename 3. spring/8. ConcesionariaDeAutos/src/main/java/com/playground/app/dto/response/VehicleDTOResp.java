@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 @AllArgsConstructor
@@ -17,7 +18,7 @@ public class VehicleDTOResp {
     private String brand;
     private String model;
     @JsonFormat(pattern = "yyyy-MM-dd")
-    private Date manufacturingDate;
+    private LocalDate manufacturingDate;
     private Integer numberOfKilometers;
     private Integer doors;
     private Integer price;

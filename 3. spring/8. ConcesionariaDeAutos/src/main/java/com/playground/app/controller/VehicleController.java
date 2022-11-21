@@ -3,22 +3,21 @@ package com.playground.app.controller;
 import com.playground.app.dto.request.VehicleDTOReq;
 import com.playground.app.dto.response.VehicleDTOResp;
 import com.playground.app.service.IVehicleService;
-import com.playground.app.service.VehicleService;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
 @RequestMapping("/v1/api/vehicles")
 public class VehicleController {
 
-    IVehicleService vehicleService;
+    private final IVehicleService vehicleService;
 
-    public VehicleController(VehicleService vehicleService) {
+    public VehicleController(IVehicleService vehicleService) {
         this.vehicleService = vehicleService;  //de esta forma hago inversion de control
     }
 
@@ -39,8 +38,8 @@ public class VehicleController {
     }
 
     @GetMapping("/dates")
-    public ResponseEntity<List<VehicleDTOResp>> getByDate(@RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") Date since,
-                                                          @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") Date to){
+    public ResponseEntity<List<VehicleDTOResp>> getByDate(@RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate since,
+                                                          @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate to){
         return new ResponseEntity<> (vehicleService.getByDates(since, to), HttpStatus.OK);
     }
 

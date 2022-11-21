@@ -9,6 +9,7 @@ import com.playground.app.repository.IVehicleRepository;
 import com.playground.app.repository.VehicleRepository;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -55,7 +56,7 @@ public class VehicleService implements IVehicleService{
     }
 
     @Override
-    public List<VehicleDTOResp> getByDates(Date since, Date to) {
+    public List<VehicleDTOResp> getByDates(LocalDate since, LocalDate to) {
 
       //  mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
