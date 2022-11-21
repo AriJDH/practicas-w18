@@ -4,10 +4,12 @@
  * */
 
 import java.util.*;
+import java.util.stream.Collectors;
 
-import static java.lang.System.exit;
+import static java.lang.System.*;
 
-public class Main {
+
+public class CarreraDeLaSelva {
 
     public static void main(String[] args) {
 
@@ -62,31 +64,9 @@ public class Main {
     private static void mostrarMenuPrincipal() {
 
         System.out.println("1. Inscribir participante");
-        //Cada categoría tiene un listado de inscriptos diferente
-
-        /*Categoría: sólo puede incribirse en una categoría
-
-        //Datos inscripción:
-        // dni
-        // nombre
-        // apellido
-        // edad
-        // celular
-        // nro emergencia
-        // grupo sanguíneo
-
-        // Asignación de un nroInscripcion consecutivo incremental
-*/
-        // Para finalizar la inscripción se debe calcular el monto
-
         System.out.println("2. Mostrar participantes por Categoría");
-        // Mostrar inscriptos de una determinada categoría, cada quien con sus datos y nroInscripción
-
         System.out.println("3. Mostrar Todos los participantes");
-
         System.out.println("4. Desinscribir participante");
-        // de una categoría -> pedir categoría como dato de entrada para recorrer listado por categoría y eliminarlo
-
         System.out.println("0. Salir");
 
         int opcion = sc.nextInt();
@@ -131,26 +111,47 @@ public class Main {
 
     private static void mostrarParticipantes() {
 
-        System.out.println("\nParticipantes Circuito Chico");
-        for (Object participante : participantesCircuitoChico) {
-            System.out.println(participante);
+        /* TODO --> SE PUEDE MEJORAR?
+            - Recorrer map categorias
+            - Imprimir título según circuito
+            - Imprimir participantes de cada circuito
+        */
+
+        for (Map.Entry<Integer, List<Object>> categoria : categorias.entrySet()) {
+
+            if(categoria.getKey().equals(1)){
+                out.println(CategoriaCircuito.CIRCUITO_CHICO);
+            }
+
+            if (categoria.getKey().equals(2)){
+                out.println(CategoriaCircuito.CIRCUITO_MEDIO);
+            }
+
+            if (categoria.getKey().equals(3)){
+                out.println(CategoriaCircuito.CIRCUITO_AVANZADO);
+            }
+
+            for (Object participante : categoria.getValue()) {
+                System.out.println(participante.toString());
+            }
         }
+
+        /*System.out.println("\nParticipantes Circuito Chico");
+        participantesCircuitoChico.forEach(System.out::println);
+
 
         System.out.println("\nParticipantes Circuito Medio");
-        for (Object participante : participantesCircuitoMedio) {
-            System.out.println(participante);
-        }
+        participantesCircuitoMedio.forEach(System.out::println);
+
 
         System.out.println("\nParticipantes Circuito Avanzado");
-        for (Object participante : participantesCircuitoAvanzado) {
-            System.out.println(participante);
-        }
+        participantesCircuitoAvanzado.forEach(System.out::println);*/
 
     }
 
     private static Enum<CategoriaCircuito> ingresarCategoria() {
         System.out.print("Ingrese Categoría > ");
-        int nroCategoria = sc.nextInt();  //todo acordarse de cerrarlo
+        int nroCategoria = sc.nextInt();
         Enum<CategoriaCircuito> categoria = null;
 
         switch (nroCategoria) {
@@ -167,27 +168,25 @@ public class Main {
         return categoria;
     }
 
-    private static int monto(int edad, Enum<CategoriaCircuito> categoria) {
+    private static int monto(boolean mayorEdad, Enum<CategoriaCircuito> categoria) {
         int monto = 0;
         /*
          * Inscripción Circuito chico: Menores de 18 años $1300. Mayores de 18 años $1500.
          * Inscripción Circuito medio: Menores de 18 años $2000. Mayores de 18 años $2300.
          * Inscripción Circuito Avanzado: No se permite inscripciones a menores de 18 años. Mayores de 18 años $2800
-         * */
+         *
+         */
 
-        boolean mayorEdad = esMayorEdad(edad);
-
-
-/*        switch (categoria.ordinal()+1){
+        switch (categoria.ordinal()+1){
             case 1:
-                return mayorEdad?1500:1300;
+                return mayorEdad ? (monto = 1500) : (monto= 1300);
             case 2:
-                return mayorEdad?2300:2000;
+                return mayorEdad ? (monto = 2300): (monto= 2000);
             default:
-                return 2800;
-        }*/
+                monto = 2800;
+        }
 
-        if (mayorEdad) {
+       /* if (mayorEdad) {
             if (categoria.equals(CategoriaCircuito.CIRCUITO_CHICO)) {
                 monto = 1500;
             }
@@ -208,7 +207,14 @@ public class Main {
                 System.out.println("No se permiten inscripciones a menores de 18 años. Reinicie la inscripción");
                 ingresarCategoria();
             }
-        }
+        }*/
+
+
+/*        if(monto == 0){
+            System.out.println("No se permiten inscripciones a menores de 18 años. Reinicie la inscripción");
+            monto(mayorEdad, categoria);
+        }*/
+
         return monto;
     }
 
@@ -227,7 +233,7 @@ public class Main {
 
         nroParticipante += 1;
         Enum<CategoriaCircuito> categoriaCircuito = ingresarCategoria();
-        int monto = monto(edad, categoriaCircuito);
+        int monto = monto(esMayorEdad(edad), categoriaCircuito);
         List participante = List.of(nroParticipante, nombre, apellido, dni, edad, celular, nroEmergencia, grupoSanguineo, categoriaCircuito, monto);
 
 
@@ -238,7 +244,17 @@ public class Main {
 
     private static void agregarParticipanteACategoria(Enum<CategoriaCircuito> categoriaCircuito, List<Object> participante) {
 
-        if (categoriaCircuito.equals(CategoriaCircuito.CIRCUITO_CHICO)) {
+
+        /*  TODO -> Refactorizar ->
+             - Recorrer Map de categorias,
+             - Identificar lista recibida por parámetro
+             - Agregar participante a la lista correspondiente
+
+                categorias.get(categoriaCircuito.ordinal()+1).add(participante);
+
+        */
+
+       if (categoriaCircuito.equals(CategoriaCircuito.CIRCUITO_CHICO)) {
             System.out.println("Categoría Circuito Chico\n");
             categorias.get(1).add(participante);
         }
@@ -263,7 +279,7 @@ public class Main {
         Integer nroParticipanteDescinscribir = sc.nextInt();
 
 
-        switch (categoria) {
+/*        switch (categoria) {
             case CIRCUITO_CHICO:
                 for (Object participante : participantesCircuitoChico) {
                     List p = (List) participante;
@@ -298,8 +314,34 @@ public class Main {
                     }
                 }
                 break;
-        }
+        }*/
 
+
+        int nroCategoria = categoria.ordinal()+1;
+        for (Map.Entry<Integer, List<Object>> categoriaAP : categorias.entrySet()) {
+
+            if(categoriaAP.getKey().equals(nroCategoria)){
+                out.println(CategoriaCircuito.values()[nroCategoria-1]);  //IMPRIME EL NOMBRE DE LA CATEGORÍA
+
+                List<Object> cat = categorias.get(nroCategoria);
+                for (int i = 0; i < cat.size(); i++){
+                    Object participante = cat.get(i);
+                   /* String[] propiedadesParticipantes = participante.toString().split(",");
+                    out.println("propiedades" + Arrays.toString(propiedadesParticipantes));
+                    for (String p : propiedadesParticipantes) {
+                        out.println(p);
+                    }*/
+
+                    out.println("Indice Participante: " + i + " - " + participante);
+
+                }
+                out.print("Ingrese índice participante a eliminar para confirmar la operación >  ");
+                int indexAEliminar = sc.nextInt();
+                sc.nextLine();
+                cat.remove(indexAEliminar);
+            }
+
+        }
 
         //remover del listado general a través de nroParticipante
         Iterator<Map.Entry<Integer, List>> it = participantes.entrySet().iterator();
@@ -310,7 +352,6 @@ public class Main {
             }
         }
 
-        //remover participante del listado de categoría
 
         mostrarTodosLosParticipantes();
 
