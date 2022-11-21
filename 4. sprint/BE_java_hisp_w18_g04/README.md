@@ -17,5 +17,10 @@ Main branch: ortega_mabel
 - [@orosco_agustina](https://www.github.com/agusoreina18)
 - [@lucas_padularosa](https://www.github.com/lucaspadularosaml)
 
+# SPRINT 1. INDIVIDUAL DEVELOPMENT.
+
+- US 0010 -> publish a promo post
+- US 0011 -> get promo post count seller's
+
 
 
