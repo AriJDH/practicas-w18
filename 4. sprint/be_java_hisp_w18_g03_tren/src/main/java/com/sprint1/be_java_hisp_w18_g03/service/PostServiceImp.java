@@ -141,8 +141,8 @@ public class PostServiceImp implements IPostService {
             throw new NoFoundException("Not a seller");
         }
 
-        Long postPromo = posts.stream().filter(x -> x.getProducto().getHasPromo() != null
-                && x.getProducto().getHasPromo().equals(Boolean.TRUE)).count();
+        Long postPromo = posts.stream().filter(post -> post.getProducto().getHasPromo() != null
+                && post.getProducto().getHasPromo()).count();
 
         return new ProductCountPromoDTO(user.getUserId(), user.getUserName(), postPromo.intValue());
     }
