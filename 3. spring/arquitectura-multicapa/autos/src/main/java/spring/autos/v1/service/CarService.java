@@ -6,6 +6,7 @@ import spring.autos.v1.dto.CarDetailsDto;
 import spring.autos.v1.dto.CarDtoReq;
 import spring.autos.v1.dto.CarDtoRes;
 import spring.autos.v1.entity.Car;
+import spring.autos.v1.exceptions.NotFoundException;
 import spring.autos.v1.repository.CarRepository;
 import spring.autos.v1.repository.ICarRepository;
 
@@ -47,8 +48,9 @@ public class CarService implements ICarService {
     @Override
     public CarDetailsDto getCarById(Long id) {
         Car car = carRepository.getCarById(id);
+        if(car == null) throw new NotFoundException("Auto no encontrado");
 
-        return car != null ? new CarDetailsDto(id, car) : null;
+        return new CarDetailsDto(id, car);
     }
 
     private List<CarDtoRes> carsToCarsDto(List<Car> cars) {

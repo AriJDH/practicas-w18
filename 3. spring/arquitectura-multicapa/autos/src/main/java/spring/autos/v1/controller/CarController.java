@@ -46,8 +46,6 @@ public class CarController {
 
     @GetMapping("/{id}")
     public ResponseEntity<CarDetailsDto> getCarById(@PathVariable Long id) {
-        CarDetailsDto carDetailsDto = carService.getCarById(id);
-        if(carDetailsDto == null) throw new NotFoundException("Auto no encontrado");
         return new ResponseEntity<>(carService.getCarById(id), HttpStatus.OK);
     }
 }
