@@ -99,6 +99,7 @@ public class AppController {
     public ResponseEntity<UserPromoPostCountDTOres> getCountPromoPostByUser(
             @RequestParam int user_id
     ) {
+        //US 0011
         UserPromoPostCountDTOres userPromoDTO = appService.getUserPromoPostCount(user_id);
         return new ResponseEntity<>(userPromoDTO, HttpStatus.OK);
     }
@@ -107,6 +108,7 @@ public class AppController {
     public ResponseEntity<?> getListPromoPostByUser(
             @RequestParam int user_id
     ) {
+        //US 0012
         UserPromoPostsDTOres userPromoDTO = appService.getUserPromoPosts(user_id);
         return new ResponseEntity<>(userPromoDTO, HttpStatus.OK);
     }

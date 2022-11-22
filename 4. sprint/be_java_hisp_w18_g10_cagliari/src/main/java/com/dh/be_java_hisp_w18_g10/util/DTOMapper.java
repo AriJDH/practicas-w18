@@ -27,8 +27,18 @@ public class DTOMapper {
                 .setDestinationNameTokenizer(NameTokenizers.UNDERSCORE);
     }
 
-    public static UserPostsDTOres mapToUserPostsDTOres(User user){
-        return modelMapper.map(user, UserPostsDTOres.class);
+    public static UserPostsDTOres mapToUserPostsDTOres(User user, List<Post> posts){
+        mapperConfigCamelToUnder();
+        UserPostsDTOres userPostsDTO = modelMapper.map(user, UserPostsDTOres.class);
+
+        List<PostDTOres> postsDTO = posts
+                .stream()
+                .map(DTOMapper::mapTo)
+                .collect(Collectors.toList());
+
+        userPostsDTO.setPosts(postsDTO);
+
+        return userPostsDTO;
     }
 
     public static UserFollowedDTOres mapToUserFollowedRes(User user){
