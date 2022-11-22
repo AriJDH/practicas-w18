@@ -8,7 +8,7 @@ public class Distribuidora {
     }
 
     public void agregarProducto(Producto producto){
-        this.productos.add(producto);
+            this.productos.add(producto);
     }
 
     public ArrayList<Producto> getProductos() {

@@ -19,7 +19,7 @@ public class Main {
         distribuidora.agregarProducto(npere1);
 //        distribuidora.agregarProducto(npere2);
 
-        System.out.println(        distribuidora.calcularTotalVenta());
+        System.out.println(distribuidora.calcularTotalVenta());
 
     }
 }
