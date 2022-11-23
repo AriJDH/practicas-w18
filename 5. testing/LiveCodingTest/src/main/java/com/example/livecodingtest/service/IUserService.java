@@ -9,4 +9,6 @@ public interface IUserService {
     UserDto crearUsuario(UserDto userDto);
 
     List<UserDto> buscarTodos();
+
+    UserDto buscarUnUsuarioPorNombre(String name);
 }

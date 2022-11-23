@@ -30,4 +30,6 @@ public class UserController {
     public ResponseEntity<?> obtenerTodos(){
         return new ResponseEntity<>(userService.buscarTodos(), HttpStatus.OK);
     }
+
+
 }

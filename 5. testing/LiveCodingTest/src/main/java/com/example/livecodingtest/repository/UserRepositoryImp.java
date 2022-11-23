@@ -5,6 +5,8 @@ import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Repository
 public class UserRepositoryImp implements IUserRepository{
@@ -24,6 +26,14 @@ public class UserRepositoryImp implements IUserRepository{
     public User guardarUsuario(User user) {
         listaUsuarios.add(user);
         return user;
+    }
+
+    @Override
+    public Optional<User> buscarUsuarioPorNombre(String name) {
+        Optional<User> userEncontrado = listaUsuarios.stream()
+                .filter(user-> user.getNombre().equals(name))
+                .findFirst();
+        return userEncontrado;
     }
 
 
