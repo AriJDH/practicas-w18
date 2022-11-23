@@ -47,7 +47,7 @@ class StudentServiceTest {
     @Test
     void readTest() {
         //ARRANGE
-        Long id = 123345L;
+        Long id = 45545L;
         SubjectDTO materia = new SubjectDTO("Lengua", 6.6);
 
         StudentDTO student = new StudentDTO(id, "Student", "Student", 6.6, Arrays.asList(materia));
