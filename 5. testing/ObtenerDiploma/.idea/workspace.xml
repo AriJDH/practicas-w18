@@ -5,17 +5,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d75b3f77-2b5a-4820-8c7f-fa11d911ca9a" name="Default Changelist" comment="Spring 2 - Practica TT - Obetener Diploma">
+      <change afterPath="$PROJECT_DIR$/src/test/java/com/meli/obtenerdiploma/service/ObtenerDiplomaServiceTestConMock.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../3. spring/multicapa/src/main/java/com/bootcamp/multicapa/dto/ErrorDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../3. spring/multicapa/src/main/java/com/bootcamp/multicapa/dto/ErrorDto.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../3. spring/multicapa/src/main/java/com/bootcamp/multicapa/exception/ExceptionConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../3. spring/multicapa/src/main/java/com/bootcamp/multicapa/exception/ExceptionConfig.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../3. spring/multicapa/src/main/java/com/bootcamp/multicapa/exception/NotFoundException.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../3. spring/multicapa/src/main/java/com/bootcamp/multicapa/exception/NotFoundException.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../3. spring/multicapa/src/main/java/com/bootcamp/multicapa/service/PersonaServiceImp.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../3. spring/multicapa/src/main/java/com/bootcamp/multicapa/service/PersonaServiceImp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../LiveCodingTest/src/test/java/com/example/livecodingtest/service/UserServiceTestConMock.java" beforeDir="false" afterPath="$PROJECT_DIR$/../LiveCodingTest/src/test/java/com/example/livecodingtest/service/UserServiceTestConMock.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/ObtenerDiploma.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/ObtenerDiploma.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__javax_validation_validation_api_2_0_1_Final.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_hibernate_validator_hibernate_validator_8_0_0_Final.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/meli/obtenerdiploma/controller/ObtenerDiplomaController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/meli/obtenerdiploma/controller/ObtenerDiplomaController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/meli/obtenerdiploma/model/StudentDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/meli/obtenerdiploma/model/StudentDTO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/meli/obtenerdiploma/model/SubjectDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/meli/obtenerdiploma/model/SubjectDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/meli/obtenerdiploma/controller/ObtenerDiplomaController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/meli/obtenerdiploma/controller/ObtenerDiplomaController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/meli/obtenerdiploma/ObtenerDiplomaApplicationTests.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/meli/obtenerdiploma/model/StudentDTO.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/meli/obtenerdiploma/model/StudentDTO.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/meli/obtenerdiploma/model/SubjectDTO.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/meli/obtenerdiploma/model/SubjectDTO.class" afterDir="false" />
     </list>
@@ -28,6 +31,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Class" />
+        <option value="JUnit5 Test Class" />
       </list>
     </option>
   </component>
@@ -76,24 +80,33 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/janmartinez/Documents/Bootcamp/RepositorioCompartido/practicas-w18/5. testing/ObtenerDiploma&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;spring.configuration.checksum&quot;: &quot;b36e5c601021deef548f272a0fa63917&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
+    "last_opened_file_path": "/Users/janmartinez/Documents/Bootcamp/RepositorioCompartido/practicas-w18/5. testing/ObtenerDiploma",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "preferences.keymap",
+    "spring.configuration.checksum": "b36e5c601021deef548f272a0fa63917"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/test/java/com/meli/obtenerdiploma" />
       <recent name="$PROJECT_DIR$/src/main/java/com/meli/obtenerdiploma" />
       <recent name="$PROJECT_DIR$/src/main/java/com/meli/obtenerDiploma" />
+    </key>
+    <key name="CreateTestDialog.Recents.Supers">
+      <recent name="" />
+    </key>
+    <key name="CreateTestDialog.RecentsKey">
+      <recent name="com.meli.obtenerdiploma.service" />
     </key>
   </component>
   <component name="RunManager" selected="Application.ObtenerDiplomaApplication">
@@ -200,7 +213,7 @@
       <updated>1619721005383</updated>
       <workItem from="1669155763024" duration="3961000" />
       <workItem from="1669162001661" duration="2322000" />
-      <workItem from="1669218774204" duration="116000" />
+      <workItem from="1669218774204" duration="6227000" />
     </task>
     <task id="LOCAL-00001" summary="Spring 2 - Practica TT - Obetener Diploma">
       <created>1619721212242</created>
