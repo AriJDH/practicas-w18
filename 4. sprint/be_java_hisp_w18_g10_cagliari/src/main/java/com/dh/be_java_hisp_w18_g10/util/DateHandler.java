@@ -12,8 +12,8 @@ public class DateHandler {
     public static String DateToString(LocalDate date) {
         return date.format(formatter);
     }
-    public static boolean isLocalDateAfter(LocalDate date, int ndays){
+    public static boolean isLocalDateAfter(LocalDate date, int days){
         Period period = Period.between(date, LocalDate.now());
-        return period.getYears() > 0 || period.getMonths() > 0 || period.getDays() > ndays;
+        return period.getDays() < days && period.getMonths() == 0 && period.getYears() == 0;
     }
 }

@@ -73,7 +73,10 @@ public class AppController {
             @PathVariable int userId){
         // US 0006
         // US 0009
-        return new ResponseEntity<>(appService.getUserPosts(userId, order), HttpStatus.OK);
+        if (order != null)
+            return new ResponseEntity<>(appService.getUserPosts(userId, order), HttpStatus.OK);
+
+        return new ResponseEntity<>(appService.getUserPosts(userId), HttpStatus.OK);
     }
 
     @PostMapping("/users/{userId}/unfollow/{userIdToUnfollow}")

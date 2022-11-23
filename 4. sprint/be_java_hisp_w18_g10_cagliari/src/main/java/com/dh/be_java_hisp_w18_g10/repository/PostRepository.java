@@ -19,6 +19,7 @@ public class PostRepository implements IPostRepository{
     public Post getPostById(int postId) {
         return posts.get(postId);
     }
+
     @Override
     public Integer addPost(Post post) {
         posts.put(count, post);
@@ -54,8 +55,10 @@ public class PostRepository implements IPostRepository{
         switch (order) {
             case "date_asc":
                 postList.sort(Comparator.comparing(Post::getDate));
+                break;
             case "date_desc":
                 postList.sort(Comparator.comparing(Post::getDate).reversed());
+                break;
             default:
                 throw new GenericException("Parametro no valido");
         }

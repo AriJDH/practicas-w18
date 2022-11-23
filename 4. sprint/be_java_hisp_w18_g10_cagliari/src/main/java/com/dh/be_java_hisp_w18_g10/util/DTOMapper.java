@@ -41,8 +41,15 @@ public class DTOMapper {
         return userPostsDTO;
     }
 
-    public static UserFollowedDTOres mapToUserFollowedRes(User user){
-        return modelMapper.map(user, UserFollowedDTOres.class);
+    public static UserFollowedDTOres mapToUserFollowedRes(User user, List<User> userFollowers){
+        mapperConfigCamelToUnder();
+        UserFollowedDTOres userFollowedDTO = modelMapper.map(user, UserFollowedDTOres.class);
+        List<UserDTOres> usersDTO = userFollowers
+                                .stream()
+                                .map(DTOMapper::mapTo)
+                                .collect(Collectors.toList());
+        userFollowedDTO.setFollowed(usersDTO);
+        return userFollowedDTO;
     }
 
     public static UserFollowersDTOres mapToFollowersDTO(User user, List<User> userFollowers) {

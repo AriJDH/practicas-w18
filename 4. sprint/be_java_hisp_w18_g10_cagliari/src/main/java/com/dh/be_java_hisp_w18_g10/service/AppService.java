@@ -10,7 +10,9 @@ import com.dh.be_java_hisp_w18_g10.repository.*;
 import com.dh.be_java_hisp_w18_g10.util.DTOMapper;
 import org.springframework.stereotype.Service;
 
+import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class AppService implements IAppService {
@@ -90,13 +92,22 @@ public class AppService implements IAppService {
     @Override
     public UserPostsDTOres getUserPosts(int userId) {
         User user = getUser(userId);
-        List<Post> posts = postRepository.getUserPostsFilterByDays(userId, 14);
+        List<Post> posts = user.getFollowed().values()
+                .stream()
+                .map(u -> postRepository.getUserPostsFilterByDays(u.getUserId(), 14))
+                .flatMap(Collection::stream)
+                .collect(Collectors.toList());
+
         return DTOMapper.mapToUserPostsDTOres(user, posts);
     }
     @Override
     public UserPostsDTOres getUserPosts(int userId, String order){
         User user = getUser(userId);
-        List<Post> posts = postRepository.getUserPostsFilterByDays(userId, 14, order);
+        List<Post> posts = user.getFollowed().values()
+                .stream()
+                .map(u -> postRepository.getUserPostsFilterByDays(u.getUserId(), 14, order))
+                .flatMap(Collection::stream)
+                .collect(Collectors.toList());
         return DTOMapper.mapToUserPostsDTOres(user, posts);
     }
 
@@ -114,9 +125,6 @@ public class AppService implements IAppService {
             throw new GenericException("El usuario con el id: " + userId +
                     " no sigue al usuario " + userIdToUnfollow);
     }
-
-
-
 
     @Override
     public UserPromoPostCountDTOres getUserPromoPostCount(int userId) {

@@ -1,0 +1,56 @@
+[
+  {
+    "averageScore": null,
+    "id": 3,
+    "message": null,
+    "studentName": null,
+    "subjects": null
+  },
+  {
+    "averageScore": null,
+    "id": 2,
+    "message": null,
+    "studentName": "Pedro",
+    "subjects": [
+      {
+        "name": "Matemática",
+        "score": 10.0
+      },
+      {
+        "name": "Física",
+        "score": 8.0
+      },
+      {
+        "name": "Química",
+        "score": 4.0
+      }
+    ]
+  },
+  {
+    "averageScore": 10.0,
+    "id": 1,
+    "message": "message",
+    "studentName": "Name",
+    "subjects": [
+      {
+        "name": "subject_0",
+        "score": 1.0
+      },
+      {
+        "name": "subject_1",
+        "score": 2.0
+      },
+      {
+        "name": "subject_2",
+        "score": 3.0
+      },
+      {
+        "name": "subject_3",
+        "score": 4.0
+      },
+      {
+        "name": "subject_4",
+        "score": 5.0
+      }
+    ]
+  }]

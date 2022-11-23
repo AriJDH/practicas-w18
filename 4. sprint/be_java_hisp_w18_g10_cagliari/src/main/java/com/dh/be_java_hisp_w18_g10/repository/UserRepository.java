@@ -38,13 +38,13 @@ public class UserRepository implements IUserRepository{
     private void loadUsersFollowed(){
         for (int i = 2; i < 4; i++) {
             users
-                    .get(4)
-                    .getFollowed()
-                    .put(i, users.get(i));
+                .get(4)
+                .getFollowed()
+                .put(i, users.get(i));
             users
-                    .get(1)
-                    .getFollowed()
-                    .put(i+2, users.get(i+2));
+                .get(1)
+                .getFollowed()
+                .put(i+2, users.get(i+2));
         }
     }
 
@@ -94,22 +94,28 @@ public class UserRepository implements IUserRepository{
         switch(order){
             case "name_asc":
                 userList.sort(Comparator.comparing(User::getUserName));
+                break;
             case "name_desc":
                 userList.sort(Comparator.comparing(User::getUserName).reversed());
+                break;
             default:
                 throw new GenericException("Parametro no aceptado");
         }
     }
     @Override
     public List<User> getUserFollowers(int userId, String order) {
-        return new ArrayList<>(getUser(userId).getFollowers().values());
+        List<User> followers = getUserFollowers(userId);
+        sortUserListBy(followers, order);
+        return followers;
     }
     @Override
     public List<User> getUserFollowed(int userId) {
-        return null;
+        return new ArrayList<>(getUser(userId).getFollowed().values());
     }
     @Override
     public List<User> getUserFollowed(int userId, String order) {
-        return null;
+        List<User> followed = getUserFollowed(userId);
+        sortUserListBy(followed, order);
+        return followed;
     }
 }
