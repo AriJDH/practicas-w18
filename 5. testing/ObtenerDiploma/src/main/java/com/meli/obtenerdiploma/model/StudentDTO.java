@@ -12,12 +12,13 @@ import javax.validation.constraints.*;
 import java.util.List;
 
 @Valid
-@Getter @Setter
+@Getter
+@Setter
 public class StudentDTO {
 
     @NotEmpty(message = "El nombre del alumno no puede ser vacío.")
-    @Pattern(regexp="([A-Z]|[0-9])[\\s|[0-9]|A-Z|a-z|ñ|ó|í|á|é|ú|Á|Ó|É|Í|Ú]*$", message = "El nombre del estudiante debe comenzar con mayúscula.")
-    @Size(max=50, message = "La longitud del nombre no puede superar los 50 caracteres")
+    @Pattern(regexp = "([A-Z]|[0-9])[\\s|[0-9]|A-Z|a-z|ñ|ó|í|á|é|ú|Á|Ó|É|Í|Ú]*$", message = "El nombre del estudiante debe comenzar con mayúscula.")
+    @Size(max = 50, message = "La longitud del nombre no puede superar los 50 caracteres")
     String studentName;
 
     String message;

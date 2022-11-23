@@ -25,7 +25,7 @@ public class ObtenerDiplomaService implements IObtenerDiplomaService {
 
     private Double calculateAverage(List<SubjectDTO> scores) {
         return scores.stream()
-                .reduce(0D, (partialSum, score)  -> partialSum + score.getScore(), Double::sum)
+                .reduce(0D, (partialSum, score) -> partialSum + score.getScore(), Double::sum)
                 / scores.size();
     }
 }
