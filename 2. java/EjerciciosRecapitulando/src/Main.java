@@ -44,7 +44,7 @@ public class Main {
                 .sorted(Comparator.comparing(Vehiculo::getCosto))
                 .collect(Collectors.toList());
         System.out.println(sortedList);
-
+        System.out.println("************************************");
         List<Vehiculo> sortedList2 = list.stream()
                 .sorted(Comparator.comparing(Vehiculo::getMarca)
                 .thenComparing(Vehiculo::getCosto))

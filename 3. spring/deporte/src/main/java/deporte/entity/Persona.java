@@ -3,17 +3,21 @@ package deporte.entity;
 import java.util.List;
 
 public class Persona {
-    private Integer id = 0;
+    private Integer id=0;
     private String nombre;
     private String apellido;
-    private  Integer edad;
+    private Integer edad;
     private List<Deporte> deportes;
 
     public Persona() {
     }
 
+    public List<Deporte> getDeportes() {
+        return deportes;
+    }
+
     public Persona(String nombre, String apellido, Integer edad, List<Deporte> deportes) {
-        this.id +=1;
+        this.id += 1;
         this.nombre = nombre;
         this.apellido = apellido;
         this.edad = edad;

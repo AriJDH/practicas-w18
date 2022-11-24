@@ -1,6 +1,7 @@
 package com.example.starwars.repository;
 
 import com.example.starwars.entity.Personaje;
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.ResourceUtils;
@@ -19,10 +20,13 @@ public class CharacterRepositoryImp implements ICharacterRepository {
     }
 
     private void loadList(){
-    ObjectMapper mapper = new ObjectMapper();
-    File jsonFile = null;
-    try {
-        jsonFile = ResourceUtils.getFile("classpath:starwars.json");
-    }
+        ObjectMapper mapper = new ObjectMapper();
+        File  jsonFile= null;
+        try {
+            jsonFile = ResourceUtils.getFile("classpath:starwars.json");
+            this.personajes = mapper.readValue(jsonFile, new TypeReference<List<Personaje>>() {});
+        }catch (Exception ex){
+            System.out.println("No existe el archivo. " + ex.getMessage());
+        }
     }
 }

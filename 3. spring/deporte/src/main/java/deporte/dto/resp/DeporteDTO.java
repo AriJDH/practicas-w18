@@ -1,10 +1,13 @@
 package deporte.dto.resp;
 
-import lombok.Getter;
-import lombok.Setter;
-
-@Getter
-@Setter
 public class DeporteDTO {
     private String nombre;
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
 }

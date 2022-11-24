@@ -12,13 +12,19 @@ public class Personaje {
     private String name;
     private String height;
     private String mass;
-    private String hairColor;
-    private String skinColor;
-    private String eyeColor;
-    private String birthYear;
+    private String hair_color;
+    private String skin_color;
+    private String eye_color;
+    private String birth_year;
     private String gender;
-    private String homeWorld;
+    private String homeworld;
     private String species;
+
+    public Integer getHeight(){
+        try{
+            return Integer.valueOf(this.height)
+        }
+    }
 
 
 }

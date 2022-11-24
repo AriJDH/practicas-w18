@@ -1,2 +1,6 @@
-package Ejercicio2;public class IUnidadDefensa {
+package Ejercicio2;
+
+public interface IUnidadDefensa extends IPuntuable{
+
+    Double calcularDistancia(PuntoEspacio puntoEspacio);
 }

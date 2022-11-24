@@ -1,5 +1,7 @@
 package parte1;
 
+import java.util.List;
+
 public class BoletoTransporte implements RepositorioBase{
     protected RepositorioBase repositorio;
     protected int descuento = 0;

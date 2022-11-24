@@ -1,11 +1,13 @@
 package deporte.dto.resp;
 
-import lombok.Getter;
-import lombok.Setter;
-
-@Getter
-@Setter
 public class DeporteNivelDTO {
-
     private String nivel;
+
+    public String getNivel() {
+        return nivel;
+    }
+
+    public void setNivel(String nivel) {
+        this.nivel = nivel;
+    }
 }

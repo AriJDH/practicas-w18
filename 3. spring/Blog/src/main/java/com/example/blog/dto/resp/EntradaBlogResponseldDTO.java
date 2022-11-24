@@ -9,6 +9,6 @@ import lombok.Setter;
 @NoArgsConstructor
 @Setter
 @Getter
-public class EntradaBlogResponseIdDTO {
+public class EntradaBlogResponseldDTO {
     private Long id;
 }

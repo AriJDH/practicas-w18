@@ -1,27 +1,49 @@
-package SerieNumerica;
+import java.util.List;
 
-public  abstract class Prototipo extends Number{
+// El prototipo va a usar el Generic <T>
+public abstract class Prototipo<T> {
 
-    protected Number initialValue = 0;
-    protected Number value = 0;
-    protected Number a = 0;
+    // Atributos de tipo T
+    protected T initialValue; // Valor inicial de la serie
+    protected T value; // Valor actual, último valor seteado
+    protected T a; // Valor que se agrega
 
-    public Prototipo(double a) {
+    // Constructores
+    public Prototipo() {
+    }
+
+    public Prototipo(T initialValue, T value, T a) {
+        this.initialValue = initialValue;
+        this.value = value;
         this.a = a;
     }
 
-    public Number getNextvalue() {
-        value = value + a;
+    // Getters
+
+    public T getInitialValue() {
+        return initialValue;
+    }
+
+    public T getValue() {
         return value;
     }
 
-    public Number resetSerie() {
-        value = initialValue;
-        return value;
+    public T getA() {
+        return a;
     }
 
-    public Number defineNewInitialValue(Number newValue){
-        initialValue = newValue;
-        return  initialValue;
-    }
+
+    // --------- Métodos --------- //
+
+    /* Devuelve un valor siguiente */
+    public abstract T nextValue(T a);
+
+    /* Reinicia la serie */
+    public abstract void setValue();
+
+    /* Establece valor inicial */
+    public abstract void setInitialValue(T newInitialValue);
+
+    /* Establecer valor que se suma en cada iteración */
+    public abstract void setA(T newA);
 }

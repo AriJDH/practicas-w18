@@ -1,16 +1,26 @@
 package deporte.persistence;
 
-import deporte.entity.Deporte;
-import deporte.entity.Persona;
+import com.personadeporte.PersonaDeporte.entity.Deporte;
+import com.personadeporte.PersonaDeporte.entity.Persona;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class BBDD {
-    Map<Integer, Persona>  personas = new HashMap<>();
+
+    Map<Integer, Persona> personas = new HashMap<>();
     Map<Integer, Deporte> deportes = new HashMap<>();
 
     public BBDD() {
+    }
+
+    public void crearDeporte(Deporte deporte){
+        deportes.put(deporte.getId(), deporte);
+
+    }
+
+    public void crearPersona(Persona persona){
+        personas.put(persona.getId(),persona);
     }
 
     public Map<Integer, Persona> getPersonas() {
@@ -27,13 +37,5 @@ public class BBDD {
 
     public void setDeportes(Map<Integer, Deporte> deportes) {
         this.deportes = deportes;
-    }
-
-    public void crearDeporte(Deporte deporte){
-        deportes.put(deporte.getId(),deporte);
-    }
-
-    public void crearPersona(Persona persona){
-        personas.put(persona.getId(),persona);
     }
 }
