@@ -27,7 +27,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class ObtenerDiplomaServiceTest {
 
     @Mock
-    private StudentDAO iStudentDAO;
+    private IStudentDAO iStudentDAO;
     @InjectMocks
     private ObtenerDiplomaService obtenerDiplomaService;
 

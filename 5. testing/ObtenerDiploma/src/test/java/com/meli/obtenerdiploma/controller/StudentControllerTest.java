@@ -1,6 +1,7 @@
 package com.meli.obtenerdiploma.controller;
 
 import com.meli.obtenerdiploma.model.StudentDTO;
+import com.meli.obtenerdiploma.service.IStudentService;
 import com.meli.obtenerdiploma.service.StudentService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -21,7 +22,8 @@ import static org.junit.jupiter.api.Assertions.*;
 class StudentControllerTest {
 
     @Mock
-    private StudentService studentService;
+    private IStudentService studentService;
+
     @InjectMocks
     private StudentController studentController;
 
