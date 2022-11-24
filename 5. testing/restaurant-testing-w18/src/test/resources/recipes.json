@@ -1,0 +1,27 @@
+[
+  {
+    "name": "burger",
+    "description": "lorem ipsum",
+    "ingredients": [
+      { "name": "bread",    "quantity": 1 },
+      { "name": "meal",     "quantity": 2 }
+    ]
+  },
+  {
+    "name": "pizza",
+    "description": "lorem ipsum",
+    "ingredients": [
+      { "name": "tomato",   "quantity": 3 },
+      { "name": "bread",    "quantity": 1 }
+    ]
+  },
+  {
+    "name": "cheeseburger",
+    "description": "lorem ipsum",
+    "ingredients": [
+      { "name": "tomato",   "quantity": 3 },
+      { "name": "cheese",   "quantity": 2 },
+      { "name": "meal",     "quantity": 2 }
+    ]
+  }
+]
