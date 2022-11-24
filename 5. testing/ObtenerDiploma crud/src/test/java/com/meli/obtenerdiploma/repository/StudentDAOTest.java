@@ -19,6 +19,7 @@ public class StudentDAOTest {
     @AfterEach
     private void setUp() {
         TestGenerator.emptyUsersFile();
+
         this.studentDAO = new StudentDAO();
     }
 
