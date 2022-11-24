@@ -4,6 +4,7 @@ import com.survive.livecoding.entity.User;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public class UserRepositoryImp implements IUserRepository{
@@ -25,7 +26,14 @@ public class UserRepositoryImp implements IUserRepository{
         userList.add(user);
         return userList;
     }
-    
+
+    @Override
+    public Optional<User> findUser(String userName) {
+        return userList.stream()
+                .filter(user -> user.getName().equals(userName))
+                .findFirst();
+    }
+
     private void loadList() {
         userList.add(new User("Frutas", "Fulano", 24));
         userList.add(new User("Verduras", "Mengano", 18));

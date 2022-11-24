@@ -1,5 +1,6 @@
 package com.survive.livecoding.exception;
 
+import com.survive.livecoding.dto.response.ErrorDTO;
 import com.survive.livecoding.dto.response.ErrorDtoRes;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,6 +22,12 @@ public class ExceptionConfig {
     public ResponseEntity<?> captureValidation(HttpMessageNotReadableException e) {
         ErrorDtoRes errorDtoRes = new ErrorDtoRes(e.getMessage());
         return new ResponseEntity<>(errorDtoRes, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(NotFoundException.class)
+    public ResponseEntity<?> noEncontrado(NotFoundException e) {
+        ErrorDTO errorDTO = new ErrorDTO(e.getMessage(), 404);
+        return new ResponseEntity<>(errorDTO, HttpStatus.NOT_FOUND);
     }
 
 }
