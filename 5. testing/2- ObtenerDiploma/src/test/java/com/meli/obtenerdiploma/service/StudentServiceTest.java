@@ -40,7 +40,12 @@ class StudentServiceTest {
 
         studentService.create(student);
 
-        verify(studentDAO,atLeastOnce()).save(student);
+        verify(studentDAO, atLeastOnce()).save(student);
+    }
+
+    @DisplayName("US0001 - CreateStudent notOk")
+    void createTestNotOk() {
+
     }
 
     @DisplayName("US002- readStudent OK")
@@ -61,6 +66,12 @@ class StudentServiceTest {
         assertEquals(student, readResult);
     }
 
+    @DisplayName("US002- readStudent notOK")
+    void readTestNotOk() {
+
+    }
+
+
     @DisplayName("US003- updateStudent OK")
     @Test
     void updateTest() {
@@ -69,7 +80,11 @@ class StudentServiceTest {
 
         studentService.update(student);
 
-        verify(studentDAO,atLeastOnce()).save(student);
+        verify(studentDAO, atLeastOnce()).save(student);
+    }
+    @DisplayName("US003- updateStudent notOK")
+    void updateTestNotOk() {
+
     }
 
     @DisplayName("US004- deleteStudent OK")
@@ -81,7 +96,11 @@ class StudentServiceTest {
 
         studentService.delete(id);
 
-        verify(studentDAO,atLeastOnce()).delete(id); //debe llamarse al menos una vez
+        verify(studentDAO, atLeastOnce()).delete(id); //debe llamarse al menos una vez
+    }
+    @DisplayName("US004- deleteStudent notOK")
+    void deleteTestNotOk() {
+
     }
 
     @DisplayName("US005- findAllStudent OK")
@@ -104,5 +123,9 @@ class StudentServiceTest {
         Set<StudentDTO> result = studentService.getAll();
 
         verify(studentRepository, atLeastOnce()).findAll();
+    }
+    @DisplayName("US005- findAllStudent notOK")
+    void getAllTestNotOK() {
+
     }
 }
