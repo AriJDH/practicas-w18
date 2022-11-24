@@ -58,13 +58,34 @@ class StudentControllerTest {
 
     @Test
     void modifyStudent() {
+        //ARRANGE
+        Long id = 45545L;
+        SubjectDTO materia = new SubjectDTO("Lengua", 6.6);
+        StudentDTO student = new StudentDTO(id, "Student", "Student", 6.6, Arrays.asList(materia));
+
+        //ACT
+        studentController.modifyStudent(student);
+
+        //ASSERT
+       verify(studentService, atLeastOnce()).update(student);
     }
 
     @Test
     void removeStudent() {
+        //ARRANGE
+        Long id = 45545L;
+        SubjectDTO materia = new SubjectDTO("Lengua", 6.6);
+        StudentDTO student = new StudentDTO(id, "Student", "Student", 6.6, Arrays.asList(materia));
+
+        //ACT
+        studentController.removeStudent(id);
+
+        //ASSERT
+        verify(studentService, atLeastOnce()).delete(id);
     }
 
     @Test
     void listStudents() {
+
     }
 }
