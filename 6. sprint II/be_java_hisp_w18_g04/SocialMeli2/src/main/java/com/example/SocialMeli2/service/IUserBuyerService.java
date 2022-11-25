@@ -5,6 +5,7 @@ import com.example.SocialMeli2.dto.respose.PostFollowedByDateDTORes;
 
 public interface IUserBuyerService {
     void follow(Integer userId, Integer userIdToFollow);
+
     FollowedListDTORes getFollowed(Integer userId, String order);
 
     PostFollowedByDateDTORes getLastPosts(Integer userId, String order);

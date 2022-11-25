@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
-public class FollowerCountDTORes{
+public class FollowerCountDTORes {
     private Integer user_id;
     private String user_name;
     private Integer followers_count;

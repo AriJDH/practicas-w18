@@ -12,27 +12,30 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Repository
-public class UserSellerRepositoryImp implements IUserSellerRepository{
+public class UserSellerRepositoryImp implements IUserSellerRepository {
     List<UserSeller> sellers = new ArrayList<>();
 
     public UserSellerRepositoryImp() {
         loadSellers();
     }
 
+    @Override
     public UserSeller findById(Integer id) {
         return sellers.stream().filter(buyer -> buyer.getUser_id().equals(id)).findFirst().get();
     }
 
-    public List<UserSeller> findAll(){
+    @Override
+    public List<UserSeller> findAll() {
         return sellers;
     }
 
-    private void loadSellers(){
-        File jsonFile= null;
+    private void loadSellers() {
+        File jsonFile = null;
         try {
             jsonFile = ResourceUtils.getFile("classpath:sellers.json");
-            sellers = Mapper.createObjectMapper().readValue(jsonFile, new TypeReference<List<UserSeller>>() {});
-        }catch (Exception ex){
+            sellers = Mapper.createObjectMapper().readValue(jsonFile, new TypeReference<List<UserSeller>>() {
+            });
+        } catch (Exception ex) {
             System.out.println("Sellers not found " + ex.getMessage());
         }
     }

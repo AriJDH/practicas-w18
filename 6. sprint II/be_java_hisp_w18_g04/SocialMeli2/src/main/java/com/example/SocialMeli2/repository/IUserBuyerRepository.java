@@ -4,7 +4,7 @@ import com.example.SocialMeli2.entity.UserBuyer;
 
 import java.util.List;
 
-public interface IUserBuyerRepository{
+public interface IUserBuyerRepository {
     UserBuyer findById(Integer id);
 
     List<UserBuyer> findAll();

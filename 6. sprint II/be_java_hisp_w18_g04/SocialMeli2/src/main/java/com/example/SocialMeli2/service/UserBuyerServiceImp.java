@@ -20,7 +20,7 @@ import java.util.stream.Collectors;
 
 
 @Service
-public class UserBuyerServiceImp implements IUserBuyerService{
+public class UserBuyerServiceImp implements IUserBuyerService {
     private final IUserBuyerRepository userBuyerRepository;
     private final IUserSellerRepository userSellerRepository;
 
@@ -29,21 +29,22 @@ public class UserBuyerServiceImp implements IUserBuyerService{
         this.userSellerRepository = userSellerRepository;
     }
 
-    private Boolean validateBuyer(Integer id){
+    private Boolean validateBuyer(Integer id) {
         Boolean valid = false;
         List<UserBuyer> buyers = userBuyerRepository.findAll();
-        for(UserBuyer buyer: buyers){
-            if(buyer.getUser_id().equals(id)){
+        for (UserBuyer buyer : buyers) {
+            if (buyer.getUser_id().equals(id)) {
                 valid = true;
             }
         }
         return valid;
     }
-    private Boolean validateSeller(Integer id){
+
+    private Boolean validateSeller(Integer id) {
         Boolean valid = false;
         List<UserSeller> sellers = userSellerRepository.findAll();
-        for(UserSeller seller: sellers){
-            if(seller.getUser_id().equals(id)){
+        for (UserSeller seller : sellers) {
+            if (seller.getUser_id().equals(id)) {
                 valid = true;
             }
         }
@@ -52,24 +53,24 @@ public class UserBuyerServiceImp implements IUserBuyerService{
 
     @Override
     public void follow(Integer userId, Integer userIdToFollow) {
-            if(validateBuyer(userId) && validateSeller(userIdToFollow)) {
-                UserBuyer buyer = userBuyerRepository.findById(userId);
-                UserSeller seller = userSellerRepository.findById(userIdToFollow);
-                if (!(buyer.getFollowed().contains(seller)) && !(seller.getFollowers().contains(buyer))) {
-                    buyer.getFollowed().add(seller);
-                    seller.getFollowers().add(buyer);
-                } else {
-                    throw new BadRequestException("The user " + userIdToFollow + " is already in your follow list");
-                }
-            } else{
-                throw new BadRequestException("The user_id not exist");
+        if (validateBuyer(userId) && validateSeller(userIdToFollow)) {
+            UserBuyer buyer = userBuyerRepository.findById(userId);
+            UserSeller seller = userSellerRepository.findById(userIdToFollow);
+            if (!(buyer.getFollowed().contains(seller)) && !(seller.getFollowers().contains(buyer))) {
+                buyer.getFollowed().add(seller);
+                seller.getFollowers().add(buyer);
+            } else {
+                throw new BadRequestException("The user " + userIdToFollow + " is already in your follow list");
             }
+        } else {
+            throw new BadRequestException("The user_id not exist");
         }
+    }
 
 
     @Override
     public FollowedListDTORes getFollowed(Integer userId, String order) {
-        if(validateBuyer(userId)) {
+        if (validateBuyer(userId)) {
             UserBuyer buyer = userBuyerRepository.findById(userId);
             List<UserSeller> sellers = buyer.getFollowed();
             List<UserDTORes> userDTOResList = sellers.stream().map(e -> new UserDTORes(e)).collect(Collectors.toList());
@@ -85,7 +86,7 @@ public class UserBuyerServiceImp implements IUserBuyerService{
 
     @Override
     public PostFollowedByDateDTORes getLastPosts(Integer userId, String order) {
-        if(validateBuyer(userId)) {
+        if (validateBuyer(userId)) {
             UserBuyer buyer = userBuyerRepository.findById(userId);
             List<UserSeller> followed = buyer.getFollowed();
             List<PostDTORes> postsFollowed = new ArrayList<>();
@@ -101,31 +102,33 @@ public class UserBuyerServiceImp implements IUserBuyerService{
         }
     }
 
-    private List<PostDTORes> filterPostByDate(List<PostDTORes> postDTOResList){
+    private List<PostDTORes> filterPostByDate(List<PostDTORes> postDTOResList) {
         return postDTOResList.stream().
-                filter(postDTORes->postDTORes.getDate().isAfter(LocalDate.now().minusWeeks(2)))
+                filter(postDTORes -> postDTORes.getDate().isAfter(LocalDate.now().minusWeeks(2)))
                 .collect(Collectors.toList());
     }
-    private void getPostListSeller(List<UserSeller> followed, List<PostDTORes> postsFollowed){
-        for (UserSeller seller: followed) {
-            for ( Post post: seller.getPosts()) {
-                postsFollowed.add(new PostDTORes(seller.getUser_id(),post));
+
+    private void getPostListSeller(List<UserSeller> followed, List<PostDTORes> postsFollowed) {
+        for (UserSeller seller : followed) {
+            for (Post post : seller.getPosts()) {
+                postsFollowed.add(new PostDTORes(seller.getUser_id(), post));
             }
         }
     }
 
     @Override
     public void unfollow(Integer userId, Integer userIdToUnfollow) {
-        if(validateBuyer(userId) && validateSeller(userIdToUnfollow)) {
-        UserBuyer buyer = userBuyerRepository.findById(userId);
-        UserSeller seller = userSellerRepository.findById(userIdToUnfollow);
-        if (buyer.getFollowed().contains(seller) && (seller.getFollowers().contains(buyer))) {
-            buyer.getFollowed().remove(seller);
-            seller.getFollowers().remove(buyer);
+        if (validateBuyer(userId) && validateSeller(userIdToUnfollow)) {
+            UserBuyer buyer = userBuyerRepository.findById(userId);
+            UserSeller seller = userSellerRepository.findById(userIdToUnfollow);
+            if (buyer.getFollowed().contains(seller) && (seller.getFollowers().contains(buyer))) {
+                buyer.getFollowed().remove(seller);
+                seller.getFollowers().remove(buyer);
+            } else {
+                throw new BadRequestException("The user " + userIdToUnfollow + " is not in your following list");
+            }
         } else {
-            throw new BadRequestException("The user "+userIdToUnfollow+" is not in your following list");
-        }
-    } else {
             throw new BadRequestException("The user_id not exist");
-        }}
+        }
+    }
 }

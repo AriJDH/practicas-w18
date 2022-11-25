@@ -19,7 +19,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class UserSellerServiceImp implements IUserSellerService{
+public class UserSellerServiceImp implements IUserSellerService {
     private final IUserSellerRepository sellerRepository;
     private final IPostRepository postRepository;
 
@@ -30,26 +30,28 @@ public class UserSellerServiceImp implements IUserSellerService{
 
     @Override
     public FollowerCountDTORes followersCount(Integer userId) {
-        if(validateSeller(userId)) {
+        if (validateSeller(userId)) {
             UserSeller seller = sellerRepository.findById(userId);
             return new FollowerCountDTORes(seller.getUser_id(), seller.getUser_name(), seller.getFollowers().size());
         } else {
             throw new BadRequestException("The user_id not exist");
         }
     }
-    private Boolean validateSeller(Integer id){
+
+    private Boolean validateSeller(Integer id) {
         Boolean valid = false;
         List<UserSeller> sellers = sellerRepository.findAll();
-        for(UserSeller seller: sellers){
-            if(seller.getUser_id().equals(id)){
+        for (UserSeller seller : sellers) {
+            if (seller.getUser_id().equals(id)) {
                 valid = true;
             }
         }
         return valid;
     }
+
     @Override
     public FollowerListDTORes getFollowers(Integer userId, String order) {
-        if(validateSeller(userId)) {
+        if (validateSeller(userId)) {
             UserSeller seller = sellerRepository.findById(userId);
             List<UserBuyer> buyers = seller.getFollowers();
             List<UserDTORes> userDTOResList = buyers.stream().map(buyer -> new UserDTORes(buyer)).collect(Collectors.toList());
@@ -65,9 +67,9 @@ public class UserSellerServiceImp implements IUserSellerService{
 
     @Override
     public void publishPost(PostDTOReq postDTOReq) {
-        Post post= Mapper.createObjectMapper().convertValue(postDTOReq, Post.class);
+        Post post = Mapper.createObjectMapper().convertValue(postDTOReq, Post.class);
         postRepository.createPost(post);
         UserSeller seller = sellerRepository.findById(postDTOReq.getUser_id());
-            seller.getPosts().add(post);
+        seller.getPosts().add(post);
     }
 }

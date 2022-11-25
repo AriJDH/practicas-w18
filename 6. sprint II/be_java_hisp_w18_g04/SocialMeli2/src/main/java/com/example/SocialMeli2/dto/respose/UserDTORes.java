@@ -17,6 +17,7 @@ public class UserDTORes {
         this.user_id = e.getUser_id();
         this.user_name = e.getUser_name();
     }
+
     public UserDTORes(UserSeller e) {
         this.user_id = e.getUser_id();
         this.user_name = e.getUser_name();

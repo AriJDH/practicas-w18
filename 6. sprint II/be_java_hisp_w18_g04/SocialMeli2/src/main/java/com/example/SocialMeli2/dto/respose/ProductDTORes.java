@@ -1,4 +1,5 @@
 package com.example.SocialMeli2.dto.respose;
+
 import com.example.SocialMeli2.entity.Product;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -16,11 +17,11 @@ public class ProductDTORes {
     private String notes;
 
     public ProductDTORes(Product product) {
-        product_id=product.getProduct_id();
-        product_name=product.getProduct_name();
-        type=product.getType();
-        brand=product.getBrand();
-        color=product.getColor();
-        notes=product.getNotes();
+        product_id = product.getProduct_id();
+        product_name = product.getProduct_name();
+        type = product.getType();
+        brand = product.getBrand();
+        color = product.getColor();
+        notes = product.getNotes();
     }
 }

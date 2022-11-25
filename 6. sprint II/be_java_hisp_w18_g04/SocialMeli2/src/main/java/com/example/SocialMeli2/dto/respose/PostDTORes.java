@@ -1,4 +1,5 @@
 package com.example.SocialMeli2.dto.respose;
+
 import com.example.SocialMeli2.entity.Post;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
@@ -21,11 +22,11 @@ public class PostDTORes {
     private Double price;
 
     public PostDTORes(Integer user_id, Post post) {
-        this.user_id=user_id;
-        this.post_id=post.getPost_id();
-        this.date=post.getDate();
-        this.product= new ProductDTORes(post.getProduct());
-        this.category=post.getCategory();
-        this.price=post.getPrice();
+        this.user_id = user_id;
+        this.post_id = post.getPost_id();
+        this.date = post.getDate();
+        this.product = new ProductDTORes(post.getProduct());
+        this.category = post.getCategory();
+        this.price = post.getPrice();
     }
 }

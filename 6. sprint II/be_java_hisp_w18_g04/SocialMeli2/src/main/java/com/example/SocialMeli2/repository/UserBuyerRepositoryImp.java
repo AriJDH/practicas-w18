@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Repository
-public class UserBuyerRepositoryImp implements IUserBuyerRepository{
+public class UserBuyerRepositoryImp implements IUserBuyerRepository {
     List<UserBuyer> buyers = new ArrayList();
 
     public UserBuyerRepositoryImp() {
@@ -24,17 +24,19 @@ public class UserBuyerRepositoryImp implements IUserBuyerRepository{
         return buyers.stream().filter(buyer -> buyer.getUser_id().equals(id)).findFirst().get();
     }
 
-    public List<UserBuyer> findAll(){
+    @Override
+    public List<UserBuyer> findAll() {
         return buyers;
     }
 
 
-    private void loadBuyers(){
-        File jsonFile= null;
+    private void loadBuyers() {
+        File jsonFile = null;
         try {
             jsonFile = ResourceUtils.getFile("classpath:buyers.json");
-            buyers = Mapper.createObjectMapper().readValue(jsonFile, new TypeReference<List<UserBuyer>>() {});
-        }catch (Exception ex){
+            buyers = Mapper.createObjectMapper().readValue(jsonFile, new TypeReference<List<UserBuyer>>() {
+            });
+        } catch (Exception ex) {
             System.out.println("Buyers not found " + ex.getMessage());
         }
     }
