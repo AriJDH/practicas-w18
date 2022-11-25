@@ -132,5 +132,4 @@ public class PostServiceImp implements IPostService {
 
         return new SellersPostDTO(user.getUserId(), responsePostDTOs);
     }
-
 }
