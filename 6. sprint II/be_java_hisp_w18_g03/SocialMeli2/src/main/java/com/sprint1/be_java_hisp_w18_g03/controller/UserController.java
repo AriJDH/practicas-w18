@@ -8,16 +8,20 @@ import com.sprint1.be_java_hisp_w18_g03.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.constraints.Min;
 
 @RestController
 @RequestMapping("/users")
+@Validated
 public class UserController {
     @Autowired
     private IUserService userService;
 
     @GetMapping("/{userId}/followers/count")
-    public ResponseEntity<FollowerCountDTO> followerCount(@PathVariable Integer userId) {
+    public ResponseEntity<FollowerCountDTO> followerCount(@PathVariable  @Min(value = 1, message = "El id debe ser mayor a 0") Integer userId) {
         return new ResponseEntity<>(userService.followerCount(userId), HttpStatus.OK);
     }
 
