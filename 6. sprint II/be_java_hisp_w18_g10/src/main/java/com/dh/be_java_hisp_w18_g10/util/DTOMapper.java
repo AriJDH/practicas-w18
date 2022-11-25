@@ -19,6 +19,7 @@ public class DTOMapper {
         }
         return mapper;
     }
+
     public static UserPostsDTOres mapToUserPostsDTOres(User user){
         return getInstance().map(user, UserPostsDTOres.class);
     }

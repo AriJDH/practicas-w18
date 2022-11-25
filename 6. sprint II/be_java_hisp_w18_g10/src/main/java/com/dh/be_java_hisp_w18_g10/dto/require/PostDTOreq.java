@@ -7,7 +7,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.time.LocalDate;
+import javax.validation.Valid;
+import javax.validation.constraints.*;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -15,10 +16,21 @@ import java.time.LocalDate;
 @Setter
 public class PostDTOreq {
     //US 0005
+    @NotNull(message = "El id no puede estar vacio.")
+    @Min(value=1, message = "El id debe ser mayor a cero")
     private int user_id;
+
+    @NotEmpty(message = "La fecha no puede estar vacia.")
     private String date;
+
+    @Valid
     private ProductDTOreq product;
+
+    @NotNull(message ="El campo no puede estar vacio.")
     private int category;
+
+    @NotNull(message ="El campo no puede estar vacio.")
+    @Max(value=10000000, message = "El precio maximo por producto es de 10 millones.")
     private double price;
 }
 

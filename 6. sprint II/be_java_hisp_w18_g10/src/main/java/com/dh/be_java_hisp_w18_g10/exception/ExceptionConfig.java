@@ -44,7 +44,6 @@ public class ExceptionConfig {
         ErrorDTOres errorDto = new ErrorDTOres(e.getBindingResult().getFieldError().getDefaultMessage(), HttpStatus.BAD_REQUEST.value());
         return new ResponseEntity<>(errorDto, HttpStatus.BAD_REQUEST);
     }
-
     @ExceptionHandler(HttpMessageNotReadableException.class)
     public ResponseEntity<?> validationExceptionHandler(HttpMessageNotReadableException e){
         ErrorDTOres errorDto = new ErrorDTOres(e.getMessage(), HttpStatus.BAD_REQUEST.value());

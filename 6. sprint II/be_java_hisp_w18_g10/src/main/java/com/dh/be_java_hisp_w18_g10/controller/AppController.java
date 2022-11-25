@@ -10,6 +10,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
+
 @RestController
 public class AppController {
     private IAppService userService;
@@ -60,7 +63,7 @@ public class AppController {
 
     @PostMapping("/products/post")
     public ResponseEntity<?> addPost(
-            @RequestBody PostDTOreq postDTOreq
+            @Valid @RequestBody PostDTOreq postDTOreq
             ){
         // US 0005
         userService.createPost(postDTOreq);
@@ -70,7 +73,7 @@ public class AppController {
     @GetMapping("/products/followed/{userId}/list")
     public ResponseEntity<UserPostsDTOres> getUserFollowedPost(
             @RequestParam(required = false) String order,
-            @PathVariable int userId){
+            @Valid @PathVariable @NotNull(message="El campo userId no puede estar vacio.") int userId){
         // US 0006
         // US 0009
         return new ResponseEntity<>(userService.getUserPosts(userId, order), HttpStatus.OK);
