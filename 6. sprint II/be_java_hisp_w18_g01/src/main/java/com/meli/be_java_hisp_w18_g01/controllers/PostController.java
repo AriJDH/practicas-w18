@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -19,7 +20,7 @@ public class PostController {
     PostService postService;
 
     @PostMapping("/post")
-    public ResponseEntity<ResponseDTO> addPost(@RequestBody PostDTO postDTO){
+    public ResponseEntity<ResponseDTO> addPost(@RequestBody @Valid PostDTO postDTO){
         postService.addPost(postDTO);
         return ResponseEntity.ok(new ResponseDTO(200,"operación exitosa"));
     }
