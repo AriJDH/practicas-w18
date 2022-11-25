@@ -48,8 +48,8 @@ public class PostServiceImp implements IPostService {
                 request.getProduct().getNotes(),
                 category,
                 request.getPrice(),
-                request.getProduct().getHasPromo(),
-                request.getProduct().getDiscount()
+                request.getHasPromo(),
+                request.getDiscount()
         );
         Post newPost = new Post(
                 sizeList,
