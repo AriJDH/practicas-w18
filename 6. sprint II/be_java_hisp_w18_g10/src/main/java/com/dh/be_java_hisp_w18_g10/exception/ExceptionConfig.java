@@ -3,6 +3,8 @@ package com.dh.be_java_hisp_w18_g10.exception;
 import com.dh.be_java_hisp_w18_g10.dto.response.ErrorDTOres;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.HttpMessageNotReadableException;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
@@ -37,5 +39,17 @@ public class ExceptionConfig {
         ErrorDTOres error = new ErrorDTOres(ex.getMessage(), 404);
         return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
     }
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ResponseEntity<?> validationExceptionHandler(MethodArgumentNotValidException e){
+        ErrorDTOres errorDto = new ErrorDTOres(e.getBindingResult().getFieldError().getDefaultMessage(), HttpStatus.BAD_REQUEST.value());
+        return new ResponseEntity<>(errorDto, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(HttpMessageNotReadableException.class)
+    public ResponseEntity<?> validationExceptionHandler(HttpMessageNotReadableException e){
+        ErrorDTOres errorDto = new ErrorDTOres(e.getMessage(), HttpStatus.BAD_REQUEST.value());
+        return new ResponseEntity<>(errorDto, HttpStatus.BAD_REQUEST);
+    }
+
 
 }
