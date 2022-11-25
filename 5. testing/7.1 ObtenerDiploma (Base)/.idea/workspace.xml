@@ -1,0 +1,445 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="d75b3f77-2b5a-4820-8c7f-fa11d911ca9a" name="Default Changelist" comment="Spring 2 - Practica TT - Obetener Diploma">
+      <change afterPath="$PROJECT_DIR$/../../2. java/11-EjerciciosIntegradoresP2Vivo/11.1-SaveTheRopa/SaveTheRopa.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../2. java/11-EjerciciosIntegradoresP2Vivo/11.2-Dakar/Dakar.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../3. ObtenerDiploma (Base con CRUD logico)/readme.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../3. ObtenerDiploma (Base con CRUD logico)/src/test/java/com/meli/obtenerdiploma/repository/StudentDAOTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../3. ObtenerDiploma (Base con CRUD logico)/src/test/java/com/meli/obtenerdiploma/repository/StudentRepositoryTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/.name" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/ObtenerDiploma.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__ch_qos_logback_logback_classic_1_2_11.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__ch_qos_logback_logback_core_1_2_11.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_classmate_1_5_1.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_core_jackson_annotations_2_13_4.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_core_jackson_core_2_13_4.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_core_jackson_databind_2_13_4_2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_datatype_jackson_datatype_jdk8_2_13_4.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_datatype_jackson_datatype_jsr310_2_13_4.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_module_jackson_module_parameter_names_2_13_4.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_jayway_jsonpath_json_path_2_7_0.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_vaadin_external_google_android_json_0_0_20131108_vaadin1.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__commons_codec_commons_codec_1_15.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__jakarta_activation_jakarta_activation_api_1_2_2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__jakarta_annotation_jakarta_annotation_api_1_3_5.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__jakarta_validation_jakarta_validation_api_2_0_2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__jakarta_xml_bind_jakarta_xml_bind_api_2_3_3.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__javax_el_javax_el_api_1_1_2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__javax_validation_validation_api_2_0_1_Final.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__net_bytebuddy_byte_buddy_1_12_18.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__net_bytebuddy_byte_buddy_agent_1_12_18.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__net_minidev_accessors_smart_2_4_8.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__net_minidev_json_smart_2_4_8.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_httpcomponents_httpclient_4_5_13.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_httpcomponents_httpcore_4_4_15.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_logging_log4j_log4j_api_2_17_2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_logging_log4j_log4j_to_slf4j_2_17_2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_tomcat_embed_tomcat_embed_core_9_0_68.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_tomcat_embed_tomcat_embed_el_9_0_68.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_tomcat_embed_tomcat_embed_websocket_9_0_68.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apiguardian_apiguardian_api_1_1_2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_assertj_assertj_core_3_22_0.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_glassfish_web_javax_el_1_1_3.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_hamcrest_hamcrest_2_2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_hibernate_validator_hibernate_validator_6_2_5_Final.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_jboss_logging_jboss_logging_3_4_3_Final.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_junit_jupiter_junit_jupiter_5_8_2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_junit_jupiter_junit_jupiter_api_5_8_2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_junit_jupiter_junit_jupiter_engine_5_8_2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_junit_jupiter_junit_jupiter_params_5_8_2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_junit_platform_junit_platform_commons_1_8_2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_junit_platform_junit_platform_engine_1_8_2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_mockito_mockito_core_4_5_1.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_mockito_mockito_junit_jupiter_4_5_1.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_objenesis_objenesis_3_2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_opentest4j_opentest4j_1_2_0.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_ow2_asm_asm_9_1.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_projectlombok_lombok_1_18_24.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_skyscreamer_jsonassert_1_5_1.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_slf4j_jul_to_slf4j_1_7_36.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_slf4j_slf4j_api_1_7_36.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_2_7_5.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_autoconfigure_2_7_5.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_devtools_2_7_5.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_2_7_5.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_json_2_7_5.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_logging_2_7_5.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_test_2_7_5.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_tomcat_2_7_5.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_web_2_7_5.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_test_2_7_5.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_test_autoconfigure_2_7_5.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_aop_5_3_23.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_beans_5_3_23.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_context_5_3_23.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_core_5_3_23.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_expression_5_3_23.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_jcl_5_3_23.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_test_5_3_23.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_web_5_3_23.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_webmvc_5_3_23.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_xmlunit_xmlunit_core_2_9_0.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_yaml_snakeyaml_1_30.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/readme.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/meli/obtenerdiploma/exception/ExceptionHandlerController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/meli/obtenerdiploma/util/ErrorDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/com/meli/obtenerdiploma/model/StudentDTOTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../2. java/1-JavaP1Vivo/Enunciados.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../2. java/11-EjerciciosIntegradoresP2Vivo/11.1-SaveTheRopa/SaveTheRopa/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../2. java/11-EjerciciosIntegradoresP2Vivo/11.1-SaveTheRopa/SaveTheRopa/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../2. java/11-EjerciciosIntegradoresP2Vivo/11.1-SaveTheRopa/SaveTheRopa/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../2. java/11-EjerciciosIntegradoresP2Vivo/11.1-SaveTheRopa/SaveTheRopa/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../2. java/11-EjerciciosIntegradoresP2Vivo/11.1-SaveTheRopa/SaveTheRopa/Enunciados.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../2. java/11-EjerciciosIntegradoresP2Vivo/11.1-SaveTheRopa/SaveTheRopa/SaveTheRopa.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../2. java/11-EjerciciosIntegradoresP2Vivo/11.1-SaveTheRopa/SaveTheRopa/src/GuardaRopa.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../2. java/11-EjerciciosIntegradoresP2Vivo/11.1-SaveTheRopa/SaveTheRopa/src/Main.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../2. java/11-EjerciciosIntegradoresP2Vivo/11.1-SaveTheRopa/SaveTheRopa/src/Prenda.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../2. java/11-EjerciciosIntegradoresP2Vivo/11.2-Dakar/Dakar/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../2. java/11-EjerciciosIntegradoresP2Vivo/11.2-Dakar/Dakar/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../2. java/11-EjerciciosIntegradoresP2Vivo/11.2-Dakar/Dakar/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../2. java/11-EjerciciosIntegradoresP2Vivo/11.2-Dakar/Dakar/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../2. java/11-EjerciciosIntegradoresP2Vivo/11.2-Dakar/Dakar/Dakar.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../2. java/11-EjerciciosIntegradoresP2Vivo/11.2-Dakar/Dakar/Enunciados.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../2. java/11-EjerciciosIntegradoresP2Vivo/11.2-Dakar/Dakar/src/Auto.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../2. java/11-EjerciciosIntegradoresP2Vivo/11.2-Dakar/Dakar/src/Carrera.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../2. java/11-EjerciciosIntegradoresP2Vivo/11.2-Dakar/Dakar/src/Main.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../2. java/11-EjerciciosIntegradoresP2Vivo/11.2-Dakar/Dakar/src/Moto.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../2. java/11-EjerciciosIntegradoresP2Vivo/11.2-Dakar/Dakar/src/SocorristaAuto.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../2. java/11-EjerciciosIntegradoresP2Vivo/11.2-Dakar/Dakar/src/SocorristaMoto.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../2. java/11-EjerciciosIntegradoresP2Vivo/11.2-Dakar/Dakar/src/Vehiculo.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../2. java/2-JavaP2Vivo/Enunciados.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../2. java/3-POOP1Vivo/Enunciados.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../2. java/4-POOP2Vivo/Enunciados.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../2. java/6-MaterialComplementario/Enunciados.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../2. java/7-RecapitulandoJavaVivo/Enunciados.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../2. java/8-10-EjerciciosIntegradores P1/8.1-ClasesAbstractas/Enunciados.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../2. java/8-10-EjerciciosIntegradores P1/8.2-10-SupermercadoElEconomico/Enunciados.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../2. java/9-EjerciciosIntegradoresP1VIVO/Enunciados.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../3. spring/1. numerosRomanos/Enunciados.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../3. spring/2. morse/Enunciados.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../3. spring/3. edadEjercicioParte1/Enunciado.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../3. spring/4. deportistasEjercicioParte2/Enunciados.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../3. spring/5. covid19/Enunciados.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../3. spring/6.  personajesStarWars/Enunciados.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../3. spring/7. calculadorCalorias/Enunciados.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../3. spring/8. vehiculos/Enunciados.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../3. spring/9. youtuber/Enunciados.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../3. spring/readme.md" beforeDir="false" afterPath="$PROJECT_DIR$/../../3. spring/readme.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../readme.md" beforeDir="false" afterPath="$PROJECT_DIR$/../readme.md" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+        <option value="JUnit5 Test Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$/../.." value="risso_patron_matias" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+    <option name="RESET_MODE" value="KEEP" />
+  </component>
+  <component name="GitToolBoxStore">
+    <option name="recentBranches">
+      <RecentBranches>
+        <option name="branchesForRepo">
+          <list>
+            <RecentBranchesForRepo>
+              <option name="branches">
+                <list>
+                  <RecentBranch>
+                    <option name="branchName" value="martinez_yepez_jorge" />
+                    <option name="lastUsedInstant" value="1620932410" />
+                  </RecentBranch>
+                  <RecentBranch>
+                    <option name="branchName" value="risso_patron_matias" />
+                    <option name="lastUsedInstant" value="1620932409" />
+                  </RecentBranch>
+                </list>
+              </option>
+              <option name="repositoryRootUrl" value="file://$PROJECT_DIR$/../.." />
+            </RecentBranchesForRepo>
+          </list>
+        </option>
+      </RecentBranches>
+    </option>
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-context/5.3.23/spring-context-5.3.23-sources.jar!/org/springframework/validation/BindException.java" root0="SKIP_INSPECTION" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="1rr4iiqbWc4IwRLyT4RkGVb5rhC" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary&quot;: &quot;JUnit5&quot;,
+    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5&quot;: &quot;&quot;,
+    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.includeInheritedMembers&quot;: &quot;true&quot;,
+    &quot;last_directory_selection&quot;: &quot;/Users/MGONCALVESCO/Documents/Repos DH/practicas-w18/5. testing/7.1 ObtenerDiploma (Base)/src/test/java/com/meli/obtenerdiploma/controller&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/MGONCALVESCO/Documents/Repos DH/practicas-w18/5. testing/7.1 ObtenerDiploma (Base)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;spring.configuration.checksum&quot;: &quot;b36e5c601021deef548f272a0fa63917&quot;
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/test/java/com/meli/obtenerdiploma" />
+      <recent name="$PROJECT_DIR$/src/main/java/com/meli/obtenerdiploma" />
+      <recent name="$PROJECT_DIR$/src/main/java/com/meli/obtenerDiploma" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
+    </key>
+    <key name="CreateTestDialog.Recents.Supers">
+      <recent name="" />
+    </key>
+    <key name="CreateTestDialog.RecentsKey">
+      <recent name="com.meli.obtenerdiploma.model" />
+      <recent name="com.meli.obtenerdiploma.controller" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Spring Boot.ObtenerDiplomaApplication">
+    <configuration name="ObtenerDiplomaApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.meli.obtenerdiploma.ObtenerDiplomaApplication" />
+      <module name="ObtenerDiploma" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.meli.obtenerdiploma.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="StudentDTOTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="ObtenerDiploma" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.meli.obtenerdiploma.model.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.meli.obtenerdiploma.model" />
+      <option name="MAIN_CLASS_NAME" value="com.meli.obtenerdiploma.model.StudentDTOTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="StudentDTOTest.primerLetraMayuscOKTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="ObtenerDiploma" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.meli.obtenerdiploma.model.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.meli.obtenerdiploma.model" />
+      <option name="MAIN_CLASS_NAME" value="com.meli.obtenerdiploma.model.StudentDTOTest" />
+      <option name="METHOD_NAME" value="primerLetraMayuscOKTest" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ObtenerDiplomaApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <option name="ACTIVE_PROFILES" />
+      <option name="ENABLE_JMX_AGENT" value="false" />
+      <module name="ObtenerDiploma" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.meli.obtenerdiploma.ObtenerDiplomaApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="Application.ObtenerDiplomaApplication" />
+      <item itemvalue="JUnit.StudentDTOTest.primerLetraMayuscOKTest" />
+      <item itemvalue="JUnit.StudentDTOTest" />
+      <item itemvalue="Spring Boot.ObtenerDiplomaApplication" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JUnit.StudentDTOTest.primerLetraMayuscOKTest" />
+        <item itemvalue="JUnit.StudentDTOTest" />
+        <item itemvalue="Application.ObtenerDiplomaApplication" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="d75b3f77-2b5a-4820-8c7f-fa11d911ca9a" name="Default Changelist" comment="" />
+      <created>1619721005383</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1619721005383</updated>
+      <workItem from="1669244463106" duration="11146000" />
+      <workItem from="1669291949392" duration="601000" />
+      <workItem from="1669294194136" duration="4953000" />
+      <workItem from="1669304681679" duration="5548000" />
+    </task>
+    <task id="LOCAL-00001" summary="Spring 2 - Practica TT - Obetener Diploma">
+      <created>1619721212242</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1619721212242</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Spring 2 - Practica TT - Obetener Diploma (again)">
+      <created>1619721595337</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1619721595337</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Spring 2 - Practica TT - Obetener Diploma">
+      <created>1619721957097</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1619721957097</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Spring 2 - Practica TT - Obetener Diploma">
+      <created>1620680696910</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1620680696910</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Spring 2 - Practica TT - Obetener Diploma">
+      <created>1620755686285</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1620755686285</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Spring 2 - Practica TT - Obetener Diploma">
+      <created>1620849861386</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1620849861386</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="HEAD" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="RECENT_FILTERS">
+      <map>
+        <entry key="Branch">
+          <value>
+            <list>
+              <RecentGroup>
+                <option name="FILTER_VALUES">
+                  <option value="HEAD" />
+                </option>
+              </RecentGroup>
+            </list>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Spring 2 - Practica TT - Obetener Diploma (again)" />
+    <MESSAGE value="Spring 2 - Practica TT - Obetener Diploma" />
+    <option name="LAST_COMMIT_MESSAGE" value="Spring 2 - Practica TT - Obetener Diploma" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/src/main/java/com/meli/obtenerdiploma/controller/ObtenerDiplomaController.java</url>
+          <line>16</line>
+          <properties class="com.meli.obtenerdiploma.controller.ObtenerDiplomaController" method="analyzeScores">
+            <option name="EMULATED" value="true" />
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-field">
+          <url>file://$PROJECT_DIR$/src/main/java/com/meli/obtenerdiploma/model/StudentDTO.java</url>
+          <line>19</line>
+          <properties field="studentName" class="com.meli.obtenerdiploma.model.StudentDTO" />
+          <option name="timeStamp" value="5" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/PracticaTT$ObtenerDiplomaServiceTest_testAverageWithEmptySubjectList.ic" NAME="ObtenerDiplomaServiceTest.testAverageWithEmptySubjectList Coverage Results" MODIFIED="1620739844261" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>com.meli.obtenerdiploma.service.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/ObtenerDiploma$StudentDTOTest.ic" NAME="StudentDTOTest Coverage Results" MODIFIED="1669292512123" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>com.meli.obtenerdiploma.model.*</FILTER>
+    </SUITE>
+  </component>
+</project>
