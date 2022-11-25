@@ -9,14 +9,12 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Getter
 public class ProductRequestDTO {
-  @JsonProperty("product_id")
-  private Integer productId;
-  @JsonProperty("product_name")
-  private String productName;
-  private String type;
-  private String brand;
-  private String color;
-  private String notes;
-  private Boolean hasPromo;
-  private Double discount;
+    @JsonProperty("product_id")
+    private Integer productId;
+    @JsonProperty("product_name")
+    private String productName;
+    private String type;
+    private String brand;
+    private String color;
+    private String notes;
 }
