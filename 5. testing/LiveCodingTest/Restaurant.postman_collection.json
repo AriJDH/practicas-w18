@@ -1,0 +1,114 @@
+{
+	"info": {
+		"_postman_id": "ea1b3d45-9803-46c6-8aed-ff65eda543a4",
+		"name": "Restaurant",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "17400033"
+	},
+	"item": [
+		{
+			"name": "Get Recipies",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/menu",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"menu"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Make Dish",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/menu/dish?name=cheeseburger",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"menu",
+						"dish"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "cheeseburger"
+						},
+						{
+							"key": "name",
+							"value": "pizza",
+							"disabled": true
+						},
+						{
+							"key": "name",
+							"value": "burger",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Recipe",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"new recipe\",\n    \"description\":\"creanding recipe\",\n    \"ingredients\":[\n        {\n            \"name\":\"bread\",\n            \"quantity\": 1\n        },\n        {\n            \"name\":\"meal\",\n            \"quantity\": 2\n        }\n    ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/recipe",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"recipe"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "url",
+			"value": "",
+			"type": "string"
+		}
+	]
+}

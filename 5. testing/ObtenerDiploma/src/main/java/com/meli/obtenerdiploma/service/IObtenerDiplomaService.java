@@ -1,8 +1,8 @@
 package com.meli.obtenerdiploma.service;
 
-import com.meli.obtenerdiploma.model.StudentDTO;
+import com.meli.obtenerdiploma.model.StudentDto;
 
 public interface IObtenerDiplomaService {
 
-    StudentDTO analyzeScores(StudentDTO rq);
+    StudentDto analyzeScores(StudentDto rq);
 }

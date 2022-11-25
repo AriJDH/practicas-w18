@@ -1,7 +1,7 @@
 package com.meli.obtenerdiploma.service;
 
-import com.meli.obtenerdiploma.model.StudentDTO;
-import com.meli.obtenerdiploma.model.SubjectDTO;
+import com.meli.obtenerdiploma.model.StudentDto;
+import com.meli.obtenerdiploma.model.SubjectDto;
 import org.springframework.stereotype.Service;
 
 import java.text.DecimalFormat;
@@ -11,7 +11,7 @@ import java.util.List;
 public class ObtenerDiplomaService implements IObtenerDiplomaService {
 
     @Override
-    public StudentDTO analyzeScores(StudentDTO rq) {
+    public StudentDto analyzeScores(StudentDto rq) {
         rq.setAverageScore(calculateAverage(rq.getSubjects()));
         rq.setMessage(getGreetingMessage(rq.getStudentName(), rq.getAverageScore()));
 
@@ -23,7 +23,7 @@ public class ObtenerDiplomaService implements IObtenerDiplomaService {
                 + ((average > 9) ? ". Felicitaciones!" : ". Puedes mejorar.");
     }
 
-    private Double calculateAverage(List<SubjectDTO> scores) {
+    private Double calculateAverage(List<SubjectDto> scores) {
         return scores.stream()
                 .reduce(0D, (partialSum, score)  -> partialSum + score.getScore(), Double::sum)
                 / scores.size();

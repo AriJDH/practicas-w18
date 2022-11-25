@@ -1,11 +1,9 @@
 package com.meli.obtenerdiploma.model;
 
 import com.meli.obtenerdiploma.util.CapitalizeStringConstraint;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
+import javax.validation.GroupSequence;
 import javax.validation.Valid;
 import javax.validation.constraints.*;
 import java.util.List;
@@ -13,11 +11,13 @@ import java.util.List;
 @Getter @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class StudentDTO {
+@EqualsAndHashCode
+public class StudentDto {
 
-    @NotBlank(message = "El nombre del alumno no puede estar vacío")
+
     @Size(max = 50, message = "La longitud del nombre no puede superar los 50 caracteres")
     @CapitalizeStringConstraint(message = "El nombre del alumno debe comenzar con mayúsculas")
+    @NotEmpty(message = "El nombre del alumno no puede estar vacío")
     String studentName;
 
     String message;
@@ -26,9 +26,8 @@ public class StudentDTO {
     @Max(value=10, message = "Average score must be less or equal to ten")
     Double averageScore;
 
-    @Valid
     @NotEmpty(message = "Subjects list cannot be empty.")
-    List<SubjectDTO> subjects;
+    List<@Valid SubjectDto> subjects;
 }
 
 // JSON REPRESENTATION
