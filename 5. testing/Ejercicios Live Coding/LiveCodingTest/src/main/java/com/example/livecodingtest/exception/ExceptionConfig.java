@@ -16,6 +16,12 @@ public class ExceptionConfig {
         return new ResponseEntity<>(errorDto, HttpStatus.BAD_REQUEST);
     }
 
+    @ExceptionHandler(NotFoundException.class)
+    public ResponseEntity<?> capturandoValidaciones(NotFoundException e){
+        ErrorDto errorDto = new ErrorDto(e.getMessage());
+        return new ResponseEntity<>(errorDto, HttpStatus.NOT_FOUND);
+    }
+
     @ExceptionHandler(HttpMessageNotReadableException.class)
     public ResponseEntity<?> capturandoValidaciones(HttpMessageNotReadableException e){
         ErrorDto errorDto = new ErrorDto(e.getMessage());
