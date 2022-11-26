@@ -21,6 +21,7 @@ import java.util.stream.Collectors;
 
 @Service
 public class AppService implements IAppService {
+
     private IUserRepository userRepository;
     private IPostRepository postRepository;
 

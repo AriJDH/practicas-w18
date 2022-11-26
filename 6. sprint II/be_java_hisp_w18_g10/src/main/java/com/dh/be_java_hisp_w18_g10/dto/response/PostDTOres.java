@@ -1,15 +1,11 @@
 package com.dh.be_java_hisp_w18_g10.dto.response;
 
 import com.dh.be_java_hisp_w18_g10.dto.require.ProductDTOreq;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.LocalDate;
 
-@Getter
-@Setter
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class PostDTOres {

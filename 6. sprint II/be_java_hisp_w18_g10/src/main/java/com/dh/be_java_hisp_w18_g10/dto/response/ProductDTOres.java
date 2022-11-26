@@ -1,14 +1,10 @@
 package com.dh.be_java_hisp_w18_g10.dto.response;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @NoArgsConstructor
 @AllArgsConstructor
-@Getter
-@Setter
+@Data
 public class ProductDTOres {
     private int product_id;
     private String product_name;
