@@ -1,0 +1,18 @@
+[
+  {
+    "id": 1,
+    "studentName": "Pepe",
+    "message": "Message ok",
+    "averageScore": 8.0,
+    "subjects": [
+      {
+        "name": "Art",
+        "score": 8.0
+      },
+      {
+        "name": null,
+        "score": null
+      }
+    ]
+  }
+]
