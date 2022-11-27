@@ -127,7 +127,10 @@ public class UserService implements IUserService {
 
     @Override
     public UserFollowersCountDTO getFollowersCount(int userId) {
-        User user = userRepository.getUser(userId);
+        User user = userRepository
+                .findUserById(userId)
+                .orElseThrow(() -> new BadRequestException("The user id" + userId
+                        + " does not exist"));
 
         if (user.getFollowers() == null) {
             throw new EmptyException("This user doesn't have followers");
@@ -145,7 +148,10 @@ public class UserService implements IUserService {
 
     @Override
     public UserFollowedListDTO getFollowedList(int userId, String order) {
-        User user = userRepository.getUser(userId);
+        User user = userRepository
+                .findUserById(userId)
+                .orElseThrow(() -> new BadRequestException("The user id" + userId
+                        + " does not exist"));
 
         if (user.getFollowed() == null) {
             throw new EmptyException("This user doesn't have followers");
@@ -170,7 +176,10 @@ public class UserService implements IUserService {
 
     @Override
     public UserFollowersListDTO getFollowersList(int userId, String order) {
-        User user = userRepository.getUser(userId);
+        User user = userRepository
+                .findUserById(userId)
+                .orElseThrow(() -> new BadRequestException("The user id" + userId
+                        + " does not exist"));
 
         if (user.getFollowers() == null) {
             throw new EmptyException("This user doesn't have followers");
