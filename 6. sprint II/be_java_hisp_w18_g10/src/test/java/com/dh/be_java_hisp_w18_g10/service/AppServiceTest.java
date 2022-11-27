@@ -2,6 +2,8 @@ package com.dh.be_java_hisp_w18_g10.service;
 
 import com.dh.be_java_hisp_w18_g10.dto.response.UserPostsDTOres;
 import com.dh.be_java_hisp_w18_g10.entity.User;
+import com.dh.be_java_hisp_w18_g10.exception.UserGenericException;
+import com.dh.be_java_hisp_w18_g10.exception.UserNotFoundException;
 import com.dh.be_java_hisp_w18_g10.repository.IPostRepository;
 import com.dh.be_java_hisp_w18_g10.repository.IUserRepository;
 import com.dh.be_java_hisp_w18_g10.repository.PostRepository;
@@ -98,6 +100,14 @@ public class AppServiceTest {
         UserPostsDTOres result = service.getUserPosts(1, TypeOrderHelper.DATE_DESC);
 
         assertArrayEquals(expected.getPosts().toArray(),result.getPosts().toArray());
+    }
+    @Test
+    @DisplayName("T0006 - Usuario no encontrado")
+    void shouldVerifyDateSortButUserIsNullTest(){
+
+        when(userRepository.getUser(8)).thenReturn(null);
+
+        assertThrows(UserNotFoundException.class, () -> service.getUserPosts(8,""));
     }
 
     @Test
