@@ -27,4 +27,7 @@ public class StudentDTO {
 
     @NotEmpty(message = "La lista de materias no puede estar vacía.")
     List<@Valid SubjectDTO> subjects;
+
+    public StudentDTO(long l, String name, List<SubjectDTO> subjectDTOList) {
+    }
 }
