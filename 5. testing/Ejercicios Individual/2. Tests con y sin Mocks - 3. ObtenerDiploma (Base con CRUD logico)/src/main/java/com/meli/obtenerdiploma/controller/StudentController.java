@@ -19,7 +19,7 @@ public class StudentController {
     @PostMapping("/registerStudent")
     public ResponseEntity<?> registerStudent(@RequestBody @Valid StudentDTO stu) {
         this.studentService.create(stu);
-        return ResponseEntity.ok(null);
+        return ResponseEntity.ok(stu); // Cambiado el null del body por el StudentDTO
     }
 
     @GetMapping("/getStudent/{id}")
@@ -30,13 +30,13 @@ public class StudentController {
     @PostMapping("/modifyStudent")
     public ResponseEntity<?> modifyStudent(@RequestBody @Valid StudentDTO stu) {
         this.studentService.update(stu);
-        return ResponseEntity.ok(null);
+        return ResponseEntity.ok("Estudiante modificado"); // Devuelve un mensaje para no devolver null
     }
 
-    @GetMapping("/removeStudent/{id}")
+    @DeleteMapping("/removeStudent/{id}") // Cambiado el Get por el Delete que es el método correcto
     public ResponseEntity<?> removeStudent(@PathVariable Long id) {
         this.studentService.delete(id);
-        return ResponseEntity.ok(null);
+        return ResponseEntity.ok("Estudiante eliminado"); // Cambiado el null del body mensaje OK
     }
 
     @GetMapping("/listStudents")
