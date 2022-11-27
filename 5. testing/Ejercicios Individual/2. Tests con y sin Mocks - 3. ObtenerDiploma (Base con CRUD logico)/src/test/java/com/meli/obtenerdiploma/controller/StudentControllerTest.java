@@ -1,39 +1,74 @@
 package com.meli.obtenerdiploma.controller;
 
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
+import com.meli.obtenerdiploma.model.StudentDTO;
+import com.meli.obtenerdiploma.service.IStudentService;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.boot.test.context.SpringBootTest;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.verify;
 
+
+@ExtendWith(MockitoExtension.class)
+@SpringBootTest
 class StudentControllerTest {
 	
-	// TODO testear con Mocks
-	@BeforeEach
-	void setUp() {
-	}
+	@Mock
+	IStudentService studentService;
 	
-	@AfterEach
-	void tearDown() {
+	@InjectMocks
+	StudentController studentController;
+
+	@Test
+	@DisplayName("US0013 - Crear estudiante happy path =^.^=")
+	void registerStudentOkTest() {
+		StudentDTO studentDTO = new StudentDTO();
+		studentDTO.setId(1L);
+		studentDTO.setStudentName("Pepe");
+		
+		studentController.registerStudent(studentDTO);
+		verify(studentService).create(studentDTO);
 	}
 	
 	@Test
-	void registerStudent() {
+	@DisplayName("US0014 - Buscar estudiante happy path =^.^=")
+	void getStudentOkTest() {
+		
+		studentController.getStudent(1L);
+		verify(studentService).read(1L);
 	}
 	
 	@Test
-	void getStudent() {
+	@DisplayName("US0015 - Modificar estudiante happy path =^.^=")
+	void modifyStudentOkTest() {
+		
+		StudentDTO studentDTO = new StudentDTO();
+		studentDTO.setId(1L);
+		studentDTO.setStudentName("Pepe");
+		
+		studentController.modifyStudent(studentDTO);
+		verify(studentService).update(studentDTO);
+		
 	}
 	
 	@Test
-	void modifyStudent() {
+	@DisplayName("US0016 - Eliminar estudiante happy path =^.^=")
+	void removeStudentOkTest() {
+		
+		studentController.removeStudent(1L);
+		verify(studentService).delete(1L);
+		
 	}
 	
 	@Test
-	void removeStudent() {
-	}
-	
-	@Test
-	void listStudents() {
+	@DisplayName("US0017 - Buscar todos los estudiantes happy path =^.^=")
+	void listStudentsOkTest() {
+		
+		studentController.listStudents();
+		verify(studentService).getAll();
 	}
 }

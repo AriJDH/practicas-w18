@@ -1,23 +1,32 @@
 package com.meli.obtenerdiploma.controller;
 
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
+import com.meli.obtenerdiploma.service.IObtenerDiplomaService;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.boot.test.context.SpringBootTest;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.verify;
 
+@ExtendWith(MockitoExtension.class)
+@SpringBootTest
 class ObtenerDiplomaControllerTest {
 	
-	// TODO testear con Mock
-	@BeforeEach
-	void setUp() {
-	}
+	@Mock
+	IObtenerDiplomaService obtenerDiplomaService;
 	
-	@AfterEach
-	void tearDown() {
-	}
+	@InjectMocks
+	ObtenerDiplomaController obtenerDiplomaController;
 	
 	@Test
-	void analyzeScores() {
+	@DisplayName("US0012 - Analizar puntaje happy path =^.^=")
+	void analyzeScoresOkTest() {
+		
+		// MOCKS
+		obtenerDiplomaController.analyzeScores(1L);
+		verify(obtenerDiplomaService).analyzeScores(1L);
 	}
 }

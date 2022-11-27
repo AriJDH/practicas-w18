@@ -25,7 +25,6 @@ public class StudentService implements IStudentService {
 
     @Override
     public void update(StudentDTO stu) {
-        // TODO modificar el método para que haga un update y no solamente un save (?
         studentDAO.save(stu);
     }
 
