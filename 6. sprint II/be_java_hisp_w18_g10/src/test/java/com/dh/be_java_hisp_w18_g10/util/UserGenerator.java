@@ -192,20 +192,40 @@ public class UserGenerator {
         User newUser = new User(id, name);
         return newUser;
     }
-    public static User getUserWithFollowers(){
+
+    public static User getUserWithFollowersASC(){
         User newUser = new User(1, "Followed");
-        newUser.getFollowers().put(2, getUser(2, "userC"));
-        newUser.getFollowers().put(3, getUser(3, "userB"));
+        newUser.getFollowers().put(2, getUser(2, "userB"));
+        newUser.getFollowers().put(3, getUser(3, "userC"));
         return newUser;
     }
 
-    public static UserFollowersListDTOres UserFollowersDTOGenerator(){
+    public static User getUserWithFollowersDESC(){
+        User newUser = new User(1, "Followed");
+        newUser.getFollowers().put(2, getUser(3, "userC"));
+        newUser.getFollowers().put(3, getUser(2, "userB"));
+        return newUser;
+    }
+
+    public static UserFollowersListDTOres UserFollowersDTOGeneratorASC(){
         UserFollowersListDTOres userFollowersListDTOres = new UserFollowersListDTOres();
         userFollowersListDTOres.setUser_name("Followed");
         userFollowersListDTOres.setUser_id(1);
-        UserDTOres follower1 = new UserDTOres(2, "userC");
-        UserDTOres follower2 = new UserDTOres(3, "userB");
+        UserDTOres follower1 = new UserDTOres(2, "userB");
+        UserDTOres follower2 = new UserDTOres(3, "userC");
         userFollowersListDTOres.setFollowers(Arrays.asList(follower1, follower2));
         return userFollowersListDTOres;
     }
+
+    public static UserFollowersListDTOres UserFollowersDTOGeneratorDESC(){
+        UserFollowersListDTOres userFollowersListDTOres = new UserFollowersListDTOres();
+        userFollowersListDTOres.setUser_name("Followed");
+        userFollowersListDTOres.setUser_id(1);
+        UserDTOres follower1 = new UserDTOres(3, "userC");
+        UserDTOres follower2 = new UserDTOres(2, "userB");
+        userFollowersListDTOres.setFollowers(Arrays.asList(follower1, follower2));
+        return userFollowersListDTOres;
+    }
+
+
 }

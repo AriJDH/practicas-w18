@@ -97,27 +97,44 @@ public class AppServiceTest {
     }
 
     @Test
-    @DisplayName("T0003 - OK")
-    void shouldReturnOrderedFollowersList(){
+    @DisplayName("T0003 - ASC")
+    void shouldReturnOrderedFollowersListASC(){
         //Arrange
         int id = 1;
-        String userName = "usuario1";
         String typeOrderAsc = "name_asc";
+
+        User followedUser = UserGenerator.getUserWithFollowersASC();
+
+        UserFollowersListDTOres followersListDTOres = UserGenerator.UserFollowersDTOGeneratorASC();
+
+        //Mock
+        when(userRepository.getUser(id)).thenReturn(followedUser);
+
+        UserFollowersListDTOres result = service.getUserFollowerList(id, typeOrderAsc);
+
+        //Assert
+        Assertions.assertEquals(followersListDTOres.getFollowers(), result.getFollowers());
+
+    }
+
+    @Test
+    @DisplayName("T0003 - DESC")
+    void shouldReturnOrderedFollowersListDESC(){
+        //Arrange
+        int id = 1;
         String typeOrderDes = "name_desc";
 
-        User followedUser = UserGenerator.getUserWithFollowers();
+        User followedUser = UserGenerator.getUserWithFollowersDESC();
 
-        UserFollowersListDTOres followersListDTOres = UserGenerator.UserFollowersDTOGenerator();
+        UserFollowersListDTOres followersListDTOres = UserGenerator.UserFollowersDTOGeneratorDESC();
 
         //Mock
         when(userRepository.getUser(id)).thenReturn(followedUser);
 
         UserFollowersListDTOres result = service.getUserFollowerList(id, typeOrderDes);
 
-        //Act
-        Assertions.assertEquals(followersListDTOres.getFollowers(), result.getFollowers());
-
         //Assert
+        Assertions.assertEquals(followersListDTOres.getFollowers(), result.getFollowers());
     }
 
     @Test
