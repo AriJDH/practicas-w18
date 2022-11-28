@@ -7,7 +7,6 @@ import com.sprint1.be_java_hisp_w18_g03.entity.Post;
 import com.sprint1.be_java_hisp_w18_g03.exception.NoFoundException;
 import com.sprint1.be_java_hisp_w18_g03.service.UserServiceImp;
 import com.sprint1.be_java_hisp_w18_g03.entity.User;
-import com.sprint1.be_java_hisp_w18_g03.utils.UserFactory;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -19,8 +18,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.sprint1.be_java_hisp_w18_g03.utils.PostFactory.getPost;
-import static com.sprint1.be_java_hisp_w18_g03.utils.UserFactory.*;
-import static com.sprint1.be_java_hisp_w18_g03.utils.PostFactory.*;
 import static com.sprint1.be_java_hisp_w18_g03.utils.UserFactory.*;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.*;

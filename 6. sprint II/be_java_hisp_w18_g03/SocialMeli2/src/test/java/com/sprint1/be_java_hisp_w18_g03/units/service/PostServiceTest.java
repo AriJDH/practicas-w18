@@ -52,17 +52,12 @@ public class PostServiceTest {
         //Assert
         assertFalse(sellersPostDTO.getPosts().isEmpty(), "La lista de post no debe venir vacia");
 
-        //Obtener post que este entre las dos semanas y la actual
-        LocalDate fechaSin2Semana = LocalDate.now().minusDays(14);
-
-        List<ResponsePostDTO> postFilter = sellersPostDTO.getPosts().stream()
-                .filter(x -> x.getDate().isAfter(fechaSin2Semana))
-                .collect(Collectors.toList());
-
         assertAll(
-                () -> assertFalse(postFilter.isEmpty(), "La lista de post entre las dos semanas y la fecha actual no debe ser vacia"),
-                () -> assertEquals(postFilter.size(), 1, "Solo debe haber un post en la lista filtrada"),
-                () -> assertEquals(postFilter.get(0).getDate(), LocalDate.now(), "La fecha de post debe ser igual a la del sistema")
+                () -> assertFalse(sellersPostDTO.getPosts().isEmpty(), "La lista de post entre las dos semanas y la fecha actual no debe ser vacia"),
+                () -> assertEquals(sellersPostDTO.getPosts().size(), 1, "Solo debe haber un post en la lista filtrada"),
+                () -> assertEquals(sellersPostDTO.getPosts().get(0).getDate(), LocalDate.now(), "La fecha de post debe ser igual a la del sistema"),
+                () -> assertEquals(sellersPostDTO.getPosts().get(0).getPostId(), 2, "El id del post debe ser 2")
+
         );
 
     }
