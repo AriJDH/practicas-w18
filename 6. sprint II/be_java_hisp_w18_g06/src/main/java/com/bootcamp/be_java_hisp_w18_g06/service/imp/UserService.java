@@ -32,6 +32,8 @@ public class UserService implements IUserService {
             .findAndAddModules()
             .build();
 
+    List<User> userAddedFollower = new ArrayList<>();
+    List<User> userAddedFollowed = new ArrayList<>();
 
     //US-001
     //userId != userIdToFollow --> Boolean
@@ -48,43 +50,54 @@ public class UserService implements IUserService {
     private boolean userFollowedHasPosts(User user) {
         return user.getPosts() != null;
     }
-
+    //Metodo para seguir
+    private void follow(User usuarioASeguir, User usuarioSeguidor, List<User> userList){
+        userList.add(usuarioASeguir);
+        usuarioSeguidor.setFollowed(userList);
+    }
     @Override
     public void followUser(int userId, int userIdToFollow) {
 
-        if (userIdDiffUserIdToFollow(userId, userIdToFollow)) {
+        /* Init variables */
+        /* Traer la lista de usuarios
+        Verificar existencia userId y userIdToFollow
+        */
+        Optional<User> usFollower = userRepository.findUserById(userId);
+        Optional<User> usFollowed = userRepository.findUserById(userIdToFollow);
+        Boolean usersAreDifferent = userIdDiffUserIdToFollow(userId, userIdToFollow);
 
-            //Traer la lista de usuarios
-            //Verificar existencia userId y userIdToFollow
-            Optional<User> usFollower = userRepository.findUserById(userId);
-            Optional<User> usFollowed = userRepository.findUserById(userIdToFollow);
-
-            List<User> userAddedFollower = new ArrayList<>();
-            List<User> userAddedFollowed = new ArrayList<>();
-
-            if (userIsPresent(usFollowed.get().getUser_id())) {
-                if (userFollowedHasPosts(usFollowed.get())) {
-                    //Agregar a la lista de Followed de userId
-                    userAddedFollower.add(usFollowed.get());
-                    usFollower.get().setFollowed(userAddedFollower);  //comprador -> vendedor
-
-                    //Agregar a la lista de Followers de userIdToFollow
-                    userAddedFollowed.add(usFollower.get());
-                    usFollowed.get().setFollowers(userAddedFollowed);  //vendedor <- comprador
-
-                    userRepository.updateUsers(usFollower.get());
-                    userRepository.updateUsers(usFollowed.get());
-
-                } else {
-                    throw new BadRequestException("You can't follow this user because he doesn't have any posts");
-                }
-            } else {
-                throw new BadRequestException("This user don't exit");
-            }
-        } else {
+        //verificación
+        if (!usersAreDifferent) {
             throw new BadRequestException("You can't follow yourself");
         }
+
+        //busca en el repo si están presentes los usuarios
+        if (!userIsPresent(usFollowed.get().getUser_id())) {
+            throw new BadRequestException("This user doesn't exit");
+        }
+
+        //verifica que el usuario tenga post para poder ser seguido
+        if (!userFollowedHasPosts(usFollowed.get())) {
+            throw new BadRequestException("You can't follow this user because he doesn't have any posts");
+        }
+
+        //Agregar a la lista de Followed de userId
+        follow(usFollowed.get(), usFollower.get(), userAddedFollower); // comprador -> vendedor
+        follow(usFollower.get(), usFollowed.get(), userAddedFollowed); // vendedor <- comprador
+
+        //Agregar a la lista de Followed de userId
+        /* userAddedFollower.add(usFollowed.get());
+        usFollower.get().setFollowed(userAddedFollower);  // comprador -> vendedor*/
+
+        //Agregar a la lista de Followers de userIdToFollow
+        /* userAddedFollowed.add(usFollower.get());
+        usFollowed.get().setFollowers(userAddedFollowed); */ // vendedor <- comprador
+
+        userRepository.updateUsers(usFollower.get());
+        userRepository.updateUsers(usFollowed.get());
+
     }
+
 
     //US-007
     private void removeFromFollow(User user) {
