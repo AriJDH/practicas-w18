@@ -95,10 +95,43 @@ class PostServiceTest {
     }
 
     // * ============= *
+    PostListByFollowedResponse mockPostList(int order){
+        User userMock = new User(1, "User 1", new ArrayList<>(), List.of(
+                new User(2, "User 2", new ArrayList<>(), new ArrayList<>(), new ArrayList<>())
+        ), new ArrayList<>());
 
+        when(userRepository.findById(1)).thenReturn(Optional.of(userMock));
+        when(postRepository.findAllById(anyInt())).thenReturn(List.of(
+                new Post(1, 2, LocalDate.now(), new Product(1, "Product 1", "Type 1", "Brand 1", "Color 1", "Note 1"), 1, 10.0, true, 5.0),
+                new Post(2, 2, LocalDate.now().minusDays(10), new Product(2, "Product 2", "Type 2", "Brand 2", "Color 1", "Note 2"), 1, 10.0, true, 5.0)
+        ));
+
+        when(mapper.convertValue(any(Post.class), eq(PostDtoRequest.class))).then(invocation -> {
+            Post post = invocation.getArgument(0);
+            return new PostDtoRequest(post.getPostId(), post.getUserId(), post.getDate(), post.getProduct(), post.getCategory(), post.getPrice());
+        });
+        PostListByFollowedResponse postLists;
+        switch(order){
+            case 1:
+                postLists = postService.findPostsByFollowedAndUserIdOrderByDateAsc(1);
+                break;
+            case -1:
+                postLists = postService.findPostsByFollowedAndUserIdOrderByDateDesc(1);
+                break;
+            default:
+                postLists = postService.findPostsByFollowedAndUserId(1);
+                break;
+        }
+
+        return postLists;
+    }
     @Test
     @DisplayName("[T006] - Method for getting all posts from followed by user id ordered by date asc (Happy Path)")
     void findPostsByFollowedAndUserIdOrderByDateAsc() {
+        PostListByFollowedResponse postLists = mockPostList(1);
+        assertNotNull(postLists);
+        assertEquals(postLists.getPosts().get(0).getDate(), LocalDate.now().minusDays(10));
+        assertEquals(2, postLists.getPosts().size());
     }
 
     // * ============= *
@@ -106,6 +139,10 @@ class PostServiceTest {
     @Test
     @DisplayName("[T006] - Method for getting all posts from followed by user id ordered by date desc (Happy Path)")
     void findPostsByFollowedAndUserIdOrderByDateDesc() {
+        PostListByFollowedResponse postLists = mockPostList(-1);
+        assertNotNull(postLists);
+        assertEquals(postLists.getPosts().get(0).getDate(), LocalDate.now());
+        assertEquals(2, postLists.getPosts().size());
     }
 
     // * ============= *
