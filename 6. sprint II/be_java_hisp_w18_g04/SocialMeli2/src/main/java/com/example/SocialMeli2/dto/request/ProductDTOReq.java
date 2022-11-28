@@ -12,7 +12,7 @@ import javax.validation.constraints.*;
 @Getter
 @Setter
 public class ProductDTOReq {
-    @NotEmpty(message = "The product id cannot be empty")
+    @NotNull(message = "The product id cannot be empty")
     @Positive(message = "The product id must be greater than 0")
     private Integer product_id;
     @NotEmpty(message = "The product name cannot be empty")

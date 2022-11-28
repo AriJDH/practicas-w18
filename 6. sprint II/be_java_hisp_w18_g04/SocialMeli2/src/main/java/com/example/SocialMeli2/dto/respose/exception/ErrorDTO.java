@@ -1,4 +1,4 @@
-package com.example.SocialMeli2.dto.respose;
+package com.example.SocialMeli2.dto.respose.exception;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
