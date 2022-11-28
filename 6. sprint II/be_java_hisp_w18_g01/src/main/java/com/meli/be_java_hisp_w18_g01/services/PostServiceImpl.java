@@ -12,6 +12,7 @@ import com.meli.be_java_hisp_w18_g01.entities.User;
 import com.meli.be_java_hisp_w18_g01.exceptions.BadRequestException;
 import com.meli.be_java_hisp_w18_g01.mappers.MapperPostToPostDTO;
 import com.meli.be_java_hisp_w18_g01.services.database.UserDbService;
+import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,8 +26,7 @@ import java.util.stream.Collectors;
 public class PostServiceImpl implements PostService {
     private long postCount = 3L;
 
-    @Autowired
-    MapperPostToPostDTO mapperPostToPostDTO;
+    MapperPostToPostDTO mapperPostToPostDTO = new MapperPostToPostDTO();
     @Autowired
     UserDbService userDbService;
     DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");

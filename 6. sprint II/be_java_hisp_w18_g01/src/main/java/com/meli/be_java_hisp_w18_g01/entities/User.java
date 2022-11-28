@@ -3,10 +3,7 @@ package com.meli.be_java_hisp_w18_g01.entities;
 import com.meli.be_java_hisp_w18_g01.exceptions.BadFollowException;
 import com.meli.be_java_hisp_w18_g01.exceptions.NotSellerException;
 import com.meli.be_java_hisp_w18_g01.exceptions.UserAlreadyFollowedException;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,13 +12,17 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@ToString
 public class User {
     @EqualsAndHashCode.Include
     private long user_id;
     @EqualsAndHashCode.Include
     private String user_name;
+    @ToString.Exclude
     private List<User> followers = new ArrayList<>();
+    @ToString.Exclude
     private List<User> followed = new ArrayList<>();
+    @ToString.Exclude
     private List<Post> posts = new ArrayList<>();
 
     public User(long user_id, String user_name) {
