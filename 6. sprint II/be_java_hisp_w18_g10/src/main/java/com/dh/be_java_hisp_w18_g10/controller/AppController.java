@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 
 @RestController
 public class AppController {
@@ -72,7 +73,7 @@ public class AppController {
 
     @GetMapping("/products/followed/{userId}/list")
     public ResponseEntity<UserPostsDTOres> getUserFollowedPost(
-            @RequestParam(required = false) String order,
+            @RequestParam(required = false) @Pattern(regexp = "name_asc|name_desc|date_asc|date_desc", message = "") String order,
             @Valid @PathVariable @NotNull(message="El campo userId no puede estar vacio.") int userId){
         // US 0006
         // US 0009
