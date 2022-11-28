@@ -6,6 +6,9 @@ import lombok.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import javax.validation.constraints.Min;
+import javax.validation.constraints.Size;
+
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor

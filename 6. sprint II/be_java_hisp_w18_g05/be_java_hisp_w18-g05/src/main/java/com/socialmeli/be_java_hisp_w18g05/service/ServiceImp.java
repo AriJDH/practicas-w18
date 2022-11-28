@@ -27,6 +27,7 @@ import lombok.Data;
 import org.springframework.cglib.core.Local;
 import org.springframework.stereotype.Service;
 
+import javax.validation.Valid;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -319,7 +320,8 @@ public class ServiceImp implements IService {
 
     //For US 0005
     @Override
-    public void newPost(NewPostDTORequest post){
+    public void newPost(@Valid NewPostDTORequest post){
+
         Integer user_id = post.getUser_id(); // Get post asociated with this id
         Seller seller = repository.getByIdSeller(user_id); // Get seller from repository
 

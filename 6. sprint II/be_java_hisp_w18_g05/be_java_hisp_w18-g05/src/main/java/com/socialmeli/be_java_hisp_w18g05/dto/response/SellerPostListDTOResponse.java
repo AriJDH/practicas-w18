@@ -4,12 +4,14 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import javax.validation.constraints.Size;
 import java.util.List;
 
 @AllArgsConstructor
 @Getter
 @NoArgsConstructor
 public class SellerPostListDTOResponse {
+
     private Integer user_id;
     private List<PostDTOResponse> posts;
 
