@@ -62,7 +62,7 @@ public class UserSellerServiceImp implements IUserSellerService {
                 throw new BadRequestException("Enter 'name_asc' for ascending alphabetical ordering or 'name_desc' for descending ordering.");
             return new FollowerListDTORes(seller.getUser_id(), seller.getUser_name(), userDTOResList);
         } else {
-            throw new BadRequestException("The user_id not exist");
+            throw new UserNotFoundException("The seller " + userId + " not exist");
         }
     }
 
