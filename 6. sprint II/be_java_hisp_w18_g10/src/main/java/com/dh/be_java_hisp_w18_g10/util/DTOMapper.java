@@ -30,7 +30,7 @@ public class DTOMapper {
 
     public static UserFollowersListDTOres mapToUserFollowersRes(User user) {
 
-        List<UserDTOres> userDTOresList = user.getFollowersList()
+        List<UserDTOres> userDTOresList = user.getFollowers().values()
                 .stream()
                 .map(entity -> new UserDTOres(entity.getUserId(), entity.getUserName()))
                 .collect(Collectors.toList());

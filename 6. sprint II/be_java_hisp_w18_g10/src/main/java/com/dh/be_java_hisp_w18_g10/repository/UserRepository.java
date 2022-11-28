@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @Repository
 public class UserRepository implements IUserRepository{
@@ -87,6 +88,6 @@ public class UserRepository implements IUserRepository{
 
     @Override
     public List<User> getUserFollowers(int id) {
-        return users.get(id).getFollowersList();
+        return users.get(id).getFollowers().values().stream().collect(Collectors.toList());
     }
 }

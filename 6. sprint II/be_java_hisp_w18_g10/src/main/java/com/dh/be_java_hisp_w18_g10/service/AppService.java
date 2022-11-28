@@ -25,6 +25,7 @@ public class AppService implements IAppService {
     private IPostRepository postRepository;
 
     public AppService(UserRepository userRepository, PostRepository postRepository) {
+
         this.userRepository = userRepository;
         this.postRepository = postRepository;
     }

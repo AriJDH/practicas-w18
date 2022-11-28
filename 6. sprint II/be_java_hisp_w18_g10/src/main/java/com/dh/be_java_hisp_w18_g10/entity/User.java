@@ -5,6 +5,7 @@ import com.dh.be_java_hisp_w18_g10.dto.response.UserFollowersListDTOres;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
@@ -16,6 +17,7 @@ import java.util.stream.Collectors;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@EqualsAndHashCode
 public class User {
 
     @JsonProperty("user_id")
@@ -32,9 +34,5 @@ public class User {
     private Map<Integer, User> followers = new HashMap<Integer, User>();
     private Map<Integer, User> followed = new HashMap<Integer, User>();
     private Map<Integer, Post> posts = new HashMap<Integer, Post>();
-
-    public List<User> getFollowersList() {
-        return new ArrayList<>(followers.values());
-    }
 
 }
