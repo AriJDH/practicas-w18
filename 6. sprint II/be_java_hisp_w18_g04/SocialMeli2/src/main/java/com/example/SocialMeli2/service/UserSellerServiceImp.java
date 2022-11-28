@@ -9,6 +9,7 @@ import com.example.SocialMeli2.entity.Post;
 import com.example.SocialMeli2.entity.UserBuyer;
 import com.example.SocialMeli2.entity.UserSeller;
 import com.example.SocialMeli2.exception.BadRequestException;
+import com.example.SocialMeli2.exception.UserNotFoundException;
 import com.example.SocialMeli2.repository.IPostRepository;
 import com.example.SocialMeli2.repository.IUserSellerRepository;
 import com.example.SocialMeli2.util.Mapper;
@@ -34,7 +35,7 @@ public class UserSellerServiceImp implements IUserSellerService {
             UserSeller seller = sellerRepository.findById(userId);
             return new FollowerCountDTORes(seller.getUser_id(), seller.getUser_name(), seller.getFollowers().size());
         } else {
-            throw new BadRequestException("The user_id not exist");
+            throw new UserNotFoundException("The seller " + userId + " not exist");
         }
     }
 
@@ -67,9 +68,13 @@ public class UserSellerServiceImp implements IUserSellerService {
 
     @Override
     public void publishPost(PostDTOReq postDTOReq) {
-        Post post = Mapper.createObjectMapper().convertValue(postDTOReq, Post.class);
-        postRepository.createPost(post);
-        UserSeller seller = sellerRepository.findById(postDTOReq.getUser_id());
-        seller.getPosts().add(post);
+        if (validateSeller(postDTOReq.getUser_id())) {
+            Post post = Mapper.createObjectMapper().convertValue(postDTOReq, Post.class);
+            postRepository.createPost(post);
+            UserSeller seller = sellerRepository.findById(postDTOReq.getUser_id());
+            seller.getPosts().add(post);
+        } else {
+            throw new UserNotFoundException("The seller " + postDTOReq.getUser_id() + " not exist");
+        }
     }
 }
