@@ -22,4 +22,8 @@ public class User {
         this.user_id = user_id;
         this.user_name = user_name;
     }
+
+    public User(Integer id) {
+        this.user_id = user_id;
+    }
 }

@@ -4,6 +4,7 @@ import com.bootcamp.be_java_hisp_w18_g06.dto.response.UserFollowDTO;
 import com.bootcamp.be_java_hisp_w18_g06.dto.response.UserFollowedListDTO;
 import com.bootcamp.be_java_hisp_w18_g06.dto.response.UserFollowersCountDTO;
 import com.bootcamp.be_java_hisp_w18_g06.dto.response.UserFollowersListDTO;
+import com.bootcamp.be_java_hisp_w18_g06.entity.Post;
 import com.bootcamp.be_java_hisp_w18_g06.entity.User;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -22,6 +23,9 @@ public class UserFactory {
 
     public static User getUserRandom(String name) {
         return new User((int) (Math.random() * 10), name);
+    }
+    public static User getUserId(Integer id) {
+        return new User(id);
     }
 
     public static User getUserWithFollowedList(String name) {
@@ -43,6 +47,22 @@ public class UserFactory {
         user.setFollowers(userList);
         return user;
     }
+
+    public static User getUserWithFollowersListAndPosts(String name) {
+        User user = getUserRandom(name);
+        List<User> userList = new ArrayList<>();
+        userList.add(getUserRandom("user 1"));
+        userList.add(getUserRandom("user 2"));
+        userList.add(getUserRandom("user 3"));
+        user.setFollowers(userList);
+        List<Post> postList = new ArrayList<>();
+        Post post = new Post();
+        postList.add(post);
+        user.setPosts(postList);
+        return user;
+    }
+
+
 
     public static UserFollowDTO getUserFollowDto(String name) {
         return mapper.convertValue(getUserRandom(name), UserFollowDTO.class);

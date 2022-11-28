@@ -34,8 +34,9 @@ public class UserService implements IUserService {
 
     //userAddedFollower
     List<User> userAddedFollower = new ArrayList<>();
-    //userAddedFollowed
+    //
     List<User> userAddedFollowed = new ArrayList<>();
+
 
     //US-001
     //userId != userIdToFollow --> Boolean
@@ -44,21 +45,18 @@ public class UserService implements IUserService {
     }
 
     //usFollowed.isPresent()--> Boolean
-    private boolean userIsPresent(int id) {
+    public boolean userIsPresent(int id) {
         return userRepository.findUserById(id).isPresent();
     }
 
     //usFollowed.get().getPosts() != null -->Boolean
-    private boolean userFollowedHasPosts(User user) {
+    public boolean userFollowedHasPosts(User user) {
         return user.getPosts() != null;
     }
     //Metodo para seguir
-    private void follow(User usuarioASeguir, User usuarioSeguidor, List<User> userList){
-        userList.add(usuarioASeguir);
-        usuarioSeguidor.setFollowed(userList);
-    }
+
     @Override
-    public void followUser(int userId, int userIdToFollow) {
+    public void followUser(Integer userId, Integer userIdToFollow) {
 
         /* Init variables */
         /* Traer la lista de usuarios
@@ -85,17 +83,14 @@ public class UserService implements IUserService {
             throw new BadRequestException("You can't follow this user because he doesn't have any posts");
         }
 
-        //Agregar a la lista de Followed de userId
-        follow(userFollowed, userFollower, userAddedFollower); // comprador -> vendedor
-        follow(userFollower, userFollowed, userAddedFollowed); // vendedor <- comprador
 
         //Agregar a la lista de Followed de userId
-        /* userAddedFollower.add(usFollowed.get());
-        usFollower.get().setFollowed(userAddedFollower);  // comprador -> vendedor*/
+         userAddedFollower.add(usFollowed.get());
+         usFollower.get().setFollowed(userAddedFollower);  // comprador -> vendedor
 
         //Agregar a la lista de Followers de userIdToFollow
-        /* userAddedFollowed.add(usFollower.get());
-        usFollowed.get().setFollowers(userAddedFollowed); */ // vendedor <- comprador
+         userAddedFollowed.add(usFollower.get());
+         usFollowed.get().setFollowers(userAddedFollowed);  // vendedor <- comprador
 
         userRepository.updateUsers(userFollower);
         userRepository.updateUsers(userFollowed);
@@ -110,7 +105,7 @@ public class UserService implements IUserService {
 
 
     @Override
-    public void unfollowUser(int userId, int userIdToUnfollow) {
+    public void unfollowUser(Integer userId, Integer userIdToUnfollow) {
         if (userIdDiffUserIdToFollow(userId, userIdToUnfollow)) {
             Optional<User> usFollower = userRepository.findUserById(userId);
             Optional<User> usUnfollowed = userRepository.findUserById(userIdToUnfollow);
@@ -228,7 +223,7 @@ public class UserService implements IUserService {
                 return users.stream().sorted(Comparator.comparing(User::getUser_name).reversed()).collect(Collectors.toList());
             }
             else {
-                throw new BadRequestException("Invalid param order");
+                throw new EmptyException("Invalid param order");
             }
         }
 
