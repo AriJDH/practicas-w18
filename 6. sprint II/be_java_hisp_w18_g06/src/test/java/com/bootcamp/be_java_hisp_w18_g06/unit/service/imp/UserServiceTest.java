@@ -2,9 +2,11 @@ package com.bootcamp.be_java_hisp_w18_g06.unit.service.imp;
 
 import com.bootcamp.be_java_hisp_w18_g06.dto.response.UserFollowedListDTO;
 import com.bootcamp.be_java_hisp_w18_g06.entity.Post;
+import com.bootcamp.be_java_hisp_w18_g06.dto.response.UserFollowersCountDTO;
 import com.bootcamp.be_java_hisp_w18_g06.entity.User;
 import com.bootcamp.be_java_hisp_w18_g06.repository.imp.UserRepository;
 import com.bootcamp.be_java_hisp_w18_g06.service.imp.UserService;
+import com.bootcamp.be_java_hisp_w18_g06.utils.UserFactory;
 import org.junit.jupiter.api.Assertions;
 import com.bootcamp.be_java_hisp_w18_g06.exceptions.BadRequestException;
 
@@ -23,6 +25,9 @@ import java.util.*;
 
 import static com.bootcamp.be_java_hisp_w18_g06.utils.UserFactory.*;
 import static org.mockito.Mockito.*;
+import static com.bootcamp.be_java_hisp_w18_g06.utils.UserFactory.getUserWithFollowedList;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.when;
 
 
 @SpringBootTest
