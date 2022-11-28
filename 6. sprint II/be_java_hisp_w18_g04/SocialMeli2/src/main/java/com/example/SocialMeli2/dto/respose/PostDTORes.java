@@ -3,6 +3,7 @@ package com.example.SocialMeli2.dto.respose;
 import com.example.SocialMeli2.entity.Post;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -11,7 +12,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
-
+@EqualsAndHashCode
 public class PostDTORes {
     private Integer user_id;
     private Integer post_id;

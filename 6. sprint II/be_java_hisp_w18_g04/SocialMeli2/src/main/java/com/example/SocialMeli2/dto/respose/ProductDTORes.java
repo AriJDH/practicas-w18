@@ -2,12 +2,14 @@ package com.example.SocialMeli2.dto.respose;
 
 import com.example.SocialMeli2.entity.Product;
 import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
+@EqualsAndHashCode
 public class ProductDTORes {
     private Integer product_id;
     private String product_name;

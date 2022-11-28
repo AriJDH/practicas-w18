@@ -2,6 +2,7 @@ package com.example.SocialMeli2.exception;
 
 import com.example.SocialMeli2.dto.respose.exception.ErrorDTO;
 import com.example.SocialMeli2.dto.respose.exception.ErrorValidationDTO;
+import org.springframework.beans.TypeMismatchException;
 import org.springframework.boot.context.properties.bind.validation.ValidationErrors;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -40,11 +41,12 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(errorDTO, HttpStatus.UNPROCESSABLE_ENTITY);
     }
 
-    @ExceptionHandler(MethodArgumentTypeMismatchException.class)
-    public ResponseEntity<ErrorDTO> MethodArgumentTypeMismatchException(Exception e){
-        ErrorDTO errorDTO = new ErrorDTO(422, e.getMessage());
-        return new ResponseEntity<>(errorDTO, HttpStatus.UNPROCESSABLE_ENTITY);
+    @ExceptionHandler(TypeMismatchException.class)
+    public ResponseEntity<ErrorDTO> TypeMismatchException(Exception e){
+        ErrorDTO errorDTO = new ErrorDTO(400, e.getMessage());
+        return new ResponseEntity<>(errorDTO, HttpStatus.BAD_REQUEST);
     }
+
     @ExceptionHandler(MethodArgumentNotValidException.class)
     ResponseEntity<ErrorValidationDTO> validatingDataTypes (
             MethodArgumentNotValidException exception

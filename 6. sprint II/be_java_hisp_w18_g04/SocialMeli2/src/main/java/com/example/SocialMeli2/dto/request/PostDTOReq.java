@@ -1,10 +1,7 @@
 package com.example.SocialMeli2.dto.request;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.validation.Valid;
 import javax.validation.constraints.Max;
@@ -17,6 +14,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @Getter
 @Setter
+@EqualsAndHashCode
 public class PostDTOReq {
     @NotNull (message = "The user id cannot be empty")
     @Positive (message = "The user id must be greater than 0")

@@ -1,9 +1,6 @@
 package com.example.SocialMeli2.dto.request;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.validation.constraints.*;
 
@@ -11,6 +8,7 @@ import javax.validation.constraints.*;
 @NoArgsConstructor
 @Getter
 @Setter
+@EqualsAndHashCode
 public class ProductDTOReq {
     @NotNull(message = "The product id cannot be empty")
     @Positive(message = "The product id must be greater than 0")

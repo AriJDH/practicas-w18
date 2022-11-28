@@ -1,13 +1,11 @@
 package com.example.SocialMeli2.dto.respose;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter @Setter
+@EqualsAndHashCode
 public class FollowDTORes {
     private String userName;
     private String userNameFollowed;
