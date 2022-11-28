@@ -28,42 +28,64 @@ public class test {
         Seller seller = new Seller(10,"Seller10");
         Buyer buyer = new Buyer(1,"Buyer1");
 
-        lenient().when(iRepository.getByIdSeller(seller.getUser_id())).thenReturn(seller);
-        lenient().when(iRepository.getByIdBuyer(buyer.getUser_id())).thenReturn(buyer);
-
         iRepository.addFollowed(buyer,seller);
         iRepository.addFollower(buyer,seller);
+
         verify(iRepository,times(1)).addFollower(buyer,seller);
         verify(iRepository,times(1)).addFollowed(buyer,seller);
     }
-
+/*
     @Test
     @DisplayName("T-0001 // Add follow, seller doesn't exist")
     public void addFollowSellerDoesntExist(){
-        lenient().when(iRepository.getByIdSeller(1)).thenReturn(null); // averiguar que es lenient
+        Buyer buyer = new Buyer(1, "Buyer1");
 
-        Assertions.assertThrows(NotFoundException.class, () -> serviceImp.follow(1, 10));
+        Assertions.assertThrows(NotFoundException.class, () -> serviceImp.follow(buyer.getUser_id(), null));
     }
 
     @Test
     @DisplayName("T-0001 // Add follow, buyer doesn't exist")
     public void addFollowBuyerDoesntExist(){
-        lenient().when(iRepository.getByIdBuyer(10)).thenReturn(null); // averiguar que es lenient
+        Seller seller = new Seller(10, "Seller10");
 
-        Assertions.assertThrows(NotFoundException.class, () -> serviceImp.follow(1, 10));
+        Assertions.assertThrows(NotFoundException.class, () -> serviceImp.follow(null, seller.getUser_id()));
     }
 
+ */
     @Test
-    @DisplayName("T-0001 // Add follow, buyer and seller don't exist")
+    @DisplayName("T-0001 // Add follow, buyer, seller or both don't exist")
     public void addFollowBuyerAndSellerDontExist(){
-        lenient().when(iRepository.getByIdSeller(1)).thenReturn(null);
-        lenient().when(iRepository.getByIdBuyer(10)).thenReturn(null);
+        Buyer buyer = new Buyer(1, "Buyer1");
+        Seller seller = new Seller(10, "Seller10");
 
         Assertions.assertAll(
-                () -> Assertions.assertThrows(NotFoundException.class, () -> serviceImp.follow(1, null)),
-                () -> Assertions.assertThrows(NotFoundException.class, () -> serviceImp.follow(null, 10))
+                () -> Assertions.assertThrows(NotFoundException.class, () -> serviceImp.follow(buyer.getUser_id(), null)),
+                () -> Assertions.assertThrows(NotFoundException.class, () -> serviceImp.follow(null, seller.getUser_id())),
+                () -> Assertions.assertThrows(NotFoundException.class, () -> serviceImp.follow(null, null))
         );
     }
 
+    @Test
+    @DisplayName("T-0002 // Unfollow, OK")
+    public void unFollowOk(){
+        Seller seller = new Seller(10,"Seller10");
+        Buyer buyer = new Buyer(1,"Buyer1");
 
+        iRepository.unfollow(buyer,seller);
+
+        verify(iRepository,times(1)).unfollow(buyer,seller);
+    }
+
+    @Test
+    @DisplayName("T-0002 // Unfollow, not found")
+    public void unFollowDontExist() {
+        Buyer buyer = new Buyer(1, "Buyer1");
+        Seller seller = new Seller(10, "Seller10");
+
+        Assertions.assertAll(
+                () -> Assertions.assertThrows(NotFoundException.class, () -> serviceImp.unfollow(buyer.getUser_id(), null)),
+                () -> Assertions.assertThrows(NotFoundException.class, () -> serviceImp.unfollow(null, seller.getUser_id())),
+                () -> Assertions.assertThrows(NotFoundException.class, () -> serviceImp.unfollow(null, null))
+        );
+    }
 }
