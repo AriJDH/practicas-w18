@@ -126,7 +126,7 @@ public class UserBuyerServiceImp implements IUserBuyerService {
     }
 
     @Override
-    public void unfollow(Integer userId, Integer userIdToUnfollow) {
+    public UnfollowDTORes unfollow(Integer userId, Integer userIdToUnfollow) {
         if (validateBuyer(userId) && validateSeller(userIdToUnfollow)) {
             UserBuyer buyer = userBuyerRepository.findById(userId);
             UserSeller seller = userSellerRepository.findById(userIdToUnfollow);
@@ -136,14 +136,14 @@ public class UserBuyerServiceImp implements IUserBuyerService {
             } else {
                 throw new BadRequestException("The user " + userIdToUnfollow + " is not in your following list");
             }
+            return new UnfollowDTORes(buyer.getUser_name(), seller.getUser_name());
         } else {
-            if (!validateBuyer(userId) && !validateSeller(userIdToUnfollow)){
-                throw new UserNotFoundException("The buyer "+userId +" and the seller "+userIdToUnfollow+" doesn't exist");
-            } else if (!validateBuyer(userId) && validateSeller(userIdToUnfollow) ){
+            if (!validateBuyer(userId) && validateSeller(userIdToUnfollow)){
                 throw new UserNotFoundException("The buyer "+userId +" doesn't exist");
-            } else if (!validateSeller(userIdToUnfollow) && validateBuyer(userId)){
-                throw new UserNotFoundException("The seller "+userIdToUnfollow +" doesn't exist");
+            } else if (!validateSeller(userIdToUnfollow) && validateBuyer(userId)) {
+                throw new UserNotFoundException("The seller " + userIdToUnfollow + " doesn't exist");
             }
+            throw new BadRequestException("The buyer "+userId +" and the seller "+userIdToUnfollow+" doesn't exist");
         }
     }
 }

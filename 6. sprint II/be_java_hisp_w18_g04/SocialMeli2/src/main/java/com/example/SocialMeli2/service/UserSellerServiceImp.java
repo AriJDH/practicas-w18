@@ -2,10 +2,10 @@ package com.example.SocialMeli2.service;
 
 
 import com.example.SocialMeli2.dto.request.PostDTOReq;
-import com.example.SocialMeli2.dto.respose.FollowerCountDTORes;
-import com.example.SocialMeli2.dto.respose.FollowerListDTORes;
-import com.example.SocialMeli2.dto.respose.UserDTORes;
+import com.example.SocialMeli2.dto.request.ProductDTOReq;
+import com.example.SocialMeli2.dto.respose.*;
 import com.example.SocialMeli2.entity.Post;
+import com.example.SocialMeli2.entity.Product;
 import com.example.SocialMeli2.entity.UserBuyer;
 import com.example.SocialMeli2.entity.UserSeller;
 import com.example.SocialMeli2.exception.BadRequestException;
@@ -67,12 +67,13 @@ public class UserSellerServiceImp implements IUserSellerService {
     }
 
     @Override
-    public void publishPost(PostDTOReq postDTOReq) {
+    public PostDTORes publishPost(PostDTOReq postDTOReq) {
         if (validateSeller(postDTOReq.getUser_id())) {
             Post post = Mapper.createObjectMapper().convertValue(postDTOReq, Post.class);
             postRepository.createPost(post);
             UserSeller seller = sellerRepository.findById(postDTOReq.getUser_id());
             seller.getPosts().add(post);
+            return new PostDTORes(postDTOReq.getUser_id(),post.getPost_id(),postDTOReq.getDate(),new ProductDTORes(post.getProduct()),postDTOReq.getCategory(),postDTOReq.getPrice());
         } else {
             throw new UserNotFoundException("The seller " + postDTOReq.getUser_id() + " doesn't exist");
         }

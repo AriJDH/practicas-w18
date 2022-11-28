@@ -8,7 +8,9 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter @Setter
-public class FollowDTORes {
+public class UnfollowDTORes {
     private String userName;
-    private String userNameFollowed;
+    private String userNameUnfollowed;
 }
+
+

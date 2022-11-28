@@ -6,9 +6,11 @@ import com.example.SocialMeli2.service.IUserBuyerService;
 import com.example.SocialMeli2.service.IUserSellerService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import javax.validation.constraints.Positive;
 
 @RestController
 public class SocialMeliController {
@@ -44,9 +46,9 @@ public class SocialMeliController {
     }
 
     @PostMapping("/products/post")
-    public ResponseEntity<?> publishPost(@Valid @RequestBody PostDTOReq postDTOReq) {
-        userSellerService.publishPost(postDTOReq);
-        return new ResponseEntity<>(HttpStatus.OK);
+    public ResponseEntity<PostDTORes> publishPost(@Valid @RequestBody PostDTOReq postDTOReq) {
+        PostDTORes postDTORes = userSellerService.publishPost(postDTOReq);
+        return new ResponseEntity<>(postDTORes, HttpStatus.OK);
     }
 
     @GetMapping("/products/followed/{userId}/list")
@@ -55,9 +57,9 @@ public class SocialMeliController {
     }
 
     @PostMapping("/users/{userId}/unfollow/{userIdToUnfollow}")
-    public ResponseEntity<?> unfollow(@PathVariable Integer userId, @PathVariable Integer userIdToUnfollow) {
-        userBuyerService.unfollow(userId, userIdToUnfollow);
-        return new ResponseEntity<>(HttpStatus.OK);
+    public ResponseEntity<UnfollowDTORes> unfollow(@PathVariable Integer userId, @PathVariable Integer userIdToUnfollow) {
+        UnfollowDTORes unfollowDTORes = userBuyerService.unfollow(userId, userIdToUnfollow);
+        return new ResponseEntity<>(unfollowDTORes, HttpStatus.OK);
     }
 
 }
