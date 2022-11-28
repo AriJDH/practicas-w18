@@ -1,10 +1,7 @@
 package com.example.SocialMeli2.controller;
 
 import com.example.SocialMeli2.dto.request.PostDTOReq;
-import com.example.SocialMeli2.dto.respose.FollowedListDTORes;
-import com.example.SocialMeli2.dto.respose.FollowerCountDTORes;
-import com.example.SocialMeli2.dto.respose.FollowerListDTORes;
-import com.example.SocialMeli2.dto.respose.PostFollowedByDateDTORes;
+import com.example.SocialMeli2.dto.respose.*;
 import com.example.SocialMeli2.service.IUserBuyerService;
 import com.example.SocialMeli2.service.IUserSellerService;
 import org.springframework.http.HttpStatus;
@@ -26,9 +23,9 @@ public class SocialMeliController {
     }
 
     @PostMapping("/users/{userId}/follow/{userIdToFollow}")
-    public ResponseEntity<?> follow(@PathVariable Integer userId, @PathVariable Integer userIdToFollow) {
-        userBuyerService.follow(userId, userIdToFollow);
-        return new ResponseEntity<>(HttpStatus.OK);
+    public ResponseEntity<FollowDTORes> follow(@PathVariable Integer userId, @PathVariable Integer userIdToFollow) {
+        FollowDTORes followDTORes = userBuyerService.follow(userId, userIdToFollow);
+        return new ResponseEntity<>(followDTORes,HttpStatus.OK);
     }
 
     @GetMapping("/users/{userId}/followers/count")

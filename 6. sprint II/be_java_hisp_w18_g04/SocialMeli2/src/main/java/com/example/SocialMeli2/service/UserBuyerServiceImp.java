@@ -1,9 +1,6 @@
 package com.example.SocialMeli2.service;
 
-import com.example.SocialMeli2.dto.respose.FollowedListDTORes;
-import com.example.SocialMeli2.dto.respose.PostDTORes;
-import com.example.SocialMeli2.dto.respose.PostFollowedByDateDTORes;
-import com.example.SocialMeli2.dto.respose.UserDTORes;
+import com.example.SocialMeli2.dto.respose.*;
 import com.example.SocialMeli2.entity.Post;
 import com.example.SocialMeli2.entity.UserBuyer;
 import com.example.SocialMeli2.entity.UserSeller;
@@ -53,27 +50,30 @@ public class UserBuyerServiceImp implements IUserBuyerService {
     }
 
     @Override
-    public void follow(Integer userId, Integer userIdToFollow) {
+   public FollowDTORes follow(Integer userId, Integer userIdToFollow) {
+
         if (validateBuyer(userId) && validateSeller(userIdToFollow)) {
             UserBuyer buyer = userBuyerRepository.findById(userId);
             UserSeller seller = userSellerRepository.findById(userIdToFollow);
             if (!(buyer.getFollowed().contains(seller)) && !(seller.getFollowers().contains(buyer))) {
                 buyer.getFollowed().add(seller);
                 seller.getFollowers().add(buyer);
-            } else {
-                throw new BadRequestException("The user " + userIdToFollow + " is already in your follow list");
+
             }
+            else {
+                throw new BadRequestException("The user " + userIdToFollow + " is already in your following list");
+            }
+            return new FollowDTORes(buyer.getUser_name(), seller.getUser_name());
+
         } else {
-            if (!validateBuyer(userId) && !validateSeller(userIdToFollow)){
-                throw new UserNotFoundException("The buyer "+userId +" and the seller "+userIdToFollow+" not exist");
-            } else if (!validateBuyer(userId) && validateSeller(userIdToFollow)){
-                throw new UserNotFoundException("The buyer "+userId +" not exist");
-            } else if (!validateSeller(userIdToFollow) && validateBuyer(userId)){
-                throw new UserNotFoundException("The seller "+userIdToFollow +" not exist");
+            if (!validateBuyer(userId) && validateSeller(userIdToFollow)){
+                throw new UserNotFoundException("The buyer "+userId +" doesn't exist");
+            } else if (!validateSeller(userIdToFollow) && validateBuyer(userId)) {
+                throw new UserNotFoundException("The seller " + userIdToFollow + " doesn't exist");
             }
+           throw new BadRequestException("The buyer "+userId +" and the seller "+userIdToFollow+" doesn't exist");
         }
     }
-
 
     @Override
     public FollowedListDTORes getFollowed(Integer userId, String order) {
@@ -87,7 +87,7 @@ public class UserBuyerServiceImp implements IUserBuyerService {
                 throw new BadRequestException("Enter 'name_asc' for ascending alphabetical ordering or 'name_desc' for descending ordering.");
             return new FollowedListDTORes(buyer.getUser_id(), buyer.getUser_name(), userDTOResList);
         } else {
-            throw new UserNotFoundException("The buyer "+userId +" not exist");
+            throw new UserNotFoundException("The buyer "+userId +" doesn't exist");
         }
     }
 
@@ -107,7 +107,7 @@ public class UserBuyerServiceImp implements IUserBuyerService {
                 throw new BadRequestException("Enter 'date_asc' for ascending order or 'date_desc' for descending order.");
             return new PostFollowedByDateDTORes(buyer.getUser_id(), filterList);
         } else {
-            throw new UserNotFoundException("The buyer "+userId +" not exist");
+            throw new UserNotFoundException("The buyer "+userId +" doesn't exist");
         }
     }
 
@@ -138,11 +138,11 @@ public class UserBuyerServiceImp implements IUserBuyerService {
             }
         } else {
             if (!validateBuyer(userId) && !validateSeller(userIdToUnfollow)){
-                throw new UserNotFoundException("The buyer "+userId +" and the seller "+userIdToUnfollow+" not exist");
+                throw new UserNotFoundException("The buyer "+userId +" and the seller "+userIdToUnfollow+" doesn't exist");
             } else if (!validateBuyer(userId) && validateSeller(userIdToUnfollow) ){
-                throw new UserNotFoundException("The buyer "+userId +" not exist");
+                throw new UserNotFoundException("The buyer "+userId +" doesn't exist");
             } else if (!validateSeller(userIdToUnfollow) && validateBuyer(userId)){
-                throw new UserNotFoundException("The seller "+userIdToUnfollow +" not exist");
+                throw new UserNotFoundException("The seller "+userIdToUnfollow +" doesn't exist");
             }
         }
     }

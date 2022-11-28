@@ -1,10 +1,11 @@
 package com.example.SocialMeli2.service;
 
+import com.example.SocialMeli2.dto.respose.FollowDTORes;
 import com.example.SocialMeli2.dto.respose.FollowedListDTORes;
 import com.example.SocialMeli2.dto.respose.PostFollowedByDateDTORes;
 
 public interface IUserBuyerService {
-    void follow(Integer userId, Integer userIdToFollow);
+    FollowDTORes follow(Integer userId, Integer userIdToFollow);
 
     FollowedListDTORes getFollowed(Integer userId, String order);
 

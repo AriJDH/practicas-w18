@@ -35,7 +35,7 @@ public class UserSellerServiceImp implements IUserSellerService {
             UserSeller seller = sellerRepository.findById(userId);
             return new FollowerCountDTORes(seller.getUser_id(), seller.getUser_name(), seller.getFollowers().size());
         } else {
-            throw new UserNotFoundException("The seller " + userId + " not exist");
+            throw new UserNotFoundException("The seller " + userId + " doesn't exist");
         }
     }
 
@@ -62,7 +62,7 @@ public class UserSellerServiceImp implements IUserSellerService {
                 throw new BadRequestException("Enter 'name_asc' for ascending alphabetical ordering or 'name_desc' for descending ordering.");
             return new FollowerListDTORes(seller.getUser_id(), seller.getUser_name(), userDTOResList);
         } else {
-            throw new UserNotFoundException("The seller " + userId + " not exist");
+            throw new UserNotFoundException("The seller " + userId + " doesn't exist");
         }
     }
 
@@ -74,7 +74,7 @@ public class UserSellerServiceImp implements IUserSellerService {
             UserSeller seller = sellerRepository.findById(postDTOReq.getUser_id());
             seller.getPosts().add(post);
         } else {
-            throw new UserNotFoundException("The seller " + postDTOReq.getUser_id() + " not exist");
+            throw new UserNotFoundException("The seller " + postDTOReq.getUser_id() + " doesn't exist");
         }
     }
 }
