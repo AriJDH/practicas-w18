@@ -228,7 +228,7 @@ public class UserService implements IUserService {
                 return users.stream().sorted(Comparator.comparing(User::getUser_name).reversed()).collect(Collectors.toList());
             }
             else {
-                throw new EmptyException("Invalid param order");
+                throw new BadRequestException("Invalid param order");
             }
         }
 
