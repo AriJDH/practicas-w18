@@ -80,4 +80,14 @@ public class PostFactory {
 
         return requestPostDTO;
     }
+
+    public static RequestPostDTO getRequestPostDTONoOk() {
+        RequestPostDTO requestPostDTO = new RequestPostDTO();
+        requestPostDTO.setUserId(-1);
+        requestPostDTO.setDate(LocalDate.now());
+        requestPostDTO.setPrice(10000.0);
+        requestPostDTO.setCategory(1);
+
+        return requestPostDTO;
+    }
 }
