@@ -71,7 +71,8 @@ public class UserServiceImp implements IUserService {
         return sellers;
     }
 
-    private void changeOrder(List<UserDto> list, String order) {
+    @Override
+    public void changeOrder(List<UserDto> list, String order) {
         Comparator<UserDto> compareByName =
                 Comparator.comparing(UserDto::getUser_name);
         switch (order){
