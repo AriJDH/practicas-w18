@@ -21,6 +21,4 @@ public class UserServiceTest {
 
     @InjectMocks
     UserServiceImp userServiceImp;
-
-
 }
