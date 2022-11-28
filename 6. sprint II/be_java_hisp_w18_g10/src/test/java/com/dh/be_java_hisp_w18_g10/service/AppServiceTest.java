@@ -279,8 +279,8 @@ public class AppServiceTest {
     @Test
     @DisplayName("T0005")
     void shouldStringOrderPassTest(){
-        String nameDesc = "name_desc";
-        String nameAsc = "name_asc";
+        String dateDesc = "date_desc";
+        String dateAsc = "date_asc";
 
         LocalDate today = LocalDate.now();
         LocalDate tenDaysAgo = today.minusDays(10);
@@ -302,8 +302,8 @@ public class AppServiceTest {
         when(userRepository.getUser(2)).thenReturn(seller);
 
         assertAll( () -> {
-                    assertDoesNotThrow(() -> service.getUserPosts(1, nameDesc));
-                    assertDoesNotThrow(() -> service.getUserPosts(1, nameAsc));
+                    assertDoesNotThrow(() -> service.getUserPosts(1, dateDesc));
+                    assertDoesNotThrow(() -> service.getUserPosts(1, dateAsc));
         });
     }
 
