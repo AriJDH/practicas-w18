@@ -354,7 +354,7 @@ public class AppServiceTest {
         when(userRepository.getUser(2)).thenReturn(vendedor1);
         when(userRepository.getUser(3)).thenReturn(vendedor2);
 
-        UserPostsDTOres result = service.getUserPosts(1, "");
+        UserPostsDTOres result = service.getUserPosts(1, TypeOrderHelper.DATE_ASC);
 
         assertArrayEquals(expected.getPosts().toArray(),result.getPosts().toArray());
     }
