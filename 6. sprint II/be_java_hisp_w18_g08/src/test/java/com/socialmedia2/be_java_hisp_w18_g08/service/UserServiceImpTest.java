@@ -1,9 +1,12 @@
 package com.socialmedia2.be_java_hisp_w18_g08.service;
 
+import com.socialmedia2.be_java_hisp_w18_g08.dto.response.FollowedDto;
 import com.socialmedia2.be_java_hisp_w18_g08.dto.response.UserDto;
 import com.socialmedia2.be_java_hisp_w18_g08.dto.response.UserListDto;
 import com.socialmedia2.be_java_hisp_w18_g08.entity.Seller;
 import com.socialmedia2.be_java_hisp_w18_g08.entity.User;
+import com.socialmedia2.be_java_hisp_w18_g08.exception.BadRequestException;
+import com.socialmedia2.be_java_hisp_w18_g08.exception.NotFoundUserException;
 import com.socialmedia2.be_java_hisp_w18_g08.repository.PostRepositoryImp;
 import com.socialmedia2.be_java_hisp_w18_g08.repository.UserRepositoryImp;
 import org.junit.jupiter.api.DisplayName;
@@ -41,16 +44,12 @@ class UserServiceImpTest {
     }
 
     @Test
-    void getFollowed() {
-    }
-
-    @Test
     void findAllFollowersQuantity() {
     }
 
     @Test
-    @DisplayName("US0003 - List followers order asc")
-    void findUserListBySellerOrderAsc(){
+    @DisplayName("US0003 - Verify that the ordering exists in followers")
+    void findUserListBySellerWhitOrderTest(){
         //Arrange
         Integer userId = 1;
         String order = "name_asc";
@@ -65,19 +64,17 @@ class UserServiceImpTest {
 
         //Act
         UserListDto userListDto = userService.findUserListBySeller(userId, order);
-        List<UserDto> followersDto = userListDto.getFollowers();
 
         //Assertion
-        assertEquals(user1.getUser_name(), followersDto.get(0).getUser_name());
+        assertTrue(userListDto.getUser_id() == 1);
 
     }
-
     @Test
-    @DisplayName("US0003 - List followers order desc")
-    void findUserListBySellerOrderDesc(){
+    @DisplayName("US0003 - Invalid parameter error in followers method")
+    void findUserListBySellerInvalidParameterTest(){
         //Arrange
         Integer userId = 1;
-        String order = "name_desc";
+        String order = "name";
         User user1 = new User(1, "Augusto", null);
         User user2 = new User(3, "Martin", null);
         User user3 = new User(5, "Samuel", null);
@@ -88,11 +85,9 @@ class UserServiceImpTest {
         when(userRepo.findSellerById(userId)).thenReturn(seller);
 
         //Act
-        UserListDto userListDto = userService.findUserListBySeller(userId, order);
-        List<UserDto> followersDto = userListDto.getFollowers();
-
         //Assertion
-        assertEquals(user3.getUser_name(), followersDto.get(0).getUser_name());
+        assertThrows(BadRequestException.class,
+                () -> userService.findUserListBySeller(userId, order));
 
     }
 
