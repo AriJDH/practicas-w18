@@ -84,7 +84,7 @@ public class UserServiceTest {
     @DisplayName("T-0003 - Verificar que el tipo de ordenamiento para followers exista US0008 - OK")
     public void getFollowersListOk(){
         //ACT
-        User userTest = getUserWithFollowers();
+        User userTest = userWithFollowers();
         //ARRANGE
         when(userRepository.findById(anyInt())).thenReturn(userTest);
         //ACT
@@ -97,7 +97,7 @@ public class UserServiceTest {
     @DisplayName("T-0003 - Verificar que el tipo de ordenamiento para followers exista US0008- D: No existe el tipo de ordenamiento")
     public void getFollowersListNoOk(){
         //ACT
-        User userTest = getUserWithFollowers();
+        User userTest = userWithFollowers();
         //ACT
         NoFoundException noFoundException = assertThrows(NoFoundException.class,()->
                 userServiceImp.getFollowersList(userTest.getUserId(),anyString())
