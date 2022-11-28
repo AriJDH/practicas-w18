@@ -1,5 +1,7 @@
 package com.socialmedia2.be_java_hisp_w18_g08.service;
 
+import com.socialmedia2.be_java_hisp_w18_g08.dto.request.FollowDtoReq;
+import com.socialmedia2.be_java_hisp_w18_g08.dto.response.FollowDtoRes;
 import com.socialmedia2.be_java_hisp_w18_g08.entity.Post;
 import com.socialmedia2.be_java_hisp_w18_g08.entity.Seller;
 import com.socialmedia2.be_java_hisp_w18_g08.entity.User;
@@ -35,8 +37,47 @@ class UserServiceImpTest {
     @InjectMocks
     PostServiceImp postService;
 
+   @Test
+   @DisplayName("T-0001 Usuario a seguir existe")
+    void testFollowUserIdExist() {
+
+        // Arrange
+        List<Seller> followed = new ArrayList<>();
+        List<User> followers = new ArrayList<>();
+        List<Post> posts = new ArrayList<>();
+
+        User user = new User(1, "User1", followed);
+        Seller seller = new Seller(5, "User5", followed, posts, followers);
+        Seller seller2 = new Seller(6, "User6", followed, posts, followers);
+        followed.add(seller2);
+
+        String message = user.getUser_name() + " with id: " + user.getUser_id() + " is following -> " + seller.getUser_name() + " with id: "+ seller.getUser_id();
+        FollowDtoReq followDtoReq = new FollowDtoReq(1, 5);
+        FollowDtoRes expected = new FollowDtoRes(200, message);
+
+        when(userRepo.getUserByID(followDtoReq.getUserId())).thenReturn(user);
+        when(userRepo.follow(followDtoReq.getUserId(), followDtoReq.getUserIdToFollow())).thenReturn(message);
+
+        // Act
+        FollowDtoRes result = userService.follow(followDtoReq);
+
+        // Assert
+        assertEquals(expected, result);
+
+    }
+
     @Test
-    void follow() {
+    @DisplayName("T-0001 Usuario a seguir no existe")
+    void testFollowUserIdNoExist() {
+
+        //Arrange
+        List<Seller> followed = new ArrayList<>();
+        User user = new User(1, "User1", followed);
+        FollowDtoReq followDtoReq = new FollowDtoReq(user.getUser_id(), 10);
+        //Act
+        //Assert
+        assertThrows(NotFoundUserException.class,()->userService.follow(followDtoReq));
+
     }
 
     @Test
