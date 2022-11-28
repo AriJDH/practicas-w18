@@ -8,7 +8,13 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.sprint1.be_java_hisp_w18_g03.utils.ProductFactory.getProduct;
+
 public class PostFactory {
+
+    public static Post getPost(Integer id, User user){
+        return new Post(id, user,LocalDate.of(2022, 8,3), getProduct());
+    }
 
     public static List<Post> getPostSellers() {
         List<Post> postSellers = new ArrayList<>();

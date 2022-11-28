@@ -29,4 +29,8 @@ public class UserFactory {
         vendedor.setUserName("Vendedor 1");
         return vendedor;
     }
+
+    public static User getUser(Integer id, String name){
+        return new User(id, name, new ArrayList<>(), new ArrayList<>());
+    }
 }

@@ -7,7 +7,6 @@ import com.sprint1.be_java_hisp_w18_g03.entity.Post;
 import com.sprint1.be_java_hisp_w18_g03.exception.NoFoundException;
 import com.sprint1.be_java_hisp_w18_g03.service.UserServiceImp;
 import com.sprint1.be_java_hisp_w18_g03.entity.User;
-import com.sprint1.be_java_hisp_w18_g03.utils.PostFactor;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -18,7 +17,8 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.sprint1.be_java_hisp_w18_g03.utils.UserFactor.getUser;
+import static com.sprint1.be_java_hisp_w18_g03.utils.PostFactory.getPost;
+import static com.sprint1.be_java_hisp_w18_g03.utils.UserFactory.getUser;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.when;
@@ -43,7 +43,7 @@ public class UserServiceTest {
 
         User userFollower = getUser(1, "Juan");
         User userToFollow = getUser(2, "Federico");
-        Post post = PostFactor.getPost(2, userToFollow);
+        Post post = getPost(2, userToFollow);
         List<Post> posts = new ArrayList<>();
         posts.add(post);
 
