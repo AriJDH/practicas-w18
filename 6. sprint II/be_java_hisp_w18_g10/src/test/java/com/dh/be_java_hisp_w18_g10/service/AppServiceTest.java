@@ -87,8 +87,46 @@ public class AppServiceTest {
 
 
     @Test
-    @DisplayName("T0001")
+    @DisplayName("T0001 Happy Path")
     void shouldFollowASellerTest(){
+        //Arrange
+        loadUsers();
+        int userId = 1;
+        int userIdToFollow = 4;
+        int followersExpectedSize = getUser(userIdToFollow).getFollowers().size()+1;
+        int followedExpectedSize = getUser(userId).getFollowed().size()+1;
+
+        //Mock
+        when(userRepository.getUser(userId)).thenReturn(getUser(userId));
+        when(userRepository.getUser(userIdToFollow)).thenReturn(getUser(userIdToFollow));
+
+        //Act
+        service.followUser(userId,userIdToFollow);
+
+        int followersActualSize = getUser(userIdToFollow).getFollowers().size();
+        int followedActualSize = getUser(userId).getFollowed().size();
+
+        //Assert
+        assertAll(
+                () -> assertEquals(followersExpectedSize, followersActualSize),
+                () -> assertEquals(followedExpectedSize, followedActualSize)
+        );
+    }
+
+    @Test
+    @DisplayName("T0001 user to follow does not exist")
+    void shouldNotFollowANullSellerTest(){
+        //Arrange
+        loadUsers();
+        int userId = 1;
+        int userIdToFollow = 12;
+
+        //Mock
+        when(userRepository.getUser(userId)).thenReturn(getUser(userId));
+        when(userRepository.getUser(userIdToFollow)).thenReturn(getUser(userIdToFollow));
+
+        //Act & Assert
+        assertThrows(UserGenericException.class, () -> service.followUser(userId, userIdToFollow));
     }
 
     @Test
