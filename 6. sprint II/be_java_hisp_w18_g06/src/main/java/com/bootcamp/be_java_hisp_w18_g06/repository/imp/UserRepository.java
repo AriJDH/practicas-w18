@@ -112,15 +112,6 @@ public class UserRepository implements IUserRepository {
 	}
 
 	@Override
-	public User getUser(int userId) {
-		Optional<User> user = findUserById(userId);
-		if (user.isEmpty()) {
-			throw new NotFoundException("The user id: " + userId + " doesn't exists");
-		}
-		return user.get();
-	}
-
-	@Override
 	public void updateUsers(User userUpdate){
 		users.addAll(users.stream()
 				.filter(user -> user.getUser_id()!=userUpdate.getUser_id())
