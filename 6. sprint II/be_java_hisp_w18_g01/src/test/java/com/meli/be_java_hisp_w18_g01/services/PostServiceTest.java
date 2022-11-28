@@ -8,6 +8,7 @@ import com.meli.be_java_hisp_w18_g01.exceptions.BadRequestException;
 import com.meli.be_java_hisp_w18_g01.mappers.MapperPostToPostDTO;
 import com.meli.be_java_hisp_w18_g01.services.database.UserDbService;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -39,7 +40,7 @@ public class PostServiceTest {
     private Post post4;
 
     @BeforeEach
-    public void cleanUsers(){
+    public void initUsers(){
         user1 = new User(1L, "Lucas", new ArrayList<>(),new ArrayList<>(),new ArrayList<>());
         user2 = new User(2L, "Marcos", new ArrayList<>(),new ArrayList<>(),new ArrayList<>());
         post1 = new Post(1L, user2, LocalDate.now(),new Product(), 1,10);
@@ -50,6 +51,7 @@ public class PostServiceTest {
 
     //T-0005
     @Test
+    @DisplayName("T0005 - Verificación de tipo de orden por fecha ascendente")
     public void verifyOderTypeAscByDateExists(){
         user2.addPost(post1);
         user1.follow(user2);
@@ -58,6 +60,7 @@ public class PostServiceTest {
         assertDoesNotThrow(()->postService.getRecentPostsFromFollowed(1L, "date_asc"));
     }
     @Test
+    @DisplayName("T0005 - Verificación de tipo de orden por fecha descendente")
     public void verifyOderTypeDescByDateExists(){
         user2.addPost(post1);
         user1.follow(user2);
@@ -66,6 +69,7 @@ public class PostServiceTest {
         assertDoesNotThrow(()->postService.getRecentPostsFromFollowed(1L, "date_desc"));
     }
     @Test
+    @DisplayName("T0005 - Verificación de tipo de orden por fecha no existente")
     public void verifyOderTypeXDoesNotExist(){
         user2.addPost(post1);
         user1.follow(user2);
@@ -75,6 +79,7 @@ public class PostServiceTest {
     }
     //T-0006
     @Test
+    @DisplayName("T0006 - Ordenamiento de posts por fecha ascendente")
     public void checkAscOrderingByDate(){
         user2.addPost(post1);
         user2.addPost(post2);
@@ -92,6 +97,7 @@ public class PostServiceTest {
         assertEquals(postService.getRecentPostsFromFollowed(1L, "date_asc").get(0).getPosts(),ascOrderedPostDTOs);
     }
     @Test
+    @DisplayName("T0006 - Ordenamiento de posts por fecha descendente")
     public void checkDescOrderingByDate(){
         user2.addPost(post1);
         user2.addPost(post2);
@@ -115,6 +121,7 @@ public class PostServiceTest {
     }
     //T-0008
     @Test
+    @DisplayName("T0006 - Posts obtenidos son de las últimas dos semanas")
     public void verifyPostsAreFromLast2Weeks(){
         Post post5 = new Post(4L, user2, LocalDate.now().minusMonths(2),new Product(),100, 20000);
         Post post6 = new Post(4L, user2, LocalDate.now().minusDays(15),new Product(),100, 20000);
