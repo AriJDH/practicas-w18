@@ -14,6 +14,11 @@ public interface IRepository {
     Buyer getByIdBuyer(Integer buyer_id);
     Seller getByIdSeller(Integer seller_id);
 
+    void addFollower(Buyer buyer, Seller seller);
+    void addFollowed(Buyer buyer, Seller seller);
+
+    void unfollow(Buyer buyer, Seller seller);
+
     /*
     void addFollow(Integer buyer_id, Integer seller_id);
     void unfollow(Integer buyer_id, Integer seller_id);

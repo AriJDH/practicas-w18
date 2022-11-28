@@ -51,6 +51,23 @@ public class RepositoryImp implements IRepository{
         return sellers.stream().filter(s->s.getUser_id().equals(seller_id)).findFirst().orElse(null);
     }
 
+    @Override
+    public void addFollower(Buyer buyer, Seller seller) {
+        seller.addFollower(buyer);
+    }
+
+    @Override
+    public void addFollowed(Buyer buyer, Seller seller) {
+        buyer.addFollowed(seller);
+    }
+
+    @Override
+    public void unfollow(Buyer buyer, Seller seller) {
+        buyer.unFollowed(seller);
+        seller.unFollower(buyer);
+    }
+
+
     void fillDB(){
 
         buyers.add(new Buyer(1, "buyer1"));

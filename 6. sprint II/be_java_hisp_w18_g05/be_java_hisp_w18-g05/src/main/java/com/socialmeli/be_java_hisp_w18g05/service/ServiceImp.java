@@ -103,8 +103,14 @@ public class ServiceImp implements IService {
         if (seguidor != null){
             throw new InvalidException("The buyer id " + userId +" is already following the seller id " + userIdToFollow);
         }
+
+        repository.addFollowed(b, s);
+        repository.addFollower(b, s);
+
+        /*
         b.addFollowed(s);
         s.addFollower(b);
+         */
     }
 
     @Override
@@ -124,8 +130,8 @@ public class ServiceImp implements IService {
         if (seguidor == null){
             throw new InvalidException("The buyer id " + userId +" doesn´t follow the seller id " + userIdToUnfollow);
         }
-        b.unFollowed(s);
-        s.unFollower(b);
+
+        repository.unfollow(b, s);
     }
 
 
