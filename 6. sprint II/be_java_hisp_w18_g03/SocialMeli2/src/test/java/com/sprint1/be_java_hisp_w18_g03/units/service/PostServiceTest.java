@@ -71,4 +71,56 @@ public class PostServiceTest {
         assertEquals(postFilter.size(), 1, "Solo debe haber un post en la lista filtrada");
         assertEquals(postFilter.get(0).getDate(), LocalDate.now(), "La fecha de post debe ser igual a la del sistema");
     }
+
+    @Test
+    @DisplayName("Verificar el correcto ordenamiento ascendente por fecha. ")
+    public void getPostSellersOrderByDateASC() {
+
+        //Arrange
+        User user = UserFactory.getUserPostSeller();
+        when(userRepository.findById(any())).thenReturn(user);
+        when(postRepository.findByUser(any())).thenReturn(PostFactory.getPostSellersOrder());
+
+        //Act
+        SellersPostDTO sellersPostDTO = postServiceImp.getPostSellers(1, "date_asc");
+
+        //Assert
+        assertNotNull(sellersPostDTO.getUserId(), "El id del usuario no debe ser nulo");
+        assertNotNull(sellersPostDTO.getPosts(), "La lista de post no debe ser nula");
+        assertFalse(sellersPostDTO.getPosts().isEmpty(), "La lista de post no debe venir vacia");
+        assertEquals(sellersPostDTO.getPosts().size(), 2, "La lista de post debe traer dos registros");
+
+        ResponsePostDTO postMenosReciente = sellersPostDTO.getPosts().get(0);
+        ResponsePostDTO postMasReciente = sellersPostDTO.getPosts().get(1);
+
+        boolean isAscendente = postMenosReciente.getDate().isBefore(postMasReciente.getDate());
+        
+        assertTrue(isAscendente, "El indicador debe indicar verdadero");
+    }
+
+    @Test
+    @DisplayName("Verificar el correcto ordenamiento descendente por fecha. ")
+    public void getPostSellersOrderByDateDESC() {
+
+        //Arrange
+        User user = UserFactory.getUserPostSeller();
+        when(userRepository.findById(any())).thenReturn(user);
+        when(postRepository.findByUser(any())).thenReturn(PostFactory.getPostSellersOrder());
+
+        //Act
+        SellersPostDTO sellersPostDTO = postServiceImp.getPostSellers(1, "date_desc");
+
+        //Assert
+        assertNotNull(sellersPostDTO.getUserId(), "El id del usuario no debe ser nulo");
+        assertNotNull(sellersPostDTO.getPosts(), "La lista de post no debe ser nula");
+        assertFalse(sellersPostDTO.getPosts().isEmpty(), "La lista de post no debe venir vacia");
+        assertEquals(sellersPostDTO.getPosts().size(), 2, "La lista de post debe traer dos registros");
+
+        ResponsePostDTO postMasReciente = sellersPostDTO.getPosts().get(0);
+        ResponsePostDTO postMenosReciente = sellersPostDTO.getPosts().get(1);
+
+        boolean isAscendente = postMasReciente.getDate().isAfter(postMenosReciente.getDate());
+
+        assertTrue(isAscendente, "El indicador debe indicar verdadero");
+    }
 }

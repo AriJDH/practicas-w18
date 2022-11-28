@@ -116,21 +116,25 @@ public class PostServiceImp implements IPostService {
 
             responsePostDTOs.add(responsePostDTO);
         }
-
-        if (order != null) {
-            switch (order) {
-                case "date_asc":
-                    responsePostDTOs = responsePostDTOs.stream().sorted((x, y) -> x.getDate().compareTo(y.getDate())).collect(Collectors.toList());
-                    break;
-                case "date_desc":
-                    responsePostDTOs = responsePostDTOs.stream().sorted((x, y) -> y.getDate().compareTo(x.getDate())).collect(Collectors.toList());
-                    break;
-                default:
-                    throw new ParamException("Ther order variable does not allow the value:" + order);
-            }
-        }
-
+        responsePostDTOs = getOrderedPostsByDate(order,responsePostDTOs);
         return new SellersPostDTO(user.getUserId(), responsePostDTOs);
+    }
+
+    public List<ResponsePostDTO> getOrderedPostsByDate(String order,List<ResponsePostDTO> responsePostDTOs){
+        if (order == null) {return responsePostDTOs;}
+
+        switch (order) {
+            case "date_asc":
+                responsePostDTOs = responsePostDTOs.stream().sorted((x, y) -> x.getDate().compareTo(y.getDate())).collect(Collectors.toList());
+                break;
+            case "date_desc":
+                responsePostDTOs = responsePostDTOs.stream().sorted((x, y) -> y.getDate().compareTo(x.getDate())).collect(Collectors.toList());
+                break;
+            default:
+                throw new ParamException("Ther order variable does not allow the value:" + order);
+        }
+        return responsePostDTOs;
+
     }
 
 }
