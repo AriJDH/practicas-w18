@@ -2,10 +2,7 @@ package com.sprint1.be_java_hisp_w18_g03.units.service;
 
 import com.sprint1.be_java_hisp_w18_g03.Repository.IPostRepository;
 import com.sprint1.be_java_hisp_w18_g03.Repository.IUserRepository;
-import com.sprint1.be_java_hisp_w18_g03.dto.response.FollowedDTO;
-import com.sprint1.be_java_hisp_w18_g03.dto.response.FollowersDTO;
-import com.sprint1.be_java_hisp_w18_g03.dto.response.ResponseDTO;
-import com.sprint1.be_java_hisp_w18_g03.dto.response.UserDTO;
+import com.sprint1.be_java_hisp_w18_g03.dto.response.*;
 import com.sprint1.be_java_hisp_w18_g03.entity.Post;
 import com.sprint1.be_java_hisp_w18_g03.exception.NoFoundException;
 import com.sprint1.be_java_hisp_w18_g03.service.UserServiceImp;
@@ -304,5 +301,18 @@ public class UserServiceTest {
         Assertions.assertIterableEquals(expected.getFollowed(), result.getFollowed());
     }
 
+    @Test
+    @DisplayName("T-0007 Verificar que la cantidad de seguidores de un determinado usuario sea correcta. (US-0002) - OK")
+    public void verifyQuantityOfFollowersOK() {
+        User user = getUser(1, "Juan");
+        user.getListFollowers().add(new User(99, "luis", null, null));
+
+        when(userRepository.findById(anyInt())).thenReturn(user);
+
+        FollowerCountDTO followerCountDTO = userServiceImp.followerCount(user.getUserId());
+
+        Assertions.assertEquals(1, followerCountDTO.getFollowersCount());
+
+    }
 
 }
