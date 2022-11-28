@@ -33,8 +33,16 @@ public class PostFactory {
         post2.setDate(LocalDate.now());
         post2.setProducto(product);
 
+        Post post3 = new Post();
+        post3.setPostId(3);
+        post3.setUser(user);
+        post3.setDate(LocalDate.now());
+        post3.setProducto(product);
+
         postSellers.add(post1);
         postSellers.add(post2);
+        postSellers.add(post3);
+
         return postSellers;
     }
 

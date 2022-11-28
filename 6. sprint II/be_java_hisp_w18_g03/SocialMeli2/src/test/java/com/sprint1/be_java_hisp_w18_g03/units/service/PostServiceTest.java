@@ -52,9 +52,9 @@ public class PostServiceTest {
 
         assertAll(
                 () -> assertFalse(sellersPostDTO.getPosts().isEmpty(), "La lista de post entre las dos semanas y la fecha actual no debe ser vacia"),
-                () -> assertEquals(sellersPostDTO.getPosts().size(), 1, "Solo debe haber un post en la lista filtrada"),
-                () -> assertEquals(sellersPostDTO.getPosts().get(0).getDate(), LocalDate.now(), "La fecha de post debe ser igual a la del sistema"),
-                () -> assertEquals(sellersPostDTO.getPosts().get(0).getPostId(), 2, "El id del post debe ser 2")
+                () -> assertEquals(2, sellersPostDTO.getPosts().size(), "Solo debe haber un post en la lista filtrada"),
+                () -> assertEquals(LocalDate.now(), sellersPostDTO.getPosts().get(0).getDate(), "La fecha de post debe ser igual a la del sistema"),
+                () -> assertEquals(2, sellersPostDTO.getPosts().get(0).getPostId() , "El id del post debe ser 2")
 
         );
 
@@ -102,13 +102,12 @@ public class PostServiceTest {
 
         //Assert
         assertFalse(sellersPostDTO.getPosts().isEmpty(), "La lista de post no debe venir vacia");
-        assertEquals(sellersPostDTO.getPosts().size(), 2, "La lista de post debe traer dos registros");
+        assertEquals(2, sellersPostDTO.getPosts().size(), "La lista de post debe traer dos registros");
 
         ResponsePostDTO postMenosReciente = sellersPostDTO.getPosts().get(0);
         ResponsePostDTO postMasReciente = sellersPostDTO.getPosts().get(1);
 
-        boolean isAscendente = postMenosReciente.getDate().isBefore(postMasReciente.getDate());
-        assertTrue(isAscendente, "El indicador debe indicar verdadero");
+        assertTrue(postMenosReciente.getDate().isBefore(postMasReciente.getDate()), "El indicador debe indicar verdadero");
     }
 
     @Test
@@ -127,13 +126,11 @@ public class PostServiceTest {
 
         //Assert
         assertFalse(sellersPostDTO.getPosts().isEmpty(), "La lista de post no debe venir vacia");
-        assertEquals(sellersPostDTO.getPosts().size(), 2, "La lista de post debe traer dos registros");
+        assertEquals(2, sellersPostDTO.getPosts().size(),"La lista de post debe traer dos registros");
 
         ResponsePostDTO postMasReciente = sellersPostDTO.getPosts().get(0);
         ResponsePostDTO postMenosReciente = sellersPostDTO.getPosts().get(1);
 
-        boolean isDescendente = postMasReciente.getDate().isAfter(postMenosReciente.getDate());
-
-        assertTrue(isDescendente, "El indicador debe indicar verdadero");
+        assertTrue(postMasReciente.getDate().isAfter(postMenosReciente.getDate()), "El indicador debe indicar verdadero");
     }
 }
