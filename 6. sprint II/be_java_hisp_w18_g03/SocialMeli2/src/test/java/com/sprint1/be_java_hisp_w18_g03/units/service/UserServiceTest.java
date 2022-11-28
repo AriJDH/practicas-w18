@@ -2,6 +2,8 @@ package com.sprint1.be_java_hisp_w18_g03.units.service;
 
 import com.sprint1.be_java_hisp_w18_g03.Repository.IPostRepository;
 import com.sprint1.be_java_hisp_w18_g03.Repository.IUserRepository;
+import com.sprint1.be_java_hisp_w18_g03.dto.response.FollowedDTO;
+import com.sprint1.be_java_hisp_w18_g03.dto.response.FollowersDTO;
 import com.sprint1.be_java_hisp_w18_g03.dto.response.ResponseDTO;
 import com.sprint1.be_java_hisp_w18_g03.entity.Post;
 import com.sprint1.be_java_hisp_w18_g03.exception.NoFoundException;
@@ -23,6 +25,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.sprint1.be_java_hisp_w18_g03.utils.UserFactor.getUser;
+import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -78,6 +81,66 @@ public class UserServiceTest {
 
         //Act & Assert
         Assertions.assertThrows(NoFoundException.class, () -> userServiceImp.follow(1, 2));
+    }
+
+    @Test
+    @DisplayName("T-0003 - Verificar que el tipo de ordenamiento para followers exista - OK")
+    public void getFollowersListOk(){
+        //ACT
+        List<User> ListUser = new ArrayList<>();
+        ListUser.add(new User(99,"luis",null,null));
+        User userTest = new User(1,"juan",null, ListUser);
+        //ARRANGE
+        when(userRepository.findById(anyInt())).thenReturn(userTest);
+        //ACT
+        FollowersDTO followersDTO = userServiceImp.getFollowersList(userTest.getUserId(),"name_asc");
+        //ASSERT
+        Assertions.assertNotNull(followersDTO);
+    }
+
+    @Test
+    @DisplayName("T-0003 - Verificar que el tipo de ordenamiento para followers exista - NO OK")
+    public void getFollowersListNoOk(){
+        //ACT
+        List<User> ListUser = new ArrayList<>();
+        ListUser.add(new User(99,"luis",null,null));
+        User userTest = new User(1,"juan",null, ListUser);
+        //ACT
+        NoFoundException noFoundException = Assertions.assertThrows(NoFoundException.class,()->
+                userServiceImp.getFollowersList(userTest.getUserId(),anyString())
+        );
+        //ASSERT
+        Assertions.assertNotNull(noFoundException);
+    }
+
+    @Test
+    @DisplayName("T-0003 - Verificar que el tipo de ordenamiento para followed exista - OK")
+    public void getFollowedListOk(){
+        //ACT
+        List<User> ListUser = new ArrayList<>();
+        ListUser.add(new User(99,"luis",null,null));
+        User userTest = new User(1,"juan",ListUser, null);
+        //ARRANGE
+        when(userRepository.findById(anyInt())).thenReturn(userTest);
+        //ACT
+        FollowedDTO followersDTO = userServiceImp.getFollowedList(userTest.getUserId(),"name_asc");
+        //ASSERT
+        Assertions.assertNotNull(followersDTO);
+    }
+
+    @Test
+    @DisplayName("T-0003 - Verificar que el tipo de ordenamiento para followed exista - NO OK")
+    public void getFollowedListNoOk(){
+        //ACT
+        List<User> ListUser = new ArrayList<>();
+        ListUser.add(new User(99,"luis",null,null));
+        User userTest = new User(1,"juan",ListUser, ListUser);
+        //ACT
+        NoFoundException noFoundException = Assertions.assertThrows(NoFoundException.class,()->
+                userServiceImp.getFollowedList(userTest.getUserId(),anyString())
+        );
+        //ASSERT
+        Assertions.assertNotNull(noFoundException);
     }
 
 }
