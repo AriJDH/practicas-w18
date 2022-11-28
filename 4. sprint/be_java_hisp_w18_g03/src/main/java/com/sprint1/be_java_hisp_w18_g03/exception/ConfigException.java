@@ -9,6 +9,7 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
+import javax.validation.ConstraintViolationException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Arrays;
@@ -41,6 +42,12 @@ public class ConfigException {
 
     @ExceptionHandler(HttpMessageNotReadableException.class)
     public ResponseEntity<?> capturandoValidaciones(HttpMessageNotReadableException e){
+        List<String> messages = Arrays.asList(e.getMessage());
+        return new ResponseEntity<>(new ErroValidationrDto(messages, 400, LocalDateTime.now()), HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(ConstraintViolationException.class)
+    public ResponseEntity<?> capturandoValidaciones(ConstraintViolationException e){
         List<String> messages = Arrays.asList(e.getMessage());
         return new ResponseEntity<>(new ErroValidationrDto(messages, 400, LocalDateTime.now()), HttpStatus.BAD_REQUEST);
     }

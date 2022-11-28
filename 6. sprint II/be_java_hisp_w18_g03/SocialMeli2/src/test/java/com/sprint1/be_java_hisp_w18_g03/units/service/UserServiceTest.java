@@ -5,6 +5,7 @@ import com.sprint1.be_java_hisp_w18_g03.Repository.IUserRepository;
 import com.sprint1.be_java_hisp_w18_g03.dto.response.FollowedDTO;
 import com.sprint1.be_java_hisp_w18_g03.dto.response.FollowersDTO;
 import com.sprint1.be_java_hisp_w18_g03.dto.response.ResponseDTO;
+import com.sprint1.be_java_hisp_w18_g03.dto.response.UserDTO;
 import com.sprint1.be_java_hisp_w18_g03.entity.Post;
 import com.sprint1.be_java_hisp_w18_g03.exception.NoFoundException;
 import com.sprint1.be_java_hisp_w18_g03.service.UserServiceImp;
@@ -179,5 +180,129 @@ public class UserServiceTest {
         //Act & Assert
         Assertions.assertThrows(NoFoundException.class, () -> userServiceImp.unfollow(1, 2));
     }
+
+    @Test
+    @DisplayName("T-0004 Verificar el correcto ordenamiento ascendente nombre lista seguidores. (US-0008) :D")
+    public void orderAscFollowersListTestOk(){
+        //Arrange
+        User user = getUser(1, "Juan");
+        user.getListFollowers().add(getUser(2, "Pepe"));
+        user.getListFollowers().add(getUser(3, "Ana"));
+        user.getListFollowers().add(getUser(4, "Federico"));
+        user.getListFollowers().add(getUser(5, "Jose"));
+        user.getListFollowers().add(getUser(6, "Santiago"));
+
+        FollowersDTO expected = new FollowersDTO();
+        expected.setUserId(user.getUserId());
+        expected.setUserName(user.getUserName());
+        expected.getFollowers().add(new UserDTO(3, "Ana"));
+        expected.getFollowers().add(new UserDTO(4, "Federico"));
+        expected.getFollowers().add(new UserDTO(5, "Jose"));
+        expected.getFollowers().add(new UserDTO(2, "Pepe"));
+        expected.getFollowers().add(new UserDTO(6, "Santiago"));
+
+        //Mock
+        when(userRepository.findById(user.getUserId())).thenReturn(user);
+
+        //Act
+        FollowersDTO result = userServiceImp.getFollowersList(user.getUserId(), "name_asc");
+
+        //Assert
+        Assertions.assertIterableEquals(expected.getFollowers(), result.getFollowers());
+    }
+
+    @Test
+    @DisplayName("T-0004 Verificar el correcto ordenamiento descendente nombre lista seguidores. (US-0008) :D")
+    public void orderDescFollowersListTestOk(){
+        //Arrange
+        User user = getUser(1, "Juan");
+        user.getListFollowers().add(getUser(2, "Pepe"));
+        user.getListFollowers().add(getUser(3, "Ana"));
+        user.getListFollowers().add(getUser(4, "Federico"));
+        user.getListFollowers().add(getUser(5, "Jose"));
+        user.getListFollowers().add(getUser(6, "Santiago"));
+
+        FollowersDTO expected = new FollowersDTO();
+        expected.setUserId(user.getUserId());
+        expected.setUserName(user.getUserName());
+
+        expected.getFollowers().add(new UserDTO(6, "Santiago"));
+        expected.getFollowers().add(new UserDTO(2, "Pepe"));
+        expected.getFollowers().add(new UserDTO(5, "Jose"));
+        expected.getFollowers().add(new UserDTO(4, "Federico"));
+        expected.getFollowers().add(new UserDTO(3, "Ana"));
+
+
+        //Mock
+        when(userRepository.findById(user.getUserId())).thenReturn(user);
+
+        //Act
+        FollowersDTO result = userServiceImp.getFollowersList(user.getUserId(), "name_desc");
+
+        //Assert
+        Assertions.assertIterableEquals(expected.getFollowers(), result.getFollowers());
+    }
+
+    @Test
+    @DisplayName("T-0004 Verificar el correcto ordenamiento ascendente nombre lista de seguidos. (US-0008) :D")
+    public void orderAscFollowedListTestOk(){
+        //Arrange
+        User user = getUser(1, "Juan");
+        user.getListFollowed().add(getUser(2, "Pepe"));
+        user.getListFollowed().add(getUser(3, "Ana"));
+        user.getListFollowed().add(getUser(4, "Federico"));
+        user.getListFollowed().add(getUser(5, "Jose"));
+        user.getListFollowed().add(getUser(6, "Santiago"));
+
+        FollowedDTO expected = new FollowedDTO();
+        expected.setUserId(user.getUserId());
+        expected.setUserName(user.getUserName());
+        expected.getFollowed().add(new UserDTO(3, "Ana"));
+        expected.getFollowed().add(new UserDTO(4, "Federico"));
+        expected.getFollowed().add(new UserDTO(5, "Jose"));
+        expected.getFollowed().add(new UserDTO(2, "Pepe"));
+        expected.getFollowed().add(new UserDTO(6, "Santiago"));
+
+        //Mock
+        when(userRepository.findById(user.getUserId())).thenReturn(user);
+
+        //Act
+        FollowedDTO result = userServiceImp.getFollowedList(user.getUserId(), "name_asc");
+
+        //Assert
+        Assertions.assertIterableEquals(expected.getFollowed(), result.getFollowed());
+    }
+
+    @Test
+    @DisplayName("T-0004 Verificar el correcto ordenamiento descendente nombre lista de seguidos. (US-0008) :D")
+    public void orderDescFollowedListTestOk(){
+        //Arrange
+        User user = getUser(1, "Juan");
+        user.getListFollowed().add(getUser(2, "Pepe"));
+        user.getListFollowed().add(getUser(3, "Ana"));
+        user.getListFollowed().add(getUser(4, "Federico"));
+        user.getListFollowed().add(getUser(5, "Jose"));
+        user.getListFollowed().add(getUser(6, "Santiago"));
+
+        FollowedDTO expected = new FollowedDTO();
+        expected.setUserId(user.getUserId());
+        expected.setUserName(user.getUserName());
+
+        expected.getFollowed().add(new UserDTO(6, "Santiago"));
+        expected.getFollowed().add(new UserDTO(2, "Pepe"));
+        expected.getFollowed().add(new UserDTO(5, "Jose"));
+        expected.getFollowed().add(new UserDTO(4, "Federico"));
+        expected.getFollowed().add(new UserDTO(3, "Ana"));
+
+        //Mock
+        when(userRepository.findById(user.getUserId())).thenReturn(user);
+
+        //Act
+        FollowedDTO result = userServiceImp.getFollowedList(user.getUserId(), "name_desc");
+
+        //Assert
+        Assertions.assertIterableEquals(expected.getFollowed(), result.getFollowed());
+    }
+
 
 }

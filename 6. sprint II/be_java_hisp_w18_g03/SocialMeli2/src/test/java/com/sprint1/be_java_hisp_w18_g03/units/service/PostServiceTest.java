@@ -8,6 +8,7 @@ import com.sprint1.be_java_hisp_w18_g03.entity.Category;
 import com.sprint1.be_java_hisp_w18_g03.entity.Post;
 import com.sprint1.be_java_hisp_w18_g03.entity.Product;
 import com.sprint1.be_java_hisp_w18_g03.entity.User;
+import com.sprint1.be_java_hisp_w18_g03.exception.ParamException;
 import com.sprint1.be_java_hisp_w18_g03.service.PostServiceImp;
 import com.sprint1.be_java_hisp_w18_g03.utils.PostFactory;
 import com.sprint1.be_java_hisp_w18_g03.utils.UserFactory;
@@ -25,8 +26,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyList;
+import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -70,6 +70,30 @@ public class PostServiceTest {
         assertFalse(postFilter.isEmpty(), "La lista de post entre las dos semanas y la fecha actual no debe ser vacia");
         assertEquals(postFilter.size(), 1, "Solo debe haber un post en la lista filtrada");
         assertEquals(postFilter.get(0).getDate(), LocalDate.now(), "La fecha de post debe ser igual a la del sistema");
+    }
+
+    @Test
+    @DisplayName("T-0005 - Verificar que el tipo de ordenamiento por fecha exista - OK")
+    public void getPostSellersOrderOk(){
+        //Arrange
+        User user = UserFactory.getUserPostSeller();
+        when(userRepository.findById(any())).thenReturn(user);
+        when(postRepository.findByUser(any())).thenReturn(PostFactory.getPostSellers());
+        //Act
+        SellersPostDTO sellersPostDTO = postServiceImp.getPostSellers(1, "date_asc");
+        assertNotNull(sellersPostDTO);
+    }
+
+    @Test
+    @DisplayName("T-0005 - Verificar que el tipo de ordenamiento por fecha exista - NO OK")
+    public void getPostSellersOrderNoOk(){
+        //Arrange
+        User user = UserFactory.getUserPostSeller();
+        when(userRepository.findById(any())).thenReturn(user);
+        when(postRepository.findByUser(any())).thenReturn(PostFactory.getPostSellers());
+        //Act
+        ParamException paramException = assertThrows(ParamException.class,()->postServiceImp.getPostSellers(1, anyString()));
+        assertNotNull(paramException);
     }
 
     @Test
