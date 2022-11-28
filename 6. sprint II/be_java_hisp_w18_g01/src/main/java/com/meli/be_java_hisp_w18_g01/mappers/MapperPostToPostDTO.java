@@ -8,7 +8,6 @@ import org.springframework.stereotype.Component;
 
 import java.time.format.DateTimeFormatter;
 
-@Component
 public class MapperPostToPostDTO extends ObjectMapper {
     @Override
     public <T> T convertValue(Object fromValue, Class<T> toValueType) throws IllegalArgumentException {
