@@ -2,15 +2,23 @@ package com.example.SocialMeli2.exception;
 
 import com.example.SocialMeli2.dto.respose.exception.ErrorDTO;
 import com.example.SocialMeli2.dto.respose.exception.ErrorValidationDTO;
+import org.springframework.boot.context.properties.bind.validation.ValidationErrors;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseStatus;
+
+import javax.validation.ConstraintViolation;
+import javax.validation.ConstraintViolationException;
+
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.StreamSupport;
 
 @ControllerAdvice
 public class GlobalExceptionHandler {
@@ -26,6 +34,17 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(errorDTO, HttpStatus.BAD_REQUEST);
     }
 
+    @ExceptionHandler(ConstraintViolationException.class)
+    public ResponseEntity<ErrorDTO> ConstraintViolationException(Exception e){
+        ErrorDTO errorDTO = new ErrorDTO(422, e.getMessage());
+        return new ResponseEntity<>(errorDTO, HttpStatus.UNPROCESSABLE_ENTITY);
+    }
+
+    @ExceptionHandler(MethodArgumentTypeMismatchException.class)
+    public ResponseEntity<ErrorDTO> MethodArgumentTypeMismatchException(Exception e){
+        ErrorDTO errorDTO = new ErrorDTO(422, e.getMessage());
+        return new ResponseEntity<>(errorDTO, HttpStatus.UNPROCESSABLE_ENTITY);
+    }
     @ExceptionHandler(MethodArgumentNotValidException.class)
     ResponseEntity<ErrorValidationDTO> validatingDataTypes (
             MethodArgumentNotValidException exception

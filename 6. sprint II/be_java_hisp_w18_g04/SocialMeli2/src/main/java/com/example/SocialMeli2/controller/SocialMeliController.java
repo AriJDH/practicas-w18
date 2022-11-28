@@ -10,9 +10,11 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 
 @RestController
+@Validated
 public class SocialMeliController {
 
     private final IUserBuyerService userBuyerService;
@@ -25,13 +27,13 @@ public class SocialMeliController {
     }
 
     @PostMapping("/users/{userId}/follow/{userIdToFollow}")
-    public ResponseEntity<FollowDTORes> follow(@PathVariable Integer userId, @PathVariable Integer userIdToFollow) {
+    public ResponseEntity<FollowDTORes> follow(@PathVariable(value="userId",required = true) @NotNull (message = "The user id cannot be empty") @Positive(message = "The user id must be greater than 0") Integer userId, @PathVariable(value = "userIdToFollow",required = true) @NotNull (message = "The user id cannot be empty") @Positive(message = "The user id must be greater than 0") Integer userIdToFollow) {
         FollowDTORes followDTORes = userBuyerService.follow(userId, userIdToFollow);
-        return new ResponseEntity<>(followDTORes,HttpStatus.OK);
+        return new ResponseEntity<>(followDTORes, HttpStatus.OK);
     }
 
     @GetMapping("/users/{userId}/followers/count")
-    public ResponseEntity<FollowerCountDTORes> followersCount(@PathVariable Integer userId) {
+    public ResponseEntity<FollowerCountDTORes> followersCount(@PathVariable(value = "userId",required = true) @NotNull (message = "The user id cannot be empty") @Positive(message = "The user id must be greater than 0") Integer userId) {
         return new ResponseEntity<>(userSellerService.followersCount(userId), HttpStatus.OK);
     }
 
