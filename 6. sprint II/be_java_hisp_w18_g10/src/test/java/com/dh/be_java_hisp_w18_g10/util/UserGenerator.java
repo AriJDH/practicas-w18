@@ -96,6 +96,10 @@ public class UserGenerator {
         user3.setUserId(3);
         user3.setUserName("usuario3");
 
+        User user4 = new User();
+        user4.setUserId(4);
+        user4.setUserName("usuario4");
+
         Map<Integer, User> followedUsuer1 = new HashMap<Integer, User>();
         followedUsuer1.put(user2.getUserId(), user2);
         followedUsuer1.put(user3.getUserId(), user3);
@@ -114,9 +118,14 @@ public class UserGenerator {
         user2.getPosts().put(getListPosts().get(1).getPost_id(),getListPosts().get(1));
         user2.getPosts().put(getListPosts().get(2).getPost_id(),getListPosts().get(2));
 
+        user4.getPosts().put(getListPosts().get(0).getPost_id(),getListPosts().get(0));
+        user4.getPosts().put(getListPosts().get(1).getPost_id(),getListPosts().get(1));
+
+
         users.put(user1.getUserId(), user1);
         users.put(user2.getUserId(), user2);
         users.put(user3.getUserId(), user3);
+        users.put(user4.getUserId(), user4);
 
     }
     public static User getUser(int id){
