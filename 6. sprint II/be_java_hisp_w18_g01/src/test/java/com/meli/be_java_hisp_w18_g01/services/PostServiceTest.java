@@ -43,9 +43,9 @@ public class PostServiceTest {
         user1 = new User(1L, "Lucas", new ArrayList<>(),new ArrayList<>(),new ArrayList<>());
         user2 = new User(2L, "Marcos", new ArrayList<>(),new ArrayList<>(),new ArrayList<>());
         post1 = new Post(1L, user2, LocalDate.now(),new Product(), 1,10);
-        post2 = new Post(2L, user2, LocalDate.of(2022,11,26),new Product(),100, 20000);
-        post3 = new Post(3L, user2, LocalDate.of(2022,11,22),new Product(),100, 20000);
-        post4 = new Post(4L, user2, LocalDate.of(2022,11,20),new Product(),100, 20000);
+        post2 = new Post(2L, user2, LocalDate.now().minusDays(2),new Product(),100, 20000);
+        post3 = new Post(3L, user2, LocalDate.now().minusDays(4),new Product(),100, 20000);
+        post4 = new Post(4L, user2, LocalDate.now().minusDays(6),new Product(),100, 20000);
     }
 
     //T-0005
@@ -103,15 +103,38 @@ public class PostServiceTest {
         descOrderedPosts.add(post2);
         descOrderedPosts.add(post3);
         descOrderedPosts.add(post4);
-        List<PostDTO> descOrderedPostDTOs = descOrderedPosts.stream().map(post->mapperPostToPostDTO.convertValue(post, PostDTO.class)).collect(Collectors.toList());
+        List<PostDTO> descOrderedPostDTOs = descOrderedPosts.stream()
+                .map(post->mapperPostToPostDTO.convertValue(post, PostDTO.class))
+                .collect(Collectors.toList());
         when(userDbService.findById(1L)).thenReturn(user1);
 
-        assertEquals(postService.getRecentPostsFromFollowed(1L, "date_desc").get(0).getPosts(),descOrderedPostDTOs);
+        assertEquals(postService.getRecentPostsFromFollowed(
+                1L,
+                "date_desc")
+                .get(0).getPosts(),descOrderedPostDTOs);
     }
     //T-0008
     @Test
     public void verifyPostsAreFromLast2Weeks(){
+        Post post5 = new Post(4L, user2, LocalDate.now().minusMonths(2),new Product(),100, 20000);
+        Post post6 = new Post(4L, user2, LocalDate.now().minusDays(15),new Product(),100, 20000);
 
+        user2.addPost(post1);
+        user2.addPost(post5);
+        user2.addPost(post6);
+
+        user1.follow(user2);
+
+        List<PostDTO> descOrderedPostDTOs = new ArrayList<>();
+
+        descOrderedPostDTOs.add(mapperPostToPostDTO.convertValue(post1, PostDTO.class));
+
+        when(userDbService.findById(1L)).thenReturn(user1);
+
+        assertEquals(postService.getRecentPostsFromFollowed(
+                        1L,
+                        "date_desc")
+                .get(0).getPosts(),descOrderedPostDTOs);
     }
 
 }

@@ -26,7 +26,7 @@ public class Post {
     }
 
     public boolean isRecent(){
-        long weeksBetween = ChronoUnit.WEEKS.between(date, LocalDate.now());
-       return weeksBetween>=0 && weeksBetween<3;
+        long daysBetween = ChronoUnit.DAYS.between(date, LocalDate.now());
+       return daysBetween>=0 && daysBetween<15;
     }
 }
