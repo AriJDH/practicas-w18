@@ -8,7 +8,6 @@ import com.sprint1.be_java_hisp_w18_g03.exception.NoFoundException;
 import com.sprint1.be_java_hisp_w18_g03.service.UserServiceImp;
 import com.sprint1.be_java_hisp_w18_g03.entity.User;
 import com.sprint1.be_java_hisp_w18_g03.utils.PostFactor;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -20,6 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.sprint1.be_java_hisp_w18_g03.utils.UserFactor.getUser;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.when;
 
@@ -37,7 +37,7 @@ public class UserServiceTest {
 
     @Test
     @DisplayName("T-0001 Verificar que el usuario a seguir exista. (US-0001) :D")
-    public void verifyFollowTestOk(){
+    public void followOk(){
         //Arrange
         ResponseDTO expectedDto = new ResponseDTO("All ok", 200);
 
@@ -56,15 +56,15 @@ public class UserServiceTest {
         ResponseDTO resultDto = userServiceImp.follow(1, 2);
 
         //Assert
-        Assertions.assertAll(
-                () -> Assertions.assertEquals(expectedDto.getMessage(), resultDto.getMessage()),
-                () -> Assertions.assertEquals(expectedDto.getCode(), resultDto.getCode())
+        assertAll(
+                () -> assertEquals(expectedDto.getMessage(), resultDto.getMessage(), "Se espera " + expectedDto.getMessage()),
+                () -> assertEquals(expectedDto.getCode(), resultDto.getCode(), "Se espera " + expectedDto.getCode())
         );
     }
 
     @Test
     @DisplayName("T-0001 Verificar que el usuario a seguir exista. (US-0001) D: no existe usuario a seguir")
-    public void verifyFollowTestUserToFollowNotFound(){
+    public void followUserToFollowNotFound(){
         //Arrange
         User userFollower = getUser(1, "Juan");
         User userToFollow = getUser(2, "Federico");
@@ -74,41 +74,41 @@ public class UserServiceTest {
         when(userRepository.findById(userToFollow.getUserId())).thenReturn(null);
 
         //Act & Assert
-        Assertions.assertThrows(NoFoundException.class, () -> userServiceImp.follow(1, 2));
+        assertThrows(NoFoundException.class, () -> userServiceImp.follow(1, 2), "Se espera que no exista el usuario a seguir");
     }
 
     @Test
-    @DisplayName("T-0003 - Verificar que el tipo de ordenamiento para followers exista - OK")
+    @DisplayName("T-0003 - Verificar que el tipo de ordenamiento para followers exista US0008 - OK")
     public void getFollowersListOk(){
         //ACT
-        List<User> ListUser = new ArrayList<>();
-        ListUser.add(new User(99,"luis",null,null));
-        User userTest = new User(1,"juan",null, ListUser);
+        List<User> listUser = new ArrayList<>();
+        listUser.add(new User(99,"luis",null,null));
+        User userTest = new User(1,"juan",null, listUser);
         //ARRANGE
         when(userRepository.findById(anyInt())).thenReturn(userTest);
         //ACT
         FollowersDTO followersDTO = userServiceImp.getFollowersList(userTest.getUserId(),"name_asc");
         //ASSERT
-        Assertions.assertNotNull(followersDTO);
+        assertNotNull(followersDTO, "El resultado no debe ser nulo");
     }
 
     @Test
-    @DisplayName("T-0003 - Verificar que el tipo de ordenamiento para followers exista - NO OK")
+    @DisplayName("T-0003 - Verificar que el tipo de ordenamiento para followers exista US0008- D: No existe el tipo de ordenamiento")
     public void getFollowersListNoOk(){
         //ACT
         List<User> ListUser = new ArrayList<>();
         ListUser.add(new User(99,"luis",null,null));
         User userTest = new User(1,"juan",null, ListUser);
         //ACT
-        NoFoundException noFoundException = Assertions.assertThrows(NoFoundException.class,()->
+        NoFoundException noFoundException = assertThrows(NoFoundException.class,()->
                 userServiceImp.getFollowersList(userTest.getUserId(),anyString())
         );
         //ASSERT
-        Assertions.assertNotNull(noFoundException);
+        assertNotNull(noFoundException.getMessage(), "Se espera que tenga mensaje de error");
     }
 
     @Test
-    @DisplayName("T-0003 - Verificar que el tipo de ordenamiento para followed exista - OK")
+    @DisplayName("T-0003 - Verificar que el tipo de ordenamiento para followed exista US0008 - OK")
     public void getFollowedListOk(){
         //ACT
         List<User> ListUser = new ArrayList<>();
@@ -119,26 +119,27 @@ public class UserServiceTest {
         //ACT
         FollowedDTO followersDTO = userServiceImp.getFollowedList(userTest.getUserId(),"name_asc");
         //ASSERT
-        Assertions.assertNotNull(followersDTO);
+        assertNotNull(followersDTO, "Se espera que el resultado no sea nulo");
     }
 
     @Test
-    @DisplayName("T-0003 - Verificar que el tipo de ordenamiento para followed exista - NO OK")
+    @DisplayName("T-0003 - Verificar que el tipo de ordenamiento para followed exista - No exite el tipo de ordenamiento")
     public void getFollowedListNoOk() {
         //ACT
         List<User> ListUser = new ArrayList<>();
         ListUser.add(new User(99, "luis", null, null));
         User userTest = new User(1, "juan", ListUser, ListUser);
         //ACT
-        NoFoundException noFoundException = Assertions.assertThrows(NoFoundException.class, () ->
+        NoFoundException noFoundException = assertThrows(NoFoundException.class, () ->
                 userServiceImp.getFollowedList(userTest.getUserId(), anyString())
         );
         //ASSERT
-        Assertions.assertNotNull(noFoundException);
+        assertNotNull(noFoundException.getMessage(), "Se espera un mensaje de error");
     }
 
+    @Test
     @DisplayName("T-0002 Verificar que el usuario a dejar de seguir exista. (US-0001) :D")
-    public void verifyUnfollowTestOk(){
+    public void unfollowOk(){
         //Arrange
         ResponseDTO expectedDto = new ResponseDTO("Ok", 200);
 
@@ -155,15 +156,15 @@ public class UserServiceTest {
         ResponseDTO resultDto = userServiceImp.unfollow(1, 2);
 
         //Assert
-        Assertions.assertAll(
-                () -> Assertions.assertEquals(expectedDto.getMessage(), resultDto.getMessage()),
-                () -> Assertions.assertEquals(expectedDto.getCode(), resultDto.getCode())
+        assertAll(
+                () -> assertEquals(expectedDto.getMessage(), resultDto.getMessage(), "Se espera " + expectedDto.getMessage()),
+                () -> assertEquals(expectedDto.getCode(), resultDto.getCode(), "Se espera " + expectedDto.getCode())
         );
     }
 
     @Test
     @DisplayName("T-0002 Verificar que el usuario a dejar de seguir exista. (US-0001) D: no existe usuario a unfollow")
-    public void verifyUnfollowTestUserToFollowNotFound(){
+    public void unfollowUserToFollowNotFound(){
         //Arrange
         User userFollower = getUser(1, "Juan");
         User userToUnfollow = getUser(2, "Federico");
@@ -175,7 +176,7 @@ public class UserServiceTest {
         when(userRepository.findById(userToUnfollow.getUserId())).thenReturn(null);
 
         //Act & Assert
-        Assertions.assertThrows(NoFoundException.class, () -> userServiceImp.unfollow(1, 2));
+        assertThrows(NoFoundException.class, () -> userServiceImp.unfollow(1, 2), "Se espera un not found exception");
     }
 
     @Test
@@ -205,7 +206,7 @@ public class UserServiceTest {
         FollowersDTO result = userServiceImp.getFollowersList(user.getUserId(), "name_asc");
 
         //Assert
-        Assertions.assertIterableEquals(expected.getFollowers(), result.getFollowers());
+        assertIterableEquals(expected.getFollowers(), result.getFollowers(), "Se espera que la lista este ordenada ascendetemente");
     }
 
     @Test
@@ -237,7 +238,7 @@ public class UserServiceTest {
         FollowersDTO result = userServiceImp.getFollowersList(user.getUserId(), "name_desc");
 
         //Assert
-        Assertions.assertIterableEquals(expected.getFollowers(), result.getFollowers());
+        assertIterableEquals(expected.getFollowers(), result.getFollowers(), "Se espera que la lista este ordenada descendentemente");
     }
 
     @Test
@@ -267,7 +268,7 @@ public class UserServiceTest {
         FollowedDTO result = userServiceImp.getFollowedList(user.getUserId(), "name_asc");
 
         //Assert
-        Assertions.assertIterableEquals(expected.getFollowed(), result.getFollowed());
+        assertIterableEquals(expected.getFollowed(), result.getFollowed(), "Se espera que la lista este ordenada ascendentemente");
     }
 
     @Test
@@ -298,12 +299,12 @@ public class UserServiceTest {
         FollowedDTO result = userServiceImp.getFollowedList(user.getUserId(), "name_desc");
 
         //Assert
-        Assertions.assertIterableEquals(expected.getFollowed(), result.getFollowed());
+        assertIterableEquals(expected.getFollowed(), result.getFollowed(), "Se espera que la lista este ordenada descendentemente");
     }
 
     @Test
     @DisplayName("T-0007 Verificar que la cantidad de seguidores de un determinado usuario sea correcta. (US-0002) - OK")
-    public void verifyQuantityOfFollowersOK() {
+    public void quantityOfFollowersOK() {
         User user = getUser(1, "Juan");
         user.getListFollowers().add(new User(99, "luis", null, null));
 
@@ -311,7 +312,7 @@ public class UserServiceTest {
 
         FollowerCountDTO followerCountDTO = userServiceImp.followerCount(user.getUserId());
 
-        Assertions.assertEquals(1, followerCountDTO.getFollowersCount());
+        assertEquals(1, followerCountDTO.getFollowersCount(), "El numero de followers debe ser uno");
 
     }
 
