@@ -17,7 +17,6 @@ import java.time.LocalDate;
 @ExtendWith(MockitoExtension.class)
 public class UserTest {
 
-    @InjectMocks
     private User seller;
     private Post post;
     //T-0007
