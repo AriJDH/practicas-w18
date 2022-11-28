@@ -12,7 +12,7 @@ public class UserSellerFactory {
         UserSeller userSeller = new UserSeller();
         userSeller.setUser_id(3);
         userSeller.setUser_name("Kyle");
-        userSeller.setFollowers(Collections.emptyList());
+        userSeller.setFollowers(new ArrayList<>());
         userSeller.setPosts(PostFactory.getPostList());
         return userSeller;
     }
@@ -22,7 +22,7 @@ public class UserSellerFactory {
         UserSeller userSeller = new UserSeller();
         userSeller.setUser_id(3);
         userSeller.setUser_name("Kyle");
-        userSeller.setFollowers(Collections.emptyList());
+        userSeller.setFollowers(new ArrayList<>());
         userSeller.setPosts(PostFactory.getPostList());
         userSellerList.add(userSeller);
         return userSellerList;

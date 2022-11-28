@@ -46,16 +46,14 @@ class UserBuyerServiceImpTest {
         when(userBuyerRepository.findById(userId)).thenReturn(UserBuyerFactory.getUserBuyer());
         when(userSellerRepository.findById(userToFollow)).thenReturn(UserSellerFactory.getUserSeller());
 
-        UserSeller userSeller = UserSellerFactory.getUserSeller();
-        UserBuyer userBuyer = UserBuyerFactory.getUserBuyer();
-        userBuyer.setFollowed(Arrays.asList(userSeller));
-        userSeller.setFollowers(Arrays.asList(userBuyer));
+        UserSellerFactory.getUserSeller().getFollowers().add(UserBuyerFactory.getUserBuyer());
+        UserBuyerFactory.getUserBuyer().getFollowed().add(UserSellerFactory.getUserSeller());
 
         FollowDTORes followDTORes = userBuyerServiceImp.follow(userId,userToFollow);
         String userName = followDTORes.getUserNameFollowed();
-        //THEN
-        assertEquals(UserSellerFactory.getUserSeller().getUser_name(),userName);
 
+        //THEN
+        assertEquals("Kyle",userName);
 
     }
 }

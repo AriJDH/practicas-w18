@@ -12,7 +12,7 @@ public class UserBuyerFactory {
         UserBuyer userBuyer = new UserBuyer();
         userBuyer.setUser_id(3);
         userBuyer.setUser_name("Louis");
-        userBuyer.setFollowed(Collections.emptyList());
+        userBuyer.setFollowed(new ArrayList<>());
         return userBuyer;
     }
     public static List<UserBuyer> getUserBuyerList(){
@@ -20,7 +20,7 @@ public class UserBuyerFactory {
         UserBuyer userBuyer = new UserBuyer();
         userBuyer.setUser_id(3);
         userBuyer.setUser_name("Louis");
-        userBuyer.setFollowed(Collections.emptyList());
+        userBuyer.setFollowed(new ArrayList<>());
         userBuyerList.add(userBuyer);
         return userBuyerList;
     }
