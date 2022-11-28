@@ -1,2 +1,8 @@
-package com.meli.obtenerdiploma;public class TestsUnitariosSinMocks {
+package com.meli.obtenerdiploma;
+
+import org.junit.jupiter.api.Test;
+
+public class TestsUnitariosSinMocks {
+    @Test
+    
 }

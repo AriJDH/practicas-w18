@@ -44,7 +44,6 @@ public class PostServiceImp implements IPostService {
         if (order == null || order.equals("date_desc")) {
             compareByDate = new OrderDateDesc();
             list.sort((l1, l2) -> compareByDate.compare(l1.getDate(), l2.getDate()));
-            ;
         } else if (order.equals("date_asc")) {
             compareByDate = new OrderDateAsc();
             list.sort((l1, l2) -> compareByDate.compare(l1.getDate(), l2.getDate()));
