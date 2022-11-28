@@ -8,6 +8,7 @@ import com.mercadolibre.socialmeli2.entity.Product;
 import com.mercadolibre.socialmeli2.entity.User;
 import com.mercadolibre.socialmeli2.exception.BadRequestException;
 import com.mercadolibre.socialmeli2.exception.NotFoundException;
+import com.mercadolibre.socialmeli2.exception.OrderInvalidException;
 import com.mercadolibre.socialmeli2.repository.IUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -111,15 +112,17 @@ public class UserService implements IUserService {
 
     private List<UserDtoRes> order(List<UserDtoRes> usersDtosRes, String order) {
         if (order != null && order.equals("name_asc")) {
-            usersDtosRes = usersDtosRes.stream()
+            return  usersDtosRes.stream()
                     .sorted((x, y) -> x.getName().compareToIgnoreCase(y.getName()))
                     .collect(Collectors.toList());
         } else if (order != null && order.equals("name_desc")) {
-            usersDtosRes = usersDtosRes.stream()
+            return usersDtosRes.stream()
                     .sorted(Comparator.comparing(UserDtoRes::getName).reversed())
                     .collect(Collectors.toList());
+        } else if (order == null) {
+            return usersDtosRes;
         }
-        return usersDtosRes;
+        throw new OrderInvalidException();
     }
 
     /**

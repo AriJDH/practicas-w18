@@ -1,14 +1,11 @@
 package com.mercadolibre.socialmeli2.service;
 
-import com.mercadolibre.socialmeli2.dto.response.PostDtoRes;
-import com.mercadolibre.socialmeli2.dto.response.RecentPostsDtoRes;
+import com.mercadolibre.socialmeli2.dto.response.*;
 import com.mercadolibre.socialmeli2.entity.Post;
 import com.mercadolibre.socialmeli2.entity.User;
-import com.mercadolibre.socialmeli2.dto.response.SellerFollowerCountDtoRes;
-import com.mercadolibre.socialmeli2.dto.response.SellerFollowerListDtoRes;
-import com.mercadolibre.socialmeli2.dto.response.UserDtoRes;
 import com.mercadolibre.socialmeli2.entity.User;
 import com.mercadolibre.socialmeli2.exception.NotFoundException;
+import com.mercadolibre.socialmeli2.exception.OrderInvalidException;
 import com.mercadolibre.socialmeli2.repository.IUserRepository;
 import com.mercadolibre.socialmeli2.utils.UserFactory;
 import org.junit.jupiter.api.DisplayName;
@@ -28,7 +25,9 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import static org.mockito.Mockito.when;
@@ -148,31 +147,47 @@ public class UserServiceTest {
 
     @Test
     @DisplayName("T-0003 Verificar que el tipo de ordenamiento alfabético exista (US-0008)")
-    void orderTestAscj() {
+    void orderTestExists() {
+        // Arrange
+        User user = new User(1, "Jose");
+        Integer id = user.getId();
+
+        List<User> followed = UserFactory.getUsers();
+        user.setFollowed(new HashSet<>(followed));
+
+        List<UserDtoRes> expectedUserDtos = UserFactory.getUsersListDto("name_asc");
+        UserFollowedListDtoRes expected = new UserFollowedListDtoRes(id, user.getName(), expectedUserDtos);
+
+        // Mock
+        when(userRepositoryMock.existsById(id)).thenReturn(true);
+        when(userRepositoryMock.findById(id)).thenReturn(user);
+        // Act
+        UserFollowedListDtoRes result = userService.getFollowed(id, "name_asc");
+
+        // Assert
+        Assertions.assertEquals(expected.getFollowed(), result.getFollowed());
+    }
+
+    @Test
+    @DisplayName("T-0003 Verificar que el tipo de ordenamiento alfabético no exista (US-0008)")
+    void orderTestNotExists() {
         // Arrange
         User seller = new User(1, "Jose");
         Integer id = seller.getId();
 
         List<User> followers = UserFactory.getUsers();
-        List<UserDtoRes> usersDtosRes = followers.stream()
-                .map(u -> new UserDtoRes(u.getId(), u.getName()))
-                .collect(Collectors.toList());
-
-        SellerFollowerListDtoRes expected = new SellerFollowerListDtoRes(id, seller.getName(), usersDtosRes);
 
         // Mock
         when(userRepositoryMock.existsById(id)).thenReturn(true);
         when(userRepositoryMock.getFollowers(id)).thenReturn(followers);
         when(userRepositoryMock.findById(id)).thenReturn(seller);
-        // Act
-        SellerFollowerListDtoRes result = userService.getFollowers(id, "name_asc");
 
-        // Assert
-        Assertions.assertEquals(1,1);
+        // Act y Assert
+        Assertions.assertThrows(OrderInvalidException.class, () -> userService.getFollowers(id, "not found"));
     }
 
     @Test
-    @DisplayName("T-0004 Verificar el correcto ordenamiento ascendente")
+    @DisplayName("T-0004 Verificar el correcto ordenamiento ascendente sobre followers")
     void orderTestAsc() {
         // Arrange
         User seller = new User(1, "Jose");
@@ -195,7 +210,7 @@ public class UserServiceTest {
     }
 
     @Test
-    @DisplayName("T-0004 Verificar el correcto ordenamiento descendente")
+    @DisplayName("T-0004 Verificar el correcto ordenamiento descendente sobre followers")
     void orderTestDesc() {
         // Arrange
         User seller = new User(1, "Jose");
