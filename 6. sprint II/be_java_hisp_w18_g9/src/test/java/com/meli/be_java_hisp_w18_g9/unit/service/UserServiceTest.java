@@ -1,6 +1,7 @@
 package com.meli.be_java_hisp_w18_g9.unit.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.meli.be_java_hisp_w18_g9.exception.BadRequestException;
 import com.meli.be_java_hisp_w18_g9.util.UsersFactory;
 import com.meli.be_java_hisp_w18_g9.model.entity.User;
 import com.meli.be_java_hisp_w18_g9.repository.IUserRepository;
@@ -15,8 +16,7 @@ import org.springframework.http.HttpStatus;
 
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 @SpringBootTest
@@ -36,11 +36,11 @@ class UserServiceTest {
     // ? ================= Tests ================= ?
 
     @Test
-    @DisplayName("Verify that the user exists T-0001")
+    @DisplayName("Verify that the user exists T-0001 Happy path")
     void follow() {
         // arrange
-        User userMock = UsersFactory.getUserById(1, "Messi", false);
-        User userToFollowMock = UsersFactory.getUserById(2, "Cristiano", true);
+        User userMock = UsersFactory.getUserById(4, "Messi", false);
+        User userToFollowMock = UsersFactory.getUserById(5, "Cristiano", true);
         Mockito.when(userRepository.findById(userMock.getUserId())).thenReturn(Optional.of(userMock));
         Mockito.when(userRepository.findById(userToFollowMock.getUserId())).thenReturn(Optional.of(userToFollowMock));
 
@@ -50,6 +50,19 @@ class UserServiceTest {
         // assert
         verify(userRepository, atLeastOnce()).update(userMock);
         assertEquals(HttpStatus.OK, followMockResponse);
+
+    }
+
+    @Test
+    @DisplayName("Verify that the user exists T-0001 Sab Path")
+    void followSadPath() {
+        // arrange
+        User userMock = UsersFactory.getUserById(1, "Messi", false);
+        User userToFollowMock = UsersFactory.getUserById(2, "Cristiano", true);
+        Mockito.when(userRepository.findById(userMock.getUserId())).thenReturn(Optional.of(userMock));
+
+        // act & assert
+        assertThrows(BadRequestException.class, () -> userService.follow(userMock.getUserId(),0));
 
     }
 
