@@ -1,9 +1,11 @@
 package com.dh.be_java_hisp_w18_g10.service;
 
+import com.dh.be_java_hisp_w18_g10.dto.response.UserFollowersCountDTOres;
 import com.dh.be_java_hisp_w18_g10.dto.response.UserPostsDTOres;
 import com.dh.be_java_hisp_w18_g10.entity.Post;
 import com.dh.be_java_hisp_w18_g10.entity.Product;
 import com.dh.be_java_hisp_w18_g10.entity.User;
+import com.dh.be_java_hisp_w18_g10.exception.NotFoundException;
 import com.dh.be_java_hisp_w18_g10.exception.UserGenericException;
 import com.dh.be_java_hisp_w18_g10.exception.UserNotFoundException;
 import com.dh.be_java_hisp_w18_g10.dto.response.UserDTOres;
@@ -190,6 +192,23 @@ public class AppServiceTest {
     @Test
     @DisplayName("T0007")
     void shouldVerifyAmountOfFollowersIsCorrectTest(){
+        ///users/{userId}/followers/count
+        UserFollowersCountDTOres expected = new UserFollowersCountDTOres(1,"usuario1",2);
+        loadUsers();
+        User user = getUser(1);
+        when(userRepository.getUser(1)).thenReturn(user);
+
+        UserFollowersCountDTOres result = service.getUserFollowersCount(1);
+
+        assertEquals(expected,result);
+    }
+    @Test
+    @DisplayName("T0007 - Usuario no encontrado")
+    void shouldVerifyAmountOfFollowersUserNotFoundTest() throws Exception{
+
+        when(userRepository.getUser(100)).thenReturn(null);
+
+        assertThrows(NotFoundException.class, ()-> service.getUserFollowersCount(100));
     }
 
     @Test
