@@ -27,9 +27,19 @@ public class UserServiceImp implements IUserService {
 
     @Override
     public FollowDtoRes follow(FollowDtoReq followDtoReq) {
-        String res;
+        String res = null;
+        Optional<Seller> follower = null;
         FollowDtoRes followDtoRes = new FollowDtoRes();
-        res = userRepository.follow(followDtoReq.getUserId(), followDtoReq.getUserIdToFollow());
+        List<Seller> followed = getFollowedByUserId(followDtoReq.getUserId());
+
+        if(!followed.isEmpty())
+          follower = followed.stream().filter(f->f.getUser_id() == followDtoReq.getUserIdToFollow()).findFirst();
+
+        if(follower.isEmpty())
+            res = userRepository.follow(followDtoReq.getUserId(), followDtoReq.getUserIdToFollow());
+        else
+            res = "User with id:" + followDtoReq.getUserId() + " already follow to Seller with id:" +followDtoReq.getUserIdToFollow();
+
         if (res.contains("not found")) {
             throw new NotFoundUserException(res);
         }
