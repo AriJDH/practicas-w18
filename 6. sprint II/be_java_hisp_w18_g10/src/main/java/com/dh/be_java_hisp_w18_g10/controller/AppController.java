@@ -40,7 +40,9 @@ public class AppController {
 
     @GetMapping("/users/{userId}/followers/list")
     public ResponseEntity<UserFollowersListDTOres> getUserFollowers(
-            @RequestParam(required = false) String order,
+            @RequestParam(required = false)
+            @Pattern(regexp = "name_asc|name_desc",
+                    message = "El parametro de order solo puede ser name_asc o name_desc.") String order,
             @PathVariable int userId) {
         // US 0003
         // US 0008
@@ -52,7 +54,9 @@ public class AppController {
 
     @GetMapping("/users/{userId}/followed/list")
     public ResponseEntity<?> getUserFollowedList(
-            @RequestParam(required = false) String order,
+            @RequestParam(required = false)
+            @Pattern(regexp = "name_asc|name_desc",
+                    message = "El parametro de order solo puede ser name_asc o name_desc.") String order,
             @PathVariable int userId
     ) {
         // US 0004
@@ -75,7 +79,9 @@ public class AppController {
 
     @GetMapping("/products/followed/{userId}/list")
     public ResponseEntity<UserPostsDTOres> getUserFollowedPost(
-            @RequestParam(required = false) @Pattern(regexp = "name_asc|name_desc|date_asc|date_desc", message = "") String order,
+            @RequestParam(required = false)
+            @Pattern(regexp = "date_asc|date_desc",
+                    message = "El parametro de order solo puede ser date_asc o date_desc.") String order,
             @Valid @PathVariable @NotNull(message="El campo userId no puede estar vacio.") int userId){
         // US 0006
         // US 0009

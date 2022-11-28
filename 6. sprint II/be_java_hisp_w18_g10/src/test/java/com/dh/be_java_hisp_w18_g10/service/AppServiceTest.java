@@ -56,9 +56,7 @@ import static org.mockito.Mockito.*;
 import static com.dh.be_java_hisp_w18_g10.util.UserGenerator.*;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import java.util.Arrays;
@@ -280,8 +278,67 @@ public class AppServiceTest {
     }
     @Test
     @DisplayName("T0005")
-    void shouldVerifyDateSortTest(){
+    void shouldStringOrderPassTest(){
+        String nameDesc = "name_desc";
+        String nameAsc = "name_asc";
+
+        LocalDate today = LocalDate.now();
+        LocalDate tenDaysAgo = today.minusDays(10);
+
+        User user = new User(1, "daniel");
+        User seller = new User(2, "alberto");
+
+        Post todayPost = new Post(1, 1, today, new Product(), 1, 50);
+        Post tenDaysAgoPost = new Post(1, 2, tenDaysAgo, new Product(), 1, 80);
+
+        Map<Integer, Post> posts = new HashMap<Integer, Post>();
+
+        posts.put(1, tenDaysAgoPost);
+        posts.put(2, todayPost);
+        user.getFollowed().put(2, seller);
+        seller.setPosts(posts);
+
+        when(userRepository.getUser(1)).thenReturn(user);
+        when(userRepository.getUser(2)).thenReturn(seller);
+
+        assertAll( () -> {
+                    assertDoesNotThrow(() -> service.getUserPosts(1, nameDesc));
+                    assertDoesNotThrow(() -> service.getUserPosts(1, nameAsc));
+        });
     }
+
+    @Test
+    @DisplayName("T0005 - No se cumple.")
+    void shouldStringOrderNotPassTest(){
+        String wrongParameter = "desc";
+
+        LocalDate today = LocalDate.now();
+        LocalDate tenDaysAgo = today.minusDays(10);
+
+        User user = new User(1, "daniel");
+        User seller = new User(2, "alberto");
+
+        Post todayPost = new Post(1, 1, today, new Product(), 1, 50);
+        Post tenDaysAgoPost = new Post(1, 2, tenDaysAgo, new Product(), 1, 80);
+
+        Map<Integer, Post> posts = new HashMap<Integer, Post>();
+
+        posts.put(1, tenDaysAgoPost);
+        posts.put(2, todayPost);
+        user.getFollowed().put(2, seller);
+        seller.setPosts(posts);
+
+        when(userRepository.getUser(1)).thenReturn(user);
+        when(userRepository.getUser(2)).thenReturn(seller);
+
+        assertAll( () -> {
+            assertThrows(UserGenericException.class ,() -> service.getUserPosts(1, wrongParameter));
+            assertThrows(UserGenericException.class ,() -> service.getUserPosts(1, wrongParameter));
+        });
+
+    }
+
+
 
     @Test
     @DisplayName("T0006 - Ascendente")
@@ -378,7 +435,8 @@ public class AppServiceTest {
         assertEquals(userPostsDto.getPosts().size(), 2);
         userPostsDto.getPosts().forEach(
                 p -> {
-                    assertThat(DateHandler.StringToDate(p.getDate()).isAfter(twoWeeksAgo)).isTrue();
+                    assertThat(DateHandler.StringToDate(p.getDate())
+                            .isAfter(twoWeeksAgo)).isTrue();
                 }
         );
 
