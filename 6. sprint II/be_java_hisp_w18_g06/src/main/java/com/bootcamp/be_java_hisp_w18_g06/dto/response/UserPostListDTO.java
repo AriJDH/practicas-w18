@@ -10,6 +10,6 @@ import java.util.List;
 @Setter
 public class UserPostListDTO {
     //US-006
-    private int user_id;
+    private Integer user_id;
     List<PostResDto> postDTOList;
 }

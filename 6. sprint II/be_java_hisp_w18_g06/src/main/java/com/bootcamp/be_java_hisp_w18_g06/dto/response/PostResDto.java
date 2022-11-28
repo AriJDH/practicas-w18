@@ -8,10 +8,10 @@ import java.time.LocalDate;
 @Getter
 @Setter
 public class PostResDto {
-    private int post_id;
-    private int user_id;
+    private Integer post_id;
+    private Integer user_id;
     private LocalDate date;
     private Product product;
     private String category;
-    private double price;
+    private Double price;
 }

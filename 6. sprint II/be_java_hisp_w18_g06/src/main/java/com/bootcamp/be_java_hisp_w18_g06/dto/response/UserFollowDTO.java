@@ -4,6 +4,6 @@ import lombok.Getter;
 
 @Getter
 public class UserFollowDTO {
-    private int user_id;
+    private Integer user_id;
     private String user_name;
 }

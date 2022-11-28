@@ -10,15 +10,15 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @Data
 public class Post {
-    private int post_id=0;
-    private int user_id;
+    private Integer post_id=0;
+    private Integer user_id;
     @JsonFormat(pattern = "dd-MM-yyyy")
     private LocalDate date;
     private Product product;
     private String category;
-    private double price;
+    private Double price;
 
-    public Post( int user_id, LocalDate date, Product product, String category, double price) {
+    public Post( Integer user_id, LocalDate date, Product product, String category, Double price) {
         this.post_id += 1;
         this.user_id = user_id;
         this.date = date;

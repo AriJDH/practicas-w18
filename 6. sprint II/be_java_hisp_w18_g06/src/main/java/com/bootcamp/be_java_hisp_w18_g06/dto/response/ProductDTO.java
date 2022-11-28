@@ -4,7 +4,7 @@ import lombok.Getter;
 
 @Getter
 public class ProductDTO {
-    private int product_id;
+    private Integer product_id;
     private String product_name;
     private String type;
     private String brand;

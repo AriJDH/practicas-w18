@@ -11,14 +11,14 @@ import java.util.List;
 @Getter
 @Setter
 public class User {
-    private int user_id;
+    private Integer user_id;
     private String user_name;
     @JsonIgnore
     private List<User> followers;
     private List<User> followed;
     private List<Post> posts;
     
-    public User(int user_id, String user_name) {
+    public User(Integer user_id, String user_name) {
         this.user_id = user_id;
         this.user_name = user_name;
     }

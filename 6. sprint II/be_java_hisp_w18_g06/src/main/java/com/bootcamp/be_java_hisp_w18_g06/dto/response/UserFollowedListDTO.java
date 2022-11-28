@@ -8,7 +8,7 @@ import java.util.List;
 @Setter
 public class UserFollowedListDTO {
     //US-OO4
-    private int user_id;
+    private Integer user_id;
     private String user_name;
     private List<UserFollowDTO> followed;
 }

@@ -7,7 +7,7 @@ import lombok.Setter;
 @Setter
 public class UserFollowersCountDTO {
     //US-002
-    private int user_id;
+    private Integer user_id;
     private String user_name;
-    private int followers_count; //TODO Setear el valor desde el service
+    private Integer followers_count; //TODO Setear el valor desde el service
 }
