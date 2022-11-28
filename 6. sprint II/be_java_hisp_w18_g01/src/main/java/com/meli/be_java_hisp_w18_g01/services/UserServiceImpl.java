@@ -7,6 +7,7 @@ import com.meli.be_java_hisp_w18_g01.entities.User;
 import com.meli.be_java_hisp_w18_g01.exceptions.BadRequestException;
 import com.meli.be_java_hisp_w18_g01.services.database.UserDbService;
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,8 +17,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-@AllArgsConstructor
-@NoArgsConstructor
+@Data
 public class UserServiceImpl implements UserService {
     @Autowired
     private UserDbService userDbService;
