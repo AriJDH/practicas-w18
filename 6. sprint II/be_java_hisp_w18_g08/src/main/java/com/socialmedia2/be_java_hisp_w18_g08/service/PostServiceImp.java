@@ -1,9 +1,12 @@
 package com.socialmedia2.be_java_hisp_w18_g08.service;
 
 import com.socialmedia2.be_java_hisp_w18_g08.dto.PostDto;
+import com.socialmedia2.be_java_hisp_w18_g08.dto.ProductDto;
 import com.socialmedia2.be_java_hisp_w18_g08.dto.request.PostDtoReq;
 import com.socialmedia2.be_java_hisp_w18_g08.dto.response.PostDtoRes;
+import com.socialmedia2.be_java_hisp_w18_g08.dto.response.ProductDtoRes;
 import com.socialmedia2.be_java_hisp_w18_g08.entity.Post;
+import com.socialmedia2.be_java_hisp_w18_g08.entity.Product;
 import com.socialmedia2.be_java_hisp_w18_g08.exception.BadRequestException;
 import com.socialmedia2.be_java_hisp_w18_g08.entity.Seller;
 import com.socialmedia2.be_java_hisp_w18_g08.exception.NotFoundUserException;
@@ -11,6 +14,7 @@ import com.socialmedia2.be_java_hisp_w18_g08.repository.IPostRepository;
 import com.socialmedia2.be_java_hisp_w18_g08.repository.IUserRepository;
 import com.socialmedia2.be_java_hisp_w18_g08.repository.PostRepositoryImp;
 import com.socialmedia2.be_java_hisp_w18_g08.repository.UserRepositoryImp;
+import com.socialmedia2.be_java_hisp_w18_g08.util.Converter;
 import com.socialmedia2.be_java_hisp_w18_g08.util.OrderDateAsc;
 import com.socialmedia2.be_java_hisp_w18_g08.util.OrderDateDesc;
 import org.springframework.stereotype.Service;
@@ -58,7 +62,8 @@ public class PostServiceImp implements IPostService {
         if (seller == null) {
             throw new BadRequestException("The post was not created. No user with id " + postDTOReq.getUser_id());
         } else {
-            Post post = new Post(postId, postDTOReq.getUser_id(), postDTOReq.getProduct(), postDTOReq.getCategory(),
+            Product product = Converter.convertProductDtoToProduct(postDTOReq.getProduct());
+            Post post = new Post(postId, postDTOReq.getUser_id(), product, postDTOReq.getCategory(),
                     postDTOReq.getPrice(), postDTOReq.getDate());
             postRepository.save(post);
             userRepository.createPost(post, postDTOReq.getUser_id());
@@ -76,10 +81,13 @@ public class PostServiceImp implements IPostService {
         postDtoRes.setUser_id(userId);
         List<PostDto> filtrados = new ArrayList<>();
 
+        ProductDtoRes product = new ProductDtoRes();
+
         for (Seller s : followed) {
            for(Post p: s.getPosts()){
                if(p.getDate().isAfter((date.minusDays(14)))){
-                   PostDto aux = new PostDto(p.getPost_id(), p.getUser_id(), p.getProduct(),
+                   product = Converter.convertProductToProductDtoRes(p.getProduct());
+                   PostDto aux = new PostDto(p.getPost_id(), p.getUser_id(),product,
                                              p.getCategory(),p.getPrice(), p.getDate());
                    filtrados.add(aux);
                }

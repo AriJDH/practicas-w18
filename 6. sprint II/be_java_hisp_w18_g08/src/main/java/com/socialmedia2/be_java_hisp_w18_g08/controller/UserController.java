@@ -29,7 +29,7 @@ public class UserController {
 
     @PostMapping("/{userId}/follow/{userIdToFollow}")
     public ResponseEntity<FollowDtoRes> follow(@PathVariable
-                                               @NotBlank(message = "El  id no puede estar vacío.")
+                                               @NotNull(message = "El  id no puede estar vacío.")
                                                @Min(value = 0, message = "El id debe ser mayor a cero")
                                                Integer userId,
                                                @PathVariable Integer userIdToFollow) {
@@ -39,7 +39,7 @@ public class UserController {
 
     @GetMapping("/{userId}/followed/list")
     public ResponseEntity<FollowedDto> getFollowed(@PathVariable
-                                                   @NotBlank(message = "El  id no puede estar vacío.")
+                                                   @NotNull(message = "El  id no puede estar vacío.")
                                                    @Min(value = 0, message = "El id debe ser mayor a cero")
                                                    Integer userId,
                                                    @RequestParam(required = false) String order) {
@@ -48,14 +48,14 @@ public class UserController {
 
     @GetMapping("/{userId}/followers/count")
     public ResponseEntity<SellerFollowersCountDto> findAllFollowersQuantity(@PathVariable
-                                                                            @NotBlank(message = "El  id no puede estar vacío.")
+                                                                            @NotNull(message = "El  id no puede estar vacío.")
                                                                             @Min(value = 0, message = "El id debe ser mayor a cero")
                                                                             Integer userId){
         return new ResponseEntity<>(userService.findAllFollowersQuantity(userId), HttpStatus.OK);
     }
     @GetMapping("/{userId}/followers/list")
     public ResponseEntity<UserListDto> findUserListBySeller(@PathVariable
-                                                            @NotBlank(message = "El  id no puede estar vacío.")
+                                                            @NotNull(message = "El  id no puede estar vacío.")
                                                             @Min(value = 0, message = "El id debe ser mayor a cero")
                                                             Integer userId,
                                                             @RequestParam(required = false) String order) {
@@ -65,7 +65,7 @@ public class UserController {
 
     @PostMapping("/{userId}/unfollow/{userIdToUnfollow}")
     public ResponseEntity<ResponseMessasgeDto> unFollow(@PathVariable
-                                                        @NotBlank(message = "El  id no puede estar vacío.")
+                                                        @NotNull(message = "El  id no puede estar vacío.")
                                                         @Min(value = 0, message = "El id debe ser mayor a cero")
                                                         Integer userId, @PathVariable Integer userIdToUnfollow){
         ResponseMessasgeDto response = new ResponseMessasgeDto(userService.unFollow(userId,userIdToUnfollow),200, LocalDateTime.now());

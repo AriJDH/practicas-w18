@@ -1,6 +1,7 @@
 package com.socialmedia2.be_java_hisp_w18_g08.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.socialmedia2.be_java_hisp_w18_g08.dto.response.ProductDtoRes;
 import com.socialmedia2.be_java_hisp_w18_g08.entity.Product;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -17,7 +18,7 @@ public class PostDto {
 
     private Integer post_id;
     private Integer user_id;
-    private Product product;
+    private ProductDtoRes product;
     private Integer category;
     private Double price;
     @JsonFormat(pattern = "dd-MM-yyyy")

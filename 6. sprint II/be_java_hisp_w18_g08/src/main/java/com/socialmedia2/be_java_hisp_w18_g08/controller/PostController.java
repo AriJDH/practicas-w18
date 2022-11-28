@@ -13,6 +13,7 @@ import com.socialmedia2.be_java_hisp_w18_g08.dto.response.PostDtoRes;
 import javax.validation.Valid;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
 @RestController
@@ -34,7 +35,7 @@ public class PostController {
 
     @GetMapping("/followed/{userId}/list")
     public ResponseEntity<PostDtoRes> getPostSellerListByUserId(@PathVariable
-                                                                @NotBlank(message = "El  id no puede estar vacío.")
+                                                                @NotNull(message = "El  id no puede estar vacío.")
                                                                 @Min(value = 0, message = "El id debe ser mayor a cero")
                                                                 Integer userId,
                                                                 @RequestParam(required = false) String order) {

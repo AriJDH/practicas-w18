@@ -15,20 +15,20 @@ import javax.validation.constraints.Size;
 @Setter
 public class ProductDto {
     private Integer product_id;
-    @NotBlank(message = "El campo no puede estar vacío.")
-    @Size(max = 40, message = "La longitud no puede superar los 40 caracteres.")
-    @Pattern(regexp = "(_/[A-Z]/[a-z]/[0-9]*$)", message = "El campo no puede poseer caracteres especiales.")
+    @NotBlank(message = "El prodcutName no puede estar vacío.")
+    @Size(max = 40, message = "La longitud del prodcutName no puede superar los 40 caracteres.")
+    @Pattern(regexp = "[\\s|[0-9]|A-Z|a-z|ñ|ó|í|á|é|ú|Á|Ó|É|Í|Ú]*$", message = "El productName no puede poseer caracteres especiales.")
     private String product_name;
-    @NotBlank(message = "El campo no puede estar vacío.")
-    @Size(max = 15, message = "La longitud no puede superar los 40 caracteres.")
-    @Pattern(regexp = "(_/[A-Z]/[a-z]/[0-9]*$)", message = "El campo no puede poseer caracteres especiales.")
+    @NotBlank(message = "El campo type no puede estar vacío.")
+    @Size(max = 15, message = "La longitud del campo type no puede superar los 40 caracteres.")
+    @Pattern(regexp = "[\\s|[0-9]|A-Z|a-z|ñ|ó|í|á|é|ú|Á|Ó|É|Í|Ú]*$", message = "El type no puede poseer caracteres especiales.")
     private String type;
     private String brand;
-    @NotBlank(message = "El campo no puede estar vacío.")
-    @Size(max = 15, message = "La longitud no puede superar los 40 caracteres.")
-    @Pattern(regexp = "(_/[A-Z]/[a-z]/[0-9]*$)", message = "El campo no puede poseer caracteres especiales.")
+    @NotBlank(message = "El campo color no puede estar vacío.")
+    @Size(max = 15, message = "La longitud del campo color no puede superar los 40 caracteres.")
+    @Pattern(regexp = "[\\s|[0-9]|A-Z|a-z|ñ|ó|í|á|é|ú|Á|Ó|É|Í|Ú]*$", message = "El Color no puede poseer caracteres especiales.")
     private String color;
-    @Size(max = 80, message = "La longitud no puede superar los 40 caracteres.")
-    @Pattern(regexp = "([A-Z]/[a-z]/[0-9]*$)", message = "El campo no puede poseer caracteres especiales.")
+    @Size(max = 80, message = "La longitud del campo notas no puede superar los 40 caracteres.")
+    @Pattern(regexp = "[\\s|[0-9]|A-Z|a-z|ñ|ó|í|á|é|ú|Á|Ó|É|Í|Ú]*$", message = "El campo notas no puede poseer caracteres especiales.")
     private String notes;
 }
