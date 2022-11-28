@@ -31,6 +31,10 @@ public class PostServiceImpl implements PostService {
     UserDbService userDbService;
     DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 
+    public PostServiceImpl(UserDbService userDbService) {
+        this.userDbService = userDbService;
+    }
+
     @Override
     public void addPost(PostDTO postDTO) {
         User user = userDbService.findById(postDTO.getUser_id());

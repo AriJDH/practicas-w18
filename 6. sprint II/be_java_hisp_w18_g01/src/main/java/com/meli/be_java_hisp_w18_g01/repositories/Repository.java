@@ -6,6 +6,7 @@ import java.util.Optional;
 public interface Repository <T>{
     void add(T t);
     void remove(T t);
+    void removeAll();
     void update(T t);
     Optional<T> find(T t);
     List<T> findAll();

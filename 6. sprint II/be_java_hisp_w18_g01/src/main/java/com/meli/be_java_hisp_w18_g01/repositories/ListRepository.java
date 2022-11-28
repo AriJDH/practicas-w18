@@ -18,6 +18,11 @@ public class ListRepository <T> implements Repository<T>{
     }
 
     @Override
+    public void removeAll() {
+        this.list.removeAll(this.list);
+    }
+
+    @Override
     public void update(T t) {
         int index = list.indexOf(t);
         if(index!=-1)
