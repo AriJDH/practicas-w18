@@ -8,7 +8,7 @@
         <version>2.7.5</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>com.socialMedia</groupId>
+    <groupId>com.socialMedia2</groupId>
     <artifactId>be_java_hisp_w18_g08</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>be_java_hisp_w18_g08</name>
@@ -63,6 +63,10 @@
             <artifactId>mockito-inline</artifactId>
             <version>4.9.0</version>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.jayway.jsonpath</groupId>
+            <artifactId>json-path</artifactId>
         </dependency>
     </dependencies>
 
