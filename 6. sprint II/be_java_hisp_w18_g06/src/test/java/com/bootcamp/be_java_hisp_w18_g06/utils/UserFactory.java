@@ -69,19 +69,7 @@ public class UserFactory {
         return user;
     }
 
-    public static User getUserWithFollowersListAndPosts(String name) {
-        User user = getUserRandom(name);
-        List<User> userList = new ArrayList<>();
-        userList.add(getUserRandom("user 1"));
-        userList.add(getUserRandom("user 2"));
-        userList.add(getUserRandom("user 3"));
-        user.setFollowers(userList);
-        List<Post> postList = new ArrayList<>();
-        Post post = new Post();
-        postList.add(post);
-        user.setPosts(postList);
-        return user;
-    }
+
 
 
 
