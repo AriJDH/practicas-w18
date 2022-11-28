@@ -189,6 +189,7 @@ public class AppService implements IAppService {
     @Override
     public UserFollowedListDTOres getUserFollowed(int userId, String order) {
         UserFollowedListDTOres res = getUserFollowed(userId);
+
         if(order.equals(TypeOrderHelper.NAME_ASC)){
             res.getFollowed()
                     .sort(Comparator.comparing(UserDTOres::getUser_name));

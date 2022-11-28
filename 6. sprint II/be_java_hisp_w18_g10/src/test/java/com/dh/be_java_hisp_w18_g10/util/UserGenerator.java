@@ -1,18 +1,79 @@
 package com.dh.be_java_hisp_w18_g10.util;
 
+import com.dh.be_java_hisp_w18_g10.dto.response.UserDTOres;
+import com.dh.be_java_hisp_w18_g10.dto.response.UserFollowedListDTOres;
+import com.dh.be_java_hisp_w18_g10.entity.User;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import com.dh.be_java_hisp_w18_g10.dto.response.PostDTOres;
 import com.dh.be_java_hisp_w18_g10.dto.response.ProductDTOres;
 import com.dh.be_java_hisp_w18_g10.dto.response.UserPostsDTOres;
 import com.dh.be_java_hisp_w18_g10.entity.Post;
 import com.dh.be_java_hisp_w18_g10.entity.Product;
 import com.dh.be_java_hisp_w18_g10.entity.User;
+import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 
+@Component
 public class UserGenerator {
+
+    public static UserFollowedListDTOres getUserFollowedListDTOresOrderNameAsc() {
+
+        UserDTOres user1 = new UserDTOres(2, "A_user");
+        UserDTOres user2 = new UserDTOres(3, "B_user");
+        UserDTOres user3 = new UserDTOres(4, "C_user");
+
+        UserFollowedListDTOres user = new UserFollowedListDTOres(1, "usuario1", new ArrayList<>(List.of(user1, user2, user3)));
+
+        return user;
+    }
+    public static UserFollowedListDTOres getUserFollowedListDTOresOrderNameDes() {
+
+        UserDTOres user1 = new UserDTOres(2, "A_user");
+        UserDTOres user2 = new UserDTOres(3, "B_user");
+        UserDTOres user3 = new UserDTOres(4, "C_user");
+
+        UserFollowedListDTOres user = new UserFollowedListDTOres(1, "usuario1", new ArrayList<>(List.of(user3, user2, user1)));
+
+        return user;
+    }
+    public static UserFollowedListDTOres getUserFollowedListDTOresDesordenado() {
+
+        UserDTOres user1 = new UserDTOres(2, "B_user");
+        UserDTOres user2 = new UserDTOres(3, "A_user");
+        UserDTOres user3 = new UserDTOres(4, "C_user");
+
+        UserFollowedListDTOres user = new UserFollowedListDTOres(1, "usuario1", new ArrayList<>(List.of(user1, user2, user3)));
+
+        return user;
+    }
+
+    public static User getUserFollowedName() {
+
+        User user = new User(1, "Usuario");
+
+        User user1 = new User(2, "B_user");
+        User user2 = new User(3, "A_user");
+        User user3 = new User(4, "C_user");
+
+        Map<Integer, User> followed = new HashMap<>();
+        followed.put(user1.getUserId(), user1);
+        followed.put(user2.getUserId(), user2);
+        followed.put(user3.getUserId(), user3);
+
+        user.setFollowed(followed);
+
+        return user;
+    }
+
 
     private static Map<Integer, User> users = new HashMap<Integer, User>();
     public static void loadUsers(){

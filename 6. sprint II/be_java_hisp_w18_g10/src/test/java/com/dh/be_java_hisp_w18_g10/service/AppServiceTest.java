@@ -6,8 +6,12 @@ import com.dh.be_java_hisp_w18_g10.entity.Product;
 import com.dh.be_java_hisp_w18_g10.entity.User;
 import com.dh.be_java_hisp_w18_g10.exception.UserGenericException;
 import com.dh.be_java_hisp_w18_g10.exception.UserNotFoundException;
+import com.dh.be_java_hisp_w18_g10.dto.response.UserDTOres;
+import com.dh.be_java_hisp_w18_g10.dto.response.UserFollowedListDTOres;
+import com.dh.be_java_hisp_w18_g10.entity.User;
 import com.dh.be_java_hisp_w18_g10.repository.IPostRepository;
 import com.dh.be_java_hisp_w18_g10.repository.IUserRepository;
+import com.dh.be_java_hisp_w18_g10.util.UserGenerator;
 import com.dh.be_java_hisp_w18_g10.repository.PostRepository;
 import com.dh.be_java_hisp_w18_g10.repository.UserRepository;
 import com.dh.be_java_hisp_w18_g10.util.DateHandler;
@@ -20,6 +24,17 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.boot.test.context.SpringBootTest;
+
+import static com.dh.be_java_hisp_w18_g10.util.TypeOrderHelper.NAME_DESC;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import java.util.List;
+
+import static com.dh.be_java_hisp_w18_g10.util.TypeOrderHelper.NAME_ASC;
+import static org.mockito.Mockito.*;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.activation.DataHandler;
@@ -37,6 +52,7 @@ import java.util.Map;
 
 
 @ExtendWith(MockitoExtension.class)
+@SpringBootTest
 public class AppServiceTest {
 
     @Autowired
@@ -68,10 +84,59 @@ public class AppServiceTest {
     }
 
     @Test
-    @DisplayName("T0004")
-    void shouldVerifyAlphabeticOrderOfFollowedTest(){
-    }
+    @DisplayName("T0004- NAME_ASC")
+    void shouldVerifyAlphabeticOrderAscOfFollowedTest() {
+        //ARRANGE
+        User user = UserGenerator.getUserFollowedName();
+        UserFollowedListDTOres userFollowedOrderNameAsc = UserGenerator.getUserFollowedListDTOresOrderNameAsc();
+        when(userRepository.getUser(userFollowedOrderNameAsc.getUser_id())).thenReturn(user);
 
+        //ACTION
+        UserFollowedListDTOres userFollowedResult = service.getUserFollowed(userFollowedOrderNameAsc.getUser_id(), NAME_ASC);
+
+        //ASSERT
+        List<UserDTOres> listUserFollowedOrderNameAsc = userFollowedOrderNameAsc.getFollowed();
+        List<UserDTOres> listuserFollowedResult = userFollowedResult.getFollowed();
+
+        for (int i = 0; i < listUserFollowedOrderNameAsc.size(); i++) {
+            assertEquals(listUserFollowedOrderNameAsc.get(i).getUser_name(), listuserFollowedResult.get(i).getUser_name());
+        }
+        verify(userRepository, atLeastOnce()).getUser(userFollowedOrderNameAsc.getUser_id());
+
+        //prueba de falla
+        /*
+         * UserFollowedListDTOres userFollowedDesordenado = UserGenerator.getUsersDesordenado();
+         * int id = userFollowedDesordenado.getUser_id();
+         * List<UserDTOres> listUserFollowedOrderNameAsc = userFollowedDesordenado.getFollowed();
+         * */
+    }
+    @Test
+    @DisplayName("T0004- NAME_DESC")
+    void shouldVerifyAlphabeticOrderDesOfFollowedTest() {
+        //ARRANGE
+        User user = UserGenerator.getUserFollowedName();
+        UserFollowedListDTOres userFollowedOrderNameDes = UserGenerator.getUserFollowedListDTOresOrderNameDes();
+        when(userRepository.getUser(userFollowedOrderNameDes.getUser_id())).thenReturn(user);
+
+        //ACTION
+        UserFollowedListDTOres userFollowedResult = service.getUserFollowed(userFollowedOrderNameDes.getUser_id(), NAME_DESC);
+
+        //ASSERT
+        List<UserDTOres> listUserFollowedOrderNameDesc = userFollowedOrderNameDes.getFollowed();
+        List<UserDTOres> listuserFollowedResult = userFollowedResult.getFollowed();
+
+        for (int i = 0; i < listUserFollowedOrderNameDesc.size(); i++) {
+            assertEquals(listUserFollowedOrderNameDesc.get(i).getUser_name(), listuserFollowedResult.get(i).getUser_name());
+        }
+        verify(userRepository, atLeastOnce()).getUser(userFollowedOrderNameDes.getUser_id());
+
+        //prueba de falla
+        /*
+         * UserFollowedListDTOres userFollowedDesordenado = UserGenerator.getUsersDesordenado();
+         * int id = userFollowedDesordenado.getUser_id();
+         * List<UserDTOres> listUserFollowedOrderNameAsc = userFollowedDesordenado.getFollowed();
+         * */
+    }
     @Test
     @DisplayName("T0005")
     void shouldVerifyDateSortTest(){
