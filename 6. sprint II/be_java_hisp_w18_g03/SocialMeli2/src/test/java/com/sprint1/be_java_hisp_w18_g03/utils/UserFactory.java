@@ -14,6 +14,13 @@ public class UserFactory {
         return new User(id, name, new ArrayList<>(), new ArrayList<>());
     }
 
+    public static User getUserWithFollowers() {
+        List<User> listUser = new ArrayList<>();
+        listUser.add(new User(99,"luis",null,null));
+        User user = new User(1,"prueba1",null,listUser);
+        return user;
+    }
+
     public static User getUserPostSeller() {
 
         User user = new User();
@@ -30,7 +37,7 @@ public class UserFactory {
         return user;
     }
 
-    public static User getSeller() {
+    public static User getSeller(){
         User vendedor = new User();
         vendedor.setUserId(2);
         vendedor.setUserName("Vendedor 1");
