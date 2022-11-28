@@ -70,7 +70,7 @@ class UserServiceImpTest {
 
     }
     @Test
-    @DisplayName("US0003 - Invalid parameter error in followers method")
+    @DisplayName("US0003 - Invalid parameter error in findUserListBySeller method")
     void findUserListBySellerInvalidParameterTest(){
         //Arrange
         Integer userId = 1;
@@ -88,6 +88,48 @@ class UserServiceImpTest {
         //Assertion
         assertThrows(BadRequestException.class,
                 () -> userService.findUserListBySeller(userId, order));
+
+    }
+    @Test
+    @DisplayName("US0003 - Verify that the ordering exists in followers")
+    void getFollowedWhitOrderTest(){
+        //Arrange
+        Integer userId = 1;
+        String order = "name_asc";
+        Seller seller1 = new Seller(1, "Augusto", null, null, null);
+        Seller seller2 = new Seller(3, "Martin", null,null,null);
+        Seller seller3 = new Seller(5, "Samuel", null, null, null);
+        List<Seller> followed = List.of(seller1, seller2, seller3);
+        User user = new User(1, "Seller1", followed);
+
+        //Mock
+        when(userRepo.getUserByID(userId)).thenReturn(user);
+
+        //Act
+        FollowedDto followedDto = userService.getFollowed(userId, order);
+        //Assertion
+        assertTrue(followedDto.getUser_id() == 1);
+
+    }
+    @Test
+    @DisplayName("US0003 - Invalid parameter error in getFollowed method")
+    void getFollowedInvalidParameterTest(){
+        //Arrange
+        Integer userId = 1;
+        String order = "name";
+        Seller seller1 = new Seller(1, "Augusto", null, null, null);
+        Seller seller2 = new Seller(3, "Martin", null,null,null);
+        Seller seller3 = new Seller(5, "Samuel", null, null, null);
+        List<Seller> followed = List.of(seller1, seller2, seller3);
+        User user = new User(1, "Seller1", followed);
+
+        //Mock
+        when(userRepo.getUserByID(userId)).thenReturn(user);
+
+        //Act
+        //Assertion
+        assertThrows(BadRequestException.class,
+                () -> userService.getFollowed(userId, order));
 
     }
 
