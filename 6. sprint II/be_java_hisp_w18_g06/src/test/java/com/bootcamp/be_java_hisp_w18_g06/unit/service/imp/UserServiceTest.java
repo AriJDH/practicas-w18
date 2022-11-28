@@ -1,10 +1,12 @@
 package com.bootcamp.be_java_hisp_w18_g06.unit.service.imp;
 
 import com.bootcamp.be_java_hisp_w18_g06.dto.response.UserFollowedListDTO;
+import com.bootcamp.be_java_hisp_w18_g06.dto.response.UserFollowersCountDTO;
 import com.bootcamp.be_java_hisp_w18_g06.entity.User;
 import com.bootcamp.be_java_hisp_w18_g06.exceptions.BadRequestException;
 import com.bootcamp.be_java_hisp_w18_g06.repository.imp.UserRepository;
 import com.bootcamp.be_java_hisp_w18_g06.service.imp.UserService;
+import com.bootcamp.be_java_hisp_w18_g06.utils.UserFactory;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
@@ -17,6 +19,7 @@ import java.util.Collections;
 import java.util.Optional;
 
 import static com.bootcamp.be_java_hisp_w18_g06.utils.UserFactory.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
 
 
@@ -40,7 +43,7 @@ class UserServiceTest {
             //MOCK
             when(repository.findUserById(user.getUser_id())).thenReturn(Optional.of(user));
             //ASSERT
-            Assertions.assertEquals(user, repository.findUserById(user.getUser_id()).get());
+            assertEquals(user, repository.findUserById(user.getUser_id()).get());
             Assertions.assertTrue(service.userFollowedHasPosts(user));
           //  Assertions.assertDoesNotThrow(()->service.followUser(user2.getUser_id(), user.getUser_id()));
 
@@ -55,7 +58,7 @@ class UserServiceTest {
             //MOCK
             when(repository.findUserById(idUnexists)).thenReturn(Optional.empty());
             //ASSERT
-            Assertions.assertEquals(Optional.empty(),repository.findUserById(idUnexists));
+            assertEquals(Optional.empty(),repository.findUserById(idUnexists));
             Assertions.assertFalse(service.userIsPresent(idUnexists));
 
         }
@@ -174,7 +177,7 @@ class UserServiceTest {
             when(repository.findUserById(user.getUser_id())).thenReturn(Optional.of(user));
 
             UserFollowedListDTO result = service.getFollowedList(user.getUser_id(), order);
-            Assertions.assertEquals("user 1", result.getFollowed().get(0).getUser_name());
+            assertEquals("user 1", result.getFollowed().get(0).getUser_name());
         }
 
         @Test
@@ -185,14 +188,32 @@ class UserServiceTest {
             when(repository.findUserById(user.getUser_id())).thenReturn(Optional.of(user));
 
             UserFollowedListDTO result = service.getFollowedList(user.getUser_id(), order);
-            Assertions.assertEquals("user 3", result.getFollowed().get(0).getUser_name());
+            assertEquals("user 3", result.getFollowed().get(0).getUser_name());
         }
     }
     //US0002
     @Nested
-    class T0007{
+    class T0007 {
+        
+        // Testear que devuelva la cantidad correcta de usuarios
         @Test
-        void getFollowersList() {
+        @DisplayName("US0002/T0007 - Calcula correctamente la cantidad total de seguidores")
+        void getFollowersListOkTest() {
+            
+            // ARRANGE
+            User user = UserFactory.getUserWithFollowersList("user1");
+            
+            //MOCKS - ACT
+            when(repository.findUserById(1))
+                    .thenReturn(Optional.of(user));
+            
+            UserFollowersCountDTO userFollowersCountDTO = new UserFollowersCountDTO();
+            userFollowersCountDTO.setFollowers_count(3);
+            
+            // ASSERTS
+            assertEquals(userFollowersCountDTO.getFollowers_count(),
+                         service.getFollowersCount(1).getFollowers_count());
+            
         }
     }
 
