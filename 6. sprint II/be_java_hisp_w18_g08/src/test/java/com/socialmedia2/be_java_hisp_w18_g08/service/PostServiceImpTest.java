@@ -51,9 +51,9 @@ class PostServiceImpTest {
         List<PostDto> posts = new ArrayList<>();
         List<Seller> followed = new ArrayList<>();
         List<User> followers = new ArrayList<>();
-        List<Post> post5 = new ArrayList<>();
+        List<Post> posts5 = new ArrayList<>();
 
-        Seller s1 = new Seller(5, "User5", followed, post5, followers);
+        Seller s1 = new Seller(5, "User5", followed, posts5, followers);
         User u1 = new User(1, "User1", followed);
         followers.add(u1);
         followed.add(s1);
@@ -62,8 +62,10 @@ class PostServiceImpTest {
         Product prod5 = new Product();
         PostDto p1 = new PostDto(1,5,prod1,12,133.33,LocalDate.now());
         Post post1 = new Post(1,5,prod5,12,133.33,LocalDate.now());
-        post5.add(post1);
+
+        posts5.add(post1);
         posts.add(p1);
+
         PostDtoRes expected = new PostDtoRes();
         expected.setPosts(posts);
         expected.setUser_id(1);
