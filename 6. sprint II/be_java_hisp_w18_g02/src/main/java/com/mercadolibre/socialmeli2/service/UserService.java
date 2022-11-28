@@ -190,13 +190,23 @@ public class UserService implements IUserService {
                         p.getPrice()))
                 .collect(Collectors.toList());
 
-        if (order != null && order.equals("date_desc")) {
-            postsRes.sort(Comparator.comparing(PostDtoRes::getDate).reversed());
-        } else if (order != null && order.equals("date_asc")) {
-            postsRes.sort(Comparator.comparing(PostDtoRes::getDate));
-        }
+        orderByDate(order, postsRes);
 
         return new RecentPostsDtoRes(userId, postsRes);
+    }
+
+    private static void orderByDate(String order, List<PostDtoRes> postsRes) {
+        if (order != null && (!order.equals("date_asc") && !order.equals("date_desc"))) {
+            throw new OrderInvalidException();
+        }
+
+        if (order!= null) {
+            if (order.equals("date_desc")) {
+                postsRes.sort(Comparator.comparing(PostDtoRes::getDate).reversed());
+            } else if (order.equals("date_asc")) {
+                postsRes.sort(Comparator.comparing(PostDtoRes::getDate));
+            }
+        }
     }
 
     /**

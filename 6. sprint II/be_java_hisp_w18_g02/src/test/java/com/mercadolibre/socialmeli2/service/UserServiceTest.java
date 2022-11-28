@@ -41,9 +41,46 @@ public class UserServiceTest {
     UserService userService;
 
     @Test
+    @DisplayName("T-0005 Verificar que el tipo de ordenamiento por fecha exista (null) (US-0009)")
+    public void test0005DateOrderExists() {
+        // Arrange
+        int userId = 1;
+        String order = null;
+        User user = UserFactory.userWithId(userId);
+
+        when(userRepositoryMock.existsById(userId)).thenReturn(true);
+        when(userRepositoryMock.findById(userId)).thenReturn(user);
+
+        int expectedSize = 0;
+
+        // Act
+        RecentPostsDtoRes recentPosts = userService.getRecentPosts(userId, order);
+
+        // Assert
+        assertEquals(expectedSize, recentPosts.getPosts().size());
+
+    }
+
+    @Test
+    @DisplayName("T-0005 Verificar que el tipo de ordenamiento por fecha exista (String no válido) (US-0009)")
+    public void test0005DateOrderNotExists() {
+        // Arrange
+        int userId = 1;
+        String order = "not an order";
+        User user = UserFactory.userWithId(userId);
+
+        when(userRepositoryMock.existsById(userId)).thenReturn(true);
+        when(userRepositoryMock.findById(userId)).thenReturn(user);
+
+        // Act / Assert
+        assertThrows(OrderInvalidException.class, ()->userService.getRecentPosts(userId, order));
+
+    }
+
+
+    @Test
     @DisplayName("T-0006 Verificar el correcto ordenamiento " +
-            "descendente por fecha. (US-0009)")
-    // De mas Nuevo a mas Viejo
+            "descendente por fecha. (date_desc) (US-0009)")
     public void test0006DateDesc() {
         // Arrange
         int userId = 1;
@@ -79,8 +116,7 @@ public class UserServiceTest {
 
     @Test
     @DisplayName("T-0006 Verificar el correcto ordenamiento " +
-            "ascendente por fecha. (US-0009)")
-    // De mas viejo a mas nuevo
+            "ascendente por fecha. (date_asc) (US-0009)")
     public void test0006DateAsc() {
         // Arrange
         int userId = 1;
