@@ -1,10 +1,11 @@
 package com.dh.be_java_hisp_w18_g10.dto.response;
 
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-@Getter
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class UserFollowersCountDTOres {

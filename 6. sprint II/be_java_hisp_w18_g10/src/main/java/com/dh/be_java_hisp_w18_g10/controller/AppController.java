@@ -8,6 +8,7 @@ import com.dh.be_java_hisp_w18_g10.service.IAppService;
 import com.dh.be_java_hisp_w18_g10.service.AppService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -15,6 +16,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
 @RestController
+@Validated
 public class AppController {
     private IAppService userService;
     public AppController(AppService userService) {
