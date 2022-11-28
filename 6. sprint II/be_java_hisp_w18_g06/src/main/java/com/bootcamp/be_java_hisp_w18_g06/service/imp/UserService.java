@@ -32,7 +32,9 @@ public class UserService implements IUserService {
             .findAndAddModules()
             .build();
 
+    //userAddedFollower
     List<User> userAddedFollower = new ArrayList<>();
+    //userAddedFollowed
     List<User> userAddedFollowed = new ArrayList<>();
 
     //US-001
@@ -63,7 +65,9 @@ public class UserService implements IUserService {
         Verificar existencia userId y userIdToFollow
         */
         Optional<User> usFollower = userRepository.findUserById(userId);
+        User userFollower = usFollower.get();
         Optional<User> usFollowed = userRepository.findUserById(userIdToFollow);
+        User userFollowed = usFollowed.get();
         Boolean usersAreDifferent = userIdDiffUserIdToFollow(userId, userIdToFollow);
 
         //verificación
@@ -82,8 +86,8 @@ public class UserService implements IUserService {
         }
 
         //Agregar a la lista de Followed de userId
-        follow(usFollowed.get(), usFollower.get(), userAddedFollower); // comprador -> vendedor
-        follow(usFollower.get(), usFollowed.get(), userAddedFollowed); // vendedor <- comprador
+        follow(userFollowed, userFollower, userAddedFollower); // comprador -> vendedor
+        follow(userFollower, userFollowed, userAddedFollowed); // vendedor <- comprador
 
         //Agregar a la lista de Followed de userId
         /* userAddedFollower.add(usFollowed.get());
@@ -93,8 +97,8 @@ public class UserService implements IUserService {
         /* userAddedFollowed.add(usFollower.get());
         usFollowed.get().setFollowers(userAddedFollowed); */ // vendedor <- comprador
 
-        userRepository.updateUsers(usFollower.get());
-        userRepository.updateUsers(usFollowed.get());
+        userRepository.updateUsers(userFollower);
+        userRepository.updateUsers(userFollowed);
 
     }
 
