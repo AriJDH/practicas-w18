@@ -19,10 +19,7 @@ public class ProductController {
 	@GetMapping("/followed/{userId}/list")
 	public ResponseEntity<List<PostDTO>> findAllByUser(@PathVariable int userId,
                                                        @RequestParam(required = false) String order) {
-	    if(order!=null)
-	        return ResponseEntity.ok(productService.sortedByAscAndDesc(userId,order));
-
-		return ResponseEntity.ok(productService.findAllPostsByUser(userId));
+		return ResponseEntity.ok(productService.findAllPostsByUser(userId,order));
 	}
 
     @PostMapping("/post")

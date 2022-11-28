@@ -39,7 +39,7 @@ public class PostService implements IPostService {
     }
 	// US006
 	@Override
-	public List<PostDTO> findAllPostsByUser(int id) {
+	public List<PostDTO> findAllPostsByUser(int id,String order) {
 
 		User user = userRepository
 						.findUserById(id)
@@ -49,25 +49,24 @@ public class PostService implements IPostService {
 		List<Post> postsSeller = getPosts(user)
 						.orElseThrow(() -> new EmptyException("User does not follow Sellers"));
 
+		if (order!=null){
+			return sortedByAscAndDesc(postsSeller,order);
+		}
+
 		List<Post> postsOrder = sortByDate(postsSeller)
 						.orElseThrow(() -> new EmptyException("There are no posts to sort"));
 
 		List<Post> postsFilter = filterLastTwoWeeks(postsOrder)
 						.orElseThrow(() -> new EmptyException("There are no posts to sort in the last two weeks"));
 
-		return postsFilter
-						.stream()
-						.map(this::mapperDTO)
-						.collect(Collectors.toList());
+		List<PostDTO>postDTOList= mapperListDto(postsFilter);
+		if (postDTOList.size()==0)
+			throw new EmptyException("list is empty");
+		return postDTOList;
+
 	}
-	@Override
-	public List<PostDTO> sortedByAscAndDesc(int id, String order) {
-		User user = userRepository
-				.findUserById(id)
-				.orElseThrow(() -> new BadRequestException("The user id" + id
-						+ "does not exist"));
-		List<Post> postsSeller = getPosts(user)
-				.orElseThrow(() -> new EmptyException("User does not follow Sellers"));
+
+	private List<PostDTO> sortedByAscAndDesc(List<Post> postsSeller, String order) {
 
 		if (order.equals("date_asc")){
 			return mapperListDto(sortByDate(postsSeller)
@@ -97,7 +96,9 @@ public class PostService implements IPostService {
 
 		return Optional.of(posts.stream()
 						.filter(post -> Period.between(post.getDate(), LocalDate.now())
-										.getDays() <= 14)
+										.getDays() <= 14&&Period.between(post.getDate(), LocalDate.now())
+								.getMonths() ==0&&Period.between(post.getDate(), LocalDate.now())
+								.getYears() ==0)
 						.collect(Collectors.toList()));
 
 	}

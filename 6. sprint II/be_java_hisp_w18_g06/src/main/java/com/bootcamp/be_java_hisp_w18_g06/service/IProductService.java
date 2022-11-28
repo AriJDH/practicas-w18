@@ -11,6 +11,6 @@ public interface IProductService {
     void save(PostDTO postDTO);
 
 	// US006
-	List<PostDTO> findAllPostsByUser(int id);
-	List<PostDTO> sortedByAscAndDesc(int id, String order);
+	List<PostDTO> findAllPostsByUser(int id,String order);
+
 }

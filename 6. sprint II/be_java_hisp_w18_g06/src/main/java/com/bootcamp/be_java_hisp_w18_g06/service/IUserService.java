@@ -13,6 +13,5 @@ public interface IUserService {
     UserFollowersCountDTO getFollowersCount(int userId);
     UserFollowedListDTO getFollowedList(int userId, String order);
     UserFollowersListDTO getFollowersList(int userId, String order);
-//    void userSortList(String order, int userId);
 
 }

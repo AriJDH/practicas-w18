@@ -24,11 +24,7 @@ public class ProductService implements IProductService {
     }
 	// US006
 	@Override
-	public List<PostDTO> findAllPostsByUser(int id) {
-		return postService.findAllPostsByUser(id);
-	}
-	@Override
-	public List<PostDTO> sortedByAscAndDesc(int id, String order) {
-		return postService.sortedByAscAndDesc(id,order);
+	public List<PostDTO> findAllPostsByUser(int id,String order) {
+		return postService.findAllPostsByUser(id,order);
 	}
 }
