@@ -33,7 +33,6 @@ class PostServiceImpTest {
     UserRepositoryImp userRepo;
     @Mock
     PostRepositoryImp postRepo;
-
     @Mock
     UserServiceImp userService;
     @InjectMocks
@@ -43,8 +42,6 @@ class PostServiceImpTest {
     Seller s2;
     User u1;
     User u2;
-    List<User> users = new ArrayList<>();
-    List<Seller> sellers = new ArrayList<>();
 
     @BeforeEach
     private void setup() {
@@ -55,6 +52,8 @@ class PostServiceImpTest {
         List<Post> p1 = new ArrayList<>();
         List<User> followers = new ArrayList<>();
         List<Seller> followed = new ArrayList<>();
+        List<User> users = new ArrayList<>();
+        List<Seller> sellers = new ArrayList<>();
         Product pr1;
         Product pr2;
 
@@ -105,7 +104,6 @@ class PostServiceImpTest {
 
         //Assert
         assertTrue(result != null);
-        // assertDoesNotThrow(() -> postService.getPostSellerListByUserId(u1.getUser_id(), null));
     }
 
     @Test
@@ -118,11 +116,7 @@ class PostServiceImpTest {
         //Mock
         when(userService.getFollowedByUserId(id)).thenReturn(u1.getFollowed());
 
-        //Act
-        //PostDtoRes result = postService.getPostSellerListByUserId(id, order);
-
-        //Assert
-        //assertTrue(result != null);
+        //Assert - Act
         assertThrows(NotFoundUserException.class, () -> postService.getPostSellerListByUserId(id, order));
     }
 }
