@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -48,6 +47,12 @@ public class GlobalExceptionHandler {
         //e.getStackTrace();
         ResponseDto eDto = new ResponseDto(messages, 400);
         return new ResponseEntity<>(eDto, HttpStatus.valueOf(eDto.getStatus()));
+    }
+
+    @ExceptionHandler(OrderInvalidException.class)
+    public ResponseEntity<?> orderInvalidExceptionHandler(OrderInvalidException e){
+        ResponseDto eDto = new ResponseDto(e.getMessage(), 400);
+        return new ResponseEntity<>(eDto, HttpStatus.valueOf(400));
     }
 
 }

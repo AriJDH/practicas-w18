@@ -38,4 +38,14 @@ public class UserFactory {
         u1.addFollowed(u4);
         return users;
     }
+
+    public static Post postWithDate(LocalDate date){
+        return new Post(1, date,  1, 1.0, new Product());
+    }
+
+    public static User userWithId(Integer id){
+        return new User(id, "Juan Perez");
+    }
+
+
 }
