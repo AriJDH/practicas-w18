@@ -13,4 +13,10 @@ public class GlobalExceptionHandler {
         ErrorDTO errorDTO = new ErrorDTO(400, e.getMessage());
         return new ResponseEntity<>(errorDTO, HttpStatus.BAD_REQUEST);
     }
+
+    @ExceptionHandler(UserNotFoundException.class)
+    public ResponseEntity<ErrorDTO> UserNotFoundException(Exception e) {
+        ErrorDTO errorDTO = new ErrorDTO(404, e.getMessage());
+        return new ResponseEntity<>(errorDTO, HttpStatus.BAD_REQUEST);
+    }
 }

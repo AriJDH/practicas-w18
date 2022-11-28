@@ -8,6 +8,7 @@ import com.example.SocialMeli2.entity.Post;
 import com.example.SocialMeli2.entity.UserBuyer;
 import com.example.SocialMeli2.entity.UserSeller;
 import com.example.SocialMeli2.exception.BadRequestException;
+import com.example.SocialMeli2.exception.UserNotFoundException;
 import com.example.SocialMeli2.repository.IUserBuyerRepository;
 import com.example.SocialMeli2.repository.IUserSellerRepository;
 import com.example.SocialMeli2.util.Sorter;
@@ -63,7 +64,13 @@ public class UserBuyerServiceImp implements IUserBuyerService {
                 throw new BadRequestException("The user " + userIdToFollow + " is already in your follow list");
             }
         } else {
-            throw new BadRequestException("The user_id not exist");
+            if (!validateBuyer(userId) && !validateSeller(userIdToFollow)){
+                throw new UserNotFoundException("The buyer "+userId +" and the seller "+userIdToFollow+" not exist");
+            } else if (!validateBuyer(userId) && validateSeller(userIdToFollow)){
+                throw new UserNotFoundException("The buyer "+userId +" not exist");
+            } else if (!validateSeller(userIdToFollow) && validateBuyer(userId)){
+                throw new UserNotFoundException("The seller "+userIdToFollow +" not exist");
+            }
         }
     }
 
@@ -80,7 +87,7 @@ public class UserBuyerServiceImp implements IUserBuyerService {
                 throw new BadRequestException("Enter 'name_asc' for ascending alphabetical ordering or 'name_desc' for descending ordering.");
             return new FollowedListDTORes(buyer.getUser_id(), buyer.getUser_name(), userDTOResList);
         } else {
-            throw new BadRequestException("The user_id not exist");
+            throw new UserNotFoundException("The buyer "+userId +" not exist");
         }
     }
 
@@ -96,9 +103,11 @@ public class UserBuyerServiceImp implements IUserBuyerService {
 
             if (!order.equals("invalid"))
                 Sorter.sortByDate(filterList, order);
+            else
+                throw new BadRequestException("Enter 'date_asc' for ascending order or 'date_desc' for descending order.");
             return new PostFollowedByDateDTORes(buyer.getUser_id(), filterList);
         } else {
-            throw new BadRequestException("The user_id not exist");
+            throw new UserNotFoundException("The buyer "+userId +" not exist");
         }
     }
 
@@ -128,7 +137,13 @@ public class UserBuyerServiceImp implements IUserBuyerService {
                 throw new BadRequestException("The user " + userIdToUnfollow + " is not in your following list");
             }
         } else {
-            throw new BadRequestException("The user_id not exist");
+            if (!validateBuyer(userId) && !validateSeller(userIdToUnfollow)){
+                throw new UserNotFoundException("The buyer "+userId +" and the seller "+userIdToUnfollow+" not exist");
+            } else if (!validateBuyer(userId) && validateSeller(userIdToUnfollow) ){
+                throw new UserNotFoundException("The buyer "+userId +" not exist");
+            } else if (!validateSeller(userIdToUnfollow) && validateBuyer(userId)){
+                throw new UserNotFoundException("The seller "+userIdToUnfollow +" not exist");
+            }
         }
     }
 }
