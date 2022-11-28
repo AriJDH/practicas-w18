@@ -98,7 +98,7 @@ public class AppServiceTest {
 
     @Test
     @DisplayName("T0003 - ASC")
-    void shouldReturnOrderedFollowersListASC(){
+    void shouldReturnOrderedFollowersListTestASC(){
         //Arrange
         int id = 1;
         String typeOrderAsc = "name_asc";
@@ -119,7 +119,7 @@ public class AppServiceTest {
 
     @Test
     @DisplayName("T0003 - DESC")
-    void shouldReturnOrderedFollowersListDESC(){
+    void shouldReturnOrderedFollowersListTestDESC(){
         //Arrange
         int id = 1;
         String typeOrderDes = "name_desc";
@@ -135,6 +135,19 @@ public class AppServiceTest {
 
         //Assert
         Assertions.assertEquals(followersListDTOres.getFollowers(), result.getFollowers());
+    }
+
+    @Test
+    @DisplayName("T0003 - No existe ordenamiento alfabetico")
+    void shouldThrowAnExceptionWhenTypeOrderDoesNotExistTest(){
+        //ARRANGE
+        int id = 1;
+        String typeOrder = "not_valid";
+        User followedUser = UserGenerator.getUserWithFollowersASC();
+        //MOCK
+        when(userRepository.getUser(id)).thenReturn(followedUser);
+        //ASSERT
+        assertThrows(UserGenericException.class, () -> service.getUserFollowerList(id,typeOrder));
     }
 
     @Test
