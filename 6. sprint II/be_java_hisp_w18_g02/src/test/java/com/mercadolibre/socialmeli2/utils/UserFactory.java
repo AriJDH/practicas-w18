@@ -1,15 +1,43 @@
 package com.mercadolibre.socialmeli2.utils;
 
+import com.mercadolibre.socialmeli2.dto.response.SellerFollowerListDtoRes;
+import com.mercadolibre.socialmeli2.dto.response.UserDtoRes;
 import com.mercadolibre.socialmeli2.entity.Post;
 import com.mercadolibre.socialmeli2.entity.Product;
 import com.mercadolibre.socialmeli2.entity.User;
 
+import java.lang.reflect.Array;
 import java.time.LocalDate;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class UserFactory {
-    public static Map<Integer, User> loadUsers(){
+    public static List<User> getUsers() {
+        User user1 = new User(2, "Camila");
+        User user2 = new User(3, "Alberto");
+        User user3 = new User(4, "Beto");
+
+        return Arrays.asList(user1, user2, user3);
+    }
+
+    public static List<UserDtoRes> getUsersListDto(String order) {
+        UserDtoRes camila = new UserDtoRes(2 , "Camila");
+        UserDtoRes alberto = new UserDtoRes(3 , "Alberto");
+        UserDtoRes beto = new UserDtoRes(4 , "Beto");
+
+        if(order != null && order.equals("name_asc")) {
+            return Arrays.asList(alberto, beto, camila);
+        } else if(order != null && order.equals("name_desc")) {
+            return Arrays.asList(camila, beto, alberto);
+        } else {
+            return Arrays.asList(camila, alberto, beto);
+        }
+    }
+
+    public static Map<Integer, User> loadUsers() {
         Map<Integer, User> users = new HashMap<>();
         User u1 = new User(1, "Juan Perez");
         User u2 = new User(2, "Maria Rodriguez");
@@ -20,8 +48,8 @@ public class UserFactory {
         Product pr2 = new Product(2, "Bicicleta de montaña R26", "Rodado",
                 "Winner", "Roja", "18 velocidades.");
 
-        Post post1 = new Post(1, LocalDate.now(),  1, 15.5, pr1);
-        Post post2 = new Post(2, LocalDate.now(),  2, 15999.99, pr2);
+        Post post1 = new Post(1, LocalDate.now(), 1, 15.5, pr1);
+        Post post2 = new Post(2, LocalDate.now(), 2, 15999.99, pr2);
 
         User u3 = new User(3, "LaOfertaPerfecta");
         User u4 = new User(4, "MotociclosSA");
