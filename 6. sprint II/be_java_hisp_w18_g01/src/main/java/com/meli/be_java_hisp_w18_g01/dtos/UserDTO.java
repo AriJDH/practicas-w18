@@ -2,6 +2,7 @@ package com.meli.be_java_hisp_w18_g01.dtos;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.Min;
