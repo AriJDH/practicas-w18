@@ -131,7 +131,43 @@ public class AppServiceTest {
 
     @Test
     @DisplayName("T0002")
-    void shouldDisplayAmountOfFollowerASellerHaveTest(){
+    void shouldUnfollowASellerTest(){
+        // Arrange
+        loadUsers();
+        int userId = getUser(1).getUserId();
+        int userIdToUnfollow = getUser(2).getUserId();
+        int followedExpectedSize = getUser(userId).getFollowed().size() -1;
+        System.out.println(followedExpectedSize);
+        int followersExpectedSize = getUser(userIdToUnfollow).getFollowers().size() -1;
+        System.out.println(followersExpectedSize);
+        // Mock
+        when(userRepository.getUser(userId)).thenReturn(getUser(userId));
+        when(userRepository.getUser(userIdToUnfollow)).thenReturn(getUser(userIdToUnfollow));
+        // Act
+        service.unfollowUser(userId, userIdToUnfollow);
+
+        int followedActualSize = getUser(userId).getFollowed().size();
+        int followersActualsize = getUser(userIdToUnfollow).getFollowers().size();
+
+        // Assert
+        assertAll( () -> assertEquals(followedExpectedSize, followedActualSize),
+                   () -> assertEquals(followersExpectedSize, followersActualsize)
+        );
+    }
+
+    @Test
+    @DisplayName("T0002 user to unfollow does not exist")
+    void shouldNotUnfollowANullSellerTest(){
+        //Arrange
+        loadUsers();
+        int userId = 1;
+        int userIdToUnfollow = 4;
+
+        //Mock
+        when(userRepository.getUser(userId)).thenReturn(getUser(userId));
+
+        //Act & Assert
+        assertThrows(UserGenericException.class, () -> service.unfollowUser(userId, userIdToUnfollow));
     }
 
     @Test

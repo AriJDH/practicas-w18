@@ -84,6 +84,7 @@ public class UserGenerator {
     private static Map<Integer, User> users = new HashMap<Integer, User>();
     public static void loadUsers(){
 
+        // crear usuarios
         User user1 = new User();
         user1.setUserId(1);
         user1.setUserName("usuario1");
@@ -100,6 +101,7 @@ public class UserGenerator {
         user4.setUserId(4);
         user4.setUserName("usuario4");
 
+        // crear a quien sigue el usuerio 1 y por quien es seguido a la vez
         Map<Integer, User> followedUsuer1 = new HashMap<Integer, User>();
         followedUsuer1.put(user2.getUserId(), user2);
         followedUsuer1.put(user3.getUserId(), user3);
@@ -108,7 +110,9 @@ public class UserGenerator {
 
         Map<Integer, User> followedUsuer2 = new HashMap<Integer, User>();
         followedUsuer2.put(user3.getUserId(), user3);
+        followedUsuer2.put(user1.getUserId(), user1);
         user2.setFollowed(followedUsuer2);
+        user2.setFollowers(followedUsuer2);
 
         Map<Integer, User> followedUsuer3 = new HashMap<Integer, User>();
         followedUsuer3.put(user2.getUserId(), user2);

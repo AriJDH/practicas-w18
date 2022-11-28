@@ -161,11 +161,14 @@ public class AppService implements IAppService {
 
     @Override
     public void unfollowUser(int userId, int userIdToUnfollow) {
+
         if (userRepository.getUser(userId) == null) {
             throw new UserGenericException("El usuario con el id: " + userId + " no fue encontrado!");
         }
-        if (userRepository.getUser(userId).getFollowed().containsKey(userIdToUnfollow)) {
-            userRepository.getUser(userId).getFollowed().remove(userIdToUnfollow);
+        if (userRepository.getUser(userId).getFollowed().containsKey(userIdToUnfollow)
+             && userRepository.getUser(userIdToUnfollow).getFollowers().containsKey(userId)) {
+            userRepository.getUser(userId).getFollowed().remove(userIdToUnfollow); //los que yo sigo
+            userRepository.getUser(userIdToUnfollow).getFollowers().remove(userId);
         } else
             throw new UserGenericException("El usuario con el id: " + userId + " no sigue al usuario " + userIdToUnfollow);
     }
