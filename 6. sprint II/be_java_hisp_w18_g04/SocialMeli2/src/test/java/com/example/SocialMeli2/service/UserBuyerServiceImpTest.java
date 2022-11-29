@@ -259,4 +259,73 @@ void orderFollowedOrderDesc(){
         assertTrue(postDtoResList.equals(followedByDateDTORes.getPosts()));
 
     }
+
+    @Test
+    @DisplayName("T-0004. US-0008. Verify the correct ascendent sortering by 'name_asc' in followed")
+    void ascendentSortFollowedTestOk(){
+        //Arange
+        String order = "name_asc";
+        Integer buyerUserId=1;
+
+        List<UserSeller> followed =new ArrayList<>();
+        UserSeller userSeller1=new UserSeller(); userSeller1.setUser_id(4); userSeller1.setUser_name("Oliver");
+        UserSeller userSeller2=new UserSeller(); userSeller2.setUser_id(2); userSeller2.setUser_name("Ethan");
+        UserSeller userSeller3=new UserSeller(); userSeller3.setUser_id(3); userSeller3.setUser_name("Kyle");
+        followed.add(userSeller1);
+        followed.add(userSeller2);
+        followed.add(userSeller3);
+
+        UserBuyer userBuyer=new UserBuyer();
+        userBuyer.setUser_id(1);
+        userBuyer.setUser_name("Josep");
+        userBuyer.setFollowed(followed);
+
+        List<UserDTORes> expected =new ArrayList<>();
+        expected.add(new UserDTORes(2,"Ethan"));
+        expected.add(new UserDTORes(3,"Kyle"));
+        expected.add(new UserDTORes(4,"Oliver"));
+
+        //Act
+        when(userBuyerRepository.findById(buyerUserId)).thenReturn(Optional.of(userBuyer));
+        FollowedListDTORes followedListDTORes= userBuyerServiceImp.getFollowed(buyerUserId,order);
+        List<UserDTORes> result= followedListDTORes.getFollowed();
+
+        //Assert
+        assertEquals(expected,result);
+    }
+
+    @Test
+    @DisplayName("T-0004. US-0008. Verify the correct descendent sortering by 'name_desc' in followed")
+    void descendentSortFollowedTestOk(){
+        //Arange
+        String order = "name_desc";
+        Integer buyerUserId=1;
+
+        List<UserSeller> followed =new ArrayList<>();
+        UserSeller userSeller1=new UserSeller(); userSeller1.setUser_id(4); userSeller1.setUser_name("Oliver");
+        UserSeller userSeller2=new UserSeller(); userSeller2.setUser_id(2); userSeller2.setUser_name("Ethan");
+        UserSeller userSeller3=new UserSeller(); userSeller3.setUser_id(3); userSeller3.setUser_name("Kyle");
+        followed.add(userSeller1);
+        followed.add(userSeller2);
+        followed.add(userSeller3);
+
+        UserBuyer userBuyer=new UserBuyer();
+        userBuyer.setUser_id(1);
+        userBuyer.setUser_name("Josep");
+        userBuyer.setFollowed(followed);
+
+        List<UserDTORes> expected =new ArrayList<>();
+        expected.add(new UserDTORes(4,"Oliver"));
+        expected.add(new UserDTORes(3,"Kyle"));
+        expected.add(new UserDTORes(2,"Ethan"));
+
+        //Act
+        when(userBuyerRepository.findById(buyerUserId)).thenReturn(Optional.of(userBuyer));
+        FollowedListDTORes followedListDTORes= userBuyerServiceImp.getFollowed(buyerUserId,order);
+        List<UserDTORes> result= followedListDTORes.getFollowed();
+
+        //Assert
+        assertEquals(expected,result);
+    }
+
 }
