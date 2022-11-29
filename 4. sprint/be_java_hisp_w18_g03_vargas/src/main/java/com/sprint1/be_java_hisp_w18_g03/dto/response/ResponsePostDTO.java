@@ -20,4 +20,6 @@ public class ResponsePostDTO {
     private Double price;
     @JsonProperty("post_id")
     private Integer postId;
+    private Boolean has_promo;
+    private Double discount;
 }

@@ -8,6 +8,5 @@ public interface IPostRepository {
     Post findByIdPost(Integer postId);
     List<Post> findByUser(Integer userId);
     boolean addPost(Post post);
-
     Integer getPostsSizeList();
 }
