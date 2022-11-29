@@ -80,52 +80,65 @@ public class UserServiceTest {
 
     //T-0001
     @Test
-    @DisplayName("T0001 - Usuario a seguir que existe")
+    @DisplayName("T0001 - Verifica que el usuario a dejar de seguir  existe")
     public void checkUserToFollowExists(){
+        //Arrange
         user2.addPost(post);
 
+        //Mock
         when(userRepository.findById(1L)).thenReturn(Optional.of(user1));
         when(userRepository.findById(2L)).thenReturn(Optional.of(user2));
 
+        //Act
         userService.handleFollow(1L,2L);
 
+        //Assert
         assertTrue(user1.getFollowed().contains(user2));
     }
     @Test
     @DisplayName("T0002 - Usuario a seguir no existe y lanza excepción")
     public void checkUserToFollowDoesNotExist(){
+        //Mock
         when(userRepository.findById(1L)).thenReturn(Optional.of(user1));
         when(userRepository.findById(2L)).thenReturn(Optional.empty());
 
+        //Act-Assert
         assertThrows(UserNotFoundException.class, ()->userService.handleFollow(1L,2L));
     }
     //T-0002
     @Test
-    @DisplayName("T0002 - Usuario a dejar de seguir que existe")
+    @DisplayName("T0002 - Verifica que un usuario deja de seguir a otro usuario")
     public void checkUserToUnfollowExists(){
+        //Arrange
         user2.addPost(post);
 
+        //Mock
         when(userRepository.findById(1L)).thenReturn(Optional.of(user1));
         when(userRepository.findById(2L)).thenReturn(Optional.of(user2));
 
+        //Act
         user1.follow(user2);
         userService.handleUnfollow(1L, 2L);
 
+        //Assert
         assertFalse(user1.getFollowed().contains(user2));
     }
     @Test
-    @DisplayName("T0002 - Usuario a dejar de seguir no exite y lanza excepción")
+    @DisplayName("T0002 - Usuario a dejar de seguir no existe y lanza excepción")
     public void checkUserToUnfollowDoesNotExist(){
+        //Arrange
         user2.addPost(post);
 
+        //Mock
         when(userRepository.findById(1L)).thenReturn(Optional.of(user1));
         when(userRepository.findById(2L)).thenReturn(Optional.empty());
 
+        //Act-Assert
         assertThrows(UserNotFoundException.class, ()->userService.handleUnfollow(1L,2L));
     }
     //T-0003
     @Test
-    @DisplayName("T0003 - Verificación de tipo de orden por nombre ascendente")
+    @DisplayName("T0003 - Verificación de tipo de orden válido por nombre ascendente")
     public void verifyOderTypeAscExists(){
         //Arrange
         Long id = 1L;
@@ -140,7 +153,7 @@ public class UserServiceTest {
 
     }
     @Test
-    @DisplayName("T0003 - Verificación de tipo de orden por nombre descendentee")
+    @DisplayName("T0003 - Verificación de tipo de orden válido por nombre descendente")
     public void verifyOderTypeDescExists(){
         //Arrange
         Long id = 1L;

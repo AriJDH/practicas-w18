@@ -51,36 +51,49 @@ public class PostServiceTest {
 
     //T-0005
     @Test
-    @DisplayName("T0005 - Verificación de tipo de orden por fecha ascendente")
+    @DisplayName("T0005 - Verificación de tipo de orden válido por fecha ascendente")
     public void verifyOderTypeAscByDateExists(){
+        //Arrange
         user2.addPost(post1);
         user1.follow(user2);
+
+        //Mock
         when(userDbService.findById(1L)).thenReturn(user1);
 
+        //Act
         assertDoesNotThrow(()->postService.getRecentPostsFromFollowed(1L, "date_asc"));
     }
     @Test
-    @DisplayName("T0005 - Verificación de tipo de orden por fecha descendente")
+    @DisplayName("T0005 - Verificación de tipo de orden válido por fecha descendente")
     public void verifyOderTypeDescByDateExists(){
+        //Arrange
         user2.addPost(post1);
         user1.follow(user2);
+
+        //Mock
         when(userDbService.findById(1L)).thenReturn(user1);
 
+        //Act-Assert
         assertDoesNotThrow(()->postService.getRecentPostsFromFollowed(1L, "date_desc"));
     }
     @Test
     @DisplayName("T0005 - Verificación de tipo de orden por fecha no existente")
     public void verifyOderTypeXDoesNotExist(){
+        //Arrange
         user2.addPost(post1);
         user1.follow(user2);
+
+        //Mock
         when(userDbService.findById(1L)).thenReturn(user1);
 
+        //Act-Assert
         assertThrows(BadRequestException.class, ()->postService.getRecentPostsFromFollowed(1L, "un tipo nada que ver"));
     }
     //T-0006
     @Test
     @DisplayName("T0006 - Ordenamiento de posts por fecha ascendente")
     public void checkAscOrderingByDate(){
+        //Arrange
         user2.addPost(post1);
         user2.addPost(post2);
         user2.addPost(post3);
@@ -92,13 +105,17 @@ public class PostServiceTest {
         ascOrderedPosts.add(post2);
         ascOrderedPosts.add(post1);
         List<PostDTO> ascOrderedPostDTOs = ascOrderedPosts.stream().map(post->mapperPostToPostDTO.convertValue(post, PostDTO.class)).collect(Collectors.toList());
+
+        //Mock
         when(userDbService.findById(1L)).thenReturn(user1);
 
-        assertEquals(postService.getRecentPostsFromFollowed(1L, "date_asc").get(0).getPosts(),ascOrderedPostDTOs);
+        //Act-Assert
+        assertEquals(ascOrderedPostDTOs,postService.getRecentPostsFromFollowed(1L, "date_asc").get(0).getPosts());
     }
     @Test
     @DisplayName("T0006 - Ordenamiento de posts por fecha descendente")
     public void checkDescOrderingByDate(){
+        //Arrange
         user2.addPost(post1);
         user2.addPost(post2);
         user2.addPost(post3);
@@ -112,17 +129,21 @@ public class PostServiceTest {
         List<PostDTO> descOrderedPostDTOs = descOrderedPosts.stream()
                 .map(post->mapperPostToPostDTO.convertValue(post, PostDTO.class))
                 .collect(Collectors.toList());
+
+        //Mock
         when(userDbService.findById(1L)).thenReturn(user1);
 
-        assertEquals(postService.getRecentPostsFromFollowed(
-                1L,
-                "date_desc")
-                .get(0).getPosts(),descOrderedPostDTOs);
+        //Act-Assert
+        assertEquals(descOrderedPostDTOs,postService.getRecentPostsFromFollowed(
+                        1L,
+                        "date_desc")
+                .get(0).getPosts());
     }
     //T-0008
     @Test
-    @DisplayName("T0006 - Posts obtenidos son de las últimas dos semanas")
+    @DisplayName("T0008 - Posts obtenidos son de las últimas dos semanas")
     public void verifyPostsAreFromLast2Weeks(){
+        //Arrange
         Post post5 = new Post(4L, user2, LocalDate.now().minusMonths(2),new Product(),100, 20000);
         Post post6 = new Post(4L, user2, LocalDate.now().minusDays(15),new Product(),100, 20000);
 
@@ -136,12 +157,13 @@ public class PostServiceTest {
 
         descOrderedPostDTOs.add(mapperPostToPostDTO.convertValue(post1, PostDTO.class));
 
+        //Mock
         when(userDbService.findById(1L)).thenReturn(user1);
 
-        assertEquals(postService.getRecentPostsFromFollowed(
+        //Act-Assert
+        assertEquals(descOrderedPostDTOs,postService.getRecentPostsFromFollowed(
                         1L,
                         "date_desc")
-                .get(0).getPosts(),descOrderedPostDTOs);
+                .get(0).getPosts());
     }
-
 }

@@ -33,7 +33,7 @@ public class UserTest {
         seller.addFollower(user2);
         seller.addFollower(user3);
 
-        //Act
+        //Act-Assert
         Assertions.assertEquals(2,seller.getFollowersCount());
     }
 }
