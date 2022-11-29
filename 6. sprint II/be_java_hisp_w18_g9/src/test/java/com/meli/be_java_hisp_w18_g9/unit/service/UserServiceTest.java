@@ -66,9 +66,10 @@ class UserServiceTest {
         User userMock = UsersFactory.getUserById(1, "Messi", false);
         User userToFollowMock = UsersFactory.getUserById(2, "Cristiano", true);
         Mockito.when(userRepository.findById(userMock.getUserId())).thenReturn(Optional.of(userMock));
+        Mockito.when(userRepository.findById(userToFollowMock.getUserId())).thenReturn(Optional.empty());
 
         // act & assert
-        assertThrows(BadRequestException.class, () -> userService.follow(userMock.getUserId(),0));
+        assertThrows(BadRequestException.class, () -> userService.follow(userMock.getUserId(),userToFollowMock.getUserId()));
 
     }
 
