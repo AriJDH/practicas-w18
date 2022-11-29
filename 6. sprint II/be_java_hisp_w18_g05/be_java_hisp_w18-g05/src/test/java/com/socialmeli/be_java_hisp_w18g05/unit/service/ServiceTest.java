@@ -9,6 +9,7 @@ import com.socialmeli.be_java_hisp_w18g05.entity.Post;
 import com.socialmeli.be_java_hisp_w18g05.entity.Product;
 import com.socialmeli.be_java_hisp_w18g05.entity.Seller;
 import com.socialmeli.be_java_hisp_w18g05.exceptions.InvalidException;
+import com.socialmeli.be_java_hisp_w18g05.exceptions.InvalidParameterException;
 import com.socialmeli.be_java_hisp_w18g05.exceptions.NotFoundException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -441,6 +442,38 @@ public class ServiceTest {
         Assertions.assertThrows(InvalidException.class, () -> serviceImp.followedPostList(userId, order));
     }
 
+    @Test
+    @DisplayName("T-0003 - OK -Verificar que el tipo de ordenamiento alfabético exista (US-0008)")
+    void test0003Ok() {
+        //========= Arrange ==========
+        Integer userId = 1;
+        String order = "name_desc";
+        Buyer buyerMock = getBuyerWithListOrderDesc(userId); // utils static method
+        List<Seller> expected = buyerMock.getFolloweds();
+        //========= Mock =============
+        when(iRepository.getByIdBuyer(userId)).thenReturn(buyerMock);
+        //========= Act ==============
+        List<SellerDTOResponse> result = serviceImp.followedsFilter(userId, order).getFollowed();
+        //========= Asserts ==========
+        Assertions.assertAll(
+                () -> Assertions.assertEquals(result.get(0).getUser_id(), expected.get(0).getUser_id()),
+                () -> Assertions.assertEquals(result.get(1).getUser_id(), expected.get(1).getUser_id()),
+                () -> Assertions.assertEquals(result.get(2).getUser_id(), expected.get(2).getUser_id())
+        );
+    }
 
+    @Test
+    @DisplayName("T-0003 - NO OK - Verificar que el tipo de ordenamiento alfabético exista (US-0008)")
+    void test0003NotOk() {
+        //========= Arrange ==========
+        Integer userId = 1;
+        String order = "not_valid";
+        Buyer buyerMock = getBuyerWithListOrderDesc(userId); // utils static method
+        List<Seller> expected = buyerMock.getFolloweds();
+        //========= Mock =============
+        lenient().when(iRepository.getByIdBuyer(userId)).thenReturn(buyerMock);
+        //========= Act Asserts ==============
+        Assertions.assertThrows(InvalidParameterException.class, () -> serviceImp.followedsFilter(userId, order));
+    }
 }
 
