@@ -56,4 +56,8 @@ public class PostFactory {
         return postList;
 
     }
+
+    public static PostDTO getPostDto(Integer userId){
+        return mapper.convertValue(getPost(userId),PostDTO.class);
+    }
 }
