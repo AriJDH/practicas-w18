@@ -8,6 +8,7 @@ import com.socialmedia2.be_java_hisp_w18_g08.dto.response.FollowedDto;
 import com.socialmedia2.be_java_hisp_w18_g08.dto.response.SellerFollowersCountDto;
 import com.socialmedia2.be_java_hisp_w18_g08.entity.Seller;
 import com.socialmedia2.be_java_hisp_w18_g08.entity.User;
+import com.socialmedia2.be_java_hisp_w18_g08.exception.BadRequestException;
 import com.socialmedia2.be_java_hisp_w18_g08.exception.NotFoundUserException;
 import com.socialmedia2.be_java_hisp_w18_g08.repository.IUserRepository;
 import com.socialmedia2.be_java_hisp_w18_g08.repository.UserRepositoryImp;
@@ -71,7 +72,8 @@ public class UserServiceImp implements IUserService {
         return sellers;
     }
 
-    private void changeOrder(List<UserDto> list, String order) {
+    @Override
+    public void changeOrder(List<UserDto> list, String order) {
         Comparator<UserDto> compareByName =
                 Comparator.comparing(UserDto::getUser_name);
         switch (order){
@@ -81,6 +83,9 @@ public class UserServiceImp implements IUserService {
             case "name_desc":
                 Collections.sort(list, compareByName.reversed());
                 break;
+            default:
+                throw new BadRequestException("Invalid parameter error");
+
         }
     }
 
