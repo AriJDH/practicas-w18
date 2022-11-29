@@ -156,4 +156,75 @@ class PostServiceTest {
             assertNotNull(postLists);
         });
     }
+
+    @Test
+    @DisplayName("[T008] Verify that the consultation of publications made in the last two weeks of a certain seller")
+    void findPostsByUserIdOrderByDateDesc() {
+        //Arrange
+        Integer userId = 1;
+
+        //Mock
+        User userMock = new User(1, "User 1", new ArrayList<>(), List.of(
+                new User(2, "User 2", new ArrayList<>(), new ArrayList<>(), new ArrayList<>())
+        ), new ArrayList<>());
+
+        when(userRepository.findById(userId)).thenReturn(Optional.of(userMock));
+
+        List<Post> posts = List.of(
+                new Post(1, 2, LocalDate.now(), new Product(1, "Product 1", "Type 1", "Brand 1", "Color 1", "Note 1"), 1, 10.0, true, 1.0),
+                new Post(2, 2, LocalDate.now().minusDays(5), new Product(2, "Product 2", "Type 2", "Brand 2", "Color 1", "Note 2"), 1, 10.0, true, 1.0),
+                new Post(3, 2, LocalDate.now().minusDays(30), new Product(3, "Product 3", "Type 3", "Brand 3", "Color 1", "Note 3"), 1, 10.0, true, 1.0)
+        );
+
+        when(postRepository.findAllById(anyInt())).thenReturn(posts);
+
+        when(mapper.convertValue(any(Post.class), eq(PostDtoRequest.class))).then(invocation -> {
+            Post post = invocation.getArgument(0);
+            return new PostDtoRequest(post.getPostId(), post.getUserId(), post.getDate(), post.getProduct(), post.getCategory(), post.getPrice());
+        });
+
+        //Action
+        PostListByFollowedResponse postLists = postService.findPostsByFollowedAndUserIdOrderByDateDesc(userId);
+
+        //Assert
+        assertEquals(2, postLists.getPosts().size());
+        assertEquals(LocalDate.now(), postLists.getPosts().get(0).getDate());
+
+    }
+
+    // * ============= *
+
+    @Test
+    @DisplayName("[T008] Verify that the consultation of publications made in the last two weeks of a certain seller")
+    void findPostsByUserIdOrderByDateAsc() {
+        //Arrange
+        Integer userId = 1;
+
+        //Mock
+        User userMock = new User(1, "User 1", new ArrayList<>(), List.of(
+                new User(2, "User 2", new ArrayList<>(), new ArrayList<>(), new ArrayList<>())
+        ), new ArrayList<>());
+
+        when(userRepository.findById(userId)).thenReturn(Optional.of(userMock));
+
+        List<Post> posts = List.of(
+                new Post(1, 2, LocalDate.now(), new Product(1, "Product 1", "Type 1", "Brand 1", "Color 1", "Note 1"), 1, 10.0, true, 1.0),
+                new Post(2, 2, LocalDate.now().minusDays(5), new Product(2, "Product 2", "Type 2", "Brand 2", "Color 1", "Note 2"), 1, 10.0, true, 1.0),
+                new Post( 3, 2, LocalDate.now().minusDays(16), new Product(3, "Product 3", "Type 3", "Brand 3", "Color 1", "Note 3"), 1, 10.0, true, 1.0));
+        when(postRepository.findAllById(anyInt())).thenReturn(posts);
+
+        when(mapper.convertValue(any(Post.class), eq(PostDtoRequest.class))).then(invocation -> {
+            Post post = invocation.getArgument(0);
+            return new PostDtoRequest(post.getPostId(), post.getUserId(), post.getDate(), post.getProduct(), post.getCategory(), post.getPrice());
+        });
+
+        //Action
+        PostListByFollowedResponse postLists = postService.findPostsByFollowedAndUserIdOrderByDateAsc(userId);
+
+        //Assert
+        assertEquals(2, postLists.getPosts().size());
+        assertEquals(LocalDate.now().minusDays(5), postLists.getPosts().get(0).getDate());
+
+
+    }
 }
