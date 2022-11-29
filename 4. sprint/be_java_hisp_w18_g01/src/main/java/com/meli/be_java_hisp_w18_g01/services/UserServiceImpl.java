@@ -55,7 +55,7 @@ public class UserServiceImpl implements UserService {
         return new UserFollowedInfoDTO(user.getUser_id(), user.getUser_name(), this.sortUsers(followed, order));
     }
 
-    public List<UserDTO> sortUsers(List<UserDTO> users, String order){
+    private List<UserDTO> sortUsers(List<UserDTO> users, String order){
         Comparator comp;
         if(order==null)
             return users;
