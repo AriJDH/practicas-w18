@@ -75,8 +75,8 @@ public class PostServiceTest {
         //Arrange
         User user = UserFactory.getUserPostSeller();
         //Mock
-        when(userRepository.findById(any())).thenReturn(user);
-        when(postRepository.findByUser(any())).thenReturn(PostFactory.getPostSellers());
+        when(userRepository.findById(anyInt())).thenReturn(user);
+        when(postRepository.findByUser(anyInt())).thenReturn(PostFactory.getPostSellers());
         //Act
         SellersPostDTO sellersPostDTO = postServiceImp.getPostSellers(1, "date_asc");
         //Assert

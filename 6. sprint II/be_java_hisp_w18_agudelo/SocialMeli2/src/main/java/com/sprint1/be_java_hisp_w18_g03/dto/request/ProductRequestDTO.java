@@ -2,6 +2,7 @@ package com.sprint1.be_java_hisp_w18_g03.dto.request;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -9,7 +10,7 @@ import javax.validation.constraints.*;
 
 @AllArgsConstructor
 @NoArgsConstructor
-@Getter
+@Data
 public class ProductRequestDTO {
     @JsonProperty("product_id")
     @NotNull(message = "El id no puede estar vacio")

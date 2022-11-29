@@ -23,6 +23,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import static org.mockito.ArgumentMatchers.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 import static org.mockito.Mockito.*;
 
@@ -32,41 +33,36 @@ class UserControllerIntegrationTest {
 
     @Autowired
     private MockMvc mockMvc;
-    @MockBean
-    UserServiceImp userServiceImp;
 
     @Test
     void followerCountNoOk() throws Exception {
         //ACT & ASSERT
-        mockMvc.perform(get("/users/{userId}/followers/count",-1))
+        this.mockMvc.perform(get("/users/{userId}/followers/count",-1))
+                .andDo(print())
                 .andExpect(status().isBadRequest());
     }
 
     @Test
-    void follow() throws Exception {
-        //ACT & ASSERT
-        mockMvc.perform(post("/users/{userId}/follow/{userIdToFollow}",anyInt(),anyInt()))
-                .andExpect(status().isOk());
+    void userFollowHimself() throws Exception {
+        this.mockMvc.perform(post("/users/{userId}/follow/{userIdToFollow}",0,0))
+                .andDo(print())
+                .andExpect(status().isBadRequest())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON));
     }
 
     @Test
-    void getFollowedList() throws Exception {
-        //ACT & ASSERT
-         mockMvc.perform(get("/users/{userId}/followed/list",1,null))
-                .andExpect(status().isOk());
+    void getFollowersListNoOk() throws Exception {
+        this.mockMvc.perform(get("/users/{userId}/followers/list",-1))
+                .andDo(print())
+                .andExpect(status().isBadRequest())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON));
     }
 
     @Test
-    void unfollow() throws Exception {
-        //ACT & ASSERT
-        mockMvc.perform(post("/users/{userId}/unfollow/{userIdToUnfollow}",anyInt(),anyInt()))
-                .andExpect(status().isOk());
-    }
-
-    @Test
-    void getListFollowers() throws Exception {
-        //ACT & ASSERT
-        mockMvc.perform(get("/users/{userId}/followers/list",1,null))
-                .andExpect(status().isOk());
+    void getFollowedListNoOk() throws Exception {
+        this.mockMvc.perform(get("/users/{userId}/followed/list",-1))
+                .andDo(print())
+                .andExpect(status().isBadRequest())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON));
     }
 }
