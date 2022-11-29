@@ -157,40 +157,7 @@ class UserServiceTest {
     // * ============= *
 
     @Test
-    void findAllFollowerOrderAsc() {
-
-        //--------------------- Arrange ------------------------------------------------------
-
-        //Create user for test
-        User userTest1 =
-                new User(1, "Ariel", new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
-        User userTest2 =
-                new User(2, "Martin", new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
-        User userTest3 =
-                new User(3, "User 3", new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
-        User userTest4 =
-                new User(4, "Charly", new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
-
-        //Create
-        List<User> listUsersFollower = new ArrayList<>();
-
-        listUsersFollower.add(userTest1);
-        listUsersFollower.add(userTest2);
-        listUsersFollower.add(userTest3);
-        listUsersFollower.add(userTest4);
-        Product product = new Product(1, "Notebook Mac", "Notebook", "Apple", "Gray", "Excelent!");
-        Product product1 = new Product(2, "Notebook Mac", "Notebook", "Apple", "Gray", "Excelent!");
-        List<Product> listProducts = new ArrayList<>();
-        listProducts.add(product);
-        listProducts.add(product1);
-
-        User userFollowed =
-                new User(5, "Aurora", listUsersFollower, new ArrayList<>(), listProducts);
-        when(userRepository.findById(userFollowed.getUserId())).thenReturn(
-                Optional.of(userFollowed));
-
-        UserFollowerListResponse resultUserFollowedLisTest =
-                userService.findAllFollowerOrderAsc(userFollowed.getUserId());
+    void findAllFollowerOrderAsc(){
 
     }
 
