@@ -7,6 +7,7 @@ import com.meli.be_java_hisp_w18_g01.entities.User;
 import com.meli.be_java_hisp_w18_g01.exceptions.BadRequestException;
 import com.meli.be_java_hisp_w18_g01.mappers.MapperPostToPostDTO;
 import com.meli.be_java_hisp_w18_g01.services.database.UserDbService;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -110,7 +111,7 @@ public class PostServiceTest {
         when(userDbService.findById(1L)).thenReturn(user1);
 
         //Act-Assert
-        assertEquals(ascOrderedPostDTOs,postService.getRecentPostsFromFollowed(1L, "date_asc").get(0).getPosts());
+        Assertions.assertArrayEquals(ascOrderedPostDTOs.toArray(),postService.getRecentPostsFromFollowed(1L, "date_asc").get(0).getPosts().toArray());
     }
     @Test
     @DisplayName("T0006 - Ordenamiento de posts por fecha descendente")
@@ -134,10 +135,10 @@ public class PostServiceTest {
         when(userDbService.findById(1L)).thenReturn(user1);
 
         //Act-Assert
-        assertEquals(descOrderedPostDTOs,postService.getRecentPostsFromFollowed(
+        Assertions.assertArrayEquals(descOrderedPostDTOs.toArray(),postService.getRecentPostsFromFollowed(
                         1L,
                         "date_desc")
-                .get(0).getPosts());
+                .get(0).getPosts().toArray());
     }
     //T-0008
     @Test
@@ -161,9 +162,9 @@ public class PostServiceTest {
         when(userDbService.findById(1L)).thenReturn(user1);
 
         //Act-Assert
-        assertEquals(descOrderedPostDTOs,postService.getRecentPostsFromFollowed(
+        Assertions.assertArrayEquals(descOrderedPostDTOs.toArray(),postService.getRecentPostsFromFollowed(
                         1L,
                         "date_desc")
-                .get(0).getPosts());
+                .get(0).getPosts().toArray());
     }
 }

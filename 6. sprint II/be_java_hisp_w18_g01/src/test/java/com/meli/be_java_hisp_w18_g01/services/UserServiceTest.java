@@ -203,8 +203,7 @@ public class UserServiceTest {
         UserFollowersInfoDTO result = userService.handleGetFollowersInfo(id, order);
 
         //Assert
-        Assertions.assertEquals(userFollowersInfoDTOExpected.getFollowers(),result.getFollowers());
-
+        Assertions.assertArrayEquals(userFollowersInfoDTOExpected.getFollowers().toArray(),result.getFollowers().toArray());
     }
     @Test
     @DisplayName("T0004 - Ordenamiento de usuarios por nombre descendente")
@@ -229,6 +228,6 @@ public class UserServiceTest {
         UserFollowersInfoDTO result = userService.handleGetFollowersInfo(id, order);
 
         //Assert
-        Assertions.assertEquals(userFollowersInfoDTOExpected.getFollowers(),result.getFollowers());
+        Assertions.assertArrayEquals(userFollowersInfoDTOExpected.getFollowers().toArray(),result.getFollowers().toArray());
     }
 }
