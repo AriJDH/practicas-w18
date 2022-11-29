@@ -66,7 +66,7 @@ public class ServiceTest {
     }
 
     @Test
-    @DisplayName("T-0001 // Add follow, buyer doesn't exist")
+    @DisplayName("T-0001 // OK - Verificar que el usuario a seguir exista")
     public void addFollowBuyerDoesntExist(){
         lenient().when(iRepository.getByIdBuyer(10)).thenReturn(null); // averiguar que es lenient
 
@@ -74,7 +74,7 @@ public class ServiceTest {
     }
 
     @Test
-    @DisplayName("T-0001 // Add follow, buyer and seller don't exist")
+    @DisplayName("T-0001 // NO OK - Verificar que el usuario a seguir exista")
     public void addFollowBuyerAndSellerDontExist(){
         lenient().when(iRepository.getByIdSeller(1)).thenReturn(null);
         lenient().when(iRepository.getByIdBuyer(10)).thenReturn(null);
@@ -86,7 +86,7 @@ public class ServiceTest {
     }
 
     @Test
-    @DisplayName("T-0002 // Unfollow, OK")
+    @DisplayName("T-0002 // OK - Verificar que el usuario a dejar de seguir exista. (US-0007)")
     public void unFollowOk(){
         Seller seller = new Seller(10,"Seller10");
         Buyer buyer = new Buyer(1,"Buyer1");
@@ -96,7 +96,7 @@ public class ServiceTest {
         verify(iRepository,times(1)).unfollow(buyer,seller);
     }
     @Test
-    @DisplayName("T-0002 // Unfollow, not found")
+    @DisplayName("T-0002 // NO OK - Verificar que el usuario a dejar de seguir exista. (US-0007) ")
     public void unFollowDontExist() {
         lenient().when(iRepository.getByIdSeller(1)).thenReturn(null);
         lenient().when(iRepository.getByIdBuyer(10)).thenReturn(null);
@@ -106,7 +106,7 @@ public class ServiceTest {
     }
 
     @Test
-    @DisplayName("T-0004 - Verificar el correcto ordenamiento ascendente por nombre. (US-0008 - US-0003)")
+    @DisplayName("T-0004 // Verificar el correcto ordenamiento ascendente por nombre. (US-0008 - US-0003)")
     void test0004Asc0803() {
         //========= Arrange ==========
         Integer userId = 1;
@@ -126,7 +126,7 @@ public class ServiceTest {
     }
 
     @Test
-    @DisplayName("T-0004 - Verificar el correcto ordenamiento descendente por nombre. (US-0008 - US-0003)")
+    @DisplayName("T-0004 // Verificar el correcto ordenamiento descendente por nombre. (US-0008 - US-0003)")
     void test0004Desc0803() {
         //========= Arrange ==========
         Integer userId = 1;
@@ -146,7 +146,7 @@ public class ServiceTest {
     }
 
     @Test
-    @DisplayName("T-0004 - Verificar el correcto ordenamiento ascendente por nombre. (US-0008 - US-0004)")
+    @DisplayName("T-0004 // Verificar el correcto ordenamiento ascendente por nombre. (US-0008 - US-0004)")
     void test0004Asc0804() {
         //========= Arrange ==========
         Integer userId = 1;
@@ -166,7 +166,7 @@ public class ServiceTest {
     }
 
     @Test
-    @DisplayName("T-0004 - Verificar el correcto ordenamiento descendente por nombre. (US-0008 - US-0004)")
+    @DisplayName("T-0004 // Verificar el correcto ordenamiento descendente por nombre. (US-0008 - US-0004)")
     void test0004Desc0804() {
         //========= Arrange ==========
         Integer userId = 1;
@@ -186,7 +186,7 @@ public class ServiceTest {
     }
 
     @Test
-    @DisplayName("T-0006 - Verificar el correcto ordenamiento por fecha ascendente. (US-0009)")
+    @DisplayName("T-0006 // Verificar el correcto ordenamiento por fecha ascendente. (US-0009)")
     void test0006Asc(){
         //========= Arrange =============
         Integer userId = 1;
@@ -241,7 +241,7 @@ public class ServiceTest {
     }
 
     @Test
-    @DisplayName("T-0006 - Verificar el correcto ordenamiento por fecha descendente. (US-0009)")
+    @DisplayName("T-0006 // Verificar el correcto ordenamiento por fecha descendente. (US-0009)")
     void test0006Desc(){
         //========= Arrange ==========
         Integer userId = 1;
@@ -294,7 +294,7 @@ public class ServiceTest {
                 () -> Assertions.assertEquals(result.getPosts().get(4).getPost_id(), expected.getPosts().get(4).getPost_id())
         );
     }
-    @DisplayName("T-0007 // Followers count is correct, user id exists")
+    @DisplayName("T-0007 // OK - Verificar que la cantidad de seguidores de un determinado usuario sea correcta. (US-0002)")
     public void followersCountTest(){
         //Arrange
         Seller seller = new Seller(10,"Seller10");
@@ -320,7 +320,7 @@ public class ServiceTest {
     }
 
     @Test
-    @DisplayName("T-0007 // Followers count is correct, user id not exists")
+    @DisplayName("T-0007 // NO OK - Verificar que la cantidad de seguidores de un determinado usuario sea correcta. (US-0002)")
     public void followersCountTestNotExist(){
         //Arrange
         when(iRepository.getByIdSeller(1)).thenReturn(null);
@@ -332,7 +332,7 @@ public class ServiceTest {
     }
 
     @Test
-    @DisplayName("T-0008 // Verify post since 2 weeks ago")
+    @DisplayName("T-0008 // Verificar que la consulta de publicaciones sea correcta  (US-0006)")
     public void postTwoWeeks(){
         //Arrange
 
@@ -386,7 +386,7 @@ public class ServiceTest {
 
 
     @Test
-    @DisplayName("T-0005 - OK -Verificar que el tipo de ordenamiento por fecha exista (US-0009)")
+    @DisplayName("T-0005 // OK -Verificar que el tipo de ordenamiento por fecha exista (US-0009)")
     void test0005Ok(){
         //========= Arrange ==========
         Integer userId = 1;
@@ -441,7 +441,7 @@ public class ServiceTest {
     }
 
     @Test
-    @DisplayName("T-0005 - NO OK - Verificar que el tipo de ordenamiento por fecha exista (US-0009)")
+    @DisplayName("T-0005 // NO OK - Verificar que el tipo de ordenamiento por fecha exista (US-0009)")
     void test0005NotOk(){
         //========= Arrange ==========
         String order = "not_valid";
@@ -457,7 +457,7 @@ public class ServiceTest {
     }
 
     @Test
-    @DisplayName("T-0003 - OK -Verificar que el tipo de ordenamiento alfabético exista (US-0008)")
+    @DisplayName("T-0003 // OK -Verificar que el tipo de ordenamiento alfabético exista (US-0008)")
     void test0003Ok() {
         //========= Arrange ==========
         Integer userId = 1;
@@ -477,7 +477,7 @@ public class ServiceTest {
     }
 
     @Test
-    @DisplayName("T-0003 - NO OK - Verificar que el tipo de ordenamiento alfabético exista (US-0008)")
+    @DisplayName("T-0003 // NO OK - Verificar que el tipo de ordenamiento alfabético exista (US-0008)")
     void test0003NotOk() {
         //========= Arrange ==========
         Integer userId = 1;
