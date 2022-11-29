@@ -110,6 +110,7 @@ class UserBuyerServiceImpTest {
         when(userBuyerRepository.findById(id)).thenReturn(Optional.empty());
 
         assertThrows(UserNotFoundException.class, () -> userBuyerServiceImp.unfollow(id, 1));
+
     }
 
     @Test
