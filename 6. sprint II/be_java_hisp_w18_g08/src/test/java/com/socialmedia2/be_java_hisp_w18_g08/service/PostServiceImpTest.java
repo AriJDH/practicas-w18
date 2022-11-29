@@ -90,7 +90,7 @@ class PostServiceImpTest {
     }
 
     @Test
-    @DisplayName("T-0005-OK")
+    @DisplayName("T-0005-OK-Verificar el correcto ordenamiento ascendente y descendente por fecha. (US-0009)")
     void getPostSellerListByUserIdOKTest() {
         //Arrange
         Integer id = 4;
@@ -107,7 +107,7 @@ class PostServiceImpTest {
     }
 
     @Test
-    @DisplayName("T-0005-NoOK")
+    @DisplayName("T-0005-NoOK-Verificar el correcto ordenamiento ascendente y descendente por fecha. (US-0009)")
     void getPostSellerListByUserIdNoOKTest() {
         //Arrange
         Integer id = 4;
