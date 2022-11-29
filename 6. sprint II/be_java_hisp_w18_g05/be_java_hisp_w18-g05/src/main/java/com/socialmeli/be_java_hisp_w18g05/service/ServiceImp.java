@@ -60,7 +60,7 @@ public class ServiceImp implements IService {
                 throw new InvalidParameterException("The parameter " + order + " isn't valid"); // Exception if order isn't valid
             }
         }else {
-            response = getFollowers(seller_id); // Call the default method
+            throw new InvalidParameterException("You need to specify asc or desc order"); // Throw Exception if order isn't valid
         }
 
         return response;
@@ -236,7 +236,7 @@ public class ServiceImp implements IService {
                 throw new InvalidParameterException("The parameter " + order + " isn't valid"); // Throw Exception if order isn't valid
             }
         }else {
-            response = getFolloweds(seller_id); // Call the default method
+            throw new InvalidParameterException("You need to specify asc or desc order"); // Throw Exception if order isn't valid
         }
 
         return response;
