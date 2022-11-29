@@ -5,7 +5,11 @@ import com.bootcamp.be_java_hisp_w18_g06.entity.Product;
 import com.bootcamp.be_java_hisp_w18_g06.entity.User;
 import com.bootcamp.be_java_hisp_w18_g06.repository.IUserRepository;
 import com.bootcamp.be_java_hisp_w18_g06.service.imp.PostService;
+import com.bootcamp.be_java_hisp_w18_g06.utils.PostFactory;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.ObjectWriter;
+import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -14,6 +18,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.MediaType;
+import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 
@@ -23,8 +29,10 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -32,6 +40,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest
 @AutoConfigureMockMvc
 @ExtendWith(MockitoExtension.class)
+@DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 public class ProductIntegrationTest {
 	
 	@Autowired
@@ -106,10 +115,28 @@ public class ProductIntegrationTest {
 	
 	@Test
 	@DisplayName("T0010 - Post save post happy path =^.^=")
-	void savePostOkTest() {
-	
-	
-	
+	void savePostOkTest() throws Exception {
+		
+		Post post = PostFactory.getPost(1);
+		
+		
+		ObjectWriter writer = new ObjectMapper()
+						.configure(SerializationFeature.WRAP_ROOT_VALUE, false)
+						.writer();
+		
+		String payload = new ObjectMapper()
+						.registerModule(new JavaTimeModule())
+						.writeValueAsString(post);
+		
+		MvcResult mvcResult = mockMvc.perform(
+										post("/products/post")
+														.contentType(MediaType.APPLICATION_JSON)
+														.content(payload))
+						.andDo(print())
+						.andReturn();
+		
+		assertEquals("OK", mvcResult.getResponse().getContentAsString());
+		
 	}
 	
 }
