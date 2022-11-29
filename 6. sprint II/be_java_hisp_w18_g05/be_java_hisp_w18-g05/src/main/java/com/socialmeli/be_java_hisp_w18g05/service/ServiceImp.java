@@ -23,10 +23,9 @@ import com.socialmeli.be_java_hisp_w18g05.exceptions.InvalidException;
 import com.socialmeli.be_java_hisp_w18g05.exceptions.InvalidParameterException;
 import com.socialmeli.be_java_hisp_w18g05.exceptions.NotFoundException;
 import com.socialmeli.be_java_hisp_w18g05.repository.IRepository;
-import lombok.Data;
-import org.springframework.cglib.core.Local;
 import org.springframework.stereotype.Service;
 
+import javax.validation.Valid;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -144,8 +143,7 @@ public class ServiceImp implements IService {
         return orderByDate(user_id, order);
     }
 
-
-    private SellerPostListDTOResponse orderByDate(Integer userId, String order){
+    public SellerPostListDTOResponse orderByDate(Integer userId, String order){
         Buyer b = repository.getByIdBuyer(userId);
         if (b == null) {
             throw new NotFoundException("Buyer id " + userId + " not found");
@@ -166,8 +164,6 @@ public class ServiceImp implements IService {
             }
         }
         // Order by date, depending on the order parameter
-
-
 
         if(order.equals("date_asc")){
             listPostDTO.sort(Comparator.comparing(PostDTOResponse::getDate)); // ordenamiento descenciente por fechas
@@ -313,13 +309,14 @@ public class ServiceImp implements IService {
         List<Buyer> followers = seller.getFollowers(); //Get followers from seller
         Integer countedFollowers = followers.size(); // Get size of the list of followers
         //Create DTO response
-        SellerFollowersCountDTOResponse sellerCount = new SellerFollowersCountDTOResponse(seller.getUser_id(),seller.getName(),countedFollowers);
+        SellerFollowersCountDTOResponse sellerCount = new SellerFollowersCountDTOResponse(seller.getUser_id(), seller.getName(),countedFollowers);
         return  sellerCount;
     }
 
     //For US 0005
     @Override
-    public void newPost(NewPostDTORequest post){
+    public void newPost(@Valid NewPostDTORequest post){
+
         Integer user_id = post.getUser_id(); // Get post asociated with this id
         Seller seller = repository.getByIdSeller(user_id); // Get seller from repository
 
