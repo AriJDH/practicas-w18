@@ -70,8 +70,25 @@ class UserBuyerServiceImpTest {
                 ()-> assertEquals(buyer.getUser_name(), result.getUser_name()),
                 ()-> assertEquals(buyer.getFollowed(), result.getFollowed())
         );
-
     }
+@Test
+@DisplayName("T-003. US-0008. Verify the correct operation if order is 'name_desc'")
+void orderFollowedOrderDesc(){
+    //Arrange
+    String order = "name_desc";
+    UserBuyer buyer = UserBuyerFactory.getUserBuyer();
+
+    //mock
+    when(userBuyerRepository.findById(1)).thenReturn(Optional.of(buyer));
+    FollowedListDTORes result = userBuyerServiceImp.getFollowed(buyer.getUser_id(), order);
+    verify(userBuyerRepository).findById(1);
+    // Assert
+    assertAll(
+            ()-> assertEquals(buyer.getUser_id(), result.getUser_id()),
+            ()-> assertEquals(buyer.getUser_name(), result.getUser_name()),
+            ()-> assertEquals(buyer.getFollowed(), result.getFollowed())
+    );
+}
 
 
     @Test
