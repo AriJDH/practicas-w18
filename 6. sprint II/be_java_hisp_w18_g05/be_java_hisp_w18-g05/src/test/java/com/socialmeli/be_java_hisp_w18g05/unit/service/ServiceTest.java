@@ -83,6 +83,26 @@ public class ServiceTest {
     }
 
     @Test
+    @DisplayName("T-0002 // Unfollow, OK")
+    public void unFollowOk(){
+        Seller seller = new Seller(10,"Seller10");
+        Buyer buyer = new Buyer(1,"Buyer1");
+        lenient().when(iRepository.getByIdSeller(seller.getUser_id())).thenReturn(seller);
+        lenient().when(iRepository.getByIdBuyer(buyer.getUser_id())).thenReturn(buyer);
+        iRepository.unfollow(buyer,seller);
+        verify(iRepository,times(1)).unfollow(buyer,seller);
+    }
+    @Test
+    @DisplayName("T-0002 // Unfollow, not found")
+    public void unFollowDontExist() {
+        lenient().when(iRepository.getByIdSeller(1)).thenReturn(null);
+        lenient().when(iRepository.getByIdBuyer(10)).thenReturn(null);
+        Assertions.assertAll(
+                () -> Assertions.assertThrows(NotFoundException.class, () -> serviceImp.unfollow(1, null)),
+                () -> Assertions.assertThrows(NotFoundException.class, () -> serviceImp.unfollow(null, 10)));
+    }
+
+    @Test
     @DisplayName("T-0004 - Verificar el correcto ordenamiento ascendente por nombre. (US-0008 - US-0003)")
     void test0004Asc0803() {
         //========= Arrange ==========
