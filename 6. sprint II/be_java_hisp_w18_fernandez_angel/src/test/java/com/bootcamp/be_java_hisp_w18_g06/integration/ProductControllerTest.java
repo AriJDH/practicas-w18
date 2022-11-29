@@ -7,12 +7,15 @@ import com.bootcamp.be_java_hisp_w18_g06.dto.response.exception.ExceptionValidRe
 import com.bootcamp.be_java_hisp_w18_g06.entity.User;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
+import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
@@ -33,6 +36,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest
 @AutoConfigureMockMvc
+@DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 class ProductControllerTest {
 
    @Autowired
@@ -43,7 +47,8 @@ class ProductControllerTest {
     class saveTests{
         @Test
         void saveOkTest() throws Exception {
-            PostDTO requestPostDto=getPostDto(2);
+            PostDTO requestPostDto=getPostDto(1);
+
 
 
             String payload= new ObjectMapper().registerModule(new JavaTimeModule()).writeValueAsString(requestPostDto);
@@ -106,23 +111,13 @@ class ProductControllerTest {
 
 
           User buyer=getUserRandom("Juan");
-          ExceptionResponseDto validResponseDTO=new ExceptionResponseDto("The user id"+buyer.getUser_id()+ " does not exist");
-
-
           String payload= new ObjectMapper().registerModule(new JavaTimeModule()).writeValueAsString(buyer);
-          String validDtoJson= new ObjectMapper().registerModule(new JavaTimeModule()).writeValueAsString(validResponseDTO);
 
-          //mock
-
-          MvcResult result= mockMvc.perform(MockMvcRequestBuilders.get("/products//followed/{userId}/list",buyer.getUser_id())
+          mockMvc.perform(MockMvcRequestBuilders.get("/products//followed/{userId}/list",buyer.getUser_id())
                   .contentType(MediaType.APPLICATION_JSON)
                   .content(payload))
                   .andDo(print())
-                  .andExpect(status().isBadRequest())
-                  .andExpect(content().contentType("application/json"))
-                  .andReturn();
-          assertEquals(validDtoJson,result.getResponse().getContentAsString());
-
+                  .andExpect(status().isBadRequest());
        }
     }
 
