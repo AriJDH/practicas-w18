@@ -6,9 +6,7 @@ import lombok.*;
 import java.util.List;
 
 @NoArgsConstructor
-@Getter
-@Setter
-@EqualsAndHashCode
+@Data
 public class PostDtoRes {
     private Integer user_id;
     private List<PostDto> posts;

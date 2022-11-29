@@ -4,9 +4,7 @@ import lombok.*;
 
 @AllArgsConstructor
 @NoArgsConstructor
-@Getter
-@Setter
-@EqualsAndHashCode
+@Data
 public class ProductDtoRes {
     private Integer product_id;
     private String product_name;
