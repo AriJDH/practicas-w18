@@ -2,7 +2,6 @@ package com.socialmedia2.be_java_hisp_w18_g08.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.socialmedia2.be_java_hisp_w18_g08.dto.response.ProductDtoRes;
-import com.socialmedia2.be_java_hisp_w18_g08.entity.Product;
 import lombok.*;
 
 import java.time.LocalDate;
