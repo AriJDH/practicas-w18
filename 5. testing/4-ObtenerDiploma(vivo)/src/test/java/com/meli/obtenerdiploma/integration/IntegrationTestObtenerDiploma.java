@@ -65,7 +65,8 @@ public class IntegrationTestObtenerDiploma {
 
     }
 
-    @Test
+  /*
+  *   @Test
     public void testGivenValidUserIdGetDiplomaWithAverangeScore() throws Exception {
 
         this.mockMvc.perform(
@@ -82,7 +83,7 @@ public class IntegrationTestObtenerDiploma {
                  ;
 
 
-    }
+    }*/
 
     @Test
     void helloTest() throws Exception {
@@ -115,6 +116,7 @@ public class IntegrationTestObtenerDiploma {
     }
 
     @Test
+    //caso por el camino infeliz
     void testGivenAnInvalidStudentIdThrowExceptionMessage() throws Exception {
 
         this.mockMvc.perform(MockMvcRequestBuilders.get("/analyzeScores/{studentId}", 22))
