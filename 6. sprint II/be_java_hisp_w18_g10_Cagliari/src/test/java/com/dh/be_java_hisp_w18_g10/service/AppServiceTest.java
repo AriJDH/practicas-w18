@@ -121,7 +121,7 @@ public class AppServiceTest {
 
         //Mock
         when(userRepository.getUser(userId)).thenReturn(getUser(userId));
-        when(userRepository.getUser(userIdToFollow)).thenReturn(getUser(userIdToFollow));
+        when(userRepository.getUser(userIdToFollow)).thenReturn(null);
 
         //Act & Assert
         assertThrows(UserGenericException.class, () -> service.followUser(userId, userIdToFollow));
@@ -134,22 +134,23 @@ public class AppServiceTest {
         loadUsers();
         int userId = getUser(1).getUserId();
         int userIdToUnfollow = getUser(2).getUserId();
+
         int followedExpectedSize = getUser(userId).getFollowed().size() -1;
-        System.out.println(followedExpectedSize);
         int followersExpectedSize = getUser(userIdToUnfollow).getFollowers().size() -1;
-        System.out.println(followersExpectedSize);
+
         // Mock
         when(userRepository.getUser(userId)).thenReturn(getUser(userId));
         when(userRepository.getUser(userIdToUnfollow)).thenReturn(getUser(userIdToUnfollow));
+
         // Act
         service.unfollowUser(userId, userIdToUnfollow);
 
         int followedActualSize = getUser(userId).getFollowed().size();
-        int followersActualsize = getUser(userIdToUnfollow).getFollowers().size();
+        int followersActualSize = getUser(userIdToUnfollow).getFollowers().size();
 
         // Assert
         assertAll( () -> assertEquals(followedExpectedSize, followedActualSize),
-                   () -> assertEquals(followersExpectedSize, followersActualsize)
+                   () -> assertEquals(followersExpectedSize, followersActualSize)
         );
     }
 
@@ -186,7 +187,6 @@ public class AppServiceTest {
 
         //Assert
         Assertions.assertEquals(followersListDTOres.getFollowers(), result.getFollowers());
-
     }
 
     @Test
@@ -219,7 +219,7 @@ public class AppServiceTest {
         //MOCK
         when(userRepository.getUser(id)).thenReturn(followedUser);
         //ASSERT
-        assertThrows(UserGenericException.class, () -> service.getUserFollowerList(id,typeOrder));
+        assertThrows(UserGenericException.class, () -> service.getUserFollowerList(id, typeOrder));
     }
 
     @Test
@@ -241,14 +241,8 @@ public class AppServiceTest {
             assertEquals(listUserFollowedOrderNameAsc.get(i).getUser_name(), listuserFollowedResult.get(i).getUser_name());
         }
         verify(userRepository, atLeastOnce()).getUser(userFollowedOrderNameAsc.getUser_id());
-
-        //prueba de falla
-        /*
-         * UserFollowedListDTOres userFollowedDesordenado = UserGenerator.getUsersDesordenado();
-         * int id = userFollowedDesordenado.getUser_id();
-         * List<UserDTOres> listUserFollowedOrderNameAsc = userFollowedDesordenado.getFollowed();
-         * */
     }
+
     @Test
     @DisplayName("T0004- NAME_DESC")
     void shouldVerifyAlphabeticOrderDesOfFollowedTest() {
@@ -268,14 +262,8 @@ public class AppServiceTest {
             assertEquals(listUserFollowedOrderNameDesc.get(i).getUser_name(), listuserFollowedResult.get(i).getUser_name());
         }
         verify(userRepository, atLeastOnce()).getUser(userFollowedOrderNameDes.getUser_id());
-
-        //prueba de falla
-        /*
-         * UserFollowedListDTOres userFollowedDesordenado = UserGenerator.getUsersDesordenado();
-         * int id = userFollowedDesordenado.getUser_id();
-         * List<UserDTOres> listUserFollowedOrderNameAsc = userFollowedDesordenado.getFollowed();
-         * */
     }
+
     @Test
     @DisplayName("T0005")
     void shouldStringOrderPassTest(){
@@ -335,10 +323,7 @@ public class AppServiceTest {
             assertThrows(UserGenericException.class, () -> service.getUserPosts(1, wrongParameter));
             assertThrows(UserGenericException.class, () -> service.getUserPosts(1, wrongParameter));
         });
-
     }
-
-
 
     @Test
     @DisplayName("T0006 - Ascendente")
@@ -358,6 +343,7 @@ public class AppServiceTest {
 
         assertArrayEquals(expected.getPosts().toArray(), result.getPosts().toArray());
     }
+
     @Test
     @DisplayName("T0006 - Descendente")
     void shouldVerifyDateSortDescTest(){
@@ -398,13 +384,14 @@ public class AppServiceTest {
 
         assertEquals(expected, result);
     }
+
     @Test
     @DisplayName("T0007 - Usuario no encontrado")
     void shouldVerifyAmountOfFollowersUserNotFoundTest() throws Exception{
 
-        when(userRepository.getUser(100)).thenReturn(null);
+        when(userRepository.getUser(anyInt())).thenReturn(null);
 
-        assertThrows(NotFoundException.class, () -> service.getUserFollowersCount(100));
+        assertThrows(NotFoundException.class, () -> service.getUserFollowersCount(50));
     }
 
     @Test
@@ -441,7 +428,6 @@ public class AppServiceTest {
                             .isAfter(twoWeeksAgo)).isTrue();
                 }
         );
-
     }
 
 
