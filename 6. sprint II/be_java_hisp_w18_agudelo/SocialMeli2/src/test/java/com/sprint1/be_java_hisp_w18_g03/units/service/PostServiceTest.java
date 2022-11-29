@@ -1,7 +1,11 @@
 package com.sprint1.be_java_hisp_w18_g03.units.service;
 
+import com.sprint1.be_java_hisp_w18_g03.Repository.ICategoryRepository;
 import com.sprint1.be_java_hisp_w18_g03.Repository.IPostRepository;
 import com.sprint1.be_java_hisp_w18_g03.Repository.IUserRepository;
+import com.sprint1.be_java_hisp_w18_g03.dto.request.ProductRequestDTO;
+import com.sprint1.be_java_hisp_w18_g03.dto.request.RequestPostDTO;
+import com.sprint1.be_java_hisp_w18_g03.dto.response.ResponseDTO;
 import com.sprint1.be_java_hisp_w18_g03.dto.response.ResponsePostDTO;
 import com.sprint1.be_java_hisp_w18_g03.dto.response.SellersPostDTO;
 import com.sprint1.be_java_hisp_w18_g03.entity.User;
@@ -18,6 +22,8 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.time.LocalDate;
 
+import static com.sprint1.be_java_hisp_w18_g03.utils.CategoryFactory.getCategory;
+import static com.sprint1.be_java_hisp_w18_g03.utils.ProductFactory.getProduct;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.when;
@@ -30,6 +36,9 @@ public class PostServiceTest {
 
     @Mock
     IPostRepository postRepository;
+
+    @Mock
+    ICategoryRepository iCategoryRepository;
 
     @InjectMocks
     PostServiceImp postServiceImp;
@@ -133,4 +142,20 @@ public class PostServiceTest {
 
         assertTrue(postMasReciente.getDate().isAfter(postMenosReciente.getDate()), "El indicador debe indicar verdadero");
     }
+
+    @Test
+    @DisplayName("Individual - createPost - OK")
+    public void createPostOk(){
+        //Arrange
+        User user = UserFactory.getUserPostSeller();
+        RequestPostDTO requestPostDTO = new RequestPostDTO(1,LocalDate.now(),new ProductRequestDTO(1,"product1","type 1","marca","blue","na",false,0d),getCategory().getCategoryId(),100d,false,0d);
+        //ACT
+        when(userRepository.findById(any())).thenReturn(user);
+        when(iCategoryRepository.findCategoryById(any())).thenReturn(getCategory());
+        when(postRepository.addPost(any())).thenReturn(true);
+        ResponseDTO response = postServiceImp.createPost(requestPostDTO);
+        //ASSERT
+        assertNotNull(response);
+    }
+
 }
