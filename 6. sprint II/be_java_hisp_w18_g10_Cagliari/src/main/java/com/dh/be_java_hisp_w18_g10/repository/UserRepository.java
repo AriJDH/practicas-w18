@@ -23,34 +23,40 @@ public class UserRepository implements IUserRepository{
 
     private void loadUsers(){
 
-        User user1 = new User(1, "usuario1");
-        User user2 = new User(2, "usuario2");
-        User user3 = new User(3, "usuario3");
+        User user1 = new User();
+        user1.setUserId(1);
+        user1.setUserName("usuario1");
 
-        // USER1 SIGUE A USUARIO 2 Y 3.
-        user1.getFollowed().put(user2.getUserId(), user2);
-        user1.getFollowed().put(user3.getUserId(), user3);
+        User user2 = new User();
+        user2.setUserId(2);
+        user2.setUserName("usuario2");
 
-        user2.getFollowers().put(user1.getUserId(), user1);
-        user3.getFollowers().put(user1.getUserId(), user1);
+        User user3 = new User();
+        user3.setUserId(3);
+        user3.setUserName("usuario3");
 
-        user2.getFollowed().put(user3.getUserId(), user3);
-        user3.getFollowers().put(user2.getUserId(), user2);
+        Map<Integer, User> followedUsuer1 = new HashMap<Integer, User>();
+        followedUsuer1.put(user2.getUserId(), user2);
+        followedUsuer1.put(user3.getUserId(), user3);
+        user1.setFollowed(followedUsuer1);
+        user1.setFollowers(followedUsuer1);
 
-        user3.getFollowed().put(user2.getUserId(), user2);
-        user2.getFollowers().put(user3.getUserId(), user3);
+        Map<Integer, User> followedUsuer2 = new HashMap<Integer, User>();
+        followedUsuer2.put(user3.getUserId(), user3);
+        user2.setFollowed(followedUsuer2);
+
+        Map<Integer, User> followedUsuer3 = new HashMap<Integer, User>();
+        followedUsuer3.put(user2.getUserId(), user2);
+        user3.setFollowed(followedUsuer3);
 
         user2.getPosts().put(getListPosts().get(0).getPost_id(),getListPosts().get(0));
         user2.getPosts().put(getListPosts().get(1).getPost_id(),getListPosts().get(1));
         user2.getPosts().put(getListPosts().get(2).getPost_id(),getListPosts().get(2));
 
-        user3.getPosts().put(getListPosts().get(0).getPost_id(),getListPosts().get(0));
-        user3.getPosts().put(getListPosts().get(1).getPost_id(),getListPosts().get(1));
-        user3.getPosts().put(getListPosts().get(2).getPost_id(),getListPosts().get(2));
+        this.users.put(user1.getUserId(), user1);
+        this.users.put(user2.getUserId(), user2);
+        this.users.put(user3.getUserId(), user3);
 
-        users.put(user1.getUserId(), user1);
-        users.put(user2.getUserId(), user2);
-        users.put(user3.getUserId(), user3);
     }
 
     @Override
