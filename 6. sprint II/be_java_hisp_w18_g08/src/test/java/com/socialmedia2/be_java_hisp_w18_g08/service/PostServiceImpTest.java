@@ -43,7 +43,7 @@ class PostServiceImpTest {
     private void setup() {
         //T-0005
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-        LocalDate date = LocalDate.parse("20-11-2022", formatter);
+        LocalDate date = LocalDate.parse(LocalDate.now().format(formatter), formatter);
 
         List<Post> postList = new ArrayList<>();
         List<User> followers = new ArrayList<>();
