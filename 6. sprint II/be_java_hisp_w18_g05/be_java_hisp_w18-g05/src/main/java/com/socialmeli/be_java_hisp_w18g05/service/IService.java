@@ -22,6 +22,7 @@ public interface IService {
     BuyerFollowedListDTOResponse getFollowedsAZ(Integer buyer_id);
     BuyerFollowedListDTOResponse getFollowedsZA(Integer buyer_id);
 
+    SellerPostListDTOResponse orderByDate(Integer userId, String order);
 
     void follow(Integer userId, Integer userIdToFollow);
     void unfollow(Integer userId, Integer userIdToUnfollow);
