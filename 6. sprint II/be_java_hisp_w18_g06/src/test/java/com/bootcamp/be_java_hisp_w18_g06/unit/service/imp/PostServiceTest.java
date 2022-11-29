@@ -11,16 +11,13 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
-
 import static com.bootcamp.be_java_hisp_w18_g06.utils.PostFactory.getPost;
 import static com.bootcamp.be_java_hisp_w18_g06.utils.UserFactory.getUserRandom;
 import static com.bootcamp.be_java_hisp_w18_g06.utils.UserFactory.getUserWithFollowersListAndPosts;
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 @SpringBootTest
@@ -41,7 +38,22 @@ class PostServiceTest {
     @Nested
     class T0008{
         @Test
-        void findAllPostsByUser() {
+        void findAllPostsByUserFromLastTwoWeeksTest() {
+            //Arrange
+            User seller=getUserWithFollowersListAndPosts("Marco");
+            User buyer=getUserRandom("Daniela");
+            buyer.setFollowed(Collections.singletonList(seller));
+
+            //Mock
+            when(userRepository.findUserById(buyer.getUser_id())).thenReturn(Optional.of(buyer));
+
+            //act
+            List<PostDTO>result=postService
+                    .findAllPostsByUser(buyer.getUser_id(),null);
+            //assert
+            assertEquals(result.size(), 2);
+
+
         }
 
     }
@@ -92,7 +104,7 @@ class PostServiceTest {
         void findAllPostsByUserAscOkTest() {
 
             //arrange
-            Integer idUser=1;
+            int idUser=1;
             String asc="date_asc";
 
             User userFollowed1=getUserWithFollowersListAndPosts("vendedor");
@@ -104,13 +116,14 @@ class PostServiceTest {
             //act
            List<PostDTO>postDTOS = postService.findAllPostsByUser(idUser,asc);
             //assert
-            assertEquals(0, userRequest.getFollowed().get(0).getPosts().get(1).getDate().compareTo(postDTOS.get(0).getDate()));
+            assertEquals(0, userRequest.getFollowed().get(0).getPosts().get(1).getDate()
+                    .compareTo(postDTOS.get(0).getDate()));
         }
         @Test
         void findAllPostsByUserDescOkTest() {
 
             //arrange
-            Integer idUser=1;
+            int idUser=1;
             String asc="date_desc";
 
             User userFollowed1=getUserWithFollowersListAndPosts("vendedor");

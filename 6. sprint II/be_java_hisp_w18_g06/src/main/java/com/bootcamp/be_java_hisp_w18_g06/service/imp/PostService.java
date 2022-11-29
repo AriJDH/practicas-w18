@@ -105,7 +105,7 @@ public class PostService implements IPostService {
 
 	private Optional<List<Post>> getPosts(User user) {
 		List<Post> postList = new ArrayList<>();
-		List<User> users = Optional.ofNullable(user.getFollowed())
+		Optional.ofNullable(user.getFollowed())
 						.orElseThrow(()-> new EmptyException("User does not follow Sellers"));
 
 		user.getFollowed()

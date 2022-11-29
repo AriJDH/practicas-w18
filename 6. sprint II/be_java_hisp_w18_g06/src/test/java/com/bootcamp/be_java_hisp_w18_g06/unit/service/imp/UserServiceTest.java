@@ -39,7 +39,6 @@ class UserServiceTest {
            //verificar que el usuario a seguir exista
             //ARRANGE
             User user = getUserWithFollowersListAndPosts("mockFollowed");
-            User user2 = getUserRandom("mockFollower");
             //MOCK
             when(repository.findUserById(user.getUser_id())).thenReturn(Optional.of(user));
             //ASSERT
