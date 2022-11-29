@@ -3,7 +3,6 @@ package com.mercadolibre.socialmeli2.repository;
 import com.mercadolibre.socialmeli2.entity.Post;
 import com.mercadolibre.socialmeli2.entity.Product;
 import com.mercadolibre.socialmeli2.entity.User;
-import com.mercadolibre.socialmeli2.exception.NotFoundException;
 import org.springframework.stereotype.Repository;
 
 import java.util.*;

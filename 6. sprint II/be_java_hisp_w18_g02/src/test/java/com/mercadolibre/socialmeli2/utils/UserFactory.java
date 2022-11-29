@@ -1,18 +1,15 @@
 package com.mercadolibre.socialmeli2.utils;
 
-import com.mercadolibre.socialmeli2.dto.response.SellerFollowerListDtoRes;
 import com.mercadolibre.socialmeli2.dto.response.UserDtoRes;
 import com.mercadolibre.socialmeli2.entity.Post;
 import com.mercadolibre.socialmeli2.entity.Product;
 import com.mercadolibre.socialmeli2.entity.User;
 
-import java.lang.reflect.Array;
 import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 public class UserFactory {
     public static List<User> getUsers() {

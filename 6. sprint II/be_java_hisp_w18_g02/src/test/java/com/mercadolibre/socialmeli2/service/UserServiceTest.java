@@ -3,13 +3,11 @@ package com.mercadolibre.socialmeli2.service;
 import com.mercadolibre.socialmeli2.dto.response.*;
 import com.mercadolibre.socialmeli2.entity.Post;
 import com.mercadolibre.socialmeli2.entity.User;
-import com.mercadolibre.socialmeli2.entity.User;
 import com.mercadolibre.socialmeli2.exception.NotFoundException;
 import com.mercadolibre.socialmeli2.exception.OrderInvalidException;
 import com.mercadolibre.socialmeli2.repository.IUserRepository;
 import com.mercadolibre.socialmeli2.utils.UserFactory;
 import org.junit.jupiter.api.*;
-import com.mercadolibre.socialmeli2.utils.UserFactory;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -20,10 +18,8 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import java.time.LocalDate;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.*;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 import static org.mockito.Mockito.when;
 
@@ -68,8 +64,10 @@ public class UserServiceTest {
         when(userRepositoryMock.findById(userNotExists)).thenReturn(users.get(userNotExists));
 
         //Act and Assert
-        assertThrows(NotFoundException.class ,()->userService.follow(userNotExists, userExists));
-        assertThrows(NotFoundException.class ,()->userService.follow(userExists, userNotExists));
+        assertAll(()->{
+            assertThrows(NotFoundException.class ,()->userService.follow(userNotExists, userExists));
+            assertThrows(NotFoundException.class ,()->userService.follow(userExists, userNotExists));
+        });
     }
 
     @Test
@@ -185,6 +183,29 @@ public class UserServiceTest {
 
         // Assert
         Assertions.assertEquals(expected.getFollowed(), result.getFollowed());
+    }
+
+    @Test
+    @DisplayName("T-0003 Verificar que el tipo de ordenamiento alfabético sea nulo (US-0008)")
+    void orderTestNull() {
+        // Arrange
+        User user = new User(1, "Jose");
+        Integer id = user.getId();
+
+        List<User> followed = UserFactory.getUsers();
+        user.setFollowed(new HashSet<>(followed));
+
+        List<UserDtoRes> expectedUserDtos = UserFactory.getUsersListDto("algo");
+        UserFollowedListDtoRes expected = new UserFollowedListDtoRes(id, user.getName(), expectedUserDtos);
+
+        // Mock
+        when(userRepositoryMock.existsById(id)).thenReturn(true);
+        when(userRepositoryMock.findById(id)).thenReturn(user);
+        // Act
+        UserFollowedListDtoRes result = userService.getFollowed(id, null);
+
+        // Assert
+        Assertions.assertEquals(expected.getId(), result.getId());
     }
 
     @Test
@@ -423,7 +444,10 @@ public class UserServiceTest {
         RecentPostsDtoRes recentPosts = userService.getRecentPosts(userId, null);
 
         // Assert
-        assertEquals(expectedSize, recentPosts.getPosts().size());
+        assertAll(()->{
+            assertEquals(expectedSize, recentPosts.getPosts().size());
+            assertEquals(today.minusDays(2), recentPosts.getPosts().get(0).getDate());
+        });
     }
 
 }
