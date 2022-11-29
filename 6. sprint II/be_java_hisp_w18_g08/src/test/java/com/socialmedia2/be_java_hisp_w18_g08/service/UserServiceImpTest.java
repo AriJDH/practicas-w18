@@ -10,6 +10,7 @@ import com.socialmedia2.be_java_hisp_w18_g08.exception.BadRequestException;
 import com.socialmedia2.be_java_hisp_w18_g08.exception.NotFoundUserException;
 import com.socialmedia2.be_java_hisp_w18_g08.dto.request.FollowDtoReq;
 import com.socialmedia2.be_java_hisp_w18_g08.dto.response.FollowDtoRes;
+import com.socialmedia2.be_java_hisp_w18_g08.dto.response.SellerFollowersCountDto;
 import com.socialmedia2.be_java_hisp_w18_g08.repository.PostRepositoryImp;
 import com.socialmedia2.be_java_hisp_w18_g08.repository.UserRepositoryImp;
 import org.junit.jupiter.api.Assertions;
@@ -26,6 +27,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Arrays;
+
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
@@ -167,7 +171,38 @@ class UserServiceImpTest {
     }
 
     @Test
-    @DisplayName("-0004 - Obtener vendedores seguidos ordenados de manera ascendente")
+    @DisplayName("T-0002 Verificar que la cantidad de seguidores de un determinado usuario sea correcta. (US-0002)")
+    void findAllFollowersQuantityTest() {
+        //Arrange
+        Integer expected = 2;
+        Integer id = 5;
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        LocalDate date = LocalDate.parse("12-11-2022", formatter);
+
+        List<Seller> sellers = new ArrayList<>();
+        List<Seller> followed = new ArrayList<>();
+        List<User> followers = new ArrayList<>();
+        List<Post> post5 = new ArrayList<>();
+
+        Seller s1 = new Seller(id, "User5", followed, post5, followers);
+        User u1 = new User(1, "User1", followed);
+        User u2 = new User(2, "User2", followed);
+
+        followers.add(u1);
+        followers.add(u2);
+        followed.add(s1);
+        sellers.add(s1);
+
+        when(userRepo.findSellerById(id)).thenReturn(s1);
+        //Act
+        SellerFollowersCountDto result = userService.findAllFollowersQuantity(id);
+
+
+        //Assert
+        Assertions.assertEquals(expected, result.getFollowers_count());
+    }
+    @Test
+    @DisplayName("T-0004 - Obtener vendedores seguidos ordenados de manera ascendente")
     void getFollowedOrderAsc() {
         //Arrange
         String order = "name_asc";
