@@ -7,23 +7,18 @@ import com.mercadolibre.socialmeli2.dto.request.PostDtoReq;
 import com.mercadolibre.socialmeli2.dto.response.ResponseDto;
 import com.mercadolibre.socialmeli2.dto.response.SellerFollowerCountDtoRes;
 import com.mercadolibre.socialmeli2.repository.IUserRepository;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultMatcher;
 import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 
-import javax.validation.Valid;
 
 import java.time.LocalDate;
 
@@ -40,6 +35,7 @@ public class UserControllerTest {
     IUserRepository userRepository;
 
     @Test
+    @DisplayName("Test de integración de método unfollow - ok")
     void unfollowTest() throws Exception{
         //Arrange
         Integer userId = 1;
@@ -69,6 +65,7 @@ public class UserControllerTest {
     }
 
     @Test
+    @DisplayName("Bonus1 - Test de integración de método getCount - ok")
     void getCountTest() throws Exception{
         //Arrange
         Integer userId = 3;
@@ -97,6 +94,7 @@ public class UserControllerTest {
     }
 
     @Test
+    @DisplayName("Bonus2 - Test de integración de método addPost - ok")
     void addPostTest() throws Exception{
         //Arrange
         ProductDto productDto = new ProductDto(20, "Silla Gamer", "Gamer", "Racer", "Red", "Special Edition");
@@ -128,6 +126,7 @@ public class UserControllerTest {
     }
 
     @Test
+    @DisplayName("Bonus3 - Test de integración de método follow - bad request")
     void followTest() throws Exception{
         //Arrange
         Integer userId = 1;
@@ -155,16 +154,5 @@ public class UserControllerTest {
                 .andExpectAll(expectedStatus, expectedJson, expectedContentType);
 
     }
-
-    /*
-    * @PostMapping("/users/{userId}/follow/{userIdToFollow}")
-    public ResponseEntity<ResponseDto> follow(@PathVariable Integer userId,
-                                         @PathVariable Integer userIdToFollow){
-        ResponseDto res = new ResponseDto(userService.follow(userId, userIdToFollow), 200);
-        return ResponseEntity.ok(res);
-    }*/
-
-
-
 
 }
