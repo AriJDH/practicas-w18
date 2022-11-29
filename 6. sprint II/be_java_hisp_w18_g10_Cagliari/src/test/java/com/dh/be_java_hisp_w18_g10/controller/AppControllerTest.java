@@ -2,8 +2,6 @@ package com.dh.be_java_hisp_w18_g10.controller;
 
 import com.dh.be_java_hisp_w18_g10.dto.require.PostDTOreq;
 import com.dh.be_java_hisp_w18_g10.dto.require.ProductDTOreq;
-import com.dh.be_java_hisp_w18_g10.entity.User;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 import com.fasterxml.jackson.databind.SerializationFeature;
@@ -41,7 +39,7 @@ public class AppControllerTest {
     }
 
     @Test
-    @DisplayName("Individual Tests - /products/post")
+    @DisplayName("Create a Post - /products/post")
     void shouldCreateAPost() throws Exception {
         ProductDTOreq productDto = new ProductDTOreq(
                 1, "Silla Gamer", "Silla", "Besto Silla", "Marron", "Ergonomica"
@@ -57,13 +55,31 @@ public class AppControllerTest {
                         .andExpect(status().isOk());
     }
 
+
     @Test
-    @DisplayName("Individual Tests - /users/{userId}/followers/count")
+    @DisplayName("Bad Request when Create a Post - /products/post")
+    void shouldThrowErrorWhenCreateAPost() throws Exception {
+        ProductDTOreq productDto = new ProductDTOreq(
+                1, "Silla$Gamer", "Silla", "Besto Silla", "Marron", "Ergonomica"
+        );
+        PostDTOreq postDto = new PostDTOreq(
+                1, "27-11-2022", productDto, 2, 100.0);
+
+        jsonBody = objectWriter.writeValueAsString(postDto);
+
+        mockMvc.perform(MockMvcRequestBuilders.post("/products/post")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(jsonBody))
+                        .andExpect(status().isBadRequest());
+    }
+
+    @Test
+    @DisplayName("Get followers count - /users/{userId}/followers/count")
     void shouldGetUserFollowersCount() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.get("/users/{userId}/followers/count", 1))
+        mockMvc.perform(MockMvcRequestBuilders.get("/users/{userId}/followers/count", 2))
                 .andExpect(status().isOk())
-                .andExpect(MockMvcResultMatchers.jsonPath("$.user_id").value(1))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.user_name").value("usuario1"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.user_id").value(2))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.user_name").value("usuario_2"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.followers_count").value(2));
     }
 
