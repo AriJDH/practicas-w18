@@ -1,6 +1,8 @@
 package com.socialmedia2.be_java_hisp_w18_g08.service;
 
+import com.socialmedia2.be_java_hisp_w18_g08.dto.PostDto;
 import com.socialmedia2.be_java_hisp_w18_g08.dto.response.PostDtoRes;
+import com.socialmedia2.be_java_hisp_w18_g08.dto.response.ProductDtoRes;
 import com.socialmedia2.be_java_hisp_w18_g08.entity.Post;
 import com.socialmedia2.be_java_hisp_w18_g08.entity.Product;
 import com.socialmedia2.be_java_hisp_w18_g08.entity.Seller;
@@ -38,6 +40,8 @@ class PostServiceImpTest {
     @InjectMocks
     PostServiceImp postService;
     User u1;
+    PostDto postDto1;
+    PostDto postDto2;
 
     @BeforeEach
     private void setup() {
@@ -68,6 +72,13 @@ class PostServiceImpTest {
         followers.add(u1);
 
         followed.add(s1);
+
+        //T-0006
+        ProductDtoRes productDto1 = new ProductDtoRes(1,"Silla","Oficina","Reclinable","Negro","Silla para oficina");
+        ProductDtoRes productDto2 = new ProductDtoRes(2,"Vaso","Utensilio","Termico","Negro","Vaso termico");
+
+        postDto1 = new PostDto(1,1,productDto1,1,4000.0,date);
+        postDto2 = new PostDto(2,1,productDto2,2,1000.0,date.plusDays(7));
     }
 
     @Test
@@ -103,5 +114,41 @@ class PostServiceImpTest {
 
         //Assert - Act
         assertThrows(NotFoundUserException.class, () -> postService.getPostSellerListByUserId(id, order));
+    }
+
+    @Test
+    @DisplayName("T-0006-OK-Verificar el correcto ordenamiento ascendente por fecha. (US-0009)")
+    void getPostSellerListByUserIdAscendentOKTest() {
+        //Arrange
+        Integer id = 2;
+        String order = "date_asc";
+        List<PostDto> expectedPost = List.of(postDto1, postDto2);
+
+        //Mock
+        when(userService.getFollowedByUserId(id)).thenReturn(u1.getFollowed());
+
+        //Act
+        PostDtoRes result = postService.getPostSellerListByUserId(id, order);
+
+        //Assert
+        assertEquals(expectedPost,result.getPosts());
+    }
+
+    @Test
+    @DisplayName("T-0006-OK-Verificar el correcto ordenamiento descendente por fecha. (US-0009)")
+    void getPostSellerListByUserIdDescendentOKTest() {
+        //Arrange
+        Integer id = 2;
+        String order = "date_desc";
+        List<PostDto> expectedPost = List.of(postDto2, postDto1);
+
+        //Mock
+        when(userService.getFollowedByUserId(id)).thenReturn(u1.getFollowed());
+
+        //Act
+        PostDtoRes result = postService.getPostSellerListByUserId(id, order);
+
+        //Assert
+        assertEquals(expectedPost,result.getPosts());
     }
 }
