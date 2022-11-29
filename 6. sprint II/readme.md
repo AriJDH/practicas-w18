@@ -5,7 +5,7 @@
 <h3>Objetivo</h3>
 El objetivo de este desafío es aplicar los contenidos dados hasta el momento durante el BOOTCAMP (Git, Java, Spring y Testing), haciendo principal hincapié en las validaciones y tipos de testing que pueden ser utilizados a partir de un enunciado propuesto, una especificación de requerimientos y documentación técnica.
 
-<h3>Pautas para la actividad<h3>
+<h3>Pautas para la actividad</h3>
 El desafío que se propone a continuación consta de 2 partes:
 Implementar validaciones y diferentes tests a un escenario determinado (grupal): A partir de un primer incremento de un escenario conocido (Sprint Nº 1), se deberán establecer distintos procesos de validación de datos y de test unitarios necesarios.
 
