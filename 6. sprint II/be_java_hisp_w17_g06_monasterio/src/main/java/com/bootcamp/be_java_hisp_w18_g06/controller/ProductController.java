@@ -28,4 +28,5 @@ public class ProductController {
         productService.save(postDTO);
         return ResponseEntity.ok("OK");
     }
+	//devolver un dto
 }

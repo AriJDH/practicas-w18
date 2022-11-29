@@ -1,10 +1,14 @@
 package com.bootcamp.be_java_hisp_w18_g06.dto.request;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.*;
 
 @Getter
+@AllArgsConstructor
+@NoArgsConstructor
 public class ProductReqDTO {
     @NotNull(message = "Id cannot be empty")
     @Min(value = 1, message = "Id must be greater than 0")
