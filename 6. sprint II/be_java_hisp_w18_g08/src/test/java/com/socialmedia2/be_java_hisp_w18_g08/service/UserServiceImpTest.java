@@ -191,10 +191,7 @@ class UserServiceImpTest {
         List<Post> post5 = new ArrayList<>();
 
         Seller s1 = new Seller(5, "User5", followed, post5, followers);
-        //Seller s2 = new Seller(6, "User6", followed, post6, followers);
-
         User u1 = new User(1, "User1", followed);
-        //User u2 = new User(2, "User2", followed);
 
         followers.add(u1);
         followed.add(s1);
