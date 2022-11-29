@@ -78,7 +78,11 @@ public class SocialMeliController {
     public ResponseEntity<UnfollowDTORes> unfollow(@PathVariable(value = "userId")
                                                        @NotNull(message = "The user id cannot be empty")
                                                        @Positive(message = "The user id must be greater than 0") Integer userId,
+<<<<<<< HEAD
                                                    @PathVariable(value = "userIdToUnfollow")
+=======
+                                                   @PathVariable(value = "userIdToUnfollow", required = true)
+>>>>>>> ea5b8c6f6e10721b34b40d12c4d939436570cdf7
                                                    @NotNull(message = "The user id cannot be empty")
                                                    @Positive(message = "The user id must be greater than 0") Integer userIdToUnfollow) {
         UnfollowDTORes unfollowDTORes = userBuyerService.unfollow(userId, userIdToUnfollow);
