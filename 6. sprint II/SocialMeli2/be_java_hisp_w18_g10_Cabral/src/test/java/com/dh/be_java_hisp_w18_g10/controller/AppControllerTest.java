@@ -57,4 +57,18 @@ public class AppControllerTest {
                 .andExpect(MockMvcResultMatchers.content().json(recipeJson));
     }
 
+    @Test
+    @DisplayName("Individual Tests - /users/{userId}/followers/list")
+    void shouldGetAListOfUserFollowers() throws Exception {
+        List<UserDTOres> listOfUsers = new ArrayList<>();
+        listOfUsers.add(new UserDTOres(1,"usuario1"));
+        listOfUsers.add(new UserDTOres(3,"usuario3"));
+        UserFollowersListDTOres userFollowersListDTOres = new UserFollowersListDTOres(2,"usuario2",listOfUsers);
+        String recipeJson = objectWriter.writeValueAsString(userFollowersListDTOres);
+
+        mockMvc.perform(MockMvcRequestBuilders.get("/users/{userId}/followers/list", 2))
+                .andExpect(status().isOk())
+                .andExpect(MockMvcResultMatchers.content().json(recipeJson));
+    }
+
 }
