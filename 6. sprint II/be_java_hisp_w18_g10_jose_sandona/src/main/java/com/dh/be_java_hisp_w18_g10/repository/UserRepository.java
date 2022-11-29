@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @Repository
 public class UserRepository implements IUserRepository{
@@ -38,11 +39,11 @@ public class UserRepository implements IUserRepository{
         followedUsuer1.put(user2.getUserId(), user2);
         followedUsuer1.put(user3.getUserId(), user3);
         user1.setFollowed(followedUsuer1);
-        user1.setFollowers(followedUsuer1);
 
         Map<Integer, User> followedUsuer2 = new HashMap<Integer, User>();
+        followedUsuer2.put(user1.getUserId(), user1);
         followedUsuer2.put(user3.getUserId(), user3);
-        user2.setFollowed(followedUsuer2);
+        user2.setFollowers(followedUsuer2);
 
         Map<Integer, User> followedUsuer3 = new HashMap<Integer, User>();
         followedUsuer3.put(user2.getUserId(), user2);
@@ -87,6 +88,6 @@ public class UserRepository implements IUserRepository{
 
     @Override
     public List<User> getUserFollowers(int id) {
-        return users.get(id).getFollowersList();
+        return users.get(id).getFollowers().values().stream().collect(Collectors.toList());
     }
 }

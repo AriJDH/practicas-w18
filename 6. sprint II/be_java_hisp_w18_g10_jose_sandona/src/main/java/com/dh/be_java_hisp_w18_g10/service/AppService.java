@@ -26,6 +26,7 @@ public class AppService implements IAppService {
     private IPostRepository postRepository;
 
     public AppService(UserRepository userRepository, PostRepository postRepository) {
+
         this.userRepository = userRepository;
         this.postRepository = postRepository;
     }
@@ -35,21 +36,21 @@ public class AppService implements IAppService {
         User user1 = userRepository.getUser(userId);
         User user2 = userRepository.getUser(userIdToFollow);
 
-        if(user1 == null){
-            throw new UserGenericException("El usuario con el id: "+userId+" no fue encontrado!");
+        if (user1 == null) {
+            throw new UserGenericException("El usuario con el id: " + userId + " no fue encontrado!");
         }
-        if(user2 == null){
-            throw new UserGenericException("El usuario con el id: "+userIdToFollow+" no fue encontrado!");
+        if (user2 == null) {
+            throw new UserGenericException("El usuario con el id: " + userIdToFollow + " no fue encontrado!");
         }
 
-        if(userId == userIdToFollow){
+        if (userId == userIdToFollow) {
             throw new UserGenericException("Un usuario no se puede seguir a si mismo!");
         }
 
-        if(!user2.getPosts().isEmpty()){
-            user1.getFollowed().put(user2.getUserId(),user2);
-        }else{
-            throw new UserGenericException("El usuario con el id: "+userIdToFollow+" no es un vendedor!");
+        if (!user2.getPosts().isEmpty()) {
+            user1.getFollowed().put(user2.getUserId(), user2);
+        } else {
+            throw new UserGenericException("El usuario con el id: " + userIdToFollow + " no es un vendedor!");
         }
         user2.getFollowers().put(user1.getUserId(), user1);
     }
@@ -57,7 +58,7 @@ public class AppService implements IAppService {
     @Override
     public UserFollowersCountDTOres getUserFollowersCount(int userId) {
         User user = userRepository.getUser(userId);
-        if(user == null) throw new NotFoundException("El usuario con el id: "+userId+" no fue encontrado!");
+        if (user == null) throw new NotFoundException("El usuario con el id: " + userId + " no fue encontrado!");
         return new UserFollowersCountDTOres(
                 user.getUserId(),
                 user.getUserName(),
@@ -67,7 +68,7 @@ public class AppService implements IAppService {
 
     @Override
     public UserFollowersListDTOres getUserFollowerList(int userId) {
-        if(userRepository.getUser(userId) == null){
+        if (userRepository.getUser(userId) == null) {
             throw new UserNotFoundException("No existe usuario con id " + userId);
         }
         return DTOMapper.mapToUserFollowersRes(userRepository.getUser(userId));
@@ -77,7 +78,7 @@ public class AppService implements IAppService {
     public UserFollowedListDTOres getUserFollowed(int userId) {
 
         User user = userRepository.getUser(userId);
-        if(user == null)
+        if (user == null)
             throw new UserNotFoundException("No existe usuario con id " + userId);
 
         int userAuxId = user.getUserId();
@@ -115,43 +116,36 @@ public class AppService implements IAppService {
     @Override
     public UserPostsDTOres getUserPosts(int userId, String order) {
         UserPostsDTOres userPostsDTOres = new UserPostsDTOres();
-        //Obtener usuario
         User user = userRepository.getUser(userId);
-        if(user == null)
+        if (user == null)
             throw new UserNotFoundException("No existe usuario con id " + userId);
-        //Chequear que usuario siga a algun vendedor
-        if(user.getFollowed().isEmpty()){
+        if (user.getFollowed().isEmpty()) {
             throw new UserGenericException(String.format("El usuario %s no sigue vendedeores"
                     , user.getUserName()));
         }
-        //
-        //Lista de Post de vendedores que el usaurio sigue
         List<PostDTOres> postListRes = new ArrayList<>();
-        /*Recorro cada vendedor que el usuario sigue
-        * Recorro sus Post en caso de tener
-        * Asigno los post a la lista postListRes*/
         for (Map.Entry<Integer, User> entry : user.getFollowed().entrySet()) {
             User userVendedor = userRepository.getUser(entry.getKey());
-            //Recorro Post para mapearlo y agregarlo a la lista
-            if(!userVendedor.getPosts().isEmpty()){
-                for (Map.Entry<Integer, Post> posts : userVendedor.getPosts().entrySet()){
-                    //Controlo que la fecha de publicacion no se mayor a 2 semanas
-                    if(DateHandler.showPostRecently(posts.getValue().getDate()))
+            if (!userVendedor.getPosts().isEmpty()) {
+                for (Map.Entry<Integer, Post> posts : userVendedor.getPosts().entrySet()) {
+                    if (DateHandler.showPostRecently(posts.getValue().getDate()))
                         postListRes.add(DTOMapper.mapTo(posts.getValue()));
                 }
             }
         }
-        //Chequeo que tengamos algun Post para mostrar
-        if (postListRes.isEmpty()){
+        if (postListRes.isEmpty()) {
             throw new UserGenericException(String.format("Los vendedores que sigue el usuario %s , no tienen publicaciones en las ultimas 2 semanas"
-                    ,user.getUserName()));
+                    , user.getUserName()));
         }
 
-        //descendente  ******** ME QUEDARIA MNAS COMODO QUE EL DATE DE POSTDTO SEA UN LOCALDATE NO UN STRING
-        postListRes = postListRes.stream().sorted(Comparator.comparing(PostDTOres::getDate)).collect(Collectors.toList());
         //ascendente
-        if(order == null || order.equals(TypeOrderHelper.DATE_DESC))
+        if (order == null || order.equals(TypeOrderHelper.DATE_DESC))
             postListRes = postListRes.stream().sorted(Comparator.comparing(PostDTOres::getDate).reversed()).collect(Collectors.toList());
+            //descendente  ********
+        else if (order.equals(TypeOrderHelper.DATE_ASC))
+            postListRes = postListRes.stream().sorted(Comparator.comparing(PostDTOres::getDate)).collect(Collectors.toList());
+        else
+            throw new UserGenericException("Parametro no aceptado");
 
         userPostsDTOres.setUser_id(userId);
         userPostsDTOres.setPosts(postListRes);
@@ -160,11 +154,14 @@ public class AppService implements IAppService {
 
     @Override
     public void unfollowUser(int userId, int userIdToUnfollow) {
+
         if (userRepository.getUser(userId) == null) {
             throw new UserGenericException("El usuario con el id: " + userId + " no fue encontrado!");
         }
-        if (userRepository.getUser(userId).getFollowed().containsKey(userIdToUnfollow)) {
-            userRepository.getUser(userId).getFollowed().remove(userIdToUnfollow);
+        if (userRepository.getUser(userId).getFollowed().containsKey(userIdToUnfollow)
+                && userRepository.getUser(userIdToUnfollow).getFollowers().containsKey(userId)) {
+            userRepository.getUser(userId).getFollowed().remove(userIdToUnfollow); //los que yo sigo
+            userRepository.getUser(userIdToUnfollow).getFollowers().remove(userId);
         } else
             throw new UserGenericException("El usuario con el id: " + userId + " no sigue al usuario " + userIdToUnfollow);
     }
@@ -172,34 +169,31 @@ public class AppService implements IAppService {
     @Override
     public UserFollowersListDTOres getUserFollowerList(int userId, String order) {
         UserFollowersListDTOres res = getUserFollowerList(userId);
-        if(order.equals(TypeOrderHelper.NAME_ASC)){
+        if (order.equals(TypeOrderHelper.NAME_ASC)) {
             res.getFollowers()
                     .sort(Comparator.comparing(UserDTOres::getUser_name));
             return res;
-        }
-        else if(order.equals(TypeOrderHelper.NAME_DESC)){
+        } else if (order.equals(TypeOrderHelper.NAME_DESC)) {
             res.getFollowers()
                     .sort(Comparator.comparing(UserDTOres::getUser_name).reversed());
             return res;
-        }
-        else
+        } else
             throw new UserGenericException("Parametro no aceptado");
     }
 
     @Override
     public UserFollowedListDTOres getUserFollowed(int userId, String order) {
         UserFollowedListDTOres res = getUserFollowed(userId);
-        if(order.equals(TypeOrderHelper.NAME_ASC)){
+
+        if (order.equals(TypeOrderHelper.NAME_ASC)) {
             res.getFollowed()
                     .sort(Comparator.comparing(UserDTOres::getUser_name));
             return res;
-        }
-        else if(order.equals(TypeOrderHelper.NAME_DESC)){
+        } else if (order.equals(TypeOrderHelper.NAME_DESC)) {
             res.getFollowed()
                     .sort(Comparator.comparing(UserDTOres::getUser_name).reversed());
             return res;
-        }
-        else
+        } else
             throw new UserGenericException("Parametro no aceptado");
     }
 }

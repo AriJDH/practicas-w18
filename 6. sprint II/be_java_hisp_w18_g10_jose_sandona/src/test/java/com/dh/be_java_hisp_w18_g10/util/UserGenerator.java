@@ -1,22 +1,90 @@
 package com.dh.be_java_hisp_w18_g10.util;
 
+import com.dh.be_java_hisp_w18_g10.dto.response.UserDTOres;
+import com.dh.be_java_hisp_w18_g10.dto.response.UserFollowersListDTOres;
+import com.dh.be_java_hisp_w18_g10.entity.User;
+
+import java.util.Arrays;
+
+import com.dh.be_java_hisp_w18_g10.dto.response.UserDTOres;
+import com.dh.be_java_hisp_w18_g10.dto.response.UserFollowedListDTOres;
+import com.dh.be_java_hisp_w18_g10.entity.User;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import com.dh.be_java_hisp_w18_g10.dto.response.PostDTOres;
 import com.dh.be_java_hisp_w18_g10.dto.response.ProductDTOres;
 import com.dh.be_java_hisp_w18_g10.dto.response.UserPostsDTOres;
 import com.dh.be_java_hisp_w18_g10.entity.Post;
 import com.dh.be_java_hisp_w18_g10.entity.Product;
 import com.dh.be_java_hisp_w18_g10.entity.User;
+import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 
+@Component
 public class UserGenerator {
+
+    public static UserFollowedListDTOres getUserFollowedListDTOresOrderNameAsc() {
+
+        UserDTOres user1 = new UserDTOres(2, "A_user");
+        UserDTOres user2 = new UserDTOres(3, "B_user");
+        UserDTOres user3 = new UserDTOres(4, "C_user");
+
+        UserFollowedListDTOres user = new UserFollowedListDTOres(1, "usuario1", new ArrayList<>(List.of(user1, user2, user3)));
+
+        return user;
+    }
+    public static UserFollowedListDTOres getUserFollowedListDTOresOrderNameDes() {
+
+        UserDTOres user1 = new UserDTOres(2, "A_user");
+        UserDTOres user2 = new UserDTOres(3, "B_user");
+        UserDTOres user3 = new UserDTOres(4, "C_user");
+
+        UserFollowedListDTOres user = new UserFollowedListDTOres(1, "usuario1", new ArrayList<>(List.of(user3, user2, user1)));
+
+        return user;
+    }
+    public static UserFollowedListDTOres getUserFollowedListDTOresDesordenado() {
+
+        UserDTOres user1 = new UserDTOres(2, "B_user");
+        UserDTOres user2 = new UserDTOres(3, "A_user");
+        UserDTOres user3 = new UserDTOres(4, "C_user");
+
+        UserFollowedListDTOres user = new UserFollowedListDTOres(1, "usuario1", new ArrayList<>(List.of(user1, user2, user3)));
+
+        return user;
+    }
+
+    public static User getUserFollowedName() {
+
+        User user = new User(1, "Usuario");
+
+        User user1 = new User(2, "B_user");
+        User user2 = new User(3, "A_user");
+        User user3 = new User(4, "C_user");
+
+        Map<Integer, User> followed = new HashMap<>();
+        followed.put(user1.getUserId(), user1);
+        followed.put(user2.getUserId(), user2);
+        followed.put(user3.getUserId(), user3);
+
+        user.setFollowed(followed);
+
+        return user;
+    }
+
 
     private static Map<Integer, User> users = new HashMap<Integer, User>();
     public static void loadUsers(){
 
+        // crear usuarios
         User user1 = new User();
         user1.setUserId(1);
         user1.setUserName("usuario1");
@@ -29,6 +97,11 @@ public class UserGenerator {
         user3.setUserId(3);
         user3.setUserName("usuario3");
 
+        User user4 = new User();
+        user4.setUserId(4);
+        user4.setUserName("usuario4");
+
+        // crear a quien sigue el usuerio 1 y por quien es seguido a la vez
         Map<Integer, User> followedUsuer1 = new HashMap<Integer, User>();
         followedUsuer1.put(user2.getUserId(), user2);
         followedUsuer1.put(user3.getUserId(), user3);
@@ -37,7 +110,9 @@ public class UserGenerator {
 
         Map<Integer, User> followedUsuer2 = new HashMap<Integer, User>();
         followedUsuer2.put(user3.getUserId(), user3);
+        followedUsuer2.put(user1.getUserId(), user1);
         user2.setFollowed(followedUsuer2);
+        user2.setFollowers(followedUsuer2);
 
         Map<Integer, User> followedUsuer3 = new HashMap<Integer, User>();
         followedUsuer3.put(user2.getUserId(), user2);
@@ -47,9 +122,14 @@ public class UserGenerator {
         user2.getPosts().put(getListPosts().get(1).getPost_id(),getListPosts().get(1));
         user2.getPosts().put(getListPosts().get(2).getPost_id(),getListPosts().get(2));
 
+        user4.getPosts().put(getListPosts().get(0).getPost_id(),getListPosts().get(0));
+        user4.getPosts().put(getListPosts().get(1).getPost_id(),getListPosts().get(1));
+
+
         users.put(user1.getUserId(), user1);
         users.put(user2.getUserId(), user2);
         users.put(user3.getUserId(), user3);
+        users.put(user4.getUserId(), user4);
 
     }
     public static User getUser(int id){
@@ -117,7 +197,48 @@ public class UserGenerator {
 
         userPost.setPosts(listPostDtoResOrderByAsc);
         return userPost;
-
     }
+
+
+
+    public static User getUser(int id, String name){
+        User newUser = new User(id, name);
+        return newUser;
+    }
+
+    public static User getUserWithFollowersASC(){
+        User newUser = new User(1, "Followed");
+        newUser.getFollowers().put(2, getUser(2, "userB"));
+        newUser.getFollowers().put(3, getUser(3, "userC"));
+        return newUser;
+    }
+
+    public static User getUserWithFollowersDESC(){
+        User newUser = new User(1, "Followed");
+        newUser.getFollowers().put(2, getUser(3, "userC"));
+        newUser.getFollowers().put(3, getUser(2, "userB"));
+        return newUser;
+    }
+
+    public static UserFollowersListDTOres UserFollowersDTOGeneratorASC(){
+        UserFollowersListDTOres userFollowersListDTOres = new UserFollowersListDTOres();
+        userFollowersListDTOres.setUser_name("Followed");
+        userFollowersListDTOres.setUser_id(1);
+        UserDTOres follower1 = new UserDTOres(2, "userB");
+        UserDTOres follower2 = new UserDTOres(3, "userC");
+        userFollowersListDTOres.setFollowers(Arrays.asList(follower1, follower2));
+        return userFollowersListDTOres;
+    }
+
+    public static UserFollowersListDTOres UserFollowersDTOGeneratorDESC(){
+        UserFollowersListDTOres userFollowersListDTOres = new UserFollowersListDTOres();
+        userFollowersListDTOres.setUser_name("Followed");
+        userFollowersListDTOres.setUser_id(1);
+        UserDTOres follower1 = new UserDTOres(3, "userC");
+        UserDTOres follower2 = new UserDTOres(2, "userB");
+        userFollowersListDTOres.setFollowers(Arrays.asList(follower1, follower2));
+        return userFollowersListDTOres;
+    }
+
 
 }

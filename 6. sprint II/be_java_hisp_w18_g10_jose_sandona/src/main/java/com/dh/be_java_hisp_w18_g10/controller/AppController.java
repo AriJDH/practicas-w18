@@ -8,12 +8,15 @@ import com.dh.be_java_hisp_w18_g10.service.IAppService;
 import com.dh.be_java_hisp_w18_g10.service.AppService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 
 @RestController
+@Validated
 public class AppController {
     private IAppService userService;
     public AppController(AppService userService) {
@@ -37,7 +40,9 @@ public class AppController {
 
     @GetMapping("/users/{userId}/followers/list")
     public ResponseEntity<UserFollowersListDTOres> getUserFollowers(
-            @RequestParam(required = false) String order,
+            @RequestParam(required = false)
+            @Pattern(regexp = "name_asc|name_desc",
+                    message = "El parametro de order solo puede ser name_asc o name_desc.") String order,
             @PathVariable int userId) {
         // US 0003
         // US 0008
@@ -49,7 +54,9 @@ public class AppController {
 
     @GetMapping("/users/{userId}/followed/list")
     public ResponseEntity<?> getUserFollowedList(
-            @RequestParam(required = false) String order,
+            @RequestParam(required = false)
+            @Pattern(regexp = "name_asc|name_desc",
+                    message = "El parametro de order solo puede ser name_asc o name_desc.") String order,
             @PathVariable int userId
     ) {
         // US 0004
@@ -72,7 +79,9 @@ public class AppController {
 
     @GetMapping("/products/followed/{userId}/list")
     public ResponseEntity<UserPostsDTOres> getUserFollowedPost(
-            @RequestParam(required = false) String order,
+            @RequestParam(required = false)
+            @Pattern(regexp = "date_asc|date_desc",
+                    message = "El parametro de order solo puede ser date_asc o date_desc.") String order,
             @Valid @PathVariable @NotNull(message="El campo userId no puede estar vacio.") int userId){
         // US 0006
         // US 0009

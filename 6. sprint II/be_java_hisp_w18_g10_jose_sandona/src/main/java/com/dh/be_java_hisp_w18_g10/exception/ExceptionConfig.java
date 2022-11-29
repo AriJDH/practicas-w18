@@ -8,6 +8,8 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
+import javax.validation.ConstraintViolationException;
+
 @ControllerAdvice
 public class ExceptionConfig {
 
@@ -46,6 +48,12 @@ public class ExceptionConfig {
     }
     @ExceptionHandler(HttpMessageNotReadableException.class)
     public ResponseEntity<?> validationExceptionHandler(HttpMessageNotReadableException e){
+        ErrorDTOres errorDto = new ErrorDTOres(e.getMessage(), HttpStatus.BAD_REQUEST.value());
+        return new ResponseEntity<>(errorDto, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(ConstraintViolationException.class)
+    public ResponseEntity<?> validationExceptionHandler(ConstraintViolationException e){
         ErrorDTOres errorDto = new ErrorDTOres(e.getMessage(), HttpStatus.BAD_REQUEST.value());
         return new ResponseEntity<>(errorDto, HttpStatus.BAD_REQUEST);
     }
