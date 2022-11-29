@@ -1,8 +1,6 @@
 package com.socialmedia2.be_java_hisp_w18_g08.service;
 
-import com.socialmedia2.be_java_hisp_w18_g08.dto.PostDto;
 import com.socialmedia2.be_java_hisp_w18_g08.dto.response.PostDtoRes;
-import com.socialmedia2.be_java_hisp_w18_g08.dto.response.ProductDtoRes;
 import com.socialmedia2.be_java_hisp_w18_g08.entity.Post;
 import com.socialmedia2.be_java_hisp_w18_g08.entity.Product;
 import com.socialmedia2.be_java_hisp_w18_g08.entity.Seller;
@@ -39,8 +37,6 @@ class PostServiceImpTest {
     UserServiceImp userService;
     @InjectMocks
     PostServiceImp postService;
-
-    Seller s1;
     User u1;
 
     @BeforeEach
@@ -54,6 +50,7 @@ class PostServiceImpTest {
         List<Seller> followed = new ArrayList<>();
         Product product1;
         Product product2;
+        Seller s1;
 
         s1 = new Seller(1, "Seller1", followed, postList, followers);
 
