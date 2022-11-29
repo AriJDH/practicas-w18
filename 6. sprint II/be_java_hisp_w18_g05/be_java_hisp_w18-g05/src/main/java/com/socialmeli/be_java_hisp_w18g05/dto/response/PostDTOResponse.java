@@ -10,9 +10,11 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.time.LocalDate;
+import java.util.Date;
 
-@AllArgsConstructor
+
 @NoArgsConstructor
+@AllArgsConstructor
 @Getter
 @Data
 public class PostDTOResponse {
@@ -24,7 +26,4 @@ public class PostDTOResponse {
     private ProductDTOResponse product;
     private Integer category;
     private Double price;
-
-    public PostDTOResponse(int user_id, int post_id, LocalDate minusDays, ProductDTOResponse product11, int category, double price) {
-    }
 }

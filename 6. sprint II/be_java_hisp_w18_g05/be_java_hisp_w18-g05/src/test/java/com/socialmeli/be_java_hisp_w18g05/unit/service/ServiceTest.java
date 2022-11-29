@@ -24,6 +24,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -332,6 +333,16 @@ public class ServiceTest {
     @DisplayName("T-0008 // Verify post since 2 weeks ago")
     public void postTwoWeeks(){
         //Arrange
+
+        DateTimeFormatter formatters = DateTimeFormatter.ofPattern("d-MM-uuuu");
+        LocalDate date =LocalDate.now().minusDays(7);
+        LocalDate date2 =LocalDate.now().minusDays(30);
+        LocalDate date3 =LocalDate.now().minusDays(11);
+
+        String datetext = date.format(formatters);
+        String datetext2 = date2.format(formatters);
+        String datetext3 = date3.format(formatters);
+
         Buyer buyer = new Buyer(1,"Buyer1");
         Seller seller = new Seller(10,"Seller10");
         Seller seller2 = new Seller(20,"Seller20");
@@ -344,24 +355,27 @@ public class ServiceTest {
 
         ProductDTOResponse product11= new ProductDTOResponse(1,"silla","gamer","racer","red","special");
         ProductDTOResponse product22= new ProductDTOResponse(1,"silla2","gamer2","racer2","red2","special2");
-        PostDTOResponse post11=new PostDTOResponse(10,1,LocalDate.now().minusDays(7),product11,100,1500.50);
-        PostDTOResponse post33=new PostDTOResponse(20,2,LocalDate.now().minusDays(30),product22,100,1500.50);
-        PostDTOResponse post22=new PostDTOResponse(10,3,LocalDate.now().minusDays(11),product22,200,2500.50);
+        PostDTOResponse post11=new PostDTOResponse(10,1,datetext,product11,100,1500.50);
+        PostDTOResponse post33=new PostDTOResponse(10,2,datetext2,product22,100,1500.50);
+        PostDTOResponse post22=new PostDTOResponse(20,3,datetext3,product22,200,2500.50);
 
         seller.addPost(post1);
         seller.addPost(post3);
         seller2.addPost(post2);
 
-        List<PostDTOResponse> expected=new ArrayList<>();
-        expected.add(post11);
-        expected.add(post33);
-        expected.add(post22);
+        List<PostDTOResponse> listexpected=new ArrayList<>();
+        listexpected.add(post22);
+        listexpected.add(post11);
+        //listexpected.add(post33);
+
 
         when(iRepository.getByIdBuyer(1)).thenReturn(buyer);
+        SellerPostListDTOResponse expected = new SellerPostListDTOResponse(buyer.getUser_id(),listexpected);
 
-        //Act
         buyer.addFollowed(seller);
         buyer.addFollowed(seller2);
+        
+        //Act
         SellerPostListDTOResponse result= serviceImp.orderByDate(buyer.getUser_id(),"date_asc");
 
         //Assert
