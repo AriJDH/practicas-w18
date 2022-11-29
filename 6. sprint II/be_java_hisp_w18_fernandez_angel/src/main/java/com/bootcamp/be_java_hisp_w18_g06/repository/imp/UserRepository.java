@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
 public class UserRepository implements IUserRepository {
 	
 	// Base de datos
-	List<User> users = new ArrayList<>();
+	static List<User> users = new ArrayList<>();
 
 	List<Product> products = new ArrayList<>();
 	List<Post> posts = new ArrayList<>();
@@ -118,5 +118,9 @@ public class UserRepository implements IUserRepository {
 				.collect(Collectors.toList()));
 
 		users.add(userUpdate);
+	}
+
+	public static  List<User> getUsers(){
+		return users;
 	}
 }

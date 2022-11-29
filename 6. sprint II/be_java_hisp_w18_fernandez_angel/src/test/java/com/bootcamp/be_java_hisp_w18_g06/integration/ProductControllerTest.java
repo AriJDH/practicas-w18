@@ -3,10 +3,16 @@ package com.bootcamp.be_java_hisp_w18_g06.integration;
 
 import com.bootcamp.be_java_hisp_w18_g06.dto.request.PostDTO;
 import com.bootcamp.be_java_hisp_w18_g06.dto.response.exception.ExceptionValidResponseDTO;
+import com.bootcamp.be_java_hisp_w18_g06.entity.User;
+import com.bootcamp.be_java_hisp_w18_g06.repository.imp.UserRepository;
+import com.bootcamp.be_java_hisp_w18_g06.service.imp.PostService;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -19,9 +25,14 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
+import static com.bootcamp.be_java_hisp_w18_g06.repository.imp.UserRepository.getUsers;
 import static com.bootcamp.be_java_hisp_w18_g06.utils.PostFactory.getPostDto;
+import static com.bootcamp.be_java_hisp_w18_g06.utils.UserFactory.getUserRandom;
+import static com.bootcamp.be_java_hisp_w18_g06.utils.UserFactory.getUserWithFollowersListAndPosts;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -32,6 +43,7 @@ class ProductControllerTest {
 
    @Autowired
    MockMvc mockMvc;
+
 
     @Nested
     class saveTests{
@@ -61,6 +73,7 @@ class ProductControllerTest {
           String payload= new ObjectMapper().registerModule(new JavaTimeModule()).writeValueAsString(requestPostDto);
           String validDtoJson= new ObjectMapper().registerModule(new JavaTimeModule()).writeValueAsString(validResponseDTO);
 
+
          MvcResult result= mockMvc.perform(MockMvcRequestBuilders.post("/products/post")
                   .contentType(MediaType.APPLICATION_JSON)
                   .content(payload))
@@ -69,6 +82,32 @@ class ProductControllerTest {
                  .andExpect(content().contentType("application/json"))
                  .andReturn();
          assertEquals(validDtoJson,result.getResponse().getContentAsString());
+       }
+    }
+    @Nested
+   class findAllByUserTests{
+       @Test
+       public void findAllByUserOkTest() throws Exception {
+
+          List<User>users=getUsers();
+          User seller=getUserWithFollowersListAndPosts("Marco");
+          User buyer=users.get(0);
+          buyer.setFollowed(Collections.singletonList(seller));
+          List<PostDTO>expectList=getPostDto();
+          String payload= new ObjectMapper().registerModule(new JavaTimeModule()).writeValueAsString(buyer);
+          String validDtoJson= new ObjectMapper().registerModule(new JavaTimeModule()).writeValueAsString(expectList);
+
+          //mock
+
+          MvcResult result= mockMvc.perform(MockMvcRequestBuilders.get("/products//followed/{userId}/list",buyer.getUser_id())
+                  .contentType(MediaType.APPLICATION_JSON)
+                  .content(payload))
+                  .andDo(print())
+                  .andExpect(status().isOk())
+                  .andExpect(content().contentType("application/json"))
+                  .andReturn();
+          assertEquals(validDtoJson,result.getResponse().getContentAsString());
+
        }
     }
 
