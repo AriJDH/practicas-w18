@@ -144,35 +144,53 @@ class UserServiceTest {
 
     @Test
     @DisplayName("T-0007 Verify that the number of followers of a certain user is correct. ")
-    void findUserFollowedQuantity() {
+    void findUserFollowerQuantity() {
         // ARRANGE
         User userTarget = User.builder()
                 .userId(1)
                 .userName("Ariel")
                 .build();
 
-        User userFollowed1 = User.builder()
+        User userFollower1 = User.builder()
                 .userId(2)
                 .userName("Janeth")
                 .build();
-        User userFollowed2 = User.builder()
+        User userFollower2 = User.builder()
                 .userId(3)
                 .userName("Angel")
                 .build();
-        User userFollowed3 = User.builder()
+        User userFollower3 = User.builder()
                 .userId(4)
                 .userName("Valentina")
                 .build();
-        List<User> userTargetFolloweds = new ArrayList<>(List.of(userFollowed1, userFollowed2, userFollowed3));
-        userTarget.setFollowed(userTargetFolloweds);
+        Product product1 = Product.builder()
+                .productId(1)
+                .productName("Notebook Mac")
+                .type("Notebook")
+                .brand("Apple")
+                .color("Gray")
+                .notes("Excelent!")
+                .build();
+        Product product2 = Product.builder()
+                .productId(2)
+                .productName("Notebook Asus")
+                .type("Notebook")
+                .brand("Asus")
+                .color("White")
+                .notes("Excelent!")
+                .build();
+        List<User> userTargetFollowers = new ArrayList<>(List.of(userFollower1, userFollower2, userFollower3));
+        List<Product> userTargetProducts = new ArrayList<>(List.of(product1, product2));
+        userTarget.setFollowers(userTargetFollowers);
+        userTarget.setProducts(userTargetProducts);
 
         // ACT
         when(userRepository.findById(userTarget.getUserId())).thenReturn(Optional.of(userTarget));
-        UserFollowedListResponse userFollowedQuantityTestResult =
-                userService.findAllFollowed(userTarget.getUserId());
+        UserFollowerListResponse userFollowerListResponse =
+                userService.findAllFollower(userTarget.getUserId());
 
         // ASSERT
-        assertEquals(userTargetFolloweds.size(), userFollowedQuantityTestResult.getFollowed().size());
+        assertEquals(userTargetFollowers.size(), userFollowerListResponse.getFollowers().size());
     }
 
     // * ============= *

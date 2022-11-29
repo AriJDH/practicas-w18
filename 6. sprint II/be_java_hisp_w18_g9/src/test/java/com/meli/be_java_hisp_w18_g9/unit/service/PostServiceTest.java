@@ -89,9 +89,10 @@ class PostServiceTest {
     @Test
     @DisplayName("[T005] - Method for getting all posts from followed by user id (Sad Path - User not found)")
     void findPostsByFollowedAndUserIdUserNotFound() {
-        when(userRepository.findById(anyInt())).thenThrow(new NotFoundException("User not found"));
+        //when(userRepository.findById(anyInt())).thenThrow(new NotFoundException("User not found"));
+        when(userRepository.findById(1)).thenReturn(Optional.empty());
         NotFoundException Exception = assertThrows(NotFoundException.class, () -> postService.findPostsByFollowedAndUserId(1));
-        assertEquals("User not found", Exception.getMessage());
+        assertEquals("User with id 1 not found", Exception.getMessage());
     }
 
     // * ============= *
