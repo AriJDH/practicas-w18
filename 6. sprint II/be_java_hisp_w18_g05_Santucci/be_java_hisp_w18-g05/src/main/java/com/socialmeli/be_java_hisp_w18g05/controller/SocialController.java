@@ -72,7 +72,7 @@ public class SocialController {
     @PostMapping("/products/post") //US0005
     public ResponseEntity<?> addPost(@RequestBody @Valid NewPostDTORequest post){
         service.newPost(post);
-        return new ResponseEntity<>( HttpStatus.OK);
+        return new ResponseEntity<>( HttpStatus.CREATED);
     }
 
     @GetMapping("/products/followed/{userId}/list") //US0006 & US0009
