@@ -1,6 +1,7 @@
 package com.meli.be_java_hisp_w18_g9.unit.service;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 
@@ -13,10 +14,13 @@ import static org.mockito.Mockito.when;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.meli.be_java_hisp_w18_g9.exception.BadRequestException;
 import com.meli.be_java_hisp_w18_g9.model.dto.response.UserFollowedListResponse;
+import com.meli.be_java_hisp_w18_g9.model.dto.response.UserFollowerListResponse;
+import com.meli.be_java_hisp_w18_g9.model.entity.Product;
 import com.meli.be_java_hisp_w18_g9.model.entity.User;
 import com.meli.be_java_hisp_w18_g9.repository.IUserRepository;
 import com.meli.be_java_hisp_w18_g9.service.UserService;
 import com.meli.be_java_hisp_w18_g9.util.UsersFactory;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -174,28 +178,246 @@ class UserServiceTest {
     // * ============= *
 
     @Test
-    @DisplayName("Verificar el correcto ordenamiento ascendente por nombre.")
+    @DisplayName("T-004 - verify correct ascending order of followed .")
     void findAllFollowedOrderAsc() {
 
+        //--------------------- Arrange ------------------------------------------------------
+
+        //------ Create user for test
+        User userTest1 = new User(1, "Ariel", new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
+        User userTest2 = new User(2, "Martin", new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
+        User userTest3 = new User(3, "User 3", new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
+        User userTest4 = new User(4, "Charly", new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
+
+        // ------ Create products
+        Product productTest1 = new Product(1, "Notebook Mac", "Notebook", "Apple", "Gray", "Excelent!");
+        Product productTest2 = new Product(2, "Notebook Dell", "Notebook", "Dell", "Black", "Excelent!");
+        Product productTest3 = new Product(3, "Notebook Asus", "Notebook", "Asus", "White", "Excelent!");
+
+        // ------ Create list products
+        List<Product> listProducTest = new ArrayList<>();
+
+        // ------ Add product to list
+        listProducTest.add(productTest1);
+        listProducTest.add(productTest2);
+        listProducTest.add(productTest3);
+
+        //------ Create
+        List <User> listUsersFollowed = new ArrayList<>();
+
+        // ------ Add user to the list
+
+        listUsersFollowed.add(userTest2);
+        listUsersFollowed.add(userTest3);
+        listUsersFollowed.add(userTest4);
+
+
+
+        //---- Insert followed and products
+        userTest1.setFollowed(listUsersFollowed);
+        userTest1.setProducts(listProducTest);
+
+        //------ Create list for order user
+        List <User> listSorterExpect = new ArrayList<>(listUsersFollowed);
+        listSorterExpect.sort(Comparator.comparing(User::getUserName));
+
+
+
+        // ----------------------------------------------------- Act -----------------------------------------------------
+
+        when (userRepository.findById(userTest1.getUserId())).thenReturn(Optional.of(userTest1));
+
+        UserFollowedListResponse resultUserFollowedLisTest = userService.findAllFollowedOrderAsc(userTest1.getUserId());
+
+        // ----------------------------------------------------- Assert -----------------------------------------------------
+        Assertions.assertEquals(listSorterExpect.get(0).getUserName(),resultUserFollowedLisTest.getFollowed().get(0).getUserName());
+        Assertions.assertEquals(listSorterExpect.get(1).getUserName(),resultUserFollowedLisTest.getFollowed().get(1).getUserName());
+        Assertions.assertEquals(listSorterExpect.get(2).getUserName(),resultUserFollowedLisTest.getFollowed().get(2).getUserName());
+
+
     }
 
     // * ============= *
 
     @Test
+    @DisplayName("T-004 - verify correct ascending order of follower .")
     void findAllFollowerOrderAsc(){
 
+        //--------------------- Arrange ------------------------------------------------------
+
+        //------ Create user for test
+        User userTest1 = new User(1, "Ariel", new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
+        User userTest2 = new User(2, "Martin", new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
+        User userTest3 = new User(3, "User 3", new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
+        User userTest4 = new User(4, "Charly", new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
+
+        // ------ Create products
+        Product productTest1 = new Product(1, "Notebook Mac", "Notebook", "Apple", "Gray", "Excelent!");
+        Product productTest2 = new Product(2, "Notebook Dell", "Notebook", "Dell", "Black", "Excelent!");
+        Product productTest3 = new Product(3, "Notebook Asus", "Notebook", "Asus", "White", "Excelent!");
+
+        // ------ Create list products
+        List<Product> listProducTest = new ArrayList<>();
+
+        // ------ Add product to list
+        listProducTest.add(productTest1);
+        listProducTest.add(productTest2);
+        listProducTest.add(productTest3);
+
+        //------ Create
+        List <User> listUsersFollower = new ArrayList<>();
+
+        // ------ Add user to the list
+
+        listUsersFollower.add(userTest2);
+        listUsersFollower.add(userTest3);
+        listUsersFollower.add(userTest4);
+
+
+
+        //---- Insert followed and products
+        userTest1.setFollowers(listUsersFollower);
+        userTest1.setProducts(listProducTest);
+
+        //------ Create list for order user
+        List <User> listSorterExpect = new ArrayList<>(listUsersFollower);
+        listSorterExpect.sort(Comparator.comparing(User::getUserName));
+
+
+
+        // ----------------------------------------------------- Act -----------------------------------------------------
+
+        when (userRepository.findById(userTest1.getUserId())).thenReturn(Optional.of(userTest1));
+
+        UserFollowerListResponse resultUserFollowerLisTest = userService.findAllFollowerOrderAsc(userTest1.getUserId());
+
+        // ----------------------------------------------------- Assert -----------------------------------------------------
+        Assertions.assertEquals(listSorterExpect.get(0).getUserName(),resultUserFollowerLisTest.getFollowers().get(0).getUserName());
+        Assertions.assertEquals(listSorterExpect.get(1).getUserName(),resultUserFollowerLisTest.getFollowers().get(1).getUserName());
+        Assertions.assertEquals(listSorterExpect.get(2).getUserName(),resultUserFollowerLisTest.getFollowers().get(2).getUserName());
+
     }
 
     // * ============= *
 
     @Test
+    @DisplayName("T-004 - verify correct descending order of follower .")
     void findAllFollowerOrderDesc() {
+
+        //--------------------- Arrange ------------------------------------------------------
+
+        //------ Create user for test
+        User userTest1 = new User(1, "Ariel", new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
+        User userTest2 = new User(2, "Martin", new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
+        User userTest3 = new User(3, "User 3", new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
+        User userTest4 = new User(4, "Charly", new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
+
+        // ------ Create products
+        Product productTest1 = new Product(1, "Notebook Mac", "Notebook", "Apple", "Gray", "Excelent!");
+        Product productTest2 = new Product(2, "Notebook Dell", "Notebook", "Dell", "Black", "Excelent!");
+        Product productTest3 = new Product(3, "Notebook Asus", "Notebook", "Asus", "White", "Excelent!");
+
+        // ------ Create list products
+        List<Product> listProducTest = new ArrayList<>();
+
+        // ------ Add product to list
+        listProducTest.add(productTest1);
+        listProducTest.add(productTest2);
+        listProducTest.add(productTest3);
+
+        //------ Create
+        List <User> listUsersFollower = new ArrayList<>();
+
+        // ------ Add user to the list
+
+        listUsersFollower.add(userTest2);
+        listUsersFollower.add(userTest3);
+        listUsersFollower.add(userTest4);
+
+
+
+        //---- Insert followed and products
+        userTest1.setFollowers(listUsersFollower);
+        userTest1.setProducts(listProducTest);
+
+        //------ Create list for order user
+        List <User> listSorterExpect = new ArrayList<>(listUsersFollower);
+        listSorterExpect.sort(Comparator.comparing(User::getUserName).reversed());
+
+
+
+        // ----------------------------------------------------- Act -----------------------------------------------------
+
+        when (userRepository.findById(userTest1.getUserId())).thenReturn(Optional.of(userTest1));
+
+        UserFollowerListResponse resultUserFollowerLisTest = userService.findAllFollowerOrderDesc(userTest1.getUserId());
+
+        // ----------------------------------------------------- Assert -----------------------------------------------------
+        Assertions.assertEquals(listSorterExpect.get(0).getUserName(),resultUserFollowerLisTest.getFollowers().get(0).getUserName());
+        Assertions.assertEquals(listSorterExpect.get(1).getUserName(),resultUserFollowerLisTest.getFollowers().get(1).getUserName());
+        Assertions.assertEquals(listSorterExpect.get(2).getUserName(),resultUserFollowerLisTest.getFollowers().get(2).getUserName());
+
     }
 
     // * ============= *
 
     @Test
+    @DisplayName("T-004 - verify correct descending order of followed .")
     void findAllFollowedOrderDesc() {
+
+        //--------------------- Arrange ------------------------------------------------------
+
+        //------ Create user for test
+        User userTest1 = new User(1, "Ariel", new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
+        User userTest2 = new User(2, "Martin", new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
+        User userTest3 = new User(3, "User 3", new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
+        User userTest4 = new User(4, "Charly", new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
+
+        // ------ Create products
+        Product productTest1 = new Product(1, "Notebook Mac", "Notebook", "Apple", "Gray", "Excelent!");
+        Product productTest2 = new Product(2, "Notebook Dell", "Notebook", "Dell", "Black", "Excelent!");
+        Product productTest3 = new Product(3, "Notebook Asus", "Notebook", "Asus", "White", "Excelent!");
+
+        // ------ Create list products
+        List<Product> listProducTest = new ArrayList<>();
+
+        // ------ Add product to list
+        listProducTest.add(productTest1);
+        listProducTest.add(productTest2);
+        listProducTest.add(productTest3);
+
+        //------ Create
+        List <User> listUsersFollowed = new ArrayList<>();
+
+        // ------ Add user to the list
+
+        listUsersFollowed.add(userTest2);
+        listUsersFollowed.add(userTest3);
+        listUsersFollowed.add(userTest4);
+
+
+
+        //---- Insert followed and products
+        userTest1.setFollowed(listUsersFollowed);
+        userTest1.setProducts(listProducTest);
+
+        //------ Create list for order user
+        List <User> listSorterExpect = new ArrayList<>(listUsersFollowed);
+        listSorterExpect.sort(Comparator.comparing(User::getUserName).reversed());
+
+
+
+        // ----------------------------------------------------- Act -----------------------------------------------------
+
+        when (userRepository.findById(userTest1.getUserId())).thenReturn(Optional.of(userTest1));
+
+        UserFollowedListResponse resultUserFollowedLisTest = userService.findAllFollowedOrderDesc(userTest1.getUserId());
+
+        // ----------------------------------------------------- Assert -----------------------------------------------------
+        Assertions.assertEquals(listSorterExpect.get(0).getUserName(),resultUserFollowedLisTest.getFollowed().get(0).getUserName());
+        Assertions.assertEquals(listSorterExpect.get(1).getUserName(),resultUserFollowedLisTest.getFollowed().get(1).getUserName());
+        Assertions.assertEquals(listSorterExpect.get(2).getUserName(),resultUserFollowedLisTest.getFollowed().get(2).getUserName());
+
     }
 
     // * ============= *
