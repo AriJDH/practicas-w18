@@ -53,7 +53,6 @@ public class IntegrationTest {
     }
     @Test
     void testIntegrationFollowedOrdeAsc() throws Exception {
-        //US0004
         //US0008
         /*ARRANGE*/
         //datos que necesito
@@ -74,6 +73,7 @@ public class IntegrationTest {
                 .andExpect(expectedResult)
                 .andExpect(expectedStatus);
     }
+
     @Test
     void testIntegrationFollowers() throws Exception {
         //US0003
