@@ -11,6 +11,7 @@ import com.example.SocialMeli2.exception.UserNotFoundException;
 import com.example.SocialMeli2.repository.IUserBuyerRepository;
 import com.example.SocialMeli2.repository.IUserSellerRepository;
 
+import com.example.SocialMeli2.util.PostFactory;
 import com.example.SocialMeli2.util.UserBuyerFactory;
 
 import com.example.SocialMeli2.util.UserSellerFactory;
@@ -166,18 +167,23 @@ void orderFollowedOrderDesc(){
     @DisplayName("T-0007 US-0002. Sort by date DESC")
     void sortBydateDESC() {
         Integer user_id = 1;
-        ArrayList<UserSeller> followed = new ArrayList<>();
+        UserSeller seller = UserSellerFactory.getUserSeller();
+        UserBuyer buyer = UserBuyerFactory.getUserBuyer();
+        buyer.getFollowed().add(seller);
+
+
         ArrayList<Post> posts = new ArrayList<>();
-        UserBuyer userBuyer = new UserBuyer();
-        userBuyer.setUser_id(1);
-        userBuyer.setUser_name("Josep");
+        Post post1 = PostFactory.getPost(3, LocalDate.of(2022, 11, 25), new Product(3,
+                "Product 3", "Type 3", "Brand 3", "Color 3", "Notes 3"), 2, 2500.13);
 
-        UserSeller seller = new UserSeller();
-        seller.setUser_name("Kyle");
-        seller.setUser_id(3);
+        Post post2 =PostFactory.getPost(7, LocalDate.of(2022, 11, 20), new Product(7,
+                "Product 7", "Type 7", "Brand 7", "Color 7", "Notes 7"), 2, 950.00);
 
-        Post post1 = new Post(3, LocalDate.of(2022, 11, 25), new Product(3, "Product 3", "Type 3", "Brand 3", "Color 3", "Notes 3"), 2, 2500.13);
-        Post post2 = new Post(7, LocalDate.of(2022, 11, 20), new Product(7, "Product 7", "Type 7", "Brand 7", "Color 7", "Notes 7"), 2, 950.00);
+        posts.add(post1);
+        posts.add(post2);
+        seller.setPosts(posts);
+
+
         List<PostDTORes> postDtoResList= new ArrayList<>();
 
         PostDTORes postDTORes = new PostDTORes(seller.getUser_id(), post1.getPost_id(), post1.getDate(),
@@ -191,21 +197,10 @@ void orderFollowedOrderDesc(){
         postDtoResList.add(postDTORes);
         postDtoResList.add(postDTORes2);
 
-        posts.add(post1);
-        posts.add(post2);
 
-        seller.setPosts(posts);
-
-        followed.add(seller);
-        userBuyer.setFollowed(followed);
-
-        // ArrayList Posts
-
-        when(userBuyerRepository.findById(user_id)).thenReturn(Optional.of(userBuyer));
+        when(userBuyerRepository.findById(user_id)).thenReturn(Optional.of(buyer));
 
         PostFollowedByDateDTORes followedByDateDTORes = userBuyerServiceImp.getLastPosts(user_id, "date_desc");
-
-        //assertTrue(post1.getDate().equals(followedByDateDTORes.getPosts().get(0).getDate()));
 
         assertTrue(postDtoResList.equals(followedByDateDTORes.getPosts()));
 
@@ -214,21 +209,23 @@ void orderFollowedOrderDesc(){
     @DisplayName("T-0007 US-0002. Sort by date ASC")
     void sortBydateASC() {
         Integer user_id = 1;
-        ArrayList<UserSeller> followed = new ArrayList<>();
+        UserSeller seller = UserSellerFactory.getUserSeller();
+        UserBuyer buyer = UserBuyerFactory.getUserBuyer();
+        buyer.getFollowed().add(seller);
+
+
         ArrayList<Post> posts = new ArrayList<>();
-        UserBuyer userBuyer = new UserBuyer();
-        userBuyer.setUser_id(1);
-        userBuyer.setUser_name("Josep");
+        Post post1 = PostFactory.getPost(3, LocalDate.of(2022, 11, 25), new Product(3,
+                "Product 3", "Type 3", "Brand 3", "Color 3", "Notes 3"), 2, 2500.13);
 
-        UserSeller seller = new UserSeller();
-        seller.setUser_name("Kyle");
-        seller.setUser_id(3);
+        Post post2 =PostFactory.getPost(7, LocalDate.of(2022, 11, 20), new Product(7,
+                "Product 7", "Type 7", "Brand 7", "Color 7", "Notes 7"), 2, 950.00);
 
-        Post post1 = new Post(3, LocalDate.of(2022, 11, 25), new Product(3, "Product 3", "Type 3", "Brand 3", "Color 3", "Notes 3"), 2, 2500.13);
-        Post post2 = new Post(7, LocalDate.of(2022, 11, 20), new Product(7, "Product 7", "Type 7", "Brand 7", "Color 7", "Notes 7"), 2, 950.00);
+        posts.add(post1);
+        posts.add(post2);
+        seller.setPosts(posts);
 
         List<PostDTORes> postDtoResList= new ArrayList<>();
-
         PostDTORes postDTORes = new PostDTORes(seller.getUser_id(), post1.getPost_id(), post1.getDate(),
                 new ProductDTORes(post1.getProduct()),
                 post1.getCategory(), post1.getPrice());
@@ -240,22 +237,10 @@ void orderFollowedOrderDesc(){
         postDtoResList.add(postDTORes2);
         postDtoResList.add(postDTORes);
 
-
-        posts.add(post2);
-        posts.add(post1);
-
-        seller.setPosts(posts);
-
-        followed.add(seller);
-        userBuyer.setFollowed(followed);
-
         // ArrayList Posts
-
-        when(userBuyerRepository.findById(user_id)).thenReturn(Optional.of(userBuyer));
+        when(userBuyerRepository.findById(user_id)).thenReturn(Optional.of(buyer));
 
         PostFollowedByDateDTORes followedByDateDTORes = userBuyerServiceImp.getLastPosts(user_id, "date_asc");
-        System.out.println(followedByDateDTORes.getPosts());
-        System.out.println(postDtoResList);
         assertTrue(postDtoResList.equals(followedByDateDTORes.getPosts()));
 
     }
