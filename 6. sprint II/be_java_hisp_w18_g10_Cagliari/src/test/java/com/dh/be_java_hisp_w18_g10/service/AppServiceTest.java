@@ -332,8 +332,8 @@ public class AppServiceTest {
         when(userRepository.getUser(2)).thenReturn(seller);
 
         assertAll( () -> {
-            assertThrows(UserGenericException.class ,() -> service.getUserPosts(1, wrongParameter));
-            assertThrows(UserGenericException.class ,() -> service.getUserPosts(1, wrongParameter));
+            assertThrows(UserGenericException.class, () -> service.getUserPosts(1, wrongParameter));
+            assertThrows(UserGenericException.class, () -> service.getUserPosts(1, wrongParameter));
         });
 
     }
@@ -356,7 +356,7 @@ public class AppServiceTest {
 
         UserPostsDTOres result = service.getUserPosts(1, TypeOrderHelper.DATE_ASC);
 
-        assertArrayEquals(expected.getPosts().toArray(),result.getPosts().toArray());
+        assertArrayEquals(expected.getPosts().toArray(), result.getPosts().toArray());
     }
     @Test
     @DisplayName("T0006 - Descendente")
@@ -396,7 +396,7 @@ public class AppServiceTest {
 
         UserFollowersCountDTOres result = service.getUserFollowersCount(1);
 
-        assertEquals(expected,result);
+        assertEquals(expected, result);
     }
     @Test
     @DisplayName("T0007 - Usuario no encontrado")
@@ -404,7 +404,7 @@ public class AppServiceTest {
 
         when(userRepository.getUser(100)).thenReturn(null);
 
-        assertThrows(NotFoundException.class, ()-> service.getUserFollowersCount(100));
+        assertThrows(NotFoundException.class, () -> service.getUserFollowersCount(100));
     }
 
     @Test
@@ -421,6 +421,7 @@ public class AppServiceTest {
         Post todayPost = new Post(1, 1, today, new Product(), 1, 50);
         Post tenDaysAgoPost = new Post(1, 2, tenDaysAgo, new Product(), 1, 80);
         Post twentyDaysAgoPost = new Post(1, 3,  twentyDaysAgo, new Product(), 2, 100);
+
         Map<Integer, Post> posts = new HashMap<Integer, Post>();
         posts.put(1, twentyDaysAgoPost);
         posts.put(2, tenDaysAgoPost);
@@ -432,6 +433,7 @@ public class AppServiceTest {
         when(userRepository.getUser(2)).thenReturn(seller);
 
         UserPostsDTOres userPostsDto = service.getUserPosts(1, null);
+
         assertEquals(userPostsDto.getPosts().size(), 2);
         userPostsDto.getPosts().forEach(
                 p -> {

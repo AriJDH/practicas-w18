@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -23,16 +24,15 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest
 @AutoConfigureMockMvc
 public class AppControllerTest {
-
     @Autowired
     private MockMvc mockMvc;
-
     private ObjectWriter objectWriter;
     private String jsonBody;
 
     @BeforeEach
     public void setUp(){
-        objectWriter = new ObjectMapper().configure(SerializationFeature.WRAP_ROOT_VALUE, false)
+        objectWriter = new ObjectMapper()
+                .configure(SerializationFeature.WRAP_ROOT_VALUE, false)
                 .configure(SerializationFeature.WRITE_DATE_KEYS_AS_TIMESTAMPS, false)
                 .registerModule(new JavaTimeModule())
                 .writer();

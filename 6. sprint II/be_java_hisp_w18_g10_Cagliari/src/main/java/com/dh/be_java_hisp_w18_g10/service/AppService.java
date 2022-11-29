@@ -59,6 +59,7 @@ public class AppService implements IAppService {
     public UserFollowersCountDTOres getUserFollowersCount(int userId) {
         User user = userRepository.getUser(userId);
         if (user == null) throw new NotFoundException("El usuario con el id: " + userId + " no fue encontrado!");
+
         return new UserFollowersCountDTOres(
                 user.getUserId(),
                 user.getUserName(),
@@ -196,4 +197,5 @@ public class AppService implements IAppService {
         } else
             throw new UserGenericException("Parametro no aceptado");
     }
+
 }
