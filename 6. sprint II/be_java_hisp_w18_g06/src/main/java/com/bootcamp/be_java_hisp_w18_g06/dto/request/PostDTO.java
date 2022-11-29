@@ -1,5 +1,6 @@
 package com.bootcamp.be_java_hisp_w18_g06.dto.request;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -9,6 +10,7 @@ import java.time.LocalDate;
 
 @Getter
 @Setter
+@EqualsAndHashCode
 public class PostDTO {
     //US-005
     @NotNull(message = "Id cannot be empty")

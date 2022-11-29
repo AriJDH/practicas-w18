@@ -1,5 +1,6 @@
 package com.bootcamp.be_java_hisp_w18_g06.utils;
 
+import com.bootcamp.be_java_hisp_w18_g06.dto.request.PostDTO;
 import com.bootcamp.be_java_hisp_w18_g06.dto.response.PostResDto;
 import com.bootcamp.be_java_hisp_w18_g06.dto.response.UserPostListDTO;
 import com.bootcamp.be_java_hisp_w18_g06.entity.Post;
@@ -42,5 +43,17 @@ public class PostFactory {
         postList.add(postResDto3);
         userPostListDTO.setPostDTOList(postList);
         return userPostListDTO;
+    }
+    public static List<PostDTO> getPostDto(){
+        List<PostDTO> postList = new ArrayList<>();
+        PostDTO post1 = new PostDTO();
+        post1.setDate(LocalDate.now().minusDays(12));
+        PostDTO post2 = new PostDTO();
+        post2.setDate(LocalDate.now());
+
+        postList.add(post1);
+        postList.add(post2);
+        return postList;
+
     }
 }

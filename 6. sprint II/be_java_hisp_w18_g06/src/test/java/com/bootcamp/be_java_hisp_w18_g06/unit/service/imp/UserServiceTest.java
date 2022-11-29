@@ -20,7 +20,7 @@ import java.util.Optional;
 
 import static com.bootcamp.be_java_hisp_w18_g06.utils.UserFactory.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 
 @SpringBootTest
@@ -81,12 +81,16 @@ class UserServiceTest {
             when(repository.findUserById(userFollower.getUser_id())).thenReturn(Optional.of(userFollower));
             when(repository.findUserById(userToUnfollow.getUser_id())).thenReturn(Optional.of(userToUnfollow));
 
+
             when(repository.findUserInList(userFollower.getFollowed(),userToUnfollow.getUser_id())).thenReturn(Optional.of(userToUnfollow));
             when(repository.findUserInList(userToUnfollow.getFollowers(),userFollower.getUser_id())).thenReturn(Optional.of(userFollower));
+
             //ACT, ASSERT
 
             Assertions.assertDoesNotThrow(()->service.unfollowUser(userFollower.getUser_id(), userToUnfollow.getUser_id()));
 
+            verify(repository,atLeast(2)).findUserById(anyInt());
+            verify(repository,atLeast(2)).findUserInList(anyList(),anyInt());
             /*
             //Verificar que el usuario a dejar de seguir exista. (US-0007)
             //ARRANGE
@@ -138,6 +142,9 @@ class UserServiceTest {
 
             //ACT, ASSERT
             Assertions.assertThrows(BadRequestException.class, ()->service.unfollowUser(userFollower.getUser_id(), userToUnfollow.getUser_id()));
+
+            verify(repository,atLeast(2)).findUserById(anyInt());
+            verify(repository,atLeast(2)).findUserInList(anyList(),anyInt());
         }
     }
     //US-0008

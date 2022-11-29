@@ -15,6 +15,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import static com.bootcamp.be_java_hisp_w18_g06.utils.PostFactory.getPost;
+import static com.bootcamp.be_java_hisp_w18_g06.utils.PostFactory.getPostDto;
 import static com.bootcamp.be_java_hisp_w18_g06.utils.UserFactory.getUserRandom;
 import static com.bootcamp.be_java_hisp_w18_g06.utils.UserFactory.getUserWithFollowersListAndPosts;
 import static org.junit.jupiter.api.Assertions.*;
@@ -43,6 +44,7 @@ class PostServiceTest {
             User seller=getUserWithFollowersListAndPosts("Marco");
             User buyer=getUserRandom("Daniela");
             buyer.setFollowed(Collections.singletonList(seller));
+            List<PostDTO>expectList=getPostDto();
 
             //Mock
             when(userRepository.findUserById(buyer.getUser_id())).thenReturn(Optional.of(buyer));
@@ -51,7 +53,7 @@ class PostServiceTest {
             List<PostDTO>result=postService
                     .findAllPostsByUser(buyer.getUser_id(),null);
             //assert
-            assertEquals(result.size(), 2);
+            assertArrayEquals(expectList.toArray(),result.toArray());
 
 
         }
