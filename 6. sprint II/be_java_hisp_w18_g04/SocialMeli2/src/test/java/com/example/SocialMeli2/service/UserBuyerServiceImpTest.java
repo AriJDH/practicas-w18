@@ -1,9 +1,7 @@
 package com.example.SocialMeli2.service;
 
-import com.example.SocialMeli2.dto.respose.FollowDTORes;
+import com.example.SocialMeli2.dto.respose.*;
 
-import com.example.SocialMeli2.dto.respose.PostFollowedByDateDTORes;
-import com.example.SocialMeli2.dto.respose.UnfollowDTORes;
 import com.example.SocialMeli2.entity.Post;
 import com.example.SocialMeli2.entity.Product;
 import com.example.SocialMeli2.entity.UserBuyer;
@@ -41,6 +39,40 @@ class UserBuyerServiceImpTest {
 
     @InjectMocks
     UserBuyerServiceImp userBuyerServiceImp;
+
+
+    @Test
+    @DisplayName("T-0003. US-0008. Catch the exception if order is 'invalid'")
+    void orderFollowedInvalidException() {
+        //Arrange
+        String order = "invalid";
+        UserBuyer buyer = UserBuyerFactory.getUserBuyer();
+
+        //Assert
+        assertThrows(UserNotFoundException.class,
+                ()-> userBuyerServiceImp.getFollowed(buyer.getUser_id(), order));
+
+    }
+    @Test
+    @DisplayName("T-0003. US-0008. Verify the correct operation if order is 'name_asc' ")
+    void orderFollowedOrderAsc(){
+    //Arrange
+        String order = "name_asc";
+        UserBuyer buyer = UserBuyerFactory.getUserBuyer();
+
+    //mock
+      when(userBuyerRepository.findById(1)).thenReturn(Optional.of(buyer));
+      FollowedListDTORes result = userBuyerServiceImp.getFollowed(buyer.getUser_id(), order);
+      verify(userBuyerRepository).findById(1);
+        // Assert
+        assertAll(
+                ()-> assertEquals(buyer.getUser_id(), result.getUser_id()),
+                ()-> assertEquals(buyer.getUser_name(), result.getUser_name()),
+                ()-> assertEquals(buyer.getFollowed(), result.getFollowed())
+        );
+
+    }
+
 
     @Test
     @DisplayName("T-0001. US-0001. The user to follow exists ")
