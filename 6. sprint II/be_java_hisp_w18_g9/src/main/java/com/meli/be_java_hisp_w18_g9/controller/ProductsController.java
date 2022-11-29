@@ -2,11 +2,8 @@ package com.meli.be_java_hisp_w18_g9.controller;
 
 import com.meli.be_java_hisp_w18_g9.exception.BadRequestException;
 import com.meli.be_java_hisp_w18_g9.model.dto.request.PostDtoRequest;
-import com.meli.be_java_hisp_w18_g9.model.dto.request.PromoPostRequest;
 import com.meli.be_java_hisp_w18_g9.model.dto.response.PostDtoResponse;
 import com.meli.be_java_hisp_w18_g9.model.dto.response.PostListByFollowedResponse;
-import com.meli.be_java_hisp_w18_g9.model.dto.response.PromoPostListByUserResponse;
-import com.meli.be_java_hisp_w18_g9.model.dto.response.PromoProductsCountResponse;
 import com.meli.be_java_hisp_w18_g9.service.IPostService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

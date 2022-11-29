@@ -12,6 +12,7 @@ import static org.mockito.Mockito.when;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.meli.be_java_hisp_w18_g9.exception.BadRequestException;
+import com.meli.be_java_hisp_w18_g9.exception.NotFoundException;
 import com.meli.be_java_hisp_w18_g9.model.dto.response.UserFollowedListResponse;
 import com.meli.be_java_hisp_w18_g9.model.dto.response.UserFollowerListResponse;
 import com.meli.be_java_hisp_w18_g9.model.dto.response.UserSimpleResponse;
@@ -35,9 +36,6 @@ class UserServiceTest {
     // ? ================= Attributes ================= ?
 
     @Mock
-    private ObjectMapper mapper;
-
-    @Mock
     private IUserRepository userRepository;
 
     @InjectMocks
@@ -46,7 +44,7 @@ class UserServiceTest {
     // ? ================= Tests ================= ?
 
     @Test
-    @DisplayName("Verify that the user exists T-0001 Happy path")
+    @DisplayName("[T001] - Verify that the user exists (Happy path)")
     void follow() {
         // arrange
         User userMock = UsersFactory.getUserById(4, "Messi", false);
@@ -63,8 +61,10 @@ class UserServiceTest {
 
     }
 
+    // * ============== *
+
     @Test
-    @DisplayName("Verify that the user exists T-0001 Sab Path")
+    @DisplayName("[T001] - Verify that the user exists (Sad Path)")
     void followSadPath() {
         // arrange
         User userMock = UsersFactory.getUserById(1, "Messi", false);
@@ -73,14 +73,14 @@ class UserServiceTest {
         Mockito.when(userRepository.findById(userToFollowMock.getUserId())).thenReturn(Optional.empty());
 
         // act & assert
-        assertThrows(BadRequestException.class, () -> userService.follow(userMock.getUserId(),userToFollowMock.getUserId()));
+        assertThrows(NotFoundException.class, () -> userService.follow(userMock.getUserId(),userToFollowMock.getUserId()));
 
     }
 
     // * ============= *
 
     @Test
-    @DisplayName("T-0002 Verify that the user to unfollow exists. Happy path ")
+    @DisplayName("[T002] - Verify that the user to unfollow exists. (Happy path)")
     void unfollow() {
         // ARRANGE
         User userTarget = User.builder()
@@ -116,8 +116,9 @@ class UserServiceTest {
     }
 
     // * ============= *
+
     @Test
-    @DisplayName("T-0002 Verify that the user to unfollow exists. Notifies non-existence by means of an exception ")
+    @DisplayName("[T002] - Verify that the user to unfollow exists. Notifies non-existence by means of an exception")
     void unfollowBad() {
         // ARRANGE
         User userTarget = User.builder()
@@ -131,14 +132,18 @@ class UserServiceTest {
         when(userRepository.findById(2)).thenReturn(
                 Optional.empty()); // user validation to follow
         // ASSERT
-        BadRequestException Exception = assertThrows(BadRequestException.class,
+        NotFoundException Exception = assertThrows(NotFoundException.class,
                 () ->  userService.unfollow(userTarget.getUserId(), 2));
         assertEquals("user to follow with Id 2 doesn't exist", Exception.getMessage());
+
     }
 
     // * ============= *
+
     @Test
+    @DisplayName("List followers")
     void findAllFollowed() {
+
         // Arrange
         User userMock = UsersFactory.getUserWithAllList(4,"Michael", true, true, false);
         UserFollowedListResponse expected = UsersFactory.getUserFollowedListResponse(userMock);
@@ -149,15 +154,19 @@ class UserServiceTest {
                 userService.findAllFollowed(userMock.getUserId());
 
         //ASSERT
-        assertNotNull(userFollowedResponse);
-        assertTrue(userFollowedResponse.getFollowed().size()>0);
+        assertAll(() ->{
+            assertNotNull(userFollowedResponse);
+            assertTrue(userFollowedResponse.getFollowed().size()>0);
+        });
     }
+
 
     // * ============= *
 
     @Test
-    @DisplayName("T-0007 Verify that the number of followers of a certain user is correct. ")
+    @DisplayName("[T007] - Verify that the number of followers of a certain user is correct. ")
     void findUserFollowerQuantity() {
+
         // ARRANGE
         User userTarget = User.builder()
                 .userId(1)
@@ -209,7 +218,7 @@ class UserServiceTest {
     // * ============= *
 
     @Test
-    @DisplayName("T-004 - verify correct ascending order of followed .")
+    @DisplayName("[T004] - Verify correct ascending order of followed.")
     void findAllFollowedOrderAsc() {
 
         //--------------------- Arrange ------------------------------------------------------
@@ -261,9 +270,11 @@ class UserServiceTest {
         UserFollowedListResponse resultUserFollowedLisTest = userService.findAllFollowedOrderAsc(userTest1.getUserId());
 
         // ----------------------------------------------------- Assert -----------------------------------------------------
-        Assertions.assertEquals(listSorterExpect.get(0).getUserName(),resultUserFollowedLisTest.getFollowed().get(0).getUserName());
-        Assertions.assertEquals(listSorterExpect.get(1).getUserName(),resultUserFollowedLisTest.getFollowed().get(1).getUserName());
-        Assertions.assertEquals(listSorterExpect.get(2).getUserName(),resultUserFollowedLisTest.getFollowed().get(2).getUserName());
+        assertAll(() ->{
+            assertEquals(listSorterExpect.get(0).getUserName(),resultUserFollowedLisTest.getFollowed().get(0).getUserName());
+            assertEquals(listSorterExpect.get(1).getUserName(),resultUserFollowedLisTest.getFollowed().get(1).getUserName());
+            assertEquals(listSorterExpect.get(2).getUserName(),resultUserFollowedLisTest.getFollowed().get(2).getUserName());
+        });
 
 
     }
@@ -271,7 +282,7 @@ class UserServiceTest {
     // * ============= *
 
     @Test
-    @DisplayName("T-004 - verify correct ascending order of follower .")
+    @DisplayName("[T004] - Verify correct ascending order of follower.")
     void findAllFollowerOrderAsc(){
 
         //--------------------- Arrange ------------------------------------------------------
@@ -323,16 +334,19 @@ class UserServiceTest {
         UserFollowerListResponse resultUserFollowerLisTest = userService.findAllFollowerOrderAsc(userTest1.getUserId());
 
         // ----------------------------------------------------- Assert -----------------------------------------------------
-        Assertions.assertEquals(listSorterExpect.get(0).getUserName(),resultUserFollowerLisTest.getFollowers().get(0).getUserName());
-        Assertions.assertEquals(listSorterExpect.get(1).getUserName(),resultUserFollowerLisTest.getFollowers().get(1).getUserName());
-        Assertions.assertEquals(listSorterExpect.get(2).getUserName(),resultUserFollowerLisTest.getFollowers().get(2).getUserName());
+
+        assertAll(() ->{
+            assertEquals(listSorterExpect.get(0).getUserName(),resultUserFollowerLisTest.getFollowers().get(0).getUserName());
+            assertEquals(listSorterExpect.get(1).getUserName(),resultUserFollowerLisTest.getFollowers().get(1).getUserName());
+            assertEquals(listSorterExpect.get(2).getUserName(),resultUserFollowerLisTest.getFollowers().get(2).getUserName());
+        });
 
     }
 
     // * ============= *
 
     @Test
-    @DisplayName("T-004 - verify correct descending order of follower .")
+    @DisplayName("[T004] - Verify correct descending order of follower.")
     void findAllFollowerOrderDesc() {
 
         //--------------------- Arrange ------------------------------------------------------
@@ -384,16 +398,20 @@ class UserServiceTest {
         UserFollowerListResponse resultUserFollowerLisTest = userService.findAllFollowerOrderDesc(userTest1.getUserId());
 
         // ----------------------------------------------------- Assert -----------------------------------------------------
-        Assertions.assertEquals(listSorterExpect.get(0).getUserName(),resultUserFollowerLisTest.getFollowers().get(0).getUserName());
-        Assertions.assertEquals(listSorterExpect.get(1).getUserName(),resultUserFollowerLisTest.getFollowers().get(1).getUserName());
-        Assertions.assertEquals(listSorterExpect.get(2).getUserName(),resultUserFollowerLisTest.getFollowers().get(2).getUserName());
+
+        assertAll(()-> {
+            assertEquals(listSorterExpect.get(0).getUserName(),resultUserFollowerLisTest.getFollowers().get(0).getUserName());
+            assertEquals(listSorterExpect.get(1).getUserName(),resultUserFollowerLisTest.getFollowers().get(1).getUserName());
+            assertEquals(listSorterExpect.get(2).getUserName(),resultUserFollowerLisTest.getFollowers().get(2).getUserName());
+        });
+
 
     }
 
     // * ============= *
 
     @Test
-    @DisplayName("T-004 - verify correct descending order of followed .")
+    @DisplayName("[T004] - Verify correct descending order of followed.")
     void findAllFollowedOrderDesc() {
 
         //--------------------- Arrange ------------------------------------------------------
@@ -445,15 +463,18 @@ class UserServiceTest {
         UserFollowedListResponse resultUserFollowedLisTest = userService.findAllFollowedOrderDesc(userTest1.getUserId());
 
         // ----------------------------------------------------- Assert -----------------------------------------------------
-        Assertions.assertEquals(listSorterExpect.get(0).getUserName(),resultUserFollowedLisTest.getFollowed().get(0).getUserName());
-        Assertions.assertEquals(listSorterExpect.get(1).getUserName(),resultUserFollowedLisTest.getFollowed().get(1).getUserName());
-        Assertions.assertEquals(listSorterExpect.get(2).getUserName(),resultUserFollowedLisTest.getFollowed().get(2).getUserName());
+        assertAll(() -> {
+            assertEquals(listSorterExpect.get(0).getUserName(),resultUserFollowedLisTest.getFollowed().get(0).getUserName());
+            assertEquals(listSorterExpect.get(1).getUserName(),resultUserFollowedLisTest.getFollowed().get(1).getUserName());
+            assertEquals(listSorterExpect.get(2).getUserName(),resultUserFollowedLisTest.getFollowed().get(2).getUserName());
+        });
 
     }
 
     // * ============= *
 
     @Test
+    @DisplayName("List all users with followers")
     void findAllFollower() {
         // Arrange
         User userMock = UsersFactory.getUserWithAllList(4,"Michael", true, false, true);
@@ -464,8 +485,11 @@ class UserServiceTest {
                 userService.findAllFollower(userMock.getUserId());
 
         //ASSERT
-        assertNotNull(userFollowerListResponse);
-        assertTrue(userFollowerListResponse.getFollowers().size()>0);
+        assertAll(() -> {
+            assertNotNull(userFollowerListResponse);
+            assertTrue(userFollowerListResponse.getFollowers().size()>0);
+        });
+
     }
 
     // * ============= *

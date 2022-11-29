@@ -61,7 +61,7 @@ class ProductsControllerTest {
     // * ============= *
 
     @Test
-    @DisplayName("[T005] - Get followed posts by user id - With order date asc filter")
+    @DisplayName("[T006] - Get followed posts by user id - With order date asc filter")
     void findFollowedByUserIdWithOrderDateAsc() {
 
         PostDtoRequest postDtoRequest1 = new PostDtoRequest(1, 1, LocalDate.now(), new Product(), 1, 10.0);
@@ -83,7 +83,7 @@ class ProductsControllerTest {
     // * ============= *
 
     @Test
-    @DisplayName("[T005] - Get followed posts by user id - With order date desc filter")
+    @DisplayName("[T006] - Get followed posts by user id - With order date desc filter")
     void findFollowedByUserIdWithOrderDateDesc() {
 
         PostDtoRequest postDtoRequest1 = new PostDtoRequest(1, 1, LocalDate.now(), new Product(), 1, 10.0);

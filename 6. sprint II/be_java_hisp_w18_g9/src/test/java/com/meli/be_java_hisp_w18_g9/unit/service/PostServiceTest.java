@@ -3,6 +3,7 @@ package com.meli.be_java_hisp_w18_g9.unit.service;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.meli.be_java_hisp_w18_g9.exception.NotFoundException;
 import com.meli.be_java_hisp_w18_g9.model.dto.request.PostDtoRequest;
+import com.meli.be_java_hisp_w18_g9.model.dto.response.PostDtoResponse;
 import com.meli.be_java_hisp_w18_g9.model.dto.response.PostListByFollowedResponse;
 import com.meli.be_java_hisp_w18_g9.model.entity.Post;
 import com.meli.be_java_hisp_w18_g9.model.entity.Product;
@@ -10,7 +11,6 @@ import com.meli.be_java_hisp_w18_g9.model.entity.User;
 import com.meli.be_java_hisp_w18_g9.repository.IPostRepository;
 import com.meli.be_java_hisp_w18_g9.repository.IUserRepository;
 import com.meli.be_java_hisp_w18_g9.service.PostService;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -24,7 +24,6 @@ import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.*;
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 @SpringBootTest
@@ -45,16 +44,6 @@ class PostServiceTest {
     private PostService postService;
 
     // ? ================= Tests ================= ?
-
-    @Test
-    void addPost() {
-    }
-
-    // * ============= *
-
-    @Test
-    void findAll() {
-    }
 
     // * ============= *
 
@@ -89,14 +78,14 @@ class PostServiceTest {
     @Test
     @DisplayName("[T005] - Method for getting all posts from followed by user id (Sad Path - User not found)")
     void findPostsByFollowedAndUserIdUserNotFound() {
-        //when(userRepository.findById(anyInt())).thenThrow(new NotFoundException("User not found"));
         when(userRepository.findById(1)).thenReturn(Optional.empty());
         NotFoundException Exception = assertThrows(NotFoundException.class, () -> postService.findPostsByFollowedAndUserId(1));
         assertEquals("User with id 1 not found", Exception.getMessage());
     }
 
     // * ============= *
-    PostListByFollowedResponse mockPostList(int order){
+
+    private PostListByFollowedResponse mockPostList(int order){
         User userMock = new User(1, "User 1", new ArrayList<>(), List.of(
                 new User(2, "User 2", new ArrayList<>(), new ArrayList<>(), new ArrayList<>())
         ), new ArrayList<>());
@@ -126,6 +115,9 @@ class PostServiceTest {
 
         return postLists;
     }
+
+    // * ============= *
+
     @Test
     @DisplayName("[T006] - Method for getting all posts from followed by user id ordered by date asc (Happy Path)")
     void findPostsByFollowedAndUserIdOrderByDateAsc() {
@@ -147,4 +139,21 @@ class PostServiceTest {
     }
 
     // * ============= *
+
+    @Test
+    @DisplayName("Find all posts")
+    void findAll() {
+
+        when(postRepository.findAll()).thenReturn(List.of(
+                new Post(1, 2, LocalDate.now(), new Product(1, "Product 1", "Type 1", "Brand 1", "Color 1", "Note 1"), 1, 10.0, true, 5.0),
+                new Post(2, 2, LocalDate.now().minusDays(10), new Product(2, "Product 2", "Type 2", "Brand 2", "Color 1", "Note 2"), 1, 10.0, true, 5.0)
+        ));
+
+        List<PostDtoResponse> postLists = postService.findAll();
+
+        assertAll(() ->{
+            assertEquals(2, postLists.size());
+            assertNotNull(postLists);
+        });
+    }
 }

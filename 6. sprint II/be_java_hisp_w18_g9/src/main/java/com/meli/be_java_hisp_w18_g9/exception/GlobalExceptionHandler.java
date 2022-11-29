@@ -36,5 +36,19 @@ public class GlobalExceptionHandler {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ErrorResponse(HttpStatus.NOT_FOUND.value(), e.getMessage()));
     }
 
+    // * =============
+
+    /**
+     * Handler to handle ForbiddenException
+     * @param e ForbiddenException
+     * @return ResponseEntity<ErrorResponse> - (message, status)
+     */
+
+    @ExceptionHandler(ForbiddenException.class)
+    public ResponseEntity<ErrorResponse> handleForbiddenException(ForbiddenException e) {
+        return ResponseEntity.status(HttpStatus.FORBIDDEN).body(new ErrorResponse(HttpStatus.FORBIDDEN.value(), e.getMessage()));
+    }
+
+
 
 }

@@ -2,6 +2,7 @@ package com.meli.be_java_hisp_w18_g9.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.meli.be_java_hisp_w18_g9.exception.BadRequestException;
+import com.meli.be_java_hisp_w18_g9.exception.ForbiddenException;
 import com.meli.be_java_hisp_w18_g9.exception.NotFoundException;
 import com.meli.be_java_hisp_w18_g9.model.dto.request.PostDtoRequest;
 import com.meli.be_java_hisp_w18_g9.model.dto.response.PostDtoResponse;
@@ -44,12 +45,8 @@ public class PostService implements IPostService {
 
         User user = userRepository.findById(post.getUserId()).orElseThrow(() -> new NotFoundException(String.format("User with id %d not found", post.getUserId())));
 
-        if (Stream.of(post.getCategory(), post.getProduct(), post.getPrice(), post.getUserId()).anyMatch(Objects::isNull)) {
-            throw new BadRequestException("All fields are required");
-        }
-
         if (user.getProducts().stream().noneMatch(product -> product.getProductId().equals(post.getProduct().getProductId()))) {
-            throw new BadRequestException("Product not associated with user");
+            throw new ForbiddenException("Product not associated with user");
         }
 
         postRepository.addPost(post);
