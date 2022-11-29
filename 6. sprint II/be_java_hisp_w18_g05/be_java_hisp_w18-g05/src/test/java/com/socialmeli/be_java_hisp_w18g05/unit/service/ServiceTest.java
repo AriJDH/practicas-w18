@@ -8,6 +8,7 @@ import com.socialmeli.be_java_hisp_w18g05.entity.Buyer;
 import com.socialmeli.be_java_hisp_w18g05.entity.Post;
 import com.socialmeli.be_java_hisp_w18g05.entity.Product;
 import com.socialmeli.be_java_hisp_w18g05.entity.Seller;
+import com.socialmeli.be_java_hisp_w18g05.exceptions.InvalidException;
 import com.socialmeli.be_java_hisp_w18g05.exceptions.NotFoundException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -367,5 +368,79 @@ public class ServiceTest {
         //Assert
         Assertions.assertEquals(expected,result);
     }
+
+
+    @Test
+    @DisplayName("T-0005 - OK -Verificar que el tipo de ordenamiento por fecha exista (US-0009)")
+    void test0005Ok(){
+        //========= Arrange ==========
+        Integer userId = 1;
+        String order = "date_desc";
+        List<Seller> sellerList = new ArrayList<>();
+        // Utilizamos un objectMapper
+        ObjectMapper op = new ObjectMapper();
+        op.registerModule(new JavaTimeModule());
+        op.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+        // lista de post del seller 10
+        List<Post> postList1 = new ArrayList<>();
+        Post post1 = new Post(1, LocalDate.now().minusDays(6), new Product(10, "Name", "type", "brand", "color", "notes"), 100, 25D );
+        Post post2 = new Post(2, LocalDate.now().minusDays(8), new Product(22, "Name", "type", "brand", "color", "notes"), 100, 25D );
+        Post post3 = new Post(3, LocalDate.now().minusDays(10), new Product(33, "Name", "type", "brand", "color", "notes"), 100, 25D);
+        postList1.add(post1);
+        postList1.add(post2);
+        postList1.add(post3);
+        // lista de post del seller 20
+        List<Post> postList2 = new ArrayList<>();
+        Post post4 = new Post(4, LocalDate.now().minusDays(11), new Product(44, "Name", "type", "brand", "color", "notes"), 100, 25D );
+        Post post5 = new Post(5, LocalDate.now().minusDays(13), new Product(55, "Name", "type", "brand", "color", "notes"), 100, 25D );
+        postList2.add(post4);
+        postList2.add(post5);
+        // Creación de los sellers
+        sellerList.add(new Seller(10, "Seller10"));
+        sellerList.add(new Seller(20, "Seller20"));
+        // asignamos post a los sellers
+        sellerList.get(0).setPosts(postList1);
+        sellerList.get(1).setPosts(postList2);
+        // Creamos comprador con la lista de sellers que sigue
+        Buyer buyerMock = new Buyer(userId, "Buyer1", sellerList);
+        // Creamos el expected con los post como deberían estar ordenados.
+        List<PostDTOResponse> postDTOResponseList = new ArrayList<>();
+        postDTOResponseList.add(new PostDTOResponse(10, post1.getPost_id(), post1.getDate().toString(), op.convertValue(post1.getProduct(), ProductDTOResponse.class), post1.getCategory(), post1.getPrice()));
+        postDTOResponseList.add(new PostDTOResponse(10, post2.getPost_id(), post2.getDate().toString(), op.convertValue(post2.getProduct(), ProductDTOResponse.class), post2.getCategory(), post2.getPrice()));
+        postDTOResponseList.add(new PostDTOResponse(10, post3.getPost_id(), post3.getDate().toString(), op.convertValue(post3.getProduct(), ProductDTOResponse.class), post3.getCategory(), post3.getPrice()));
+        postDTOResponseList.add(new PostDTOResponse(20, post4.getPost_id(), post4.getDate().toString(), op.convertValue(post4.getProduct(), ProductDTOResponse.class), post4.getCategory(), post4.getPrice()));
+        postDTOResponseList.add(new PostDTOResponse(20, post5.getPost_id(), post5.getDate().toString(), op.convertValue(post5.getProduct(), ProductDTOResponse.class), post5.getCategory(), post5.getPrice()));
+        SellerPostListDTOResponse expected = new SellerPostListDTOResponse(userId, postDTOResponseList);
+        //========= Mock =============
+        when(iRepository.getByIdBuyer(userId)).thenReturn(buyerMock);
+        //========= Act ==============
+        SellerPostListDTOResponse result = serviceImp.followedPostList(userId, order);
+        //========= Asserts ==========
+        Assertions.assertAll(
+                () -> Assertions.assertEquals(result.getPosts().get(0).getPost_id(), expected.getPosts().get(0).getPost_id()),
+                () -> Assertions.assertEquals(result.getPosts().get(1).getPost_id(), expected.getPosts().get(1).getPost_id()),
+                () -> Assertions.assertEquals(result.getPosts().get(2).getPost_id(), expected.getPosts().get(2).getPost_id()),
+                () -> Assertions.assertEquals(result.getPosts().get(3).getPost_id(), expected.getPosts().get(3).getPost_id()),
+                () -> Assertions.assertEquals(result.getPosts().get(4).getPost_id(), expected.getPosts().get(4).getPost_id())
+        );
+    }
+
+    @Test
+    @DisplayName("T-0005 - NO OK - Verificar que el tipo de ordenamiento por fecha exista (US-0009)")
+    void test0005NotOk(){
+        //========= Arrange ==========
+        String order = "not_valid";
+        int userId = 1;
+        List<Seller> sellerList = new ArrayList<>();
+        sellerList.add(new Seller(10, "Seller10"));
+        sellerList.add(new Seller(20, "Seller20"));
+        Buyer buyerMock = new Buyer(userId, "Buyer1",sellerList );
+        //========= Mock =============
+        when(iRepository.getByIdBuyer(userId)).thenReturn(buyerMock);
+        //========= Act & Asserts ====
+        Assertions.assertThrows(InvalidException.class, () -> serviceImp.followedPostList(userId, order));
+    }
+
+
 }
 
