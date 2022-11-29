@@ -12,6 +12,8 @@ import com.socialmedia2.be_java_hisp_w18_g08.repository.UserRepositoryImp;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
@@ -47,12 +49,12 @@ class UserServiceImpTest {
     void findAllFollowersQuantity() {
     }
 
-    @Test
-    @DisplayName("US0003 - Verify that the ordering exists in followers")
-    void findUserListBySellerWhitOrderTest(){
+    @ParameterizedTest
+    @CsvSource({"name_asc", "name_desc"})
+    @DisplayName("US0003 - Verify that the order exists for the list of followers")
+    void findUserListBySellerWhitOrderTest(String order){
         //Arrange
         Integer userId = 1;
-        String order = "name_asc";
         User user1 = new User(1, "Augusto", null);
         User user2 = new User(3, "Martin", null);
         User user3 = new User(5, "Samuel", null);
@@ -66,7 +68,7 @@ class UserServiceImpTest {
         UserListDto userListDto = userService.findUserListBySeller(userId, order);
 
         //Assertion
-        assertTrue(userListDto.getUser_id() == 1);
+        assertNotNull(userListDto);
 
     }
     @Test
@@ -90,12 +92,12 @@ class UserServiceImpTest {
                 () -> userService.findUserListBySeller(userId, order));
 
     }
-    @Test
-    @DisplayName("US0003 - Verify that the ordering exists in followers")
-    void getFollowedWhitOrderTest(){
+    @ParameterizedTest
+    @CsvSource({"name_asc", "name_desc"})
+    @DisplayName("US0003 - Verify that the order exists for the list of followed")
+    void getFollowedWhitOrderTest(String order){
         //Arrange
         Integer userId = 1;
-        String order = "name_asc";
         Seller seller1 = new Seller(1, "Augusto", null, null, null);
         Seller seller2 = new Seller(3, "Martin", null,null,null);
         Seller seller3 = new Seller(5, "Samuel", null, null, null);
@@ -107,8 +109,9 @@ class UserServiceImpTest {
 
         //Act
         FollowedDto followedDto = userService.getFollowed(userId, order);
+
         //Assertion
-        assertTrue(followedDto.getUser_id() == 1);
+        assertNotNull(followedDto);
 
     }
     @Test
