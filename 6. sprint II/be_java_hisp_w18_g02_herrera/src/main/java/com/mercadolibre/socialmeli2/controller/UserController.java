@@ -4,6 +4,7 @@ import com.mercadolibre.socialmeli2.dto.request.PostDtoReq;
 import com.mercadolibre.socialmeli2.dto.response.*;
 import com.mercadolibre.socialmeli2.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -80,8 +81,8 @@ public class UserController {
      */
     @PostMapping("/products/post")
     public ResponseEntity<ResponseDto> addPost(@Valid @RequestBody PostDtoReq postReq){
-        ResponseDto res = new ResponseDto(userService.addPost(postReq), 200);
-        return ResponseEntity.ok(res);
+        ResponseDto res = new ResponseDto(userService.addPost(postReq), 201);
+        return new ResponseEntity<>(res, HttpStatus.CREATED);
     }
 
     /**
