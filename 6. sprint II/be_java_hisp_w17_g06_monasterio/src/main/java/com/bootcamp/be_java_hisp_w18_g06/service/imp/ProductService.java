@@ -19,8 +19,9 @@ public class ProductService implements IProductService {
 	private IPostService postService;
 
     @Override
-    public void save(PostDTO postDTO) {
+    public PostDTO save(PostDTO postDTO) {
         postService.savePost(postDTO);
+		return postDTO;
     }
 	// US006
 	@Override

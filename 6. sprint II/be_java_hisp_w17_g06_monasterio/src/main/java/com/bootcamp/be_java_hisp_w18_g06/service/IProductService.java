@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface IProductService {
 
-    void save(PostDTO postDTO);
+    PostDTO save(PostDTO postDTO);
 
 	// US006
 	List<PostDTO> findAllPostsByUser(int id,String order);

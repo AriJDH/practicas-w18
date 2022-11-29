@@ -4,6 +4,7 @@ import com.bootcamp.be_java_hisp_w18_g06.dto.request.PostDTO;
 import com.bootcamp.be_java_hisp_w18_g06.dto.request.ProductReqDTO;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -16,7 +17,6 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 
@@ -28,7 +28,7 @@ public class Integration {
     MockMvc mockMvc;
 
     @Test
-    void test1 () throws Exception {
+    void saveOk () throws Exception {
         // Arrange
         ProductReqDTO product = new ProductReqDTO(
                 1,
@@ -45,17 +45,43 @@ public class Integration {
                 "mascotas",
                 3000.00
         );
-
-        //String payload= new ObjectMapper().registerModule(new JavaTimeModule()).writeValueAsString(requestPostDto)
         String postJson = new ObjectMapper().registerModule(new JavaTimeModule()).writeValueAsString(post);
         String payload = new ObjectMapper().registerModule(new JavaTimeModule()).writeValueAsString(post);
 
         //Matchers
         ResultMatcher expectedStatus = MockMvcResultMatchers.status().isOk();
-       // ResultMatcher expectedJson = MockMvcResultMatchers.content().json(postJson);
+        ResultMatcher expectedJson = MockMvcResultMatchers.content().json(postJson);
+        ResultMatcher expectedContentType = MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON);
 
-        //ResultMatcher expectedContentType = MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON);
-        ResultMatcher expectedContentType = MockMvcResultMatchers.content().contentType(MediaType.valueOf("text/plain;charset=UTF-8"));
+        //Request
+        MockHttpServletRequestBuilder requestPayload = MockMvcRequestBuilders.post("/products/post")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(payload);
+
+        //Act & Assert
+        mockMvc.perform(requestPayload)
+                .andDo(print())
+                .andExpectAll(expectedStatus,expectedJson ,expectedContentType);
+    }
+
+
+    @Test
+    //Si mando mal el postDTO controlar que devuelva un 400
+    void saveNotOk () throws Exception {
+        // Arrange
+        ProductReqDTO product = new ProductReqDTO();
+        PostDTO post = new PostDTO(
+                1,
+                LocalDate.now(),
+                product,
+                "mascotas",
+                3000.00
+        );
+        String payload = new ObjectMapper().registerModule(new JavaTimeModule()).writeValueAsString(post);
+
+        //Matchers
+        ResultMatcher expectedStatus = MockMvcResultMatchers.status().isBadRequest();
+        ResultMatcher expectedContentType = MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON);
 
         //Request
         MockHttpServletRequestBuilder requestPayload = MockMvcRequestBuilders.post("/products/post")
@@ -66,7 +92,7 @@ public class Integration {
         mockMvc.perform(requestPayload)
                 .andDo(print())
                 .andExpectAll(expectedStatus, expectedContentType);
-
-
     }
+
+
 }
