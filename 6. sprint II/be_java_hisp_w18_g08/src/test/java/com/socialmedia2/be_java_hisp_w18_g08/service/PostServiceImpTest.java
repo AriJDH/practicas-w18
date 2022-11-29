@@ -1,6 +1,8 @@
 package com.socialmedia2.be_java_hisp_w18_g08.service;
 
+import com.socialmedia2.be_java_hisp_w18_g08.dto.PostDto;
 import com.socialmedia2.be_java_hisp_w18_g08.dto.response.PostDtoRes;
+import com.socialmedia2.be_java_hisp_w18_g08.dto.response.ProductDtoRes;
 import com.socialmedia2.be_java_hisp_w18_g08.entity.Post;
 import com.socialmedia2.be_java_hisp_w18_g08.entity.Product;
 import com.socialmedia2.be_java_hisp_w18_g08.entity.Seller;
@@ -39,50 +41,36 @@ class PostServiceImpTest {
     PostServiceImp postService;
 
     Seller s1;
-    Seller s2;
     User u1;
-    User u2;
 
     @BeforeEach
     private void setup() {
-
+        //T-0005
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
         LocalDate date = LocalDate.parse("20-11-2022", formatter);
 
-        List<Post> p1 = new ArrayList<>();
+        List<Post> postList = new ArrayList<>();
         List<User> followers = new ArrayList<>();
         List<Seller> followed = new ArrayList<>();
-        List<User> users = new ArrayList<>();
-        List<Seller> sellers = new ArrayList<>();
-        Product pr1;
-        Product pr2;
+        Product product1;
+        Product product2;
 
-        s1 = new Seller(1, "Seller1", followed, p1, followers);
-        s2 = new Seller(2, "Seller2", followed, p1, followers);
+        s1 = new Seller(1, "Seller1", followed, postList, followers);
 
-        u1 = new User(4,"User1",followed);
-        u2 = new User(5,"User2",followed);
+        u1 = new User(2,"User1",followed);
 
-        pr1 = new Product(1,"Silla","Oficina","Reclinable","Negro","Silla para oficina");
-        pr2 = new Product(2,"Vaso","Utensilio","Termico","Negro","Vaso termico");
+        product1 = new Product(1,"Silla","Oficina","Reclinable","Negro","Silla para oficina");
+        product2 = new Product(2,"Vaso","Utensilio","Termico","Negro","Vaso termico");
 
-        Post post1 = new Post(1,1,pr1,1,4000.0,date);
-        Post post2 = new Post(2,2,pr2,2,1000.0,date.plusDays(7));
+        Post post1 = new Post(1,1,product1,1,4000.0,date);
+        Post post2 = new Post(2,1,product2,2,1000.0,date.plusDays(7));
 
-        p1.add(post1);
-        p1.add(post2);
+        postList.add(post1);
+        postList.add(post2);
 
         followers.add(u1);
-        followers.add(u2);
 
         followed.add(s1);
-        followed.add(s2);
-
-        sellers.add(s1);
-        sellers.add(s2);
-
-        users.add(u1);
-        users.add(u2);
     }
 
     @Test
@@ -90,10 +78,10 @@ class PostServiceImpTest {
     }
 
     @Test
-    @DisplayName("T-0005-OK-Verificar el correcto ordenamiento ascendente y descendente por fecha. (US-0009)")
+    @DisplayName("T-0005-OK-Verificar que el tipo de ordenamiento por fecha exista (US-0009)")
     void getPostSellerListByUserIdOKTest() {
         //Arrange
-        Integer id = 4;
+        Integer id = 2;
         String order = "date_asc";
 
         //Mock
@@ -103,14 +91,14 @@ class PostServiceImpTest {
         PostDtoRes result = postService.getPostSellerListByUserId(id, order);
 
         //Assert
-        assertTrue(result != null);
+        assertNotNull(result);
     }
 
     @Test
-    @DisplayName("T-0005-NoOK-Verificar el correcto ordenamiento ascendente y descendente por fecha. (US-0009)")
+    @DisplayName("T-0005-NoOK-Verificar que el tipo de ordenamiento por fecha exista (US-0009)")
     void getPostSellerListByUserIdNoOKTest() {
         //Arrange
-        Integer id = 4;
+        Integer id = 2;
         String order = "sin_orden";
 
         //Mock
