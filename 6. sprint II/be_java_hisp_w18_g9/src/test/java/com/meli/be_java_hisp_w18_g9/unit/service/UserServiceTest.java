@@ -5,8 +5,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.atLeastOnce;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -15,6 +14,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.meli.be_java_hisp_w18_g9.exception.BadRequestException;
 import com.meli.be_java_hisp_w18_g9.model.dto.response.UserFollowedListResponse;
 import com.meli.be_java_hisp_w18_g9.model.dto.response.UserFollowerListResponse;
+import com.meli.be_java_hisp_w18_g9.model.dto.response.UserSimpleResponse;
 import com.meli.be_java_hisp_w18_g9.model.entity.Product;
 import com.meli.be_java_hisp_w18_g9.model.entity.User;
 import com.meli.be_java_hisp_w18_g9.repository.IUserRepository;
@@ -92,6 +92,7 @@ class UserServiceTest {
                 .userId(2)
                 .userName("Janeth")
                 .build();
+
         List<User> userTargetFollowers = new ArrayList<>(List.of(userFollower));
         List<User> userFollowerFollowers = new ArrayList<>(List.of(userTarget));
 
@@ -138,6 +139,18 @@ class UserServiceTest {
     // * ============= *
     @Test
     void findAllFollowed() {
+        // Arrange
+        User userMock = UsersFactory.getUserWithAllList(4,"Michael", true, true, false);
+        UserFollowedListResponse expected = UsersFactory.getUserFollowedListResponse(userMock);
+
+        //Act
+        when(userRepository.findById(userMock.getUserId())).thenReturn(Optional.of(userMock));
+        UserFollowedListResponse userFollowedResponse =
+                userService.findAllFollowed(userMock.getUserId());
+
+        //ASSERT
+        assertNotNull(userFollowedResponse);
+        assertTrue(userFollowedResponse.getFollowed().size()>0);
     }
 
     // * ============= *
@@ -442,6 +455,17 @@ class UserServiceTest {
 
     @Test
     void findAllFollower() {
+        // Arrange
+        User userMock = UsersFactory.getUserWithAllList(4,"Michael", true, false, true);
+
+        //Act
+        when(userRepository.findById(userMock.getUserId())).thenReturn(Optional.of(userMock));
+        UserFollowerListResponse userFollowerListResponse =
+                userService.findAllFollower(userMock.getUserId());
+
+        //ASSERT
+        assertNotNull(userFollowerListResponse);
+        assertTrue(userFollowerListResponse.getFollowers().size()>0);
     }
 
     // * ============= *
