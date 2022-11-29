@@ -137,8 +137,10 @@ class PostServiceTest {
             //act
             List<PostDTO>postDTOS = postService.findAllPostsByUser(idUser,asc);
 
+            System.out.println(userRequest.getFollowed().get(0).getPosts().get(2).getDate().compareTo(postDTOS.get(0).getDate()));
+            System.out.println(userRequest.getFollowed().get(0).getPosts().get(2).getDate());
             //assert
-            assertEquals(userRequest.getFollowed().get(0).getPosts().get(2).getDate().compareTo(postDTOS.get(0).getDate()), 0);
+            assertEquals(0, userRequest.getFollowed().get(0).getPosts().get(2).getDate().compareTo(postDTOS.get(0).getDate()));
         }
 
     }

@@ -47,7 +47,7 @@ public class PostFactory {
     public static List<PostDTO> getPostDto(){
         List<PostDTO> postList = new ArrayList<>();
         PostDTO post1 = new PostDTO();
-        post1.setDate(LocalDate.now().minusDays(12));
+        post1.setDate(LocalDate.now().minusWeeks(1));
         PostDTO post2 = new PostDTO();
         post2.setDate(LocalDate.now());
 

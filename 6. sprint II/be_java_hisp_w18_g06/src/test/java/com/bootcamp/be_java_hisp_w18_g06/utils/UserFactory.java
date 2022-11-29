@@ -57,11 +57,11 @@ public class UserFactory {
         user.setFollowers(userList);
         List<Post> postList = new ArrayList<>();
         Post post1 = new Post();
-        post1.setDate(LocalDate.now().minusDays(12));
+        post1.setDate(LocalDate.now());
         Post post2 = new Post();
-        post2.setDate(LocalDate.now());
+        post2.setDate(LocalDate.now().minusWeeks(1));
         Post post3 = new Post();
-        post3.setDate(LocalDate.now().minusDays(20));
+        post3.setDate(LocalDate.now().minusWeeks(3));
         postList.add(post2);
         postList.add(post3);
         postList.add(post1);

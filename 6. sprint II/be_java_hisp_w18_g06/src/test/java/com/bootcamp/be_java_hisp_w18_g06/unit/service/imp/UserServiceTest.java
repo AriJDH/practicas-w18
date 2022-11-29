@@ -91,36 +91,6 @@ class UserServiceTest {
 
             verify(repository,atLeast(2)).findUserById(anyInt());
             verify(repository,atLeast(2)).findUserInList(anyList(),anyInt());
-            /*
-            //Verificar que el usuario a dejar de seguir exista. (US-0007)
-            //ARRANGE
-            User userToUnfollow = new User(1);
-            User userFollower = new User(2);
-            Post post = new Post();
-            List<Post> =Arrays.asList(post);
-
-            //mock
-
-            when(repository.findUserById(userToUnfollow.getUser_id())).thenReturn(Optional.of(userToUnfollow));
-            //verify(repository, atLeast(1)).findUserById(userToUnfollow.getUser_id());
-            //ACT
-
-
-
-            //ASSERT
-            Assertions.assertDoesNotThrow(()->service.unfollowUser(userFollower.getUser_id(),userToUnfollow.getUser_id()));
-
-
-            // Verificar que el usuario a dejar de seguir exista
-            //Assertions.assertEquals(userToUnfollow, repository.findUserById(userToUnfollow.getUser_id()).get());
-
-            //Verificar que el usuario a dejar de seguir exista en mi lista de seguidos
-            //userfollower.getFollowed() lista ; recorrer lista buscando userToUnfollow INDEXOF
-            //seguidores.indexOf(seguidor)
-            //userToUnfollow.getFollowers lista. recorrer y buscar userFollower.
-            //Assertions.assertEquals(1,userToUnfollow.getFollowers().indexOf(userFollower));
-
-*/
 
         }
 
@@ -130,6 +100,7 @@ class UserServiceTest {
             //ARRANGE
 
             User userToUnfollow = getUserWithFollowersListAndPosts("userToUnfollow");
+            userToUnfollow.setUser_id(1);
             User userFollower = userToUnfollow.getFollowers().get(0);
             userFollower.setFollowed(Collections.singletonList(userToUnfollow));
 
