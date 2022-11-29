@@ -51,7 +51,7 @@ class UserServiceImpTest {
 
     @ParameterizedTest
     @CsvSource({"name_asc", "name_desc"})
-    @DisplayName("US0003 - Verify that the order exists for the list of followers")
+    @DisplayName("T0003 - Verify that the order exists for the list of followers")
     void findUserListBySellerWhitOrderTest(String order){
         //Arrange
         Integer userId = 1;
@@ -72,7 +72,7 @@ class UserServiceImpTest {
 
     }
     @Test
-    @DisplayName("US0003 - Invalid parameter error in findUserListBySeller method")
+    @DisplayName("T0003 - Invalid parameter error in findUserListBySeller method")
     void findUserListBySellerInvalidParameterTest(){
         //Arrange
         Integer userId = 1;
@@ -94,7 +94,7 @@ class UserServiceImpTest {
     }
     @ParameterizedTest
     @CsvSource({"name_asc", "name_desc"})
-    @DisplayName("US0003 - Verify that the order exists for the list of followed")
+    @DisplayName("T0003 - Verify that the order exists for the list of followed")
     void getFollowedWhitOrderTest(String order){
         //Arrange
         Integer userId = 1;
@@ -115,7 +115,7 @@ class UserServiceImpTest {
 
     }
     @Test
-    @DisplayName("US0003 - Invalid parameter error in getFollowed method")
+    @DisplayName("T0003 - Invalid parameter error in getFollowed method")
     void getFollowedInvalidParameterTest(){
         //Arrange
         Integer userId = 1;
