@@ -20,7 +20,9 @@ public class ProductController {
 	@GetMapping("/followed/{userId}/list")
 	public ResponseEntity<List<PostDTO>> findAllByUser(@PathVariable int userId,
                                                        @RequestParam(required = false) String order) {
-		return ResponseEntity.ok(productService.findAllPostsByUser(userId,order));
+		return ResponseEntity
+						.ok(productService
+										    .findAllPostsByUser(userId,order));
 	}
 
     @PostMapping("/post")

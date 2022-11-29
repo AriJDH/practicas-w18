@@ -127,7 +127,7 @@ public class UserService implements IUserService {
     public UserFollowersCountDTO getFollowersCount(int userId) {
         User user = userRepository
                 .findUserById(userId)
-                .orElseThrow(() -> new BadRequestException("The user id" + userId
+                .orElseThrow(() -> new BadRequestException("The user id " + userId
                         + " does not exist"));
 
         if (user.getFollowers() == null) {
@@ -148,7 +148,7 @@ public class UserService implements IUserService {
     public UserFollowedListDTO getFollowedList(int userId, String order) {
         User user = userRepository
                 .findUserById(userId)
-                .orElseThrow(() -> new BadRequestException("The user id" + userId
+                .orElseThrow(() -> new BadRequestException("The user id " + userId
                         + " does not exist"));
 
         if (user.getFollowed() == null) {
@@ -176,7 +176,7 @@ public class UserService implements IUserService {
     public UserFollowersListDTO getFollowersList(int userId, String order) {
         User user = userRepository
                 .findUserById(userId)
-                .orElseThrow(() -> new BadRequestException("The user id" + userId
+                .orElseThrow(() -> new BadRequestException("The user id " + userId
                         + " does not exist"));
 
         if (user.getFollowers() == null) {
