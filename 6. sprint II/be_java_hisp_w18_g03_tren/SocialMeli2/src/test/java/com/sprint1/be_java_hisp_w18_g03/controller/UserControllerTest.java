@@ -39,4 +39,16 @@ public class UserControllerTest {
                 .andExpect(MockMvcResultMatchers.jsonPath("$.user_name").value("Gabriela"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.followed").value(new ArrayList<>()));
     }
+
+    @Test
+    @DisplayName("Obtener la lista de los seguidores")
+    public void getFollowersListOk() throws Exception {
+
+        this.mockMvc.perform(MockMvcRequestBuilders.get("/users/{userId}/followers/list", 2))
+                .andDo(print())
+                .andExpect(status().isBadRequest())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.message").value("The user hasn't followers"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.code").value(400));
+    }
 }
