@@ -1,6 +1,7 @@
 package com.dh.be_java_hisp_w18_g10.controller;
 
 import com.dh.be_java_hisp_w18_g10.dto.response.UserDTOres;
+import com.dh.be_java_hisp_w18_g10.dto.response.UserFollowedListDTOres;
 import com.dh.be_java_hisp_w18_g10.dto.response.UserFollowersCountDTOres;
 import com.dh.be_java_hisp_w18_g10.dto.response.UserFollowersListDTOres;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -67,6 +68,20 @@ public class AppControllerTest {
         String recipeJson = objectWriter.writeValueAsString(userFollowersListDTOres);
 
         mockMvc.perform(MockMvcRequestBuilders.get("/users/{userId}/followers/list", 2))
+                .andExpect(status().isOk())
+                .andExpect(MockMvcResultMatchers.content().json(recipeJson));
+    }
+
+    @Test
+    @DisplayName("Individual Tests - /users/{userId}/followers/list")
+    void shouldGetAListOfUserFolloweds() throws Exception {
+        List<UserDTOres> listOfUsers = new ArrayList<>();
+        listOfUsers.add(new UserDTOres(2,"usuario2"));
+        listOfUsers.add(new UserDTOres(3,"usuario3"));
+        UserFollowedListDTOres userFollowedListDTOres = new UserFollowedListDTOres(1,"usuario1",listOfUsers);
+        String recipeJson = objectWriter.writeValueAsString(userFollowedListDTOres);
+
+        mockMvc.perform(MockMvcRequestBuilders.get("/users/{userId}/followed/list", 1))
                 .andExpect(status().isOk())
                 .andExpect(MockMvcResultMatchers.content().json(recipeJson));
     }
