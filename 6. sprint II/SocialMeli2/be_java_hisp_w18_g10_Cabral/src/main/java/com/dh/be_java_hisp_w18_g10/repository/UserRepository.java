@@ -26,6 +26,7 @@ public class UserRepository implements IUserRepository{
         User user1 = new User(1, "usuario1");
         User user2 = new User(2, "usuario2");
         User user3 = new User(3, "usuario3");
+        User user4 = new User(4, "usuario4");
 
         // USER1 SIGUE A USUARIO 2 Y 3.
         user1.getFollowed().put(user2.getUserId(), user2);
@@ -48,9 +49,14 @@ public class UserRepository implements IUserRepository{
         user3.getPosts().put(getListPosts().get(1).getPost_id(),getListPosts().get(1));
         user3.getPosts().put(getListPosts().get(2).getPost_id(),getListPosts().get(2));
 
+        user4.getPosts().put(getListPosts().get(0).getPost_id(),getListPosts().get(0));
+        user4.getPosts().put(getListPosts().get(1).getPost_id(),getListPosts().get(1));
+        user4.getPosts().put(getListPosts().get(2).getPost_id(),getListPosts().get(2));
+
         users.put(user1.getUserId(), user1);
         users.put(user2.getUserId(), user2);
         users.put(user3.getUserId(), user3);
+        users.put(user4.getUserId(), user4);
     }
 
     @Override
