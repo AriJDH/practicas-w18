@@ -2,6 +2,7 @@ package com.socialmeli.be_java_hisp_w18g05.dto.response;
 
 
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -13,6 +14,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
+@Data
 public class PostDTOResponse {
 
 
@@ -22,4 +24,7 @@ public class PostDTOResponse {
     private ProductDTOResponse product;
     private Integer category;
     private Double price;
+
+    public PostDTOResponse(int user_id, int post_id, LocalDate minusDays, ProductDTOResponse product11, int category, double price) {
+    }
 }

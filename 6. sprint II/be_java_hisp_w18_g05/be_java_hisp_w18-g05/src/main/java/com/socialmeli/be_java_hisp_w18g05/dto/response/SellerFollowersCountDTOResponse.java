@@ -12,6 +12,7 @@ import javax.validation.constraints.Size;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
+@Data
 public class SellerFollowersCountDTOResponse {
 
     private Integer user_id;
