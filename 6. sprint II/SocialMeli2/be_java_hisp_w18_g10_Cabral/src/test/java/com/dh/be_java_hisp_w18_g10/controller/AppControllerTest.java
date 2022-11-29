@@ -1,5 +1,7 @@
 package com.dh.be_java_hisp_w18_g10.controller;
 
+import com.dh.be_java_hisp_w18_g10.dto.require.PostDTOreq;
+import com.dh.be_java_hisp_w18_g10.dto.require.ProductDTOreq;
 import com.dh.be_java_hisp_w18_g10.dto.response.UserDTOres;
 import com.dh.be_java_hisp_w18_g10.dto.response.UserFollowedListDTOres;
 import com.dh.be_java_hisp_w18_g10.dto.response.UserFollowersCountDTOres;
@@ -14,6 +16,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
@@ -84,6 +87,23 @@ public class AppControllerTest {
         mockMvc.perform(MockMvcRequestBuilders.get("/users/{userId}/followed/list", 1))
                 .andExpect(status().isOk())
                 .andExpect(MockMvcResultMatchers.content().json(recipeJson));
+    }
+
+    @Test
+    @DisplayName("Individual Tests - /products/post")
+    void shouldCreateANewPost() throws Exception {
+        ProductDTOreq product = new ProductDTOreq(
+                12, "Monitor ASUS TUF ", "Monitor", "ASUS", "Negro", "Monitor Gamer 27 pulgadas"
+        );
+        PostDTOreq post = new PostDTOreq(
+                1, "20-11-2022", product, 2, 316.0);
+
+        String recipeJson = objectWriter.writeValueAsString(post);
+
+        mockMvc.perform(MockMvcRequestBuilders.post("/products/post")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(recipeJson))
+                .andExpect(status().isOk());
     }
 
 }
