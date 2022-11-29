@@ -1,7 +1,6 @@
 package com.socialmeli.be_java_hisp_w18g05.repository;
 
 import com.socialmeli.be_java_hisp_w18g05.entity.Buyer;
-import com.socialmeli.be_java_hisp_w18g05.entity.Post;
 import com.socialmeli.be_java_hisp_w18g05.entity.Seller;
 
 import java.util.List;

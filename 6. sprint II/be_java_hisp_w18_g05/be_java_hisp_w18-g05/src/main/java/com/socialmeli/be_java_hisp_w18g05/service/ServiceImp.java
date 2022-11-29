@@ -23,8 +23,6 @@ import com.socialmeli.be_java_hisp_w18g05.exceptions.InvalidException;
 import com.socialmeli.be_java_hisp_w18g05.exceptions.InvalidParameterException;
 import com.socialmeli.be_java_hisp_w18g05.exceptions.NotFoundException;
 import com.socialmeli.be_java_hisp_w18g05.repository.IRepository;
-import lombok.Data;
-import org.springframework.cglib.core.Local;
 import org.springframework.stereotype.Service;
 
 import javax.validation.Valid;
@@ -314,7 +312,7 @@ public class ServiceImp implements IService {
         List<Buyer> followers = seller.getFollowers(); //Get followers from seller
         Integer countedFollowers = followers.size(); // Get size of the list of followers
         //Create DTO response
-        SellerFollowersCountDTOResponse sellerCount = new SellerFollowersCountDTOResponse(seller.getUser_id(),seller.getName(),countedFollowers);
+        SellerFollowersCountDTOResponse sellerCount = new SellerFollowersCountDTOResponse(seller.getUser_id(), seller.getName(),countedFollowers);
         return  sellerCount;
     }
 

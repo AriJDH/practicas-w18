@@ -2,15 +2,10 @@ package com.socialmeli.be_java_hisp_w18g05.repository;
 
 
 import com.socialmeli.be_java_hisp_w18g05.entity.Buyer;
-import com.socialmeli.be_java_hisp_w18g05.entity.Post;
-import com.socialmeli.be_java_hisp_w18g05.entity.Product;
 import com.socialmeli.be_java_hisp_w18g05.entity.Seller;
 import org.springframework.stereotype.Repository;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 @Repository
