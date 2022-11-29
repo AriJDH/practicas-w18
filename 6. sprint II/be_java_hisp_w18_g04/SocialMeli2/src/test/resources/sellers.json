@@ -38,7 +38,18 @@
     {
         "user_id": 2,
         "user_name": "Ethan",
-        "followers":[
+        "followers":[{
+            "user_id": 1,
+            "user_name": "Josep"
+        },
+            {
+                "user_id": 3,
+                "user_name": "Louis"
+            },
+            {
+                "user_id": 4,
+                "user_name": "Kevin"
+            }
         ],
         "posts": [
             {
