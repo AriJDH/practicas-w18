@@ -11,11 +11,8 @@ import com.socialmedia2.be_java_hisp_w18_g08.exception.NotFoundUserException;
 import com.socialmedia2.be_java_hisp_w18_g08.dto.request.FollowDtoReq;
 import com.socialmedia2.be_java_hisp_w18_g08.dto.response.FollowDtoRes;
 import com.socialmedia2.be_java_hisp_w18_g08.dto.response.SellerFollowersCountDto;
-import com.socialmedia2.be_java_hisp_w18_g08.repository.PostRepositoryImp;
 import com.socialmedia2.be_java_hisp_w18_g08.repository.UserRepositoryImp;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -34,41 +31,52 @@ import java.time.format.DateTimeFormatter;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 @ExtendWith(MockitoExtension.class)
 @SpringBootTest
 class UserServiceImpTest {
 
-    //Revisar si realmente hacen falta los dos repos
     @Mock
     UserRepositoryImp userRepo;
-    @Mock
-    PostRepositoryImp postRepo;
-
     @InjectMocks
     UserServiceImp userService;
-    @InjectMocks
-    PostServiceImp postService;
 
+    User user1;
+    User user2;
+    User user3;
+    Seller seller1;
+    Seller seller2;
+    Seller seller3;
+    List<Seller> followed = new ArrayList<>();
+    List<User> followers = new ArrayList<>();
+    List<Post> postList = new ArrayList<>();
+
+    @BeforeEach
+    private void setup(){
+
+        user1 = new User(1, "Augusto", followed);
+        user2 = new User(3, "Martin", null);
+        user3 = new User(5, "Samuel", null);
+        seller1 = new Seller(1, "Augusto", followed, postList, followers);
+        seller2 = new Seller(3, "Martin", followed, postList, followers);
+        seller3 = new Seller(5, "Samuel", followed, postList, followers);
+
+    }
+
+    @Order(1)
     @Test
-    @DisplayName("T-0001 Usuario a seguir existe")
+    @DisplayName("T-0001 - Usuario a seguir existe")
     void testFollowUserIdExist() {
         // Arrange
-        List<Seller> followed = new ArrayList<>();
-        List<User> followers = new ArrayList<>();
-        List<Post> posts = new ArrayList<>();
 
-        User user = new User(1, "User1", followed);
-        Seller seller = new Seller(5, "User5", followed, posts, followers);
-        Seller seller2 = new Seller(6, "User6", followed, posts, followers);
         followed.add(seller2);
-
         String message =
-                user.getUser_name() + " with id: " + user.getUser_id() + " is following -> " + seller.getUser_name() +
-                        " with id: " + seller.getUser_id();
+                user1.getUser_name() + " with id: " + user1.getUser_id() + " is following -> " + seller1.getUser_name() +
+                        " with id: " + seller1.getUser_id();
         FollowDtoReq followDtoReq = new FollowDtoReq(1, 5);
         FollowDtoRes expected = new FollowDtoRes(200, message);
 
-        when(userRepo.getUserByID(followDtoReq.getUserId())).thenReturn(user);
+        when(userRepo.getUserByID(followDtoReq.getUserId())).thenReturn(user1);
         when(userRepo.follow(followDtoReq.getUserId(), followDtoReq.getUserIdToFollow())).thenReturn(message);
 
         // Act
@@ -79,29 +87,27 @@ class UserServiceImpTest {
 
     }
 
+    @Order(2)
     @Test
-    @DisplayName("T-0001 Usuario a seguir no existe")
+    @DisplayName("T-0001 - Usuario a seguir no existe")
     void testFollowUserIdNoExist() {
         //Arrange
-        List<Seller> followed = new ArrayList<>();
-        User user = new User(1, "User1", followed);
-        FollowDtoReq followDtoReq = new FollowDtoReq(user.getUser_id(), 10);
+
+        FollowDtoReq followDtoReq = new FollowDtoReq(user1.getUser_id(), 10);
         //Act
         //Assert
         assertThrows(NotFoundUserException.class, () -> userService.follow(followDtoReq));
 
     }
 
+    @Order(5)
     @ParameterizedTest
     @CsvSource({"name_asc", "name_desc"})
     @DisplayName("T-0003 - Verificar que el orden para la lista que retorna el metodo findUserListBySellerWhitOrder exista")
     void findUserListBySellerWhitOrderTest(String order) {
         //Arrange
         Integer userId = 1;
-        User user1 = new User(1, "Augusto", null);
-        User user2 = new User(3, "Martin", null);
-        User user3 = new User(5, "Samuel", null);
-        List<User> followers = List.of(user1, user2, user3);
+        followers = List.of(user1, user2, user3);
         Seller seller = new Seller(1, "Seller1", null, null, followers);
 
         //Mock
@@ -115,16 +121,15 @@ class UserServiceImpTest {
 
     }
 
+    @Order(6)
     @Test
     @DisplayName("T-0003 - Error por parametro invalido en el metodo findUserListBySeller")
     void findUserListBySellerInvalidParameterTest() {
         //Arrange
         Integer userId = 1;
         String order = "name";
-        User user1 = new User(1, "Augusto", null);
-        User user2 = new User(3, "Martin", null);
-        User user3 = new User(5, "Samuel", null);
-        List<User> followers = List.of(user1, user2, user3);
+
+        followers = List.of(user1, user2, user3);
         Seller seller = new Seller(1, "Seller1", null, null, followers);
         //Mock
         when(userRepo.findSellerById(userId)).thenReturn(seller);
@@ -133,16 +138,15 @@ class UserServiceImpTest {
 
     }
 
+    @Order(7)
     @ParameterizedTest
     @CsvSource({"name_asc", "name_desc"})
     @DisplayName("T-0003 - Verificar que el orden para la lista que retorna el metodo getFollowed exista")
     void getFollowedWhitOrderTest(String order) {
         //Arrange
         Integer userId = 1;
-        Seller seller1 = new Seller(1, "Augusto", null, null, null);
-        Seller seller2 = new Seller(3, "Martin", null, null, null);
-        Seller seller3 = new Seller(5, "Samuel", null, null, null);
-        List<Seller> followed = List.of(seller1, seller2, seller3);
+
+        followed = List.of(seller1, seller2, seller3);
         User user = new User(1, "Seller1", followed);
         //Mock
         when(userRepo.getUserByID(userId)).thenReturn(user);
@@ -152,16 +156,15 @@ class UserServiceImpTest {
         assertNotNull(followedDto);
     }
 
+    @Order(8)
     @Test
     @DisplayName("T-0003 - error por parametro invaldo en el metodo getFollowed")
     void getFollowedInvalidParameterTest() {
         //Arrange
         Integer userId = 1;
         String order = "name";
-        Seller seller1 = new Seller(1, "Augusto", null, null, null);
-        Seller seller2 = new Seller(3, "Martin", null, null, null);
-        Seller seller3 = new Seller(5, "Samuel", null, null, null);
-        List<Seller> followed = List.of(seller1, seller2, seller3);
+
+        followed = List.of(seller1, seller2, seller3);
         User user = new User(1, "Seller1", followed);
         //Mock
         when(userRepo.getUserByID(userId)).thenReturn(user);
@@ -170,8 +173,9 @@ class UserServiceImpTest {
 
     }
 
+    @Order(13)
     @Test
-    @DisplayName("T-0002 Verificar que la cantidad de seguidores de un determinado usuario sea correcta. (US-0002)")
+    @DisplayName("T-0007 - Verificar que la cantidad de seguidores de un determinado usuario sea correcta. (US-0002)")
     void findAllFollowersQuantityTest() {
         //Arrange
         Integer expected = 2;
@@ -180,20 +184,12 @@ class UserServiceImpTest {
         LocalDate date = LocalDate.parse("12-11-2022", formatter);
 
         List<Seller> sellers = new ArrayList<>();
-        List<Seller> followed = new ArrayList<>();
-        List<User> followers = new ArrayList<>();
-        List<Post> post5 = new ArrayList<>();
+        followers.add(user1);
+        followers.add(user2);
+        followed.add(seller1);
+        sellers.add(seller1);
 
-        Seller s1 = new Seller(id, "User5", followed, post5, followers);
-        User u1 = new User(1, "User1", followed);
-        User u2 = new User(2, "User2", followed);
-
-        followers.add(u1);
-        followers.add(u2);
-        followed.add(s1);
-        sellers.add(s1);
-
-        when(userRepo.findSellerById(id)).thenReturn(s1);
+        when(userRepo.findSellerById(id)).thenReturn(seller3);
         //Act
         SellerFollowersCountDto result = userService.findAllFollowersQuantity(id);
 
@@ -201,6 +197,8 @@ class UserServiceImpTest {
         //Assert
         Assertions.assertEquals(expected, result.getFollowers_count());
     }
+
+    @Order(9)
     @Test
     @DisplayName("T-0004 - Obtener vendedores seguidos ordenados de manera ascendente")
     void getFollowedOrderAsc() {
@@ -221,6 +219,7 @@ class UserServiceImpTest {
         Assertions.assertEquals(expectedRes.getFollowed(), response.getFollowed());
     }
 
+    @Order(10)
     @Test
     @DisplayName("T-0004 - Obtener vendedores seguidos ordenados de manera descendente")
     void getFollowedOrderDesc() {
@@ -241,6 +240,7 @@ class UserServiceImpTest {
         Assertions.assertEquals(expectedRes.getFollowed(), response.getFollowed());
     }
 
+    @Order(11)
     @Test
     @DisplayName("T-0004 - Obtener seguidores ordenados de manera ascendente")
     void findUserListBySellerOrderAsc() {
@@ -261,6 +261,7 @@ class UserServiceImpTest {
         Assertions.assertEquals(expectedRes.getFollowers(), response.getFollowers());
     }
 
+    @Order(12)
     @Test
     @DisplayName("T-0004 - Obtener seguidores ordenados de manera descendente")
     void findUserListBySellerOrderDesc() {
@@ -281,30 +282,25 @@ class UserServiceImpTest {
         Assertions.assertEquals(expectedRes.getFollowers(), response.getFollowers());
     }
 
+    @Order(3)
     @Test
-    @DisplayName("(T-0007), Cumple :) Verificar que el usuario a dejar de seguir exista.")
+    @DisplayName("T-0002 - Cumple :) Verificar que el usuario a dejar de seguir exista.")
     void unFollowCumple() {
         //Arrange
 
-        List<User> followers = new ArrayList<>();
-        List<Seller> followed = new ArrayList<>();
-        List<Post> post5 = new ArrayList<>();
 
-        Seller s1 = new Seller(5, "User5", followed, post5, followers);
-        User u1 = new User(1, "User1", followed);
+        followers.add(user1);
+        followed.add(seller1);
 
-        followers.add(u1);
-        followed.add(s1);
-
-        String expected = u1.getUser_name() + "with id:" + u1.getUser_id() + " unfollow to -> " + s1.getUser_name() +
-                " with id: " + s1.getUser_id();
+        String expected = user1.getUser_name() + "with id:" + user1.getUser_id() + " unfollow to -> " + seller1.getUser_name() +
+                " with id: " + seller1.getUser_id();
         ;
 
-        when(userRepo.unFollow(u1.getUser_id(), s1.getUser_id())).thenReturn(expected);
+        when(userRepo.unFollow(user1.getUser_id(), seller1.getUser_id())).thenReturn(expected);
 
         //Act
 
-        String result = userService.unFollow(u1.getUser_id(), s1.getUser_id());
+        String result = userService.unFollow(user1.getUser_id(), seller1.getUser_id());
 
         //Assert
 
@@ -313,18 +309,16 @@ class UserServiceImpTest {
 
     }
 
+    @Order(4)
     @Test
-    @DisplayName("(T-0007), NoCumple :( - Verificar que el usuario a dejar de seguir exista. ")
+    @DisplayName("T-0002 - NoCumple :( - Verificar que el usuario a dejar de seguir exista. ")
     void unFollowNoCumple() {
         //Arrange
-        List<Seller> followed = new ArrayList<>();
-        User u1 = new User(1, "User1", followed);
-
-        when(userRepo.unFollow(u1.getUser_id(), 3)).thenThrow(NotFoundUserException.class);
+        when(userRepo.unFollow(user1.getUser_id(), 3)).thenThrow(NotFoundUserException.class);
 
         //Act
         //Assert
-        assertThrows(NotFoundUserException.class, () -> userService.unFollow(u1.getUser_id(), 3));
+        assertThrows(NotFoundUserException.class, () -> userService.unFollow(user1.getUser_id(), 3));
 
 
     }
@@ -334,8 +328,8 @@ class UserServiceImpTest {
         Seller n1 = new Seller(1, "Juan", null, null, null);
         Seller n2 = new Seller(2, "Pedro", null, null, null);
         Seller n3 = new Seller(3, "Andres", null, null, null);
-        List<Seller> listSellers = Arrays.asList(n1, n2, n3);
-        User user = new User(5, name, listSellers);
+        followed = Arrays.asList(n1, n2, n3);
+        User user = new User(5, name, followed);
         return user;
     }
 
@@ -343,7 +337,7 @@ class UserServiceImpTest {
         User user2 = new User(3, "Martin", null);
         User user1 = new User(1, "Augusto", null);
         User user3 = new User(5, "Samuel", null);
-        List<User> followers = List.of(user1, user2, user3);
+        followers = List.of(user1, user2, user3);
         Seller seller = new Seller(1, "Seller1", null, null, followers);
         return seller;
     }

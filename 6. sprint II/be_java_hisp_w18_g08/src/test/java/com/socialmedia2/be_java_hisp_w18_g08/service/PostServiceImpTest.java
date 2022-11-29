@@ -8,8 +8,6 @@ import com.socialmedia2.be_java_hisp_w18_g08.entity.Product;
 import com.socialmedia2.be_java_hisp_w18_g08.entity.Seller;
 import com.socialmedia2.be_java_hisp_w18_g08.entity.User;
 import com.socialmedia2.be_java_hisp_w18_g08.exception.NotFoundUserException;
-import com.socialmedia2.be_java_hisp_w18_g08.repository.PostRepositoryImp;
-import com.socialmedia2.be_java_hisp_w18_g08.repository.UserRepositoryImp;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.*;
@@ -27,16 +25,11 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 @ExtendWith(MockitoExtension.class)
 @SpringBootTest
 class PostServiceImpTest {
 
-    //Revisar si realmente hacen falta los dos repos
-
-    @Mock
-    UserRepositoryImp userRepo;
-    @Mock
-    PostRepositoryImp postRepo;
     @Mock
     UserServiceImp userService;
 
@@ -84,8 +77,9 @@ class PostServiceImpTest {
         postDto2 = new PostDto(2,1,productDto2,2,1000.0,date.plusDays(7));
     }
 
+    @Order(1)
     @Test
-    @DisplayName("T-0005-OK-Verificar que el tipo de ordenamiento por fecha exista (US-0009)")
+    @DisplayName("T-0005 - OK-Verificar que el tipo de ordenamiento por fecha exista (US-0009)")
     void getPostSellerListByUserIdOKTest() {
         //Arrange
         Integer id = 2;
@@ -101,8 +95,9 @@ class PostServiceImpTest {
         assertNotNull(result);
     }
 
+    @Order(2)
     @Test
-    @DisplayName("T-0005-NoOK-Verificar que el tipo de ordenamiento por fecha exista (US-0009)")
+    @DisplayName("T-0005 - NoOK-Verificar que el tipo de ordenamiento por fecha exista (US-0009)")
     void getPostSellerListByUserIdNoOKTest() {
         //Arrange
         Integer id = 2;
@@ -115,8 +110,9 @@ class PostServiceImpTest {
         assertThrows(NotFoundUserException.class, () -> postService.getPostSellerListByUserId(id, order));
     }
 
+    @Order(3)
     @Test
-    @DisplayName("T-0006-OK-Verificar el correcto ordenamiento ascendente por fecha. (US-0009)")
+    @DisplayName("T-0006 - OK-Verificar el correcto ordenamiento ascendente por fecha. (US-0009)")
     void getPostSellerListByUserIdAscendentOKTest() {
         //Arrange
         Integer id = 2;
@@ -133,8 +129,9 @@ class PostServiceImpTest {
         assertEquals(expectedPost,result.getPosts());
     }
 
+    @Order(4)
     @Test
-    @DisplayName("T-0006-OK-Verificar el correcto ordenamiento descendente por fecha. (US-0009)")
+    @DisplayName("T-0006 - OK-Verificar el correcto ordenamiento descendente por fecha. (US-0009)")
     void getPostSellerListByUserIdDescendentOKTest() {
         //Arrange
         Integer id = 2;
@@ -151,6 +148,7 @@ class PostServiceImpTest {
         assertEquals(expectedPost,result.getPosts());
     }
 
+    @Order(5)
     @Test
     @DisplayName("T-0008 - Verificar que la lista de post sea efectivamente de las últimas dos semanas. (US-0006)")
     void getPostSellerListByUserId() {
