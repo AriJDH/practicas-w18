@@ -136,13 +136,9 @@ class UserServiceTest {
 
             when(repository.findUserInList(userFollower.getFollowed(),userToUnfollow.getUser_id())).thenReturn(Optional.empty());
             when(repository.findUserInList(userToUnfollow.getFollowers(),userFollower.getUser_id())).thenReturn(Optional.empty());
+
             //ACT, ASSERT
-
-
             Assertions.assertThrows(BadRequestException.class, ()->service.unfollowUser(userFollower.getUser_id(), userToUnfollow.getUser_id()));
-
-
-
         }
     }
     //US-0008

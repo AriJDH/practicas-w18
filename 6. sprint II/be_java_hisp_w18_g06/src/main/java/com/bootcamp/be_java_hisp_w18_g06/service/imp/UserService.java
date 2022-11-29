@@ -32,28 +32,10 @@ public class UserService implements IUserService {
             .findAndAddModules()
             .build();
 
-    //userAddedFollower
     List<User> userAddedFollower = new ArrayList<>();
-    //
+
     List<User> userAddedFollowed = new ArrayList<>();
 
-
-    //US-001
-    //userId != userIdToFollow --> Boolean
-    private boolean userIdDiffUserIdToFollow(int userId, int userIdToFollow) {
-        return userId != userIdToFollow;
-    }
-
-    //usFollowed.isPresent()--> Boolean
-    public boolean userIsPresent(int id) {
-        return userRepository.findUserById(id).isPresent();
-    }
-
-    //usFollowed.get().getPosts() != null -->Boolean
-    public boolean userFollowedHasPosts(User user) {
-        return user.getPosts() != null;
-    }
-    //Metodo para seguir
 
     @Override
     public void followUser(Integer userId, Integer userIdToFollow) {
@@ -83,14 +65,13 @@ public class UserService implements IUserService {
             throw new BadRequestException("You can't follow this user because he doesn't have any posts");
         }
 
-
         //Agregar a la lista de Followed de userId
-         userAddedFollower.add(usFollowed.get());
-         usFollower.get().setFollowed(userAddedFollower);  // comprador -> vendedor
+        userAddedFollower.add(usFollowed.get());
+        usFollower.get().setFollowed(userAddedFollower);  // comprador -> vendedor
 
         //Agregar a la lista de Followers de userIdToFollow
-         userAddedFollowed.add(usFollower.get());
-         usFollowed.get().setFollowers(userAddedFollowed);  // vendedor <- comprador
+        userAddedFollowed.add(usFollower.get());
+        usFollowed.get().setFollowers(userAddedFollowed);  // vendedor <- comprador
 
         userRepository.updateUsers(userFollower);
         userRepository.updateUsers(userFollowed);
@@ -106,34 +87,39 @@ public class UserService implements IUserService {
 
     @Override
     public void unfollowUser(Integer userId, Integer userIdToUnfollow) {
-        if (userIdDiffUserIdToFollow(userId, userIdToUnfollow)) {
-            Optional<User> usFollower = userRepository.findUserById(userId);
-            Optional<User> usUnfollowed = userRepository.findUserById(userIdToUnfollow);
 
-            boolean isInListToUnfollowed = userRepository.findUserInList(usFollower.get().getFollowed(), userIdToUnfollow).isPresent();
-            boolean userIdIsInListToFollowers = userRepository.findUserInList(usUnfollowed.get().getFollowers(), userId).isPresent();
 
-            List<User> listFollowed = usFollower.get().getFollowed();
-            List<User> listFollowers = usUnfollowed.get().getFollowers();
+        /* Init variables */
+        Optional<User> usFollower = userRepository.findUserById(userId);
+        Optional<User> usUnfollowed = userRepository.findUserById(userIdToUnfollow);
 
-            //busca en el repo si estan presentes los usuarios
-            if (userIsPresent(usUnfollowed.get().getUser_id()) && userIsPresent(usFollower.get().getUser_id())) {
-                //booleans
-                if (isInListToUnfollowed && userIdIsInListToFollowers) {
-                    listFollowed.remove(usUnfollowed);
-                    listFollowers.remove(usFollower);
+        boolean isInListToUnfollowed = userRepository.findUserInList(usFollower.get().getFollowed(), userIdToUnfollow).isPresent();
+        boolean userIdIsInListToFollowers = userRepository.findUserInList(usUnfollowed.get().getFollowers(), userId).isPresent();
 
-                } else {
-                    throw new BadRequestException("The users don't follow each other");
-                }
-            }
-            else {
-                throw new BadRequestException("User doesn't exist");
-            }
+        List<User> listFollowed = usFollower.get().getFollowed();
+        List<User> listFollowers = usUnfollowed.get().getFollowers();
 
-        } else {
+
+
+        /*Validations*/
+        /* Users with different id */
+        if (!userIdDiffUserIdToFollow(userId, userIdToUnfollow)) {
             throw new BadRequestException("You can't unfollow yourself");
         }
+
+        /* Search the repository if users are presents */
+        if (!userIsPresent(usUnfollowed.get().getUser_id()) || !userIsPresent(usFollower.get().getUser_id())) {
+            throw new BadRequestException("User doesn't exist");
+        }
+
+        //booleans
+        if (!isInListToUnfollowed || !userIdIsInListToFollowers) {
+            throw new BadRequestException("The users don't follow each other");
+        }
+
+        listFollowed.remove(usUnfollowed);
+        listFollowers.remove(usFollower);
+
     }
 
 
@@ -169,7 +155,7 @@ public class UserService implements IUserService {
             throw new EmptyException("This user doesn't have followers");
         }
 
-        if(order != null){
+        if (order != null) {
             user.setFollowed(sortList(order, user.getFollowed()));
         }
 
@@ -179,7 +165,7 @@ public class UserService implements IUserService {
         userFollowedListDTO.setUser_id(user.getUser_id());
         userFollowedListDTO.setUser_name(user.getUser_name());
         userFollowedListDTO.setFollowed(user.getFollowed().stream()
-                .map( x -> mapper.convertValue(x, UserFollowDTO.class))
+                .map(x -> mapper.convertValue(x, UserFollowDTO.class))
                 .collect(Collectors.toList()));
         //
 
@@ -197,7 +183,7 @@ public class UserService implements IUserService {
             throw new EmptyException("This user doesn't have followers");
         }
 
-        if(order != null){
+        if (order != null) {
             user.setFollowers(sortList(order, user.getFollowers()));
         }
 
@@ -206,25 +192,42 @@ public class UserService implements IUserService {
         userFollowersListDTO.setUser_id(user.getUser_id());
         userFollowersListDTO.setUser_name(user.getUser_name());
         userFollowersListDTO.setFollowers(user.getFollowers().stream()
-                .map( x -> mapper.convertValue(x, UserFollowDTO.class))
+                .map(x -> mapper.convertValue(x, UserFollowDTO.class))
                 .collect(Collectors.toList()));
 
         return userFollowersListDTO;
     }
 
 
-
-        //008
-        private List<User> sortList(String order, List<User> users) {
-            if (order.equals("name_asc")) {
-                return users.stream().sorted(Comparator.comparing(User::getUser_name)).collect(Collectors.toList());
-            }
-            else if(order.equals("name_desc")){
-                return users.stream().sorted(Comparator.comparing(User::getUser_name).reversed()).collect(Collectors.toList());
-            }
-            else {
-                throw new BadRequestException("Invalid param order");
-            }
+    //008
+    private List<User> sortList(String order, List<User> users) {
+        if (order.equals("name_asc")) {
+            return users.stream().sorted(Comparator.comparing(User::getUser_name)).collect(Collectors.toList());
+        } else if (order.equals("name_desc")) {
+            return users.stream().sorted(Comparator.comparing(User::getUser_name).reversed()).collect(Collectors.toList());
+        } else {
+            throw new BadRequestException("Invalid param order");
         }
+    }
+
+
+    /* FUNCIONES AUXILIARES */
+
+    //US-001
+    //userId != userIdToFollow --> Boolean
+    private boolean userIdDiffUserIdToFollow(int userId, int userIdToFollow) {
+        return userId != userIdToFollow;
+    }
+
+    //usFollowed.isPresent()--> Boolean
+    public boolean userIsPresent(int id) {
+        return userRepository.findUserById(id).isPresent();
+    }
+
+    //usFollowed.get().getPosts() != null -->Boolean
+    public boolean userFollowedHasPosts(User user) {
+        return user.getPosts() != null;
+    }
+    //Metodo para seguir
 
 }
