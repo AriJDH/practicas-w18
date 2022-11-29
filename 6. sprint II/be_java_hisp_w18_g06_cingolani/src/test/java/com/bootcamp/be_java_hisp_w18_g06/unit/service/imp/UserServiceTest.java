@@ -63,8 +63,6 @@ class UserServiceTest {
         }
     }
 
-
-
     //US0007
     @Nested
     class T0002{
@@ -118,6 +116,7 @@ class UserServiceTest {
             verify(repository,atLeast(2)).findUserInList(anyList(),anyInt());
         }
     }
+
     //US-0008
     @Nested
     class T0003{
@@ -139,6 +138,7 @@ class UserServiceTest {
             Assertions.assertThrows(BadRequestException.class, ()->service.getFollowedList(user.getUser_id(), order));
         }
     }
+
     //US-0008
     @Nested
     class T0004 {
@@ -164,6 +164,7 @@ class UserServiceTest {
             assertEquals("user 3", result.getFollowed().get(0).getUser_name());
         }
     }
+
     //US0002
     @Nested
     class T0007 {

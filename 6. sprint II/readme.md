@@ -49,7 +49,8 @@ El especialista conoce que los tiempos de desarrollo en bootcamp son acotados, p
 
 
 
-***************
+*********************************************************************************************************
+
 <h2>Programación Java - Sprint Nº 2 - Testing</h2>
 
 <h3>Requerimientos técnicos funcionales (Punto A)</h3>
@@ -70,3 +71,25 @@ https://docs.google.com/document/d/1187Qpl9lfHk-pckNTWJgQwr8fq6lTJWt/edit?usp=sh
 
 <h3>Especificaciones técnicas de Desafío SPRINT II</h3>
 https://docs.google.com/document/d/1LNrf6vXUSteJSNlSWjTtrS66CnLAaVvc/preview?rtpof=true
+
+
+*********************************************************************************************************
+
+<h2> INDIVIDUAL </h2>
+
+- Refactor en la clase ExceptionValidResponseDTO > Se agrega @JsonFormat(pattern = "dd-MM-yyyy") para el atributo timeStamp;
+
+- Test integración "Verify status 204 - Follow an user OK": 
+Se realiza una corrección en el status devuelto, se cambia status 200 por 204. 
+
+Controller: UserController
+
+SUT: 
+@PostMapping("/{userId}/follow/{userIdToFollow}")
+followUser
+
+- Test integración "Verify status 400 - Message: 'Can't follow this user because he doesn't have any post'"
+No requiere modificación de código fuente. 
+
+- Test integración "Verify status 400 -> Message: 'You can't follow yourself'"
+No requiere modificación de código fuente. 

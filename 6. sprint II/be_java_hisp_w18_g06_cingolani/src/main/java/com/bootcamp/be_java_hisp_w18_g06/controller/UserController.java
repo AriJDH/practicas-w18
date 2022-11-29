@@ -21,7 +21,7 @@ public class UserController {
     public ResponseEntity<?> followUser(@PathVariable int userId, @PathVariable int userIdToFollow) {
 
             userService.followUser(userId, userIdToFollow);
-            return new ResponseEntity<>(HttpStatus.OK);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 
     }
 

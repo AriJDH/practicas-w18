@@ -31,7 +31,7 @@ class PostServiceTest {
     private PostService postService;
 
     //nomenclatura del nombre:
-    // nombre del método + resultado esperado + test
+    //nombre del método + resultado esperado + test
     //ej: savePostOkTest()
 
 
@@ -59,6 +59,7 @@ class PostServiceTest {
         }
 
     }
+
     //US00009
     @Nested
     class T0005{

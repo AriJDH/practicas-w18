@@ -25,6 +25,7 @@ public class UserFactory {
     public static User getUserRandom(String name) {
         return new User((int) (Math.random() * 10), name);
     }
+
     public static User getUserId(Integer id) {
         return new User(id);
     }
@@ -48,6 +49,7 @@ public class UserFactory {
         user.setFollowers(userList);
         return user;
     }
+
     public static User getUserWithFollowersListAndPosts(String name) {
         User user = getUserRandom(name);
         List<User> userList = new ArrayList<>();
@@ -68,10 +70,6 @@ public class UserFactory {
         user.setPosts(postList);
         return user;
     }
-
-
-
-
 
     public static UserFollowDTO getUserFollowDto(String name) {
         return mapper.convertValue(getUserRandom(name), UserFollowDTO.class);
@@ -106,7 +104,5 @@ public class UserFactory {
                 .collect(Collectors.toList()));
         return userFollowedListDTO;
     }
-
-
 
 }
