@@ -71,7 +71,7 @@ public class Integration {
 
     @Test
     @DisplayName("Integration test - FollowNoOk")
-    //Este test es cuando falla follow
+    //Este test es cuando falla follow,devuelve code 400
     void iTFollow() throws Exception {
         mockMvc.perform(
                         MockMvcRequestBuilders.post("/users/{userId}/follow/{userIdToFollow}","1","2"))
