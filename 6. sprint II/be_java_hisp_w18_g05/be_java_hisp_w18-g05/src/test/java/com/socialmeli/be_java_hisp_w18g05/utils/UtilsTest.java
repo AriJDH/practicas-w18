@@ -6,7 +6,7 @@ import com.socialmeli.be_java_hisp_w18g05.entity.Seller;
 import java.util.ArrayList;
 import java.util.List;
 
-public class test {
+public class UtilsTest {
     public static Buyer getBuyerWithListOrderAsc (Integer userId){
         List<Seller> sellerList = new ArrayList<>();
         sellerList.add(new Seller(10, "Seller10"));

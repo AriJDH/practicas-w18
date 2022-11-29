@@ -13,8 +13,6 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.socialmeli.be_java_hisp_w18g05.dto.response.*;
-import com.socialmeli.be_java_hisp_w18g05.entity.Post;
-import com.socialmeli.be_java_hisp_w18g05.entity.Product;
 import com.socialmeli.be_java_hisp_w18g05.repository.IRepository;
 import com.socialmeli.be_java_hisp_w18g05.service.ServiceImp;
 import org.junit.jupiter.api.Assertions;
@@ -30,14 +28,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.mockito.Mockito.*;
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 
-import static com.socialmeli.be_java_hisp_w18g05.utils.test.*;
+import static com.socialmeli.be_java_hisp_w18g05.utils.UtilsTest.*;
 
 @ExtendWith(MockitoExtension.class)
-public class test {
+public class ServiceTest {
 
     @Mock
     IRepository iRepository;
