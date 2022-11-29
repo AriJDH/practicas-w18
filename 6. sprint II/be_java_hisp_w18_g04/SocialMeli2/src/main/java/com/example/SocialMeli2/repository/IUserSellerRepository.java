@@ -3,9 +3,10 @@ package com.example.SocialMeli2.repository;
 import com.example.SocialMeli2.entity.UserSeller;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface IUserSellerRepository {
-    UserSeller findById(Integer id);
+    Optional<UserSeller> findById(Integer id);
 
     List<UserSeller> findAll();
 }

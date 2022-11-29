@@ -17,6 +17,7 @@ import com.example.SocialMeli2.util.Sorter;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -27,16 +28,6 @@ public class UserSellerServiceImp implements IUserSellerService {
     public UserSellerServiceImp(IUserSellerRepository sellerRepository, IPostRepository postRepository) {
         this.sellerRepository = sellerRepository;
         this.postRepository = postRepository;
-    }
-
-    @Override
-    public FollowerCountDTORes followersCount(Integer userId) {
-        if (validateSeller(userId)) {
-            UserSeller seller = sellerRepository.findById(userId);
-            return new FollowerCountDTORes(seller.getUser_id(), seller.getUser_name(), seller.getFollowers().size());
-        } else {
-            throw new UserNotFoundException("The seller " + userId + " doesn't exist");
-        }
     }
 
     private Boolean validateSeller(Integer id) {
@@ -51,31 +42,37 @@ public class UserSellerServiceImp implements IUserSellerService {
     }
 
     @Override
+    public FollowerCountDTORes followersCount(Integer userId) {
+        UserSeller seller = getSeller(userId);
+        return new FollowerCountDTORes(seller.getUser_id(), seller.getUser_name(), seller.getFollowers().size());
+    }
+
+    @Override
     public FollowerListDTORes getFollowers(Integer userId, String order) {
-        if (validateSeller(userId)) {
-            UserSeller seller = sellerRepository.findById(userId);
-            List<UserBuyer> buyers = seller.getFollowers();
-            List<UserDTORes> userDTOResList = buyers.stream().map(buyer -> new UserDTORes(buyer)).collect(Collectors.toList());
-            if (!order.equals("invalid"))
-                Sorter.sortedByName(userDTOResList, order);
-            else
-                throw new BadRequestException("Enter 'name_asc' for ascending alphabetical ordering or 'name_desc' for descending ordering.");
-            return new FollowerListDTORes(seller.getUser_id(), seller.getUser_name(), userDTOResList);
-        } else {
-            throw new UserNotFoundException("The seller " + userId + " doesn't exist");
-        }
+        UserSeller seller = getSeller(userId);
+        List<UserBuyer> buyers = seller.getFollowers();
+        List<UserDTORes> userDTOResList = buyers.stream().map(UserDTORes::new).collect(Collectors.toList());
+
+        if (!order.equals("invalid"))
+            Sorter.sortedByName(userDTOResList, order);
+        else
+            throw new BadRequestException("Enter 'name_asc' for ascending alphabetical ordering or 'name_desc' for descending ordering.");
+
+        return new FollowerListDTORes(seller.getUser_id(), seller.getUser_name(), userDTOResList);
     }
 
     @Override
     public PostDTORes publishPost(PostDTOReq postDTOReq) {
-        if (validateSeller(postDTOReq.getUser_id())) {
-            Post post = Mapper.createObjectMapper().convertValue(postDTOReq, Post.class);
-            postRepository.createPost(post);
-            UserSeller seller = sellerRepository.findById(postDTOReq.getUser_id());
-            seller.getPosts().add(post);
-            return new PostDTORes(postDTOReq.getUser_id(),post.getPost_id(),postDTOReq.getDate(),new ProductDTORes(post.getProduct()),postDTOReq.getCategory(),postDTOReq.getPrice());
-        } else {
-            throw new UserNotFoundException("The seller " + postDTOReq.getUser_id() + " doesn't exist");
-        }
+        UserSeller seller = getSeller(postDTOReq.getUser_id());
+        Post post = Mapper.createObjectMapper().convertValue(postDTOReq, Post.class);
+        postRepository.createPost(post);
+        seller.getPosts().add(post);
+        return new PostDTORes(postDTOReq.getUser_id(), post.getPost_id(), postDTOReq.getDate(), new ProductDTORes(post.getProduct()), postDTOReq.getCategory(), postDTOReq.getPrice());
+    }
+
+    private UserSeller getSeller(Integer id) {
+        Optional<UserSeller> optionalUserSeller = sellerRepository.findById(id);
+        UserSeller seller = optionalUserSeller.orElseThrow(() -> new UserNotFoundException("The buyer " + id + " doesn't exist"));
+        return seller;
     }
 }

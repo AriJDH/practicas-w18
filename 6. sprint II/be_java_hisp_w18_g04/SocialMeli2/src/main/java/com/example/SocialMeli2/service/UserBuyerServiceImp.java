@@ -2,6 +2,7 @@ package com.example.SocialMeli2.service;
 
 import com.example.SocialMeli2.dto.respose.*;
 import com.example.SocialMeli2.entity.Post;
+import com.example.SocialMeli2.entity.User;
 import com.example.SocialMeli2.entity.UserBuyer;
 import com.example.SocialMeli2.entity.UserSeller;
 import com.example.SocialMeli2.exception.BadRequestException;
@@ -11,9 +12,11 @@ import com.example.SocialMeli2.repository.IUserSellerRepository;
 import com.example.SocialMeli2.util.Sorter;
 import org.springframework.stereotype.Service;
 
+import java.nio.Buffer;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 
@@ -50,65 +53,46 @@ public class UserBuyerServiceImp implements IUserBuyerService {
     }
 
     @Override
-   public FollowDTORes follow(Integer userId, Integer userIdToFollow) {
+    public FollowDTORes follow(Integer userId, Integer userIdToFollow) {
+        UserBuyer buyer = getBuyer(userId);
+        UserSeller seller = getSeller(userIdToFollow);
 
-        if (validateBuyer(userId) && validateSeller(userIdToFollow)) {
-            UserBuyer buyer = userBuyerRepository.findById(userId);
-            UserSeller seller = userSellerRepository.findById(userIdToFollow);
-            if (!(buyer.getFollowed().contains(seller)) && !(seller.getFollowers().contains(buyer))) {
-                buyer.getFollowed().add(seller);
-                seller.getFollowers().add(buyer);
-
-            }
-            else {
-                throw new BadRequestException("The user " + userIdToFollow + " is already in your following list");
-            }
-            return new FollowDTORes(buyer.getUser_name(), seller.getUser_name());
-
+        if (!(buyer.getFollowed().contains(seller)) && !(seller.getFollowers().contains(buyer))) {
+            buyer.getFollowed().add(seller);
+            seller.getFollowers().add(buyer);
         } else {
-            if (!validateBuyer(userId) && validateSeller(userIdToFollow)){
-                throw new UserNotFoundException("The buyer "+userId +" doesn't exist");
-            } else if (!validateSeller(userIdToFollow) && validateBuyer(userId)) {
-                throw new UserNotFoundException("The seller " + userIdToFollow + " doesn't exist");
-            }
-           throw new BadRequestException("The buyer "+userId +" and the seller "+userIdToFollow+" doesn't exist");
+            throw new BadRequestException("The user " + userIdToFollow + " is already in your following list");
         }
+
+        return new FollowDTORes(buyer.getUser_name(), seller.getUser_name());
     }
 
     @Override
     public FollowedListDTORes getFollowed(Integer userId, String order) {
-        if (validateBuyer(userId)) {
-            UserBuyer buyer = userBuyerRepository.findById(userId);
-            List<UserSeller> sellers = buyer.getFollowed();
-            List<UserDTORes> userDTOResList = sellers.stream().map(e -> new UserDTORes(e)).collect(Collectors.toList());
-            if (!order.equals("invalid"))
-                Sorter.sortedByName(userDTOResList, order);
-            else
-                throw new BadRequestException("Enter 'name_asc' for ascending alphabetical ordering or 'name_desc' for descending ordering.");
-            return new FollowedListDTORes(buyer.getUser_id(), buyer.getUser_name(), userDTOResList);
-        } else {
-            throw new UserNotFoundException("The buyer "+userId +" doesn't exist");
-        }
+        UserBuyer buyer = getBuyer(userId);
+        List<UserSeller> sellers = buyer.getFollowed();
+        List<UserDTORes> userDTOResList = sellers.stream().map(e -> new UserDTORes(e)).collect(Collectors.toList());
+        if (!order.equals("invalid"))
+            Sorter.sortedByName(userDTOResList, order);
+        else
+            throw new BadRequestException("Enter 'name_asc' for ascending alphabetical ordering or 'name_desc' for descending ordering.");
+
+        return new FollowedListDTORes(buyer.getUser_id(), buyer.getUser_name(), userDTOResList);
     }
 
     @Override
     public PostFollowedByDateDTORes getLastPosts(Integer userId, String order) {
-        if (validateBuyer(userId)) {
-            UserBuyer buyer = userBuyerRepository.findById(userId);
-            List<UserSeller> followed = buyer.getFollowed();
-            List<PostDTORes> postsFollowed = new ArrayList<>();
-            getPostListSeller(followed, postsFollowed);
+        UserBuyer buyer = getBuyer(userId);
+        List<UserSeller> followed = buyer.getFollowed();
+        List<PostDTORes> postsFollowed = new ArrayList<>();
+        getPostListSeller(followed, postsFollowed);
+        List<PostDTORes> filterList = filterPostByDate(postsFollowed);
+        if (!order.equals("invalid"))
+            Sorter.sortByDate(filterList, order);
+        else
+            throw new BadRequestException("Enter 'date_asc' for ascending order or 'date_desc' for descending order.");
 
-            List<PostDTORes> filterList = filterPostByDate(postsFollowed);
-
-            if (!order.equals("invalid"))
-                Sorter.sortByDate(filterList, order);
-            else
-                throw new BadRequestException("Enter 'date_asc' for ascending order or 'date_desc' for descending order.");
-            return new PostFollowedByDateDTORes(buyer.getUser_id(), filterList);
-        } else {
-            throw new UserNotFoundException("The buyer "+userId +" doesn't exist");
-        }
+        return new PostFollowedByDateDTORes(buyer.getUser_id(), filterList);
     }
 
     private List<PostDTORes> filterPostByDate(List<PostDTORes> postDTOResList) {
@@ -127,23 +111,26 @@ public class UserBuyerServiceImp implements IUserBuyerService {
 
     @Override
     public UnfollowDTORes unfollow(Integer userId, Integer userIdToUnfollow) {
-        if (validateBuyer(userId) && validateSeller(userIdToUnfollow)) {
-            UserBuyer buyer = userBuyerRepository.findById(userId);
-            UserSeller seller = userSellerRepository.findById(userIdToUnfollow);
-            if (buyer.getFollowed().contains(seller) && (seller.getFollowers().contains(buyer))) {
-                buyer.getFollowed().remove(seller);
-                seller.getFollowers().remove(buyer);
-            } else {
-                throw new BadRequestException("The user " + userIdToUnfollow + " is not in your following list");
-            }
-            return new UnfollowDTORes(buyer.getUser_name(), seller.getUser_name());
+        UserBuyer buyer = getBuyer(userId);
+        UserSeller seller = getSeller(userIdToUnfollow);
+        if (buyer.getFollowed().contains(seller) && (seller.getFollowers().contains(buyer))) {
+            buyer.getFollowed().remove(seller);
+            seller.getFollowers().remove(buyer);
         } else {
-            if (!validateBuyer(userId) && validateSeller(userIdToUnfollow)){
-                throw new UserNotFoundException("The buyer "+userId +" doesn't exist");
-            } else if (!validateSeller(userIdToUnfollow) && validateBuyer(userId)) {
-                throw new UserNotFoundException("The seller " + userIdToUnfollow + " doesn't exist");
-            }
-            throw new BadRequestException("The buyer "+userId +" and the seller "+userIdToUnfollow+" doesn't exist");
+            throw new BadRequestException("The user " + userIdToUnfollow + " is not in your following list");
         }
+        return new UnfollowDTORes(buyer.getUser_name(), seller.getUser_name());
+    }
+
+    private UserBuyer getBuyer(Integer id) {
+        Optional<UserBuyer> optionalUserBuyer = userBuyerRepository.findById(id);
+        UserBuyer buyer = optionalUserBuyer.orElseThrow(() -> new UserNotFoundException("The buyer " + id + " doesn't exist"));
+        return buyer;
+    }
+
+    private UserSeller getSeller(Integer id) {
+        Optional<UserSeller> optionalUserSeller = userSellerRepository.findById(id);
+        UserSeller seller = optionalUserSeller.orElseThrow(() -> new UserNotFoundException("The seller " + id + " doesn't exist"));
+        return seller;
     }
 }

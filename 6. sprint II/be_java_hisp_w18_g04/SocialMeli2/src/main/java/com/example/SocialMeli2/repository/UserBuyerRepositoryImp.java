@@ -9,6 +9,7 @@ import org.springframework.util.ResourceUtils;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public class UserBuyerRepositoryImp implements IUserBuyerRepository {
@@ -20,8 +21,8 @@ public class UserBuyerRepositoryImp implements IUserBuyerRepository {
 
 
     @Override
-    public UserBuyer findById(Integer id) {
-        return buyers.stream().filter(buyer -> buyer.getUser_id().equals(id)).findFirst().get();
+    public Optional<UserBuyer> findById(Integer id) {
+        return buyers.stream().filter(buyer -> buyer.getUser_id().equals(id)).findFirst();
     }
 
     @Override

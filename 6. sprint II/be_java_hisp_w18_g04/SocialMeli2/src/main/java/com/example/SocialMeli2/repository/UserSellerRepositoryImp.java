@@ -10,6 +10,7 @@ import org.springframework.util.ResourceUtils;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public class UserSellerRepositoryImp implements IUserSellerRepository {
@@ -20,8 +21,8 @@ public class UserSellerRepositoryImp implements IUserSellerRepository {
     }
 
     @Override
-    public UserSeller findById(Integer id) {
-        return sellers.stream().filter(buyer -> buyer.getUser_id().equals(id)).findFirst().get();
+    public Optional<UserSeller> findById(Integer id) {
+        return sellers.stream().filter(buyer -> buyer.getUser_id().equals(id)).findFirst();
     }
 
     @Override
