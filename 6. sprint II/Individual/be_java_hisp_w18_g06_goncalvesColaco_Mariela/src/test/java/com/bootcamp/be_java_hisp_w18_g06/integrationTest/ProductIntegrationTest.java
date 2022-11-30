@@ -100,9 +100,7 @@ public class ProductIntegrationTest {
 						.thenReturn(Optional.of(user3));
 		
 		MvcResult mvcResult = mockMvc
-						.perform(
-										
-										get("/products/followed/3/list"))
+						.perform(get("/products/followed/3/list"))
 						.andDo(print())
 						.andExpect(status()
 										           .isOk())

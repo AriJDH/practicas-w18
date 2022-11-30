@@ -42,7 +42,7 @@ class UserServiceTest {
             //MOCK
             when(repository.findUserById(user.getUserId())).thenReturn(Optional.of(user));
             //ASSERT
-            assertEquals(user, repository.findUserById(user.getUserId()).get());
+            //assertEquals(user, repository.findUserById(user.getUserId()).get());
             Assertions.assertTrue(service.userFollowedHasPosts(user));
           //  Assertions.assertDoesNotThrow(()->service.followUser(user2.getUser_id(), user.getUser_id()));
 
@@ -57,7 +57,7 @@ class UserServiceTest {
             //MOCK
             when(repository.findUserById(idUnexists)).thenReturn(Optional.empty());
             //ASSERT
-            assertEquals(Optional.empty(),repository.findUserById(idUnexists));
+            //assertEquals(Optional.empty(),repository.findUserById(idUnexists));
             Assertions.assertFalse(service.userIsPresent(idUnexists));
 
         }
