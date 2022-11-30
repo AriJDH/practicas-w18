@@ -45,7 +45,7 @@ public class UserFactory {
         Product pr2 = new Product(2, "Bicicleta de montaña R26", "Rodado",
                 "Winner", "Roja", "18 velocidades.");
 
-        Post post1 = new Post(1, LocalDate.now(), 1, 15.5, pr1);
+        Post post1 = new Post(1, LocalDate.now().minusDays(2), 1, 15.5, pr1);
         Post post2 = new Post(2, LocalDate.now(), 2, 15999.99, pr2);
 
         User u3 = new User(3, "LaOfertaPerfecta");

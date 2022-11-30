@@ -36,7 +36,7 @@ public class UserRepository implements IUserRepository{
         Product pr2 = new Product(2, "Bicicleta de montaña R26", "Rodado",
                 "Winner", "Roja", "18 velocidades.");
 
-        Post post1 = new Post(nextPostId++, LocalDate.now(),  1, 15.5, pr1);
+        Post post1 = new Post(nextPostId++, LocalDate.now().minusDays(2),  1, 15.5, pr1);
         Post post2 = new Post(nextPostId++, LocalDate.now(),  2, 15999.99, pr2);
 
         User u3 = new User(3, "LaOfertaPerfecta");
@@ -81,10 +81,7 @@ public class UserRepository implements IUserRepository{
     @Override
     public void createPost(Integer userId, Post newPost) {
         User user = findById(userId);
-        if (user.getPosts()==null){
-            user.setPosts(new ArrayList<Post>());
-        }
-        user.getPosts().add(newPost);
+        if (user!=null) user.getPosts().add(newPost);
     }
 
     @Override

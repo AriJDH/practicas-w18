@@ -10,6 +10,7 @@ import com.mercadolibre.socialmeli2.exception.BadRequestException;
 import com.mercadolibre.socialmeli2.exception.NotFoundException;
 import com.mercadolibre.socialmeli2.exception.OrderInvalidException;
 import com.mercadolibre.socialmeli2.repository.IUserRepository;
+import com.mercadolibre.socialmeli2.utils.Constants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -132,30 +133,22 @@ public class UserService implements IUserService {
      */
     @Override
     public String addPost(PostDtoReq postReq) {
-        Post post;
-        Product prod;
-        User user = userRepository.findById(postReq.getUserId());
-        if (user ==null) {
-            throw new NotFoundException("El usuario "+postReq.getUserId()+" no existe");
+        if (!this.userRepository.existsById(postReq.getUserId())) {
+            throw new NotFoundException(Constants.ERROR_MSG_USER_NOT_FOUND +postReq.getUserId());
         }
-        try {
-            prod = new Product(postReq.getProduct().getId(),
-                    postReq.getProduct().getName(),
-                    postReq.getProduct().getType(),
-                    postReq.getProduct().getBrand(),
-                    postReq.getProduct().getColor(),
-                    postReq.getProduct().getNotes());
-            post = new Post(userRepository.getNextPostId(),
-                    postReq.getDate(),
-                    postReq.getCategory(),
-                    postReq.getPrice(),
-                    prod);
-            userRepository.createPost(postReq.getUserId(), post);
-
-        } catch (Exception e) {
-            throw new BadRequestException("Posteo invalido");
-        }
-        return "Post creado correctamente";
+        Product prod = new Product(postReq.getProduct().getId(),
+                postReq.getProduct().getName(),
+                postReq.getProduct().getType(),
+                postReq.getProduct().getBrand(),
+                postReq.getProduct().getColor(),
+                postReq.getProduct().getNotes());
+        Post post = new Post(userRepository.getNextPostId(),
+                postReq.getDate(),
+                postReq.getCategory(),
+                postReq.getPrice(),
+                prod);
+        userRepository.createPost(postReq.getUserId(), post);
+        return Constants.SUCCESS_MSG_ADD_POST;
     }
 
     /**
@@ -174,20 +167,22 @@ public class UserService implements IUserService {
         LocalDate twoWeeksAgo = now.minusWeeks(2);
 
         List<PostDtoRes> postsRes = followed.stream()
-                .flatMap(f -> f.getPosts().stream())
+                .flatMap(u ->
+                        u.getPosts().stream()
+                                .map(p -> new PostDtoRes(
+                                        u.getId(),
+                                        p.getId(),
+                                        p.getDate(),
+                                        new ProductDto(p.getProduct().getId(),
+                                                p.getProduct().getName(),
+                                                p.getProduct().getType(),
+                                                p.getProduct().getBrand(),
+                                                p.getProduct().getColor(),
+                                                p.getProduct().getNotes()),
+                                        p.getCategory(),
+                                        p.getPrice()))
+                )
                 .filter(p -> (p.getDate().isAfter(twoWeeksAgo) && p.getDate().isBefore(now.plusDays(1))))
-                .map(p -> new PostDtoRes(
-                        userId,
-                        p.getId(),
-                        p.getDate(),
-                        new ProductDto(p.getProduct().getId(),
-                                p.getProduct().getName(),
-                                p.getProduct().getType(),
-                                p.getProduct().getBrand(),
-                                p.getProduct().getColor(),
-                                p.getProduct().getNotes()),
-                        p.getCategory(),
-                        p.getPrice()))
                 .collect(Collectors.toList());
 
         orderByDate(order, postsRes);

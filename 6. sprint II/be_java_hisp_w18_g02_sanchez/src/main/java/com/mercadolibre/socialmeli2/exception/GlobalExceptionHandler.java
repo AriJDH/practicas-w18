@@ -17,8 +17,8 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(NotFoundException.class)
     public ResponseEntity<?> notFoundHandler(NotFoundException e){
-        ResponseDto eDto = new ResponseDto(e.getMessage(), 400);
-        return new ResponseEntity<>(eDto, HttpStatus.valueOf(400));
+        ResponseDto eDto = new ResponseDto(e.getMessage(), 404);
+        return new ResponseEntity<>(eDto, HttpStatus.valueOf(404));
     }
 
     @ExceptionHandler(IllegalArgumentException.class)
