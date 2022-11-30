@@ -9,6 +9,7 @@ import com.mercadolibre.socialmeli2.dto.request.PostDtoReq;
 import com.mercadolibre.socialmeli2.dto.response.*;
 import com.mercadolibre.socialmeli2.repository.UserRepository;
 import com.mercadolibre.socialmeli2.utils.UserFactory;
+import org.hamcrest.Matchers;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -287,7 +288,7 @@ public class UserControllerTest {
     }
 
     @Test
-    @DisplayName("US0006 GET /products/followed/{userId}/list (Happy Path)")
+    @DisplayName("US0006 GET /products/followed/{userId}/list (Happy Path: fields)")
     void getRecentPostIntTestOk() throws Exception {
         // Act & Assert
         mockMvc.perform(MockMvcRequestBuilders.get("/products/followed/{userId}/list", 1))
@@ -295,13 +296,38 @@ public class UserControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(content().contentType("application/json"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.user_id").value(1))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.posts[0].user_id").value(4))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.posts[0].post_id").value(2))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.posts[0].category").value(2))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.posts[0].price").value(15999.99))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.posts[0].product.product_id").value(2))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.posts[1].user_id").value(3))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.posts[1].post_id").value(1))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.posts[1].category").value(1))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.posts[1].price").value(15.5))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.posts[1].product.product_id").value(1));
+    }
+
+    @Test
+    @DisplayName("US0006 GET /products/followed/{userId}/list (Happy Path: correctness)")
+    void getRecentPostIntTestTwoWeeksOk() throws Exception {
+        // Arrange
+        userRepository.setUsers(UserFactory.loadUsersWithPosts());
+
+        // Act & Assert
+        mockMvc.perform(MockMvcRequestBuilders.get("/products/followed/{userId}/list", 1))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(content().contentType("application/json"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.user_id").value(1))
+                .andExpect(MockMvcResultMatchers
+                        .jsonPath("$.posts[*].post_id")
+                        .value(Matchers.containsInAnyOrder(1, 2, 3, 4, 5)))
+                .andExpect(MockMvcResultMatchers
+                        .jsonPath("$.posts[*].category")
+                        .value(Matchers.containsInAnyOrder(1, 2, 3, 4, 5)))
+                .andExpect(MockMvcResultMatchers
+                        .jsonPath("$.posts[*].price")
+                        .value(Matchers.containsInAnyOrder(15.5, 15999.99, 7000D, 5999D, 200D)));
     }
 }

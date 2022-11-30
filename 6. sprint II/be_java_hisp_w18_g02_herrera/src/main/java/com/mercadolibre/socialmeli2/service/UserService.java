@@ -10,6 +10,7 @@ import com.mercadolibre.socialmeli2.exception.BadRequestException;
 import com.mercadolibre.socialmeli2.exception.NotFoundException;
 import com.mercadolibre.socialmeli2.exception.OrderInvalidException;
 import com.mercadolibre.socialmeli2.repository.IUserRepository;
+import com.mercadolibre.socialmeli2.utils.DTOConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -174,20 +175,9 @@ public class UserService implements IUserService {
         LocalDate twoWeeksAgo = now.minusWeeks(2);
 
         List<PostDtoRes> postsRes = followed.stream()
-                .flatMap(f -> f.getPosts().stream())
-                .filter(p -> (p.getDate().isAfter(twoWeeksAgo) && p.getDate().isBefore(now.plusDays(1))))
-                .map(p -> new PostDtoRes(
-                        userId,
-                        p.getId(),
-                        p.getDate(),
-                        new ProductDto(p.getProduct().getId(),
-                                p.getProduct().getName(),
-                                p.getProduct().getType(),
-                                p.getProduct().getBrand(),
-                                p.getProduct().getColor(),
-                                p.getProduct().getNotes()),
-                        p.getCategory(),
-                        p.getPrice()))
+                .flatMap(f -> f.getPosts().stream()
+                        .filter(p -> (p.getDate().isAfter(twoWeeksAgo) && p.getDate().isBefore(now.plusDays(1))))
+                        .map(p -> DTOConverter.entityToDto(p, f.getId())))
                 .collect(Collectors.toList());
 
         orderByDate(order, postsRes);
