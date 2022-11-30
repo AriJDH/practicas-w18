@@ -408,4 +408,20 @@ public class UserControllerTest {
                 .andExpect(MockMvcResultMatchers .jsonPath("$.messages").value(expected.getMessages()))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.status").value(400));
     }
+
+    @Test
+    @DisplayName("US0007 POST /users/{userId}/unfollow/{userIdToUnfollow} (Happy path)")
+    void unfollowIntTestOk() throws Exception {
+        // Arrange
+        ResponseDto expected = new ResponseDto("El usuario 1 dejó de seguir al usuario 4", 200);
+
+        // Act & Assert
+        mockMvc.perform(MockMvcRequestBuilders.post(
+                "/users/{userId}/unfollow/{userIdToUnfollow}", 1, 4))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(content().contentType("application/json"))
+                .andExpect(MockMvcResultMatchers .jsonPath("$.messages").value(expected.getMessages()))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.status").value(200));
+    }
 }
