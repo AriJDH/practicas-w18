@@ -367,6 +367,8 @@ class UserBuyerServiceImpTest {
             when(userBuyerRepository.findById(userBuyer5.getUser_id())).thenReturn(Optional.of(userBuyer5));
             PostFollowedByDateDTORes current = userBuyerServiceImp.getLastPosts(userBuyer5.getUser_id(), order);
 
+            verifyNoMoreInteractions(userBuyerRepository);
+
             //THEN
             assertAll(
                     () -> {
@@ -377,6 +379,9 @@ class UserBuyerServiceImpTest {
                     },
                     () -> {
                         assertTrue(current.getPosts().get(0).getDate().isAfter(LocalDate.now().minusWeeks(2)));
+                    },
+                    ()-> {
+                        assertTrue(current.getPosts().get(1).getDate().isAfter(LocalDate.now().minusWeeks(2)));
                     }
             );
         }

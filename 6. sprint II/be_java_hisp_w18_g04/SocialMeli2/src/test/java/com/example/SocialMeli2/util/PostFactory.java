@@ -46,14 +46,14 @@ public class PostFactory {
         List<Post> postList = new ArrayList<>();
         Post post9= new Post();
         post9.setPost_id(9);
-        post9.setDate(LocalDate.of(2022,11,21));
+        post9.setDate(LocalDate.now().minusDays(13));
         post9.setProduct(ProductFactory.getProduct9());
         post9.setCategory(2);
         post9.setPrice(450.00);
 
         Post post10= new Post();
         post10.setPost_id(10);
-        post10.setDate(LocalDate.of(2022,11,23));
+        post10.setDate(LocalDate.now().minusDays(9));
         post10.setProduct(ProductFactory.getProduct10());
         post10.setCategory(3);
         post10.setPrice(4500.00);
