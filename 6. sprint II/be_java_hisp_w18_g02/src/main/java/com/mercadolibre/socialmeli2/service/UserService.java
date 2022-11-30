@@ -174,20 +174,22 @@ public class UserService implements IUserService {
         LocalDate twoWeeksAgo = now.minusWeeks(2);
 
         List<PostDtoRes> postsRes = followed.stream()
-                .flatMap(f -> f.getPosts().stream())
+                .flatMap(u ->
+                        u.getPosts().stream()
+                                .map(p -> new PostDtoRes(
+                                        u.getId(),
+                                        p.getId(),
+                                        p.getDate(),
+                                        new ProductDto(p.getProduct().getId(),
+                                                p.getProduct().getName(),
+                                                p.getProduct().getType(),
+                                                p.getProduct().getBrand(),
+                                                p.getProduct().getColor(),
+                                                p.getProduct().getNotes()),
+                                        p.getCategory(),
+                                        p.getPrice()))
+                )
                 .filter(p -> (p.getDate().isAfter(twoWeeksAgo) && p.getDate().isBefore(now.plusDays(1))))
-                .map(p -> new PostDtoRes(
-                        userId,
-                        p.getId(),
-                        p.getDate(),
-                        new ProductDto(p.getProduct().getId(),
-                                p.getProduct().getName(),
-                                p.getProduct().getType(),
-                                p.getProduct().getBrand(),
-                                p.getProduct().getColor(),
-                                p.getProduct().getNotes()),
-                        p.getCategory(),
-                        p.getPrice()))
                 .collect(Collectors.toList());
 
         orderByDate(order, postsRes);
