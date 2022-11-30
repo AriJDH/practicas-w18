@@ -29,15 +29,15 @@ public class PostFactory {
 
     public static UserPostListDTO getPostListDto(int userId) {
         UserPostListDTO userPostListDTO = new UserPostListDTO();
-        userPostListDTO.setUser_id(userId);
+        userPostListDTO.setUserId(userId);
 
         List<PostResDto> postList = new ArrayList<>();
         PostResDto postResDto1 = mapper.convertValue(getPost(1), PostResDto.class);
-        postResDto1.setPost_id(1);
+        postResDto1.setPostId(1);
         PostResDto postResDto2 = mapper.convertValue(getPost(1), PostResDto.class);
-        postResDto2.setPost_id(1);
+        postResDto2.setPostId(1);
         PostResDto postResDto3 = mapper.convertValue(getPost(1), PostResDto.class);
-        postResDto3.setPost_id(1);
+        postResDto3.setPostId(1);
         postList.add(postResDto1);
         postList.add(postResDto2);
         postList.add(postResDto3);

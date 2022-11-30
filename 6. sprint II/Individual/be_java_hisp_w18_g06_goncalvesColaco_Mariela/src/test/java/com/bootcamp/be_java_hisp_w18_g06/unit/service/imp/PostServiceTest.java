@@ -47,11 +47,11 @@ class PostServiceTest {
             List<PostDTO>expectList=getPostDto();
 
             //Mock
-            when(userRepository.findUserById(buyer.getUser_id())).thenReturn(Optional.of(buyer));
+            when(userRepository.findUserById(buyer.getUserId())).thenReturn(Optional.of(buyer));
 
             //act
             List<PostDTO>result=postService
-                    .findAllPostsByUser(buyer.getUser_id(),null);
+                    .findAllPostsByUser(buyer.getUserId(), null);
             //assert
             assertArrayEquals(expectList.toArray(),result.toArray());
 

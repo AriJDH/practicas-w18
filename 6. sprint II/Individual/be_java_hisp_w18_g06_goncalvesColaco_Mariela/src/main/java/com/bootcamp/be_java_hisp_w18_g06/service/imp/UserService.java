@@ -56,7 +56,7 @@ public class UserService implements IUserService {
         }
 
         //busca en el repo si están presentes los usuarios
-        if (!userIsPresent(usFollowed.get().getUser_id())) {
+        if (!userIsPresent(usFollowed.get().getUserId())) {
             throw new BadRequestException("This user doesn't exit");
         }
 
@@ -81,7 +81,7 @@ public class UserService implements IUserService {
 
     //US-007
     private void removeFromFollow(User user) {
-        user.getFollowed().remove(user.getUser_id());
+        user.getFollowed().remove(user.getUserId());
     }
 
 
@@ -108,7 +108,7 @@ public class UserService implements IUserService {
         }
 
         /* Search the repository if users are presents */
-        if (!userIsPresent(usUnfollowed.get().getUser_id()) || !userIsPresent(usFollower.get().getUser_id())) {
+        if (!userIsPresent(usUnfollowed.get().getUserId()) || !userIsPresent(usFollower.get().getUserId())) {
             throw new BadRequestException("User doesn't exist");
         }
 
@@ -136,9 +136,9 @@ public class UserService implements IUserService {
 
         // Temporal
         UserFollowersCountDTO userFollowersCountDTO = new UserFollowersCountDTO();
-        userFollowersCountDTO.setUser_id(userId);
-        userFollowersCountDTO.setUser_name(user.getUser_name());
-        userFollowersCountDTO.setFollowers_count(user.getFollowers().size());
+        userFollowersCountDTO.setUserId(userId);
+        userFollowersCountDTO.setUserName(user.getUserName());
+        userFollowersCountDTO.setFollowersCount(user.getFollowers().size());
         //
 
         return userFollowersCountDTO;
@@ -162,8 +162,8 @@ public class UserService implements IUserService {
         mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
         UserFollowedListDTO userFollowedListDTO = new UserFollowedListDTO();
-        userFollowedListDTO.setUser_id(user.getUser_id());
-        userFollowedListDTO.setUser_name(user.getUser_name());
+        userFollowedListDTO.setUserId(user.getUserId());
+        userFollowedListDTO.setUserName(user.getUserName());
         userFollowedListDTO.setFollowed(user.getFollowed().stream()
                 .map(x -> mapper.convertValue(x, UserFollowDTO.class))
                 .collect(Collectors.toList()));
@@ -189,8 +189,8 @@ public class UserService implements IUserService {
 
         mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
         UserFollowersListDTO userFollowersListDTO = new UserFollowersListDTO();
-        userFollowersListDTO.setUser_id(user.getUser_id());
-        userFollowersListDTO.setUser_name(user.getUser_name());
+        userFollowersListDTO.setUserId(user.getUserId());
+        userFollowersListDTO.setUserName(user.getUserName());
         userFollowersListDTO.setFollowers(user.getFollowers().stream()
                 .map(x -> mapper.convertValue(x, UserFollowDTO.class))
                 .collect(Collectors.toList()));
@@ -202,9 +202,9 @@ public class UserService implements IUserService {
     //008
     private List<User> sortList(String order, List<User> users) {
         if (order.equals("name_asc")) {
-            return users.stream().sorted(Comparator.comparing(User::getUser_name)).collect(Collectors.toList());
+            return users.stream().sorted(Comparator.comparing(User::getUserName)).collect(Collectors.toList());
         } else if (order.equals("name_desc")) {
-            return users.stream().sorted(Comparator.comparing(User::getUser_name).reversed()).collect(Collectors.toList());
+            return users.stream().sorted(Comparator.comparing(User::getUserName).reversed()).collect(Collectors.toList());
         } else {
             throw new BadRequestException("Invalid param order");
         }

@@ -65,16 +65,16 @@ public class ProductIntegrationTest {
 		// MOCKS
 		// Usuarios que vamos a usar
 		User user1 = new User();
-		user1.setUser_id(1);
-		user1.setUser_name("user1");
+		user1.setUserId(1);
+		user1.setUserName("user1");
 		
 		User user2 = new User();
-		user2.setUser_id(2);
-		user2.setUser_name("user2");
+		user2.setUserId(2);
+		user2.setUserName("user2");
 		
 		User user3 = new User();
-		user3.setUser_id(3);
-		user3.setUser_name("user3");
+		user3.setUserId(3);
+		user3.setUserName("user3");
 		
 		// Posts que vamos a usar
 		List<Post> postList = new ArrayList<>();

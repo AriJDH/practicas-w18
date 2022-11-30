@@ -79,17 +79,17 @@ public class UserFactory {
 
     public static UserFollowersCountDTO getUserFollowCountDto(String name) {
         UserFollowersCountDTO userFollowersCountDTODTO = new UserFollowersCountDTO();
-        userFollowersCountDTODTO.setUser_id((int) (Math.random() * 10));
-        userFollowersCountDTODTO.setUser_name(name);
-        userFollowersCountDTODTO.setFollowers_count((int) (Math.random() * 100));
+        userFollowersCountDTODTO.setUserId((int) (Math.random() * 10));
+        userFollowersCountDTODTO.setUserName(name);
+        userFollowersCountDTODTO.setFollowersCount((int) (Math.random() * 100));
         return userFollowersCountDTODTO;
     }
 
     public static UserFollowedListDTO getUserFollowedListDto() {
         User user = getUserWithFollowedList("user followed list");
         UserFollowedListDTO userFollowedListDTO = new UserFollowedListDTO();
-        userFollowedListDTO.setUser_id(user.getUser_id());
-        userFollowedListDTO.setUser_name(user.getUser_name());
+        userFollowedListDTO.setUserId(user.getUserId());
+        userFollowedListDTO.setUserName(user.getUserName());
         userFollowedListDTO.setFollowed(user.getFollowed().stream().map( follow -> mapper
                 .convertValue(follow, UserFollowDTO.class))
                 .collect(Collectors.toList()));
@@ -99,8 +99,8 @@ public class UserFactory {
     public static UserFollowersListDTO getUserFollowersListDto() {
         User user = getUserWithFollowedList("user followed list");
         UserFollowersListDTO userFollowedListDTO = new UserFollowersListDTO();
-        userFollowedListDTO.setUser_id(user.getUser_id());
-        userFollowedListDTO.setUser_name(user.getUser_name());
+        userFollowedListDTO.setUserId(user.getUserId());
+        userFollowedListDTO.setUserName(user.getUserName());
         userFollowedListDTO.setFollowers(user.getFollowed().stream().map( follow -> mapper
                 .convertValue(follow, UserFollowDTO.class))
                 .collect(Collectors.toList()));

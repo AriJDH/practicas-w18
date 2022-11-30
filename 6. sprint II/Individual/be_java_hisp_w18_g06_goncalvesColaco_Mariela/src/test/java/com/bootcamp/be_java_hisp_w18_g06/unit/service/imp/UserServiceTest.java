@@ -40,9 +40,9 @@ class UserServiceTest {
             //ARRANGE
             User user = getUserWithFollowersListAndPosts("mockFollowed");
             //MOCK
-            when(repository.findUserById(user.getUser_id())).thenReturn(Optional.of(user));
+            when(repository.findUserById(user.getUserId())).thenReturn(Optional.of(user));
             //ASSERT
-            assertEquals(user, repository.findUserById(user.getUser_id()).get());
+            assertEquals(user, repository.findUserById(user.getUserId()).get());
             Assertions.assertTrue(service.userFollowedHasPosts(user));
           //  Assertions.assertDoesNotThrow(()->service.followUser(user2.getUser_id(), user.getUser_id()));
 
@@ -78,16 +78,16 @@ class UserServiceTest {
             userFollower.setFollowed(Collections.singletonList(userToUnfollow));
 
             //MOCK
-            when(repository.findUserById(userFollower.getUser_id())).thenReturn(Optional.of(userFollower));
-            when(repository.findUserById(userToUnfollow.getUser_id())).thenReturn(Optional.of(userToUnfollow));
+            when(repository.findUserById(userFollower.getUserId())).thenReturn(Optional.of(userFollower));
+            when(repository.findUserById(userToUnfollow.getUserId())).thenReturn(Optional.of(userToUnfollow));
 
 
-            when(repository.findUserInList(userFollower.getFollowed(),userToUnfollow.getUser_id())).thenReturn(Optional.of(userToUnfollow));
-            when(repository.findUserInList(userToUnfollow.getFollowers(),userFollower.getUser_id())).thenReturn(Optional.of(userFollower));
+            when(repository.findUserInList(userFollower.getFollowed(),userToUnfollow.getUserId())).thenReturn(Optional.of(userToUnfollow));
+            when(repository.findUserInList(userToUnfollow.getFollowers(),userFollower.getUserId())).thenReturn(Optional.of(userFollower));
 
             //ACT, ASSERT
 
-            Assertions.assertDoesNotThrow(()->service.unfollowUser(userFollower.getUser_id(), userToUnfollow.getUser_id()));
+            Assertions.assertDoesNotThrow(()->service.unfollowUser(userFollower.getUserId(), userToUnfollow.getUserId()));
 
             verify(repository,atLeast(2)).findUserById(anyInt());
             verify(repository,atLeast(2)).findUserInList(anyList(),anyInt());
@@ -100,19 +100,19 @@ class UserServiceTest {
             //ARRANGE
 
             User userToUnfollow = getUserWithFollowersListAndPosts("userToUnfollow");
-            userToUnfollow.setUser_id(1);
+            userToUnfollow.setUserId(1);
             User userFollower = userToUnfollow.getFollowers().get(0);
             userFollower.setFollowed(Collections.singletonList(userToUnfollow));
 
             //MOCK
-            when(repository.findUserById(userFollower.getUser_id())).thenReturn(Optional.of(userFollower));
-            when(repository.findUserById(userToUnfollow.getUser_id())).thenReturn(Optional.of(userToUnfollow));
+            when(repository.findUserById(userFollower.getUserId())).thenReturn(Optional.of(userFollower));
+            when(repository.findUserById(userToUnfollow.getUserId())).thenReturn(Optional.of(userToUnfollow));
 
-            when(repository.findUserInList(userFollower.getFollowed(),userToUnfollow.getUser_id())).thenReturn(Optional.empty());
-            when(repository.findUserInList(userToUnfollow.getFollowers(),userFollower.getUser_id())).thenReturn(Optional.empty());
+            when(repository.findUserInList(userFollower.getFollowed(),userToUnfollow.getUserId())).thenReturn(Optional.empty());
+            when(repository.findUserInList(userToUnfollow.getFollowers(),userFollower.getUserId())).thenReturn(Optional.empty());
 
             //ACT, ASSERT
-            Assertions.assertThrows(BadRequestException.class, ()->service.unfollowUser(userFollower.getUser_id(), userToUnfollow.getUser_id()));
+            Assertions.assertThrows(BadRequestException.class, ()->service.unfollowUser(userFollower.getUserId(), userToUnfollow.getUserId()));
 
             verify(repository,atLeast(2)).findUserById(anyInt());
             verify(repository,atLeast(2)).findUserInList(anyList(),anyInt());
@@ -126,8 +126,8 @@ class UserServiceTest {
             String order = "name_asc";
             User user = getUserWithFollowedList("user with followed list");
 
-            when(repository.findUserById(user.getUser_id())).thenReturn(Optional.of(user));
-            Assertions.assertDoesNotThrow(()->service.getFollowedList(user.getUser_id(), order));
+            when(repository.findUserById(user.getUserId())).thenReturn(Optional.of(user));
+            Assertions.assertDoesNotThrow(()->service.getFollowedList(user.getUserId(), order));
 
         }
         @Test
@@ -135,8 +135,8 @@ class UserServiceTest {
             String order = "order not found";
             User user = getUserWithFollowedList("user with followed list");
 
-            when(repository.findUserById(user.getUser_id())).thenReturn(Optional.of(user));
-            Assertions.assertThrows(BadRequestException.class, ()->service.getFollowedList(user.getUser_id(), order));
+            when(repository.findUserById(user.getUserId())).thenReturn(Optional.of(user));
+            Assertions.assertThrows(BadRequestException.class, ()->service.getFollowedList(user.getUserId(), order));
         }
     }
     //US-0008
@@ -147,10 +147,10 @@ class UserServiceTest {
             String order = "name_asc";
             User user = getUserWithFollowedList("user with followed list asc");
 
-            when(repository.findUserById(user.getUser_id())).thenReturn(Optional.of(user));
+            when(repository.findUserById(user.getUserId())).thenReturn(Optional.of(user));
 
-            UserFollowedListDTO result = service.getFollowedList(user.getUser_id(), order);
-            assertEquals("user 1", result.getFollowed().get(0).getUser_name());
+            UserFollowedListDTO result = service.getFollowedList(user.getUserId(), order);
+            assertEquals("user 1", result.getFollowed().get(0).getUserName());
         }
 
         @Test
@@ -158,10 +158,10 @@ class UserServiceTest {
             String order = "name_desc";
             User user = getUserWithFollowedList("user with followed list desc");
 
-            when(repository.findUserById(user.getUser_id())).thenReturn(Optional.of(user));
+            when(repository.findUserById(user.getUserId())).thenReturn(Optional.of(user));
 
-            UserFollowedListDTO result = service.getFollowedList(user.getUser_id(), order);
-            assertEquals("user 3", result.getFollowed().get(0).getUser_name());
+            UserFollowedListDTO result = service.getFollowedList(user.getUserId(), order);
+            assertEquals("user 3", result.getFollowed().get(0).getUserName());
         }
     }
     //US0002
@@ -181,11 +181,11 @@ class UserServiceTest {
                     .thenReturn(Optional.of(user));
             
             UserFollowersCountDTO userFollowersCountDTO = new UserFollowersCountDTO();
-            userFollowersCountDTO.setFollowers_count(3);
+            userFollowersCountDTO.setFollowersCount(3);
             
             // ASSERTS
-            assertEquals(userFollowersCountDTO.getFollowers_count(),
-                         service.getFollowersCount(1).getFollowers_count());
+            assertEquals(userFollowersCountDTO.getFollowersCount(),
+                         service.getFollowersCount(1).getFollowersCount());
             
         }
     }

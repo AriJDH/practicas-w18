@@ -1,5 +1,6 @@
 package com.bootcamp.be_java_hisp_w18_g06.dto.request;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 
 import javax.validation.constraints.*;
@@ -8,11 +9,13 @@ import javax.validation.constraints.*;
 public class ProductReqDTO {
     @NotNull(message = "Id cannot be empty")
     @Min(value = 1, message = "Id must be greater than 0")
-    private Integer product_id;
+    @JsonProperty("product_id")
+    private Integer productId;
     @NotBlank(message = "Product name field cannot be empty")
     @Size(max = 40, message = "Length cannot be greater than 40")
     @Pattern(regexp = "^[A-Za-z\\s]{1,}[\\.]{0,1}[A-Za-z\\s]{0,}$", message = "Product name cannot contain special characters(%, &, $, etc)")
-    private String product_name;
+    @JsonProperty("product_name")
+    private String productName;
     @NotBlank(message = "Type field cannot be empty")
     @Size(max = 15, message = "Length cannot be greater than 15")
     @Pattern(regexp = "^[A-Za-z\\s]{1,}[\\.]{0,1}[A-Za-z\\s]{0,}$", message = "Type cannot contain special characters(%, &, $, etc)")

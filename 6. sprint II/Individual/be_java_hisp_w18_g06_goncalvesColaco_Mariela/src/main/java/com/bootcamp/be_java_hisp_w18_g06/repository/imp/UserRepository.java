@@ -3,8 +3,6 @@ package com.bootcamp.be_java_hisp_w18_g06.repository.imp;
 import com.bootcamp.be_java_hisp_w18_g06.entity.Post;
 import com.bootcamp.be_java_hisp_w18_g06.entity.Product;
 import com.bootcamp.be_java_hisp_w18_g06.entity.User;
-import com.bootcamp.be_java_hisp_w18_g06.exceptions.EmptyException;
-import com.bootcamp.be_java_hisp_w18_g06.exceptions.NotFoundException;
 import com.bootcamp.be_java_hisp_w18_g06.repository.IUserRepository;
 import org.springframework.stereotype.Repository;
 
@@ -54,7 +52,7 @@ public class UserRepository implements IUserRepository {
 	);
 	
 	Post post1 = new Post(
-					user1.getUser_id(),
+					user1.getUserId(),
 					LocalDate.of(2022, 11, 10),
 					product1,
 					"120",
@@ -62,7 +60,7 @@ public class UserRepository implements IUserRepository {
 	);
 	
 	Post post2 = new Post(
-					user1.getUser_id(),
+					user1.getUserId(),
 					LocalDate.of(2021, 4, 29),
 					product2,
 					"100",
@@ -87,7 +85,7 @@ public class UserRepository implements IUserRepository {
 	public Optional<User> findUserById(int id) {
 		return users
 						.stream()
-						.filter(user -> user.getUser_id() == id)
+						.filter(user -> user.getUserId() == id)
 						.findFirst();
 	}
 
@@ -98,7 +96,7 @@ public class UserRepository implements IUserRepository {
 
 		return list
 				.stream()
-				.filter(user -> user.getUser_id() == idUserInList)
+				.filter(user -> user.getUserId() == idUserInList)
 				.findFirst();
 	}
 
@@ -114,7 +112,7 @@ public class UserRepository implements IUserRepository {
 	@Override
 	public void updateUsers(User userUpdate){
 		users.addAll(users.stream()
-				.filter(user -> user.getUser_id()!=userUpdate.getUser_id())
+				.filter(user -> user.getUserId()!=userUpdate.getUserId())
 				.collect(Collectors.toList()));
 
 		users.add(userUpdate);

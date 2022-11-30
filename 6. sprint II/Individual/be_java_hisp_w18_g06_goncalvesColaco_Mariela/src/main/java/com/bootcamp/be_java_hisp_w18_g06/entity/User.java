@@ -1,8 +1,10 @@
 package com.bootcamp.be_java_hisp_w18_g06.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @NoArgsConstructor
@@ -11,19 +13,20 @@ import java.util.List;
 @Getter
 @Setter
 public class User {
-    private Integer user_id;
-    private String user_name;
+    @JsonProperty("user_id")
+    private Integer userId;
+    @JsonProperty("user_name")
+    private String userName;
     @JsonIgnore
-    private List<User> followers;
-    private List<User> followed;
-    private List<Post> posts;
+    private List<User> followers = new ArrayList<>();
+    private List<User> followed = new ArrayList<>();
+    private List<Post> posts = new ArrayList<>();
     
-    public User(Integer user_id, String user_name) {
-        this.user_id = user_id;
-        this.user_name = user_name;
+    public User(Integer userId, String userName) {
+        this.userId = userId;
+        this.userName = userName;
     }
 
     public User(Integer id) {
-        this.user_id = user_id;
     }
 }
