@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: com.socialmedia2.be_java_hisp_w18_g08.BeJavaHispW18G08ApplicationTests
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 3.438 s - in com.socialmedia2.be_java_hisp_w18_g08.BeJavaHispW18G08ApplicationTests
