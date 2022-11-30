@@ -21,8 +21,8 @@ public class UserRepositoryImpl implements IUserRepository {
 <span class="fc" id="L21">    public UserRepositoryImpl() {</span>
 
 <span class="fc" id="L23">        users.put(1, new UserEntity(1, &quot;Carlos&quot;, new ArrayList&lt;&gt;(), new ArrayList&lt;&gt;(Arrays.asList(2)), new ArrayList&lt;&gt;()));</span>
-<span class="fc" id="L24">        users.put(2, new UserEntity(2, &quot;Felipe&quot;, new ArrayList&lt;&gt;(Arrays.asList(1)), new ArrayList&lt;&gt;(), new ArrayList&lt;&gt;()));</span>
-<span class="fc" id="L25">        users.put(3, new UserEntity(3, &quot;Maria&quot;, new ArrayList&lt;&gt;(), new ArrayList&lt;&gt;(), new ArrayList&lt;&gt;()));</span>
+<span class="fc" id="L24">        users.put(2, new UserEntity(2, &quot;Felipe&quot;, new ArrayList&lt;&gt;(Arrays.asList(1)), new ArrayList&lt;&gt;(), new ArrayList&lt;&gt;(Arrays.asList(40,50))));</span>
+<span class="fc" id="L25">        users.put(3, new UserEntity(3, &quot;Maria&quot;, new ArrayList&lt;&gt;(), new ArrayList&lt;&gt;(), new ArrayList&lt;&gt;(Arrays.asList(60,70))));</span>
 <span class="fc" id="L26">        users.put(4, new UserEntity(4, &quot;Elisa&quot;, new ArrayList&lt;&gt;(), new ArrayList&lt;&gt;(), new ArrayList&lt;&gt;()));</span>
 <span class="fc" id="L27">        users.put(5, new UserEntity(5, &quot;Raul&quot;, new ArrayList&lt;&gt;(), new ArrayList&lt;&gt;(), new ArrayList&lt;&gt;()));</span>
 <span class="fc" id="L28">        users.put(6, new UserEntity(6, &quot;Florencia&quot;, new ArrayList&lt;&gt;(), new ArrayList&lt;&gt;(), new ArrayList&lt;&gt;()));</span>
@@ -48,29 +48,29 @@ public class UserRepositoryImpl implements IUserRepository {
     @Override
     public void followSeller(Integer userId, Integer userIdToFollow) {
 
-<span class="nc" id="L51">        Boolean isAlreadyFollower = users.get(userId).getFollowedList().contains(userIdToFollow);</span>
-<span class="nc" id="L52">        Boolean isTheSameEntity = userId.equals(userIdToFollow);</span>
-<span class="nc bnc" id="L53" title="All 4 branches missed.">        if (!isAlreadyFollower &amp;&amp; !isTheSameEntity) {</span>
+<span class="fc" id="L51">        Boolean isAlreadyFollower = users.get(userId).getFollowedList().contains(userIdToFollow);</span>
+<span class="fc" id="L52">        Boolean isTheSameEntity = userId.equals(userIdToFollow);</span>
+<span class="pc bpc" id="L53" title="2 of 4 branches missed.">        if (!isAlreadyFollower &amp;&amp; !isTheSameEntity) {</span>
 
-<span class="nc" id="L55">            users.get(userId).addFollowedList(userIdToFollow);</span>
-<span class="nc" id="L56">            users.get(userIdToFollow).addFollowersToList(userId);</span>
+<span class="fc" id="L55">            users.get(userId).addFollowedList(userIdToFollow);</span>
+<span class="fc" id="L56">            users.get(userIdToFollow).addFollowersToList(userId);</span>
         }
-<span class="nc" id="L58">    }</span>
+<span class="fc" id="L58">    }</span>
 
     @Override
     public void unfollowSeller(Integer userId, Integer userIdToUnfollow) {
-<span class="nc" id="L62">        users.get(userId).removeFollowedToList(userIdToUnfollow);</span>
-<span class="nc" id="L63">        users.get(userIdToUnfollow).removeFollowersToList(userId);</span>
-<span class="nc" id="L64">    }</span>
+<span class="fc" id="L62">        users.get(userId).removeFollowedToList(userIdToUnfollow);</span>
+<span class="fc" id="L63">        users.get(userIdToUnfollow).removeFollowersToList(userId);</span>
+<span class="fc" id="L64">    }</span>
 
     @Override
     public Boolean exist(Integer userId) {
-<span class="nc bnc" id="L68" title="All 2 branches missed.">        return users.get(userId) != null;</span>
+<span class="fc bfc" id="L68" title="All 2 branches covered.">        return users.get(userId) != null;</span>
     }
 
     @Override
     public Boolean isSeller(Integer userId) {
-<span class="nc bnc" id="L73" title="All 2 branches missed.">        return users.get(userId).getPublicationList().size() &gt; 0;</span>
+<span class="pc bpc" id="L73" title="1 of 2 branches missed.">        return users.get(userId).getPublicationList().size() &gt; 0;</span>
     }
 
 }

@@ -30,8 +30,8 @@ public class UserController {
                                                  @Min(value = 1, message = &quot;El id debe ser mayor a cero.&quot;)
                                                  @PathVariable Integer userIdToFollow) {
 
-<span class="nc" id="L33">        userService.followUserSeller(userId, userIdToFollow);</span>
-<span class="nc" id="L34">        return new ResponseEntity&lt;&gt;(HttpStatus.OK);</span>
+<span class="fc" id="L33">        userService.followUserSeller(userId, userIdToFollow);</span>
+<span class="fc" id="L34">        return new ResponseEntity&lt;&gt;(HttpStatus.OK);</span>
     }
 
     //US 007
@@ -43,8 +43,8 @@ public class UserController {
                                                    @Min(value = 1, message = &quot;El id debe ser mayor a cero.&quot;)
                                                    @PathVariable Integer userIdToUnfollow) {
 
-<span class="nc bnc" id="L46" title="All 2 branches missed.">        if (userService.unfollowUserSeller(userId, userIdToUnfollow)) {</span>
-<span class="nc" id="L47">            return new ResponseEntity&lt;&gt;(HttpStatus.OK);</span>
+<span class="pc bpc" id="L46" title="1 of 2 branches missed.">        if (userService.unfollowUserSeller(userId, userIdToUnfollow)) {</span>
+<span class="fc" id="L47">            return new ResponseEntity&lt;&gt;(HttpStatus.OK);</span>
         }
 <span class="nc" id="L49">        return new ResponseEntity&lt;&gt;(HttpStatus.BAD_REQUEST);</span>
     }

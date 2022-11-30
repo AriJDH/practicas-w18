@@ -21,8 +21,8 @@ public class UserRepositoryImpl implements IUserRepository {
     public UserRepositoryImpl() {
 
         users.put(1, new UserEntity(1, "Carlos", new ArrayList<>(), new ArrayList<>(Arrays.asList(2)), new ArrayList<>()));
-        users.put(2, new UserEntity(2, "Felipe", new ArrayList<>(Arrays.asList(1)), new ArrayList<>(), new ArrayList<>()));
-        users.put(3, new UserEntity(3, "Maria", new ArrayList<>(), new ArrayList<>(), new ArrayList<>()));
+        users.put(2, new UserEntity(2, "Felipe", new ArrayList<>(Arrays.asList(1)), new ArrayList<>(), new ArrayList<>(Arrays.asList(40,50))));
+        users.put(3, new UserEntity(3, "Maria", new ArrayList<>(), new ArrayList<>(), new ArrayList<>(Arrays.asList(60,70))));
         users.put(4, new UserEntity(4, "Elisa", new ArrayList<>(), new ArrayList<>(), new ArrayList<>()));
         users.put(5, new UserEntity(5, "Raul", new ArrayList<>(), new ArrayList<>(), new ArrayList<>()));
         users.put(6, new UserEntity(6, "Florencia", new ArrayList<>(), new ArrayList<>(), new ArrayList<>()));

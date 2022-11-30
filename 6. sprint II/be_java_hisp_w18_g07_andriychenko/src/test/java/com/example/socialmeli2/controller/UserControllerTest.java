@@ -108,4 +108,62 @@ class UserControllerTest {
         }
     }
 
+
+    @DisplayName("Testea el Endpoint /users/{userId}/follow/{userIdToFollow}")
+    @Nested
+    class followUser{
+        @Autowired UserRepositoryImpl userRepository;
+        @DisplayName("Succesfull Execution")
+        @Test
+        void followUser()throws Exception{
+            Integer testSeguidor = 4;
+            Integer testSeguido = 3;
+
+            mockMvc.perform(MockMvcRequestBuilders.post("/users/{userId}/follow/{userIdToFollow}", testSeguidor, testSeguido))
+                    .andDo(print())
+                    .andExpect(status().isOk());
+
+            assertEquals(userRepository.getEntityById(testSeguido).getFollowersList().size(), 1);
+        }
+        @DisplayName("Unsuccesful Execution - NonExistant ID")
+        @Test
+        void followUserError()throws Exception{
+            Integer testSeguidor = 50;
+            Integer testSeguido = 333;
+
+            mockMvc.perform(MockMvcRequestBuilders.post("/users/{userId}/follow/{userIdToFollow}", testSeguidor, testSeguido))
+                    .andDo(print())
+                    .andExpect(status().isBadRequest());
+        }
+    }
+
+
+    @DisplayName("Testea el Endpoint /users/{userId}/unfollow/{userIdToFollow}")
+    @Nested
+    class unfollowUser{
+        @Autowired UserRepositoryImpl userRepository;
+        @DisplayName("Succesfull Execution")
+        @Test
+        void unfollowUser()throws Exception{
+            Integer testSeguidor = 2;
+            Integer testSeguido = 1;
+
+            mockMvc.perform(MockMvcRequestBuilders.post("/users/{userId}/unfollow/{userIdToUnfollow}", testSeguidor, testSeguido))
+                    .andDo(print())
+                    .andExpect(status().isOk());
+
+            assertEquals(userRepository.getEntityById(testSeguido).getFollowersList().size(), 0);
+        }
+        @DisplayName("Unsuccesful Execution - NonExistant ID")
+        @Test
+        void unfollowUserError()throws Exception{
+            Integer testSeguidor = 50;
+            Integer testSeguido = 333;
+
+            mockMvc.perform(MockMvcRequestBuilders.post("/users/{userId}/unfollow/{userIdToUnfollow}", testSeguidor, testSeguido))
+                    .andDo(print())
+                    .andExpect(status().isBadRequest());
+        }
+    }
+
 }

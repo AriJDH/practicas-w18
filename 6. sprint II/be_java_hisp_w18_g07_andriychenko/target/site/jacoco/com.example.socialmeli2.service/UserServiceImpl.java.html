@@ -61,8 +61,8 @@ public class UserServiceImpl implements IUserService {
     @Override
     public boolean unfollowUserSeller(Integer userId, Integer userIdToUnfollow) {
 <span class="fc" id="L63">        boolean unfollowSeller = false;</span>
-<span class="pc bpc" id="L64" title="1 of 2 branches missed.">        if (!userRepository.exist(userId)) {</span>
-<span class="nc" id="L65">            throw new NotFoundException(&quot;No existe usuario con ID: &quot; + userId);</span>
+<span class="fc bfc" id="L64" title="All 2 branches covered.">        if (!userRepository.exist(userId)) {</span>
+<span class="fc" id="L65">            throw new NotFoundException(&quot;No existe usuario con ID: &quot; + userId);</span>
         }
 <span class="fc bfc" id="L67" title="All 2 branches covered.">        if (!userRepository.exist(userIdToUnfollow)) {</span>
 <span class="fc" id="L68">            throw new NotFoundException(&quot;No existe usuario con ID: &quot; + userIdToUnfollow);</span>
