@@ -114,8 +114,32 @@ class SocialMeliControllerTest {
                 .andExpect(MockMvcResultMatchers.jsonPath("$.followers", hasSize(3)));
     }
 
+    @Test
+    void methodGetFollowedTest() throws Exception {
+        FollowedListDTORes followedListDTORes = new FollowedListDTORes();
+        followedListDTORes.setUser_id(1);
+        followedListDTORes.setUser_name("Josep");
+        List<UserDTORes> followed = new ArrayList<>();
+        UserDTORes userDTORes1 = new UserDTORes(2,"Ethan");
+        followed.add(userDTORes1);
+        followedListDTORes.setFollowed(followed);
+        String responseJson = mapper.writeValueAsString(followedListDTORes);
 
+        MockHttpServletRequestBuilder response = MockMvcRequestBuilders
+                .get("/users/{client_id}/followed/list",1)
+                .param("order","name_asc")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(responseJson);
+
+        this.mvc.perform(response)
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.user_id").value(1))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.user_name").value("Josep"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.followed", hasSize(3)));
     }
+}
 
 
 
