@@ -41,11 +41,8 @@ class UserServiceTest {
             User user = getUserWithFollowersListAndPosts("mockFollowed");
             //MOCK
             when(repository.findUserById(user.getUser_id())).thenReturn(Optional.of(user));
-            //ASSERT
-            assertEquals(user, repository.findUserById(user.getUser_id()).get());
+            //ACT ASSERT
             Assertions.assertTrue(service.userFollowedHasPosts(user));
-          //  Assertions.assertDoesNotThrow(()->service.followUser(user2.getUser_id(), user.getUser_id()));
-
         }
 
         @DisplayName("FollowUserNotOK")
@@ -56,8 +53,7 @@ class UserServiceTest {
             int idUnexists = 509;
             //MOCK
             when(repository.findUserById(idUnexists)).thenReturn(Optional.empty());
-            //ASSERT
-            assertEquals(Optional.empty(),repository.findUserById(idUnexists));
+            //ACT ASSERT
             Assertions.assertFalse(service.userIsPresent(idUnexists));
 
         }
