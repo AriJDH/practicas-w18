@@ -73,14 +73,11 @@ class ProductControllerTest {
           String validDtoJson= new ObjectMapper().registerModule(new JavaTimeModule()).writeValueAsString(validResponseDTO);
 
 
-         MvcResult result= mockMvc.perform(MockMvcRequestBuilders.post("/products/post")
+         mockMvc.perform(MockMvcRequestBuilders.post("/products/post")
                   .contentType(MediaType.APPLICATION_JSON)
                   .content(payload))
                   .andDo(print())
-                  .andExpect(status().isBadRequest())
-                 .andExpect(content().contentType("application/json"))
-                 .andReturn();
-         assertEquals(validDtoJson,result.getResponse().getContentAsString());
+                  .andExpect(status().isBadRequest());
        }
     }
     @Nested

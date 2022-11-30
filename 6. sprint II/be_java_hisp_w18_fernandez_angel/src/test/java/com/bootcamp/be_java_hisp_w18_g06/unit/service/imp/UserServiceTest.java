@@ -64,6 +64,24 @@ class UserServiceTest {
             Assertions.assertFalse(service.userIsPresent(idUnexists));
 
         }
+        @Test
+        void userToFollowUsersAreNotDifferentTest() { // :)
+            //ARRANGE
+
+            User userToUnfollow = getUserWithFollowersListAndPosts("userToUnfollow");
+            userToUnfollow.setUser_id(1);
+            User userFollower = userToUnfollow.getFollowers().get(0);
+            userFollower.setUser_id(1);
+            userFollower.setFollowed(Collections.singletonList(userToUnfollow));
+
+            //MOCK
+            when(repository.findUserById(userFollower.getUser_id())).thenReturn(Optional.of(userFollower));
+            when(repository.findUserById(userToUnfollow.getUser_id())).thenReturn(Optional.of(userToUnfollow));
+
+            //ACT, ASSERT
+
+            assertThrows(BadRequestException.class,()->service.followUser(userFollower.getUser_id(),userToUnfollow.getUser_id()));
+        }
     }
 
 
