@@ -137,9 +137,11 @@ public class UserService implements IUserService {
         LocalDate twoWeeksAgo = now.minusWeeks(2);
 
         List<PromoPostDto> postsRes = followed.stream()
-                .flatMap(f -> f.getPosts().stream())
+                .flatMap(user ->
+                    user.getPosts().stream()
+                        .map(p -> DTOConverter.entityToDto(p, user.getId()))
+                )
                 .filter(p -> (p.getDate().isAfter(twoWeeksAgo) && p.getDate().isBefore(now.plusDays(1))))
-                .map(p -> DTOConverter.entityToDto(p, userId))
                 .collect(Collectors.toList());
 
         orderByDate(order, postsRes);
