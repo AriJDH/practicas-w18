@@ -180,8 +180,6 @@ class UserServiceImpTest {
         //Arrange
         Integer expected = 2;
         Integer id = 5;
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-        LocalDate date = LocalDate.parse("12-11-2022", formatter);
 
         List<Seller> sellers = new ArrayList<>();
         followers.add(user1);
@@ -294,7 +292,6 @@ class UserServiceImpTest {
 
         String expected = user1.getUser_name() + "with id:" + user1.getUser_id() + " unfollow to -> " + seller1.getUser_name() +
                 " with id: " + seller1.getUser_id();
-        ;
 
         when(userRepo.unFollow(user1.getUser_id(), seller1.getUser_id())).thenReturn(expected);
 
