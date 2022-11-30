@@ -88,7 +88,8 @@ class PostControllerTest {
                 .writeValueAsString(postDtoReq);
 
         // Act & Assert
-        MvcResult result= mockMvc.perform(MockMvcRequestBuilders.post("/products/post")
+        mockMvc
+                .perform(MockMvcRequestBuilders.post("/products/post")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(payload))
                 .andDo(print())
@@ -96,10 +97,7 @@ class PostControllerTest {
                         jsonPath("$.message").value("El Color no puede poseer caracteres especiales."),
                         jsonPath("$.timeStamp").value(expectedDto.getTimeStamp().toString()),
                         status().isBadRequest(),
-                        content().contentType(MediaType.APPLICATION_JSON))
-                .andReturn();
-
-
+                        content().contentType(MediaType.APPLICATION_JSON));
     }
 
     @Order(3)
@@ -133,14 +131,14 @@ class PostControllerTest {
 
         System.out.println(expectedDto.getTimeStamp().toString());
 
-        mockMvc.perform(MockMvcRequestBuilders.get("/products/followed/{userId}/list", -1))
+        mockMvc
+                .perform(MockMvcRequestBuilders.get("/products/followed/{userId}/list", -1))
                 .andDo(print())
                 .andExpectAll(
                         status().isNotFound(),
                         content().contentType(MediaType.APPLICATION_JSON),
                         jsonPath("$.message").value("getPostSellerListByUserId.userId: El id debe ser mayor a cero"),
-                        jsonPath("$.timeStamp").value(expectedDto.getTimeStamp().toString()))
-                .andReturn();
+                        jsonPath("$.timeStamp").value(expectedDto.getTimeStamp().toString()));
     }
 
     @Order(5)
@@ -150,13 +148,13 @@ class PostControllerTest {
         // Arrange
         ExceptionDto expectedDto = new ExceptionDto(List.of("User with id: 10Not found"),404,LocalDate.now());
 
-        mockMvc.perform(MockMvcRequestBuilders.get("/products/followed/{userId}/list", 10))
+        mockMvc
+                .perform(MockMvcRequestBuilders.get("/products/followed/{userId}/list", 10))
                 .andDo(print())
                 .andExpectAll(
                         content().contentType(MediaType.APPLICATION_JSON),
                         jsonPath("$.message").value("User with id: 10Not found"),
                         jsonPath("$.timeStamp").value(expectedDto.getTimeStamp().toString()),
-                        jsonPath("$.status").value(expectedDto.getStatus()))
-                .andReturn();
+                        jsonPath("$.status").value(expectedDto.getStatus()));
     }
 }

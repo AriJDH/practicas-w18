@@ -4,11 +4,8 @@ import com.socialmedia2.be_java_hisp_w18_g08.entity.Post;
 import com.socialmedia2.be_java_hisp_w18_g08.entity.Product;
 import com.socialmedia2.be_java_hisp_w18_g08.entity.Seller;
 import com.socialmedia2.be_java_hisp_w18_g08.entity.User;
-import com.socialmedia2.be_java_hisp_w18_g08.repository.IPostRepository;
-import com.socialmedia2.be_java_hisp_w18_g08.repository.IUserRepository;
 import com.socialmedia2.be_java_hisp_w18_g08.repository.PostRepositoryImp;
 import com.socialmedia2.be_java_hisp_w18_g08.repository.UserRepositoryImp;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
