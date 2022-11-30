@@ -64,6 +64,43 @@ public class UserFactory {
         return users;
     }
 
+    public static Map<Integer, User> loadAbcUsers(){
+        Map<Integer, User> users = new HashMap<>();
+        User u1 = new User(1, "Juan");
+
+        User camila = new User(2, "Camila");
+        User alberto = new User(3, "Alberto");
+        User beto = new User(4, "Beto");
+
+        Product pr1 = new Product(1, "Mouse inalámbrico", "Acessorio",
+                "Logitech", "Negro", "Usa pila AA.");
+
+        Product pr2 = new Product(2, "Bicicleta de montaña R26", "Rodado",
+                "Winner", "Roja", "18 velocidades.");
+
+        Product pr3 = new Product(3, "Otro producto", "tipo",
+                "brand", "Roja", "18 velocidades.");
+
+        Post post1 = new Post(1, LocalDate.now(),  1, 15.5, pr1);
+        Post post2 = new Post(2, LocalDate.now(),  2, 15999.99, pr2);
+        Post post3 = new Post(3, LocalDate.now(),  3, 8000D, pr3);
+
+        camila.addPost(post1);
+        alberto.addPost(post2);
+        beto.addPost(post3);
+
+        users.put(1, u1);
+        users.put(2, camila);
+        users.put(3, alberto);
+        users.put(4, beto);
+
+        u1.addFollowed(camila);
+        u1.addFollowed(alberto);
+        u1.addFollowed(beto);
+        return users;
+    }
+
+
     public static Post postWithDate(LocalDate date){
         return new Post(1, date,  1, 1.0, new Product());
     }

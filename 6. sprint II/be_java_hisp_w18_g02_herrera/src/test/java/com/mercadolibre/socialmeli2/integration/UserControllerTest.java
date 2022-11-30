@@ -6,13 +6,11 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.mercadolibre.socialmeli2.dto.ProductDto;
 import com.mercadolibre.socialmeli2.dto.request.PostDtoReq;
-import com.mercadolibre.socialmeli2.dto.response.ResponseDto;
-import com.mercadolibre.socialmeli2.dto.response.SellerFollowerCountDtoRes;
-import com.mercadolibre.socialmeli2.dto.response.SellerFollowerListDtoRes;
-import com.mercadolibre.socialmeli2.dto.response.UserDtoRes;
+import com.mercadolibre.socialmeli2.dto.response.*;
 import com.mercadolibre.socialmeli2.entity.User;
 import com.mercadolibre.socialmeli2.repository.IUserRepository;
 import com.mercadolibre.socialmeli2.repository.UserRepository;
+import com.mercadolibre.socialmeli2.utils.UserFactory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -120,6 +118,86 @@ public class UserControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(content().contentType("application/json"))
                 .andExpect(MockMvcResultMatchers.content().json(expectedJson));
+    }
+
+    @Test
+    @DisplayName("US0004 GET /users/{userId}/followed/list (Happy path: without order)")
+    void getFollowedIntegrationTestOk() throws Exception {
+        // Arrange
+        UserDtoRes u3Dto = new UserDtoRes(3, "LaOfertaPerfecta");
+        UserDtoRes u4Dto = new UserDtoRes(4, "MotociclosSA");
+        List<UserDtoRes> expectedFollowed = Arrays.asList(u4Dto, u3Dto);
+        UserFollowedListDtoRes expected = new UserFollowedListDtoRes(1, "Juan Perez", expectedFollowed);
+        String expectedJson = new ObjectMapper().writeValueAsString(expected);
+
+        // Act & Assert
+        mockMvc.perform(MockMvcRequestBuilders.get("/users/{userId}/followed/list", 1))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(content().contentType("application/json"))
+                .andExpect(MockMvcResultMatchers.content().json(expectedJson));
+    }
+
+    @Test
+    @DisplayName("US0004 GET /users/{userId}/followed/list (Happy path: with order asc)")
+    void getFollowedOrderedAscIntTestOk() throws Exception {
+        // Arrange
+        userRepository.setUsers(UserFactory.loadAbcUsers());
+
+        List<UserDtoRes> expectedFollowed = UserFactory.getUsersListDto(null);
+        UserFollowedListDtoRes expected = new UserFollowedListDtoRes(1, "Juan", expectedFollowed);
+        String expectedJson = new ObjectMapper().writeValueAsString(expected);
+
+        // Act & Assert
+        mockMvc.perform(MockMvcRequestBuilders.get("/users/{userId}/followed/list", 1)
+                        .param("order", "name_asc"))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(MockMvcResultMatchers.content().json(expectedJson))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.followed[0].user_name").value("Alberto"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.followed[1].user_name").value("Beto"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.followed[2].user_name").value("Camila"));
+    }
+
+    @Test
+    @DisplayName("US0004 GET /users/{userId}/followed/list (Happy path: with order desc)")
+    void getFollowedOrderedDescIntTestOk() throws Exception {
+        // Arrange
+        userRepository.setUsers(UserFactory.loadAbcUsers());
+
+        List<UserDtoRes> expectedFollowed = UserFactory.getUsersListDto(null);
+        UserFollowedListDtoRes expected = new UserFollowedListDtoRes(1, "Juan", expectedFollowed);
+        String expectedJson = new ObjectMapper().writeValueAsString(expected);
+
+        // Act & Assert
+        mockMvc.perform(MockMvcRequestBuilders.get("/users/{userId}/followed/list", 1)
+                .param("order", "name_desc"))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(MockMvcResultMatchers.content().json(expectedJson))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.followed[0].user_name").value("Camila"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.followed[1].user_name").value("Beto"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.followed[2].user_name").value("Alberto"));
+    }
+
+    @Test
+    @DisplayName("US0004 GET /users/{userId}/followed/list (Sad path: Invalid order)")
+    void getFollowedInvalidOrder() throws Exception {
+        // Arrange
+        userRepository.setUsers(UserFactory.loadAbcUsers());
+
+        ResponseDto expected = new ResponseDto("El tipo de ordenamiento no es válido.", 400);
+
+        // Act & Assert
+        mockMvc.perform(MockMvcRequestBuilders.get("/users/{userId}/followed/list", 1)
+                .param("order", "invalid"))
+                .andDo(print())
+                .andExpect(status().isBadRequest())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.messages").value(expected.getMessages()))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.status").value(400));
     }
 
     @Test
