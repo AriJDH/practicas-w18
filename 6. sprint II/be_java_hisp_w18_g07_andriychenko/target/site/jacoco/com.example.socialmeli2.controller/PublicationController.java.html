@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>PublicationController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">SocialMeli2</a> &gt; <a href="index.source.html" class="el_package">com.example.socialmeli2.controller</a> &gt; <span class="el_source">PublicationController.java</span></div><h1>PublicationController.java</h1><pre class="source lang-java linenums">package com.example.socialmeli2.controller;
+
+import com.example.socialmeli2.dto.request.PublicationRequest;
+import com.example.socialmeli2.dto.response.UserFollowedPublicationResponse;
+import com.example.socialmeli2.service.IPublicationService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
+
+@RestController
+<span class="nc" id="L14">@RequiredArgsConstructor</span>
+public class PublicationController {
+
+    private final IPublicationService publicationService;
+
+    /**
+     * US 0005: URL=/products/post
+     * @param publicationRequest    requestbody - json with publication data and product data
+     * @return          respose entity -  OK status code if registry was succesful, Bad_Request if registry could not be added
+     */
+    @PostMapping(&quot;/products/post&quot;)
+    public ResponseEntity&lt;Void&gt; createPublication(@Valid @RequestBody PublicationRequest publicationRequest) {
+
+<span class="nc" id="L27">        publicationService.registerPublication(publicationRequest);</span>
+<span class="nc" id="L28">        return new ResponseEntity&lt;&gt;(HttpStatus.OK);</span>
+    }
+
+    /**
+     * US 0006: URL=/products/followed/{userId}/list
+     * @param userId    pathvariable - user identification number
+     * @param order     pathvariable - publication response order by date: name_asc=ascending; name_desc=descending
+     * @return          respose entity - &quot;user followed publication response DTO&quot; &amp; OK status code
+     */
+    @GetMapping(&quot;/products/followed/{userId}/list&quot;)
+    public ResponseEntity&lt;UserFollowedPublicationResponse&gt; getUserFollowedPublicationsById(@Valid @PathVariable Integer userId, @RequestParam(defaultValue = &quot;&quot;) String order) {
+
+<span class="nc" id="L40">        UserFollowedPublicationResponse response = publicationService.getUserFollowedPublicationsById(userId, order);</span>
+<span class="nc" id="L41">        return new ResponseEntity&lt;&gt;(response, HttpStatus.OK);</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: com.example.socialmeli2.SocialMeli2ApplicationTests
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 2.223 s - in com.example.socialmeli2.SocialMeli2ApplicationTests

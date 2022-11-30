@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>UserController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">SocialMeli2</a> &gt; <a href="index.source.html" class="el_package">com.example.socialmeli2.controller</a> &gt; <span class="el_source">UserController.java</span></div><h1>UserController.java</h1><pre class="source lang-java linenums">package com.example.socialmeli2.controller;
+
+import com.example.socialmeli2.dto.response.UserFollowedListResponse;
+import com.example.socialmeli2.dto.response.UserFollowerCountResponse;
+import com.example.socialmeli2.dto.response.UserFollowersListResponse;
+import com.example.socialmeli2.service.IUserService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+
+@RestController
+@RequiredArgsConstructor
+public class UserController {
+
+    private final IUserService userService;
+
+    //US 001
+    @PostMapping(&quot;/users/{userId}/follow/{userIdToFollow}&quot;)
+    public ResponseEntity&lt;Void&gt; followUserSeller(@Valid @NotNull(message = &quot;El  id no puede estar vacío.&quot;) @Min(value = 1, message = &quot;El id debe ser mayor a cero.&quot;) @PathVariable Integer userId,@Valid @NotNull(message = &quot;El  id no puede estar vacío.&quot;) @Min(value = 1, message = &quot;El id debe ser mayor a cero.&quot;)  @PathVariable Integer userIdToFollow) {
+
+<span class="nc" id="L26">        userService.followUserSeller(userId, userIdToFollow);</span>
+<span class="nc" id="L27">        return new ResponseEntity&lt;&gt;(HttpStatus.OK);</span>
+    }
+
+    //US 007
+    @PostMapping(&quot;/users/{userId}/unfollow/{userIdToUnfollow}&quot;)
+    public ResponseEntity&lt;Void&gt; unfollowUserSeller(@Valid @NotNull(message = &quot;El  id no puede estar vacío.&quot;) @Min(value = 1, message = &quot;El id debe ser mayor a cero.&quot;) @PathVariable Integer userId,@Valid @NotNull(message = &quot;El  id no puede estar vacío.&quot;) @Min(value = 1, message = &quot;El id debe ser mayor a cero.&quot;)  @PathVariable Integer userIdToUnfollow) {
+
+<span class="nc bnc" id="L34" title="All 2 branches missed.">       if(userService.unfollowUserSeller(userId, userIdToUnfollow))</span>
+       {
+<span class="nc" id="L36">            return new ResponseEntity&lt;&gt;(HttpStatus.OK);</span>
+       }
+<span class="nc" id="L38">        return new ResponseEntity&lt;&gt;(HttpStatus.BAD_REQUEST);</span>
+    }
+
+    //US 004
+    @GetMapping(&quot;/users/{userId}/followed/list&quot;)
+    public ResponseEntity&lt;UserFollowedListResponse&gt; getUsersFollowed(@Valid @NotNull(message = &quot;El  id no puede estar vacío.&quot;) @Min(value = 1, message = &quot;El id debe ser mayor a cero.&quot;) @PathVariable Integer userId, @RequestParam(defaultValue = &quot;&quot;) String order) {
+
+<span class="nc" id="L45">        return new ResponseEntity&lt;&gt;(userService.getFollowedUsersById(userId, order), HttpStatus.OK);</span>
+    }
+
+    //US 003
+    @GetMapping(&quot;/users/{userId}/followers/list&quot;)
+    public ResponseEntity&lt;UserFollowersListResponse&gt; getUsersFollowers(@Valid @NotNull(message = &quot;El  id no puede estar vacío.&quot;) @Min(value = 1, message = &quot;El id debe ser mayor a cero.&quot;) @PathVariable int userId, @RequestParam(defaultValue = &quot;&quot;) String order) {
+
+<span class="nc" id="L52">        return new ResponseEntity&lt;&gt;(userService.getFollowersUsersById(userId, order), HttpStatus.OK);</span>
+    }
+
+    //US 002
+    @GetMapping(&quot;/users/{userId}/followers/count&quot;)
+    public ResponseEntity&lt;UserFollowerCountResponse&gt; getUserFollowersCount(@Valid @NotNull(message = &quot;El  id no puede estar vacío.&quot;) @Min(value = 1, message = &quot;El id debe ser mayor a cero.&quot;) @PathVariable int userId) {
+
+<span class="nc" id="L59">        return new ResponseEntity&lt;&gt;(userService.getUserFollowersCount(userId), HttpStatus.OK);</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

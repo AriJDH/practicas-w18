@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>UserEntity.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">SocialMeli2</a> &gt; <a href="index.source.html" class="el_package">com.example.socialmeli2.entity</a> &gt; <span class="el_source">UserEntity.java</span></div><h1>UserEntity.java</h1><pre class="source lang-java linenums">package com.example.socialmeli2.entity;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import java.util.List;
+
+@lombok.Data
+@NoArgsConstructor
+@AllArgsConstructor
+public class UserEntity {
+
+    private Integer id;
+    private String name;
+    private List&lt;Integer&gt; followersList;   //Almacena los ids de los usuarios que nos siguen
+    private List&lt;Integer&gt; followedList;   //Almacena los ids de los usuarios que seguimos
+    private List&lt;Integer&gt; publicationList; //Almacena los ids de las publicaciones relacionadas al usuario
+
+
+    public void addFollowersToList(Integer userId){
+<span class="nc" id="L22">        followersList.add(userId);</span>
+<span class="nc" id="L23">    }</span>
+
+    public void removeFollowersToList(Integer userId){
+<span class="nc" id="L26">        followersList.remove(userId);</span>
+<span class="nc" id="L27">    }</span>
+
+    public void addFollowedList(Integer userId){
+<span class="nc" id="L30">        followedList.add(userId);</span>
+<span class="nc" id="L31">    }</span>
+
+    public void removeFollowedToList(Integer userId){
+<span class="nc" id="L34">        followedList.remove(userId);</span>
+<span class="nc" id="L35">    }</span>
+    public boolean ifFollowerExist(Integer id){
+<span class="fc" id="L37">        return followersList.contains(id);</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

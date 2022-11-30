@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>UserRepositoryImpl.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">SocialMeli2</a> &gt; <a href="index.source.html" class="el_package">com.example.socialmeli2.repository</a> &gt; <span class="el_source">UserRepositoryImpl.java</span></div><h1>UserRepositoryImpl.java</h1><pre class="source lang-java linenums">package com.example.socialmeli2.repository;
+
+import com.example.socialmeli2.entity.UserEntity;
+import com.example.socialmeli2.exception.NotFoundException;
+import org.springframework.stereotype.Repository;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
+
+@Repository
+public class UserRepositoryImpl implements IUserRepository {
+
+<span class="nc" id="L15">    private Map&lt;Integer, UserEntity&gt; users = new HashMap&lt;&gt;();</span>
+
+<span class="nc" id="L17">    public UserRepositoryImpl() {</span>
+
+<span class="nc" id="L19">        users.put(1, new UserEntity(1, &quot;Carlos&quot;, new ArrayList&lt;&gt;(), new ArrayList&lt;&gt;(Arrays.asList(2)), new ArrayList&lt;&gt;()));</span>
+<span class="nc" id="L20">        users.put(2, new UserEntity(2, &quot;Felipe&quot;, new ArrayList&lt;&gt;(Arrays.asList(1)), new ArrayList&lt;&gt;(), new ArrayList&lt;&gt;()));</span>
+<span class="nc" id="L21">        users.put(3, new UserEntity(3, &quot;Maria&quot;, new ArrayList&lt;&gt;(), new ArrayList&lt;&gt;(), new ArrayList&lt;&gt;()));</span>
+<span class="nc" id="L22">        users.put(4, new UserEntity(4, &quot;Elisa&quot;, new ArrayList&lt;&gt;(), new ArrayList&lt;&gt;(), new ArrayList&lt;&gt;()));</span>
+<span class="nc" id="L23">        users.put(5, new UserEntity(5, &quot;Raul&quot;, new ArrayList&lt;&gt;(), new ArrayList&lt;&gt;(), new ArrayList&lt;&gt;()));</span>
+<span class="nc" id="L24">        users.put(6, new UserEntity(6, &quot;Florencia&quot;, new ArrayList&lt;&gt;(), new ArrayList&lt;&gt;(), new ArrayList&lt;&gt;()));</span>
+
+<span class="nc" id="L26">    }</span>
+
+
+    @Override
+    public UserEntity getEntityById(Integer userId) {
+<span class="nc bnc" id="L31" title="All 2 branches missed.">        if (this.users.get(userId) == null) {</span>
+<span class="nc" id="L32">            throw new NotFoundException(&quot;No existe usuario con ID: &quot; + userId);</span>
+        }
+
+<span class="nc" id="L35">        return users.get(userId);</span>
+    }
+
+    @Override
+    public Map&lt;Integer, UserEntity&gt; getAllEntity() {
+<span class="nc" id="L40">        return users;</span>
+    }
+
+
+
+    @Override
+    public void followSeller(Integer userId, Integer userIdToFollow) {
+
+<span class="nc" id="L48">        Boolean isAlreadyFollower = users.get(userId).getFollowedList().contains(userIdToFollow);</span>
+<span class="nc" id="L49">        Boolean isTheSameEntity = userId.equals(userIdToFollow);</span>
+<span class="nc bnc" id="L50" title="All 4 branches missed.">        if (!isAlreadyFollower &amp;&amp; !isTheSameEntity) {</span>
+
+<span class="nc" id="L52">            users.get(userId).addFollowedList(userIdToFollow);</span>
+<span class="nc" id="L53">            users.get(userIdToFollow).addFollowersToList(userId);</span>
+        }
+<span class="nc" id="L55">    }</span>
+
+    @Override
+    public void unfollowSeller(Integer userId, Integer userIdToUnfollow) {
+<span class="nc" id="L59">        users.get(userId).removeFollowedToList(userIdToUnfollow);</span>
+<span class="nc" id="L60">        users.get(userIdToUnfollow).removeFollowersToList(userId);</span>
+<span class="nc" id="L61">    }</span>
+
+    @Override
+    public Boolean exist(Integer userId) {
+<span class="nc bnc" id="L65" title="All 2 branches missed.">        return users.get(userId) != null;</span>
+    }
+
+    @Override
+    public Boolean isSeller(Integer userId) {
+<span class="nc bnc" id="L70" title="All 2 branches missed.">        return users.get(userId).getPublicationList().size() &gt; 0;</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

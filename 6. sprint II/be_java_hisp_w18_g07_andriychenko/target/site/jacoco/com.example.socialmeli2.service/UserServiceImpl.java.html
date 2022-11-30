@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>UserServiceImpl.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">SocialMeli2</a> &gt; <a href="index.source.html" class="el_package">com.example.socialmeli2.service</a> &gt; <span class="el_source">UserServiceImpl.java</span></div><h1>UserServiceImpl.java</h1><pre class="source lang-java linenums">package com.example.socialmeli2.service;
+
+import com.example.socialmeli2.dto.response.UserBasicResponse;
+import com.example.socialmeli2.dto.response.UserFollowedListResponse;
+import com.example.socialmeli2.dto.response.UserFollowerCountResponse;
+import com.example.socialmeli2.dto.response.UserFollowersListResponse;
+import com.example.socialmeli2.entity.UserEntity;
+import com.example.socialmeli2.exception.InvalidParameterException;
+import com.example.socialmeli2.exception.NotFoundException;
+import com.example.socialmeli2.repository.IUserRepository;
+import com.example.socialmeli2.util.ListSorterByOrder;
+import com.example.socialmeli2.util.UserMapper;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+import static java.util.Arrays.asList;
+
+@Service
+@RequiredArgsConstructor
+public class UserServiceImpl implements IUserService {
+
+    private final IUserRepository userRepository;
+
+    /**
+     * Permite que un usuario comience a seguir a otro usuario. Evalua que ambos usuarios pasados como parametro
+     * existan y que el usuario objetivo sea un vendedor o tenga al menos una publicacion
+     *
+     * @param userId         Usuario que va a comenzar a seguir a otro
+     * @param userIdToFollow Usuario objetivo a seguir
+     *
+     * @return un booleano para identifcar si se completó la acción
+     */
+    @Override
+    public boolean followUserSeller(Integer userId, Integer userIdToFollow) {
+
+<span class="fc" id="L40">        boolean exist = false;</span>
+
+<span class="fc bfc" id="L42" title="All 2 branches covered.">        if (!userRepository.exist(userId)) {</span>
+<span class="fc" id="L43">            throw new NotFoundException(&quot;No existe usuario con ID: &quot; + userId);</span>
+        }
+
+<span class="pc bpc" id="L46" title="1 of 2 branches missed.">        if (!userRepository.exist(userIdToFollow)) {</span>
+<span class="nc" id="L47">            throw new NotFoundException(&quot;No existe usuario con ID: &quot; + userIdToFollow);</span>
+        }
+<span class="pc bpc" id="L49" title="1 of 2 branches missed.">        if (userRepository.isSeller(userIdToFollow)) {</span>
+<span class="fc" id="L50">            userRepository.followSeller(userId, userIdToFollow);</span>
+<span class="fc" id="L51">            exist = true;</span>
+        } else {
+<span class="nc" id="L53">            throw new NotFoundException(&quot;El usuario con ID: &quot; + userIdToFollow + &quot; no es vendedor&quot;);</span>
+        }
+
+<span class="fc" id="L56">        return exist;</span>
+    }
+
+    /**
+     * This method is used to unfollow a seller.
+     *
+     * @param userId           the user ID who wants to unfollow a seller
+     * @param userIdToUnfollow the seller/user ID to unfollow
+     */
+    @Override
+    public boolean unfollowUserSeller(Integer userId, Integer userIdToUnfollow) {
+<span class="fc" id="L67">        boolean unfollowSeller= false;</span>
+<span class="pc bpc" id="L68" title="1 of 2 branches missed.">        if (!userRepository.exist(userId)) {</span>
+<span class="nc" id="L69">            throw new NotFoundException(&quot;No existe usuario con ID: &quot; + userId);</span>
+        }
+<span class="fc bfc" id="L71" title="All 2 branches covered.">        if (!userRepository.exist(userIdToUnfollow)) {</span>
+<span class="fc" id="L72">            throw new NotFoundException(&quot;No existe usuario con ID: &quot; + userIdToUnfollow);</span>
+        }
+<span class="fc bfc" id="L74" title="All 2 branches covered.">        if (userRepository.getEntityById(userId).ifFollowerExist(userIdToUnfollow)){</span>
+<span class="fc" id="L75">            userRepository.unfollowSeller(userId, userIdToUnfollow);</span>
+<span class="fc" id="L76">            unfollowSeller=true;</span>
+        }
+<span class="fc" id="L78">        return unfollowSeller;</span>
+    }
+
+    /**
+     * This method is used to count the numbers of followers of a User
+     *
+     * @param userId the User ID to count his followers
+     * @return The count of followers
+     */
+    @Override
+    public UserFollowerCountResponse getUserFollowersCount(Integer userId) {
+<span class="fc" id="L89">        UserEntity userCount = userRepository.getEntityById(userId);</span>
+<span class="fc" id="L90">        return UserMapper.userEntity2UserFollowerCountResponse(userCount);</span>
+    }
+
+    /**
+     * This method when is called will return a user_id with its user_name
+     * and a list of users followed with user_id and user_name.
+     * If the user don´t follow anyone, the list will be empty
+     *
+     * @param userId enter the id of the user that we will retrieve the list of followers
+     * @param order  Optional. enter the value &quot;name_asc&quot; or &quot;name_desc&quot; to order the list of followed users by user_name
+     * @return returns an UserFollowedListResponse object made of userId, userName and List&lt;&gt;UserResponse
+     */
+    @Override
+    public UserFollowersListResponse getFollowersUsersById(Integer userId, String order) {
+<span class="fc" id="L104">        UserEntity seller = userRepository.getEntityById(userId);</span>
+<span class="fc" id="L105">        List&lt;UserBasicResponse&gt; followersDtos = new ArrayList&lt;&gt;();</span>
+
+
+<span class="fc bfc" id="L108" title="All 2 branches covered.">        for (Integer followerId : seller.getFollowersList()) {</span>
+<span class="fc" id="L109">            UserEntity follower = userRepository.getEntityById(followerId);</span>
+<span class="fc" id="L110">            followersDtos.add(UserMapper.userEntity2UserBasicResponse(follower));</span>
+<span class="fc" id="L111">        }</span>
+
+<span class="pc bpc" id="L113" title="1 of 2 branches missed.">        if (!order.isEmpty()) {</span>
+<span class="fc" id="L114">            followersDtos = ListSorterByOrder.userSortedByName(followersDtos, order);</span>
+        }
+
+<span class="fc" id="L117">        return UserMapper.userEntity2UserFollowersListResponse(seller, followersDtos);</span>
+    }
+
+    /**
+     * This method when is called will return a user_id with its user_name
+     * and a list of users followed with user_id and user_name.
+     * If the user don´t follow anyone, the list will be empty
+     *
+     * @param id    enter the id of the user that we will retrieve the list of followers
+     * @param order Optional. enter the value &quot;name_asc&quot; or &quot;name_desc&quot; to order the list of followed users by user_name
+     * @return returns an UserFollowedListResponse object made of userId, userName and List&lt;&gt;UserResponse
+     */
+    @Override
+    public UserFollowedListResponse getFollowedUsersById(Integer id, String order) {
+<span class="nc" id="L131">        UserEntity entity = userRepository.getEntityById(id);</span>
+<span class="nc" id="L132">        List&lt;UserBasicResponse&gt; followedList = new ArrayList&lt;&gt;();</span>
+
+<span class="nc bnc" id="L134" title="All 2 branches missed.">        for (Integer integer : entity.getFollowedList()) {</span>
+<span class="nc" id="L135">            followedList.add(UserMapper.userEntity2UserBasicResponse(userRepository.getEntityById(integer)));</span>
+<span class="nc" id="L136">        }</span>
+
+
+<span class="nc bnc" id="L139" title="All 2 branches missed.">        if (!order.isEmpty()) {</span>
+<span class="nc" id="L140">            followedList = ListSorterByOrder.userSortedByName(followedList, order);</span>
+        }
+
+<span class="nc" id="L143">        return UserMapper.userEntity2UserFollowedListResponse(entity, followedList);</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

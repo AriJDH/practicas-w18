@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ProductRepositoryImpl.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">SocialMeli2</a> &gt; <a href="index.source.html" class="el_package">com.example.socialmeli2.repository</a> &gt; <span class="el_source">ProductRepositoryImpl.java</span></div><h1>ProductRepositoryImpl.java</h1><pre class="source lang-java linenums">package com.example.socialmeli2.repository;
+
+import com.example.socialmeli2.entity.ProductEntity;
+import com.example.socialmeli2.exception.NotFoundException;
+import org.springframework.stereotype.Repository;
+
+import java.util.HashMap;
+import java.util.Map;
+
+@Repository
+public class ProductRepositoryImpl implements IProductRepository {
+
+<span class="nc" id="L13">    private Map&lt;Integer, ProductEntity&gt; products = new HashMap&lt;&gt;();</span>
+
+<span class="nc" id="L15">    public ProductRepositoryImpl() {</span>
+
+<span class="nc" id="L17">        products.put(1, new ProductEntity(1, &quot;Silla Gamer&quot;, &quot;Gamer&quot;, &quot;Racer&quot;, &quot;Red &amp; Black&quot;, &quot;Special Edition&quot;));</span>
+<span class="nc" id="L18">        products.put(2, new ProductEntity(2, &quot;Headset RGB Inalámbrico&quot;, &quot;Gamer&quot;, &quot;Racer&quot;, &quot;Green with RGB&quot;, &quot;Sin Batería&quot;));</span>
+<span class="nc" id="L19">        products.put(3, new ProductEntity(3, &quot;Teclado&quot;, &quot;Gamer&quot;, &quot;Racer&quot;, &quot;Yelow &amp; White&quot;, &quot;Special Edition&quot;));</span>
+<span class="nc" id="L20">        products.put(4, new ProductEntity(4, &quot;Audifonos gamer&quot;, &quot;Gamer&quot;, &quot;Redragon Ares&quot;, &quot;Red &amp; Black&quot;, &quot;Special Edition&quot;));</span>
+<span class="nc" id="L21">        products.put(5, new ProductEntity(5, &quot;Monitor&quot;, &quot;Gamer&quot;, &quot;Samsung F22T35 led 22&quot;, &quot;dark blue gray 100V/240V&quot;, &quot;Una experiencia visual de calidad&quot;));</span>
+
+<span class="nc" id="L23">    }</span>
+
+    @Override
+    public ProductEntity getEntityById(Integer productId) {
+<span class="nc bnc" id="L27" title="All 2 branches missed.">        if (this.products.get(productId) == null) {</span>
+<span class="nc" id="L28">            throw new NotFoundException(&quot;No existe producto con ID: &quot; + productId);</span>
+        }
+
+<span class="nc" id="L31">        return products.get(productId);</span>
+    }
+
+    @Override
+    public Map&lt;Integer, ProductEntity&gt; getAllEntity() {
+<span class="nc" id="L36">        return products;</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>
