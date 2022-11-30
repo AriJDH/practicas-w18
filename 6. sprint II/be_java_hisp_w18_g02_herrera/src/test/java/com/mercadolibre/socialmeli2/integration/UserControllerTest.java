@@ -330,4 +330,82 @@ public class UserControllerTest {
                         .jsonPath("$.posts[*].price")
                         .value(Matchers.containsInAnyOrder(15.5, 15999.99, 7000D, 5999D, 200D)));
     }
+
+    @Test
+    @DisplayName("US0006 GET /products/followed/{userId}/list (Happy Path: order test asc)")
+    void getRecentPostIntOrderTestAscOk() throws Exception {
+        // Arrange
+        userRepository.setUsers(UserFactory.loadUsersWithPosts());
+
+        // Act & Assert
+        mockMvc.perform(MockMvcRequestBuilders.get("/products/followed/{userId}/list", 1)
+                    .param("order", "date_asc"))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(content().contentType("application/json"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.user_id").value(1))
+                .andExpect(MockMvcResultMatchers
+                        .jsonPath("$.posts[0].post_id")
+                        .value(4))
+                .andExpect(MockMvcResultMatchers
+                        .jsonPath("$.posts[1].post_id")
+                        .value(5))
+                .andExpect(MockMvcResultMatchers
+                        .jsonPath("$.posts[2].post_id")
+                        .value(3))
+                .andExpect(MockMvcResultMatchers
+                        .jsonPath("$.posts[3].post_id")
+                        .value(2))
+                .andExpect(MockMvcResultMatchers
+                        .jsonPath("$.posts[4].post_id")
+                        .value(1));
+    }
+
+    @Test
+    @DisplayName("US0006 GET /products/followed/{userId}/list (Happy Path: order test desc)")
+    void getRecentPostIntOrderTestDescOk() throws Exception {
+        // Arrange
+        userRepository.setUsers(UserFactory.loadUsersWithPosts());
+
+        // Act & Assert
+        mockMvc.perform(MockMvcRequestBuilders.get("/products/followed/{userId}/list", 1)
+                .param("order", "date_desc"))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(content().contentType("application/json"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.user_id").value(1))
+                .andExpect(MockMvcResultMatchers
+                        .jsonPath("$.posts[0].post_id")
+                        .value(1))
+                .andExpect(MockMvcResultMatchers
+                        .jsonPath("$.posts[1].post_id")
+                        .value(2))
+                .andExpect(MockMvcResultMatchers
+                        .jsonPath("$.posts[2].post_id")
+                        .value(3))
+                .andExpect(MockMvcResultMatchers
+                        .jsonPath("$.posts[3].post_id")
+                        .value(5))
+                .andExpect(MockMvcResultMatchers
+                        .jsonPath("$.posts[4].post_id")
+                        .value(4));
+    }
+
+    @Test
+    @DisplayName("US0006 GET /products/followed/{userId}/list (Sad Path: invalid order)")
+    void getRecentPostIntTestInvalidOrderSad() throws Exception {
+        // Arrange
+        userRepository.setUsers(UserFactory.loadUsersWithPosts());
+
+        ResponseDto expected = new ResponseDto("El tipo de ordenamiento no es válido.", 400);
+
+        // Act & Assert
+        mockMvc.perform(MockMvcRequestBuilders.get("/products/followed/{userId}/list", 1)
+                .param("order", "invalid"))
+                .andDo(print())
+                .andExpect(status().isBadRequest())
+                .andExpect(content().contentType("application/json"))
+                .andExpect(MockMvcResultMatchers .jsonPath("$.messages").value(expected.getMessages()))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.status").value(400));
+    }
 }

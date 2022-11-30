@@ -78,6 +78,7 @@ public class UserFactory {
                 "Winner", "Roja", "18 velocidades.");
 
         LocalDate now = LocalDate.now();
+        LocalDate yesterday = now.minusDays(1);
         LocalDate fiveDaysAgo = now.minusDays(5);
         LocalDate eightDaysAgo = now.minusDays(8);
         LocalDate oneWeekAgo = now.minusWeeks(1);
@@ -86,7 +87,7 @@ public class UserFactory {
         LocalDate fourWeeksAgo = now.minusWeeks(4);
 
         Post post1 = new Post(1, now, 1, 15.5, pr1);
-        Post post2 = new Post(2, now, 2, 15999.99, pr2);
+        Post post2 = new Post(2, yesterday, 2, 15999.99, pr2);
         Post post3 = new Post(3, fiveDaysAgo, 3, 7000D, pr2);
         Post post4 = new Post(4, eightDaysAgo, 4, 5999D, pr2);
         Post post5 = new Post(5, oneWeekAgo, 5, 200D, pr2);
