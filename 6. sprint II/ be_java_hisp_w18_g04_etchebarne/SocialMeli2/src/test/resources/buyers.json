@@ -1,0 +1,116 @@
+[
+  {
+    "user_id": 1,
+    "user_name": "Josep",
+    "followed": [
+      {
+        "user_id": 4,
+        "user_name": "Oliver"
+      },
+      {
+        "user_id": 2,
+        "user_name": "Ethan"
+      },
+      {
+        "user_id": 3,
+        "user_name": "Kyle"
+      }
+    ]
+  },
+  {
+    "user_id": 2,
+    "user_name": "Kyle",
+    "followed": [
+    ]
+  },
+  {
+    "user_id": 3,
+    "user_name": "Louis",
+    "followed": [
+    ]
+  },
+  {
+    "user_id": 4,
+    "user_name": "Kevin",
+    "followed": [
+    ]
+  },
+  {
+    "user_id": 5,
+    "user_name": "Raquel",
+    "followed": [
+      {
+        "user_id": 4,
+        "user_name": "Oliver",
+        "followers": [
+          {
+            "user_id": 5,
+            "user_name": "Raquel",
+            "followed": [
+            ]
+          }
+        ],
+        "posts": [
+          {
+            "post_id": 5,
+            "date": "29-10-2022",
+            "product": {
+              "product_id": 5,
+              "product_name": "Product 5",
+              "type": "Type 5",
+              "brand": "Brand 5",
+              "color": "Color 5",
+              "notes": "Notes 5"
+            },
+            "category": 3,
+            "price": 500.45
+          },
+          {
+            "post_id": 7,
+            "date": "07-11-2022",
+            "product": {
+              "product_id": 7,
+              "product_name": "Product 7",
+              "type": "Type 7",
+              "brand": "Brand 7",
+              "color": "Color 7",
+              "notes": "Notes 7"
+            },
+            "category": 2,
+            "price": 950.00
+          },
+          {
+            "post_id": 9,
+            "date": "21-11-2022",
+            "product": {
+              "product_id": 9,
+              "product_name": "Product 9",
+              "type": "Type 9",
+              "brand": "Brand 9",
+              "color": "Color 9",
+              "notes": "Notes 9"
+            },
+            "category": 2,
+            "price": 450.00
+          },
+          {
+            "post_id": 10,
+            "date": "29-11-2022",
+            "product": {
+              "product_id": 10,
+              "product_name": "Product 10",
+              "type": "Type 10",
+              "brand": "Brand 10",
+              "color": "Color 10",
+              "notes": "Notes 10"
+            },
+            "category": 3,
+            "price": 4500.00
+          }
+        ]
+      }
+    ]
+  }
+]
+}
+]
