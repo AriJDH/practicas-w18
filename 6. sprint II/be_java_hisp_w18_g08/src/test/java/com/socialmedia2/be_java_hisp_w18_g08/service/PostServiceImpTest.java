@@ -168,8 +168,6 @@ class PostServiceImpTest {
         PostDtoRes result = postService.getPostSellerListByUserId(u1.getUser_id(), null);
 
         //Assert
-        System.out.println("Expected: " +expected);
-        System.out.println("Result: " +result);
         assertEquals(expected.getPosts(), result.getPosts());
     }
 
