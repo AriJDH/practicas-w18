@@ -50,6 +50,7 @@ class SocialMeliControllerTest {
     @BeforeEach
     void setUp() {
         mapper = new ObjectMapper();
+        mapper.findAndRegisterModules();
     }
 
     @Test
@@ -184,6 +185,21 @@ class SocialMeliControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(content().json(postJson))
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON));
+    }
+
+    @Test
+    void methodgetLastPostsTest() throws Exception {
+        MockHttpServletRequestBuilder requestPayload = MockMvcRequestBuilders
+                .get("/products/followed/{userId}/list",3)
+                .param("order","date_asc")
+                .contentType(MediaType.APPLICATION_JSON);
+        mvc
+                .perform(requestPayload)
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.user_id").value(3))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.posts",hasSize(0)));
     }
 }
 
