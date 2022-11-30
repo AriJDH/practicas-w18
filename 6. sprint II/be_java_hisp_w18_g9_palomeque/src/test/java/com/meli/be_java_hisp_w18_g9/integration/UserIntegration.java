@@ -178,6 +178,66 @@ public class UserIntegration {
     }
 
     @Test
+    @DisplayName("find All Followed of an user with desc order")
+    void userFollowedWithOrderDescList () throws Exception{
+
+        // Arrange
+        User userMock = UsersFactory.getUserWithAllList(1,"Messi",true, true, false);
+
+        UserFollowedListResponse userFollowedListResponse = UsersFactory.getUserFollowedListResponse(userMock, 1);
+        String userJson = writer.writeValueAsString(userFollowedListResponse);
+        System.out.println(userFollowedListResponse);
+        //Mock
+        when(userRepository.findById(userMock.getUserId())).thenReturn(Optional.of(userMock));
+
+        /* Expect Response */
+        ResultMatcher expectedStatus = status().isOk();
+        ResultMatcher expectedJson = content().json(userJson);
+        ResultMatcher expectedContentType = content().contentType(MediaType.APPLICATION_JSON);
+
+        /* Request */
+        MockHttpServletRequestBuilder request = MockMvcRequestBuilders
+                .get("/users/{userId}/followed/list", userMock.getUserId())
+                .contentType(MediaType.APPLICATION_JSON);
+
+        // Act & Assert
+        mockMvc
+                .perform(request)
+                .andDo(print())
+                .andExpectAll(expectedStatus,expectedJson,expectedContentType);
+    }
+
+    @Test
+    @DisplayName("find All Followed of an user with asc order")
+    void userFollowedWithOrderAscList () throws Exception{
+
+        // Arrange
+        User userMock = UsersFactory.getUserWithAllList(1,"Cristiano",true, true, false);
+
+        UserFollowedListResponse userFollowedListResponse = UsersFactory.getUserFollowedListResponse(userMock, 2);
+        String userJson = writer.writeValueAsString(userFollowedListResponse);
+        System.out.println(userFollowedListResponse);
+        //Mock
+        when(userRepository.findById(userMock.getUserId())).thenReturn(Optional.of(userMock));
+
+        /* Expect Response */
+        ResultMatcher expectedStatus = status().isOk();
+        ResultMatcher expectedJson = content().json(userJson);
+        ResultMatcher expectedContentType = content().contentType(MediaType.APPLICATION_JSON);
+
+        /* Request */
+        MockHttpServletRequestBuilder request = MockMvcRequestBuilders
+                .get("/users/{userId}/followed/list", userMock.getUserId())
+                .contentType(MediaType.APPLICATION_JSON);
+
+        // Act & Assert
+        mockMvc
+                .perform(request)
+                .andDo(print())
+                .andExpectAll(expectedStatus,expectedJson,expectedContentType);
+    }
+
+    @Test
     @DisplayName("find All Follower of an user without order")
     void userFollowerList () throws Exception{
 
@@ -211,12 +271,45 @@ public class UserIntegration {
 
     @Test
     @DisplayName("find All Follower of an user with order desc")
-    void userFollowerWithOrderAscList () throws Exception{
+    void userFollowerWithOrderDescList () throws Exception{
 
         // Arrange
         User userMock = UsersFactory.getUserWithAllList(1,"Cristiano",true, false, true);
 
         UserFollowerListResponse userFollowerListResponse = UsersFactory.getUserFollowerListResponse(userMock, 1);
+        String userJson = writer.writeValueAsString(userFollowerListResponse);
+        System.out.println(userFollowerListResponse);
+
+        //Mock
+        when(userRepository.findById(userMock.getUserId())).thenReturn(Optional.of(userMock));
+
+        /* Expect Response */
+        ResultMatcher expectedStatus = status().isOk();
+        ResultMatcher expectedJson = content().json(userJson);
+        ResultMatcher expectedContentType = content().contentType(MediaType.APPLICATION_JSON);
+
+        /* Request */
+        MockHttpServletRequestBuilder request = MockMvcRequestBuilders
+                .get("/users/{userId}/followers/list", userMock.getUserId())
+                .param("order","name_desc")
+                .contentType(MediaType.APPLICATION_JSON);
+
+        // Act & Assert
+        mockMvc
+                .perform(request)
+                .andDo(print())
+                .andExpectAll(expectedStatus,expectedJson,expectedContentType);
+
+    }
+
+    @Test
+    @DisplayName("find All Follower of an user with asc desc")
+    void userFollowerWithOrderAscList () throws Exception{
+
+        // Arrange
+        User userMock = UsersFactory.getUserWithAllList(1,"Cristiano",true, false, true);
+
+        UserFollowerListResponse userFollowerListResponse = UsersFactory.getUserFollowerListResponse(userMock, 2);
         String userJson = writer.writeValueAsString(userFollowerListResponse);
         System.out.println(userFollowerListResponse);
 
