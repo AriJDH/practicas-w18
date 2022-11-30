@@ -7,6 +7,7 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.mercadolibre.socialmeli2.dto.ProductDto;
 import com.mercadolibre.socialmeli2.dto.request.PostDtoReq;
 import com.mercadolibre.socialmeli2.dto.response.*;
+import com.mercadolibre.socialmeli2.entity.Product;
 import com.mercadolibre.socialmeli2.entity.User;
 import com.mercadolibre.socialmeli2.repository.IUserRepository;
 import com.mercadolibre.socialmeli2.repository.UserRepository;
@@ -41,7 +42,7 @@ public class UserControllerTest {
 
     @BeforeEach
     void setup() {
-        userRepository.setUsers(userRepository.loadUsers());
+        userRepository.setUsers(UserFactory.loadUsers());
     }
 
     @Test
@@ -80,7 +81,7 @@ public class UserControllerTest {
     @DisplayName("US0002 GET /users/{userId}/followers/count (Happy path)")
     void getCountIntegrationTestOk() throws Exception {
         mockMvc.perform(MockMvcRequestBuilders.get("/users/{userId}/followers/count", 3))
-        .andDo(print())
+                .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(content().contentType("application/json"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.user_id").value(3))
@@ -172,7 +173,7 @@ public class UserControllerTest {
 
         // Act & Assert
         mockMvc.perform(MockMvcRequestBuilders.get("/users/{userId}/followed/list", 1)
-                .param("order", "name_desc"))
+                    .param("order", "name_desc"))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
@@ -192,7 +193,7 @@ public class UserControllerTest {
 
         // Act & Assert
         mockMvc.perform(MockMvcRequestBuilders.get("/users/{userId}/followed/list", 1)
-                .param("order", "invalid"))
+                    .param("order", "invalid"))
                 .andDo(print())
                 .andExpect(status().isBadRequest())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
@@ -252,8 +253,8 @@ public class UserControllerTest {
 
         // Act & Assert
         mockMvc.perform(MockMvcRequestBuilders.post("/products/post")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(payloadJson))
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .content(payloadJson))
                 .andDo(print())
                 .andExpect(status().isBadRequest())
                 .andExpect(content().contentType("application/json"))
@@ -284,13 +285,32 @@ public class UserControllerTest {
 
         // Act & Assert
         mockMvc.perform(MockMvcRequestBuilders.post("/products/post")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(payloadJson))
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .content(payloadJson))
                 .andDo(print())
                 .andExpect(status().isBadRequest())
                 .andExpect(content().contentType("application/json"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.messages").value(expectedDto.getMessages()))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.status").value(400))
                 .andReturn();
+    }
+
+    @Test
+    @DisplayName("US0006 POST /products/followed/{userId}/list (Happy Path)")
+    void getRecentPostIntTestOk() throws Exception {
+        // Act & Assert
+        mockMvc.perform(MockMvcRequestBuilders.get("/products/followed/{userId}/list", 1))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(content().contentType("application/json"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.user_id").value(1))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.posts[0].post_id").value(2))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.posts[0].category").value(2))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.posts[0].price").value(15999.99))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.posts[0].product.product_id").value(2))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.posts[1].post_id").value(1))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.posts[1].category").value(1))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.posts[1].price").value(15.5))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.posts[1].product.product_id").value(1));
     }
 }
