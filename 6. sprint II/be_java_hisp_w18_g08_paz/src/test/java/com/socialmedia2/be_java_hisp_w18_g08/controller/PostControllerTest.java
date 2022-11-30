@@ -112,7 +112,8 @@ class PostControllerTest {
                 .registerModule(new JavaTimeModule())
                 .writeValueAsString(expectedDto);
 
-        MvcResult result = mockMvc.perform(MockMvcRequestBuilders.get("/products/followed/{userId}/list", user.getUser_id()))
+        MvcResult result = mockMvc.perform(MockMvcRequestBuilders.get("/products/followed/{userId}/list", user.getUser_id())
+                        .param("order","date_asc"))
                 .andDo(print())
                 .andExpectAll(
                         status().isOk(),
