@@ -2,6 +2,7 @@ package com.bootcamp.be_java_hisp_w18_g06.unit.service.imp;
 
 import com.bootcamp.be_java_hisp_w18_g06.dto.response.UserFollowedListDTO;
 import com.bootcamp.be_java_hisp_w18_g06.dto.response.UserFollowersCountDTO;
+import com.bootcamp.be_java_hisp_w18_g06.dto.response.UserFollowersListDTO;
 import com.bootcamp.be_java_hisp_w18_g06.entity.User;
 import com.bootcamp.be_java_hisp_w18_g06.exceptions.BadRequestException;
 import com.bootcamp.be_java_hisp_w18_g06.exceptions.EmptyException;
@@ -224,6 +225,36 @@ class UserServiceTest {
             // ACT  ASSERTS
             assertThrows(EmptyException.class,()->service.getFollowersList(user.getUser_id(),null));
 
+        }
+        @Test
+        void getFollowerListAscTest() {
+            String order = "name_asc";
+            User user = getUserWithFollowersList("user with followed list asc");
+
+            when(repository.findUserById(user.getUser_id())).thenReturn(Optional.of(user));
+
+            UserFollowersListDTO result = service.getFollowersList(user.getUser_id(), order);
+            assertEquals("user 1", result.getFollowers().get(0).getUser_name());
+        }
+
+        @Test
+        void getFollowerListDescTest() {
+            String order = "name_desc";
+            User user = getUserWithFollowersList("user with followed list asc");
+
+            when(repository.findUserById(user.getUser_id())).thenReturn(Optional.of(user));
+
+            UserFollowersListDTO result = service.getFollowersList(user.getUser_id(), order);
+            assertEquals("user 3", result.getFollowers().get(0).getUser_name());
+        }
+        @Test
+        void getFollowerListExceptionTest() {
+            String order = "Bad request";
+            User user = getUserWithFollowersList("user with followed list asc");
+
+            when(repository.findUserById(user.getUser_id())).thenReturn(Optional.of(user));
+
+            assertThrows(BadRequestException.class,()->service.getFollowersList(user.getUser_id(), order));
         }
     }
 
