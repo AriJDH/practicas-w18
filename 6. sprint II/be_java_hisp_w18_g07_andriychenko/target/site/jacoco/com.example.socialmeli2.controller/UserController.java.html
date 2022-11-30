@@ -72,7 +72,7 @@ public class UserController {
                                                                            @Min(value = 1, message = &quot;El id debe ser mayor a cero.&quot;)
                                                                            @PathVariable Integer userId) {
 
-<span class="nc" id="L75">        return new ResponseEntity&lt;&gt;(userService.getUserFollowersCount(userId), HttpStatus.OK);</span>
+<span class="fc" id="L75">        return new ResponseEntity&lt;&gt;(userService.getUserFollowersCount(userId), HttpStatus.OK);</span>
     }
 
 }

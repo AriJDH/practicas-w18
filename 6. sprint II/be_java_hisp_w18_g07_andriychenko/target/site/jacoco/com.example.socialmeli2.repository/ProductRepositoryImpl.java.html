@@ -10,17 +10,17 @@ import java.util.Map;
 @Repository
 public class ProductRepositoryImpl implements IProductRepository {
 
-<span class="nc" id="L13">    private Map&lt;Integer, ProductEntity&gt; products = new HashMap&lt;&gt;();</span>
+<span class="fc" id="L13">    private Map&lt;Integer, ProductEntity&gt; products = new HashMap&lt;&gt;();</span>
 
-<span class="nc" id="L15">    public ProductRepositoryImpl() {</span>
+<span class="fc" id="L15">    public ProductRepositoryImpl() {</span>
 
-<span class="nc" id="L17">        products.put(1, new ProductEntity(1, &quot;Silla Gamer&quot;, &quot;Gamer&quot;, &quot;Racer&quot;, &quot;Red &amp; Black&quot;, &quot;Special Edition&quot;));</span>
-<span class="nc" id="L18">        products.put(2, new ProductEntity(2, &quot;Headset RGB Inalámbrico&quot;, &quot;Gamer&quot;, &quot;Racer&quot;, &quot;Green with RGB&quot;, &quot;Sin Batería&quot;));</span>
-<span class="nc" id="L19">        products.put(3, new ProductEntity(3, &quot;Teclado&quot;, &quot;Gamer&quot;, &quot;Racer&quot;, &quot;Yelow &amp; White&quot;, &quot;Special Edition&quot;));</span>
-<span class="nc" id="L20">        products.put(4, new ProductEntity(4, &quot;Audifonos gamer&quot;, &quot;Gamer&quot;, &quot;Redragon Ares&quot;, &quot;Red &amp; Black&quot;, &quot;Special Edition&quot;));</span>
-<span class="nc" id="L21">        products.put(5, new ProductEntity(5, &quot;Monitor&quot;, &quot;Gamer&quot;, &quot;Samsung F22T35 led 22&quot;, &quot;dark blue gray 100V/240V&quot;, &quot;Una experiencia visual de calidad&quot;));</span>
+<span class="fc" id="L17">        products.put(1, new ProductEntity(1, &quot;Silla Gamer&quot;, &quot;Gamer&quot;, &quot;Racer&quot;, &quot;Red &amp; Black&quot;, &quot;Special Edition&quot;));</span>
+<span class="fc" id="L18">        products.put(2, new ProductEntity(2, &quot;Headset RGB Inalámbrico&quot;, &quot;Gamer&quot;, &quot;Racer&quot;, &quot;Green with RGB&quot;, &quot;Sin Batería&quot;));</span>
+<span class="fc" id="L19">        products.put(3, new ProductEntity(3, &quot;Teclado&quot;, &quot;Gamer&quot;, &quot;Racer&quot;, &quot;Yelow &amp; White&quot;, &quot;Special Edition&quot;));</span>
+<span class="fc" id="L20">        products.put(4, new ProductEntity(4, &quot;Audifonos gamer&quot;, &quot;Gamer&quot;, &quot;Redragon Ares&quot;, &quot;Red &amp; Black&quot;, &quot;Special Edition&quot;));</span>
+<span class="fc" id="L21">        products.put(5, new ProductEntity(5, &quot;Monitor&quot;, &quot;Gamer&quot;, &quot;Samsung F22T35 led 22&quot;, &quot;dark blue gray 100V/240V&quot;, &quot;Una experiencia visual de calidad&quot;));</span>
 
-<span class="nc" id="L23">    }</span>
+<span class="fc" id="L23">    }</span>
 
     @Override
     public ProductEntity getEntityById(Integer productId) {

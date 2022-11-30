@@ -7,13 +7,16 @@ import com.example.socialmeli2.service.IUserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
 @RestController
 @RequiredArgsConstructor
+@Validated
 public class UserController {
 
     private final IUserService userService;
@@ -68,7 +71,8 @@ public class UserController {
 
     //US 002
     @GetMapping("/users/{userId}/followers/count")
-    public ResponseEntity<UserFollowerCountResponse> getUserFollowersCount(@NotNull(message = "El  id no puede estar vacío.")
+    public ResponseEntity<UserFollowerCountResponse> getUserFollowersCount(@Valid
+                                                                            @NotNull(message = "El  id no puede estar vacío.")
                                                                            @Min(value = 1, message = "El id debe ser mayor a cero.")
                                                                            @PathVariable Integer userId) {
 

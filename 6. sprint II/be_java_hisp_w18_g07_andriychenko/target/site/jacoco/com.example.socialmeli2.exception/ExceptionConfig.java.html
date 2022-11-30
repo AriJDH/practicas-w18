@@ -17,12 +17,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 @ControllerAdvice(annotations = RestController.class)
-<span class="nc" id="L20">public class ExceptionConfig {</span>
+<span class="fc" id="L20">public class ExceptionConfig {</span>
 
     @ExceptionHandler(NotFoundException.class)
     public ResponseEntity&lt;?&gt; NotFoundException(Exception e) {
-<span class="nc" id="L24">        ErrorResponse errorResponse = new ErrorResponse(e.getMessage(), 400);</span>
-<span class="nc" id="L25">        return new ResponseEntity&lt;&gt;(errorResponse, HttpStatus.BAD_REQUEST);</span>
+<span class="fc" id="L24">        ErrorResponse errorResponse = new ErrorResponse(e.getMessage(), 400);</span>
+<span class="fc" id="L25">        return new ResponseEntity&lt;&gt;(errorResponse, HttpStatus.BAD_REQUEST);</span>
     }
 
     @ExceptionHandler(MethodArgumentTypeMismatchException.class)
