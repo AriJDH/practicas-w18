@@ -1,13 +1,10 @@
 package com.example.SocialMeli2.dto.respose;
 
-import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @AllArgsConstructor
 @NoArgsConstructor
-@Getter
+@Getter @Setter
 @EqualsAndHashCode
 public class FollowerCountDTORes {
     private Integer user_id;
