@@ -62,6 +62,21 @@ public class UserControllerTest {
     }
 
     @Test
+    @DisplayName("US0001 POST /users/{userId}/follow/{userIdToFollow} (Sad path: Can't follow yourself)")
+    void followIntegrationTestSad() throws Exception {
+        // Arrange
+        ResponseDto responseDto = new ResponseDto("No es posible seguirse a si mismo.", 400);
+
+        mockMvc.perform(MockMvcRequestBuilders.post(
+                "/users/{userId}/follow/{userIdToFollow}", 4, 4))
+                .andDo(print())
+                .andExpect(status().isBadRequest())
+                .andExpect(content().contentType("application/json"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.messages").value(responseDto.getMessages()))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.status").value(400));
+    }
+
+    @Test
     @DisplayName("US0002 GET /users/{userId}/followers/count (Happy path)")
     void getCountIntegrationTestOk() throws Exception {
         mockMvc.perform(MockMvcRequestBuilders.get("/users/{userId}/followers/count", 3))
