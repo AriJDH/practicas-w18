@@ -3,38 +3,28 @@ package com.example.SocialMeli2.controller;
 import com.example.SocialMeli2.dto.request.PostDTOReq;
 import com.example.SocialMeli2.dto.request.ProductDTOReq;
 import com.example.SocialMeli2.dto.respose.*;
-import com.example.SocialMeli2.service.IUserBuyerService;
-import com.example.SocialMeli2.service.UserBuyerServiceImp;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.json.JsonMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.MvcResult;
-import org.springframework.test.web.servlet.ResultMatcher;
 import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
 
-import javax.validation.constraints.Positive;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.hamcrest.Matchers.empty;
+
 import static org.hamcrest.Matchers.hasSize;
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.when;
+
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -54,6 +44,7 @@ class SocialMeliControllerTest {
     }
 
     @Test
+    @DisplayName("US 0001")
     void methodFollowTest() throws Exception {
         FollowDTORes followDTORes = new FollowDTORes();
         followDTORes.setUserName("Josep");
@@ -74,6 +65,7 @@ class SocialMeliControllerTest {
     }
 
     @Test
+    @DisplayName("US 0002")
     void methodFollowersCountTest() throws Exception {
         FollowerCountDTORes followerCountDTORes = new FollowerCountDTORes();
         followerCountDTORes.setUser_id(2);
@@ -96,6 +88,7 @@ class SocialMeliControllerTest {
     }
 
     @Test
+    @DisplayName("US 0003")
     void methodGetFollowersTest() throws Exception {
         FollowerListDTORes followerListDTORes = new FollowerListDTORes();
         followerListDTORes.setUser_id(2);
@@ -126,6 +119,7 @@ class SocialMeliControllerTest {
     }
 
     @Test
+    @DisplayName("US 0004")
     void methodGetFollowedTest() throws Exception {
         FollowedListDTORes followedListDTORes = new FollowedListDTORes();
         followedListDTORes.setUser_id(1);
@@ -152,6 +146,7 @@ class SocialMeliControllerTest {
     }
 
     @Test
+    @DisplayName("US 0005")
     void methodPublishPostTest() throws Exception {
         PostDTOReq postDTOReq = new PostDTOReq();
         postDTOReq.setUser_id(1);
@@ -167,10 +162,6 @@ class SocialMeliControllerTest {
         postDTORes.setProduct(new ProductDTORes(1, "Silla Gamer", "Gamer", "Racer", "Red Black", "Special Edition"));
         postDTORes.setCategory(1);
         postDTORes.setPrice(1300.00);
-
-        ObjectMapper mapper = JsonMapper.builder()
-                .addModule(new JavaTimeModule())
-                .build();
 
         String postJson = mapper.writeValueAsString(postDTOReq);
         String payload = mapper.writeValueAsString(postDTORes);
@@ -188,10 +179,11 @@ class SocialMeliControllerTest {
     }
 
     @Test
+    @DisplayName("US 0006")
     void methodgetLastPostsTest() throws Exception {
         MockHttpServletRequestBuilder requestPayload = MockMvcRequestBuilders
-                .get("/products/followed/{userId}/list",3)
-                .param("order","date_asc")
+                .get("/products/followed/{userId}/list", 3)
+                .param("order", "date_asc")
                 .contentType(MediaType.APPLICATION_JSON);
         mvc
                 .perform(requestPayload)
@@ -199,7 +191,22 @@ class SocialMeliControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.user_id").value(3))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.posts",hasSize(0)));
+                .andExpect(MockMvcResultMatchers.jsonPath("$.posts", hasSize(0)));
+    }
+
+    @Test
+    @DisplayName("US 0007")
+    void methodUnFollowExceptionTest() throws Exception {
+        MockHttpServletRequestBuilder response = MockMvcRequestBuilders
+                .post("/users/{userId}/unfollow/{userIdToUnfollow}", 4, 2)
+                .contentType(MediaType.APPLICATION_JSON);
+
+        this.mvc.perform(response)
+                .andDo(print())
+                .andExpect(status().isBadRequest())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect((MockMvcResultMatchers.jsonPath("$.status").value("400")))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.message").value("The user 2 is not in your following list"));
     }
 }
 
