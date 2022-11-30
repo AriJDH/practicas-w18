@@ -60,9 +60,11 @@ public class UserIntegrationTest {
     @Test
     @DisplayName("Seguir a un usuario")
     public void followUser() throws Exception {
+        //Arrange
         userRepository.add(lucas);
         userRepository.add(miguel);
         miguel.addPost(post1);
+        //Act - Assert
         mockMvc.perform(post("/users/1/follow/2"))
                 .andDo(print())
                 .andExpect(status().isOk());
@@ -71,10 +73,12 @@ public class UserIntegrationTest {
     @Test
     @DisplayName("Dejar de seguir a un usuario")
     public void unfollowUser() throws Exception {
+        //Arrange
         userRepository.add(lucas);
         userRepository.add(miguel);
         miguel.addPost(post1);
         lucas.follow(miguel);
+        //Act - Assert
         mockMvc.perform(post("/users/1/unfollow/2"))
                 .andDo(print())
                 .andExpect(status().isOk());
@@ -83,10 +87,12 @@ public class UserIntegrationTest {
     @Test
     @DisplayName("Obtener cantidad de seguidores de un usuario")
     public void getFollowersCount() throws Exception {
+        //Arrange
         userRepository.add(lucas);
         userRepository.add(miguel);
         miguel.addPost(post1);
         lucas.follow(miguel);
+        //Act - Assert
         mockMvc.perform(get("/users/2/followers/count"))
                 .andDo(print())
                 .andExpect(status().isOk())
@@ -96,10 +102,12 @@ public class UserIntegrationTest {
     @Test
     @DisplayName("Obtener información de los seguidores de un usuario")
     public void getFollowersInfo() throws Exception {
+        //Arrange
         userRepository.add(lucas);
         userRepository.add(miguel);
         miguel.addPost(post1);
         lucas.follow(miguel);
+        //Act - Assert
         mockMvc.perform(get("/users/2/followers/list"))
                 .andDo(print())
                 .andExpect(status().isOk())
@@ -110,10 +118,12 @@ public class UserIntegrationTest {
     @Test
     @DisplayName("Obtener información de los seguidos de un usuario")
     public void getFollowedInfo() throws Exception {
+        //Arrange
         userRepository.add(lucas);
         userRepository.add(miguel);
         miguel.addPost(post1);
         lucas.follow(miguel);
+        //Act - Assert
         mockMvc.perform(get("/users/1/followed/list"))
                 .andDo(print())
                 .andExpect(status().isOk())

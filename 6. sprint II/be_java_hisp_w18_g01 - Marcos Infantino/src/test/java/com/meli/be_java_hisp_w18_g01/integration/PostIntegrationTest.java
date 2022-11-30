@@ -44,9 +44,9 @@ public class PostIntegrationTest {
     @Test
     @DisplayName("Agregar publicación con formato correcto")
     public void addPost() throws Exception {
+        //Arrange
         User user1 = new User(1L, "Lucas", new ArrayList<>(),new ArrayList<>(),new ArrayList<>());
         userRepository.add(user1);
-
         String content = "{\n" +
                 "    \"user_id\": 1,\n" +
                 "    \"date\": \"17-11-2022\",\n" +
@@ -61,7 +61,7 @@ public class PostIntegrationTest {
                 "    \"category\": 100,\n" +
                 "    \"price\": 1500.50\n" +
                 "}";
-
+        //Act - Assert
         mockMvc.perform(post("/products/post")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(content))
@@ -72,9 +72,9 @@ public class PostIntegrationTest {
     @Test
     @DisplayName("Agregar publicación con formato incorrecto")
     public void addPostWithValidationErrors() throws Exception {
+        //Arrange
         User user1 = new User(1L, "Lucas", new ArrayList<>(),new ArrayList<>(),new ArrayList<>());
         userRepository.add(user1);
-
         String content = "{\n" +
                 "    \"user_id\": 1,\n" +
                 "    \"date\": \"17-11-2022\",\n" +
@@ -89,7 +89,7 @@ public class PostIntegrationTest {
                 "    \"category\": 100,\n" +
                 "    \"price\": 1500.50\n" +
                 "}";
-
+        //Act - Assert
         mockMvc.perform(post("/products/post")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(content))
@@ -100,22 +100,21 @@ public class PostIntegrationTest {
     @Test
     @DisplayName("Obtener publicaciones recientes de los seguidos")
     public void getRecentPostsFromFollowed() throws Exception {
+        //Arrange
         User user1 = new User(1L, "Lucas", new ArrayList<>(),new ArrayList<>(),new ArrayList<>());
         User user2 = new User(2L, "Marcos", new ArrayList<>(),new ArrayList<>(),new ArrayList<>());
         Post post1 = new Post(1L, user2, LocalDate.now(),new Product(), 1,10);
         Post post2 = new Post(2L, user2, LocalDate.now().minusDays(2),new Product(),100, 20000);
         Post post3 = new Post(3L, user2, LocalDate.now().minusDays(4),new Product(),100, 20000);
         Post post4 = new Post(4L, user2, LocalDate.now().minusDays(6),new Product(),100, 20000);
-
         user2.addPost(post1);
         user2.addPost(post2);
         user2.addPost(post3);
         user2.addPost(post4);
         user1.follow(user2);
-
         userRepository.add(user1);
         userRepository.add(user2);
-
+        //Act - Assert
         mockMvc.perform(get("/products/followed/1/list"))
                 .andDo(print())
                 .andExpect(status().isOk())
