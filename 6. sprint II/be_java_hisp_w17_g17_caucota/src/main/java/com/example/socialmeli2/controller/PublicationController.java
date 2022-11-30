@@ -25,10 +25,11 @@ public class PublicationController {
      * @return respose entity -  OK status code if registry was succesful, Bad_Request if registry could not be added
      */
     @PostMapping("/products/post")
-    public ResponseEntity<Void> createPublication(@Valid @RequestBody PublicationRequest publicationRequest) {
+    public ResponseEntity<PublicationRequest> createPublication(@Valid @RequestBody PublicationRequest publicationRequest) {
 
         publicationService.registerPublication(publicationRequest);
-        return new ResponseEntity<>(HttpStatus.OK);
+
+        return new ResponseEntity<>(publicationRequest, HttpStatus.OK);
     }
 
     /**

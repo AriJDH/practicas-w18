@@ -12,7 +12,7 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
-@Data
+@lombok.Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class PublicationRequest {

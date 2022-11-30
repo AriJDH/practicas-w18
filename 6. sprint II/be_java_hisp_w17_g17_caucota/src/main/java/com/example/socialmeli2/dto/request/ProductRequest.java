@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.*;
 
-@Data
+@lombok.Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class ProductRequest {
@@ -24,14 +24,14 @@ public class ProductRequest {
     private String name;
 
     @NotBlank(message = "El campo no puede estar vacío")
-    @Size(max = 40, message = "La longitud no puede superar los 15 caracteres")
+    @Size(max = 15, message = "La longitud no puede superar los 15 caracteres")
     @Pattern(regexp = "[\\w À-ÿ]*", message = "El campo no puede poseer caracteres especiales")
     private String type;
 
     private String brand;
 
     @NotBlank(message = "El campo no puede estar vacío.")
-    @Size(max = 40, message = "La longitud no puede superar los 15 caracteres")
+    @Size(max = 15, message = "La longitud no puede superar los 15 caracteres")
     @Pattern(regexp = "[\\w À-ÿ]*", message = "El campo no puede poseer caracteres especiales")
     private String color;
 

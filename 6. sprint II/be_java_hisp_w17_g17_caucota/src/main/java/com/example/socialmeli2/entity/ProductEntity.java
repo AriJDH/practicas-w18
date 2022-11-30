@@ -4,7 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Data
+@lombok.Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class ProductEntity {

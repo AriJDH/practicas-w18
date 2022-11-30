@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 
 import java.util.List;
 
-@Data
+@lombok.Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class UserFollowedListResponse {

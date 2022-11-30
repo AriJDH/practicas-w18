@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 
-@Data
+@lombok.Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class PublicationEntity {
