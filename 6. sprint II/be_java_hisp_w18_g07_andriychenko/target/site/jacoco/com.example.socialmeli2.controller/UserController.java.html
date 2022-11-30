@@ -7,13 +7,16 @@ import com.example.socialmeli2.service.IUserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
 @RestController
 @RequiredArgsConstructor
+@Validated
 public class UserController {
 
     private final IUserService userService;
@@ -27,8 +30,8 @@ public class UserController {
                                                  @Min(value = 1, message = &quot;El id debe ser mayor a cero.&quot;)
                                                  @PathVariable Integer userIdToFollow) {
 
-<span class="nc" id="L30">        userService.followUserSeller(userId, userIdToFollow);</span>
-<span class="nc" id="L31">        return new ResponseEntity&lt;&gt;(HttpStatus.OK);</span>
+<span class="nc" id="L33">        userService.followUserSeller(userId, userIdToFollow);</span>
+<span class="nc" id="L34">        return new ResponseEntity&lt;&gt;(HttpStatus.OK);</span>
     }
 
     //US 007
@@ -40,10 +43,10 @@ public class UserController {
                                                    @Min(value = 1, message = &quot;El id debe ser mayor a cero.&quot;)
                                                    @PathVariable Integer userIdToUnfollow) {
 
-<span class="nc bnc" id="L43" title="All 2 branches missed.">        if (userService.unfollowUserSeller(userId, userIdToUnfollow)) {</span>
-<span class="nc" id="L44">            return new ResponseEntity&lt;&gt;(HttpStatus.OK);</span>
+<span class="nc bnc" id="L46" title="All 2 branches missed.">        if (userService.unfollowUserSeller(userId, userIdToUnfollow)) {</span>
+<span class="nc" id="L47">            return new ResponseEntity&lt;&gt;(HttpStatus.OK);</span>
         }
-<span class="nc" id="L46">        return new ResponseEntity&lt;&gt;(HttpStatus.BAD_REQUEST);</span>
+<span class="nc" id="L49">        return new ResponseEntity&lt;&gt;(HttpStatus.BAD_REQUEST);</span>
     }
 
     //US 004
@@ -53,7 +56,7 @@ public class UserController {
                                                                      @PathVariable Integer userId,
                                                                      @RequestParam(defaultValue = &quot;&quot;) String order) {
 
-<span class="nc" id="L56">        return new ResponseEntity&lt;&gt;(userService.getFollowedUsersById(userId, order), HttpStatus.OK);</span>
+<span class="nc" id="L59">        return new ResponseEntity&lt;&gt;(userService.getFollowedUsersById(userId, order), HttpStatus.OK);</span>
     }
 
     //US 003
@@ -63,16 +66,17 @@ public class UserController {
                                                                        @PathVariable Integer userId,
                                                                        @RequestParam(defaultValue = &quot;&quot;) String order) {
 
-<span class="nc" id="L66">        return new ResponseEntity&lt;&gt;(userService.getFollowersUsersById(userId, order), HttpStatus.OK);</span>
+<span class="nc" id="L69">        return new ResponseEntity&lt;&gt;(userService.getFollowersUsersById(userId, order), HttpStatus.OK);</span>
     }
 
     //US 002
     @GetMapping(&quot;/users/{userId}/followers/count&quot;)
-    public ResponseEntity&lt;UserFollowerCountResponse&gt; getUserFollowersCount(@NotNull(message = &quot;El  id no puede estar vacío.&quot;)
+    public ResponseEntity&lt;UserFollowerCountResponse&gt; getUserFollowersCount(@Valid
+                                                                            @NotNull(message = &quot;El  id no puede estar vacío.&quot;)
                                                                            @Min(value = 1, message = &quot;El id debe ser mayor a cero.&quot;)
                                                                            @PathVariable Integer userId) {
 
-<span class="fc" id="L75">        return new ResponseEntity&lt;&gt;(userService.getUserFollowersCount(userId), HttpStatus.OK);</span>
+<span class="fc" id="L79">        return new ResponseEntity&lt;&gt;(userService.getUserFollowersCount(userId), HttpStatus.OK);</span>
     }
 
 }

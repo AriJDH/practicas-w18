@@ -39,12 +39,12 @@ public class PublicationServiceImpl implements IPublicationService {
      */
     @Override
     public void registerPublication(PublicationRequest publicationRequest) {
-<span class="nc" id="L42">        UserEntity entity = userRepository.getEntityById(publicationRequest.getUserId());</span>
-<span class="nc" id="L43">        productRepository.getEntityById(publicationRequest.getProductRequest().getId());</span>
-<span class="nc" id="L44">        PublicationEntity publication = PublicationMapper.publicationRequest2PublicationEntity(publicationRequest);</span>
-<span class="nc" id="L45">        publicationRepository.addEntity(publication);</span>
-<span class="nc" id="L46">        entity.getPublicationList().add(publication.getId());</span>
-<span class="nc" id="L47">    }</span>
+<span class="fc" id="L42">        UserEntity entity = userRepository.getEntityById(publicationRequest.getUserId());</span>
+<span class="fc" id="L43">        productRepository.getEntityById(publicationRequest.getProductRequest().getId());</span>
+<span class="fc" id="L44">        PublicationEntity publication = PublicationMapper.publicationRequest2PublicationEntity(publicationRequest);</span>
+<span class="fc" id="L45">        publicationRepository.addEntity(publication);</span>
+<span class="fc" id="L46">        entity.getPublicationList().add(publication.getId());</span>
+<span class="fc" id="L47">    }</span>
 
     /**
      * US 0006: Obtain a list of the publications made by the sellers that a

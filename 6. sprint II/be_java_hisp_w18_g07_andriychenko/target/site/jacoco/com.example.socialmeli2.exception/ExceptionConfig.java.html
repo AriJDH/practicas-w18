@@ -48,8 +48,8 @@ import java.util.List;
 
     @ExceptionHandler(HttpMessageNotReadableException.class)
     public ResponseEntity&lt;?&gt; capturandoValidaciones(HttpMessageNotReadableException e) {
-<span class="nc" id="L51">        ErrorResponse ErrorResponse = new ErrorResponse(e.getMessage(), HttpStatus.BAD_REQUEST.value());</span>
-<span class="nc" id="L52">        return new ResponseEntity&lt;&gt;(ErrorResponse, HttpStatus.BAD_REQUEST);</span>
+<span class="fc" id="L51">        ErrorResponse ErrorResponse = new ErrorResponse(e.getMessage(), HttpStatus.BAD_REQUEST.value());</span>
+<span class="fc" id="L52">        return new ResponseEntity&lt;&gt;(ErrorResponse, HttpStatus.BAD_REQUEST);</span>
     }
 
 }

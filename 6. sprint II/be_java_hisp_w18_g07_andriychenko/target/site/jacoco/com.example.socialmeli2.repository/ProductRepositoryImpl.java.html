@@ -24,11 +24,11 @@ public class ProductRepositoryImpl implements IProductRepository {
 
     @Override
     public ProductEntity getEntityById(Integer productId) {
-<span class="nc bnc" id="L27" title="All 2 branches missed.">        if (this.products.get(productId) == null) {</span>
+<span class="pc bpc" id="L27" title="1 of 2 branches missed.">        if (this.products.get(productId) == null) {</span>
 <span class="nc" id="L28">            throw new NotFoundException(&quot;No existe producto con ID: &quot; + productId);</span>
         }
 
-<span class="nc" id="L31">        return products.get(productId);</span>
+<span class="fc" id="L31">        return products.get(productId);</span>
     }
 
     @Override

@@ -27,8 +27,8 @@ public class PublicationController {
     @PostMapping(&quot;/products/post&quot;)
     public ResponseEntity&lt;Void&gt; createPublication(@Valid @RequestBody PublicationRequest publicationRequest) {
 
-<span class="nc" id="L30">        publicationService.registerPublication(publicationRequest);</span>
-<span class="nc" id="L31">        return new ResponseEntity&lt;&gt;(HttpStatus.OK);</span>
+<span class="fc" id="L30">        publicationService.registerPublication(publicationRequest);</span>
+<span class="fc" id="L31">        return new ResponseEntity&lt;&gt;(HttpStatus.OK);</span>
     }
 
     /**
