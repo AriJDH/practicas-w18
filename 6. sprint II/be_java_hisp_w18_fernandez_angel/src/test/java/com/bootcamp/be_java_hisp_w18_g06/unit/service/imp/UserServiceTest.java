@@ -21,6 +21,7 @@ import java.util.Optional;
 
 import static com.bootcamp.be_java_hisp_w18_g06.utils.UserFactory.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.*;
 
 
@@ -207,6 +208,22 @@ class UserServiceTest {
             assertEquals(userFollowersCountDTO.getFollowers_count(),
                          service.getFollowersCount(1).getFollowers_count());
             
+        }
+
+        @Test
+        void getFollowersListEmptyExceptionTest() {
+
+            // ARRANGE
+            User user = UserFactory.getUserWithFollowersList("user1");
+            user.setFollowers(null);
+
+            //MOCKS - ACT
+            when(repository.findUserById(user.getUser_id()))
+                    .thenReturn(Optional.of(user));
+
+            // ACT  ASSERTS
+            assertThrows(EmptyException.class,()->service.getFollowersList(user.getUser_id(),null));
+
         }
     }
 
