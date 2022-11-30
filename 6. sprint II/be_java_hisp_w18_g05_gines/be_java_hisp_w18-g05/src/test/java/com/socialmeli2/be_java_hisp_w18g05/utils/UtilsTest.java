@@ -3,6 +3,8 @@ package com.socialmeli2.be_java_hisp_w18g05.utils;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import com.socialmeli2.be_java_hisp_w18g05.dto.request.NewPostDTORequest;
+import com.socialmeli2.be_java_hisp_w18g05.dto.request.ProductDTORequest;
 import com.socialmeli2.be_java_hisp_w18g05.dto.response.PostDTOResponse;
 import com.socialmeli2.be_java_hisp_w18g05.dto.response.ProductDTOResponse;
 import com.socialmeli2.be_java_hisp_w18g05.dto.response.SellerFollowersCountDTOResponse;
@@ -11,6 +13,7 @@ import com.socialmeli2.be_java_hisp_w18g05.entity.Buyer;
 import com.socialmeli2.be_java_hisp_w18g05.entity.Post;
 import com.socialmeli2.be_java_hisp_w18g05.entity.Product;
 import com.socialmeli2.be_java_hisp_w18g05.entity.Seller;
+import com.socialmeli2.be_java_hisp_w18g05.integration.IntegrationTest;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -68,6 +71,15 @@ public class UtilsTest {
     public static ProductDTOResponse getProductDTO3(){
         return new ProductDTOResponse(3,"silla3","gamer3","racer3","red3","special3");
     }
+
+    public static ProductDTORequest getProductDTORequest1() {
+        return new ProductDTORequest(1,"product_name","type","brand", "color","notes");
+    }
+
+    public static NewPostDTORequest getPostDTORequest1(Integer userId){
+    return new NewPostDTORequest(10, "29-11-2022", getProductDTORequest1(), 10, 20D);
+    }
+
     public static PostDTOResponse getPostDTO1(Integer userId){
         DateTimeFormatter formatters = DateTimeFormatter.ofPattern("d-MM-yyyy");
         String datetext = LocalDate.now().minusDays(6).format(formatters);
@@ -199,6 +211,14 @@ public class UtilsTest {
         buyerList.add(new Buyer(3, "Buyer3"));
         Seller sellerReturn = new Seller(userId, "Seller1", buyerList);
         return sellerReturn;
+    }
+
+    public static SellerFollowersCountDTOResponse getSellerWith2Follows(Integer userId){
+        SellerFollowersCountDTOResponse response = new SellerFollowersCountDTOResponse();
+        response.setUser_id(userId);
+        response.setUser_name("seller6");
+        response.setFollowers_count(2);
+        return response;
     }
 
 }

@@ -106,10 +106,6 @@ public class ServiceImp implements IService {
         repository.addFollowed(b, s);
         repository.addFollower(b, s);
 
-        /*
-        b.addFollowed(s);
-        s.addFollower(b);
-         */
     }
 
     @Override
@@ -127,7 +123,7 @@ public class ServiceImp implements IService {
         Buyer seguidor = s.getFollowers().stream().filter(x->x.getUser_id().equals(userId)).findFirst().orElse(null);
 
         if (seguidor == null){
-            throw new InvalidException("The buyer id " + userId +" doesn´t follow the seller id " + userIdToUnfollow);
+            throw new InvalidException("The buyer id " + userId +" does not follow the seller id " + userIdToUnfollow);
         }
 
         repository.unfollow(b, s);

@@ -6,6 +6,7 @@ import com.socialmeli2.be_java_hisp_w18g05.entity.Seller;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Repository
@@ -64,7 +65,6 @@ public class RepositoryImp implements IRepository{
 
 
     void fillDB(){
-
         buyers.add(new Buyer(1, "buyer1"));
         buyers.add(new Buyer(2, "buyer2"));
         buyers.add(new Buyer(3, "buyer3"));
@@ -76,6 +76,15 @@ public class RepositoryImp implements IRepository{
         sellers.add(new Seller(30, "seller3"));
         sellers.add(new Seller(40, "seller4"));
         sellers.add(new Seller(50, "seller5"));
+        sellers.add(new Seller(60, "seller6"));
 
+        List<Buyer> followers = new ArrayList<>();
+        followers.add(buyers.get(0));
+        followers.add(buyers.get(1));
+        sellers.get(5).setFollowers(followers);
+        List<Seller> followeds = new ArrayList<>();
+        followeds.add(sellers.get(5));
+        buyers.get(0).setFolloweds(followeds);
+        buyers.get(1).setFolloweds(followeds);
     }
 }
