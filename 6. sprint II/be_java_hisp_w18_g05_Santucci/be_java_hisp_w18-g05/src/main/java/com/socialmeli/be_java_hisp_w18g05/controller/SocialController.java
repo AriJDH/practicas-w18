@@ -8,14 +8,10 @@ import com.socialmeli.be_java_hisp_w18g05.dto.request.NewPostDTORequest;
 
 import com.socialmeli.be_java_hisp_w18g05.dto.response.BuyerFollowedListDTOResponse;
 
-
-import com.socialmeli.be_java_hisp_w18g05.dto.response.SellerFollowersCountDTOResponse;
-
 import com.socialmeli.be_java_hisp_w18g05.dto.response.SellerFollowersListDTOResponse;
 import com.socialmeli.be_java_hisp_w18g05.dto.response.SellerPostListDTOResponse;
 import com.socialmeli.be_java_hisp_w18g05.service.IService;
 import com.socialmeli.be_java_hisp_w18g05.service.ServiceImp;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -24,12 +20,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.function.EntityResponse;
 
 import javax.validation.Valid;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
-import java.util.List;
 
 @RestController
 @Validated
