@@ -4,6 +4,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.meli.be_java_hisp_w18_g01.dtos.*;
 import com.meli.be_java_hisp_w18_g01.entities.User;
 import com.meli.be_java_hisp_w18_g01.repositories.UserRepository;
+import com.meli.be_java_hisp_w18_g01.services.PostService;
+import com.meli.be_java_hisp_w18_g01.services.UserService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +32,12 @@ public class PostControllerTest {
 
     @Autowired
     MockMvc mockMvc;
+
+    @Autowired
+    PostService postService;
+
+    @Autowired
+    UserService userService;
 
     private ObjectMapper objectMapper = new ObjectMapper();
 
@@ -147,11 +155,14 @@ public class PostControllerTest {
                 20000.0
         );
 
+
         User lucas = new User(1L, "lucas");
         userRepository.add(lucas);
 
         User miguel = new User(2L, "miguel");
         userRepository.add(miguel);
+
+        postService.addPost(postDTO);
 
         List<PostDTO> postsDTO = new ArrayList<>();
         postsDTO.add(postDTO);
@@ -163,6 +174,7 @@ public class PostControllerTest {
 
         List<SellerDTO> sellersDTO = new ArrayList<>();
         sellersDTO.add(sellerDTO);
+        userService.handleFollow(2L, 1L);
 
         //Mapper
         String stringResponseDTO = this.objectMapper.writeValueAsString(responseDTO);
@@ -174,21 +186,6 @@ public class PostControllerTest {
         ResultMatcher resultMatcherSeller = MockMvcResultMatchers.content().json(stringSellerDTO);
 
         //Act and Assert
-        this.mockMvc.perform(post("/products/post")
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(content)
-                ).andDo(print())
-                .andExpect(status().isOk())
-                .andExpect(resultMatcher)
-                .andReturn();
-
-        this.mockMvc.perform(post("/users/2/follow/1")
-                        .contentType(MediaType.APPLICATION_JSON)
-                ).andDo(print())
-                .andExpect(status().isOk())
-                .andExpect(resultMatcher)
-                .andReturn();
-
         this.mockMvc.perform(get("/products/followed/2/list")
                 .contentType(MediaType.APPLICATION_JSON)
         ).andDo(print())

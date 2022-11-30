@@ -5,6 +5,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.meli.be_java_hisp_w18_g01.dtos.*;
 import com.meli.be_java_hisp_w18_g01.entities.User;
 import com.meli.be_java_hisp_w18_g01.repositories.UserRepository;
+import com.meli.be_java_hisp_w18_g01.services.PostService;
+import com.meli.be_java_hisp_w18_g01.services.UserService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,6 +37,12 @@ public class UserControllerTest {
 
     @Autowired
     UserRepository userRepository;
+
+    @Autowired
+    PostService postService;
+
+    @Autowired
+    UserService userService;
 
     @BeforeEach
     public void load() {
@@ -75,6 +83,9 @@ public class UserControllerTest {
         User miguel = new User(2L, "miguel");
         userRepository.add(miguel);
 
+        postService.addPost(postDTO);
+        userService.handleFollow(2L, 1L);
+
         //Mapper
         String stringUserFollowersCountDTO =
                 this.objectMapper.writeValueAsString(userFollowersCountDTO);
@@ -84,19 +95,6 @@ public class UserControllerTest {
         ResultMatcher resultMatcher = MockMvcResultMatchers.content().json(stringUserFollowersCountDTO);
 
         //Act and Assert
-        this.mockMvc.perform(post("/products/post")
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(content)
-                ).andDo(print())
-                .andExpect(status().isOk())
-                .andReturn();
-
-        this.mockMvc.perform(post("/users/2/follow/1")
-                        .contentType(MediaType.APPLICATION_JSON)
-                ).andDo(print())
-                .andExpect(status().isOk())
-                .andReturn();
-
         this.mockMvc.perform(get("/users/1/followers/count")
                         .contentType(MediaType.APPLICATION_JSON)
                 ).andDo(print())
@@ -148,6 +146,9 @@ public class UserControllerTest {
         User miguel = new User(2L, "miguel");
         userRepository.add(miguel);
 
+        postService.addPost(postDTO);
+        userService.handleFollow(2L, 1L);
+
         //Mapper
         String stringUserFollowers = this.objectMapper.writeValueAsString(userFollowersInfoDTO);
         String content = this.objectMapper.writeValueAsString(postDTO);
@@ -158,19 +159,6 @@ public class UserControllerTest {
                         .json(stringUserFollowers);
 
         //Act and Assert
-        this.mockMvc.perform(post("/products/post")
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(content)
-                ).andDo(print())
-                .andExpect(status().isOk())
-                .andReturn();
-
-        this.mockMvc.perform(post("/users/2/follow/1")
-                        .contentType(MediaType.APPLICATION_JSON)
-                ).andDo(print())
-                .andExpect(status().isOk())
-                .andReturn();
-
         this.mockMvc.perform(get("/users/1/followers/list")
                         .contentType(MediaType.APPLICATION_JSON)
                 ).andDo(print())
