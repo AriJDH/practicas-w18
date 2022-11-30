@@ -28,10 +28,22 @@ class ListSorterByOrderTest {
 
         @Test
         @DisplayName("Success - Valid Order")
-        void test1() {
+        void test1b() {
 
             //Arrange
             String order = "name_asc";
+
+            //Act
+            //Assert
+            Assertions.assertDoesNotThrow(() -> ListSorterByOrder.userSortedByName(usersList, order));
+
+        }
+        @Test
+        @DisplayName("Success - Valid Order")
+        void test1a() {
+
+            //Arrange
+            String order = "name_desc";
 
             //Act
             //Assert

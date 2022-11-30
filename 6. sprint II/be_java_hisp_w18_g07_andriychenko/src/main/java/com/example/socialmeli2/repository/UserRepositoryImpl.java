@@ -14,6 +14,10 @@ public class UserRepositoryImpl implements IUserRepository {
 
     private Map<Integer, UserEntity> users = new HashMap<>();
 
+    public UserRepositoryImpl(Map<Integer, UserEntity> users) {
+        this.users = users;
+    }
+
     public UserRepositoryImpl() {
 
         users.put(1, new UserEntity(1, "Carlos", new ArrayList<>(), new ArrayList<>(Arrays.asList(2)), new ArrayList<>()));
