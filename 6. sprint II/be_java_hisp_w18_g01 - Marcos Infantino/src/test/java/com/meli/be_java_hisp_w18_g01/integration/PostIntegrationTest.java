@@ -10,6 +10,7 @@ import com.meli.be_java_hisp_w18_g01.entities.User;
 import com.meli.be_java_hisp_w18_g01.repositories.UserRepository;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -41,6 +42,7 @@ public class PostIntegrationTest {
     }
 
     @Test
+    @DisplayName("Agregar publicación con formato correcto")
     public void addPost() throws Exception {
         User user1 = new User(1L, "Lucas", new ArrayList<>(),new ArrayList<>(),new ArrayList<>());
         userRepository.add(user1);
@@ -68,6 +70,7 @@ public class PostIntegrationTest {
     }
 
     @Test
+    @DisplayName("Agregar publicación con formato incorrecto")
     public void addPostWithValidationErrors() throws Exception {
         User user1 = new User(1L, "Lucas", new ArrayList<>(),new ArrayList<>(),new ArrayList<>());
         userRepository.add(user1);
@@ -95,6 +98,7 @@ public class PostIntegrationTest {
     }
 
     @Test
+    @DisplayName("Obtener publicaciones recientes de los seguidos")
     public void getRecentPostsFromFollowed() throws Exception {
         User user1 = new User(1L, "Lucas", new ArrayList<>(),new ArrayList<>(),new ArrayList<>());
         User user2 = new User(2L, "Marcos", new ArrayList<>(),new ArrayList<>(),new ArrayList<>());

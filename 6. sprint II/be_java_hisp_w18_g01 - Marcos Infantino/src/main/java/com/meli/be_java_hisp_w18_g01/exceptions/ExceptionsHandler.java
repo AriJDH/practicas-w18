@@ -61,6 +61,7 @@ public class ExceptionsHandler {
         return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
     }
 
+    /*
     @ExceptionHandler({Exception.class})
     public ResponseEntity<?> handleServersideError(Exception e){
         return new ResponseEntity<>(
@@ -70,7 +71,7 @@ public class ExceptionsHandler {
                 HttpStatus.INTERNAL_SERVER_ERROR
         );
     }
-
+*/
 
 
     /*@ExceptionHandler(MethodArgumentNotValidException.class)
