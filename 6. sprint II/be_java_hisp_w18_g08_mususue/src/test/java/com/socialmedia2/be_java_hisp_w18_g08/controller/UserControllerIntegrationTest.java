@@ -1,5 +1,6 @@
 package com.socialmedia2.be_java_hisp_w18_g08.controller;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -36,6 +37,16 @@ public class UserControllerIntegrationTest {
                 .andDo(print()).andExpect(status().isNotFound())
                 .andExpect(content().contentType("application/json"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.message").value("User with id:10 not found"))
+                .andReturn();
+
+    }
+
+    @Test
+    void getFollowersCountOkTest()throws Exception{
+        this.mockMvc.perform(MockMvcRequestBuilders.get("/users/{userId}/followers/count", 5))
+                .andDo(print()).andExpect(status().isOk())
+                .andExpect(content().contentType("application/json"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.followers_count").value(3))
                 .andReturn();
 
     }
