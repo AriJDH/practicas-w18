@@ -18,8 +18,10 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeFormatterBuilder;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Locale;
 import java.util.stream.Collectors;
 
 @Service
@@ -29,6 +31,7 @@ public class PostServiceImpl implements PostService {
     MapperPostToPostDTO mapperPostToPostDTO = new MapperPostToPostDTO();
     @Autowired
     UserDbService userDbService;
+    //DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
     DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 
     public PostServiceImpl(UserDbService userDbService) {
@@ -45,7 +48,7 @@ public class PostServiceImpl implements PostService {
         try {
             post = new Post(postCount,
                     user,
-                    LocalDate.parse(postDTO.getDate(),dateFormatter),
+                    LocalDate.parse(postDTO.getDate(), dateFormatter),
                     mapper.convertValue(postDTO.getProduct(), Product.class),
                     postDTO.getCategory(),
                     postDTO.getPrice()

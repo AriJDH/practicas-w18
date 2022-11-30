@@ -42,10 +42,6 @@ public class UserServiceTest {
     private User user2 = new User(2L, "Marcos", new ArrayList<>(),new ArrayList<>(),new ArrayList<>());
     private Post post = new Post(1L, user2, LocalDate.now(),new Product(), 1,10);
     private List<User> users = new ArrayList<>();
-    private User lucas;
-    private User miguel;
-    private User laura;
-    private User agustin;
 
     @BeforeEach
     public void configUserService(){
@@ -54,10 +50,10 @@ public class UserServiceTest {
 
     @BeforeEach
     void initUsers(){
-        lucas = new User(1L, "lucas");
-        miguel = new User(2L, "miguel");
-        laura = new User(3L, "laura");
-        agustin = new User(4L, "agustin");
+        User lucas = new User(1L, "lucas");
+        User miguel = new User(2L, "miguel");
+        User laura = new User(3L, "laura");
+        User agustin = new User(4L, "agustin");
 
         Product product1 = new Product(1L, "Zapatillas", "Tipo de zapatilla",
                 "Adadis", "Blancas", "Las mejores zapas del condado");

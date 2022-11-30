@@ -5,6 +5,11 @@ import com.meli.be_java_hisp_w18_g01.dtos.PostDTO;
 import com.meli.be_java_hisp_w18_g01.dtos.ProductDTO;
 import com.meli.be_java_hisp_w18_g01.dtos.ResponseDTO;
 import com.meli.be_java_hisp_w18_g01.dtos.SellerDTO;
+import com.meli.be_java_hisp_w18_g01.entities.Post;
+import com.meli.be_java_hisp_w18_g01.entities.Product;
+import com.meli.be_java_hisp_w18_g01.entities.User;
+import com.meli.be_java_hisp_w18_g01.repositories.UserRepository;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +22,8 @@ import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilde
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.List;
 
@@ -30,13 +37,42 @@ class PostControllerTest {
     @Autowired
     MockMvc mockMvc;
 
+    @Autowired
+    private UserRepository userRepository;
+
+    @BeforeEach
+    void loadBb(){
+        userRepository.removeAll();
+
+        User lucas = new User(1L, "lucas");
+        Product product1 = new Product(1L, "Zapatillas", "Zapatilla",
+                "Adadis", "Blancas", "Las mejores zapas del condado");
+        Post post1 = new Post(1L, lucas, LocalDate.now(),product1,100, 20000);
+        Post post2 = new Post(2L, lucas, LocalDate.now().minusDays(5),product1,100, 20000);
+        Post post3 = new Post(3L, lucas, LocalDate.now().minusDays(15),product1,100, 20000);
+        lucas.addPost(post1);
+        lucas.addPost(post2);
+        lucas.addPost(post3);
+
+        userRepository.add(lucas);
+
+        User miguel = new User(2L, "miguel");
+        miguel.follow(lucas);
+        userRepository.add(miguel);
+
+        User laura = new User(3L, "laura");
+        userRepository.add(laura);
+    }
+
     @Test
     @DisplayName("T0009 - Creando un post con todos los datos requeridos")
     void createPostOk() throws Exception {
         //Arrange
+        String fecha1 = LocalDate.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+
         ProductDTO product = new ProductDTO(1L, "Zapatillas", "Zapatilla",
                 "Adadis", "Blancas", "Las mejores zapas del condado");
-        PostDTO post = new PostDTO(1L, "22-11-2022",product,100, 20000D);
+        PostDTO post = new PostDTO(1L, fecha1, product,100, 20000D);
 
         String payload = new ObjectMapper().writeValueAsString(post);
 
@@ -93,10 +129,13 @@ class PostControllerTest {
     void getRecentPostsFromFollowedOk() throws Exception {
 
         //Arange
+        String fecha1 = LocalDate.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+        String fecha2 = LocalDate.now().minusDays(5).format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+
         ProductDTO product = new ProductDTO(1L, "Zapatillas", "Zapatilla",
                 "Adadis", "Blancas", "Las mejores zapas del condado");
-        PostDTO post1 = new PostDTO(1L, "20-11-2022", product, 100, 20000D);
-        PostDTO post2 = new PostDTO(1L, "29-11-2022", product, 100, 20000D);
+        PostDTO post1 = new PostDTO(1L, fecha2, product, 100, 20000D);
+        PostDTO post2 = new PostDTO(1L, fecha1, product, 100, 20000D);
         List<PostDTO> posts = Arrays.asList(post1, post2);
 
         SellerDTO vendedor = new SellerDTO(1L, posts);

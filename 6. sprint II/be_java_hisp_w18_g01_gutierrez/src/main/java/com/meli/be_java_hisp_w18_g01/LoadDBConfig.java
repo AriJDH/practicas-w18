@@ -33,7 +33,6 @@ public class LoadDBConfig {
             userRepository.add(lucas);
 
             User miguel = new User(2L, "miguel");
-            miguel.follow(lucas);
             userRepository.add(miguel);
 
             User laura = new User(3L, "laura");
