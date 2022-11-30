@@ -39,4 +39,15 @@ public class UserControllerIntegrationTest {
                 .andReturn();
 
     }
+
+    @Test
+    void unfollowOkTest()throws Exception{
+        this.mockMvc.perform(MockMvcRequestBuilders.post("/users/{userId}/unfollow/{userIdToUnfollow}", 1, 5))
+                .andDo(print()).andExpect(status().isOk())
+                .andExpect(content().contentType("application/json"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.message").value("User1 with id: 1 unfollow to -> User5 with id: 5"))
+                .andReturn();
+
+    }
+
 }
