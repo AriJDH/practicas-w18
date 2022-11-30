@@ -11,7 +11,7 @@ import java.util.Map;
 @Repository
 public class PublicationRepositoryImpl implements IPublicationRepository {
 
-    PublicationRepositoryImpl() {
+    public PublicationRepositoryImpl() {
         PublicationEntity publication1 = new PublicationEntity
                 (1, LocalDate.of(2022, 11, 15), 2, 1, 1, 99.99);
         PublicationEntity publication2 = new PublicationEntity
