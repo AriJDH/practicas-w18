@@ -185,7 +185,7 @@ class UserSellerServiceImpTest {
             when(userSellerRepository.findById(1)).thenReturn(Optional.of(seller));
 
             FollowerCountDTORes follCountDtoRes = userSellerServiceImp.followersCount(seller.getUser_id());
-            assertEquals(seller.getFollowers().size(),follCountDtoRes.getFollowers_count());
+            assertEquals(seller.getFollowers().size(), follCountDtoRes.getFollowers_count());
         }
 
         @Test
