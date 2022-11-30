@@ -1,10 +1,12 @@
 package com.bootcamp.be_java_hisp_w18_g06.utils;
 
+import com.bootcamp.be_java_hisp_w18_g06.dto.request.ProductReqDTO;
 import com.bootcamp.be_java_hisp_w18_g06.dto.response.UserFollowDTO;
 import com.bootcamp.be_java_hisp_w18_g06.dto.response.UserFollowedListDTO;
 import com.bootcamp.be_java_hisp_w18_g06.dto.response.UserFollowersCountDTO;
 import com.bootcamp.be_java_hisp_w18_g06.dto.response.UserFollowersListDTO;
 import com.bootcamp.be_java_hisp_w18_g06.entity.Post;
+import com.bootcamp.be_java_hisp_w18_g06.entity.Product;
 import com.bootcamp.be_java_hisp_w18_g06.entity.User;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -50,26 +52,88 @@ public class UserFactory {
     }
     public static User getUserWithFollowersListAndPosts(String name) {
         User user = getUserRandom(name);
+
         List<User> userList = new ArrayList<>();
-        //userList.add(getUserRandom("user 1"));
+
         userList.add(getUserRandom("user 2"));
         userList.add(getUserRandom("user 3"));
+
         user.setFollowers(userList);
+
         List<Post> postList = new ArrayList<>();
         Post post1 = new Post();
+        post1.setPost_id(1);
         post1.setDate(LocalDate.now());
         Post post2 = new Post();
+        post2.setPost_id(2);
         post2.setDate(LocalDate.now().minusWeeks(1));
         Post post3 = new Post();
+        post3.setPost_id(3);
         post3.setDate(LocalDate.now().minusWeeks(3));
+
         postList.add(post2);
         postList.add(post3);
         postList.add(post1);
+
         user.setPosts(postList);
+
         return user;
     }
 
+    public static User getUserWithFollowersListAndPostsDTO(String name) {
+        User user = getUserRandom(name);
+        List<User> userList = new ArrayList<>();
 
+        userList.add(getUserRandom("user 2"));
+        userList.add(getUserRandom("user 3"));
+
+        user.setFollowers(userList);
+
+        List<User> userFollowedList = new ArrayList<>();
+        userFollowedList.add(getUserRandom("user 4"));
+        userFollowedList.add(getUserRandom("user 5"));
+
+        user.setFollowed(userFollowedList);
+
+        Product product = new Product(
+                9,
+                "alimento mascotas",
+                "alimento",
+                "estampa",
+                "marron",
+                "presentacion bolsa grande"
+        );
+
+        Post post1 = new Post(
+                1,
+                LocalDate.now(),
+                product,
+                "mascotas",
+                3000.00
+        );
+        Post post2 = new Post(
+                2,
+                LocalDate.now(),
+                product,
+                "gatos",
+                3000.00
+        );
+        Post post3 = new Post(
+                3,
+                LocalDate.now(),
+                product,
+                "gatos",
+                3000.00
+        );
+        List<Post> postList = new ArrayList<>();
+        postList.add(post2);
+        postList.add(post3);
+        postList.add(post1);
+
+        user.setPosts(postList);
+
+        return user;
+    }
 
 
 

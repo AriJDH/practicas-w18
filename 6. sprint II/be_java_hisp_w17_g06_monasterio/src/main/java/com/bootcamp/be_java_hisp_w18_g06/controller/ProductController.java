@@ -28,5 +28,5 @@ public class ProductController {
     public ResponseEntity<PostDTO> save(@Valid @RequestBody PostDTO postDTO){
         return new ResponseEntity<>(productService.save(postDTO), HttpStatus.OK);
     }
-	//devolver un dto
+
 }
