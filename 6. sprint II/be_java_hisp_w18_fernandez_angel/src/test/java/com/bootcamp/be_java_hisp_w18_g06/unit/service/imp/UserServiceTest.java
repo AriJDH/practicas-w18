@@ -120,6 +120,52 @@ class UserServiceTest {
             verify(repository,atLeast(2)).findUserById(anyInt());
             verify(repository,atLeast(2)).findUserInList(anyList(),anyInt());
         }
+        @Test
+        void UserToUnfollowEqualsIdsExceptionTest() {
+            //verificar que el usuario a dejar seguir no exista en la lista del userFollower
+            //ARRANGE
+
+            User userToUnfollow = getUserWithFollowersListAndPosts("userToUnfollow");
+            userToUnfollow.setUser_id(1);
+            User userFollower = userToUnfollow.getFollowers().get(0);
+            userFollower.setFollowed(Collections.singletonList(userToUnfollow));
+
+            userFollower.setUser_id(1);
+
+            //MOCK
+            when(repository.findUserById(userFollower.getUser_id())).thenReturn(Optional.of(userFollower));
+            when(repository.findUserById(userToUnfollow.getUser_id())).thenReturn(Optional.of(userToUnfollow));
+
+            when(repository.findUserInList(userFollower.getFollowed(),userToUnfollow.getUser_id())).thenReturn(Optional.of(userToUnfollow));
+            when(repository.findUserInList(userToUnfollow.getFollowers(),userFollower.getUser_id())).thenReturn(Optional.of(userFollower));
+
+            //ACT, ASSERT
+            Assertions.assertThrows(BadRequestException.class, ()->service.unfollowUser(userFollower.getUser_id(), userToUnfollow.getUser_id()));
+
+        }
+        @Test
+        void UserToUnfollowSellerNotPresentExceptionTest() {
+            //verificar que el usuario a dejar seguir no exista en la lista del userFollower
+            //ARRANGE
+
+            User userToUnfollow = getUserWithFollowersListAndPosts("userToUnfollow");
+            userToUnfollow.setUser_id(1);
+            User userFollower = userToUnfollow.getFollowers().get(0);
+            userFollower.setFollowed(Collections.singletonList(userToUnfollow));
+
+            userFollower.setUser_id(1);
+
+            //MOCK
+            when(repository.findUserById(userFollower.getUser_id())).thenReturn(Optional.empty());
+            when(repository.findUserById(userToUnfollow.getUser_id())).thenReturn(Optional.of(userToUnfollow));
+
+            when(repository.findUserInList(userFollower.getFollowed(),userToUnfollow.getUser_id())).thenReturn(Optional.of(userToUnfollow));
+            when(repository.findUserInList(userToUnfollow.getFollowers(),userFollower.getUser_id())).thenReturn(Optional.of(userFollower));
+
+            //ACT, ASSERT
+            Assertions.assertThrows(BadRequestException.class, ()->service.unfollowUser(userFollower.getUser_id(), userToUnfollow.getUser_id()));
+
+        }
     }
     //US-0008
     @Nested
