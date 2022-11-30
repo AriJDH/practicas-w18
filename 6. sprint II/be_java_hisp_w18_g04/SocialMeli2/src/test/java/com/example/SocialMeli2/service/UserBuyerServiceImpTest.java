@@ -189,24 +189,7 @@ class UserBuyerServiceImpTest {
             String order = "name_asc";
             Integer buyerUserId = 1;
 
-            List<UserSeller> followed = new ArrayList<>();
-            UserSeller userSeller1 = new UserSeller();
-            userSeller1.setUser_id(4);
-            userSeller1.setUser_name("Oliver");
-            UserSeller userSeller2 = new UserSeller();
-            userSeller2.setUser_id(2);
-            userSeller2.setUser_name("Ethan");
-            UserSeller userSeller3 = new UserSeller();
-            userSeller3.setUser_id(3);
-            userSeller3.setUser_name("Kyle");
-            followed.add(userSeller1);
-            followed.add(userSeller2);
-            followed.add(userSeller3);
-
-            UserBuyer userBuyer = new UserBuyer();
-            userBuyer.setUser_id(1);
-            userBuyer.setUser_name("Josep");
-            userBuyer.setFollowed(followed);
+            UserBuyer userBuyer = UserBuyerFactory.getUserBuyer1();
 
             List<UserDTORes> expected = new ArrayList<>();
             expected.add(new UserDTORes(2, "Ethan"));
@@ -229,24 +212,8 @@ class UserBuyerServiceImpTest {
             String order = "name_desc";
             Integer buyerUserId = 1;
 
-            List<UserSeller> followed = new ArrayList<>();
-            UserSeller userSeller1 = new UserSeller();
-            userSeller1.setUser_id(4);
-            userSeller1.setUser_name("Oliver");
-            UserSeller userSeller2 = new UserSeller();
-            userSeller2.setUser_id(2);
-            userSeller2.setUser_name("Ethan");
-            UserSeller userSeller3 = new UserSeller();
-            userSeller3.setUser_id(3);
-            userSeller3.setUser_name("Kyle");
-            followed.add(userSeller1);
-            followed.add(userSeller2);
-            followed.add(userSeller3);
+            UserBuyer userBuyer = UserBuyerFactory.getUserBuyer1();
 
-            UserBuyer userBuyer = new UserBuyer();
-            userBuyer.setUser_id(1);
-            userBuyer.setUser_name("Josep");
-            userBuyer.setFollowed(followed);
 
             List<UserDTORes> expected = new ArrayList<>();
             expected.add(new UserDTORes(4, "Oliver"));
@@ -264,8 +231,65 @@ class UserBuyerServiceImpTest {
     }
 
     @Nested
+    @DisplayName("T-0005. US-0009")
+    public class Test0005 {
+
+        @Test
+        @DisplayName("Verify the correct operation if order is 'date_asc' ")
+        void orderPostByDateAsc() {
+            //Arrange
+            String dateOrder = "date_asc";
+            UserBuyer buyer = UserBuyerFactory.getUserBuyer();
+            UserSeller seller = UserSellerFactory.getUserSeller();
+            List<Post> posts = PostFactory.getPostList();
+            seller.setPosts(posts);
+            buyer.getFollowed().add(seller);
+
+            //mock
+            when(userBuyerRepository.findById(1)).thenReturn(Optional.of(buyer));
+            PostFollowedByDateDTORes result = userBuyerServiceImp.getLastPosts(buyer.getUser_id(), dateOrder);
+            // Assert
+            assertNotNull(result);
+
+        }
+
+        @Test
+        @DisplayName("Verify the correct operation if order is 'date_desc' ")
+        void orderPostByDateDesc() {
+            //Arrange
+            String dateOrder = "date_desc";
+            UserBuyer buyer = UserBuyerFactory.getUserBuyer();
+            UserSeller seller = UserSellerFactory.getUserSeller();
+            List<Post> posts = PostFactory.getPostList();
+            seller.setPosts(posts);
+            buyer.getFollowed().add(seller);
+
+            //mock
+            when(userBuyerRepository.findById(1)).thenReturn(Optional.of(buyer));
+            PostFollowedByDateDTORes result = userBuyerServiceImp.getLastPosts(buyer.getUser_id(), dateOrder);
+            // Assert
+            assertNotNull(result);
+
+        }
+
+        @Test
+        @DisplayName("Catch the exception if date is 'invalid'")
+        void orderDateInvalidException() {
+            //ARRANGE
+            String orderDate = "invalid";
+            UserBuyer buyer = UserBuyerFactory.getUserBuyer();
+
+            //ASSERT
+            assertThrows(UserNotFoundException.class,
+                    () -> userBuyerServiceImp.getLastPosts(buyer.getUser_id(), orderDate));
+        }
+
+
+    }
+
+    @Nested
     @DisplayName("T-0006. US-0009")
-    public class Test006 {
+    public class Test0006 {
         @Test
         @DisplayName("Sort by date DESC")
         void sortBydateDESC() {
@@ -380,7 +404,7 @@ class UserBuyerServiceImpTest {
                     () -> {
                         assertTrue(current.getPosts().get(0).getDate().isAfter(LocalDate.now().minusWeeks(2)));
                     },
-                    ()-> {
+                    () -> {
                         assertTrue(current.getPosts().get(1).getDate().isAfter(LocalDate.now().minusWeeks(2)));
                     }
             );

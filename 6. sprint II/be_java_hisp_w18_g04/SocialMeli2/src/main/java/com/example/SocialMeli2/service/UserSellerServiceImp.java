@@ -30,16 +30,6 @@ public class UserSellerServiceImp implements IUserSellerService {
         this.postRepository = postRepository;
     }
 
-    private Boolean validateSeller(Integer id) {
-        Boolean valid = false;
-        List<UserSeller> sellers = sellerRepository.findAll();
-        for (UserSeller seller : sellers) {
-            if (seller.getUser_id().equals(id)) {
-                valid = true;
-            }
-        }
-        return valid;
-    }
 
     @Override
     public FollowerCountDTORes followersCount(Integer userId) {

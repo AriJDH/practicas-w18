@@ -10,14 +10,6 @@ import java.util.List;
 
 public class PostFactory {
 
-    public static Post getPost(){
-        Post post = new Post();
-        post.setPost_id(3);
-        post.setDate(LocalDate.of(2022,03,25));
-        post.setCategory(2);
-        post.setPrice(2500.13);
-        return post;
-    }
 
     public static List<Post> getPostList(){
         List<Post> postList = new ArrayList<>();
