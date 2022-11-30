@@ -7,6 +7,7 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
+import javax.validation.ConstraintViolationException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -37,6 +38,13 @@ public class ExceptionConfig {
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<ExceptionDto> catchValidation(MethodArgumentNotValidException ex){
         List<String> messages = ex.getFieldErrors().stream().map(m->m.getDefaultMessage()).collect(Collectors.toList());
+        ExceptionDto response = new ExceptionDto(messages,400, LocalDateTime.now());
+        return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(ConstraintViolationException.class)
+    public ResponseEntity<ExceptionDto> catchValidation(ConstraintViolationException ex){
+        List<String> messages = List.of(ex.getMessage());
         ExceptionDto response = new ExceptionDto(messages,400, LocalDateTime.now());
         return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
     }

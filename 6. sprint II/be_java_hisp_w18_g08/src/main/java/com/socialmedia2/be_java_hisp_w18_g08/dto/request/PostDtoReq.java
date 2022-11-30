@@ -15,9 +15,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @Getter
 public class PostDtoReq {
-    /*@NotNull(message = "El id_post no puede estar vacío.")
-    @Min(value=0,message = "El id_post debe ser mayor a cero.")
-    private Integer post_id;*/
+
     private Integer user_id;
     @Valid
     private ProductDto product;
