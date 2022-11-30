@@ -3,6 +3,7 @@ package com.meli.be_java_hisp_w18_g9.integration;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 import com.fasterxml.jackson.databind.SerializationFeature;
+import com.meli.be_java_hisp_w18_g9.model.dto.response.FollowersCountUserResponse;
 import com.meli.be_java_hisp_w18_g9.model.dto.response.UserFollowedListResponse;
 import com.meli.be_java_hisp_w18_g9.model.dto.response.UserFollowerListResponse;
 import com.meli.be_java_hisp_w18_g9.model.entity.User;
@@ -73,6 +74,54 @@ public class UserIntegration {
     }
 
     @Test
+    @DisplayName("unFollow an user not seller")
+    void unFollowASeller () throws Exception{
+        // Arrange
+        User userMock = UsersFactory.getUserWithAllList(1,"Messi",true, false, false);
+        User userToFollowMock = UsersFactory.getUserWithAllList(2,"Andrea",true, false, false);
+
+        userMock = UsersFactory.addFollowed(userMock,userToFollowMock);
+        userToFollowMock = UsersFactory.addFollower(userToFollowMock,userMock);
+
+        when(userRepository.findById(userMock.getUserId())).thenReturn(Optional.of(userMock));
+        when(userRepository.findById(userToFollowMock.getUserId())).thenReturn(Optional.of(userToFollowMock));
+
+        /* Request */
+        MockHttpServletRequestBuilder request = MockMvcRequestBuilders
+                .post("/users/{userId}/unfollow/{userIdToFollow}", userMock.getUserId(), userToFollowMock.getUserId())
+                .contentType(MediaType.APPLICATION_JSON);
+
+        // Act & Assert
+        mockMvc
+                .perform(request)
+                .andDo(print())
+                .andExpectAll(status().isOk());
+    }
+
+    @Test
+    @DisplayName("unFollow an user (without followed list)")
+    void unFollowWithoutFollowedList () throws Exception{
+        // Arrange
+        User userMock = UsersFactory.getUserWithAllList(1,"Messi",true, false, false);
+        User userToFollowMock = UsersFactory.getUserWithAllList(2,"Andrea",true, false, false);
+
+        when(userRepository.findById(userMock.getUserId())).thenReturn(Optional.of(userMock));
+        when(userRepository.findById(userToFollowMock.getUserId())).thenReturn(Optional.of(userToFollowMock));
+
+        /* Request */
+        MockHttpServletRequestBuilder request = MockMvcRequestBuilders
+                .post("/users/{userId}/unfollow/{userIdToFollow}", userMock.getUserId(), userToFollowMock.getUserId())
+                .contentType(MediaType.APPLICATION_JSON);
+
+        // Act & Assert
+        mockMvc
+                .perform(request)
+                .andDo(print())
+                .andExpectAll(status().isForbidden())
+                .andExpect(jsonPath("$.message").value("You don't follow the user with id: " + userToFollowMock.getUserId()));
+    }
+
+    @Test
     @DisplayName("Follow an user not seller")
     void followNotAnSeller () throws Exception
     {
@@ -123,6 +172,31 @@ public class UserIntegration {
     }
 
     @Test
+    @DisplayName("unFollow yourself")
+    void unFollowYourself () throws Exception
+    {
+        // Arrange
+        User userMock = UsersFactory.getUserWithAllList(1,"Esteban",true, false, false);
+        User yourselfMock = userMock;
+
+        when(userRepository.findById(userMock.getUserId())).thenReturn(Optional.of(userMock));
+        when(userRepository.findById(yourselfMock.getUserId())).thenReturn(Optional.of(yourselfMock));
+
+        /* Request */
+        MockHttpServletRequestBuilder request = MockMvcRequestBuilders
+                .post("/users/{userId}/unfollow/{userIdToFollow}", userMock.getUserId(), yourselfMock.getUserId())
+                .contentType(MediaType.APPLICATION_JSON);
+
+        // Act & Assert
+        mockMvc
+                .perform(request)
+                .andDo(print())
+                .andExpectAll(status().isForbidden())
+                .andExpect(jsonPath("$.message").value("You can't unfollow yourself"));
+
+    }
+
+    @Test
     @DisplayName("user to Follow don't exists")
     void userToFollowDontExists () throws Exception
     {
@@ -145,6 +219,60 @@ public class UserIntegration {
                 .andExpectAll(status().isNotFound())
                 .andExpect(jsonPath("$.message").value("user to follow with Id " +userToFollowMock.getUserId()+ " doesn't exist"));
 
+    }
+
+    @Test
+    @DisplayName("user to UnFollow don't exists")
+    void userToUnFollowDontExists () throws Exception
+    {
+        // Arrange
+        User userMock = UsersFactory.getUserWithAllList(1,"Felipe",true, false, false);
+        User userToFollowMock = UsersFactory.getUserWithAllList(2,"Estefania",false, false, false);
+
+        when(userRepository.findById(userMock.getUserId())).thenReturn(Optional.of(userMock));
+        when(userRepository.findById(userToFollowMock.getUserId())).thenReturn(Optional.empty());
+
+        /* Request */
+        MockHttpServletRequestBuilder request = MockMvcRequestBuilders
+                .post("/users/{userId}/unfollow/{userIdToFollow}", userMock.getUserId(), userToFollowMock.getUserId())
+                .contentType(MediaType.APPLICATION_JSON);
+
+        // Act & Assert
+        mockMvc
+                .perform(request)
+                .andDo(print())
+                .andExpectAll(status().isNotFound())
+                .andExpect(jsonPath("$.message").value("user to follow with Id " +userToFollowMock.getUserId()+ " doesn't exist"));
+
+    }
+
+    @Test
+    @DisplayName("user followed quantity")
+    void userFollowedQuantity () throws Exception{
+        // Arrange
+        User userMock = UsersFactory.getUserWithAllList(1,"Messi",true, false, true);
+
+        FollowersCountUserResponse followersCountUserResponse = UsersFactory.getFollowersCountUserResponse(userMock);
+        String userJson = writer.writeValueAsString(followersCountUserResponse);
+        System.out.println(followersCountUserResponse);
+        //Mock
+        when(userRepository.findById(userMock.getUserId())).thenReturn(Optional.of(userMock));
+
+        /* Expect Response */
+        ResultMatcher expectedStatus = status().isOk();
+        ResultMatcher expectedJson = content().json(userJson);
+        ResultMatcher expectedContentType = content().contentType(MediaType.APPLICATION_JSON);
+
+        /* Request */
+        MockHttpServletRequestBuilder request = MockMvcRequestBuilders
+                .get("/users/{userId}/followers/count", userMock.getUserId())
+                .contentType(MediaType.APPLICATION_JSON);
+
+        // Act & Assert
+        mockMvc
+                .perform(request)
+                .andDo(print())
+                .andExpectAll(expectedStatus,expectedJson,expectedContentType);
     }
 
     @Test
@@ -236,6 +364,43 @@ public class UserIntegration {
                 .andDo(print())
                 .andExpectAll(expectedStatus,expectedJson,expectedContentType);
     }
+
+    @Test
+    @DisplayName("User with followers but without products")
+    void userFollowerListUserWithoutProducts () throws Exception
+    {
+        // Arrange
+        User userMock = UsersFactory.getUserWithAllList(1,"Juan",false, false, true);
+
+        when(userRepository.findById(userMock.getUserId())).thenReturn(Optional.of(userMock));
+
+        UserFollowerListResponse userFollowerListResponse = UsersFactory.getUserFollowerListResponse(userMock,0);
+        String userJson = writer.writeValueAsString(userFollowerListResponse);
+        System.out.println(userFollowerListResponse);
+
+        //Mock
+        when(userRepository.findById(userMock.getUserId())).thenReturn(Optional.of(userMock));
+
+        /* Expect Response */
+        ResultMatcher expectedStatus = status().isOk();
+        ResultMatcher expectedJson = content().json(userJson);
+        ResultMatcher expectedContentType = content().contentType(MediaType.APPLICATION_JSON);
+
+        /* Request */
+        MockHttpServletRequestBuilder request = MockMvcRequestBuilders
+                .get("/users/{userId}/followers/list", userMock.getUserId())
+                .contentType(MediaType.APPLICATION_JSON);
+
+
+        // Act & Assert
+        mockMvc
+                .perform(request)
+                .andDo(print())
+                .andExpectAll(status().isForbidden())
+                .andExpect(jsonPath("$.message").value("User with id "+userMock.getUserId()+" is not a seller"));
+
+    }
+
 
     @Test
     @DisplayName("find All Follower of an user without order")

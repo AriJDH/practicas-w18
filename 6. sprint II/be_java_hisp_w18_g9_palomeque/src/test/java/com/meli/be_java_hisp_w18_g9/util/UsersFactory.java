@@ -1,5 +1,6 @@
 package com.meli.be_java_hisp_w18_g9.util;
 
+import com.meli.be_java_hisp_w18_g9.model.dto.response.FollowersCountUserResponse;
 import com.meli.be_java_hisp_w18_g9.model.dto.response.UserFollowedListResponse;
 import com.meli.be_java_hisp_w18_g9.model.dto.response.UserFollowerListResponse;
 import com.meli.be_java_hisp_w18_g9.model.dto.response.UserSimpleResponse;
@@ -57,6 +58,24 @@ public class UsersFactory {
         }
 
         return userToReturn;
+    }
+
+    public static User addFollowed(User userMock, User userToFollow) {
+
+        List<User> listUsers = userMock.getFollowed();
+        listUsers.add(userToFollow);
+        userMock.setFollowed(listUsers);
+
+        return userMock;
+    }
+
+    public static User addFollower(User userToFollow, User userMock) {
+
+        List<User> listUsers = userToFollow.getFollowers();
+        listUsers.add(userMock);
+        userToFollow.setFollowers(listUsers);
+
+        return userToFollow;
     }
 
     public static UserFollowedListResponse getUserFollowedListResponse(User user, Integer order){
@@ -127,6 +146,13 @@ public class UsersFactory {
     public static User getUserById(Integer userId, String nombre, Boolean withProducts) {
         User user = new User(userId, nombre, new ArrayList<>(), new ArrayList<>(), withProducts ? getProduct() : new ArrayList<>());
         return user;
+    }
+
+    public static FollowersCountUserResponse getFollowersCountUserResponse(User user){
+
+        Integer userFollowersQuantity = user.getFollowers().size();
+
+        return new FollowersCountUserResponse(user.getUserId(),user.getUserName(),userFollowersQuantity);
     }
 
 }
