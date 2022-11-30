@@ -87,6 +87,34 @@ class IntegrationTest {
         System.out.println(result.getResponse().getContentAsString());
     }
 
+    @Test
+    @DisplayName("Listar seguidos Ascendente exitoso =)")
+    void getFollowedAsc() throws Exception{
+        //Arrange
+
+        UserDto us = new UserDto(5,"User5");
+        UserDto us2 = new UserDto(6,"User6");
+        UserDto us3 = new UserDto(7,"User7");
+        UserDto us4 = new UserDto(8,"User8");
+        List<UserDto> lista =  Arrays.asList(us,us2,us3,us4);
+
+        FollowedDto response = new FollowedDto(1,"User1",lista);
+        String payload = new ObjectMapper().writeValueAsString(response);
+
+        //Matchers
+
+        ResultMatcher expectedJson   = MockMvcResultMatchers.content().json(payload);
+
+        //Act&Assert
+        MvcResult result = mockMvc.perform(MockMvcRequestBuilders
+                        .get("/users/{userId}/followed/list",1)
+                        .param("order","name_asc"))
+                .andDo(print()).andExpect(status().isOk())
+                .andExpect(expectedJson)
+                .andReturn();
+
+        System.out.println(result.getResponse().getContentAsString());
+    }
 
     @Test
     @DisplayName( "Follow exitoso =)")
@@ -177,6 +205,70 @@ class IntegrationTest {
                 .andExpectAll(expectedStatus, expectedJson, expectedContentType);
     }
 
+    @Test
+    @DisplayName("Listar seguidores ascendente exitoso =)")
+    void findUserListBySellerAsc()throws Exception{
+        UserDto us = new UserDto(1,"User1");
+        UserDto us2 = new UserDto(2,"User2");
+        UserDto us3 = new UserDto(3,"User3");
+        UserDto us4 = new UserDto(4,"User4");
+        List<UserDto> followers =  Arrays.asList(us,us2,us3,us4);
+
+        UserListDto response = new UserListDto(6,"User6",followers);
+        String responseJson = new ObjectMapper().writeValueAsString(response);
+
+        /* Matchers */
+        ResultMatcher expectedStatus = MockMvcResultMatchers.status().isOk();
+        ResultMatcher expectedJson   = MockMvcResultMatchers.content().json(responseJson);
+        ResultMatcher expectedContentType = MockMvcResultMatchers
+                .content()
+                .contentType(MediaType.APPLICATION_JSON);
+
+        // Request
+        MockHttpServletRequestBuilder requestPayload = MockMvcRequestBuilders
+                .get("/users/{userId}/followers/list", 6)
+                .param("order","name_asc");
+
+        // Act & Assert
+        mockMvc.perform(requestPayload)
+                .andDo(print())
+                .andExpectAll(expectedStatus, expectedJson, expectedContentType);
+
+    }
+
+    @Test
+    @DisplayName("Listar seguidores descendente exitoso =)")
+    void findUserListBySellerDesc()throws Exception{
+        UserDto us = new UserDto(1,"User1");
+        UserDto us2 = new UserDto(2,"User2");
+        UserDto us3 = new UserDto(3,"User3");
+        UserDto us4 = new UserDto(4,"User4");
+        List<UserDto> followers =  Arrays.asList(us,us2,us3,us4);
+
+        UserListDto response = new UserListDto(6,"User6",followers);
+        String responseJson = new ObjectMapper().writeValueAsString(response);
+
+        /* Matchers */
+        ResultMatcher expectedStatus = MockMvcResultMatchers.status().isOk();
+        ResultMatcher expectedJson   = MockMvcResultMatchers.content().json(responseJson);
+        ResultMatcher expectedContentType = MockMvcResultMatchers
+                .content()
+                .contentType(MediaType.APPLICATION_JSON);
+
+        // Request
+        MockHttpServletRequestBuilder requestPayload = MockMvcRequestBuilders
+                .get("/users/{userId}/followers/list", 6)
+                .param("order","name_desc");
+
+        // Act & Assert
+        mockMvc.perform(requestPayload)
+                .andDo(print())
+                .andExpectAll(expectedStatus, expectedJson, expectedContentType);
+
+
+    }
+
+
 
     //PostController
     @Test
@@ -206,5 +298,58 @@ class IntegrationTest {
                 .andExpectAll(expectedJson)
                 .andReturn();
     }
+
+    @Test
+    @DisplayName("Lista de vendedores No Exitoso =(")
+    void getPostSellerListByUserIdBad()throws Exception{
+        //Arrange
+        List<String> ms = Arrays.asList("User with id: 5Not found");
+        ExceptionDto res = new ExceptionDto(ms,404,null);
+        String payload = new ObjectMapper().writeValueAsString(res);
+
+        //Request
+        MockHttpServletRequestBuilder requestPayload = MockMvcRequestBuilders
+                .get("/products/followed/5/list")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(payload);
+
+        // Act & Assert
+        mockMvc
+                .perform(requestPayload)
+                .andDo(print())
+                .andExpect(jsonPath("$.message")
+                        .value("User with id: 5Not found"))
+                .andReturn();
+    }
+
+    @Test
+    @DisplayName("Listar vendedores Asc Exitoso =)")
+    void getPostSellerListByUserIdAsc()throws Exception{
+        //Arrange
+
+        List<PostDto> posts = new ArrayList<>();
+        PostDtoRes response = new PostDtoRes();
+        ProductDtoRes pr = new ProductDtoRes(1,"Product1","Type1","Brand1","Color1","Notes1");
+        PostDto ps = new PostDto(3,7,pr,3,333.33,null);
+        posts.add(ps);
+        response.setUser_id(4);
+        response.setPosts(posts);
+
+        String pl = new ObjectMapper().writeValueAsString(response);
+        String payload = pl.replace("null","02-12-2022");
+
+        //Matchers
+
+        ResultMatcher expectedJson   = MockMvcResultMatchers.content().json(payload);
+
+        // Act & Assert
+        this.mockMvc.perform(MockMvcRequestBuilders
+                        .get("/products/followed/{userId}/list", 4)
+                        .param("order","date_asc"))
+                .andDo(print())
+                .andExpectAll(expectedJson)
+                .andReturn();
+    }
+
 
 }
