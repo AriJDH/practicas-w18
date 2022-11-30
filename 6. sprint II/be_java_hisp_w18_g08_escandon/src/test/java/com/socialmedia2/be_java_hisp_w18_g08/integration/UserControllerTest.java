@@ -26,4 +26,40 @@ public class UserControllerTest {
                         .andExpect(content().contentType("application/json"))
                         .andExpect(MockMvcResultMatchers.jsonPath("$.followers_count").value(4));
     }
+
+    @Test
+    public void followTest() throws Exception{
+        this.mockMvc.perform(MockMvcRequestBuilders.post("/users/{userId}/follow/{userIdToFollow}", 1,5))
+                .andDo(print()).andExpect(status().isOk())
+                .andExpect(content().contentType("application/json"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.statusCode").value(200))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.message").value("User with id:1 already follow to Seller with id:5"));
+    }
+    @Test
+    public void getFollowedTest() throws Exception{
+        this.mockMvc.perform(MockMvcRequestBuilders.get("/users/{userId}/followed/list", 1))
+                .andDo(print()).andExpect(status().isOk())
+                .andExpect(content().contentType("application/json"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.user_id").value(1))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.followed").isArray());
+    }
+
+    @Test
+    public void findUserListBySellerTest() throws Exception{
+        this.mockMvc.perform(MockMvcRequestBuilders.get("/users/{userId}/followers/list", 5))
+                .andDo(print()).andExpect(status().isOk())
+                .andExpect(content().contentType("application/json"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.user_id").value(5))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.followers").isArray());
+    }
+
+    @Test
+    public void unFollowTest() throws Exception{
+        this.mockMvc.perform(MockMvcRequestBuilders.post("/users/{userId}/unfollow/{userIdToUnfollow}", 1,5))
+                .andDo(print()).andExpect(status().isOk())
+                .andExpect(content().contentType("application/json"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.status").value(200))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.message").value("User1 with id: 1 unfollow to -> User5 with id: 5"));
+    }
+    
 }
