@@ -7,6 +7,10 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.mercadolibre.socialmeli2.dto.ProductDto;
 import com.mercadolibre.socialmeli2.dto.request.PostDtoReq;
 import com.mercadolibre.socialmeli2.dto.response.ResponseDto;
+import com.mercadolibre.socialmeli2.dto.response.SellerFollowerCountDtoRes;
+import com.mercadolibre.socialmeli2.dto.response.SellerFollowerListDtoRes;
+import com.mercadolibre.socialmeli2.dto.response.UserDtoRes;
+import com.mercadolibre.socialmeli2.entity.User;
 import com.mercadolibre.socialmeli2.repository.IUserRepository;
 import com.mercadolibre.socialmeli2.repository.UserRepository;
 import org.junit.jupiter.api.BeforeEach;
@@ -21,6 +25,8 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import java.time.LocalDate;
+import java.util.Arrays;
+import java.util.List;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
@@ -38,6 +44,21 @@ public class UserControllerTest {
     @BeforeEach
     void setup() {
         userRepository.setUsers(userRepository.loadUsers());
+    }
+
+    @Test
+    @DisplayName("US0001 POST /users/{userId}/follow/{userIdToFollow} (Happy path)")
+    void followIntegrationTestOk() throws Exception {
+        // Arrange
+        ResponseDto responseDto = new ResponseDto("El usuario 2 ahora sigue al usuario 4", 200);
+
+        mockMvc.perform(MockMvcRequestBuilders.post(
+                "/users/{userId}/follow/{userIdToFollow}", 2, 4))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(content().contentType("application/json"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.messages").value(responseDto.getMessages()))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.status").value(200));
     }
 
     @Test
@@ -65,6 +86,23 @@ public class UserControllerTest {
                 .andExpect(content().contentType("application/json"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.messages").value(responseDto.getMessages()))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.status").value(400));
+    }
+
+    @Test
+    @DisplayName("US0003 GET /users/{userId}/followers/list (Happy path)")
+    void getFollowersIntegrationTestOk() throws Exception {
+        // Arrange
+        UserDtoRes u1Dto = new UserDtoRes(1, "Juan Perez");
+        List<UserDtoRes> expectedFollowers = Arrays.asList(u1Dto);
+        SellerFollowerListDtoRes expected = new SellerFollowerListDtoRes(4, "MotociclosSA", expectedFollowers);
+        String expectedJson = new ObjectMapper().writeValueAsString(expected);
+
+        // Act & Assert
+        mockMvc.perform(MockMvcRequestBuilders.get("/users/{userId}/followers/list", 4))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(content().contentType("application/json"))
+                .andExpect(MockMvcResultMatchers.content().json(expectedJson));
     }
 
     @Test
