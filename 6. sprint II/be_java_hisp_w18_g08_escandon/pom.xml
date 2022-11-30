@@ -9,10 +9,10 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.socialMedia2</groupId>
-    <artifactId>be_java_hisp_w18_g08</artifactId>
+    <artifactId>be_java_hisp_w18_g08_escandon</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>be_java_hisp_w18_g08</name>
-    <description>be_java_hisp_w18_g08</description>
+    <name>be_java_hisp_w18_g08_escandon</name>
+    <description>be_java_hisp_w18_g08_escandon</description>
     <properties>
         <java.version>11</java.version>
     </properties>

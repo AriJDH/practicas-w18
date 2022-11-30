@@ -180,6 +180,7 @@ class UserServiceImpTest {
         //Arrange
         Integer expected = 2;
         Integer id = 5;
+        //Verificar si es necesario
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
         LocalDate date = LocalDate.parse("12-11-2022", formatter);
 
@@ -192,7 +193,6 @@ class UserServiceImpTest {
         when(userRepo.findSellerById(id)).thenReturn(seller3);
         //Act
         SellerFollowersCountDto result = userService.findAllFollowersQuantity(id);
-
 
         //Assert
         Assertions.assertEquals(expected, result.getFollowers_count());
@@ -287,25 +287,17 @@ class UserServiceImpTest {
     @DisplayName("T-0002 - Cumple :) Verificar que el usuario a dejar de seguir exista.")
     void unFollowCumple() {
         //Arrange
-
-
         followers.add(user1);
         followed.add(seller1);
 
         String expected = user1.getUser_name() + "with id:" + user1.getUser_id() + " unfollow to -> " + seller1.getUser_name() +
                 " with id: " + seller1.getUser_id();
         ;
-
         when(userRepo.unFollow(user1.getUser_id(), seller1.getUser_id())).thenReturn(expected);
-
         //Act
-
         String result = userService.unFollow(user1.getUser_id(), seller1.getUser_id());
-
         //Assert
-
         assertEquals(expected, result);
-
 
     }
 
