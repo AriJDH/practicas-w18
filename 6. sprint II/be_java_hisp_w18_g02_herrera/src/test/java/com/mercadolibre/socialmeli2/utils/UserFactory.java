@@ -100,7 +100,6 @@ public class UserFactory {
         return users;
     }
 
-
     public static Post postWithDate(LocalDate date){
         return new Post(1, date,  1, 1.0, new Product());
     }

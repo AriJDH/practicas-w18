@@ -7,9 +7,6 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.mercadolibre.socialmeli2.dto.ProductDto;
 import com.mercadolibre.socialmeli2.dto.request.PostDtoReq;
 import com.mercadolibre.socialmeli2.dto.response.*;
-import com.mercadolibre.socialmeli2.entity.Product;
-import com.mercadolibre.socialmeli2.entity.User;
-import com.mercadolibre.socialmeli2.repository.IUserRepository;
 import com.mercadolibre.socialmeli2.repository.UserRepository;
 import com.mercadolibre.socialmeli2.utils.UserFactory;
 import org.junit.jupiter.api.BeforeEach;
@@ -213,7 +210,6 @@ public class UserControllerTest {
 
         ObjectMapper mapper = new ObjectMapper();
         mapper.registerModule(new JavaTimeModule());
-
         ObjectWriter writer = mapper
                 .configure(SerializationFeature.WRAP_ROOT_VALUE,false)
                 .writer();
@@ -228,8 +224,7 @@ public class UserControllerTest {
                 .andExpect(status().isCreated())
                 .andExpect(content().contentType("application/json"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.messages").value(expectedDto.getMessages()))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.status").value(201))
-                .andReturn();
+                .andExpect(MockMvcResultMatchers.jsonPath("$.status").value(201));
     }
 
     @Test
@@ -244,7 +239,6 @@ public class UserControllerTest {
 
         ObjectMapper mapper = new ObjectMapper();
         mapper.registerModule(new JavaTimeModule());
-
         ObjectWriter writer = mapper
                 .configure(SerializationFeature.WRAP_ROOT_VALUE,false)
                 .writer();
@@ -259,8 +253,7 @@ public class UserControllerTest {
                 .andExpect(status().isBadRequest())
                 .andExpect(content().contentType("application/json"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.messages").value(expectedDto.getMessages()))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.status").value(400))
-                .andReturn();
+                .andExpect(MockMvcResultMatchers.jsonPath("$.status").value(400));
     }
 
     @Test
@@ -276,7 +269,6 @@ public class UserControllerTest {
 
         ObjectMapper mapper = new ObjectMapper();
         mapper.registerModule(new JavaTimeModule());
-
         ObjectWriter writer = mapper
                 .configure(SerializationFeature.WRAP_ROOT_VALUE,false)
                 .writer();
@@ -291,12 +283,11 @@ public class UserControllerTest {
                 .andExpect(status().isBadRequest())
                 .andExpect(content().contentType("application/json"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.messages").value(expectedDto.getMessages()))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.status").value(400))
-                .andReturn();
+                .andExpect(MockMvcResultMatchers.jsonPath("$.status").value(400));
     }
 
     @Test
-    @DisplayName("US0006 POST /products/followed/{userId}/list (Happy Path)")
+    @DisplayName("US0006 GET /products/followed/{userId}/list (Happy Path)")
     void getRecentPostIntTestOk() throws Exception {
         // Act & Assert
         mockMvc.perform(MockMvcRequestBuilders.get("/products/followed/{userId}/list", 1))
