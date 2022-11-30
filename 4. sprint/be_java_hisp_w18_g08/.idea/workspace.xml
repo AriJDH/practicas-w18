@@ -5,45 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="94a24d91-89ea-4fa5-93b1-1ff6ddcccc9b" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.mvn/wrapper/maven-wrapper.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.mvn/wrapper/maven-wrapper.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mvnw" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mvnw.cmd" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/socialmedia/be_java_hisp_w18_g08/BeJavaHispW18G08Application.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/socialmedia/be_java_hisp_w18_g08/controller/PostController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/socialmedia/be_java_hisp_w18_g08/controller/UserController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/socialmedia/be_java_hisp_w18_g08/dto/ExceptionDto.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/socialmedia/be_java_hisp_w18_g08/dto/PostDto.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/socialmedia/be_java_hisp_w18_g08/dto/request/FollowDtoReq.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/socialmedia/be_java_hisp_w18_g08/dto/request/PostDtoReq.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/socialmedia/be_java_hisp_w18_g08/dto/response/FollowDtoRes.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/socialmedia/be_java_hisp_w18_g08/dto/response/FollowedDto.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/socialmedia/be_java_hisp_w18_g08/dto/response/PostDtoRes.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/socialmedia/be_java_hisp_w18_g08/dto/response/SellerFollowersCountDto.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/socialmedia/be_java_hisp_w18_g08/dto/response/UserDto.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/socialmedia/be_java_hisp_w18_g08/dto/response/UserListDto.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/socialmedia/be_java_hisp_w18_g08/entity/Post.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/socialmedia/be_java_hisp_w18_g08/entity/Product.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/socialmedia/be_java_hisp_w18_g08/entity/Seller.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/socialmedia/be_java_hisp_w18_g08/entity/User.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/socialmedia/be_java_hisp_w18_g08/exception/BadRequestException.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/socialmedia/be_java_hisp_w18_g08/exception/ExceptionConfig.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/socialmedia/be_java_hisp_w18_g08/exception/NotFoundUserException.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/socialmedia/be_java_hisp_w18_g08/repository/IPostRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/socialmedia/be_java_hisp_w18_g08/repository/IUserRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/socialmedia/be_java_hisp_w18_g08/repository/PostRepositoryImp.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/socialmedia/be_java_hisp_w18_g08/repository/UserRepositoryImp.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/socialmedia/be_java_hisp_w18_g08/service/IPostService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/socialmedia/be_java_hisp_w18_g08/service/IUserService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/socialmedia/be_java_hisp_w18_g08/service/PostServiceImp.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/socialmedia/be_java_hisp_w18_g08/service/UserServiceImp.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/socialmedia/be_java_hisp_w18_g08/util/OrderDateAsc.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/socialmedia/be_java_hisp_w18_g08/util/OrderDateDesc.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/Sprint 1.postman_collection.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/socialmedia/be_java_hisp_w18_g08/BeJavaHispW18G08ApplicationTests.java" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../5. testing/ObtenerDiploma/src/main/java/com/meli/obtenerdiploma/constants/Errors.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../5. testing/ObtenerDiploma/src/main/java/com/meli/obtenerdiploma/constants/Regex.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../5. testing/ObtenerDiploma/src/main/java/com/meli/obtenerdiploma/dto/ExceptionDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../5. testing/ObtenerDiploma/src/main/java/com/meli/obtenerdiploma/exceptionHandler/ExceptionConfig.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -77,23 +42,23 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RequestMappingsPanelOrder0": "0",
-    "RequestMappingsPanelOrder1": "1",
-    "RequestMappingsPanelWidth0": "75",
-    "RequestMappingsPanelWidth1": "75",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "/Users/jootero/Documents/Bootcamp/practicas-w18/4. sprint/be_java_hisp_w18_g08/pom.xml",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0",
-    "settings.editor.selected.configurable": "Runtime.Targets.Configurable",
-    "spring.configuration.checksum": "6b2073aa4fc3fd6c912a7b50a271d23a"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/jootero/Documents/Bootcamp/practicas-w18/4. sprint/be_java_hisp_w18_g08/pom.xml&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;Runtime.Targets.Configurable&quot;,
+    &quot;spring.configuration.checksum&quot;: &quot;6b2073aa4fc3fd6c912a7b50a271d23a&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/../../../../practicas-w18/4. sprint" />
@@ -119,6 +84,7 @@
       <workItem from="1668623442201" duration="27444000" />
       <workItem from="1668782832122" duration="16829000" />
       <workItem from="1668803159334" duration="18000" />
+      <workItem from="1669647642820" duration="26000" />
     </task>
     <servers />
   </component>
