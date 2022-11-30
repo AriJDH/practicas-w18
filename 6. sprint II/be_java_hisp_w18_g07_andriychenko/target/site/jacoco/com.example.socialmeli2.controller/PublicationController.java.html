@@ -9,36 +9,43 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 
 @RestController
-<span class="nc" id="L14">@RequiredArgsConstructor</span>
+@RequiredArgsConstructor
 public class PublicationController {
 
     private final IPublicationService publicationService;
 
     /**
      * US 0005: URL=/products/post
-     * @param publicationRequest    requestbody - json with publication data and product data
-     * @return          respose entity -  OK status code if registry was succesful, Bad_Request if registry could not be added
+     *
+     * @param publicationRequest requestbody - json with publication data and product data
+     * @return respose entity -  OK status code if registry was succesful, Bad_Request if registry could not be added
      */
     @PostMapping(&quot;/products/post&quot;)
     public ResponseEntity&lt;Void&gt; createPublication(@Valid @RequestBody PublicationRequest publicationRequest) {
 
-<span class="nc" id="L27">        publicationService.registerPublication(publicationRequest);</span>
-<span class="nc" id="L28">        return new ResponseEntity&lt;&gt;(HttpStatus.OK);</span>
+<span class="nc" id="L30">        publicationService.registerPublication(publicationRequest);</span>
+<span class="nc" id="L31">        return new ResponseEntity&lt;&gt;(HttpStatus.OK);</span>
     }
 
     /**
      * US 0006: URL=/products/followed/{userId}/list
-     * @param userId    pathvariable - user identification number
-     * @param order     pathvariable - publication response order by date: name_asc=ascending; name_desc=descending
-     * @return          respose entity - &quot;user followed publication response DTO&quot; &amp; OK status code
+     *
+     * @param userId pathvariable - user identification number
+     * @param order  pathvariable - publication response order by date: name_asc=ascending; name_desc=descending
+     * @return respose entity - &quot;user followed publication response DTO&quot; &amp; OK status code
      */
     @GetMapping(&quot;/products/followed/{userId}/list&quot;)
-    public ResponseEntity&lt;UserFollowedPublicationResponse&gt; getUserFollowedPublicationsById(@Valid @PathVariable Integer userId, @RequestParam(defaultValue = &quot;&quot;) String order) {
+    public ResponseEntity&lt;UserFollowedPublicationResponse&gt; getUserFollowedPublicationsById(@NotNull(message = &quot;El  id no puede estar vacío.&quot;)
+                                                                                           @Min(value = 1, message = &quot;El id debe ser mayor a cero.&quot;)
+                                                                                           @PathVariable Integer userId,
+                                                                                           @RequestParam(defaultValue = &quot;&quot;) String order) {
 
-<span class="nc" id="L40">        UserFollowedPublicationResponse response = publicationService.getUserFollowedPublicationsById(userId, order);</span>
-<span class="nc" id="L41">        return new ResponseEntity&lt;&gt;(response, HttpStatus.OK);</span>
+<span class="nc" id="L47">        UserFollowedPublicationResponse response = publicationService.getUserFollowedPublicationsById(userId, order);</span>
+<span class="nc" id="L48">        return new ResponseEntity&lt;&gt;(response, HttpStatus.OK);</span>
     }
 
 }

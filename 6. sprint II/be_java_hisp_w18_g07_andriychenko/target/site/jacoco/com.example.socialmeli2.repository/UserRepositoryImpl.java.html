@@ -41,33 +41,32 @@ public class UserRepositoryImpl implements IUserRepository {
     }
 
 
-
     @Override
     public void followSeller(Integer userId, Integer userIdToFollow) {
 
-<span class="nc" id="L48">        Boolean isAlreadyFollower = users.get(userId).getFollowedList().contains(userIdToFollow);</span>
-<span class="nc" id="L49">        Boolean isTheSameEntity = userId.equals(userIdToFollow);</span>
-<span class="nc bnc" id="L50" title="All 4 branches missed.">        if (!isAlreadyFollower &amp;&amp; !isTheSameEntity) {</span>
+<span class="nc" id="L47">        Boolean isAlreadyFollower = users.get(userId).getFollowedList().contains(userIdToFollow);</span>
+<span class="nc" id="L48">        Boolean isTheSameEntity = userId.equals(userIdToFollow);</span>
+<span class="nc bnc" id="L49" title="All 4 branches missed.">        if (!isAlreadyFollower &amp;&amp; !isTheSameEntity) {</span>
 
-<span class="nc" id="L52">            users.get(userId).addFollowedList(userIdToFollow);</span>
-<span class="nc" id="L53">            users.get(userIdToFollow).addFollowersToList(userId);</span>
+<span class="nc" id="L51">            users.get(userId).addFollowedList(userIdToFollow);</span>
+<span class="nc" id="L52">            users.get(userIdToFollow).addFollowersToList(userId);</span>
         }
-<span class="nc" id="L55">    }</span>
+<span class="nc" id="L54">    }</span>
 
     @Override
     public void unfollowSeller(Integer userId, Integer userIdToUnfollow) {
-<span class="nc" id="L59">        users.get(userId).removeFollowedToList(userIdToUnfollow);</span>
-<span class="nc" id="L60">        users.get(userIdToUnfollow).removeFollowersToList(userId);</span>
-<span class="nc" id="L61">    }</span>
+<span class="nc" id="L58">        users.get(userId).removeFollowedToList(userIdToUnfollow);</span>
+<span class="nc" id="L59">        users.get(userIdToUnfollow).removeFollowersToList(userId);</span>
+<span class="nc" id="L60">    }</span>
 
     @Override
     public Boolean exist(Integer userId) {
-<span class="nc bnc" id="L65" title="All 2 branches missed.">        return users.get(userId) != null;</span>
+<span class="nc bnc" id="L64" title="All 2 branches missed.">        return users.get(userId) != null;</span>
     }
 
     @Override
     public Boolean isSeller(Integer userId) {
-<span class="nc bnc" id="L70" title="All 2 branches missed.">        return users.get(userId).getPublicationList().size() &gt; 0;</span>
+<span class="nc bnc" id="L69" title="All 2 branches missed.">        return users.get(userId).getPublicationList().size() &gt; 0;</span>
     }
 
 }

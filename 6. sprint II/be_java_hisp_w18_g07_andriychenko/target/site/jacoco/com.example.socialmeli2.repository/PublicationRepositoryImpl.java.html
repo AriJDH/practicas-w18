@@ -1,53 +1,51 @@
 <?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>PublicationRepositoryImpl.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">SocialMeli2</a> &gt; <a href="index.source.html" class="el_package">com.example.socialmeli2.repository</a> &gt; <span class="el_source">PublicationRepositoryImpl.java</span></div><h1>PublicationRepositoryImpl.java</h1><pre class="source lang-java linenums">package com.example.socialmeli2.repository;
 
-import com.example.socialmeli2.dto.response.PublicationResponse;
 import com.example.socialmeli2.entity.PublicationEntity;
 import com.example.socialmeli2.exception.NotFoundException;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 @Repository
 public class PublicationRepositoryImpl implements IPublicationRepository {
 
-<span class="nc" id="L17">    PublicationRepositoryImpl(){</span>
-<span class="nc" id="L18">        PublicationEntity publication1 = new PublicationEntity</span>
-<span class="nc" id="L19">                (1, LocalDate.of(2022,11,15),2,1,1,99.99);</span>
-<span class="nc" id="L20">        PublicationEntity publication2 = new PublicationEntity</span>
-<span class="nc" id="L21">                (2, LocalDate.of(2022,11,16),2,2,1,199.99);</span>
-<span class="nc" id="L22">        PublicationEntity publication3 = new PublicationEntity</span>
-<span class="nc" id="L23">                (3, LocalDate.of(2022,9,23),2,3,1,299.99);</span>
-<span class="nc" id="L24">        this.addEntity(publication1);</span>
-<span class="nc" id="L25">        this.addEntity(publication2);</span>
-<span class="nc" id="L26">        this.addEntity(publication3);</span>
-<span class="nc" id="L27">    }</span>
-<span class="nc" id="L28">    private Map&lt;Integer, PublicationEntity&gt; publications = new HashMap&lt;&gt;();</span>
-<span class="nc" id="L29">    private Integer publicationId = 0;</span>
+<span class="nc" id="L14">    PublicationRepositoryImpl() {</span>
+<span class="nc" id="L15">        PublicationEntity publication1 = new PublicationEntity</span>
+<span class="nc" id="L16">                (1, LocalDate.of(2022, 11, 15), 2, 1, 1, 99.99);</span>
+<span class="nc" id="L17">        PublicationEntity publication2 = new PublicationEntity</span>
+<span class="nc" id="L18">                (2, LocalDate.of(2022, 11, 16), 2, 2, 1, 199.99);</span>
+<span class="nc" id="L19">        PublicationEntity publication3 = new PublicationEntity</span>
+<span class="nc" id="L20">                (3, LocalDate.of(2022, 9, 23), 2, 3, 1, 299.99);</span>
+<span class="nc" id="L21">        this.addEntity(publication1);</span>
+<span class="nc" id="L22">        this.addEntity(publication2);</span>
+<span class="nc" id="L23">        this.addEntity(publication3);</span>
+<span class="nc" id="L24">    }</span>
+
+<span class="nc" id="L26">    private Map&lt;Integer, PublicationEntity&gt; publications = new HashMap&lt;&gt;();</span>
+<span class="nc" id="L27">    private Integer publicationId = 0;</span>
 
     @Override
     public Boolean addEntity(PublicationEntity publicationEntity) {
-<span class="nc" id="L33">        publicationId++;</span>
-<span class="nc" id="L34">        publicationEntity.setId(publicationId);</span>
-<span class="nc" id="L35">        publications.put(publicationId, publicationEntity);</span>
-<span class="nc" id="L36">        return true;</span>
+<span class="nc" id="L31">        publicationId++;</span>
+<span class="nc" id="L32">        publicationEntity.setId(publicationId);</span>
+<span class="nc" id="L33">        publications.put(publicationId, publicationEntity);</span>
+<span class="nc" id="L34">        return true;</span>
     }
 
     @Override
     public PublicationEntity getEntityById(Integer publicationId) {
-<span class="nc bnc" id="L41" title="All 2 branches missed.">        if (this.publications.get(publicationId) == null) {</span>
-<span class="nc" id="L42">            throw new NotFoundException(&quot;No existe publicacion con ID: &quot; + publicationId);</span>
+<span class="nc bnc" id="L39" title="All 2 branches missed.">        if (this.publications.get(publicationId) == null) {</span>
+<span class="nc" id="L40">            throw new NotFoundException(&quot;No existe publicacion con ID: &quot; + publicationId);</span>
         }
 
-<span class="nc" id="L45">        return publications.get(publicationId);</span>
+<span class="nc" id="L43">        return publications.get(publicationId);</span>
     }
 
     @Override
     public Map&lt;Integer, PublicationEntity&gt; getAllEntity() {
-<span class="nc" id="L50">        return publications;</span>
+<span class="nc" id="L48">        return publications;</span>
     }
 
 }

@@ -5,7 +5,6 @@ import com.example.socialmeli2.dto.response.UserFollowedListResponse;
 import com.example.socialmeli2.dto.response.UserFollowerCountResponse;
 import com.example.socialmeli2.dto.response.UserFollowersListResponse;
 import com.example.socialmeli2.entity.UserEntity;
-import com.example.socialmeli2.exception.InvalidParameterException;
 import com.example.socialmeli2.exception.NotFoundException;
 import com.example.socialmeli2.repository.IUserRepository;
 import com.example.socialmeli2.util.ListSorterByOrder;
@@ -14,10 +13,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-
-import static java.util.Arrays.asList;
 
 @Service
 @RequiredArgsConstructor
@@ -25,35 +21,35 @@ public class UserServiceImpl implements IUserService {
 
     private final IUserRepository userRepository;
 
+
     /**
      * Permite que un usuario comience a seguir a otro usuario. Evalua que ambos usuarios pasados como parametro
      * existan y que el usuario objetivo sea un vendedor o tenga al menos una publicacion
      *
      * @param userId         Usuario que va a comenzar a seguir a otro
      * @param userIdToFollow Usuario objetivo a seguir
-     *
      * @return un booleano para identifcar si se completó la acción
      */
     @Override
     public boolean followUserSeller(Integer userId, Integer userIdToFollow) {
 
-<span class="fc" id="L40">        boolean exist = false;</span>
+<span class="fc" id="L36">        boolean exist = false;</span>
 
-<span class="fc bfc" id="L42" title="All 2 branches covered.">        if (!userRepository.exist(userId)) {</span>
-<span class="fc" id="L43">            throw new NotFoundException(&quot;No existe usuario con ID: &quot; + userId);</span>
+<span class="fc bfc" id="L38" title="All 2 branches covered.">        if (!userRepository.exist(userId)) {</span>
+<span class="fc" id="L39">            throw new NotFoundException(&quot;No existe usuario con ID: &quot; + userId);</span>
         }
 
-<span class="pc bpc" id="L46" title="1 of 2 branches missed.">        if (!userRepository.exist(userIdToFollow)) {</span>
-<span class="nc" id="L47">            throw new NotFoundException(&quot;No existe usuario con ID: &quot; + userIdToFollow);</span>
+<span class="fc bfc" id="L42" title="All 2 branches covered.">        if (!userRepository.exist(userIdToFollow)) {</span>
+<span class="fc" id="L43">            throw new NotFoundException(&quot;No existe usuario con ID: &quot; + userIdToFollow);</span>
         }
-<span class="pc bpc" id="L49" title="1 of 2 branches missed.">        if (userRepository.isSeller(userIdToFollow)) {</span>
-<span class="fc" id="L50">            userRepository.followSeller(userId, userIdToFollow);</span>
-<span class="fc" id="L51">            exist = true;</span>
+<span class="fc bfc" id="L45" title="All 2 branches covered.">        if (userRepository.isSeller(userIdToFollow)) {</span>
+<span class="fc" id="L46">            userRepository.followSeller(userId, userIdToFollow);</span>
+<span class="fc" id="L47">            exist = true;</span>
         } else {
-<span class="nc" id="L53">            throw new NotFoundException(&quot;El usuario con ID: &quot; + userIdToFollow + &quot; no es vendedor&quot;);</span>
+<span class="fc" id="L49">            throw new NotFoundException(&quot;El usuario con ID: &quot; + userIdToFollow + &quot; no es vendedor&quot;);</span>
         }
 
-<span class="fc" id="L56">        return exist;</span>
+<span class="fc" id="L52">        return exist;</span>
     }
 
     /**
@@ -64,18 +60,18 @@ public class UserServiceImpl implements IUserService {
      */
     @Override
     public boolean unfollowUserSeller(Integer userId, Integer userIdToUnfollow) {
-<span class="fc" id="L67">        boolean unfollowSeller= false;</span>
-<span class="pc bpc" id="L68" title="1 of 2 branches missed.">        if (!userRepository.exist(userId)) {</span>
-<span class="nc" id="L69">            throw new NotFoundException(&quot;No existe usuario con ID: &quot; + userId);</span>
+<span class="fc" id="L63">        boolean unfollowSeller = false;</span>
+<span class="pc bpc" id="L64" title="1 of 2 branches missed.">        if (!userRepository.exist(userId)) {</span>
+<span class="nc" id="L65">            throw new NotFoundException(&quot;No existe usuario con ID: &quot; + userId);</span>
         }
-<span class="fc bfc" id="L71" title="All 2 branches covered.">        if (!userRepository.exist(userIdToUnfollow)) {</span>
-<span class="fc" id="L72">            throw new NotFoundException(&quot;No existe usuario con ID: &quot; + userIdToUnfollow);</span>
+<span class="fc bfc" id="L67" title="All 2 branches covered.">        if (!userRepository.exist(userIdToUnfollow)) {</span>
+<span class="fc" id="L68">            throw new NotFoundException(&quot;No existe usuario con ID: &quot; + userIdToUnfollow);</span>
         }
-<span class="fc bfc" id="L74" title="All 2 branches covered.">        if (userRepository.getEntityById(userId).ifFollowerExist(userIdToUnfollow)){</span>
-<span class="fc" id="L75">            userRepository.unfollowSeller(userId, userIdToUnfollow);</span>
-<span class="fc" id="L76">            unfollowSeller=true;</span>
+<span class="fc bfc" id="L70" title="All 2 branches covered.">        if (userRepository.getEntityById(userId).ifFollowerExist(userIdToUnfollow)) {</span>
+<span class="fc" id="L71">            userRepository.unfollowSeller(userId, userIdToUnfollow);</span>
+<span class="fc" id="L72">            unfollowSeller = true;</span>
         }
-<span class="fc" id="L78">        return unfollowSeller;</span>
+<span class="fc" id="L74">        return unfollowSeller;</span>
     }
 
     /**
@@ -86,8 +82,8 @@ public class UserServiceImpl implements IUserService {
      */
     @Override
     public UserFollowerCountResponse getUserFollowersCount(Integer userId) {
-<span class="fc" id="L89">        UserEntity userCount = userRepository.getEntityById(userId);</span>
-<span class="fc" id="L90">        return UserMapper.userEntity2UserFollowerCountResponse(userCount);</span>
+<span class="fc" id="L85">        UserEntity userCount = userRepository.getEntityById(userId);</span>
+<span class="fc" id="L86">        return UserMapper.userEntity2UserFollowerCountResponse(userCount);</span>
     }
 
     /**
@@ -101,20 +97,20 @@ public class UserServiceImpl implements IUserService {
      */
     @Override
     public UserFollowersListResponse getFollowersUsersById(Integer userId, String order) {
-<span class="fc" id="L104">        UserEntity seller = userRepository.getEntityById(userId);</span>
-<span class="fc" id="L105">        List&lt;UserBasicResponse&gt; followersDtos = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L100">        UserEntity seller = userRepository.getEntityById(userId);</span>
+<span class="fc" id="L101">        List&lt;UserBasicResponse&gt; followersDtos = new ArrayList&lt;&gt;();</span>
 
 
-<span class="fc bfc" id="L108" title="All 2 branches covered.">        for (Integer followerId : seller.getFollowersList()) {</span>
-<span class="fc" id="L109">            UserEntity follower = userRepository.getEntityById(followerId);</span>
-<span class="fc" id="L110">            followersDtos.add(UserMapper.userEntity2UserBasicResponse(follower));</span>
-<span class="fc" id="L111">        }</span>
+<span class="fc bfc" id="L104" title="All 2 branches covered.">        for (Integer followerId : seller.getFollowersList()) {</span>
+<span class="fc" id="L105">            UserEntity follower = userRepository.getEntityById(followerId);</span>
+<span class="fc" id="L106">            followersDtos.add(UserMapper.userEntity2UserBasicResponse(follower));</span>
+<span class="fc" id="L107">        }</span>
 
-<span class="pc bpc" id="L113" title="1 of 2 branches missed.">        if (!order.isEmpty()) {</span>
-<span class="fc" id="L114">            followersDtos = ListSorterByOrder.userSortedByName(followersDtos, order);</span>
+<span class="pc bpc" id="L109" title="1 of 2 branches missed.">        if (!order.isEmpty()) {</span>
+<span class="fc" id="L110">            followersDtos = ListSorterByOrder.userSortedByName(followersDtos, order);</span>
         }
 
-<span class="fc" id="L117">        return UserMapper.userEntity2UserFollowersListResponse(seller, followersDtos);</span>
+<span class="fc" id="L113">        return UserMapper.userEntity2UserFollowersListResponse(seller, followersDtos);</span>
     }
 
     /**
@@ -128,19 +124,19 @@ public class UserServiceImpl implements IUserService {
      */
     @Override
     public UserFollowedListResponse getFollowedUsersById(Integer id, String order) {
-<span class="nc" id="L131">        UserEntity entity = userRepository.getEntityById(id);</span>
-<span class="nc" id="L132">        List&lt;UserBasicResponse&gt; followedList = new ArrayList&lt;&gt;();</span>
+<span class="nc" id="L127">        UserEntity entity = userRepository.getEntityById(id);</span>
+<span class="nc" id="L128">        List&lt;UserBasicResponse&gt; followedList = new ArrayList&lt;&gt;();</span>
 
-<span class="nc bnc" id="L134" title="All 2 branches missed.">        for (Integer integer : entity.getFollowedList()) {</span>
-<span class="nc" id="L135">            followedList.add(UserMapper.userEntity2UserBasicResponse(userRepository.getEntityById(integer)));</span>
-<span class="nc" id="L136">        }</span>
+<span class="nc bnc" id="L130" title="All 2 branches missed.">        for (Integer integer : entity.getFollowedList()) {</span>
+<span class="nc" id="L131">            followedList.add(UserMapper.userEntity2UserBasicResponse(userRepository.getEntityById(integer)));</span>
+<span class="nc" id="L132">        }</span>
 
 
-<span class="nc bnc" id="L139" title="All 2 branches missed.">        if (!order.isEmpty()) {</span>
-<span class="nc" id="L140">            followedList = ListSorterByOrder.userSortedByName(followedList, order);</span>
+<span class="nc bnc" id="L135" title="All 2 branches missed.">        if (!order.isEmpty()) {</span>
+<span class="nc" id="L136">            followedList = ListSorterByOrder.userSortedByName(followedList, order);</span>
         }
 
-<span class="nc" id="L143">        return UserMapper.userEntity2UserFollowedListResponse(entity, followedList);</span>
+<span class="nc" id="L139">        return UserMapper.userEntity2UserFollowedListResponse(entity, followedList);</span>
     }
 
 }

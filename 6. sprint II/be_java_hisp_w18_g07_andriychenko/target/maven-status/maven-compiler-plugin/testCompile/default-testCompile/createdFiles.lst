@@ -1,3 +1,11 @@
-com/example/socialmeli2/unit/service/UserServiceImplTest$getFollowersUsersByIdOrder.class
-com/example/socialmeli2/unit/PublicationServiceImplTest.class
-com/example/socialmeli2/unit/service/UserServiceImplTest$FollowUserSellerThrows.class
+com/example/socialmeli2/unit/service/UserServiceImplTest$unfollowUserSeller.class
+com/example/socialmeli2/unit/util/ListSorterByOrderTest.class
+com/example/socialmeli2/unit/util/ListSorterByOrderTest$OrderingByNameExists.class
+com/example/socialmeli2/unit/service/PublicationServiceImplTest$getUserFollowedPublicationsByIdTwoWeeks.class
+com/example/socialmeli2/unit/service/PublicationServiceImplTest.class
+com/example/socialmeli2/unit/service/UserServiceImplTest$getUserFollowersCount.class
+com/example/socialmeli2/unit/service/PublicationServiceImplTest$getListOfPublicationsFollowed.class
+com/example/socialmeli2/unit/service/UserServiceImplTest$getFollowersUsersById.class
+com/example/socialmeli2/unit/service/UserServiceImplTest$FollowUserSeller.class
+com/example/socialmeli2/unit/service/PublicationServiceImplTest$getUserFollowedPublicationsById.class
+com/example/socialmeli2/util/PublicationFactory.class

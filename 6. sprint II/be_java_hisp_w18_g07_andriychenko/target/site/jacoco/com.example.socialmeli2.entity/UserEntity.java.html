@@ -18,23 +18,25 @@ public class UserEntity {
     private List&lt;Integer&gt; publicationList; //Almacena los ids de las publicaciones relacionadas al usuario
 
 
-    public void addFollowersToList(Integer userId){
+    public void addFollowersToList(Integer userId) {
 <span class="nc" id="L22">        followersList.add(userId);</span>
 <span class="nc" id="L23">    }</span>
 
-    public void removeFollowersToList(Integer userId){
+    public void removeFollowersToList(Integer userId) {
 <span class="nc" id="L26">        followersList.remove(userId);</span>
 <span class="nc" id="L27">    }</span>
 
-    public void addFollowedList(Integer userId){
+    public void addFollowedList(Integer userId) {
 <span class="nc" id="L30">        followedList.add(userId);</span>
 <span class="nc" id="L31">    }</span>
 
-    public void removeFollowedToList(Integer userId){
+    public void removeFollowedToList(Integer userId) {
 <span class="nc" id="L34">        followedList.remove(userId);</span>
 <span class="nc" id="L35">    }</span>
-    public boolean ifFollowerExist(Integer id){
-<span class="fc" id="L37">        return followersList.contains(id);</span>
+
+    public boolean ifFollowerExist(Integer id) {
+<span class="fc" id="L38">        return followersList.contains(id);</span>
     }
+
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>
