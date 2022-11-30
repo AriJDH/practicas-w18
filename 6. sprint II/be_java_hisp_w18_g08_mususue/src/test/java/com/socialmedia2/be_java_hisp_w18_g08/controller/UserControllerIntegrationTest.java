@@ -30,4 +30,13 @@ public class UserControllerIntegrationTest {
 
     }
 
+    @Test
+    void followErrorTest()throws Exception{
+        this.mockMvc.perform(MockMvcRequestBuilders.post("/users/{userId}/follow/{userIdToFollow}", 10, 5))
+                .andDo(print()).andExpect(status().isNotFound())
+                .andExpect(content().contentType("application/json"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.message").value("User with id: 10Not found"))
+                .andReturn();
+
+    }
 }
