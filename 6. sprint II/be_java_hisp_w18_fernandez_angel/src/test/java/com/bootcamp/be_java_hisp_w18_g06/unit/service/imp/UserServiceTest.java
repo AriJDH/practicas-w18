@@ -4,6 +4,7 @@ import com.bootcamp.be_java_hisp_w18_g06.dto.response.UserFollowedListDTO;
 import com.bootcamp.be_java_hisp_w18_g06.dto.response.UserFollowersCountDTO;
 import com.bootcamp.be_java_hisp_w18_g06.entity.User;
 import com.bootcamp.be_java_hisp_w18_g06.exceptions.BadRequestException;
+import com.bootcamp.be_java_hisp_w18_g06.exceptions.EmptyException;
 import com.bootcamp.be_java_hisp_w18_g06.repository.imp.UserRepository;
 import com.bootcamp.be_java_hisp_w18_g06.service.imp.UserService;
 import com.bootcamp.be_java_hisp_w18_g06.utils.UserFactory;
@@ -138,6 +139,25 @@ class UserServiceTest {
             when(repository.findUserById(user.getUser_id())).thenReturn(Optional.of(user));
             Assertions.assertThrows(BadRequestException.class, ()->service.getFollowedList(user.getUser_id(), order));
         }
+        @Test
+        void getFollowedListEmptyExceptionTest() {
+
+            User user = getUserWithFollowedList("user with followed list");
+            user.setFollowed(null);
+
+            when(repository.findUserById(user.getUser_id())).thenReturn(Optional.of(user));
+            Assertions.assertThrows(EmptyException.class, ()->service.getFollowedList(user.getUser_id(), null));
+        }
+        @Test
+        void getFollowedListDescTest() {
+            String order = "name_desc";
+            User user = getUserWithFollowedList("user with followed list");
+
+            when(repository.findUserById(user.getUser_id())).thenReturn(Optional.of(user));
+            Assertions.assertDoesNotThrow(()->service.getFollowedList(user.getUser_id(), order));
+
+        }
+
     }
     //US-0008
     @Nested
