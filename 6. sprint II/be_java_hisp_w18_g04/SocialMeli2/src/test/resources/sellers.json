@@ -121,6 +121,12 @@
         "user_id": 4,
         "user_name": "Oliver",
         "followers":[
+            {
+                "user_id": 5,
+                "user_name": "Raquel",
+                "followed":[
+                ]
+            }
         ],
         "posts": [
             {

@@ -9,7 +9,7 @@ import java.util.List;
 
 public class UserBuyerFactory {
 
-    public static UserBuyer getUserBuyer(){
+    public static UserBuyer getUserBuyer() {
         ArrayList<UserSeller> followed = new ArrayList<>();
         UserBuyer userBuyer = new UserBuyer();
         userBuyer.setUser_id(1);
@@ -17,7 +17,8 @@ public class UserBuyerFactory {
         userBuyer.setFollowed(followed);
         return userBuyer;
     }
-    public static List<UserBuyer> getUserBuyerList(){
+
+    public static List<UserBuyer> getUserBuyerList() {
         List<UserBuyer> userBuyerList = new ArrayList<>();
         UserBuyer userBuyer = new UserBuyer();
         userBuyer.setUser_id(1);
@@ -27,5 +28,13 @@ public class UserBuyerFactory {
         return userBuyerList;
     }
 
+    public static UserBuyer getUserBuyer5() {
+        ArrayList<UserSeller> followed = new ArrayList<>();
+        UserBuyer userBuyer = new UserBuyer();
+        userBuyer.setUser_id(5);
+        userBuyer.setUser_name("Raquel");
+        userBuyer.setFollowed(followed);
+        return userBuyer;
+    }
 
 }

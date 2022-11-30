@@ -10,7 +10,6 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 
 @RestController
@@ -28,10 +27,8 @@ public class SocialMeliController {
 
     @PostMapping("/users/{userId}/follow/{userIdToFollow}")
     public ResponseEntity<FollowDTORes> follow(@PathVariable(value = "userId")
-                                                   @NotNull(message = "The user id cannot be empty")
-                                                   @Positive(message = "The user id must be greater than 0") Integer userId,
+                                               @Positive(message = "The user id must be greater than 0") Integer userId,
                                                @PathVariable(value = "userIdToFollow")
-                                               @NotNull(message = "The user id cannot be empty")
                                                @Positive(message = "The user id must be greater than 0") Integer userIdToFollow) {
         FollowDTORes followDTORes = userBuyerService.follow(userId, userIdToFollow);
         return new ResponseEntity<>(followDTORes, HttpStatus.OK);
@@ -39,23 +36,21 @@ public class SocialMeliController {
 
     @GetMapping("/users/{userId}/followers/count")
     public ResponseEntity<FollowerCountDTORes> followersCount(@PathVariable(value = "userId")
-                                                                  @NotNull(message = "The user id cannot be empty")
-                                                                  @Positive(message = "The user id must be greater than 0") Integer userId) {
+                                                              @Positive(message = "The user id must be greater than 0")
+                                                              Integer userId) {
         return new ResponseEntity<>(userSellerService.followersCount(userId), HttpStatus.OK);
     }
 
     @GetMapping("/users/{userId}/followers/list")
     public ResponseEntity<FollowerListDTORes> getFollowers(@PathVariable(value = "userId")
-                                                               @NotNull(message = "The user id cannot be empty")
-                                                               @Positive(message = "The user id must be greater than 0") Integer userId,
+                                                           @Positive(message = "The user id must be greater than 0") Integer userId,
                                                            @RequestParam(required = true) String order) {
         return new ResponseEntity<>(userSellerService.getFollowers(userId, order), HttpStatus.OK);
     }
 
     @GetMapping("/users/{userId}/followed/list")
     public ResponseEntity<FollowedListDTORes> getFollowed(@PathVariable(value = "userId")
-                                                              @NotNull(message = "The user id cannot be empty")
-                                                              @Positive(message = "The user id must be greater than 0") Integer userId,
+                                                          @Positive(message = "The user id must be greater than 0") Integer userId,
                                                           @RequestParam String order) {
         return new ResponseEntity<>(userBuyerService.getFollowed(userId, order), HttpStatus.OK);
     }
@@ -68,18 +63,15 @@ public class SocialMeliController {
 
     @GetMapping("/products/followed/{userId}/list")
     public ResponseEntity<PostFollowedByDateDTORes> getLastPosts(@PathVariable(value = "userId")
-                                                                     @NotNull(message = "The user id cannot be empty")
-                                                                     @Positive(message = "The user id must be greater than 0") Integer userId,
+                                                                 @Positive(message = "The user id must be greater than 0") Integer userId,
                                                                  @RequestParam String order) {
         return new ResponseEntity<>(userBuyerService.getLastPosts(userId, order), HttpStatus.OK);
     }
 
     @PostMapping("/users/{userId}/unfollow/{userIdToUnfollow}")
     public ResponseEntity<UnfollowDTORes> unfollow(@PathVariable(value = "userId")
-                                                       @NotNull(message = "The user id cannot be empty")
-                                                       @Positive(message = "The user id must be greater than 0") Integer userId,
-                                                       @PathVariable(value = "userIdToUnfollow", required = true)
-                                                   @NotNull(message = "The user id cannot be empty")
+                                                   @Positive(message = "The user id must be greater than 0") Integer userId,
+                                                   @PathVariable(value = "userIdToUnfollow")
                                                    @Positive(message = "The user id must be greater than 0") Integer userIdToUnfollow) {
         UnfollowDTORes unfollowDTORes = userBuyerService.unfollow(userId, userIdToUnfollow);
         return new ResponseEntity<>(unfollowDTORes, HttpStatus.OK);

@@ -6,7 +6,6 @@ import com.example.SocialMeli2.entity.Post;
 import com.example.SocialMeli2.entity.Product;
 import com.example.SocialMeli2.entity.UserBuyer;
 import com.example.SocialMeli2.entity.UserSeller;
-import com.example.SocialMeli2.exception.BadRequestException;
 import com.example.SocialMeli2.exception.UserNotFoundException;
 import com.example.SocialMeli2.repository.IUserBuyerRepository;
 import com.example.SocialMeli2.repository.IUserSellerRepository;
@@ -15,15 +14,14 @@ import com.example.SocialMeli2.util.PostFactory;
 import com.example.SocialMeli2.util.UserBuyerFactory;
 
 import com.example.SocialMeli2.util.UserSellerFactory;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import javax.swing.*;
 import java.time.LocalDate;
 import java.util.*;
 
@@ -41,276 +39,346 @@ class UserBuyerServiceImpTest {
     @InjectMocks
     UserBuyerServiceImp userBuyerServiceImp;
 
+    @Nested
+    @DisplayName("T-0001. US-0001")
+    public class Test0001 {
+        @Test
+        @DisplayName("The user to follow exists")
+        void userToFollowExistsOK() {
+            //GIVEN
+            UserSeller seller = UserSellerFactory.getUserSeller();
+            UserBuyer buyer = UserBuyerFactory.getUserBuyer();
 
-    @Test
-    @DisplayName("T-0003. US-0008. Catch the exception if order is 'invalid'")
-    void orderFollowedInvalidException() {
-        //Arrange
-        String order = "invalid";
-        UserBuyer buyer = UserBuyerFactory.getUserBuyer();
+            // WHEN
+            when(userBuyerRepository.findById(1)).thenReturn(Optional.of(buyer));
+            when(userSellerRepository.findById(1)).thenReturn(Optional.of(seller));
 
-        //Assert
-        assertThrows(UserNotFoundException.class,
-                ()-> userBuyerServiceImp.getFollowed(buyer.getUser_id(), order));
+            FollowDTORes followDTORes = userBuyerServiceImp.follow(buyer.getUser_id(), seller.getUser_id());
 
-    }
-    @Test
-    @DisplayName("T-0003. US-0008. Verify the correct operation if order is 'name_asc' ")
-    void orderFollowedOrderAsc(){
-    //Arrange
-        String order = "name_asc";
-        UserBuyer buyer = UserBuyerFactory.getUserBuyer();
+            String userName = followDTORes.getUserNameFollowed();
+            verify(userBuyerRepository).findById(1);
+            verify(userSellerRepository).findById(1);
+            //THEN
+            assertEquals(seller.getUser_name(), userName);
+            assertAll(
+                    () -> {
+                        assertEquals(seller.getUser_name(), userName);
+                    },
+                    () -> {
+                        assertTrue(followDTORes.getUserNameFollowed().equals(seller.getUser_name()));
+                    },
+                    () -> {
+                        assertTrue(followDTORes.getUserName().equals(buyer.getUser_name()));
+                    }
+            );
+        }
 
-    //mock
-      when(userBuyerRepository.findById(1)).thenReturn(Optional.of(buyer));
-      FollowedListDTORes result = userBuyerServiceImp.getFollowed(buyer.getUser_id(), order);
-      verify(userBuyerRepository).findById(1);
-        // Assert
-        assertAll(
-                ()-> assertEquals(buyer.getUser_id(), result.getUser_id()),
-                ()-> assertEquals(buyer.getUser_name(), result.getUser_name()),
-                ()-> assertEquals(buyer.getFollowed(), result.getFollowed())
-        );
-    }
-@Test
-@DisplayName("T-003. US-0008. Verify the correct operation if order is 'name_desc'")
-void orderFollowedOrderDesc(){
-    //Arrange
-    String order = "name_desc";
-    UserBuyer buyer = UserBuyerFactory.getUserBuyer();
+        @Test
+        @DisplayName("The user to follow doesn't exists")
+        void userToFollowException() {
+            Integer id = 15;
 
-    //mock
-    when(userBuyerRepository.findById(1)).thenReturn(Optional.of(buyer));
-    FollowedListDTORes result = userBuyerServiceImp.getFollowed(buyer.getUser_id(), order);
-    verify(userBuyerRepository).findById(1);
-    // Assert
-    assertAll(
-            ()-> assertEquals(buyer.getUser_id(), result.getUser_id()),
-            ()-> assertEquals(buyer.getUser_name(), result.getUser_name()),
-            ()-> assertEquals(buyer.getFollowed(), result.getFollowed())
-    );
-}
+            when(userBuyerRepository.findById(id)).thenReturn(Optional.empty());
 
-
-    @Test
-    @DisplayName("T-0001. US-0001. The user to follow exists ")
-    void userToFollowExistsOK() {
-        //GIVEN
-        UserSeller seller = UserSellerFactory.getUserSeller();
-        UserBuyer buyer = UserBuyerFactory.getUserBuyer();
-
-        // WHEN
-        when(userBuyerRepository.findById(1)).thenReturn(Optional.of(buyer));
-        when(userSellerRepository.findById(1)).thenReturn(Optional.of(seller));
-
-        FollowDTORes followDTORes = userBuyerServiceImp.follow(buyer.getUser_id(), seller.getUser_id());
-
-        String userName = followDTORes.getUserNameFollowed();
-        verify(userBuyerRepository).findById(1);
-        verify(userSellerRepository).findById(1);
-        //THEN
-        assertEquals(seller.getUser_name(), userName);
-        assertAll(
-                ()->{assertEquals(seller.getUser_name(), userName);},
-                ()->{assertTrue(followDTORes.getUserNameFollowed().equals(seller.getUser_name()));},
-                ()->{assertTrue(followDTORes.getUserName().equals(buyer.getUser_name()));}
-        );
+            assertThrows(UserNotFoundException.class,
+                    () -> userBuyerServiceImp.follow(id, 1));
+        }
     }
 
-    @Test
-    @DisplayName("T-0001. US-0001. The user to follow doesn't exists")
-    void userToFollowException() {
-        Integer id = 15;
 
-        when(userBuyerRepository.findById(id)).thenReturn(Optional.empty());
+    @Nested
+    @DisplayName("T-0002. US-0007")
+    public class Test0002 {
+        @Test
+        @DisplayName("The user to unfollow exists")
+        void userToUnfollowExistsOK() {
+            // GIVEN
+            UserSeller seller = UserSellerFactory.getUserSeller();
+            UserBuyer buyer = UserBuyerFactory.getUserBuyer();
+            seller.getFollowers().add(buyer);
+            buyer.getFollowed().add(seller);
 
-        assertThrows(UserNotFoundException.class,
-                () -> userBuyerServiceImp.follow(id, 1));
+            // WHEN
+            when(userBuyerRepository.findById(1)).thenReturn(Optional.of(buyer));
+            when(userSellerRepository.findById(1)).thenReturn(Optional.of(seller));
 
+            UnfollowDTORes unfollowDTORes = userBuyerServiceImp.unfollow(buyer.getUser_id(), seller.getUser_id());
+
+            assertAll(
+                    () -> {
+                        assertEquals(seller.getUser_name(), unfollowDTORes.getUserNameUnfollowed());
+                    },
+                    () -> {
+                        assertTrue(buyer.getUser_name().equals(unfollowDTORes.getUserName()));
+                    }
+            );
+        }
+
+        @Test
+        @DisplayName("The user to unfollow doesn't exists")
+        void userToUnfollowException() {
+            Integer id = 15;
+
+            when(userBuyerRepository.findById(id)).thenReturn(Optional.empty());
+
+            assertThrows(UserNotFoundException.class, () -> userBuyerServiceImp.unfollow(id, 1));
+        }
     }
 
-    @Test
-    @DisplayName("T-0002. US-0007. The user to unfollow exists")
-    void userToUnfollowExistsOK() {
-        // GIVEN
-        UserSeller seller = UserSellerFactory.getUserSeller();
-        UserBuyer buyer = UserBuyerFactory.getUserBuyer();
-        seller.getFollowers().add(buyer);
-        buyer.getFollowed().add(seller);
+    @Nested
+    @DisplayName("T-0003. US-0008")
+    public class Test0003 {
+        @Test
+        @DisplayName("Catch the exception if order is 'invalid'")
+        void orderFollowedInvalidException() {
+            //Arrange
+            String order = "invalid";
+            UserBuyer buyer = UserBuyerFactory.getUserBuyer();
 
-        // WHEN
-        when(userBuyerRepository.findById(1)).thenReturn(Optional.of(buyer));
-        when(userSellerRepository.findById(1)).thenReturn(Optional.of(seller));
+            //Assert
+            assertThrows(UserNotFoundException.class,
+                    () -> userBuyerServiceImp.getFollowed(buyer.getUser_id(), order));
+        }
 
-        UnfollowDTORes unfollowDTORes = userBuyerServiceImp.unfollow(buyer.getUser_id(), seller.getUser_id());
+        @Test
+        @DisplayName("Verify the correct operation if order is 'name_asc'")
+        void orderFollowedOrderAsc() {
+            //Arrange
+            String order = "name_asc";
+            UserBuyer buyer = UserBuyerFactory.getUserBuyer();
 
+            //mock
+            when(userBuyerRepository.findById(1)).thenReturn(Optional.of(buyer));
+            FollowedListDTORes result = userBuyerServiceImp.getFollowed(buyer.getUser_id(), order);
+            verify(userBuyerRepository).findById(1);
+            // Assert
+            assertAll(
+                    () -> assertEquals(buyer.getUser_id(), result.getUser_id()),
+                    () -> assertEquals(buyer.getUser_name(), result.getUser_name()),
+                    () -> assertEquals(buyer.getFollowed(), result.getFollowed())
+            );
+        }
 
-        assertAll(
-                ()->{assertEquals(seller.getUser_name(), unfollowDTORes.getUserNameUnfollowed());},
-                ()->{assertTrue(buyer.getUser_name().equals(unfollowDTORes.getUserName()));}
-        );
+        @Test
+        @DisplayName("Verify the correct operation if order is 'name_desc'")
+        void orderFollowedOrderDesc() {
+            //Arrange
+            String order = "name_desc";
+            UserBuyer buyer = UserBuyerFactory.getUserBuyer();
 
+            //mock
+            when(userBuyerRepository.findById(1)).thenReturn(Optional.of(buyer));
+            FollowedListDTORes result = userBuyerServiceImp.getFollowed(buyer.getUser_id(), order);
+            verify(userBuyerRepository).findById(1);
+            // Assert
+            assertAll(
+                    () -> assertEquals(buyer.getUser_id(), result.getUser_id()),
+                    () -> assertEquals(buyer.getUser_name(), result.getUser_name()),
+                    () -> assertEquals(buyer.getFollowed(), result.getFollowed())
+            );
+        }
     }
 
-    @Test
-    @DisplayName("T-0002. US-0007. The user to unfollow doesn't exists")
-    void userToUnfollowException() {
-        Integer id = 15;
+    @Nested
+    @DisplayName("T-0004. US-0008")
+    public class Test0004 {
+        @Test
+        @DisplayName("Verify the correct ascendent sortering by 'name_asc' in followed")
+        void ascendentSortFollowedTestOk() {
+            //Arange
+            String order = "name_asc";
+            Integer buyerUserId = 1;
 
-        when(userBuyerRepository.findById(id)).thenReturn(Optional.empty());
+            List<UserSeller> followed = new ArrayList<>();
+            UserSeller userSeller1 = new UserSeller();
+            userSeller1.setUser_id(4);
+            userSeller1.setUser_name("Oliver");
+            UserSeller userSeller2 = new UserSeller();
+            userSeller2.setUser_id(2);
+            userSeller2.setUser_name("Ethan");
+            UserSeller userSeller3 = new UserSeller();
+            userSeller3.setUser_id(3);
+            userSeller3.setUser_name("Kyle");
+            followed.add(userSeller1);
+            followed.add(userSeller2);
+            followed.add(userSeller3);
 
-        assertThrows(UserNotFoundException.class, () -> userBuyerServiceImp.unfollow(id, 1));
+            UserBuyer userBuyer = new UserBuyer();
+            userBuyer.setUser_id(1);
+            userBuyer.setUser_name("Josep");
+            userBuyer.setFollowed(followed);
 
+            List<UserDTORes> expected = new ArrayList<>();
+            expected.add(new UserDTORes(2, "Ethan"));
+            expected.add(new UserDTORes(3, "Kyle"));
+            expected.add(new UserDTORes(4, "Oliver"));
+
+            //Act
+            when(userBuyerRepository.findById(buyerUserId)).thenReturn(Optional.of(userBuyer));
+            FollowedListDTORes followedListDTORes = userBuyerServiceImp.getFollowed(buyerUserId, order);
+            List<UserDTORes> result = followedListDTORes.getFollowed();
+
+            //Assert
+            assertEquals(expected, result);
+        }
+
+        @Test
+        @DisplayName("Verify the correct descendent sortering by 'name_desc' in followed")
+        void descendentSortFollowedTestOk() {
+            //Arange
+            String order = "name_desc";
+            Integer buyerUserId = 1;
+
+            List<UserSeller> followed = new ArrayList<>();
+            UserSeller userSeller1 = new UserSeller();
+            userSeller1.setUser_id(4);
+            userSeller1.setUser_name("Oliver");
+            UserSeller userSeller2 = new UserSeller();
+            userSeller2.setUser_id(2);
+            userSeller2.setUser_name("Ethan");
+            UserSeller userSeller3 = new UserSeller();
+            userSeller3.setUser_id(3);
+            userSeller3.setUser_name("Kyle");
+            followed.add(userSeller1);
+            followed.add(userSeller2);
+            followed.add(userSeller3);
+
+            UserBuyer userBuyer = new UserBuyer();
+            userBuyer.setUser_id(1);
+            userBuyer.setUser_name("Josep");
+            userBuyer.setFollowed(followed);
+
+            List<UserDTORes> expected = new ArrayList<>();
+            expected.add(new UserDTORes(4, "Oliver"));
+            expected.add(new UserDTORes(3, "Kyle"));
+            expected.add(new UserDTORes(2, "Ethan"));
+
+            //Act
+            when(userBuyerRepository.findById(buyerUserId)).thenReturn(Optional.of(userBuyer));
+            FollowedListDTORes followedListDTORes = userBuyerServiceImp.getFollowed(buyerUserId, order);
+            List<UserDTORes> result = followedListDTORes.getFollowed();
+
+            //Assert
+            assertEquals(expected, result);
+        }
     }
 
-    @Test
-    @DisplayName("T-0007 US-0002. Sort by date DESC")
-    void sortBydateDESC() {
-        Integer user_id = 1;
-        UserSeller seller = UserSellerFactory.getUserSeller();
-        UserBuyer buyer = UserBuyerFactory.getUserBuyer();
-        buyer.getFollowed().add(seller);
+    @Nested
+    @DisplayName("T-0006. US-0009")
+    public class Test006 {
+        @Test
+        @DisplayName("Sort by date DESC")
+        void sortBydateDESC() {
+            Integer user_id = 1;
+            UserSeller seller = UserSellerFactory.getUserSeller();
+            UserBuyer buyer = UserBuyerFactory.getUserBuyer();
+            buyer.getFollowed().add(seller);
 
 
-        ArrayList<Post> posts = new ArrayList<>();
-        Post post1 = PostFactory.getPost(3, LocalDate.of(2022, 11, 25), new Product(3,
-                "Product 3", "Type 3", "Brand 3", "Color 3", "Notes 3"), 2, 2500.13);
+            ArrayList<Post> posts = new ArrayList<>();
+            Post post1 = PostFactory.getPost(3, LocalDate.of(2022, 11, 25), new Product(3,
+                    "Product 3", "Type 3", "Brand 3", "Color 3", "Notes 3"), 2, 2500.13);
 
-        Post post2 =PostFactory.getPost(7, LocalDate.of(2022, 11, 20), new Product(7,
-                "Product 7", "Type 7", "Brand 7", "Color 7", "Notes 7"), 2, 950.00);
+            Post post2 = PostFactory.getPost(7, LocalDate.of(2022, 11, 20), new Product(7,
+                    "Product 7", "Type 7", "Brand 7", "Color 7", "Notes 7"), 2, 950.00);
 
-        posts.add(post1);
-        posts.add(post2);
-        seller.setPosts(posts);
-
-
-        List<PostDTORes> postDtoResList= new ArrayList<>();
-
-        PostDTORes postDTORes = new PostDTORes(seller.getUser_id(), post1.getPost_id(), post1.getDate(),
-                new ProductDTORes(post1.getProduct()),
-                post1.getCategory(), post1.getPrice());
-
-        PostDTORes postDTORes2 = new PostDTORes(seller.getUser_id(), post2.getPost_id(), post2.getDate(),
-                new ProductDTORes(post2.getProduct()),
-                post1.getCategory(), post2.getPrice());
-
-        postDtoResList.add(postDTORes);
-        postDtoResList.add(postDTORes2);
+            posts.add(post1);
+            posts.add(post2);
+            seller.setPosts(posts);
 
 
-        when(userBuyerRepository.findById(user_id)).thenReturn(Optional.of(buyer));
+            List<PostDTORes> postDtoResList = new ArrayList<>();
 
-        PostFollowedByDateDTORes followedByDateDTORes = userBuyerServiceImp.getLastPosts(user_id, "date_desc");
+            PostDTORes postDTORes = new PostDTORes(seller.getUser_id(), post1.getPost_id(), post1.getDate(),
+                    new ProductDTORes(post1.getProduct()),
+                    post1.getCategory(), post1.getPrice());
 
-        assertTrue(postDtoResList.equals(followedByDateDTORes.getPosts()));
+            PostDTORes postDTORes2 = new PostDTORes(seller.getUser_id(), post2.getPost_id(), post2.getDate(),
+                    new ProductDTORes(post2.getProduct()),
+                    post1.getCategory(), post2.getPrice());
 
-    }
-    @Test
-    @DisplayName("T-0007 US-0002. Sort by date ASC")
-    void sortBydateASC() {
-        Integer user_id = 1;
-        UserSeller seller = UserSellerFactory.getUserSeller();
-        UserBuyer buyer = UserBuyerFactory.getUserBuyer();
-        buyer.getFollowed().add(seller);
+            postDtoResList.add(postDTORes);
+            postDtoResList.add(postDTORes2);
 
 
-        ArrayList<Post> posts = new ArrayList<>();
-        Post post1 = PostFactory.getPost(3, LocalDate.of(2022, 11, 25), new Product(3,
-                "Product 3", "Type 3", "Brand 3", "Color 3", "Notes 3"), 2, 2500.13);
+            when(userBuyerRepository.findById(user_id)).thenReturn(Optional.of(buyer));
 
-        Post post2 =PostFactory.getPost(7, LocalDate.of(2022, 11, 20), new Product(7,
-                "Product 7", "Type 7", "Brand 7", "Color 7", "Notes 7"), 2, 950.00);
+            PostFollowedByDateDTORes followedByDateDTORes = userBuyerServiceImp.getLastPosts(user_id, "date_desc");
 
-        posts.add(post1);
-        posts.add(post2);
-        seller.setPosts(posts);
+            assertTrue(postDtoResList.equals(followedByDateDTORes.getPosts()));
 
-        List<PostDTORes> postDtoResList= new ArrayList<>();
-        PostDTORes postDTORes = new PostDTORes(seller.getUser_id(), post1.getPost_id(), post1.getDate(),
-                new ProductDTORes(post1.getProduct()),
-                post1.getCategory(), post1.getPrice());
+        }
 
-        PostDTORes postDTORes2 = new PostDTORes(seller.getUser_id(), post2.getPost_id(), post2.getDate(),
-                new ProductDTORes(post2.getProduct()),
-                post1.getCategory(), post2.getPrice());
+        @Test
+        @DisplayName("Sort by date ASC")
+        void sortBydateASC() {
+            Integer user_id = 1;
+            UserSeller seller = UserSellerFactory.getUserSeller();
+            UserBuyer buyer = UserBuyerFactory.getUserBuyer();
+            buyer.getFollowed().add(seller);
 
-        postDtoResList.add(postDTORes2);
-        postDtoResList.add(postDTORes);
 
-        // ArrayList Posts
-        when(userBuyerRepository.findById(user_id)).thenReturn(Optional.of(buyer));
+            ArrayList<Post> posts = new ArrayList<>();
+            Post post1 = PostFactory.getPost(3, LocalDate.of(2022, 11, 25), new Product(3,
+                    "Product 3", "Type 3", "Brand 3", "Color 3", "Notes 3"), 2, 2500.13);
 
-        PostFollowedByDateDTORes followedByDateDTORes = userBuyerServiceImp.getLastPosts(user_id, "date_asc");
-        assertTrue(postDtoResList.equals(followedByDateDTORes.getPosts()));
+            Post post2 = PostFactory.getPost(7, LocalDate.of(2022, 11, 20), new Product(7,
+                    "Product 7", "Type 7", "Brand 7", "Color 7", "Notes 7"), 2, 950.00);
 
-    }
+            posts.add(post1);
+            posts.add(post2);
+            seller.setPosts(posts);
 
-    @Test
-    @DisplayName("T-0004. US-0008. Verify the correct ascendent sortering by 'name_asc' in followed")
-    void ascendentSortFollowedTestOk(){
-        //Arange
-        String order = "name_asc";
-        Integer buyerUserId=1;
+            List<PostDTORes> postDtoResList = new ArrayList<>();
+            PostDTORes postDTORes = new PostDTORes(seller.getUser_id(), post1.getPost_id(), post1.getDate(),
+                    new ProductDTORes(post1.getProduct()),
+                    post1.getCategory(), post1.getPrice());
 
-        List<UserSeller> followed =new ArrayList<>();
-        UserSeller userSeller1=new UserSeller(); userSeller1.setUser_id(4); userSeller1.setUser_name("Oliver");
-        UserSeller userSeller2=new UserSeller(); userSeller2.setUser_id(2); userSeller2.setUser_name("Ethan");
-        UserSeller userSeller3=new UserSeller(); userSeller3.setUser_id(3); userSeller3.setUser_name("Kyle");
-        followed.add(userSeller1);
-        followed.add(userSeller2);
-        followed.add(userSeller3);
+            PostDTORes postDTORes2 = new PostDTORes(seller.getUser_id(), post2.getPost_id(), post2.getDate(),
+                    new ProductDTORes(post2.getProduct()),
+                    post1.getCategory(), post2.getPrice());
 
-        UserBuyer userBuyer=new UserBuyer();
-        userBuyer.setUser_id(1);
-        userBuyer.setUser_name("Josep");
-        userBuyer.setFollowed(followed);
+            postDtoResList.add(postDTORes2);
+            postDtoResList.add(postDTORes);
 
-        List<UserDTORes> expected =new ArrayList<>();
-        expected.add(new UserDTORes(2,"Ethan"));
-        expected.add(new UserDTORes(3,"Kyle"));
-        expected.add(new UserDTORes(4,"Oliver"));
+            // ArrayList Posts
+            when(userBuyerRepository.findById(user_id)).thenReturn(Optional.of(buyer));
 
-        //Act
-        when(userBuyerRepository.findById(buyerUserId)).thenReturn(Optional.of(userBuyer));
-        FollowedListDTORes followedListDTORes= userBuyerServiceImp.getFollowed(buyerUserId,order);
-        List<UserDTORes> result= followedListDTORes.getFollowed();
-
-        //Assert
-        assertEquals(expected,result);
+            PostFollowedByDateDTORes followedByDateDTORes = userBuyerServiceImp.getLastPosts(user_id, "date_asc");
+            assertTrue(postDtoResList.equals(followedByDateDTORes.getPosts()));
+        }
     }
 
-    @Test
-    @DisplayName("T-0004. US-0008. Verify the correct descendent sortering by 'name_desc' in followed")
-    void descendentSortFollowedTestOk(){
-        //Arange
-        String order = "name_desc";
-        Integer buyerUserId=1;
+    @Nested
+    @DisplayName("T-0008. US-0006")
+    public class Test0009 {
+        @Test
+        void getLastPostTwoWeeksTest() {
+            //GIVEN
+            String order = "date_asc";
 
-        List<UserSeller> followed =new ArrayList<>();
-        UserSeller userSeller1=new UserSeller(); userSeller1.setUser_id(4); userSeller1.setUser_name("Oliver");
-        UserSeller userSeller2=new UserSeller(); userSeller2.setUser_id(2); userSeller2.setUser_name("Ethan");
-        UserSeller userSeller3=new UserSeller(); userSeller3.setUser_id(3); userSeller3.setUser_name("Kyle");
-        followed.add(userSeller1);
-        followed.add(userSeller2);
-        followed.add(userSeller3);
+            UserSeller userSeller4 = UserSellerFactory.getUserSeller4();
+            UserBuyer userBuyer5 = UserBuyerFactory.getUserBuyer5();
+            List<Post> postListTwoWeeksBySeller4 = PostFactory.getPostListTwoWeeksBySeller4();
+            userBuyer5.getFollowed().add(userSeller4);
+            userSeller4.getFollowers().add(userBuyer5);
 
-        UserBuyer userBuyer=new UserBuyer();
-        userBuyer.setUser_id(1);
-        userBuyer.setUser_name("Josep");
-        userBuyer.setFollowed(followed);
+            //WHEN
+            when(userBuyerRepository.findById(userBuyer5.getUser_id())).thenReturn(Optional.of(userBuyer5));
+            PostFollowedByDateDTORes current = userBuyerServiceImp.getLastPosts(userBuyer5.getUser_id(), order);
 
-        List<UserDTORes> expected =new ArrayList<>();
-        expected.add(new UserDTORes(4,"Oliver"));
-        expected.add(new UserDTORes(3,"Kyle"));
-        expected.add(new UserDTORes(2,"Ethan"));
-
-        //Act
-        when(userBuyerRepository.findById(buyerUserId)).thenReturn(Optional.of(userBuyer));
-        FollowedListDTORes followedListDTORes= userBuyerServiceImp.getFollowed(buyerUserId,order);
-        List<UserDTORes> result= followedListDTORes.getFollowed();
-
-        //Assert
-        assertEquals(expected,result);
+            //THEN
+            assertAll(
+                    () -> {
+                        assertTrue(current.getPosts().size() == 2);
+                    },
+                    () -> {
+                        assertEquals(postListTwoWeeksBySeller4.size(), current.getPosts().size());
+                    },
+                    () -> {
+                        assertTrue(current.getPosts().get(0).getDate().isAfter(LocalDate.now().minusWeeks(2)));
+                    }
+            );
+        }
     }
-
 }

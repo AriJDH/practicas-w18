@@ -2,16 +2,18 @@ package com.example.SocialMeli2.exception;
 
 import com.example.SocialMeli2.dto.respose.exception.ErrorDTO;
 import com.example.SocialMeli2.dto.respose.exception.ErrorValidationDTO;
+
 import org.springframework.beans.TypeMismatchException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
+
 import javax.validation.ConstraintViolationException;
-
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -43,7 +45,13 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(MissingServletRequestParameterException.class)
-    public ResponseEntity<ErrorDTO> MissingServletRequestParameterException(Exception e){
+    public ResponseEntity<ErrorDTO> MissingServletRequestParameterException(MissingServletRequestParameterException e){
+        ErrorDTO errorDTO = new ErrorDTO(400, e.getMessage());
+        return new ResponseEntity<>(errorDTO, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(HttpMessageNotReadableException.class)
+    public ResponseEntity<ErrorDTO> HttpMessageNotReadableException(Exception e){
         ErrorDTO errorDTO = new ErrorDTO(400, e.getMessage());
         return new ResponseEntity<>(errorDTO, HttpStatus.BAD_REQUEST);
     }

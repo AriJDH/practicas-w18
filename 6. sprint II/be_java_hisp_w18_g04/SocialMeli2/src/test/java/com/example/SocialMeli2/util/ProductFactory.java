@@ -14,4 +14,26 @@ public class ProductFactory {
         return product;
     }
 
+    public static Product getProduct9(){
+        Product product = new Product();
+        product.setProduct_id(9);
+        product.setProduct_name("Product 9");
+        product.setType("Type 9");
+        product.setBrand("Brand 9");
+        product.setColor("Color 9");
+        product.setNotes("Notes 9");
+        return product;
+    }
+
+    public static Product getProduct10(){
+        Product product = new Product();
+        product.setProduct_id(10);
+        product.setProduct_name("Product 10");
+        product.setType("Type 10");
+        product.setBrand("Brand 10");
+        product.setColor("Color 10");
+        product.setNotes("Notes 10");
+        return product;
+    }
+
 }

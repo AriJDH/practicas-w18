@@ -12,7 +12,6 @@ import com.example.SocialMeli2.repository.IUserSellerRepository;
 import com.example.SocialMeli2.util.Sorter;
 import org.springframework.stereotype.Service;
 
-import java.nio.Buffer;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;

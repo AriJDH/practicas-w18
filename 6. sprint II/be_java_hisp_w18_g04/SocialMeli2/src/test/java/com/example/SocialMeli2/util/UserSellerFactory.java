@@ -29,4 +29,16 @@ public class UserSellerFactory {
         userSellerList.add(userSeller);
         return userSellerList;
     }
+
+    public static UserSeller getUserSeller4(){
+        ArrayList<UserBuyer> followers = new ArrayList<>();
+        UserSeller userSeller = new UserSeller();
+        userSeller.setUser_id(4);
+        userSeller.setUser_name("Oliver");
+        userSeller.setFollowers(followers);
+        userSeller.setPosts(PostFactory.getPostListTwoWeeksBySeller4());
+        return userSeller;
+    }
+
+
 }
