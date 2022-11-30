@@ -52,6 +52,7 @@ public class UserControllerTest {
         // Arrange
         ResponseDto responseDto = new ResponseDto("El usuario 2 ahora sigue al usuario 4", 200);
 
+        // Act & Assert
         mockMvc.perform(MockMvcRequestBuilders.post(
                 "/users/{userId}/follow/{userIdToFollow}", 2, 4))
                 .andDo(print())
@@ -67,6 +68,7 @@ public class UserControllerTest {
         // Arrange
         ResponseDto responseDto = new ResponseDto("No es posible seguirse a si mismo.", 400);
 
+        // Act & Assert
         mockMvc.perform(MockMvcRequestBuilders.post(
                 "/users/{userId}/follow/{userIdToFollow}", 4, 4))
                 .andDo(print())
@@ -94,7 +96,7 @@ public class UserControllerTest {
         // Arrange
         ResponseDto responseDto = new ResponseDto("No se pudo encontrar al usuario 99", 400);
 
-        // Matchers
+        // Act & Assert
         mockMvc.perform(MockMvcRequestBuilders.get("/users/{userId}/followers/count", 99))
                 .andDo(print())
                 .andExpect(status().isBadRequest())
@@ -139,7 +141,7 @@ public class UserControllerTest {
 
         String payloadJson = writer.writeValueAsString(payloadDto);
 
-        // Matchers
+        // Act & Assert
         mockMvc.perform(MockMvcRequestBuilders.post("/products/post")
                     .contentType(MediaType.APPLICATION_JSON)
                     .content(payloadJson))
@@ -170,7 +172,39 @@ public class UserControllerTest {
 
         String payloadJson = writer.writeValueAsString(payloadDto);
 
-        // Matchers
+        // Act & Assert
+        mockMvc.perform(MockMvcRequestBuilders.post("/products/post")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(payloadJson))
+                .andDo(print())
+                .andExpect(status().isBadRequest())
+                .andExpect(content().contentType("application/json"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.messages").value(expectedDto.getMessages()))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.status").value(400))
+                .andReturn();
+    }
+
+    @Test
+    @DisplayName("US0005 POST /products/post (Sad Path: Invalid Arguments: color)")
+    void addPostIntTestSadInvalidArguments() throws Exception {
+        // Arrange
+        ResponseDto expectedDto = new ResponseDto(
+                "El campo no puede poseer caracteres especiales: color", 400);
+
+        ProductDto productDto = new ProductDto(1, "Sillar Gamer", "Gamer",
+                "Racer", "Red Black", "Special Edition");
+        PostDtoReq payloadDto = new PostDtoReq(3, LocalDate.now(), productDto, 100, 1500D);
+
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.registerModule(new JavaTimeModule());
+
+        ObjectWriter writer = mapper
+                .configure(SerializationFeature.WRAP_ROOT_VALUE,false)
+                .writer();
+
+        String payloadJson = writer.writeValueAsString(payloadDto);
+
+        // Act & Assert
         mockMvc.perform(MockMvcRequestBuilders.post("/products/post")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(payloadJson))
