@@ -1,0 +1,49 @@
+{
+  "errorValidationResponseList": [
+    {
+      "field": "productRequest.notes",
+      "rejectedValue": "Wow&",
+      "message": "El campo no puede poseer caracteres especiales."
+    },
+    {
+      "field": "productRequest.type",
+      "rejectedValue": "Gamer&",
+      "message": "El campo no puede poseer caracteres especiales"
+    },
+    {
+      "field": "productRequest.color",
+      "rejectedValue": "blue&",
+      "message": "El campo no puede poseer caracteres especiales"
+    },
+    {
+      "field": "productRequest.id",
+      "rejectedValue": 0,
+      "message": "El id debe ser mayor a cero."
+    },
+    {
+      "field": "date",
+      "rejectedValue": null,
+      "message": "El campo no puede estar vacío."
+    },
+    {
+      "field": "price",
+      "rejectedValue": 1.00000001E7,
+      "message": "El precio máximo por producto es de 10.000.000"
+    },
+    {
+      "field": "date",
+      "rejectedValue": null,
+      "message": "El campo no puede estar vacío."
+    },
+    {
+      "field": "productRequest.name",
+      "rejectedValue": "Monitor&",
+      "message": "El campo no puede poseer caracteres especiales."
+    },
+    {
+      "field": "userId",
+      "rejectedValue": 0,
+      "message": "El id debe ser mayor a cero."
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "user_id": 0,
+  "date": "",
+  "product": {
+    "product_id": 0,
+    "product_name": "Monitor&",
+    "type": "Gamer&",
+    "brand": "Samsung",
+    "color": "blue&",
+    "notes": "Wow&"
+  },
+  "category": 100,
+  "price": 10000000.1
+}
