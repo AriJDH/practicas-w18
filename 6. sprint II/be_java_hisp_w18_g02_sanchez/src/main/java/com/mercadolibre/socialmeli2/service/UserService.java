@@ -37,7 +37,7 @@ public class UserService implements IUserService {
     public String follow(Integer idFollower, Integer idFollow) {
         //this.userRepository.follow(userId, userIdToFollow);
         if(idFollower == idFollow)
-            throw new IllegalArgumentException("No es posible seguirse a si mismo.");
+            throw new IllegalArgumentException(Constants.ERROR_MSG_USER_FOLLOW_SELF);
 
         User userFollower = userRepository.findById(idFollower);
         if(userFollower == null)

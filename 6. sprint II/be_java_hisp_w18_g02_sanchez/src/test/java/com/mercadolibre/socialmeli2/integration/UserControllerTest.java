@@ -5,6 +5,8 @@ import com.fasterxml.jackson.databind.ObjectWriter;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.mercadolibre.socialmeli2.dto.request.PostDtoReq;
+import com.mercadolibre.socialmeli2.dto.response.PostDtoRes;
+import com.mercadolibre.socialmeli2.dto.response.RecentPostsDtoRes;
 import com.mercadolibre.socialmeli2.dto.response.ResponseDto;
 import com.mercadolibre.socialmeli2.repository.UserRepository;
 import com.mercadolibre.socialmeli2.utils.Constants;
@@ -64,7 +66,7 @@ public class UserControllerTest {
 
     @Test
     @DisplayName("T-INT-0001 Verificar agregar publicación (US-0005). Caso de éxito.")
-    public void testAddPostSuccesfully() throws Exception {
+    public void testAddPostSuccess() throws Exception {
         //Arrenge
         PostDtoReq postDtoReq = PostDtoReqFactory.getPostDtoReq(3);
         ResponseDto expectedResponseDto = new ResponseDto(Constants.SUCCESS_MSG_ADD_POST, 200);
@@ -205,5 +207,78 @@ public class UserControllerTest {
         //System.out.println("\nMENSAJES DE ERROR OBTENIDOS "+msgsList.size()+":\n"+msgsList);
     }
 
+    @Test
+    @DisplayName("T-INT-0003 Verificar seguir usuario (US-0001). Caso de éxito.")
+    public void testFollowUserSuccess() throws Exception {
+        //Arrenge
+        int followerUserId = 2;
+        int toFollowUserId = 3;
+        ResponseDto expectedResponseDto = new ResponseDto(
+                "El usuario " + followerUserId + " ahora sigue al usuario " + toFollowUserId,
+                200
+        );
+        String endPointUrl = "/users/"+followerUserId+"/follow/"+toFollowUserId;
+        MockHttpServletRequestBuilder request = MockMvcRequestBuilders.post(endPointUrl);
 
+        //Act and Assert
+        mockMvc.perform(request).andDo(print()).andExpectAll(
+                MockMvcResultMatchers.status().isOk(),
+                MockMvcResultMatchers.jsonPath("$.messages").value(expectedResponseDto.getMessages()),
+                MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON)
+        );
+    }
+
+    @Test
+    @DisplayName("T-INT-0003 Verificar seguir usuario (US-0001). Caso de error (sigue a si mismo).")
+    public void testFollowUserFailureFollowSelf() throws Exception {
+        //Arrenge
+        int followerUserId = 1;
+        int toFollowUserId = 1;
+        ResponseDto eDto = new ResponseDto(Constants.ERROR_MSG_USER_FOLLOW_SELF, 400);
+        ResponseEntity<ResponseDto> expectedResponse = new ResponseEntity<>(eDto, HttpStatus.valueOf(eDto.getStatus()));
+        String endPointUrl = "/users/"+followerUserId+"/follow/"+toFollowUserId;
+        MockHttpServletRequestBuilder request = MockMvcRequestBuilders.post(endPointUrl);
+
+        //Act and Assert
+        mockMvc.perform(request).andDo(print()).andExpectAll(
+                MockMvcResultMatchers.status().isBadRequest(),
+                MockMvcResultMatchers.jsonPath("$.messages").value(expectedResponse.getBody().getMessages()),
+                MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON)
+        );
+    }
+
+    @Test
+    @DisplayName("T-INT-0003 Verificar obtener publicaciones recientes (US-0006 y US-0009). Caso de éxito.")
+    public void testGetRecentPostsSuccess() throws Exception {
+        //Arrenge
+        int userId = 2;
+        RecentPostsDtoRes excpectedDto = new RecentPostsDtoRes(userId, new ArrayList<PostDtoRes>());
+        String endPointUrl = "/products/followed/"+userId+"/list";
+        MockHttpServletRequestBuilder request = MockMvcRequestBuilders.get(endPointUrl);
+
+        //Act and Assert
+        mockMvc.perform(request).andDo(print()).andExpectAll(
+                MockMvcResultMatchers.status().isOk(),
+                MockMvcResultMatchers.content().json(writer.writeValueAsString(excpectedDto)),
+                MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON)
+        );
+    }
+
+    @Test
+    @DisplayName("T-INT-0003 Verificar obtener publicaciones recientes (US-0006 y US-0009). Caso de error (order inválido).")
+    public void testGetRecentPostsFailureOrderInvalid() throws Exception {
+        //Arrenge
+        int userId = 2;
+        ResponseDto eDto = new ResponseDto("El tipo de ordenamiento no es válido.", 400);
+        ResponseEntity<ResponseDto> expectedResponse = new ResponseEntity<>(eDto, HttpStatus.valueOf(eDto.getStatus()));
+        String endPointUrl = "/products/followed/"+userId+"/list?order=ORDERNOTEXISTS";
+        MockHttpServletRequestBuilder request = MockMvcRequestBuilders.get(endPointUrl);
+
+        //Act and Assert
+        mockMvc.perform(request).andDo(print()).andExpectAll(
+                MockMvcResultMatchers.status().isBadRequest(),
+                MockMvcResultMatchers.jsonPath("$.messages").value(expectedResponse.getBody().getMessages()),
+                MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON)
+        );
+    }
 }

@@ -36,6 +36,7 @@ public abstract class Constants {
     public static final String MAX_LENGTH_80= "La longitud no puede superar los 80 caracteres: notes";
     public static final String NOTES_SPECIAL_CHARACTERS_NOT_ALLOWED= "El campo no puede poseer caracteres especiales: notes";
     public static final String ERROR_MSG_USER_NOT_FOUND= "No se pudo encontrar al usuario con id ";
+    public static final String ERROR_MSG_USER_FOLLOW_SELF= "No es posible seguirse a si mismo.";
     public static final String SUCCESS_MSG_ADD_POST= "Post creado correctamente";
 
 }
