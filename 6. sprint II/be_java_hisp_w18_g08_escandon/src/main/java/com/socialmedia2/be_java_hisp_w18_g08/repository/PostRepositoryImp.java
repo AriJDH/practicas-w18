@@ -51,6 +51,10 @@ public class PostRepositoryImp implements IPostRepository{
         posts.add(ps4);
 
     }
+    @Override
+    public void clearRepo() {
+        this.posts.clear();
+    }
 
     @Override
     public void save(Post post) {

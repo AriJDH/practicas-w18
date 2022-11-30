@@ -12,13 +12,13 @@ import java.util.List;
 @Repository
 @Getter
 public class UserRepositoryImp implements IUserRepository{
-    List<User> users;
-    List<Seller> sellers;
+    List<User> users = new ArrayList<>();
+    List<Seller> sellers = new ArrayList<>();
     IPostRepository postRepository;
 
     public UserRepositoryImp(PostRepositoryImp postRepository) {
-        users = new ArrayList<>();
-        sellers = new ArrayList<>();
+        //users ;
+        //sellers = new ArrayList<>();
         //Carga de Datos inicial
         this.postRepository = postRepository;
         List<User> followers = new ArrayList<>();
@@ -63,6 +63,19 @@ public class UserRepositoryImp implements IUserRepository{
         this.users.add(u2);
         this.users.add(u3);
         this.users.add(u4);
+    }
+    @Override
+    public void clearRepo(){
+        this.users.clear();
+        this.sellers.clear();
+    }
+
+    public void addUser(User user) {
+        this.users.add(user);
+    }
+
+    public void addSeller(Seller seller) {
+        this.sellers.add(seller);
     }
 
     //refactorizar nombre

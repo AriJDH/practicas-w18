@@ -10,4 +10,6 @@ public interface IPostRepository {
     List<Post> getAll();
     Post getById(Integer id);
     Boolean add(Post post);
+
+    void clearRepo();
 }
