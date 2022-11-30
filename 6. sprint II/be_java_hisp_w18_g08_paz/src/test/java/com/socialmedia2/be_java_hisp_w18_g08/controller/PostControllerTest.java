@@ -125,7 +125,7 @@ class PostControllerTest {
 
     @Order(4)
     @Test
-    @DisplayName("T00011 - Get posts list by user id validation exception")
+    @DisplayName("T00010 - Get posts list by user id validation exception")
     void getPostSellerListByUserIdValidationException() throws Exception{
         // Arrange
         ExceptionDto expectedDto = new ExceptionDto(List.of("getPostSellerListByUserId.userId: El id debe ser mayor a cero"),404,LocalDate.now());
@@ -144,7 +144,7 @@ class PostControllerTest {
 
     @Order(5)
     @Test
-    @DisplayName("T00012 - Get posts list by user id exception")
+    @DisplayName("T00010 - Get posts list by user id exception")
     void getPostSellerListByUserIdException() throws Exception{
         // Arrange
         ExceptionDto expectedDto = new ExceptionDto(List.of("User with id: 10Not found"),404,LocalDate.now());

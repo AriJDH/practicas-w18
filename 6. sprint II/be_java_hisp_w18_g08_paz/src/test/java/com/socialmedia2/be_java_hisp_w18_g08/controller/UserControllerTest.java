@@ -46,7 +46,7 @@ class UserControllerTest {
 
     @Order(1)
     @Test
-    @DisplayName("T0013 - Follow OK")
+    @DisplayName("T0011 - Follow OK")
     void followOk() throws Exception {
         //Arrange
         FollowDtoRes expectedDto = new FollowDtoRes(200,"User with id:1 already follow to Seller with id:6");
@@ -68,7 +68,7 @@ class UserControllerTest {
 
     @Order(2)
     @Test
-    @DisplayName("T0014 - Follow NoOK")
+    @DisplayName("T0011 - Follow NoOK")
     void followNoOk()throws Exception{
         //Arrange
         ExceptionDto expectedDto = new ExceptionDto(List.of("User with id: 10Not found"),404, LocalDate.now());
@@ -91,7 +91,7 @@ class UserControllerTest {
 
     @Order(3)
     @Test
-    @DisplayName("T0015 - Unfollow OK")
+    @DisplayName("T0012 - Unfollow OK")
     void unfollowOk() throws Exception {
         //Arrange
         ResponseMessasgeDto expectedDto = new ResponseMessasgeDto("User1 with id: 1 unfollow to -> User6 with id: 6", 200, LocalDate.now());
@@ -109,7 +109,7 @@ class UserControllerTest {
 
     @Order(4)
     @Test
-    @DisplayName("T0016 - Unfollow NoOK")
+    @DisplayName("T0012 - Unfollow NoOK")
     void unfollowNoOk() throws Exception {
         // Act & Assert
         mockMvc
@@ -124,7 +124,7 @@ class UserControllerTest {
 
     @Order(5)
     @Test
-    @DisplayName("T0017 - Followers Quantity OK")
+    @DisplayName("T0013 - Followers Quantity OK")
     void followersQuantityOk() throws Exception {
         //Arrange
         SellerFollowersCountDto expectedDto = new SellerFollowersCountDto(6,"User6",4);
@@ -146,7 +146,7 @@ class UserControllerTest {
 
     @Order(6)
     @Test
-    @DisplayName("T0018 - Followers Quantity NoOK")
+    @DisplayName("T0013 - Followers Quantity NoOK")
     void followersQuantityNoOk() throws Exception {
         // Act & Assert
         mockMvc
