@@ -25,7 +25,7 @@ public class UserControllerIntegrationTest {
         this.mockMvc.perform(MockMvcRequestBuilders.post("/users/{userId}/follow/{userIdToFollow}", 1, 5))
                 .andDo(print()).andExpect(status().isOk())
                 .andExpect(content().contentType("application/json"))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.message").value("User with id:1 already follow to Seller with id:5"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.message").value("User1 with id: 1 is following -> User5 with id: 5"))
                 .andReturn();
 
     }
@@ -35,7 +35,7 @@ public class UserControllerIntegrationTest {
         this.mockMvc.perform(MockMvcRequestBuilders.post("/users/{userId}/follow/{userIdToFollow}", 10, 5))
                 .andDo(print()).andExpect(status().isNotFound())
                 .andExpect(content().contentType("application/json"))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.message").value("User with id: 10Not found"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.message").value("User with id:10 not found"))
                 .andReturn();
 
     }
@@ -46,6 +46,16 @@ public class UserControllerIntegrationTest {
                 .andDo(print()).andExpect(status().isOk())
                 .andExpect(content().contentType("application/json"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.message").value("User1 with id: 1 unfollow to -> User5 with id: 5"))
+                .andReturn();
+
+    }
+
+    @Test
+    void unfollowErrorTest()throws Exception{
+        this.mockMvc.perform(MockMvcRequestBuilders.post("/users/{userId}/unfollow/{userIdToUnfollow}", 10, 5))
+                .andDo(print()).andExpect(status().isNotFound())
+                .andExpect(content().contentType("application/json"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.message").value("User with id:10 not found"))
                 .andReturn();
 
     }
