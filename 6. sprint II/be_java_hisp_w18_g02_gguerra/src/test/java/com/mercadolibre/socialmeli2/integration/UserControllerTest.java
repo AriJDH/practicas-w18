@@ -13,6 +13,7 @@ import com.mercadolibre.socialmeli2.entity.User;
 import com.mercadolibre.socialmeli2.repository.UserRepository;
 import com.mercadolibre.socialmeli2.utils.UserFactory;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -43,6 +44,7 @@ public class UserControllerTest {
     UserRepository userRepository;
 
     @Test
+    @DisplayName("Test integracion 1: Agregar Post")
     void testAddPost () throws Exception {
         // Arrange
         userRepository.setUsers(UserFactory.loadUsers());
@@ -71,6 +73,7 @@ public class UserControllerTest {
 
 
     @Test
+    @DisplayName("Test integracion 2: Obtener lista de seguidos")
     void testGetFollowed () throws Exception {
         // Arrange
         userRepository.setUsers(UserFactory.loadUsers());
