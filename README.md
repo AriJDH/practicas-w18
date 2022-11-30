@@ -47,3 +47,6 @@ Cada desarrolador cuenta con un branch con la estructura ya creada a su nombre p
    
    `git push`
 testing permissions from desktop
+
+# Documentación Api's
+http://localhost:8080/swagger-ui.html
