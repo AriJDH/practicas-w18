@@ -1,6 +1,7 @@
 package com.example.socialmeli2.integration;
 
 import com.example.socialmeli2.dto.request.PublicationRequest;
+import com.example.socialmeli2.dto.response.ErrorResponse;
 import com.example.socialmeli2.util.PublicationFactory;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.*;
@@ -27,6 +28,46 @@ class PublicationControllerTest {
 
     @Autowired
     private ObjectMapper objectMapper;
+
+    @Nested
+    @DisplayName("T-0010 - Integration - User followed seller publications")
+    class getUserFollowedPublicationsById {
+        @Test
+        void whenValidInput_thenReturns200() throws Exception {
+            // Arrange
+            Integer userId = 1;
+            /* Matchers */
+            ResultMatcher expectedStatus = MockMvcResultMatchers.status().is2xxSuccessful();
+            /* Request */
+            MockHttpServletRequestBuilder requestBuilder = MockMvcRequestBuilders
+                    .get("/products/followed/{userId}/list", userId);
+            // Act & Assert
+            mockMvc.perform(requestBuilder)
+                    .andDo(MockMvcResultHandlers.print())
+                    .andExpectAll(expectedStatus);
+        }
+
+        @Test
+        void whenUserNotFound_thenReturnErrorResponse() throws Exception {
+            // Arrange
+            Integer userId = 20;
+            /* Expected */
+            ErrorResponse errorResponse = new ErrorResponse("No existe usuario con ID: 20", 400);
+            String errorJson = objectMapper.writeValueAsString(errorResponse);
+            /* Matchers */
+            ResultMatcher expectedStatus = MockMvcResultMatchers.status().is4xxClientError();
+            ResultMatcher expectedJson = MockMvcResultMatchers.content().json(errorJson);
+            ResultMatcher expectedContentType = MockMvcResultMatchers
+                    .content().contentType(MediaType.APPLICATION_JSON);
+            /* Request */
+            MockHttpServletRequestBuilder requestBuilder = MockMvcRequestBuilders
+                    .get("/products/followed/{userId}/list", userId);
+            // Act & Assert
+            mockMvc.perform(requestBuilder)
+                    .andDo(MockMvcResultHandlers.print())
+                    .andExpectAll(expectedStatus, expectedJson, expectedContentType);
+        }
+    }
 
     /**
      * T-0009
