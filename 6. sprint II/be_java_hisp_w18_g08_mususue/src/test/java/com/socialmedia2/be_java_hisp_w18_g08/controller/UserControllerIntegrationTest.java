@@ -60,4 +60,15 @@ public class UserControllerIntegrationTest {
 
     }
 
+    @Test
+    void followedListOkTest()throws Exception{
+        this.mockMvc.perform(MockMvcRequestBuilders.get("/users/{userId}/followed/list", 1))
+                .andDo(print()).andExpect(status().isOk())
+                .andExpect(content().contentType("application/json"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.user_id").value(1))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.user_name").value("User1"))
+                .andReturn();
+
+    }
+
 }
