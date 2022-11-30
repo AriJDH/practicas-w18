@@ -74,6 +74,7 @@ public class UserRepository implements IUserRepository {
 		products.add(product2);
 		posts.add(post1);
 		posts.add(post2);
+		user1.setFollowers(new ArrayList<>());
 		users.add(user1);
 		users.add(user2);
 		addPostToUser();

@@ -42,9 +42,8 @@ class UserServiceTest {
             //MOCK
             when(repository.findUserById(user.getUser_id())).thenReturn(Optional.of(user));
             //ASSERT
-            assertEquals(user, repository.findUserById(user.getUser_id()).get());
+            //assertEquals(user, repository.findUserById(user.getUser_id()).get());
             Assertions.assertTrue(service.userFollowedHasPosts(user));
-          //  Assertions.assertDoesNotThrow(()->service.followUser(user2.getUser_id(), user.getUser_id()));
 
         }
 
@@ -57,7 +56,7 @@ class UserServiceTest {
             //MOCK
             when(repository.findUserById(idUnexists)).thenReturn(Optional.empty());
             //ASSERT
-            assertEquals(Optional.empty(),repository.findUserById(idUnexists));
+            //assertEquals(Optional.empty(),repository.findUserById(idUnexists));
             Assertions.assertFalse(service.userIsPresent(idUnexists));
 
         }
@@ -72,7 +71,9 @@ class UserServiceTest {
             //ARRANGE
 
             User userToUnfollow = getUserWithFollowersListAndPosts("userToUnfollow");
+            userToUnfollow.setUser_id(1);
             User userFollower = userToUnfollow.getFollowers().get(0);
+            userFollower.setUser_id(2);
             userFollower.setFollowed(Collections.singletonList(userToUnfollow));
 
             //MOCK

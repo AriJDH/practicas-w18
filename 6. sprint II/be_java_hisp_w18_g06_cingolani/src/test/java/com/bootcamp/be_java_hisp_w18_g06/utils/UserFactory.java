@@ -62,7 +62,7 @@ public class UserFactory {
         post1.setDate(LocalDate.now());
         Post post2 = new Post();
         post2.setDate(LocalDate.now().minusWeeks(1));
-        Post post3 = new Post();
+        Post post3 = new Post() ;
         post3.setDate(LocalDate.now().minusWeeks(3));
         postList.add(post2);
         postList.add(post3);

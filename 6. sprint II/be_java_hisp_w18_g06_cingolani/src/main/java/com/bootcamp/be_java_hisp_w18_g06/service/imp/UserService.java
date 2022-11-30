@@ -42,12 +42,9 @@ public class UserService implements IUserService {
 
         /* Init variables */
         /* Traer la lista de usuarios
-        Verificar existencia userId y userIdToFollow
-        */
+        Verificar existencia userId y userIdToFollow */
         Optional<User> usFollower = userRepository.findUserById(userId);
-        User userFollower = usFollower.get();
         Optional<User> usFollowed = userRepository.findUserById(userIdToFollow);
-        User userFollowed = usFollowed.get();
         Boolean usersAreDifferent = userIdDiffUserIdToFollow(userId, userIdToFollow);
 
         //verificación
@@ -56,9 +53,12 @@ public class UserService implements IUserService {
         }
 
         //busca en el repo si están presentes los usuarios
-        if (!userIsPresent(usFollowed.get().getUser_id())) {
-            throw new BadRequestException("This user doesn't exit");
+        if ( !userIsPresent(userId) || !userIsPresent(userIdToFollow)) {
+            throw new BadRequestException("This user doesn't exist");
         }
+
+        User userFollower = usFollower.get();
+        User userFollowed = usFollowed.get();
 
         //verifica que el usuario tenga post para poder ser seguido
         if (!userFollowedHasPosts(usFollowed.get())) {
@@ -79,15 +79,21 @@ public class UserService implements IUserService {
     }
 
 
-    //US-007
-    private void removeFromFollow(User user) {
-        user.getFollowed().remove(user.getUser_id());
-    }
 
 
     @Override
     public void unfollowUser(Integer userId, Integer userIdToUnfollow) {
 
+        /*Validations of users */
+        /* Users with different id */
+        if (!userIdDiffUserIdToFollow(userId, userIdToUnfollow)) {
+            throw new BadRequestException("You can't unfollow yourself");
+        }
+
+        /* Search the repository if users are presents */
+        if (!userIsPresent(userIdToUnfollow) || !userIsPresent(userId)) {
+            throw new BadRequestException("User doesn't exist");
+        }
 
         /* Init variables */
         Optional<User> usFollower = userRepository.findUserById(userId);
@@ -100,17 +106,17 @@ public class UserService implements IUserService {
         List<User> listFollowers = usUnfollowed.get().getFollowers();
 
 
+/*
+        User usFollower = userRepository.findUserById(userId)
+                .orElseThrow(()-> new BadRequestException("User doesn't exist"));
+        User usUnfollowed = userRepository.findUserById(userIdToUnfollow)
+                .orElseThrow(() -> new BadRequestException("User doesn't exist"));
 
-        /*Validations*/
-        /* Users with different id */
-        if (!userIdDiffUserIdToFollow(userId, userIdToUnfollow)) {
-            throw new BadRequestException("You can't unfollow yourself");
-        }
+        boolean isInListToUnfollowed = userRepository.findUserInList(usFollower.getFollowed(), userIdToUnfollow).isPresent();
+        boolean userIdIsInListToFollowers = userRepository.findUserInList(usUnfollowed.getFollowers(), userId).isPresent();
 
-        /* Search the repository if users are presents */
-        if (!userIsPresent(usUnfollowed.get().getUser_id()) || !userIsPresent(usFollower.get().getUser_id())) {
-            throw new BadRequestException("User doesn't exist");
-        }
+        List<User> listFollowed = usFollower.getFollowed();
+        List<User> listFollowers = usUnfollowed.getFollowers();*/
 
         //booleans
         if (!isInListToUnfollowed || !userIdIsInListToFollowers) {
@@ -228,6 +234,11 @@ public class UserService implements IUserService {
     public boolean userFollowedHasPosts(User user) {
         return user.getPosts() != null;
     }
-    //Metodo para seguir
+
+
+    //US-007
+    private void removeFromFollow(User user) {
+        user.getFollowed().remove(user.getUser_id());
+    }
 
 }

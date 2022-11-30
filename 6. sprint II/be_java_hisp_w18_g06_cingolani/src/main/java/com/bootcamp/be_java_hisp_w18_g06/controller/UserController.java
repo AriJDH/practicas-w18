@@ -19,18 +19,14 @@ public class UserController {
 
     @PostMapping("/{userId}/follow/{userIdToFollow}")
     public ResponseEntity<?> followUser(@PathVariable int userId, @PathVariable int userIdToFollow) {
-
             userService.followUser(userId, userIdToFollow);
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-
     }
 
     @PostMapping("/{userId}/unfollow/{userIdToUnfollow}")
     public ResponseEntity<?> unfollowUser(@PathVariable int userId, @PathVariable int userIdToUnfollow) {
-
         userService.unfollowUser(userId, userIdToUnfollow);
-        return new ResponseEntity<>(HttpStatus.OK);
-
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
     @GetMapping("/{userId}/followers/count")
