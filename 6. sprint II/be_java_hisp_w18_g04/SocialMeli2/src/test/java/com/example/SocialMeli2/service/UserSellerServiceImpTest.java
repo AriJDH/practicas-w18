@@ -99,24 +99,8 @@ class UserSellerServiceImpTest {
             String order = "name_asc";
             Integer sellerUserId = 2;
 
-            List<UserBuyer> followers = new ArrayList<>();
-            UserBuyer userBuyer1 = new UserBuyer();
-            userBuyer1.setUser_id(1);
-            userBuyer1.setUser_name("Josep");
-            UserBuyer userBuyer2 = new UserBuyer();
-            userBuyer2.setUser_id(3);
-            userBuyer2.setUser_name("Louis");
-            UserBuyer userBuyer3 = new UserBuyer();
-            userBuyer3.setUser_id(4);
-            userBuyer3.setUser_name("Kevin");
-            followers.add(userBuyer1);
-            followers.add(userBuyer2);
-            followers.add(userBuyer3);
-            UserSeller userSeller = new UserSeller();
-            userSeller.setUser_id(2);
-            userSeller.setUser_name("Ethan");
-            userSeller.setFollowers(followers);
-            userSeller.setPosts(new ArrayList<>());
+            UserSeller userSeller = UserSellerFactory.getUserSeller2();
+
 
             List<UserDTORes> expected = new ArrayList<>();
             expected.add(new UserDTORes(1, "Josep"));
@@ -138,25 +122,8 @@ class UserSellerServiceImpTest {
             //Arrange
             String order = "name_desc";
             Integer sellerUserId = 2;
+            UserSeller userSeller = UserSellerFactory.getUserSeller2();
 
-            List<UserBuyer> followers = new ArrayList<>();
-            UserBuyer userBuyer1 = new UserBuyer();
-            userBuyer1.setUser_id(1);
-            userBuyer1.setUser_name("Josep");
-            UserBuyer userBuyer2 = new UserBuyer();
-            userBuyer2.setUser_id(3);
-            userBuyer2.setUser_name("Louis");
-            UserBuyer userBuyer3 = new UserBuyer();
-            userBuyer3.setUser_id(4);
-            userBuyer3.setUser_name("Kevin");
-            followers.add(userBuyer1);
-            followers.add(userBuyer2);
-            followers.add(userBuyer3);
-            UserSeller userSeller = new UserSeller();
-            userSeller.setUser_id(2);
-            userSeller.setUser_name("Ethan");
-            userSeller.setFollowers(followers);
-            userSeller.setPosts(new ArrayList<>());
 
             List<UserDTORes> expected = new ArrayList<>();
             expected.add(new UserDTORes(3, "Louis"));

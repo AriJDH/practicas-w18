@@ -19,17 +19,6 @@ public class UserSellerFactory {
         return userSeller;
     }
 
-    public static List<UserSeller> getUserSellerList(){
-        List<UserSeller> userSellerList = new ArrayList<>();
-        UserSeller userSeller = new UserSeller();
-        userSeller.setUser_id(3);
-        userSeller.setUser_name("Kyle");
-        userSeller.setFollowers(new ArrayList<>());
-        userSeller.setPosts(PostFactory.getPostList());
-        userSellerList.add(userSeller);
-        return userSellerList;
-    }
-
     public static UserSeller getUserSeller4(){
         ArrayList<UserBuyer> followers = new ArrayList<>();
         UserSeller userSeller = new UserSeller();
@@ -37,6 +26,27 @@ public class UserSellerFactory {
         userSeller.setUser_name("Oliver");
         userSeller.setFollowers(followers);
         userSeller.setPosts(PostFactory.getPostListTwoWeeksBySeller4());
+        return userSeller;
+    }
+    public static UserSeller getUserSeller2(){
+        List<UserBuyer> followers = new ArrayList<>();
+        UserBuyer userBuyer1 = new UserBuyer();
+        userBuyer1.setUser_id(1);
+        userBuyer1.setUser_name("Josep");
+        UserBuyer userBuyer2 = new UserBuyer();
+        userBuyer2.setUser_id(3);
+        userBuyer2.setUser_name("Louis");
+        UserBuyer userBuyer3 = new UserBuyer();
+        userBuyer3.setUser_id(4);
+        userBuyer3.setUser_name("Kevin");
+        followers.add(userBuyer1);
+        followers.add(userBuyer2);
+        followers.add(userBuyer3);
+        UserSeller userSeller = new UserSeller();
+        userSeller.setUser_id(2);
+        userSeller.setUser_name("Ethan");
+        userSeller.setFollowers(followers);
+        userSeller.setPosts(new ArrayList<>());
         return userSeller;
     }
 

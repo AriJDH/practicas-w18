@@ -29,28 +29,6 @@ public class UserBuyerServiceImp implements IUserBuyerService {
         this.userSellerRepository = userSellerRepository;
     }
 
-    private Boolean validateBuyer(Integer id) {
-        Boolean valid = false;
-        List<UserBuyer> buyers = userBuyerRepository.findAll();
-        for (UserBuyer buyer : buyers) {
-            if (buyer.getUser_id().equals(id)) {
-                valid = true;
-            }
-        }
-        return valid;
-    }
-
-    private Boolean validateSeller(Integer id) {
-        Boolean valid = false;
-        List<UserSeller> sellers = userSellerRepository.findAll();
-        for (UserSeller seller : sellers) {
-            if (seller.getUser_id().equals(id)) {
-                valid = true;
-            }
-        }
-        return valid;
-    }
-
     @Override
     public FollowDTORes follow(Integer userId, Integer userIdToFollow) {
         UserBuyer buyer = getBuyer(userId);
