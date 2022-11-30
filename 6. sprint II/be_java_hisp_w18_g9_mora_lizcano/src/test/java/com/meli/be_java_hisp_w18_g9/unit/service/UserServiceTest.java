@@ -170,7 +170,7 @@ class UserServiceTest {
         // ARRANGE
         User userTarget = User.builder()
                 .userId(1)
-                .userName("Ariel")
+                .userName("Angie")
                 .build();
 
         User userFollower1 = User.builder()
@@ -224,7 +224,7 @@ class UserServiceTest {
         //--------------------- Arrange ------------------------------------------------------
 
         //------ Create user for test
-        User userTest1 = new User(1, "Ariel", new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
+        User userTest1 = new User(1, "Ana", new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
         User userTest2 = new User(2, "Martin", new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
         User userTest3 = new User(3, "User 3", new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
         User userTest4 = new User(4, "Charly", new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
@@ -288,7 +288,7 @@ class UserServiceTest {
         //--------------------- Arrange ------------------------------------------------------
 
         //------ Create user for test
-        User userTest1 = new User(1, "Ariel", new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
+        User userTest1 = new User(1, "Agustin", new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
         User userTest2 = new User(2, "Martin", new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
         User userTest3 = new User(3, "User 3", new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
         User userTest4 = new User(4, "Charly", new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
@@ -352,7 +352,7 @@ class UserServiceTest {
         //--------------------- Arrange ------------------------------------------------------
 
         //------ Create user for test
-        User userTest1 = new User(1, "Ariel", new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
+        User userTest1 = new User(1, "Armando", new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
         User userTest2 = new User(2, "Martin", new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
         User userTest3 = new User(3, "User 3", new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
         User userTest4 = new User(4, "Charly", new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
@@ -417,7 +417,7 @@ class UserServiceTest {
         //--------------------- Arrange ------------------------------------------------------
 
         //------ Create user for test
-        User userTest1 = new User(1, "Ariel", new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
+        User userTest1 = new User(1, "Alex", new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
         User userTest2 = new User(2, "Martin", new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
         User userTest3 = new User(3, "User 3", new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
         User userTest4 = new User(4, "Charly", new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
