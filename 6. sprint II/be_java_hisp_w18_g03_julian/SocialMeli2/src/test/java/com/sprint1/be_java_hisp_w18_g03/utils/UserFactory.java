@@ -81,6 +81,30 @@ public class UserFactory {
         return  expected;
     }
 
+    public static FollowersDTO userWithFollowersNoOrder(){
+        FollowersDTO expected = new FollowersDTO();
+        expected.setUserId(1);
+        expected.setUserName("Juan");
+        expected.getFollowers().add(new UserDTO(2, "Pepe"));
+        expected.getFollowers().add(new UserDTO(3, "Ana"));
+        expected.getFollowers().add(new UserDTO(4, "Federico"));
+        expected.getFollowers().add(new UserDTO(5, "Jose"));
+        expected.getFollowers().add(new UserDTO(6, "Santiago"));
+        return expected;
+    }
+
+    public static FollowedDTO userWithFollowedNoOrder(){
+        FollowedDTO expected = new FollowedDTO();
+        expected.setUserId(1);
+        expected.setUserName("Juan");
+        expected.getFollowed().add(new UserDTO(2, "Pepe"));
+        expected.getFollowed().add(new UserDTO(3, "Ana"));
+        expected.getFollowed().add(new UserDTO(4, "Federico"));
+        expected.getFollowed().add(new UserDTO(5, "Jose"));
+        expected.getFollowed().add(new UserDTO(6, "Santiago"));
+        return expected;
+    }
+
     public static FollowedDTO userWithFollowedOrderAsc(){
         FollowedDTO expected = new FollowedDTO();
         expected.setUserId(1);

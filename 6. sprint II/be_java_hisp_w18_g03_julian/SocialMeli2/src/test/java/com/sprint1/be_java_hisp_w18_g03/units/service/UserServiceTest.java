@@ -206,6 +206,23 @@ public class UserServiceTest {
     }
 
     @Test
+    @DisplayName("T-0004 Verificar sin orden nombre lista seguidores. (US-0008) :D")
+    public void noOrderFollowersListTestOk(){
+        //Arrange
+        User user = userWithFollowers();
+        FollowersDTO expected = userWithFollowersNoOrder();
+
+        //Mock
+        when(userRepository.findById(user.getUserId())).thenReturn(user);
+
+        //Act
+        FollowersDTO result = userServiceImp.getFollowersList(user.getUserId(), null);
+
+        //Assert
+        assertIterableEquals(expected.getFollowers(), result.getFollowers(), "Se espera que la lista este ordenada ascendetemente");
+    }
+
+    @Test
     @DisplayName("T-0004 Verificar el correcto ordenamiento ascendente nombre lista de seguidos. (US-0008) :D")
     public void orderAscFollowedListTestOk(){
         //Arrange
@@ -217,6 +234,23 @@ public class UserServiceTest {
 
         //Act
         FollowedDTO result = userServiceImp.getFollowedList(user.getUserId(), "name_asc");
+
+        //Assert
+        assertIterableEquals(expected.getFollowed(), result.getFollowed(), "Se espera que la lista este ordenada ascendentemente");
+    }
+
+    @Test
+    @DisplayName("T-0004 Verificar sin ordenamiento nombre lista de seguidos. (US-0008) :D")
+    public void noOrderFollowedListTestOk(){
+        //Arrange
+        User user = userWithFollowed();
+        FollowedDTO expected = userWithFollowedNoOrder();
+
+        //Mock
+        when(userRepository.findById(user.getUserId())).thenReturn(user);
+
+        //Act
+        FollowedDTO result = userServiceImp.getFollowedList(user.getUserId(), null);
 
         //Assert
         assertIterableEquals(expected.getFollowed(), result.getFollowed(), "Se espera que la lista este ordenada ascendentemente");

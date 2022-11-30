@@ -11,6 +11,7 @@ import java.util.stream.Collectors;
 public class PostRepository implements IPostRepository {
     private List<Post> postList = new ArrayList<>();
 
+
     public Post findByIdPost(Integer postId) {
         return postList.stream().filter(p->p.getPostId().equals(postId)).findFirst().orElse(null);
     }
