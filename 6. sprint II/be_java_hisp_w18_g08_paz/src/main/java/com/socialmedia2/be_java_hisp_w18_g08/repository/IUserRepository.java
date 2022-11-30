@@ -14,4 +14,10 @@ public interface IUserRepository {
     void createPost(Post post, Integer id);
 
     String unFollow(Integer userId,Integer userIdToUnfollow);
+
+    void deleteAll();
+
+    void createUser(User user);
+
+    void createSeller(Seller seller);
 }

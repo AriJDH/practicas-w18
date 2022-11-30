@@ -45,8 +45,7 @@ public class ExceptionConfig {
 
     @ExceptionHandler(ConstraintViolationException.class)
     public ResponseEntity<ExceptionDto> catchValidationController(ConstraintViolationException e){
-        List<String> messages = new ArrayList<>();
-        messages.add(e.getMessage());
+        List<String> messages = List.of(e.getMessage());
         ExceptionDto eDTO = new ExceptionDto(messages, 404,LocalDate.now());
         return new ResponseEntity<>(eDTO, HttpStatus.NOT_FOUND);
     }

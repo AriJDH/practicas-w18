@@ -122,4 +122,20 @@ public class UserRepositoryImp implements IUserRepository{
            seller.getFollowers().remove(user);
            return user.getUser_name() +" with id: " + userId + " unfollow to -> " + seller.getUser_name() + " with id: "+ userIdToUnfollow;
     }
+
+    @Override
+    public void deleteAll() {
+        this.users.clear();
+        this.sellers.clear();
+    }
+
+    @Override
+    public void createUser(User user) {
+        this.users.add(user);
+    }
+
+    @Override
+    public void createSeller(Seller seller) {
+        this.sellers.add(seller);
+    }
 }

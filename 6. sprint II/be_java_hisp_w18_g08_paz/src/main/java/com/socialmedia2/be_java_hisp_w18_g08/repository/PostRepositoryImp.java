@@ -32,6 +32,7 @@ public class PostRepositoryImp implements IPostRepository{
         return this.posts.add(post);
     }
 
+
     public  PostRepositoryImp(){
         Product pr1 = new Product(1,"Product1","Type1","Brand1","Color1","Notes1");
         Product pr2 = new Product(2,"Product2","Type2","Brand2","Color2","Notes2");
@@ -55,5 +56,11 @@ public class PostRepositoryImp implements IPostRepository{
     @Override
     public void save(Post post) {
         posts.add(post);
+    }
+
+    @Override
+    public void deleteAll() {
+        this.posts.clear();
+
     }
 }

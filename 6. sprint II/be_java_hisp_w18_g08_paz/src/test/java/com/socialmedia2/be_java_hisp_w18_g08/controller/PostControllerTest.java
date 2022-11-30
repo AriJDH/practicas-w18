@@ -7,6 +7,8 @@ import com.socialmedia2.be_java_hisp_w18_g08.dto.request.PostDtoReq;
 import com.socialmedia2.be_java_hisp_w18_g08.dto.response.PostDtoRes;
 import com.socialmedia2.be_java_hisp_w18_g08.dto.response.ResponseMessasgeDto;
 import com.socialmedia2.be_java_hisp_w18_g08.entity.User;
+import com.socialmedia2.be_java_hisp_w18_g08.repository.PostRepositoryImp;
+import com.socialmedia2.be_java_hisp_w18_g08.repository.UserRepositoryImp;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -26,6 +28,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static com.socialmedia2.be_java_hisp_w18_g08.util.FactoryPost.*;
 import static com.socialmedia2.be_java_hisp_w18_g08.util.FactoryUser.*;
+import static com.socialmedia2.be_java_hisp_w18_g08.util.DBFactory.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
@@ -35,6 +38,17 @@ class PostControllerTest {
 
     @Autowired
     MockMvc mockMvc;
+    @Autowired
+    PostRepositoryImp postRepositoryImp;
+    @Autowired
+    UserRepositoryImp userRepositoryImp;
+
+    @BeforeEach
+    private void setup(){
+        userRepositoryImp.deleteAll();
+        postRepositoryImp.deleteAll();
+        createRepository(userRepositoryImp, postRepositoryImp);
+    }
 
     @Order(1)
     @Test
@@ -84,6 +98,8 @@ class PostControllerTest {
                         status().isBadRequest(),
                         content().contentType(MediaType.APPLICATION_JSON))
                 .andReturn();
+
+
     }
 
     @Order(3)
@@ -132,13 +148,13 @@ class PostControllerTest {
     @DisplayName("T00012 - Get posts list by user id exception")
     void getPostSellerListByUserIdException() throws Exception{
         // Arrange
-        ExceptionDto expectedDto = new ExceptionDto(List.of("User with id: 0Not found"),404,LocalDate.now());
+        ExceptionDto expectedDto = new ExceptionDto(List.of("User with id: 10Not found"),404,LocalDate.now());
 
-        mockMvc.perform(MockMvcRequestBuilders.get("/products/followed/{userId}/list", 0))
+        mockMvc.perform(MockMvcRequestBuilders.get("/products/followed/{userId}/list", 10))
                 .andDo(print())
                 .andExpectAll(
                         content().contentType(MediaType.APPLICATION_JSON),
-                        jsonPath("$.message").value("User with id: 0Not found"),
+                        jsonPath("$.message").value("User with id: 10Not found"),
                         jsonPath("$.timeStamp").value(expectedDto.getTimeStamp().toString()),
                         jsonPath("$.status").value(expectedDto.getStatus()))
                 .andReturn();

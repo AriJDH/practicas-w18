@@ -170,5 +170,4 @@ class PostServiceImpTest {
         //Assert
         assertEquals(expected.getPosts(), result.getPosts());
     }
-
 }

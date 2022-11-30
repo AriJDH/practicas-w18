@@ -25,9 +25,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Arrays;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 
@@ -60,7 +57,6 @@ class UserServiceImpTest {
         seller1 = new Seller(1, "Augusto", followed, postList, followers);
         seller2 = new Seller(3, "Martin", followed, postList, followers);
         seller3 = new Seller(5, "Samuel", followed, postList, followers);
-
     }
 
     @Order(1)

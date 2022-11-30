@@ -37,7 +37,7 @@ public class PostController {
     @GetMapping("/followed/{userId}/list")
     public ResponseEntity<PostDtoRes> getPostSellerListByUserId(@PathVariable
                                                                 @NotNull(message = "El  id no puede estar vacío.")
-                                                                @Min(value = 0, message = "El id debe ser mayor a cero")
+                                                                @Min(value = 1, message = "El id debe ser mayor a cero")
                                                                 Integer userId,
                                                                 @RequestParam(required = false) String order) {
         PostDtoRes response = postService.getPostSellerListByUserId(userId, order);
