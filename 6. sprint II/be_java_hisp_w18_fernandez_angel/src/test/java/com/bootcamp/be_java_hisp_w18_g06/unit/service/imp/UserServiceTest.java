@@ -212,7 +212,7 @@ class UserServiceTest {
         }
 
         @Test
-        void getFollowersListEmptyExceptionTest() {
+        void getFollowersCountEmptyExceptionTest() {
 
             // ARRANGE
             User user = UserFactory.getUserWithFollowersList("user1");
@@ -223,7 +223,7 @@ class UserServiceTest {
                     .thenReturn(Optional.of(user));
 
             // ACT  ASSERTS
-            assertThrows(EmptyException.class,()->service.getFollowersList(user.getUser_id(),null));
+            assertThrows(EmptyException.class,()->service.getFollowersCount(user.getUser_id()));
 
         }
         @Test
