@@ -38,6 +38,7 @@ public class Integration {
     MockMvc mockMvc;
 
     @Test
+    @DisplayName("Save user happy path")
     void saveOk () throws Exception {
         // Arrange
         ProductReqDTO product = new ProductReqDTO(
@@ -74,6 +75,7 @@ public class Integration {
                 .andExpectAll(expectedStatus,expectedJson ,expectedContentType);
     }
     @Test
+    @DisplayName("Save user UNhappy path")
     //Si mando mal el postDTO controlar que devuelva un 400
     void saveNotOk () throws Exception {
         // Arrange
@@ -138,12 +140,6 @@ public class Integration {
         User user = getUserWithFollowersListAndPostsDTO("Humita");
         user.setUser_id(5);
 
-       // User user1 = getAllUsers().get(0);
-       // user1.setUser_id(1);
-       // user1.setFollowed(Arrays.asList(user));
-
-      //  user.setFollowers(Arrays.asList(user1));
-
         String payload = new ObjectMapper().registerModule(new JavaTimeModule()).writeValueAsString(user);
 
         //Matchers
@@ -159,6 +155,57 @@ public class Integration {
         mockMvc.perform(requestPayload)
                 .andDo(print())
                 .andExpectAll(expectedStatus ,expectedContentType);
+    }
+
+    @Test
+    @DisplayName("Follow user happy path")
+    void followUserOk() throws Exception {
+        User user = getUserWithFollowersListAndPostsDTO("Humita");
+        user.setUser_id(2);
+
+        User user1 = getAllUsers().get(0);
+        user1.setUser_id(1);
+
+        String payload = new ObjectMapper().registerModule(new JavaTimeModule()).writeValueAsString(user);
+
+        //Matchers
+        ResultMatcher expectedStatus = MockMvcResultMatchers.status().isOk();
+
+        //Request
+        MockHttpServletRequestBuilder requestPayload = MockMvcRequestBuilders.post("/users/"+user.getUser_id()+"/follow/"+user1.getUser_id())
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(payload);
+
+        //Act & Assert
+        mockMvc.perform(requestPayload)
+                .andDo(print())
+                .andExpectAll(expectedStatus);
+    }
+
+    @Test
+    @DisplayName("Follow user UNhappy path. Resp: You can't follow this user because he doesn't have any posts")
+    void followUserNotOk() throws Exception {
+        User user = getUserWithFollowersListAndPostsDTO("Humita");
+        user.setUser_id(2);
+
+        User user1 = getAllUsers().get(0);
+        user1.setUser_id(1);
+
+        String payload = new ObjectMapper().registerModule(new JavaTimeModule()).writeValueAsString(user);
+
+        //Matchers
+        ResultMatcher expectedStatus = MockMvcResultMatchers.status().isBadRequest();
+        ResultMatcher expectedContentType = MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON);
+
+        //Request
+        MockHttpServletRequestBuilder requestPayload = MockMvcRequestBuilders.post("/users/"+user1.getUser_id()+"/follow/"+user.getUser_id())
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(payload);
+
+        //Act & Assert
+        mockMvc.perform(requestPayload)
+                .andDo(print())
+                .andExpectAll(expectedStatus, expectedContentType);
     }
 
 
