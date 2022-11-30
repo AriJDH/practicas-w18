@@ -1,6 +1,7 @@
 package com.socialmedia2.be_java_hisp_w18_g08.controller;
 
 import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -22,6 +23,7 @@ public class UserControllerIntegrationTest {
     MockMvc mockMvc;
 
     @Test
+    @DisplayName("Follow - Ok")
     void followOkTest()throws Exception{
         this.mockMvc.perform(MockMvcRequestBuilders.post("/users/{userId}/follow/{userIdToFollow}", 1, 5))
                 .andDo(print()).andExpect(status().isOk())
@@ -32,6 +34,7 @@ public class UserControllerIntegrationTest {
     }
 
     @Test
+    @DisplayName("Follow - Error")
     void followErrorTest()throws Exception{
         this.mockMvc.perform(MockMvcRequestBuilders.post("/users/{userId}/follow/{userIdToFollow}", 10, 5))
                 .andDo(print()).andExpect(status().isNotFound())
@@ -42,6 +45,7 @@ public class UserControllerIntegrationTest {
     }
 
     @Test
+    @DisplayName("Quantity Followers - Ok")
     void getFollowersCountOkTest()throws Exception{
         this.mockMvc.perform(MockMvcRequestBuilders.get("/users/{userId}/followers/count", 5))
                 .andDo(print()).andExpect(status().isOk())
@@ -52,16 +56,18 @@ public class UserControllerIntegrationTest {
     }
 
     @Test
+    @DisplayName("Unfollow - Ok")
     void unfollowOkTest()throws Exception{
-        this.mockMvc.perform(MockMvcRequestBuilders.post("/users/{userId}/unfollow/{userIdToUnfollow}", 1, 5))
+        this.mockMvc.perform(MockMvcRequestBuilders.post("/users/{userId}/unfollow/{userIdToUnfollow}", 2, 5))
                 .andDo(print()).andExpect(status().isOk())
                 .andExpect(content().contentType("application/json"))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.message").value("User1 with id: 1 unfollow to -> User5 with id: 5"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.message").value("User2 with id: 2 unfollow to -> User5 with id: 5"))
                 .andReturn();
 
     }
 
     @Test
+    @DisplayName("Unfollow - Error")
     void unfollowErrorTest()throws Exception{
         this.mockMvc.perform(MockMvcRequestBuilders.post("/users/{userId}/unfollow/{userIdToUnfollow}", 10, 5))
                 .andDo(print()).andExpect(status().isNotFound())
@@ -72,6 +78,7 @@ public class UserControllerIntegrationTest {
     }
 
     @Test
+    @DisplayName("List Followed - Ok")
     void followedListOkTest()throws Exception{
         this.mockMvc.perform(MockMvcRequestBuilders.get("/users/{userId}/followed/list", 1))
                 .andDo(print()).andExpect(status().isOk())
@@ -81,5 +88,19 @@ public class UserControllerIntegrationTest {
                 .andReturn();
 
     }
+
+    @Test
+    @DisplayName("List Followers - Ok")
+    void followersListOkTest()throws Exception{
+        this.mockMvc.perform(MockMvcRequestBuilders.get("/users/{userId}/followers/list", 5))
+                .andDo(print()).andExpect(status().isOk())
+                .andExpect(content().contentType("application/json"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.user_id").value(5))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.user_name").value("User5"))
+                .andReturn();
+
+    }
+
+
 
 }
