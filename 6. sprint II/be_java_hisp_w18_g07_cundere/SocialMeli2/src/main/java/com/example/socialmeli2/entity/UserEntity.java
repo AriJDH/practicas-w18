@@ -1,0 +1,41 @@
+package com.example.socialmeli2.entity;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import java.util.List;
+
+@lombok.Data
+@NoArgsConstructor
+@AllArgsConstructor
+public class UserEntity {
+
+    private Integer id;
+    private String name;
+    private List<Integer> followersList;   //Almacena los ids de los usuarios que nos siguen
+    private List<Integer> followedList;   //Almacena los ids de los usuarios que seguimos
+    private List<Integer> publicationList; //Almacena los ids de las publicaciones relacionadas al usuario
+
+
+    public void addFollowersToList(Integer userId) {
+        followersList.add(userId);
+    }
+
+    public void removeFollowersToList(Integer userId) {
+        followersList.remove(userId);
+    }
+
+    public void addFollowedList(Integer userId) {
+        followedList.add(userId);
+    }
+
+    public void removeFollowedToList(Integer userId) {
+        followedList.remove(userId);
+    }
+
+    public boolean ifFollowerExist(Integer id) {
+        return followersList.contains(id);
+    }
+
+}
