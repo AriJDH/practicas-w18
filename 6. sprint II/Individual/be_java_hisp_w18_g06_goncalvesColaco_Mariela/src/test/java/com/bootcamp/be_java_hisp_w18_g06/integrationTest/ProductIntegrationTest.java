@@ -1,4 +1,4 @@
-package com.bootcamp.be_java_hisp_w18_g06.integrationTest;
+package com.bootcamp.be_java_hisp_w18_g06.IntegrationTest;
 
 import com.bootcamp.be_java_hisp_w18_g06.entity.Post;
 import com.bootcamp.be_java_hisp_w18_g06.entity.Product;
@@ -6,11 +6,13 @@ import com.bootcamp.be_java_hisp_w18_g06.entity.User;
 import com.bootcamp.be_java_hisp_w18_g06.repository.IUserRepository;
 import com.bootcamp.be_java_hisp_w18_g06.service.imp.PostService;
 import com.bootcamp.be_java_hisp_w18_g06.utils.PostFactory;
+import com.bootcamp.be_java_hisp_w18_g06.utils.UserFactory;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.junit.jupiter.MockitoExtension;
@@ -137,4 +139,52 @@ public class ProductIntegrationTest {
 		
 	}
 	
+	// Exceptions ---------------------------------------------- //
+	@Nested
+	class Exceptions {
+		@Test
+		@DisplayName("T0016 - Get all products by post Not Ok T.T")
+		void findAllProductsByUserNotOkTest() throws Exception {
+			
+			User buyer = UserFactory.getUserRandom("buyer");
+			
+			when(userRepository
+							     .findUserById(3))
+							.thenReturn(Optional.of(buyer));
+			
+			MvcResult mvcResult = mockMvc
+							.perform(get("/products/followed/3/list"))
+							.andDo(print())
+							.andExpect(status()
+											           .isBadRequest())
+							.andExpect(content()
+											           .contentType("application/json"))
+							.andReturn();
+			
+			System.out.println(mvcResult.getResponse().getContentAsString());
+		}
+		
+		@Test
+		@DisplayName("T0017 - savePostNotOk T.T ")
+		void savePostOkTest() throws Exception {
+			Post post = new Post();
+			
+			ObjectWriter writer = new ObjectMapper()
+							.configure(SerializationFeature.WRAP_ROOT_VALUE, false)
+							.writer();
+			
+			String payload = new ObjectMapper()
+							.registerModule(new JavaTimeModule())
+							.writeValueAsString(post);
+			
+			MvcResult mvcResult = mockMvc.perform(
+											post("/products/post")
+															.contentType(MediaType.APPLICATION_JSON)
+															.content(payload))
+							.andDo(print())
+							.andReturn();
+			
+			assertEquals(400, mvcResult.getResponse().getStatus());
+		}
+	}
 }

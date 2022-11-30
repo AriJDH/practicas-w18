@@ -9,12 +9,12 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Data
 public class Product {
-    @JsonProperty("product_id")
-    private Integer productId;
-    @JsonProperty("product_name")
-    private String productName;
-    private String type;
-    private String brand;
-    private String color;
-    private String notes;
+	@JsonProperty("product_id")
+	private Integer productId;
+	@JsonProperty("product_name")
+	private String productName;
+	private String type;
+	private String brand;
+	private String color;
+	private String notes;
 }

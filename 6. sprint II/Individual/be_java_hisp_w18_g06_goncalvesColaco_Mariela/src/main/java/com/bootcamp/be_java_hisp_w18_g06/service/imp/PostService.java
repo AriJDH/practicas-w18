@@ -25,7 +25,6 @@ import java.util.stream.Collectors;
 
 @Service
 public class PostService implements IPostService {
-	
 	@Autowired
 	private IUserRepository userRepository;
 	
@@ -124,7 +123,7 @@ public class PostService implements IPostService {
 	
 	private List<PostDTO> mapperListDto(List<Post> posts) {
 		return posts.stream()
-						.map(post -> mapperDTO(post))
+						.map(this::mapperDTO)
 						.collect(Collectors.toList());
 	}
 	
@@ -137,5 +136,4 @@ public class PostService implements IPostService {
 										)
 										.collect(Collectors.toList()));
 	}
-	
 }

@@ -5,8 +5,8 @@ import lombok.Getter;
 
 @Getter
 public class UserFollowDTO {
-    @JsonProperty("user_id")
-    private Integer userId;
-    @JsonProperty("user_name")
-    private String userName;
+	@JsonProperty("user_id")
+	private Integer userId;
+	@JsonProperty("user_name")
+	private String userName;
 }

@@ -6,15 +6,17 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDate;
+
+// DTO solamente utilizado en la Factory
 @Getter
 @Setter
 public class PostResDto {
-    @JsonProperty("post_id")
-    private Integer postId;
-    @JsonProperty("user_Id")
-    private Integer userId;
-    private LocalDate date;
-    private Product product;
-    private String category;
-    private Double price;
+	@JsonProperty("post_id")
+	private Integer postId;
+	@JsonProperty("user_Id")
+	private Integer userId;
+	private LocalDate date;
+	private Product product;
+	private String category;
+	private Double price;
 }

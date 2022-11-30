@@ -12,22 +12,26 @@ import java.util.List;
 @RestController
 @RequestMapping("/products")
 public class ProductController {
-
-	@Autowired
-	private IProductService productService;
-
+	
+	// Inyección de dependencias por constructor
+	private final IProductService productService;
+	
+	public ProductController(IProductService productService) {
+		this.productService = productService;
+	}
+	
 	// US006
 	@GetMapping("/followed/{userId}/list")
 	public ResponseEntity<List<PostDTO>> findAllByUser(@PathVariable int userId,
-                                                       @RequestParam(required = false) String order) {
+	                                                   @RequestParam(required = false) String order) {
 		return ResponseEntity
 						.ok(productService
-										    .findAllPostsByUser(userId,order));
+										    .findAllPostsByUser(userId, order));
 	}
-
-    @PostMapping("/post")
-    public ResponseEntity<?> save(@Valid @RequestBody PostDTO postDTO){
-        productService.save(postDTO);
-        return ResponseEntity.ok("OK");
-    }
+	
+	@PostMapping("/post")
+	public ResponseEntity<?> save(@Valid @RequestBody PostDTO postDTO) {
+		productService.save(postDTO);
+		return ResponseEntity.ok("OK");
+	}
 }

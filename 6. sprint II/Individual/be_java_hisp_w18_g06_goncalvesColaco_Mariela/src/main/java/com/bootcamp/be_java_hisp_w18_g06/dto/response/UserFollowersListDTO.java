@@ -10,11 +10,11 @@ import java.util.List;
 @Getter
 @Setter
 public class UserFollowersListDTO {
-    //US-003
-    @JsonProperty("user_id")
-    private Integer userId;
-    @JsonProperty("user_name")
-    private String userName;
-    private List<UserFollowDTO> followers = new ArrayList<>();
+	//US-003
+	@JsonProperty("user_id")
+	private Integer userId;
+	@JsonProperty("user_name")
+	private String userName;
+	private List<UserFollowDTO> followers = new ArrayList<>();
 }
 

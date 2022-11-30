@@ -19,35 +19,39 @@ import java.util.stream.Collectors;
 
 @ControllerAdvice(annotations = RestController.class)
 public class GlobalExceptionHandler {
-
-    @ExceptionHandler(BadRequestException.class)
-    public ResponseEntity<ExceptionResponseDto> badRequestException(BadRequestException e) {
-
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                .body(new ExceptionResponseDto(e.getMessage()));
-    }
-    @ExceptionHandler(EmptyException.class)
-    public ResponseEntity<ExceptionResponseDto> emptyException(EmptyException e) {
-
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                .body(new ExceptionResponseDto(e.getMessage()));
-    }
-    @ExceptionHandler(NotFoundException.class)
-    public ResponseEntity<ExceptionResponseDto> notFoundException(NotFoundException e) {
-
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                .body(new ExceptionResponseDto(e.getMessage()));
-    }
-
-    @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<ExceptionValidResponseDTO> emptyException(MethodArgumentNotValidException e) {
-        List<String> messages = e.getFieldErrors().stream().map(s -> s.getDefaultMessage()).collect(Collectors.toList());
-        return new ResponseEntity<>(new ExceptionValidResponseDTO(messages, 400, LocalDate.now()), HttpStatus.BAD_REQUEST);
-    }
-
-    @ExceptionHandler(HttpMessageNotReadableException.class)
-    public ResponseEntity<ExceptionResponseDto> notFoundException(HttpMessageNotReadableException e) {
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                .body(new ExceptionResponseDto(e.getMessage()));
-    }
+	
+	@ExceptionHandler(BadRequestException.class)
+	public ResponseEntity<ExceptionResponseDto> badRequestException(BadRequestException e) {
+		
+		return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+						.body(new ExceptionResponseDto(e.getMessage()));
+	}
+	
+	@ExceptionHandler(EmptyException.class)
+	public ResponseEntity<ExceptionResponseDto> emptyException(EmptyException e) {
+		
+		return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+						.body(new ExceptionResponseDto(e.getMessage()));
+	}
+	
+	@ExceptionHandler(NotFoundException.class)
+	public ResponseEntity<ExceptionResponseDto> notFoundException(NotFoundException e) {
+		
+		return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+						.body(new ExceptionResponseDto(e.getMessage()));
+	}
+	
+	@ExceptionHandler(MethodArgumentNotValidException.class)
+	public ResponseEntity<ExceptionValidResponseDTO> emptyException(MethodArgumentNotValidException e) {
+		List<String> messages =
+						e.getFieldErrors().stream().map(s -> s.getDefaultMessage()).collect(Collectors.toList());
+		return new ResponseEntity<>(new ExceptionValidResponseDTO(messages, 400, LocalDate.now()),
+		                            HttpStatus.BAD_REQUEST);
+	}
+	
+	@ExceptionHandler(HttpMessageNotReadableException.class)
+	public ResponseEntity<ExceptionResponseDto> notFoundException(HttpMessageNotReadableException e) {
+		return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+						.body(new ExceptionResponseDto(e.getMessage()));
+	}
 }

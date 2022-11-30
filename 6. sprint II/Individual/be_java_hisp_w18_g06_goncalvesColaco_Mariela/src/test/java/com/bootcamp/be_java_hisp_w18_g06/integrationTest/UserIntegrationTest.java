@@ -1,4 +1,4 @@
-package com.bootcamp.be_java_hisp_w18_g06.integrationTest;
+package com.bootcamp.be_java_hisp_w18_g06.IntegrationTest;
 
 import com.bootcamp.be_java_hisp_w18_g06.entity.User;
 import com.bootcamp.be_java_hisp_w18_g06.repository.IUserRepository;
@@ -16,13 +16,12 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.*;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -156,7 +155,7 @@ public class UserIntegrationTest {
 						.thenReturn(Optional.of(seller));
 		
 		MvcResult mvcResult = mockMvc
-						.perform(get("/users/{userId}/followed/list", 1))
+						.perform(get("/users/{userId}/followers/list", 1))
 						.andDo(print())
 						.andExpect(status().isOk())
 						.andExpect(content().contentType("application/json"))
@@ -166,4 +165,28 @@ public class UserIntegrationTest {
 		
 	}
 	
+	// Exceptions ------------------------------------- //
+	@Test
+	@DisplayName("T0018 - Tratar de seguir un usuario que no tiene posts T.T")
+	void followUserNotOkTest() throws Exception {
+		User seller = UserFactory.getUserWithFollowersListAndPosts("seller");
+		User buyer = UserFactory.getUserWithFollowedList("buyer");
+		
+		seller.setUserId(3);
+		buyer.setUserId(4);
+		
+		when(userRepository.findUserById(3))
+						.thenReturn(Optional.of(seller));
+		
+		when(userRepository.findUserById(4))
+						.thenReturn(Optional.of(buyer));
+		
+		MvcResult mvcResult = mockMvc
+						.perform(post("/users/{userId}/follow/{userIdToFollow}", 3, 4))
+						.andDo(print())
+						.andExpect(status().isBadRequest())
+						.andReturn();
+		System.out.println(mvcResult.getResponse().getContentAsString());
+		
+	}
 }

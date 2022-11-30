@@ -7,11 +7,12 @@ import lombok.Setter;
 import java.util.ArrayList;
 import java.util.List;
 
+// DTO utilizado solamente en la Factory
 @Getter
 @Setter
 public class UserPostListDTO {
-    //US-006
-    @JsonProperty("user_id")
-    private Integer userId;
-    List<PostResDto> postDTOList = new ArrayList<>();
+	//US-006
+	@JsonProperty("user_id")
+	private Integer userId;
+	List<PostResDto> postDTOList = new ArrayList<>();
 }

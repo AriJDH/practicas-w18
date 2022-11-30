@@ -11,7 +11,7 @@ import java.util.List;
 @AllArgsConstructor
 @Getter
 public class ExceptionValidResponseDTO {
-    private List<String> messages;
-    private int status;
-    private LocalDate timeStamp;
+	private List<String> messages;
+	private int status;
+	private LocalDate timeStamp;
 }

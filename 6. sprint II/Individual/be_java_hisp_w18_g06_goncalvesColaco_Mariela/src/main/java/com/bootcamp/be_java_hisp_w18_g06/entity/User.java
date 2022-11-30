@@ -13,20 +13,19 @@ import java.util.List;
 @Getter
 @Setter
 public class User {
-    @JsonProperty("user_id")
-    private Integer userId;
-    @JsonProperty("user_name")
-    private String userName;
-    @JsonIgnore
-    private List<User> followers = new ArrayList<>();
-    private List<User> followed = new ArrayList<>();
-    private List<Post> posts = new ArrayList<>();
-    
-    public User(Integer userId, String userName) {
-        this.userId = userId;
-        this.userName = userName;
-    }
-
-    public User(Integer id) {
-    }
+	@JsonProperty("user_id")
+	private Integer userId;
+	@JsonProperty("user_name")
+	private String userName;
+	@JsonIgnore
+	private List<User> followers = new ArrayList<>();
+	private List<User> followed = new ArrayList<>();
+	private List<Post> posts = new ArrayList<>();
+	
+	public User(Integer userId, String userName) {
+		this.userId = userId;
+		this.userName = userName;
+	}
+	
+	public User(Integer id) {}
 }

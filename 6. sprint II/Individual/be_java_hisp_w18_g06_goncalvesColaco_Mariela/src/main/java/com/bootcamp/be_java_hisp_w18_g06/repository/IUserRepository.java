@@ -7,9 +7,12 @@ import java.util.List;
 import java.util.Optional;
 
 public interface IUserRepository {
-
-    void createPost(Post post);
-    Optional<User> findUserById(int id);
-    Optional<User> findUserInList(List<User> list, int idUserInList);
-    void updateUsers(User userUpdate);
+	
+	void createPost(Post post);
+	
+	Optional<User> findUserById(int id);
+	
+	Optional<User> findUserInList(List<User> list, int idUserInList);
+	
+	void updateUsers(User userUpdate);
 }
