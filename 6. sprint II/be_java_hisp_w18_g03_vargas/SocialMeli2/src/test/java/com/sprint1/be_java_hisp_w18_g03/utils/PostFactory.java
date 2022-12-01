@@ -1,5 +1,6 @@
 package com.sprint1.be_java_hisp_w18_g03.utils;
 
+import com.sprint1.be_java_hisp_w18_g03.dto.request.RequestPostDTO;
 import com.sprint1.be_java_hisp_w18_g03.entity.Post;
 import com.sprint1.be_java_hisp_w18_g03.entity.Product;
 import com.sprint1.be_java_hisp_w18_g03.entity.User;
@@ -67,4 +68,15 @@ public class PostFactory {
         postSellers.add(post2);
         return postSellers;
     }
+
+    public static RequestPostDTO getRequestPostDTO() {
+        RequestPostDTO requestPostDTO = new RequestPostDTO();
+        requestPostDTO.setUserId(1);
+        requestPostDTO.setDate(LocalDate.now());
+        requestPostDTO.setProduct(ProductFactory.getRequestProductDTO());
+        requestPostDTO.setPrice(123456.0);
+        requestPostDTO.setCategory(1);
+        return requestPostDTO;
+    }
+
 }

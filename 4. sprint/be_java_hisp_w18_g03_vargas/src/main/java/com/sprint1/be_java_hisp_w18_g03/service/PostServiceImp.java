@@ -55,7 +55,7 @@ public class PostServiceImp implements IPostService {
                 product
         );
         boolean responseAdd = iPostRepository.addPost(newPost);
-        if (responseAdd == false) throw new CreationException("Error adding the post");
+        if (!responseAdd) throw new CreationException("Error adding the post");
         return new ResponseDTO("Post added successfully", 200);
     }
 

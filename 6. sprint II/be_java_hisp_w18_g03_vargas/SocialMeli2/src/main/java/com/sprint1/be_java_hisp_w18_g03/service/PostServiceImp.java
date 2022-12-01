@@ -71,10 +71,6 @@ public class PostServiceImp implements IPostService {
             throw new NoFoundException("The user hasn't being found");
         }
 
-        if (user.getListFollowed().isEmpty()) {
-            throw new NoFoundException("The people followed hasn't being found");
-        }
-
         List<Post> postSell = new ArrayList<>();
 
         for (User userFollowed : user.getListFollowed()) {
@@ -88,10 +84,6 @@ public class PostServiceImp implements IPostService {
         List<Post> recentPost = postSell.stream()
                 .filter(x -> x.getDate().isAfter(fechaSin2Semana))
                 .collect(Collectors.toList());
-
-        if (recentPost.isEmpty()) {
-            throw new NoFoundException("The posts hasn't being found");
-        }
 
         List<ResponsePostDTO> responsePostDTOs = new ArrayList<>();
 

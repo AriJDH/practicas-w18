@@ -242,6 +242,7 @@ public class UserServiceTest {
     @Test
     @DisplayName("T-0007 Verificar que la cantidad de seguidores de un determinado usuario sea correcta. (US-0002) - OK")
     public void quantityOfFollowersOK() {
+        //TODO: probar con mas usuarios
         User user = getUser(1, "Juan");
         user.getListFollowers().add(new User(99, "luis", null, null));
 

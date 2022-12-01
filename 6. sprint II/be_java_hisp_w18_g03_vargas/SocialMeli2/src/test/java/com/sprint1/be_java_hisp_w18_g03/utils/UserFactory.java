@@ -1,9 +1,11 @@
 package com.sprint1.be_java_hisp_w18_g03.utils;
 
 import com.sprint1.be_java_hisp_w18_g03.dto.response.FollowedDTO;
+import com.sprint1.be_java_hisp_w18_g03.dto.response.FollowerCountDTO;
 import com.sprint1.be_java_hisp_w18_g03.dto.response.FollowersDTO;
 import com.sprint1.be_java_hisp_w18_g03.dto.response.UserDTO;
 import com.sprint1.be_java_hisp_w18_g03.entity.User;
+import com.sprint1.be_java_hisp_w18_g03.exception.NoFoundException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -104,6 +106,14 @@ public class UserFactory {
         expected.getFollowed().add(new UserDTO(4, "Federico"));
         expected.getFollowed().add(new UserDTO(3, "Ana"));
         return expected;
+    }
+
+    public static FollowerCountDTO getCountFolowerUser(){
+        FollowerCountDTO followerCountDTO = new FollowerCountDTO();
+        followerCountDTO.setUserId(1);
+        followerCountDTO.setUserName("Gabriela");
+        followerCountDTO.setFollowersCount(0);
+        return followerCountDTO;
     }
 
 }
