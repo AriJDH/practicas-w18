@@ -28,15 +28,12 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest
-@AutoConfigureMockMvc
 @ExtendWith(MockitoExtension. class)
 public class CalculateRestControllerTest {
     @Mock
     private CalculateService calculateService;
     @InjectMocks
     private CalculateRestController calculateRestController;
-    @Autowired
-    private MockMvc mockMvc;
     private RoomDTO habitacion = new RoomDTO("Habitacion", 100, 100);
     private RoomDTO cocina = new RoomDTO("Cocina", 125, 125);
     private RoomDTO living = new RoomDTO("Living", 150, 150);
