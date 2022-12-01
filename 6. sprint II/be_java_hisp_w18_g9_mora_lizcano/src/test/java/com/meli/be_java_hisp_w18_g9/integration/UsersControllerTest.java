@@ -41,7 +41,6 @@ MockMvc mockMvc;
         User user = new User(1, "Ian", new ArrayList<>(),
                 List.of(
                         new User(2, "Pedro", new ArrayList<>(), new ArrayList<>(), new ArrayList<>())
-
                 ), new ArrayList<>());
 
        when(userRepository.findById(anyInt())).thenReturn(Optional.of(user));
@@ -58,9 +57,7 @@ MockMvc mockMvc;
                 .andExpect(jsonPath("$.followed[0].user_name").value("Pedro"));
 
 
-
     }
-
     @Test
     @DisplayName("Get count of followers of a user")
     void userFollowedQuantity() {
