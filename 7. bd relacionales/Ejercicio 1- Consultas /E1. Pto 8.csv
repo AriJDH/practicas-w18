@@ -1,0 +1,6 @@
+id,created_at,updated_at,title,rating,awards,release_date,length,genre_id
+7,NULL,NULL,"Transformers: el lado oscuro de la luna",0.9,1,"2005-07-04 00:00:00",NULL,5
+14,NULL,NULL,"Toy Story 2",3.2,2,"2003-04-04 00:00:00",120,7
+16,NULL,NULL,"Mi pobre angelito",3.2,1,"1989-01-04 00:00:00",120,1
+9,NULL,NULL,"Harry Potter y la cámara de los secretos",3.5,2,"2009-08-04 00:00:00",200,8
+11,NULL,NULL,"Alicia en el país de las maravillas",5.7,2,"2008-07-04 00:00:00",120,NULL
