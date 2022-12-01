@@ -13,6 +13,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultMatcher;
+import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
+
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -52,6 +54,54 @@ public class IntegrationTest {
                 .andExpectAll(expectedStatus);
 
     }
+
+    @Test
+    @DisplayName("Integration Bonus US-0001")
+    void test2() throws Exception {
+
+        // Arrange
+
+        Integer userId = 3;
+        Integer userIdFollow = 30;
+
+        // Matchers
+
+        ResultMatcher expectedStatus = status().isOk();
+
+        MockHttpServletRequestBuilder requestPayload = post("/users/{userId}/follow/{userIdToFollow}",userId,userIdFollow);
+
+        // Act & Assert
+
+        mockMvc
+                .perform(requestPayload)
+                .andDo(print())
+                .andExpectAll(expectedStatus);
+    }
+
+
+    @Test
+    @DisplayName("Integration Bonus US-0007")
+    void test3() throws Exception {
+
+        // Arrange
+
+        Integer userId = 3;
+        Integer userIdFollow = 60;
+
+        //Matchers
+
+        ResultMatcher expectedStatus = status().isOk();
+
+        MockHttpServletRequestBuilder requestPaylod = post("/users/{userId}/unfollow/{userIdToUnfollow}",userId,userIdFollow);
+
+        // Act & Assert
+
+        mockMvc
+                .perform(requestPaylod)
+                .andDo(print())
+                .andExpectAll(expectedStatus);
+    }
+
 
 
 }

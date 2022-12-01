@@ -76,6 +76,12 @@ public class RepositoryImp implements IRepository{
         sellers.add(new Seller(30, "seller3"));
         sellers.add(new Seller(40, "seller4"));
         sellers.add(new Seller(50, "seller5"));
+        List<Buyer> f = new ArrayList<>();
+        f.add(buyers.get(2));
+        f.add(buyers.get(4));
+
+        sellers.add(new Seller(60, "seller6", f));
+
 
     }
 }
