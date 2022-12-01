@@ -64,7 +64,6 @@ public class PostServiceTest {
                 () -> assertEquals(2, sellersPostDTO.getPosts().size(), "Solo debe haber un post en la lista filtrada"),
                 () -> assertEquals(LocalDate.now(), sellersPostDTO.getPosts().get(0).getDate(), "La fecha de post debe ser igual a la del sistema"),
                 () -> assertEquals(2, sellersPostDTO.getPosts().get(0).getPostId() , "El id del post debe ser 2")
-
         );
 
     }
