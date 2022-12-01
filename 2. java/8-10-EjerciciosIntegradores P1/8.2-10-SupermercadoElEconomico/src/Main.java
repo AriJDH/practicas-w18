@@ -91,8 +91,5 @@ public class Main {
         System.out.println("============ Guardamos la factura / cliente inexistente ============");
         facturaImpl.guardar(factura2);
 
-
-
-
     }
 }

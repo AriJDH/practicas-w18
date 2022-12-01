@@ -4,6 +4,8 @@ import model.Cliente;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.Objects;
 
 public class ClienteRepository implements IRepository<Cliente>{
 	
@@ -17,8 +19,8 @@ public class ClienteRepository implements IRepository<Cliente>{
 	
 	@Override
 	public Cliente buscarPorId(Long id) {
-		Cliente clienteEncontrado = (Cliente) clienteList.stream().filter(cliente -> cliente.getId()== id);
-		return clienteEncontrado;
+		return clienteList.stream().filter(cliente -> Objects.equals(cliente.getId(),
+		                                                             id)).findFirst().orElseThrow(()-> new NoSuchElementException("El Id no se encuentra"));
 	}
 	
 	@Override

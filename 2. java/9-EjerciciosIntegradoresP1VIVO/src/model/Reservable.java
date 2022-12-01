@@ -3,9 +3,9 @@ package model;
 public abstract class Reservable {
 	
 	// Atributos
-	private Double precioUnitario;
-	private Double precioTotal;
-	private Double descuentoAplicado;
+	private Double precioUnitario = 0.0;
+	private Double precioTotal = 0.0;
+	private Double descuentoAplicado = 0.0;
 	
 	// Constructores
 	public Reservable() {

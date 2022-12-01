@@ -11,8 +11,8 @@ Ejercicios:
 7. Recapitulando Java Vivo | Vehiculos // _Terminado_
 8. Ejercicios Integradores P1 | 8.1 Ejercicio clase abstracta - Series numericas // _Terminado_
                               | 8.2 Ejercicio Integrador Parte 1 Supermercado // _Terminado_
-9. Ejercicios Integradores P1 VIVO | Turismo // **En desarrollo** (falta ejecutar todo en el Main)
-10. Ejercicios Integradores P2 | Ejercicio Integrador Parte II Supermercado // **En desarrollo** -> Video
+9. Ejercicios Integradores P1 VIVO | Turismo // _Terminado_
+10. Ejercicios Integradores P2 | Ejercicio Integrador Parte II Supermercado // _Terminado_
 11. Ejercicios Integradores P2 Vivo | 11.1 SaveTheRopa S.A // _Terminado_
                                     | 11.2 Dakar // _Terminado_
   

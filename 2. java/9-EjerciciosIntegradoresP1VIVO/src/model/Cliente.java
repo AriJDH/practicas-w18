@@ -6,18 +6,22 @@ import java.util.List;
 public class Cliente {
 	
 	// Atributos
-	private Long id;
+	private Long id = 0L;
 	private List<Localizador> localizadorList = new ArrayList<>();
 	
 	// Constructores
-	public Cliente() {
-	}
 	
 	public Cliente(Long id, List<Localizador> localizadorList) {
 		this.id = id;
 		this.localizadorList = localizadorList;
 	}
-
+	
+	public Cliente() {
+		this.id += 1;
+	}
+	
+	public Cliente(long id) {}
+	
 	// Getters y setters
 	public Long getId() {
 		return id;

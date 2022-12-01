@@ -6,35 +6,41 @@ import java.util.List;
 public class Localizador {
 	
 	// Atributos
-	private Long id;
-	private Cliente cliente;
+	private Long id = 0L;
+	private Long clienteId;
 	private List<Reservable> reservableList = new ArrayList<>();
-	private Double precioTotal;
-	private Double descuentoAplicado;
+	private Double precioTotal = 0.0;
+	private Double descuentoAplicado = 0.0;
 	
 	// Constructores
 	public Localizador() {
+		this.id +=1 ;
 	}
 	
 	public Localizador(Long id,
-	                   Cliente cliente,
+	                   Long clienteId,
 	                   List<Reservable> reservableList,
 	                   Double precioTotal,
 	                   Double descuentoAplicado) {
 		this.id = id;
-		this.cliente = cliente;
+		this.clienteId = clienteId;
 		this.reservableList = reservableList;
 		this.precioTotal = precioTotal;
 		this.descuentoAplicado = descuentoAplicado;
 	}
 	
-	// Getters y setters
-	public Cliente getCliente() {
-		return cliente;
+	public Localizador(long id, Long clienteId) {
+		this.id = id;
+		this.clienteId = clienteId;
 	}
 	
-	public void setCliente(Cliente cliente) {
-		this.cliente = cliente;
+	// Getters y setters
+	public Long getClienteId() {
+		return clienteId;
+	}
+	
+	public void setClienteId(Long clienteId) {
+		this.clienteId = clienteId;
 	}
 	
 	public List<Reservable> getReservableList() {
@@ -73,7 +79,7 @@ public class Localizador {
 	@Override
 	public String toString() {
 		return "Este localizador está formado por: " +
-						"\n Cliente ID: " + cliente.getId() +
+						"\n Cliente ID: " + clienteId +
 						"\n Listado de Reservas: " + reservableList +
 						"\n Precio Total: " + precioTotal +
 						"\n Descuento Aplicado: " + descuentoAplicado;
@@ -82,5 +88,6 @@ public class Localizador {
 	public void agregarReservable(Reservable reservable, Integer cantidad){
 		reservable.calcularPrecio(cantidad);
 		reservableList.add(reservable);
+		setPrecioTotal(precioTotal+reservable.getPrecioTotal()*cantidad);
 	}
 }

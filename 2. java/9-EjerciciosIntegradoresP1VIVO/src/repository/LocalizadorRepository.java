@@ -4,6 +4,8 @@ import model.Localizador;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.Objects;
 
 public class LocalizadorRepository implements IRepository<Localizador> {
 	
@@ -18,9 +20,10 @@ public class LocalizadorRepository implements IRepository<Localizador> {
 	
 	@Override
 	public Localizador buscarPorId(Long id) {
-		Localizador localizadorEncontrado = (Localizador) localizadorList.stream()
-						.filter(localizador -> localizador.getId()==id);
-		return localizadorEncontrado;
+		return localizadorList.stream()
+						.filter(localizador -> Objects.equals(localizador.getId(), id)).findFirst()
+						.orElseThrow(() -> new NoSuchElementException("El Id no se encuentra"));
+		
 	}
 	
 	@Override
@@ -30,8 +33,8 @@ public class LocalizadorRepository implements IRepository<Localizador> {
 	
 	@Override
 	public void eliminarPorId(Long id) {
-	Localizador localizadorEncontrado = buscarPorId(id);
-	localizadorList.remove(localizadorEncontrado);
+		Localizador localizadorEncontrado = buscarPorId(id);
+		localizadorList.remove(localizadorEncontrado);
 	}
 	
 	
