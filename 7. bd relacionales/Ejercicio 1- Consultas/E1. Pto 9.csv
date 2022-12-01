@@ -1,0 +1,11 @@
+id,created_at,updated_at,first_name,last_name,rating,favorite_movie_id
+1,NULL,NULL,Sam,Worthington,7.5,1
+2,NULL,NULL,Zoe,Saldana,5.5,2
+3,NULL,NULL,Sigourney,Weaver,9.7,NULL
+4,NULL,NULL,Leonardo,"Di Caprio",3.5,4
+5,NULL,NULL,Kate,Winslet,1.5,5
+6,NULL,NULL,Billy,Zane,7.5,6
+7,NULL,NULL,Mark,Hamill,6.5,7
+8,NULL,NULL,Harrison,Ford,7.5,8
+9,NULL,NULL,Carrie,Fisher,7.5,9
+10,NULL,NULL,Sam,Neill,2.5,10
