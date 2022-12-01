@@ -55,7 +55,6 @@ public class AppControllerTest {
                         .andExpect(status().isOk());
     }
 
-
     @Test
     @DisplayName("Bad Request when Create a Post - /products/post")
     void shouldThrowErrorWhenCreateAPost() throws Exception {
@@ -82,6 +81,5 @@ public class AppControllerTest {
                 .andExpect(MockMvcResultMatchers.jsonPath("$.user_name").value("usuario_2"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.followers_count").value(2));
     }
-
 
 }

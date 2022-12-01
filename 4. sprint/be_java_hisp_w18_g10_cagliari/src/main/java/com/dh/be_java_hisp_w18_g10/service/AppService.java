@@ -8,6 +8,7 @@ import com.dh.be_java_hisp_w18_g10.exception.GenericException;
 import com.dh.be_java_hisp_w18_g10.exception.UserNotFoundException;
 import com.dh.be_java_hisp_w18_g10.repository.*;
 import com.dh.be_java_hisp_w18_g10.util.DTOMapper;
+import com.dh.be_java_hisp_w18_g10.util.MapToEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
@@ -82,7 +83,7 @@ public class AppService implements IAppService {
     public void createPost(PostDTOreq postDTOreq) {
         int userId = postDTOreq.getUser_id();
         User user = getUser(userId);
-        Post post = DTOMapper.mapTo(postDTOreq);
+        Post post = MapToEntity.map(postDTOreq);
         Integer postId = postRepository.addPost(post);
         post.setPost_id(postId);
         user.getPosts()
@@ -97,7 +98,6 @@ public class AppService implements IAppService {
                 .map(u -> postRepository.getUserPostsFilterByDays(u.getUserId(), 14))
                 .flatMap(Collection::stream)
                 .collect(Collectors.toList());
-
         return DTOMapper.mapToUserPostsDTOres(user, posts);
     }
     @Override
