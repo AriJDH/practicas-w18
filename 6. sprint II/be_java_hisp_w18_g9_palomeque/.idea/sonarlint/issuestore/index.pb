@@ -5,3 +5,17 @@ Csrc/main/java/com/meli/be_java_hisp_w18_g9/service/PostService.java,1/9/197e49
 Vsrc/test/java/com/meli/be_java_hisp_w18_g9/unit/controller/ProductsControllerTest.java,c/d/cd3673266903d4ef488855b14c7667bb1278008d
 |
 Lsrc/test/java/com/meli/be_java_hisp_w18_g9/unit/service/UserServiceTest.java,2/6/265201aee9091b722920b67b1d4a2df460e14258
+t
+Dsrc/main/java/com/meli/be_java_hisp_w18_g9/service/IUserService.java,f/2/f2e8bf447e012b7aaeb5fa6c151a041899db57a9
+y
+Isrc/main/java/com/meli/be_java_hisp_w18_g9/repository/UserRepository.java,c/5/c5d09d9e5cf29e1c02c67f58fd26dcaff376bbb9
+}
+Msrc/main/java/com/meli/be_java_hisp_w18_g9/controller/ProductsController.java,4/b/4b3927b38169c762fc90408682b6768b6c691886
+z
+Jsrc/main/java/com/meli/be_java_hisp_w18_g9/controller/UsersController.java,2/3/2351c044fe96665d81f0d9f66a5876435ceaa787
+q
+Asrc/test/java/com/meli/be_java_hisp_w18_g9/util/UsersFactory.java,c/4/c49b117374e6f820872f3ea3a57f243243f121b6
+s
+Csrc/main/java/com/meli/be_java_hisp_w18_g9/service/UserService.java,c/a/ca6e1628e1a34cdecc29089ee3e01e7cc9172e29
+{
+Ksrc/test/java/com/meli/be_java_hisp_w18_g9/integration/UserIntegration.java,6/3/6332e5fc3772c6dd457b4c0ba308fbf51a21e033
