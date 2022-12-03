@@ -9,7 +9,7 @@ INSERT INTO TWD
 SELECT episodes.title, season_id
 FROM episodes
 INNER JOIN seasons
-ON peisodes.season_id = seasons.id
+ON episodes.season_id = seasons.id
 WHERE seasons.serie_id = 3;
 
 -- SELECCIONAR UNA TABLA DONDE CREAR UN INDICE Y LUEGO CHEQUEAR LA CREACION DEL
