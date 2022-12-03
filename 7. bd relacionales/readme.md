@@ -49,7 +49,10 @@ Importar el archivo movies_db.sql desde PHPMyAdmin o MySQL Workbench y resolver 
 13. Traer el título de las películas con el rating mayor a 3, con más de 1 premio y con fecha de lanzamiento entre el año 1988 al 2009. Ordenar los resultados por rating.
 
 ************************************** Ejercicio 4 **************************************
-**DER y SQL** _PENDIENTE_
+
+*********************************************************************************
+                        **DER y SQL** >>>>> PENDIENTE // TODO 1
+*********************************************************************************
 _Escenario_
 Una empresa proveedora de Internet necesita una base de datos para almacenar cada uno de sus clientes junto con el plan/pack que tiene contratado.
 
@@ -132,7 +135,7 @@ Se requiere obtener las siguientes consultas:
 
 ************************************** Ejercicio 7 **************************************
 
-**Consultas SQL Avanzadas** _EN DESARROLLO_
+**Consultas SQL Avanzadas** _TERMINADO EN EQUIPO_
 
 En base al mismo, plantear las consultas SQL para resolver los siguientes requerimientos:
 
@@ -156,7 +159,10 @@ Implementar la base de datos en PHPMyAdmin o MySQL Workbench, cargar cinco regis
 
 ************************************** Ejercicio 8 **************************************
 **Optimización de Bases de Datos - Parte 2 - PG**
-**Normalización** _PENDIENTE_
+
+*********************************************************************************
+                    **Normalización** >>>>>> PENDIENTE // TODO 2
+*********************************************************************************
 
 _Escenario_
 
@@ -173,7 +179,10 @@ Se solicita para el escenario anterior:
 - Describir con sus palabras cada paso de la descomposición y aplicación de las reglas para visualizar el planteo realizado.
 
 ************************************** Ejercicio 9 **************************************
- **Creación de Tablas Temporales e Índices** _PENDIENTE_
+
+*********************************************************************************
+        **Creación de Tablas Temporales e Índices** >>>> PENDIENTE // TODO 3
+ *********************************************************************************
 
 _Ejercicio 1_
 1. Con la base de datos “movies”, se propone crear una tabla temporal llamada “TWD” y guardar en la misma los episodios de todas las temporadas de “The Walking Dead”.
@@ -184,7 +193,10 @@ _Ejercicio 2_
 2. Analizar por qué crearía un índice en la tabla indicada y con qué criterio se elige/n el/los campos.
 
 ************************************** Ejercicio 10 **************************************
-**Consultas SQL Avanzadas 2** _PENDIENTE_
+
+*********************************************************************************
+            **Consultas SQL Avanzadas 2** >>>>> PENDIENTE // TODO 4
+*********************************************************************************
 
 Resolver las siguientes consignas
 1. Tomando la base de datos movies_db.sql, se solicita:
@@ -200,4 +212,5 @@ Resolver las siguientes consignas
 11. Chequee que el índice fue creado correctamente.
 12. En la base de datos movies ¿Existiría una mejora notable al crear índices? Analizar y justificar la respuesta.
 13. ¿En qué otra tabla crearía un índice y por qué? Justificar la respuesta
+
 

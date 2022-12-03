@@ -48,27 +48,90 @@ WHERE
 
 -- 7. Listar los datos de los estudiantes cuya edad es mayor al promedio.
 
--- PENDIENTE!! 
+SELECT 
+    e.nombre, e.edad
+FROM
+    estudiante e
+WHERE
+    e.edad > (SELECT 
+            AVG(e1.edad)
+        FROM
+            estudiante e1);
 
 -- 8. Listar los nombres de los estudiantes cuyo apellido comience con la letra G.
-SELECT nombre, apellido
-FROM estudiante
-WHERE apellido LIKE "G%";
+SELECT 
+    nombre, apellido
+FROM
+    estudiante
+WHERE
+    apellido LIKE 'G%';
 
 -- 9.  Listar los autores del libro “El Universo: Guía de viaje”. (Se debe listar solamente los nombres).
--- PENDIENTE!! 
+SELECT 
+    a.nombre
+FROM
+    autor a
+        INNER JOIN
+    libro_autor la ON a.id = la.id_autor
+        INNER JOIN
+    libro l ON la.id_libro = la.id_libro
+WHERE
+    l.titulo LIKE 'El Universo: Guía de viaje'
+GROUP BY a.nombre;
 
 -- 10. ¿Qué libros se prestaron al lector “Filippo Galli”?
--- PENDIENTE!! 
+SELECT 
+    l.titulo
+FROM
+    libro l
+       INNER JOIN
+    prestamo p ON p.id_libro = l.id
+       INNER JOIN
+    estudiante e ON e.id = p.id_lector
+WHERE
+    e.nombre = 'Filippo'
+        AND e.apellido = 'Galli';
 
 -- 11. Listar el nombre del estudiante de menor edad.
--- PENDIENTE!! 
+SELECT 
+    e.nombre, e.edad
+FROM
+    estudiante e
+ORDER BY e.edad ASC
+LIMIT 1;
 
 -- 12. Listar nombres de los estudiantes a los que se prestaron libros de Base de Datos.
--- PENDIENTE!! 
+SELECT 
+    e.nombre
+FROM
+    libro l
+        INNER JOIN
+    prestamo p ON p.id_libro = l.id
+        INNER JOIN
+    estudiante e ON e.id = p.id_lector
+WHERE
+    l.area = 'Base de Datos';
 
 -- 13. Listar los libros que pertenecen a la autora J.K. Rowling.
--- PENDIENTE!! 
+SELECT 
+    l.titulo
+FROM
+    autor a
+        INNER JOIN
+    libro_autor la ON la.id_autor = a.id
+        INNER JOIN
+    libro l ON la.id_libro = l.id
+WHERE
+    a.nombre = 'J.K. Rowling.';
 
 -- 14. Listar títulos de los libros que debían devolverse el 16/07/2021.
--- PENDIENTE!! 
+SELECT 
+    l.titulo
+FROM
+    libro l
+        INNER JOIN
+    prestamo p ON p.id_libro = l.id
+WHERE
+    p.fecha_devolucion = '2022/10/10'
+        AND p.devuelto = FALSE;
+
