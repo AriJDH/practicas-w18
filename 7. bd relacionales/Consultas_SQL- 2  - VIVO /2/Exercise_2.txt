@@ -1,0 +1,11 @@
+a. ¿Cuál es la primary key para la tabla de clientes? Justificar respuesta
+
+R: La Primary Key en la tabla de clientes es id_cliente lo que garantiza que sea único y fácil de administrar.
+
+¿Cuál es la primary key para la tabla de planes de internet? Justificar respuesta.
+
+R: Por la misma razón que en clientes, la Primary Key en planes de internet es id_plan
+
+c. ¿Cómo serían las relaciones entre tablas? ¿En qué tabla debería haber foreign key? ¿A qué campo de qué tabla hace referencia dicha foreign key? Justificar respuesta.
+
+R: Las relaciones serian ONE to MANY porque un plan de internet puede ser contratado por muchas entidades Cliente. Pero un Cliente solo puede contratar un solo plan de internet. La Foreing Key se encuentra en la tabla Cliente y hace referencia al campo id_plan de la tabla planes_internet
