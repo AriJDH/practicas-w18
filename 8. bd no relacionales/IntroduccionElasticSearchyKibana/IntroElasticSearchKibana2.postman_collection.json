@@ -1,0 +1,99 @@
+{
+	"info": {
+		"_postman_id": "ceb6dc3c-025e-4758-9989-5cd885bf4ef8",
+		"name": "IntroElasticSearchKibana",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "BuscarClientesPerez",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"query\": {\n    \"match\": {\"apellido\":\"perez\"}\n  }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:9200/clientes/_search",
+					"host": [
+						"localhost"
+					],
+					"port": "9200",
+					"path": [
+						"clientes",
+						"_search"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "AgregarClienteUruguay",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"nombre\":\"Nico\",\n  \"apellido\":\"Sanchez\",\n  \"pais\":\"Uruguay\",\n  \"localidad\":\"Posadas\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:9200/clientes/_doc",
+					"host": [
+						"localhost"
+					],
+					"port": "9200",
+					"path": [
+						"clientes",
+						"_doc"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "BuscarClientesUruguay",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"query\": {\n    \"match\": {\"pais\":\"Uruguay\"}\n  }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:9200/clientes/_search",
+					"host": [
+						"localhost"
+					],
+					"port": "9200",
+					"path": [
+						"clientes",
+						"_search"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
