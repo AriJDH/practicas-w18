@@ -63,7 +63,7 @@ public class ControllerTest {
     @Test
     void methodGetFollowedTest() throws Exception {
         FollowedListDTORes followedListDTORes = new FollowedListDTORes();
-        followedListDTORes.setUser_id(1);
+        followedgiListDTORes.setUser_id(1);
         followedListDTORes.setUser_name("Josep");
         List<UserDTORes> followed = new ArrayList<>();
         UserDTORes userDTOResA = new UserDTORes(2,"Ethan");
