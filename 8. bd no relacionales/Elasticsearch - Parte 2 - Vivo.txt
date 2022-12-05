@@ -1,0 +1,21 @@
+PUT /productos
+
+POST /productos/_search
+
+POST /productos/_bulk
+{ "index" : { "_index" : "productos"} }
+{"modelo": "Xtreme fut 2.0","deporte": "fútbol","marca": "adidas","precio": 17000.00}
+{ "index" : { "_index" : "productos"} }
+{"modelo": "Xtreme fut 3.0","deporte": "fútbol","marca": "adidas","precio": 18000.00}
+{ "index" : { "_index" : "productos"} }
+{"modelo": "Pegasus turbo v1.0","deporte": "running","marca": "nike","precio": 19000.00}
+{ "index" : { "_index" : "productos"} }
+{"modelo": "Pegasus turbo v2.0","deporte": "running","marca": "nike","precio": 20000.00}
+{ "index" : { "_index" : "productos"} }
+{"modelo": "Pegasus turbo v3.0","deporte": "running","marca": "nike","precio": 20000.00}
+{ "index" : { "_index" : "productos"} }
+{"modelo": "Pegasus turbo v4.0","deporte": "running","marca": "nike","precio": 21000.00}
+{ "index" : { "_index" : "productos"} }
+{"modelo": "Pegasus turbo v5.0","deporte": "running","marca": "nike","precio": 22000.00}
+{ "index" : { "_index" : "productos"} }
+{"modelo": "Pegasus turbo v6.0","deporte": "running","marca": "nike","precio": 23000.00}
