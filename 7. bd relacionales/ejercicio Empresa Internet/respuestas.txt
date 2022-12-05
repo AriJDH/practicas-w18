@@ -1,0 +1,14 @@
+a. ¿Cuál es la primary key para la tabla de clientes? Justificar respuesta
+
+-La primary key para la tabla de clientes es "idCliente", debido a que sera una valor unico e irrepetible en la tabla.
+
+b. ¿Cuál es la primary key para la tabla de planes de internet? Justificar respuesta.
+
+-La primary key para la tabla de planes es "idPlan", debido a que sera una valor unico e irrepetible en la tabla.
+
+c. ¿Cómo serían las relaciones entre tablas? ¿En qué tabla debería haber foreign key? ¿A qué campo de qué tabla hace referencia dicha foreign key? Justificar respuesta.
+
+-En este caso plantee que la relacion es de muchos a muchos, por lo tanto se crea una tabla intermedia llamada "ClientePlan" en donde se encuentran las foreign key de 
+ambas tablas, en donde el campo "cliente_id" de la tabla ClientePlan es la foreign key que hace referencia al idCliente de la tabla Cliente, mientras que el campo 
+"plan_id" es la foreign key que hace referencia al idPlan de la tabla Plan. De esta manera estamos relacionando de manera correcta ambas tablas ya que se trata de una 
+relacion de muchos a muchos.

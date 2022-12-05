@@ -1,0 +1,51 @@
+SELECT * FROM Cliente;
+-- Incorporar 10 registros en la tabla de clientes.
+INSERT INTO Cliente VALUES (1,'33.890.112','David','Cabral','1988-07-12','Mendoza','Capital');
+INSERT INTO Cliente VALUES (2,'45.353.132','Dante','De la Vega','1988-07-12','Mendoza','Capital');
+INSERT INTO Cliente VALUES (3,'27.112.512','Hugo','Bazan','1988-07-12','Mendoza','Capital');
+INSERT INTO Cliente VALUES (4,'25.123.162','Maxi','Huniquen','1988-07-12','La Rioja','Capital');
+INSERT INTO Cliente VALUES (5,'30.892.172','Maria','Garcia','1988-07-12','La Rioja','Capital');
+INSERT INTO Cliente VALUES (6,'31.379.132','Marta','Sabattini','1988-07-12','Cordoba','Capital');
+INSERT INTO Cliente VALUES (7,'33.274.113','Lucia','Roldan','1988-07-12','Cordoba','Capital');
+INSERT INTO Cliente VALUES (8,'32.356.114','Roberto','Quinteros','1988-07-12','Mendoza','Capital');
+INSERT INTO Cliente VALUES (9,'34.834.115','Marianela','Ruarte','1988-07-12','La Rioja','Capital');
+INSERT INTO Cliente VALUES (10,'23.590.165','Carlos','Molina','1978-07-23','La Rioja','Capital');
+
+
+SELECT * FROM Plan;
+-- Incorporar 5 registros en la tabla de planes de internet.
+INSERT INTO Plan VALUES(1,100,3000,10);
+INSERT INTO Plan VALUES(2,200,5500,15);
+INSERT INTO Plan VALUES(3,300,6200,20);
+INSERT INTO Plan VALUES(4,50,2000,5);
+INSERT INTO Plan VALUES(5,500,7500,25);
+
+-- Realizar las asociaciones/relaciones correspondientes entre estos registros.
+SELECT * FROM ClientePlan;
+INSERT INTO ClientePlan VALUES (1,1,4);
+INSERT INTO ClientePlan VALUES (2,2,2);
+INSERT INTO ClientePlan VALUES (3,3,4);
+INSERT INTO ClientePlan VALUES (4,4,5);
+INSERT INTO ClientePlan VALUES (5,5,2);
+INSERT INTO ClientePlan VALUES (6,6,1);
+INSERT INTO ClientePlan VALUES (7,7,2);
+INSERT INTO ClientePlan VALUES (8,8,3);
+INSERT INTO ClientePlan VALUES (9,9,4);
+INSERT INTO ClientePlan VALUES (10,10,5);
+INSERT INTO ClientePlan VALUES (11,1,3);
+INSERT INTO ClientePlan VALUES (12,2,2);
+INSERT INTO ClientePlan VALUES (13,3,1);
+
+-- Plantear 10 consultas SQL que se podrian realizar a la base de datos. Expresar las sentencias.
+SELECT * FROM Cliente;
+SELECT * FROM Plan;
+SELECT * FROM ClientePlan;
+SELECT nombre, apellido, provincia FROM Cliente WHERE provincia = 'Mendoza';
+SELECT nombre, apellido, provincia FROM Cliente WHERE provincia = 'Cordoba';
+SELECT nombre, apellido, provincia FROM Cliente WHERE provincia = 'La Rioja';
+SELECT idPlan, velocidad_mb, precio FROM Plan WHERE descuento > 20;
+SELECT idPlan, velocidad_mb, precio FROM Plan WHERE descuento > 10;
+SELECT c.nombre, c.apellido, c.provincia, p.velocidad_mb, p.precio FROM ClientePlan cp INNER JOIN Cliente c ON cp.cliente_id = c.idCliente INNER JOIN Plan p ON cp.plan_id 
+= p.idPlan;
+SELECT c.nombre, c.apellido, c.provincia, p.velocidad_mb, p.precio FROM ClientePlan cp INNER JOIN Cliente c ON cp.cliente_id = c.idCliente INNER JOIN Plan p ON cp.plan_id 
+= p.idPlan WHERE p.precio > 6000;
