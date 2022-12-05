@@ -1,0 +1,33 @@
+
+-- 1 Mostrar el título y el nombre del género de todas las series.
+SELECT s.title, g.name FROM series s INNER JOIN genres g ON s.genre_id = g.id;
+
+-- 2 Mostrar el título de los episodios, el nombre y apellido de los actores que trabajan en cada uno de ellos.
+SELECT e.title, a.first_name, a.last_name 
+FROM actor_episode ae 
+INNER JOIN episodes e ON ae.episode_id = e.id 
+INNER JOIN actors a ON ae.actor_id = a.id;
+
+-- 3 Mostrar el título de todas las series y el total de temporadas que tiene cada una de ellas.
+
+SELECT series.title, count(seasons.number) Total_temporadas 
+FROM series, seasons
+WHERE series.id = seasons.serie_id
+GROUP BY seasons.serie_id;
+
+-- 4 Mostrar el nombre de todos los géneros y la cantidad total de películas por cada uno, siempre que sea mayor o igual a 3
+
+SELECT g.name, count(m.id) as Total_Peliculas
+FROM genres g, movies m
+WHERE g.id = m.genre_id
+GROUP BY m.genre_id
+HAVING count(m.id) >= 3;
+
+-- 5 Mostrar sólo el nombre y apellido de los actores que trabajan en todas las películas de la guerra de las galaxias y que estos no se repitan.
+
+SELECT DISTINCT a.first_name, a.last_name
+FROM actor_movie am
+INNER JOIN actors a
+ON am.actor_id = a.id
+AND am.movie_id >= 3
+AND am.movie_id <= 4
