@@ -20,13 +20,13 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:9200/zapatillas",
+					"raw": "localhost:9200/zapatillas_deportivas",
 					"host": [
 						"localhost"
 					],
 					"port": "9200",
 					"path": [
-						"zapatillas"
+						"zapatillas_deportivas"
 					]
 				}
 			},
