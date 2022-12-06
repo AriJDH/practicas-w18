@@ -1,0 +1,41 @@
+{"took":0,"timed_out":false,"_shards":{"total":1,"successful":1,"skipped":0,"failed":0},"hits":{"total":{"value":14,"relation":"eq"},"max_score":1.0,"hits":[{"_index":"zapatillas_deportivas","_type":"_doc","_id":"OMZS5IQBxI1rw-yQckKP","_score":1.0,"_source":{
+    "color" : "purple",
+    "modelo" : "e-services",
+    "talle" : "50"
+}},{"_index":"zapatillas_deportivas","_type":"_doc","_id":"OcZS5IQBxI1rw-yQdUIr","_score":1.0,"_source":{
+    "color" : "turquoise",
+    "modelo" : "e-business",
+    "talle" : "41"
+}},{"_index":"zapatillas_deportivas","_type":"_doc","_id":"MsZS5IQBxI1rw-yQBELa","_score":1.0,"_source":{
+    "color" : "orange",
+    "modelo" : "partnerships",
+    "talle" : "36"
+}},{"_index":"zapatillas_deportivas","_type":"_doc","_id":"M8ZS5IQBxI1rw-yQBkL9","_score":1.0,"_source":{
+    "color" : "olive",
+    "modelo" : "relationships",
+    "talle" : "51"
+}},{"_index":"zapatillas_deportivas","_type":"_doc","_id":"NcZS5IQBxI1rw-yQYkJ-","_score":1.0,"_source":{
+    "color" : "turquoise",
+    "modelo" : "deliverables",
+    "talle" : "55"
+}},{"_index":"zapatillas_deportivas","_type":"_doc","_id":"NsZS5IQBxI1rw-yQY0J9","_score":1.0,"_source":{
+    "color" : "pink",
+    "modelo" : "action-items",
+    "talle" : "43"
+}},{"_index":"zapatillas_deportivas","_type":"_doc","_id":"L8ZR5IQBxI1rw-yQ_EJ-","_score":1.0,"_source":{
+    "color" : "tan",
+    "modelo" : "vortals",
+    "talle" : "54"
+}},{"_index":"zapatillas_deportivas","_type":"_doc","_id":"MMZR5IQBxI1rw-yQ_0IA","_score":1.0,"_source":{
+    "color" : "violet",
+    "modelo" : "e-markets",
+    "talle" : "31"
+}},{"_index":"zapatillas_deportivas","_type":"_doc","_id":"N8ZS5IQBxI1rw-yQb0Iv","_score":1.0,"_source":{
+    "color" : "ivory",
+    "modelo" : "infrastructures",
+    "talle" : "41"
+}},{"_index":"zapatillas_deportivas","_type":"_doc","_id":"LsZP5IQBxI1rw-yQPEIk","_score":1.0,"_source":{
+    "color" : "mint green",
+    "modelo" : "bandwidth",
+    "talle" : "51"
+}}]}}
