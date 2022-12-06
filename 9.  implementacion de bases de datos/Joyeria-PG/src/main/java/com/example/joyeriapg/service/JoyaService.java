@@ -55,6 +55,13 @@ public class JoyaService implements IJoyaService{
 
     @Override
     public void editJoya(Long id, JoyaRequest joyaRequest) {
-        JoyaEntity joyaOriginal = findJoya(id);
+        JoyaEntity joyaOriginal = this.joyaRepository.findById(id).orElse(null);
+        joyaOriginal.setNombre(joyaRequest.getNombre());
+        joyaOriginal.setPeso(joyaRequest.getPeso());
+        joyaOriginal.setMaterial(joyaRequest.getMaterial());
+        joyaOriginal.setParticularidad(joyaRequest.getParticularidad());
+        joyaOriginal.setVentaONo(joyaRequest.getVentaONo());
+
+        this.joyaRepository.save(joyaOriginal);
     }
 }

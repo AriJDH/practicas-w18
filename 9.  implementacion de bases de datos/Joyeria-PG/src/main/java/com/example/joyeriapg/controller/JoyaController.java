@@ -40,7 +40,7 @@ public class JoyaController {
 
     @PostMapping("jewelry/update/{id}")
     public ResponseEntity<JoyaResponse> actualizar(@PathVariable Long id, @RequestBody JoyaRequest joyaRequest){
-        this.joyaService.saveJoya(joyaRequest);
+        this.joyaService.editJoya(id, joyaRequest);
         JoyaResponse joyaResponse = this.joyaService.findJoya(id);
         return new ResponseEntity<>(joyaResponse, HttpStatus.ACCEPTED);
     }
