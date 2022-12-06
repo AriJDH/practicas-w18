@@ -19,10 +19,8 @@ public class PersonaService {
 	@Autowired
 	SintomaService sintomaService;
 	
-	public List<PersonaDTO> buscarPersonasRiesgo(){
-	
-	}
-	
-	
+	//public List<PersonaDTO> buscarPersonasRiesgo(){
+	// TODO pendiente buscar personas de riesgo y ejecutar el sistema
+	//}
 	
 }

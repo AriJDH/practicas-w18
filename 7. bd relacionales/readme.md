@@ -83,7 +83,9 @@ Plantear 10 consultas SQL que se podrían realizar a la base de datos. Expresar 
 
 **Consultas SQL Avanzadas - Parte 1 - PG**
 **Consultas SQL Avanzadas** _TERMINADO_
+
 _Primera Parte_
+
 Responder las siguientes preguntas:
 1. ¿A qué se denomina JOIN en una base de datos y para qué se utiliza?
 a. Se utiliza para obtener datos de varias tablas relacionadas entre sí. Consiste en combinar datos de una tabla con datos de la otra tabla, a partir de una o varias condiciones en común.
