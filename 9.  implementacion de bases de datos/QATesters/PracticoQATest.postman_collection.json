@@ -1,0 +1,152 @@
+{
+	"info": {
+		"_postman_id": "76b59a13-a02d-43e8-92c0-394e9ea2c2d1",
+		"name": "PracticoQATest",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "getAllTestCases",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/api/testcases",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"testcases"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "createTestCase",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"description\": \"Pruebas rancias.\",\n    \"tested\":false,\n    \"passed\":false,\n    \"number_of_tries\": 999,\n    \"last_update\": \"2022-12-06\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/api/testcases/new",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"testcases",
+						"new"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getTestCaseById",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/api/testcases/1",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"testcases",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "updateTestCase",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"description\": \"Pruebas rancias mejoradas.\",\n    \"tested\":false,\n    \"passed\":false,\n    \"number_of_tries\": 999,\n    \"last_update\": \"2022-12-06\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/api/testcases/1",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"testcases",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "deleteTestCase",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/api/testcases/2",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"testcases",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getTestCasesByQuery",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/api/testcases/query?last_update=2022-12-07",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"testcases",
+						"query"
+					],
+					"query": [
+						{
+							"key": "last_update",
+							"value": "2022-12-07"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
