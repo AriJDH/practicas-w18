@@ -71,7 +71,8 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "/Users/dtren/Desarrollo bootcamp/repositorio_practicas/practicas-w18/5. testing/ObtenerDiploma/pom.xml"
+    "last_opened_file_path": "/Users/dtren/Desarrollo bootcamp/repositorio_practicas/practicas-w18/5. testing/ObtenerDiploma/pom.xml",
+    "spring.configuration.checksum": "b36e5c601021deef548f272a0fa63917"
   }
 }]]></component>
   <component name="RecentsManager">
@@ -186,6 +187,7 @@
       <option name="presentableId" value="Default" />
       <updated>1619721005383</updated>
       <workItem from="1669038653709" duration="12560000" />
+      <workItem from="1670363871561" duration="17000" />
     </task>
     <task id="LOCAL-00001" summary="Spring 2 - Practica TT - Obetener Diploma">
       <created>1619721212242</created>
