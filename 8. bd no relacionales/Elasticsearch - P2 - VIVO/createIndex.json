@@ -1,0 +1,17 @@
+// POST society/_create/2
+{
+    "mappings":{
+        "properties":{
+            "nombre":{"type":"text"},
+            "apellido":{"type":"text"},
+            "direccion":{"type":"text"}
+    }}
+}
+// GET society/_search
+
+// POST society/_doc
+{
+    "nombre":"Angel",
+    "apellido":"Archbold",
+    "direccion":"Calle 7"
+}

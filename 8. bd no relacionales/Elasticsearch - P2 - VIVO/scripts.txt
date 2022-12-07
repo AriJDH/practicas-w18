@@ -1,0 +1,31 @@
+// Obtiene todos los indices que existen //
+GET _cat/indices 
+green  open metrics-endpoint.metadata_current_default pDrij2P1RGq_Hz75jfxSVA 1 0  0 0  225b  225b
+yellow open sport_shoes                               Ht-nrZJJQsGq7oPc-Di5Ew 1 1 26 0  10kb  10kb
+yellow open sports_shoes                              2DoHM1M7SlOb9d4PFgNwjg 1 1 26 0  10kb  10kb
+yellow open zapatillas_deportivas                     k0FWO-kkTWaMNFYig3-RDA 1 1 11 0 7.5kb 7.5kb
+
+--------------------
+
+// Crea un indice //
+
+POST society/_create/2
+{
+    "mappings":{
+        "properties":{
+            "nombre":{"type":"text"},
+            "apellido":{"type":"text"},
+            "direccion":{"type":"text"}
+    }}
+}
+
+--------------------
+
+//  Crea un nuevo registro //
+
+// POST society/_doc
+{
+    "nombre":"Angel",
+    "apellido":"Archbold",
+    "direccion":"Calle 7"
+}
