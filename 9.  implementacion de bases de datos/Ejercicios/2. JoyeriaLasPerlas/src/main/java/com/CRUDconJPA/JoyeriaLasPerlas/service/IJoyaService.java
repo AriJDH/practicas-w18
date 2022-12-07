@@ -8,16 +8,16 @@ import java.util.List;
 @Service
 public interface IJoyaService {
 
-	// --------- CRUD --------- //
-	// Gurdar
+	// -------------------------------- CRUD -------------------------------- //
+	// Gurdar -------------------------------- //
 	JoyaDto saveAndFlush(JoyaDto joyaDto);
-	// Buscar todos
+	// Buscar todos -------------------------------- //
 	List<JoyaDto> findAll();
-	// Buscar por id
+	// Buscar por id -------------------------------- //
 	JoyaDto findById(Long id);
-	// Eliminar por id
+	// Eliminar por id -------------------------------- //
 	void deleteById(Long id);
-	// Modificar
+	// Modificar -------------------------------- //
 	void update(JoyaDto joyaDto);
 
 }

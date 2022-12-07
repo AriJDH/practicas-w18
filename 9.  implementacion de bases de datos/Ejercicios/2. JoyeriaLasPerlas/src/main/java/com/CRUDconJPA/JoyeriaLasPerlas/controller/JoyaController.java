@@ -13,14 +13,14 @@ import java.util.List;
 @RequestMapping("/jewerly")
 public class JoyaController {
 	
-	// Dependencias
+	// Dependencias -------------------------------- //
 	JoyaServiceImp joyaServiceImp;
 	
 	public JoyaController(JoyaServiceImp joyaServiceImp) {
 		this.joyaServiceImp = joyaServiceImp;
 	}
 	
-	// Guardar
+	// Guardar -------------------------------- //
 	@PostMapping("/new")
 	public ResponseEntity<?> save(@RequestBody @Valid JoyaDto joyaDto) {
 		JoyaDto joyaDtoSaved = joyaServiceImp.saveAndFlush(joyaDto);
@@ -29,28 +29,28 @@ public class JoyaController {
 						.body("El número identificatorio es " + joyaDtoSaved.getId());
 	}
 	
-	// Buscar todos
+	// Buscar todos -------------------------------- //
 	@GetMapping
 	public ResponseEntity<List<JoyaDto>> findAll() {
 		List<JoyaDto> joyaDtoList = joyaServiceImp.findAll();
 		return ResponseEntity.ok().body(joyaDtoList);
 	}
 	
-	// Buscar por id
+	// Buscar por id -------------------------------- //
 	@GetMapping("/{id}")
 	public ResponseEntity<JoyaDto> findById(@PathVariable @NotNull Long id) {
 		JoyaDto joyaDto = joyaServiceImp.findById(id);
 		return ResponseEntity.ok().body(joyaDto);
 	}
 	
-	// Eliminar por id
+	// Eliminar por id -------------------------------- //
 	@DeleteMapping("/delete/{id}")
 	public ResponseEntity<String> delete(@PathVariable @NotNull Long id) {
 		joyaServiceImp.deleteById(id);
 		return ResponseEntity.ok().body("El id " + id + " fue eliminado con éxito");
 	}
 	
-	// Modificar
+	// Modificar -------------------------------- //
 	@PutMapping("/update/{id}")
 	public ResponseEntity<?> update(@PathVariable Long id, @RequestBody JoyaDto joyaDto) {
 		joyaDto.setId(id);

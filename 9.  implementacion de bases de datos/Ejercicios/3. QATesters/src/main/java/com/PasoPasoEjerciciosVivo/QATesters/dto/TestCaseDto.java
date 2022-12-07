@@ -6,14 +6,14 @@ import lombok.Data;
 import java.time.LocalDate;
 
 @Data
-public class TestCaseResponseDto {
+public class TestCaseDto {
 	
 	private Long idCase;
 	private String description;
-	private Boolean tested;
-	private Boolean passed;
+	private boolean tested;
+	private boolean passed;
 	private int numberOfTries;
-	@JsonFormat(pattern = "dd-MM-yyyy")
+	@JsonFormat(pattern = "yyyy-MM-dd")
 	private LocalDate lastUpdate;
 	
 }

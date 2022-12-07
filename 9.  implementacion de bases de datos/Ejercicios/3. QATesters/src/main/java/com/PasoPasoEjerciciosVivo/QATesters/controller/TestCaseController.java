@@ -1,8 +1,7 @@
 package com.PasoPasoEjerciciosVivo.QATesters.controller;
 
-import com.PasoPasoEjerciciosVivo.QATesters.dto.TestCaseRequestDto;
-import com.PasoPasoEjerciciosVivo.QATesters.service.ITestCaseService;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.PasoPasoEjerciciosVivo.QATesters.dto.TestCaseDto;
+import com.PasoPasoEjerciciosVivo.QATesters.service.TestCaseServiceImp;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -13,16 +12,19 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api/testcases")
 public class TestCaseController {
-
-	final
-	ITestCaseService testCaseService;
 	
-	public TestCaseController(ITestCaseService testCaseService) {this.testCaseService = testCaseService;}
+	// Dependencias -------------------------------- //
+	TestCaseServiceImp testCaseServiceImp;
 	
+	public TestCaseController(TestCaseServiceImp testCaseServiceImp) {
+		this.testCaseServiceImp = testCaseServiceImp;
+	}
+	
+	// Guardar  -------------------------------- //
 	@PostMapping("/new")
-	public ResponseEntity<?> save(@RequestBody TestCaseRequestDto testCaseRequestDto){
-		testCaseService.saveAndFlush(testCaseRequestDto);
+	public ResponseEntity<?> save(@RequestBody TestCaseDto testCaseDto) {
+		testCaseServiceImp.saveAndFlush(testCaseDto);
 		return ResponseEntity.ok(HttpStatus.CREATED);
 	}
-
+	
 }

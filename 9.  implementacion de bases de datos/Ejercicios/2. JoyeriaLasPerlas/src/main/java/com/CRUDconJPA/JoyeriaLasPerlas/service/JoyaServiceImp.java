@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 @Service
 public class JoyaServiceImp implements IJoyaService {
 	
-	// Inyección de dependencias
+	// Dependencias -------------------------------- //
 	JoyaRepository joyaRepository;
 	ObjectMapper mapper;
 	
