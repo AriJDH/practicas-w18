@@ -52,6 +52,6 @@ public class TestCaseServiceImp implements ITestCaseService {
 
     @Override
     public List<TestCase> getTestCaseByDate(LocalDate lastUpdate) {
-        return iTestCaseRepository.findAllByAfterLastUpdate(lastUpdate);
+        return iTestCaseRepository.findAllByLastUpdateIsAfter(lastUpdate);
     }
 }

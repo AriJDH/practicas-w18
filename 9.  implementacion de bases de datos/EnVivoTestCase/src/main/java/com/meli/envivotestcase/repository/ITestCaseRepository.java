@@ -11,6 +11,12 @@ import java.util.List;
 
 @Repository
 public interface ITestCaseRepository extends JpaRepository<TestCase,Long> {
+
+    //CONSULTA CON HQL
     @Query("SELECT T FROM TestCase T WHERE T.lastUpdate >= :lastDate")
     public List<TestCase> findAllByAfterLastUpdate(@Param("lastDate")LocalDate lastDate);
+
+    //CONSULTA AUTOGENERADA
+    public List<TestCase> findAllByLastUpdateIsAfter(LocalDate lastDate);
+
 }
