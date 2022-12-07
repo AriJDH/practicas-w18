@@ -3,6 +3,7 @@ package com.example.joyeria_lasperlas.service;
 import com.example.joyeria_lasperlas.dto.request.JewelDTORequest;
 import com.example.joyeria_lasperlas.dto.response.JewelDTOResponse;
 import com.example.joyeria_lasperlas.entity.Jewel;
+import com.example.joyeria_lasperlas.exception.NotFoundException;
 import com.example.joyeria_lasperlas.repository.IRepositoryJewerly;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -37,16 +38,25 @@ public class ServiceJewerlyImp implements IServiceJewerly{
 
     @Override
     public Long saveJewel(JewelDTORequest jewelDTORequest) {
-        return null;
+        Jewel jewel =  repositoryJewerly.save(op.convertValue(jewelDTORequest, Jewel.class));
+        return jewel.getNro_identificatorio();
     }
 
     @Override
-    public Boolean logicDelete(Long id) {
-        return null;
+    public void logicDelete(Long id) {
+        Jewel jewel = repositoryJewerly.findById(id).orElse(null);
+        if (jewel == null) throw new NotFoundException("La joya con id " + id + " no existe.");
+        jewel.setVentaONo(false);
+        repositoryJewerly.save(jewel);
     }
 
     @Override
-    public JewelDTOResponse updateJewel(JewelDTORequest jewelDTORequest) {
-        return null;
+    public JewelDTOResponse updateJewel(JewelDTORequest jewelDTORequest, Long id) {
+        Jewel jewel = repositoryJewerly.findById(id).orElse(null);
+        if (jewel == null) throw new NotFoundException("La joya con id " + id + " no existe.");
+        jewel = op.convertValue(jewelDTORequest, Jewel.class);
+        jewel.setNro_identificatorio(id);
+        repositoryJewerly.save(jewel);
+        return op.convertValue(jewel, JewelDTOResponse.class);
     }
 }
