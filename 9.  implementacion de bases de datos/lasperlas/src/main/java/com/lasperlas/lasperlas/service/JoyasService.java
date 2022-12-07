@@ -44,7 +44,7 @@ public class JoyasService implements IJoyasService {
        List<Joya> joyitas = joyasRepository.findAll();
        return joyitas.stream().filter(p -> p.getVentaONo()).map(p -> new JoyaDTO(p.getNombre(),p.getMaterial(),p.getPeso(),p.getParticularidad(),p.getPosee_piedra(),p.getVentaONo())).collect(Collectors.toList());
     }
-
+    
     @Override
     public ResponseDTO update(Long id, UpdateDTO joyita) {
         if (joyasRepository.existsById(id)){
