@@ -2,9 +2,15 @@ package com.PasoPasoEjerciciosVivo.QATesters.controller;
 
 import com.PasoPasoEjerciciosVivo.QATesters.dto.TestCaseDto;
 import com.PasoPasoEjerciciosVivo.QATesters.service.TestCaseServiceImp;
+import org.springframework.cglib.core.Local;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/testcases")
@@ -26,8 +32,13 @@ public class TestCaseController {
 	
 	// Buscar todos  -------------------------------- //
 	@GetMapping
-	public ResponseEntity<?> getAll() {
-		return ResponseEntity.ok().body(testCaseServiceImp.findAll());
+	public ResponseEntity<?> getAll(@RequestParam(value = "last_update", required = false)
+	                                  @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date) {
+		List<TestCaseDto> testCaseDtoList = new ArrayList<>();
+		if(date != null){
+			testCaseDtoList = testCaseServiceImp.findAllByDates(date);
+		} else testCaseDtoList = testCaseServiceImp.findAll();
+		return ResponseEntity.ok().body(testCaseDtoList);
 	}
 	
 	// Buscar por id  -------------------------------- //
@@ -49,7 +60,5 @@ public class TestCaseController {
 		testCaseServiceImp.delete(id);
 		return ResponseEntity.ok().body("El elemento fue eliminado con éxito");
 	}
-	
-	// Buscar todos los casos de prueba que hayan sido actualizados después de una determinada fecha.
 	
 }

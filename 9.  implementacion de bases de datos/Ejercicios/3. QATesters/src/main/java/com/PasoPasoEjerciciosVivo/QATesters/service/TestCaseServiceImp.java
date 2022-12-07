@@ -6,6 +6,7 @@ import com.PasoPasoEjerciciosVivo.QATesters.repository.ITestCaseRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.EmptyStackException;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -34,7 +35,7 @@ public class TestCaseServiceImp implements ITestCaseService {
 	// Buscar todos  -------------------------------- //
 	@Override
 	public List<TestCaseDto> findAll() {
-		List<TestCase> testCaseList= testCaseRepository
+		List<TestCase> testCaseList = testCaseRepository
 						.findAll();
 		List<TestCaseDto> testCaseDtoList = testCaseList
 						.stream()
@@ -61,7 +62,7 @@ public class TestCaseServiceImp implements ITestCaseService {
 	@Override
 	public void update(Long id, TestCaseDto testCaseDto) {
 		TestCase testCaseResult = testCaseRepository.findById(id).orElseThrow(
-						()-> new NoSuchElementException("El id no fue encontrado"));
+						() -> new NoSuchElementException("El id no fue encontrado"));
 		TestCase testCaseNew = mapper.convertValue(testCaseDto, TestCase.class);
 		testCaseNew.setIdCase(id);
 		testCaseRepository.saveAndFlush(testCaseNew);
@@ -71,10 +72,22 @@ public class TestCaseServiceImp implements ITestCaseService {
 	@Override
 	public void delete(Long id) {
 		TestCase testCase = testCaseRepository.findById(id).orElseThrow(
-						()-> new NoSuchElementException("El id no fue encontrado"));
+						() -> new NoSuchElementException("El id no fue encontrado"));
 		testCaseRepository.deleteById(id);
 	}
 	
-	// Buscar todos los casos de prueba que hayan sido actualizados después de una determinada fecha.
-	
+	// Buscar por fechas  -------------------------------- //
+	@Override
+	public List<TestCaseDto> findAllByDates(LocalDate date) {
+		List<TestCase> testCaseList = testCaseRepository.findAll();
+		List<TestCase> testCaseListFilter = testCaseList.stream().filter(testCase ->
+						                                                                 testCase.getLastUpdate()
+										                                                                 .isAfter(date))
+						.collect(Collectors.toList());
+		return testCaseListFilter
+						.stream()
+						.map(testCase ->
+										     mapper.convertValue(testCase, TestCaseDto.class))
+						.collect(Collectors.toList());
+	}
 }

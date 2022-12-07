@@ -3,6 +3,7 @@ package com.PasoPasoEjerciciosVivo.QATesters.service;
 import com.PasoPasoEjerciciosVivo.QATesters.dto.TestCaseDto;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -23,5 +24,6 @@ public interface ITestCaseService {
 	// Eliminar  -------------------------------- //
 	void delete(Long id);
 	
-	
+	// Buscar por fechas  -------------------------------- //
+	List<TestCaseDto> findAllByDates(LocalDate date);
 }

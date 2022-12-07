@@ -33,6 +33,58 @@
 			"response": []
 		},
 		{
+			"name": "Post Ok Copy",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"description\": \"descripcion prueba\",\n    \"tested\": true,\n    \"passed\": false,\n    \"numberOfTries\": 10,\n    \"lastUpdate\": \"2022-11-10\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{urlBase}}/new",
+					"host": [
+						"{{urlBase}}"
+					],
+					"path": [
+						"new"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Post Ok Copy 2",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"description\": \"descripcion prueba\",\n    \"tested\": true,\n    \"passed\": false,\n    \"numberOfTries\": 10,\n    \"lastUpdate\": \"2022-01-10\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{urlBase}}/new",
+					"host": [
+						"{{urlBase}}"
+					],
+					"path": [
+						"new"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "Get All Ok",
 			"request": {
 				"method": "GET",
@@ -195,6 +247,26 @@
 					],
 					"path": [
 						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All By Dates",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{urlBase}}?last_update=2022-10-10",
+					"host": [
+						"{{urlBase}}"
+					],
+					"query": [
+						{
+							"key": "last_update",
+							"value": "2022-10-10"
+						}
 					]
 				}
 			},
