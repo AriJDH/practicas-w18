@@ -8,19 +8,20 @@ import java.util.List;
 @Service
 public interface ITestCaseService {
 	
-	// Guardar
+	// Guardar  -------------------------------- //
 	void saveAndFlush(TestCaseDto testCaseRequestDto);
 	
-	// Buscar Todos
+	// Buscar todos  -------------------------------- //
 	List<TestCaseDto> findAll();
 	
-	// Buscar por Id
+	// Buscar por id  -------------------------------- //
 	TestCaseDto findById(Long id);
 	
-	// Eliminar por id
+	// Modificar  -------------------------------- //
+	void update(Long id, TestCaseDto testCaseRequestDto);
+	
+	// Eliminar  -------------------------------- //
 	void delete(Long id);
 	
-	// Modificar
-	void update(Long id, TestCaseDto testCaseRequestDto);
 	
 }

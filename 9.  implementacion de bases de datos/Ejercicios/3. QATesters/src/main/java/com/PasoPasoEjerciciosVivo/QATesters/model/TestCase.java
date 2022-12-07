@@ -1,12 +1,13 @@
 package com.PasoPasoEjerciciosVivo.QATesters.model;
 
-import lombok.Setter;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import lombok.Getter;
 
 import javax.persistence.*;
 import java.time.LocalDate;
 
 @Entity
-@Setter
+@Getter
 public class TestCase {
 	
 	@Id
@@ -21,4 +22,7 @@ public class TestCase {
 	@Column(name = "last_update")
 	private LocalDate lastUpdate;
 	
+	public void setIdCase(Long idCase) {
+		this.idCase = idCase;
+	}
 }
