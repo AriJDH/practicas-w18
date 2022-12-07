@@ -85,7 +85,6 @@ public class TestCaseService implements ITestCaseService{
     public TestCaseDTO updateTestCase(Long id, TestCaseDTO testCaseDTO) {
 
         TestCase findTC = repositoryTestCase.findById(id).orElseThrow();
-
         TestCase updateTC = MapTo.dtoToEntity(testCaseDTO); //Convierto a entidad el dto que recibo
         updateTC.setId_case(findTC.getId_case());           //Setteo id del Test case convertido de DTO a Entity
         updateTC.setLast_update(testCaseDTO.getLast_updated());

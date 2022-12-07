@@ -12,8 +12,6 @@ public interface ITestCaseService {
     public TestCase save(TestCase testCase);
     public MessageDTOResponse delete (Long id);
     public TestCase findById(Long id);
-
     public List<TestCase> findAfterDate(LocalDate date);
-
     TestCaseDTO updateTestCase(Long id, TestCaseDTO testCaseDTO);
 }
