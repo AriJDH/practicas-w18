@@ -1,0 +1,215 @@
+{
+	"info": {
+		"_postman_id": "21fc4400-9166-4f08-be7f-6f716738af54",
+		"name": "Elasticsearch",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Obtener listado de todos los index de elasticsearch",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/_cat/indices",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"_cat",
+						"indices"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Crear index",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"settings\": {\n    \"number_of_shards\": 1\n  },\n  \"mappings\": {\n    \"properties\": {\n      \"modelo\": {\n        \"type\": \"text\"\n      },\n      \"talle\": {\n        \"type\": \"short\"\n      },\n      \"color\": {\n        \"type\": \"text\"\n      }\n    }\n  }\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/{{index}}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"{{index}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Conocer el mapping del index",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/{{index}}/_mapping",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"{{index}}",
+						"_mapping"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Ingresar un registro en el index",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.environment.set(\"randomNumber\", _.random(29, 55))"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"color\" : \"{{$randomColor}}\",\n    \"modelo\" : \"{{$randomBsNoun}}\",\n    \"talle\" : \"{{randomNumber}}\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/{{index}}/_doc",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"{{index}}",
+						"_doc"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Obtener todos los registros",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/{{index}}/_search",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"{{index}}",
+						"_search"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Modificar un registro",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"color\": \"violet\",\n    \"modelo\": \"channels\",\n    \"talle\": \"37\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/{{index}}/_doc/LMZL5IQBxI1rw-yQ_0I_",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"{{index}}",
+						"_doc",
+						"LMZL5IQBxI1rw-yQ_0I_"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Filtrar por campo color y talle",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"_source\": [\"color\", \"talle\"]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/{{index}}/_search",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"{{index}}",
+						"_search"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "host",
+			"value": "http://localhost:9200"
+		},
+		{
+			"key": "index",
+			"value": "zapatillas_deportivas"
+		}
+	]
+}

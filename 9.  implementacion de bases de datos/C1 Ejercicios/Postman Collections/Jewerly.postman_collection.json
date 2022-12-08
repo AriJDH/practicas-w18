@@ -1,0 +1,190 @@
+{
+	"info": {
+		"_postman_id": "25e5fb2a-cf2c-49d9-a1c9-941138013808",
+		"name": "Jewerly",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get All",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/{{api}}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"{{api}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get By ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/{{api}}/1",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"{{api}}",
+						"1"
+					],
+					"query": [
+						{
+							"key": "",
+							"value": null,
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UPDATE By ID",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"Turquesa\",\n    \"material\": \"Turquesa\",\n    \"weight\": 2,\n    \"characteristic\": \"bla\",\n    \"hadStone\": true,\n    \"saleOrNot\": true\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/{{api}}/2",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"{{api}}",
+						"2"
+					],
+					"query": [
+						{
+							"key": "",
+							"value": null,
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All On Sale",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/{{api}}/onSale",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"{{api}}",
+						"onSale"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete By ID",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/{{api}}/1",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"{{api}}",
+						"1"
+					],
+					"query": [
+						{
+							"key": "",
+							"value": null,
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "New",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"Turquesa\",\n    \"material\": \"Turquesa\",\n    \"weight\": 2,\n    \"characteristic\": \"bla\",\n    \"hadStone\": true,\n    \"saleOrNot\": true\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/{{api}}/new",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"{{api}}",
+						"new"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "host",
+			"value": "http://localhost:8080"
+		},
+		{
+			"key": "api",
+			"value": "jewerly"
+		},
+		{
+			"key": "servicio",
+			"value": "testcases",
+			"disabled": true
+		}
+	]
+}

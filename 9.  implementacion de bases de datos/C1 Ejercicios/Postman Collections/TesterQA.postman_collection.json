@@ -1,0 +1,200 @@
+{
+	"info": {
+		"_postman_id": "510cb73b-aa3f-4e2b-8301-7bda49de49ec",
+		"name": "TesterQA",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get All Test Cases",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/{{api}}/{{servicio}}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"{{api}}",
+						"{{servicio}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Test Case By ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/{{api}}/{{servicio}}/2",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"{{api}}",
+						"{{servicio}}",
+						"2"
+					],
+					"query": [
+						{
+							"key": "",
+							"value": null,
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UPDATE Test Case By ID",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"description\": \"Test 1\",\n    \"tested\": true,\n    \"passed\": false,\n    \"number_of_tries\": 2,\n    \"lastUpdated\": \"20-09-2022\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/{{api}}/{{servicio}}/1",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"{{api}}",
+						"{{servicio}}",
+						"1"
+					],
+					"query": [
+						{
+							"key": "",
+							"value": null,
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Test Case After Date",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/{{api}}/{{servicio}}/last_update?date=30-07-2022",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"{{api}}",
+						"{{servicio}}",
+						"last_update"
+					],
+					"query": [
+						{
+							"key": "date",
+							"value": "30-07-2022"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test Case By ID",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/{{api}}/{{servicio}}/1",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"{{api}}",
+						"{{servicio}}",
+						"1"
+					],
+					"query": [
+						{
+							"key": "",
+							"value": null,
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "New Test",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"description\" : \"Test 93\",\n    \"tested\" : true,\n    \"passed\" : false,\n    \"number_of_tries\" : 2,\n    \"lastUpdate\": \"10-08-2022\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/{{api}}/{{servicio}}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"{{api}}",
+						"{{servicio}}"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "host",
+			"value": "http://localhost:8080"
+		},
+		{
+			"key": "api",
+			"value": "api"
+		},
+		{
+			"key": "servicio",
+			"value": "testcases"
+		}
+	]
+}
