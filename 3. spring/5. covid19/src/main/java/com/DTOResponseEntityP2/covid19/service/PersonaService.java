@@ -4,9 +4,7 @@ import com.DTOResponseEntityP2.covid19.model.Persona;
 import com.DTOResponseEntityP2.covid19.model.PersonaDTO;
 import com.DTOResponseEntityP2.covid19.repository.PersonaRepositoryImp;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.HttpClientErrorException;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -14,13 +12,27 @@ import java.util.stream.Collectors;
 @Service
 public class PersonaService {
 	
-	@Autowired
+	final
 	PersonaRepositoryImp personaRepositoryImp;
-	@Autowired
+	final
 	SintomaService sintomaService;
+	final
+	ObjectMapper mapper;
 	
-	//public List<PersonaDTO> buscarPersonasRiesgo(){
-	// TODO pendiente buscar personas de riesgo y ejecutar el sistema
-	//}
+	public PersonaService(PersonaRepositoryImp personaRepositoryImp,
+	                      SintomaService sintomaService,
+	                      ObjectMapper mapper) {
+		this.personaRepositoryImp = personaRepositoryImp;
+		this.sintomaService = sintomaService;
+		this.mapper = mapper;
+	}
 	
+	// Buscar personas de riesgo -------------------------------------- //
+	public List<PersonaDTO> buscarPersonasRiesgo() {
+		List<Persona> personaList = personaRepositoryImp.buscarTodos();
+		return personaList.stream()
+						.filter(persona -> persona.getEdad() > 60 && persona.getTieneSintomas())
+						.map(persona -> mapper.convertValue(persona, PersonaDTO.class))
+						.collect(Collectors.toList());
+	}
 }

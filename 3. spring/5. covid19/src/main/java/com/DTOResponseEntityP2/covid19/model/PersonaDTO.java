@@ -13,6 +13,7 @@ public class PersonaDTO {
 	private String nombre;
 	private String apellido;
 	private Integer edad;
-	private String sintomaAsociado;
+	private Boolean tieneSintomas;
+	private Sintoma sintomaAsociado;
 	
 }

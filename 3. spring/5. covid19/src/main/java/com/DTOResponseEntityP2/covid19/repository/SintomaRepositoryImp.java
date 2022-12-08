@@ -28,11 +28,12 @@ public class SintomaRepositoryImp implements IRepository<Sintoma> {
 	}
 	
 	public Sintoma buscarPorNombre(String nombre) {
-		 List<Sintoma> sintomasBuscados = buscarTodos();
-		 Sintoma sintomaEncontrado= sintomasBuscados
-						 .stream()
-						.filter(sintoma -> sintoma.getNombre().equals(nombre)).findFirst().orElseThrow(()-> new RuntimeException("Sintoma no encontrado"));
-	return sintomaEncontrado;
+		List<Sintoma> sintomasBuscados = buscarTodos();
+		Sintoma sintomaEncontrado = sintomasBuscados
+						.stream()
+						.filter(sintoma -> sintoma.getNombre().equals(nombre)).findFirst()
+						.orElseThrow(() -> new RuntimeException("Sintoma no encontrado"));
+		return sintomaEncontrado;
 	}
 	
 }

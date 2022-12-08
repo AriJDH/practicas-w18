@@ -1,8 +1,8 @@
 package com.DTOResponseEntityP2.covid19.repository;
 
 import com.DTOResponseEntityP2.covid19.model.Persona;
-import com.DTOResponseEntityP2.covid19.model.Sintoma;
 import org.springframework.stereotype.Repository;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,10 +10,10 @@ import java.util.List;
 public class PersonaRepositoryImp implements IRepository<Persona> {
 	
 	// Tests
-	Persona persona1 = new Persona(1L, "Nombre1", "Apellido1", 30);
-	Persona persona2 = new Persona(2L, "Nombre2", "Apellido2", 65);
-	Persona persona3 = new Persona(3L, "Nombre3", "Apellido3", 45);
-	Persona persona4 = new Persona(4L, "Nombre4", "Apellido4", 70);
+	Persona persona1 = new Persona(1L, "Nombre1", "Apellido1", 30, true);
+	Persona persona2 = new Persona(2L, "Nombre2", "Apellido2", 65, true);
+	Persona persona3 = new Persona(3L, "Nombre3", "Apellido3", 45, false);
+	Persona persona4 = new Persona(4L, "Nombre4", "Apellido4", 70, false);
 	
 	// Nuestras <<Bases de datos>> para personas
 	List<Persona> personas = new ArrayList<Persona>() {{
@@ -35,5 +35,4 @@ public class PersonaRepositoryImp implements IRepository<Persona> {
 						.stream()
 						.filter(persona -> persona.getNombre().equals(nombre));
 	}
-	
 }
