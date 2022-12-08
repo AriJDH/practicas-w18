@@ -1,0 +1,29 @@
+{
+	"info": {
+		"_postman_id": "1609a32f-364f-40da-9304-793b2c04e42a",
+		"name": "starwars",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "24341398"
+	},
+	"item": [
+		{
+			"name": "Buscar personajes",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/starwars/va",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"starwars",
+						"va"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

@@ -1,7 +1,6 @@
 package com.arquitecturaMulticapaP1Vivo.personajesStarWars.controller;
 
 import com.arquitecturaMulticapaP1Vivo.personajesStarWars.dto.PersonajeDTO;
-import com.arquitecturaMulticapaP1Vivo.personajesStarWars.service.IPersonajeService;
 import com.arquitecturaMulticapaP1Vivo.personajesStarWars.service.PersonajeServiceImp;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,11 +12,15 @@ import java.util.List;
 
 @RestController
 public class PersonajeController {
+	final
+	PersonajeServiceImp personajeService;
 	
-	IPersonajeService personajeService = new PersonajeServiceImp();
+	public PersonajeController(PersonajeServiceImp personajeService) {
+		this.personajeService = personajeService;
+	}
 	
 	@GetMapping("/starwars/{query}")
-	public ResponseEntity<List<PersonajeDTO>> findPersonajes(@PathVariable String query){
-		return new ResponseEntity<>(personajeService.getPersonajes(query) , HttpStatus.OK);
+	public ResponseEntity<List<PersonajeDTO>> findPersonajes(@PathVariable String query) {
+		return new ResponseEntity<>(personajeService.getPersonajes(query), HttpStatus.OK);
 	}
 }

@@ -1,21 +1,28 @@
 package com.arquitecturaMulticapaP1Vivo.personajesStarWars.entity;
 
-import lombok.*;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
-@Getter
 @Data
-@Setter
-public class Personaje {
+public class Personaje{
 	
 	// Representación del Objeto
 	private String name;
 	private int height;
-	private int mass;
+	private double mass;
+	@JsonProperty("hair_color")
 	private String hairColor;
+	@JsonProperty("skin_color")
 	private String skinColor;
+	@JsonProperty("eye_color")
 	private String eyeColor;
+	@JsonProperty("birth_year")
 	private String birthYear;
 	private String gender;
 	private String homeworld;

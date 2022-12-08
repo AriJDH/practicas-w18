@@ -8,20 +8,16 @@ import org.springframework.util.ResourceUtils;
 
 import java.io.File;
 import java.nio.file.Files;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Repository
 public class PersonajeRepositoryImp implements IPersonajeRepository {
-	
-	List<Personaje> personajes;
+	List<Personaje> personajes = new ArrayList<>();
 	
 	public PersonajeRepositoryImp(List<Personaje> personajes) {
 		this.personajes = personajes;
-		loadList();
-	}
-	
-	public PersonajeRepositoryImp() {
-	
 	}
 	
 	@Override
@@ -30,17 +26,17 @@ public class PersonajeRepositoryImp implements IPersonajeRepository {
 		return personajes;
 	}
 	
-	
+	@Override
 	public void loadList() {
-		ObjectMapper mapper = new ObjectMapper();
 		File jsonFile = null;
 		try {
 			jsonFile = ResourceUtils.getFile("classpath:starwars.json");
-			String strings = Files.readString(jsonFile.toPath());
-			personajes = mapper.readValue(strings, new TypeReference<List<Personaje>>() {
-			}); // TODO error de mapeo -> pendiente de resolver
+			String strList = Files.readAllLines(jsonFile.toPath()).stream().collect(Collectors.joining("\n"));
+			strList = strList.replace("\"NA\"", "0");
+			ObjectMapper om = new ObjectMapper();
+			personajes = om.readValue(strList, new TypeReference<List<Personaje>>() {});
 		} catch (Exception ex) {
-			System.out.println("No existe el archivo. " + ex.getMessage());
+			System.out.println("No puede leerse el archivo. " + ex.getMessage());
 		}
 		
 		
