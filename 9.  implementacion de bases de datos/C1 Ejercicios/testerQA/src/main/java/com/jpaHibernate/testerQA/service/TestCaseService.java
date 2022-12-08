@@ -30,7 +30,7 @@ public class TestCaseService implements ITestCaseService{
     }
 
     /**
-     * @param testCaseDTO
+     * @param testCase
      * @return List<TestCaseDTO>
      */
     @Override
@@ -74,7 +74,8 @@ public class TestCaseService implements ITestCaseService{
      */
     @Override
     public List<TestCase> findAfterDate(LocalDate date) {
-        return repositoryTestCase.findTestCasesAfterDate(date);
+      //  return repositoryTestCase.findTestCaseAfterLastUpdate(date);
+        return repositoryTestCase.findAllByLastUpdateIsAfter(date);
     }
 
     /**
@@ -87,7 +88,7 @@ public class TestCaseService implements ITestCaseService{
         TestCase findTC = repositoryTestCase.findById(id).orElseThrow();
         TestCase updateTC = MapTo.dtoToEntity(testCaseDTO); //Convierto a entidad el dto que recibo
         updateTC.setId_case(findTC.getId_case());           //Setteo id del Test case convertido de DTO a Entity
-        updateTC.setLast_update(testCaseDTO.getLast_updated());
+        updateTC.setLastUpdate(testCaseDTO.getLastUpdated());
 
         repositoryTestCase.save(updateTC);                  //Guardo a través del repo
         return MapTo.entityToDTO(updateTC);                 //Convierto de entidad a DTO y lo retorno actualizado

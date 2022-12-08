@@ -21,4 +21,12 @@ public class MapTo {
     public static TestCase dtoToEntity(TestCaseDTO testCaseDTO){
         return instance().map(testCaseDTO, TestCase.class);
     }
+
+
+
+
+/*    public static TestCaseDTO entityToDto(TestCase testCase){
+        TestCaseDTO testCaseDTO = new TestCaseDTO();
+        return testCaseDTO;
+    }*/
 }

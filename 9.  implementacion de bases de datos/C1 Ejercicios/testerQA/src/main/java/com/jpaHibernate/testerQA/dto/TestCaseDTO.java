@@ -20,5 +20,5 @@ public class TestCaseDTO {
     private Integer number_of_tries;
     @JsonFormat(pattern = "dd-MM-yyyy")
     @DateTimeFormat(pattern = "dd-MM-yyyy")
-    private LocalDate last_updated;
+    private LocalDate lastUpdated;
 }

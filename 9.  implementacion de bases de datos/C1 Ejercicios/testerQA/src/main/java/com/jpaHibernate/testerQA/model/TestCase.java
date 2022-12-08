@@ -27,6 +27,6 @@ public class TestCase {
     private int number_of_tries;
     @JsonFormat(pattern = "dd-MM-yyyy")
     @DateTimeFormat(pattern = "dd-MM-yyyy")
-    private LocalDate last_update;
+    private LocalDate lastUpdate;
 
 }
