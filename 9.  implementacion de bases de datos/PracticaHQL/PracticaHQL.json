@@ -1,0 +1,115 @@
+{
+	"info": {
+		"_postman_id": "8aac93d6-1236-4fb3-ab5c-6463915ed3b7",
+		"name": "hql",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "save",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"patente\":\"AG112HS\",\n    \"marca\":\"Toyota\",\n    \"modelo\":\"Hilux\",\n    \"anioFabricacion\":2023,\n    \"cantidadRuedas\":5,\n    \"siniesters\":[\n        {\n            \"fechaSiniestro\":\"2022-12-15\",\n            \"perdidaEconomica\": 900000.00\n        }\n    ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/vehicle",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"vehicle"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "findAllByPatente",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/vehicle/findAllByPatente",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"vehicle",
+						"findAllByPatente"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "findAllByPatenteAndMarca",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/vehicle/findAllByPatenteAndMarca",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"vehicle",
+						"findAllByPatenteAndMarca"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "findAllPetentesByRuedasAndAnioFabricacion",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/vehicle/findAllPatentesByRuedasAndAnioFabricacion",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"vehicle",
+						"findAllPatentesByRuedasAndAnioFabricacion"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "findByPatenteMarcaModeloBySinister",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": null
+			},
+			"response": []
+		},
+		{
+			"name": "findByPatenteMarcaModeloAndPerdidaBySinister",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": null
+			},
+			"response": []
+		}
+	]
+}
