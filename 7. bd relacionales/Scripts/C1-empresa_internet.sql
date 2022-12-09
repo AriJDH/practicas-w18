@@ -98,7 +98,13 @@ HAVING Plan.idPlan = 1;
 
 # 10 Mostrar el plan que actualmente genera más ingresos a la empresa
 
-
+SELECT SUM(Plan.price) as total, Plan.idPlan
+FROM Plan
+JOIN Plan_has_Cliente
+ON Plan.idPlan = Plan_has_Cliente.Plan_idPlan
+GROUP BY Plan.idPlan
+ORDER BY total DESC
+LIMIT 1;
 
 
 
