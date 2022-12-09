@@ -1,8 +1,10 @@
 package com.example.joyerialasperlas.service;
 
-import com.example.joyerialasperlas.dto.request.jerwelyCreateResponse;
+import com.example.joyerialasperlas.dto.response.JerwelyDtoResponse;
+import com.example.joyerialasperlas.exceptions.NotFoundException;
 import com.example.joyerialasperlas.model.Jewerly;
 import com.example.joyerialasperlas.repository.IJewerlyRepository;
+import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
@@ -25,36 +27,40 @@ public class JewerlyService implements IJewerlyService {
     }
 
     @Override
-    public jerwelyCreateResponse guardarJoyas(Jewerly jewerly) {
+    public JerwelyDtoResponse guardarJoyas(Jewerly jewerly) {
         jewerlyRepository.save(jewerly);
         List<Jewerly> jewerlyList = jewerlyRepository.findAll();
         jewerlyList.sort(Comparator.comparing(Jewerly::getNroIdentificatorio).reversed());
-        jerwelyCreateResponse response = new jerwelyCreateResponse();
+        JerwelyDtoResponse response = new JerwelyDtoResponse();
         response.setMessage("Se ha creado el id "+jewerlyList.get(0).getNroIdentificatorio());
         response.setStatus(HttpStatus.OK);
         return response;
     }
 
     @Override
-    public String borrarJoyas(Long idjewerly) {
+    public JerwelyDtoResponse borrarJoyas(Long idjewerly) {
         /*jewerlyRepository.deleteById(idjewerly);*/
 
         Jewerly joyaOriginal = this.encontrarJoya(idjewerly);
         joyaOriginal.setVentaONo(false);
         this.guardarJoyas(joyaOriginal);
 
-        return "Joya con id " + idjewerly.toString() + " dada de baja para la venta correctamente";
+        JerwelyDtoResponse response = new JerwelyDtoResponse();
+        response.setMessage("Se ha eliminado logicamente el id "+idjewerly);
+        response.setStatus(HttpStatus.OK);
+
+        return response;
     }
 
 
     @Override
     public Jewerly encontrarJoya(Long idjewerly) {
-        Jewerly jewerlyReturn = jewerlyRepository.findById(idjewerly).orElse(null);
+        Jewerly jewerlyReturn = jewerlyRepository.findById(idjewerly).orElseThrow(()-> new NotFoundException("Jewerly not found "+idjewerly));
         return jewerlyReturn;
     }
 
     @Override
-    public String editarJoya(Long idjewerly, Jewerly jewerly_upd) {
+    public Jewerly editarJoya(Long idjewerly, Jewerly jewerly_upd) {
         Jewerly joyaOriginal = this.encontrarJoya(idjewerly);
 
         joyaOriginal.setNombre(jewerly_upd.getNombre());
@@ -65,6 +71,6 @@ public class JewerlyService implements IJewerlyService {
         joyaOriginal.setVentaONo(jewerly_upd.getVentaONo());
 
         this.guardarJoyas(joyaOriginal);
-        return "Modificaciones guardadas correctamente";
+        return joyaOriginal;
     }
 }

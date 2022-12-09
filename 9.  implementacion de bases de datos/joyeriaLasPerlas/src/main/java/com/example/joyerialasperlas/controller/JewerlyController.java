@@ -1,9 +1,10 @@
 package com.example.joyerialasperlas.controller;
 
-import com.example.joyerialasperlas.dto.request.jerwelyCreateResponse;
+import com.example.joyerialasperlas.dto.response.JerwelyDtoResponse;
 import com.example.joyerialasperlas.model.Jewerly;
 import com.example.joyerialasperlas.service.IJewerlyService;
 import lombok.RequiredArgsConstructor;
+import org.apache.tomcat.util.http.parser.HttpParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -33,7 +34,7 @@ public class JewerlyController {
      * @return HttpStatus - 200 OK (if success) or 400 Bad Request (if error)
      */
     @PostMapping("/jewerly/new")
-    public ResponseEntity<jerwelyCreateResponse> createJewerly(@RequestBody Jewerly jewerly) throws Throwable{
+    public ResponseEntity<JerwelyDtoResponse> createJewerly(@RequestBody Jewerly jewerly) throws Throwable{
         return new ResponseEntity<>(jewerlyService.guardarJoyas(jewerly), HttpStatus.OK);
     }
 
@@ -46,15 +47,15 @@ public class JewerlyController {
     //como es un borrado lógico, se trata más bien de un update y no de un delete
     //por eso usamos put
     @PutMapping ("/jewerly/delete/{id}")
-    public String deleteJoya (@PathVariable Long id) {
+    public ResponseEntity<JerwelyDtoResponse> deleteJoya (@PathVariable Long id) throws Throwable {
 
-        return jewerlyService.borrarJoyas(id);
+        return new ResponseEntity<>(jewerlyService.borrarJoyas(id),HttpStatus.OK);
     }
 
     @PutMapping ("/jewerly/update/{id_modificar}")
-    public String editJoya (@PathVariable Long id_modificar, @RequestBody Jewerly joya) {
+    public ResponseEntity<Jewerly> editJoya (@PathVariable Long id_modificar, @RequestBody Jewerly joya) throws Throwable {
 
-        return jewerlyService.editarJoya(id_modificar, joya);
+        return new ResponseEntity<>(jewerlyService.editarJoya(id_modificar, joya), HttpStatus.OK);
     }
 
 }
