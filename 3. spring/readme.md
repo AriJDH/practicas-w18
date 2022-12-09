@@ -7,8 +7,8 @@ Ejercicios:
 3. Ejercicios, DTO y Response Entity - VIVO | Edad persona // _Terminado_
 4. Ejercicios, DTO y Response Entity - VIVO | Deportistas // _Terminado_
 5. DTO y Reesponse Entity - P2 | Covid 19 // _Terminado_
-6. Arquitectura Multicapa - P1 - VIVO | Starwars // **En desarrollo**
+6. Arquitectura Multicapa - P1 - VIVO | Starwars //_Terminado_
 7. Ejercicios Prácticos - P2 - VIVO | Calculador de calorías // _Terminado_
 8. Ejercicios Prácticos - P2 - VIVO | Ejercicio concesionaria de autos (Opcional) // _Terminado_
 9. Manejo de Excepciones - P1 - VIVO | Youtuber // _Terminado_
-10. Recapitulando Spring - P2 - VIVO | Link Tracker // **PENDIENTE**
+10. Recapitulando Spring - P2 - VIVO | Link Tracker // **EN DESARROLLO**

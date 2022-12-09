@@ -6,7 +6,7 @@
 ************************************** Ejercicio 1 **************************************
 
 **BD Relacionales - Parte 1 - PG**
-**Planteo Diagrama Entidad-Relación** // _Terminado_
+**Planteo Diagrama Entidad-Relación** // _TERMINADO_
 Una mueblería necesita la implementación de una base de datos para controlar las ventas que realiza por día, el stock de sus artículos (productos) y la lista de sus clientes que realizan las compras.
 
 
@@ -20,7 +20,7 @@ Se necesita plantear:
 ************************************** Ejercicio 2 **************************************
 
 **BD Relacionales - Parte 1 - VIVO**
-**Diseño Diagrama Entidad-Relación** // _Terminado en equipo_
+**Diseño Diagrama Entidad-Relación** // _TERMINADO EN EQUIPO_
 Realizar un diagrama de entidad - relación para el sistema de una concesionaria, que desea gestionar los servicios de los coches de sus clientes. 
 
 
@@ -30,7 +30,7 @@ Utilizar el formato adecuado para representar las Primary y Foreign Key en el di
 ************************************** Ejercicio 3 **************************************
 
 **Consultas SQL - Parte 2 - VIVO**
-**Consultas a Base de Datos** _Terminado_
+**Consultas a Base de Datos** _TERMINADO_
 
 Se propone realizar las siguientes consultas a la base de datos movies_db.sql.
 Importar el archivo movies_db.sql desde PHPMyAdmin o MySQL Workbench y resolver las siguientes consultas:
@@ -50,9 +50,7 @@ Importar el archivo movies_db.sql desde PHPMyAdmin o MySQL Workbench y resolver 
 
 ************************************** Ejercicio 4 **************************************
 
-*********************************************************************************
-                        **DER y SQL** >>>>> PENDIENTE // TODO 1
-*********************************************************************************
+**DER y SQL** _TERMINADO_ 
 _Escenario_
 Una empresa proveedora de Internet necesita una base de datos para almacenar cada uno de sus clientes junto con el plan/pack que tiene contratado.
 
@@ -162,9 +160,7 @@ Implementar la base de datos en PHPMyAdmin o MySQL Workbench, cargar cinco regis
 ************************************** Ejercicio 8 **************************************
 **Optimización de Bases de Datos - Parte 2 - PG**
 
-*********************************************************************************
-                    **Normalización** >>>>>> PENDIENTE // TODO 2
-*********************************************************************************
+**Normalización** _TERMINADO_
 
 _Escenario_
 
@@ -182,9 +178,7 @@ Se solicita para el escenario anterior:
 
 ************************************** Ejercicio 9 **************************************
 
-*********************************************************************************
-        **Creación de Tablas Temporales e Índices** >>>> PENDIENTE // TODO 3
- *********************************************************************************
+**Creación de Tablas Temporales e Índices** _TERMINADO_
 
 _Ejercicio 1_
 1. Con la base de datos “movies”, se propone crear una tabla temporal llamada “TWD” y guardar en la misma los episodios de todas las temporadas de “The Walking Dead”.
@@ -196,23 +190,21 @@ _Ejercicio 2_
 
 ************************************** Ejercicio 10 **************************************
 
-*********************************************************************************
-            **Consultas SQL Avanzadas 2** >>>>> PENDIENTE // TODO 4
-*********************************************************************************
+**Consultas SQL Avanzadas 2** _TERMINADO_ 
 
 Resolver las siguientes consignas
-1. Tomando la base de datos movies_db.sql, se solicita:
-2. Agregar una película a la tabla movies.
-3. Agregar un género a la tabla genres.
-4. Asociar a la película del punto 1. con el género creado en el punto 2.
-5. Modificar la tabla actors para que al menos un actor tenga como favorita la película agregada en el punto 1.
-6. Crear una tabla temporal copia de la tabla movies.
-7. Eliminar de esa tabla temporal todas las películas que hayan ganado menos de 5 awards.
-8. Obtener la lista de todos los géneros que tengan al menos una película.
-9. Obtener la lista de actores cuya película favorita haya ganado más de 3 awards.
-10. Crear un índice sobre el nombre en la tabla movies.
-11. Chequee que el índice fue creado correctamente.
-12. En la base de datos movies ¿Existiría una mejora notable al crear índices? Analizar y justificar la respuesta.
-13. ¿En qué otra tabla crearía un índice y por qué? Justificar la respuesta
+Tomando la base de datos movies_db.sql, se solicita:
+1. Agregar una película a la tabla movies.
+2. Agregar un género a la tabla genres.
+3. Asociar a la película del punto 1. con el género creado en el punto 2.
+4. Modificar la tabla actors para que al menos un actor tenga como favorita la película agregada en el punto 1.
+5. Crear una tabla temporal copia de la tabla movies.
+6. Eliminar de esa tabla temporal todas las películas que hayan ganado menos de 5 awards.
+7. Obtener la lista de todos los géneros que tengan al menos una película.
+8. Obtener la lista de actores cuya película favorita haya ganado más de 3 awards.
+9. Crear un índice sobre el nombre en la tabla movies.
+10. Chequee que el índice fue creado correctamente.
+11. En la base de datos movies ¿Existiría una mejora notable al crear índices? Analizar y justificar la respuesta.
+12. ¿En qué otra tabla crearía un índice y por qué? Justificar la respuesta
 
 
