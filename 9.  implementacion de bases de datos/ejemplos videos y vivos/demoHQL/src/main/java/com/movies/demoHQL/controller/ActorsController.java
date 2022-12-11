@@ -29,7 +29,6 @@ public class ActorsController {
 
     @GetMapping("/actormovie")
     public ActorMovieResponceDTO getActorWithfavoriteMovie (@RequestParam String name){
-
         return service.getActorWithfavoriteMovie(name);
     }
 
