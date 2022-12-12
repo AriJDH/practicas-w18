@@ -16,6 +16,9 @@ public class Siniestro {
     private Integer id;
     private LocalDate fecha;
     private Double perdidaEconomica;
-    private Integer vehiculo_id;
+    @ManyToOne
+    @JoinColumn(name = "vehiculo_id", nullable = false)
+    private Vehiculo vehiculo;
+    //private Integer vehiculo_id;
 }
 

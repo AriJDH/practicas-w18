@@ -4,12 +4,14 @@ import com.example.empresadeseguros.dto.request.SiniestroNewDTORequest;
 import com.example.empresadeseguros.dto.response.SiniestroDTOResponse;
 import com.example.empresadeseguros.entity.Siniestro;
 import com.example.empresadeseguros.entity.Vehiculo;
+import com.example.empresadeseguros.exception.NotFoundException;
 import com.example.empresadeseguros.repository.IRepositorySiniestro;
 import com.example.empresadeseguros.repository.IRepositoryVehiculo;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -26,17 +28,21 @@ public class ServiceSiniestroImp implements IServiceSiniestro{
     @Override
     public Integer nuevoSiniestro(SiniestroNewDTORequest siniestroDTO) {
         ModelMapper modelMapper = new ModelMapper();
-        Siniestro siniestro = iRepositorySiniestro.save(modelMapper.map(siniestroDTO, Siniestro.class));
-        Vehiculo vehiculo = iRepositoryVehiculo.findById(siniestro.getVehiculo_id()).orElse(null);
-        //vehiculo.getSiniestros().add(siniestro);
-        vehiculo.setSiniestros(Set.of(siniestro));
+        int idVehiculo = siniestroDTO.getVehiculo_id();
+        Optional<Vehiculo> vehiculo = iRepositoryVehiculo.findById(idVehiculo);
+        if (vehiculo.isEmpty()) throw new NotFoundException("El vehículo con id " + idVehiculo + " no existe.");
+        Siniestro siniestro = modelMapper.map(siniestroDTO, Siniestro.class);
+        siniestro.setVehiculo(vehiculo.get());
+        iRepositorySiniestro.save(siniestro);
         return siniestro.getId() ;
     }
 
     @Override
     public SiniestroDTOResponse findById(Integer id) {
         ModelMapper modelMapper = new ModelMapper();
-        return modelMapper.map(iRepositorySiniestro.findById(id).orElse(null), SiniestroDTOResponse.class);
+        Optional<Siniestro> siniestro = iRepositorySiniestro.findById(id);
+        if (siniestro.isEmpty()) throw new NotFoundException("El siniestro con id " + id + " no existe");
+        return modelMapper.map(siniestro, SiniestroDTOResponse.class);
     }
 
     @Override

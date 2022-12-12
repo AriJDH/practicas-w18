@@ -20,9 +20,9 @@ public interface IRepositoryVehiculo extends JpaRepository<Vehiculo, Integer> {
     @Query("From Vehiculo where ruedas > 4 and anio = year(current_date())")
     List<Vehiculo> findAllVehiculos4RuedasCurrentDate();
 
-    @Query("From Vehiculo v inner join Siniestro s on s.vehiculo_id = v.id where s.perdidaEconomica > :perdidaEconomica")
+    @Query("From Vehiculo v inner join Siniestro s on s.vehiculo.id = v.id where s.perdidaEconomica > :perdidaEconomica")
     List<Vehiculo> findAllVehiculosPerdida(@Param("perdidaEconomica") Double perdidaEconomica);
 
-    @Query("select new com.example.empresadeseguros.entity.model.VehiculoSiniestro(v.patente, v.marca, v.modelo, s.perdidaEconomica) From Vehiculo v inner join Siniestro s on s.vehiculo_id = v.id where s.perdidaEconomica > :perdidaEconomica")
+    @Query("select new com.example.empresadeseguros.entity.model.VehiculoSiniestro(v.patente, v.marca, v.modelo, s.perdidaEconomica) From Vehiculo v inner join Siniestro s on s.vehiculo.id = v.id where s.perdidaEconomica > :perdidaEconomica")
     List<VehiculoSiniestro> findAllVehiculosPerdidaTotal(@Param("perdidaEconomica") Double perdidaEconomica);
 }
