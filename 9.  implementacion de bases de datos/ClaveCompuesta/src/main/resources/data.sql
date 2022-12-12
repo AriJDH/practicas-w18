@@ -1,0 +1,10 @@
+insert into compras (clienteid, fecha, direccion_envio, impuestos, sub_total, product) values (1, '2022-01-25', '64 Anthes Trail', 580.51, 13940.18, 'Yoplait - Strawbrasp Peac');
+insert into compras (clienteid, fecha, direccion_envio, impuestos, sub_total, product) values (2, '2022-03-15', '085 Blue Bill Park Park', 277.58, 17088.32, 'Beans - Black Bean, Dry');
+insert into compras (clienteid, fecha, direccion_envio, impuestos, sub_total, product) values (3, '2022-11-17', '2316 Memorial Place', 854.35, 22580.19, 'Butter Sweet');
+insert into compras (clienteid, fecha, direccion_envio, impuestos, sub_total, product) values (4, '2022-04-05', '7137 Pleasure Drive', 909.13, 17572.9, 'Crawfish');
+insert into compras (clienteid, fecha, direccion_envio, impuestos, sub_total, product) values (5, '2022-04-10', '4 Rieder Lane', 396.8, 26145.95, 'Seedlings - Buckwheat, Organic');
+insert into compras (clienteid, fecha, direccion_envio, impuestos, sub_total, product) values (6, '2021-12-23', '6 Kim Trail', 776.97, 18463.71, 'Wine - Bouchard La Vignee Pinot');
+insert into compras (clienteid, fecha, direccion_envio, impuestos, sub_total, product) values (7, '2022-09-27', '62 Northview Terrace', 730.84, 3680.75, 'Veal - Insides, Grains');
+insert into compras (clienteid, fecha, direccion_envio, impuestos, sub_total, product) values (8, '2022-11-30', '8929 Bobwhite Road', 403.92, 15659.21, 'Lady Fingers');
+insert into compras (clienteid, fecha, direccion_envio, impuestos, sub_total, product) values (9, '2022-06-18', '3770 2nd Court', 851.23, 3226.06, 'Calaloo');
+insert into compras (clienteid, fecha, direccion_envio, impuestos, sub_total, product) values (10, '2022-08-02', '91179 Park Meadow Junction', 540.42, 3400.36, 'Longos - Grilled Salmon With Bbq');
