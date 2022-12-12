@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class TesterCaseService implements ITesterCaseService  {
@@ -27,6 +28,13 @@ public class TesterCaseService implements ITesterCaseService  {
     @Override
     public List<TestCase> getTesterCase() {
         List<TestCase> testCaseList = this.testerCaseRepository.findAll();
+        return testCaseList;
+    }
+
+    @Override
+    public List<TestCase> getTesterCase(LocalDate lastUpdate) {
+        List<TestCase> testCaseList = this.testerCaseRepository.findAll();
+        testCaseList.stream().filter(f -> f.getLastUpdate().compareTo(lastUpdate) > 0).collect(Collectors.toList());
         return testCaseList;
     }
 
@@ -84,4 +92,7 @@ public class TesterCaseService implements ITesterCaseService  {
 
         return testCaseEditResponse;
     }
+
+
+
 }
