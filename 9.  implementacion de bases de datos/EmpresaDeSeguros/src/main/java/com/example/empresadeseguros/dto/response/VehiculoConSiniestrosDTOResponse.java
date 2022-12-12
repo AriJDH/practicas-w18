@@ -18,6 +18,6 @@ public class VehiculoConSiniestrosDTOResponse {
     private String marca;
     private String modelo;
     private Integer anio;
-    private Integer cantRuedas;
+    private Integer ruedas;
     private Set<SiniestroSinIdDTOResponse> siniestros;
 }

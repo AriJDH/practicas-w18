@@ -3,12 +3,14 @@ package com.example.empresadeseguros.service;
 import com.example.empresadeseguros.dto.request.VehiculoNewDTORequest;
 import com.example.empresadeseguros.dto.response.*;
 import com.example.empresadeseguros.entity.Vehiculo;
-import com.example.empresadeseguros.repository.IRepositorySiniestro;
+import com.example.empresadeseguros.entity.model.VehiculoSiniestro;
+import com.example.empresadeseguros.exception.NotFoundException;
 import com.example.empresadeseguros.repository.IRepositoryVehiculo;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -20,7 +22,7 @@ public class ServiceVehiculoImp implements IServiceVehiculo{
     }
     @Override
     public PatentesVehiculosDTOResponse findAllVehiculos() {
-        List<String> listPatentes = iRepositoryVehiculo.findAllVehiculos().stream().map(x->x.getPatente()).collect(Collectors.toList());
+        List<String> listPatentes = iRepositoryVehiculo.findAllVehiculos().stream().map(Vehiculo::getPatente).collect(Collectors.toList());
         PatentesVehiculosDTOResponse patentesVehiculosDTOResponse = new PatentesVehiculosDTOResponse();
         patentesVehiculosDTOResponse.setPatente(listPatentes);
         patentesVehiculosDTOResponse.setMensaje("Listado de patentes de vehículos registrados.");
@@ -49,7 +51,9 @@ public class ServiceVehiculoImp implements IServiceVehiculo{
     @Override
     public VehiculoDTOResponse findById(Integer id) {
         ModelMapper modelMapper = new ModelMapper();
-        return modelMapper.map(iRepositoryVehiculo.findById(id).orElse(null), VehiculoDTOResponse.class);
+        Optional<Vehiculo> vehiculo = iRepositoryVehiculo.findById(id);
+        if(vehiculo.isEmpty()) throw new NotFoundException("El vehículo con id " + id + " no existe.");
+        return modelMapper.map(vehiculo, VehiculoDTOResponse.class);
     }
 
     @Override
@@ -61,7 +65,36 @@ public class ServiceVehiculoImp implements IServiceVehiculo{
     @Override
     public VehiculoConSiniestrosDTOResponse findByIdConSiniestros(Integer id) {
         ModelMapper modelMapper = new ModelMapper();
-        return modelMapper.map(iRepositoryVehiculo.findById(id).orElse(null), VehiculoConSiniestrosDTOResponse.class ) ;
+        Optional<Vehiculo> vehiculo = iRepositoryVehiculo.findById(id);
+        if(vehiculo.isEmpty()) throw new NotFoundException("El vehículo con id " + id + " no existe.");
+        return modelMapper.map(vehiculo, VehiculoConSiniestrosDTOResponse.class);
+      }
+
+    @Override
+    public PatentesVehiculosDTOResponse findAllVehiculos4RuedasCurrentDate() {
+        PatentesVehiculosDTOResponse lista = new PatentesVehiculosDTOResponse();
+        lista.setMensaje("Listado de patentes de todos los vehículos que tengan más de cuatro ruedas y hayan sido fabricados en el corriente año.");
+        lista.setPatente(iRepositoryVehiculo.findAllVehiculos4RuedasCurrentDate().stream().map(Vehiculo::getPatente).collect(Collectors.toList()));
+        return lista;
+    }
+
+    @Override
+    public ListMMMVehiculoDTOResponse findAllVehiculosPerdida(Double perdidaEconomica) {
+        ModelMapper modelMapper = new ModelMapper();
+        ListMMMVehiculoDTOResponse lista = new ListMMMVehiculoDTOResponse();
+        lista.setMensaje("Listado de patente, marca y modelo de todos los vehículos que hayan tenido un siniestro con pérdida mayor de " + perdidaEconomica);
+        lista.setVehiculos( iRepositoryVehiculo.findAllVehiculosPerdida(perdidaEconomica).stream().map(x->modelMapper.map(x, MMMVehiculoDTOResponse.class)).collect(Collectors.toList()) );
+        return lista;
+    }
+
+    @Override
+    public ListMMMVehiculoTotalDTOResponse findAllVehiculosPerdidaTotal(Double perdidaEconomica) {
+        ModelMapper modelMapper = new ModelMapper();
+        ListMMMVehiculoTotalDTOResponse lista = new ListMMMVehiculoTotalDTOResponse();
+        lista.setMensaje("Listado de patente, marca y modelo de todos los vehículos que hayan tenido un siniestro con pérdida mayor de " + perdidaEconomica + " y a cuánto ascendió la pérdida total de todos ellos.");
+        lista.setVehiculos(iRepositoryVehiculo.findAllVehiculosPerdida(perdidaEconomica).stream().map(x->modelMapper.map(x, MMMVehiculoDTOResponse.class)).collect(Collectors.toList()) );
+        lista.setPerdidaTotal(iRepositoryVehiculo.findAllVehiculosPerdidaTotal(perdidaEconomica).stream().mapToDouble(VehiculoSiniestro::getPerdidaEconomica).sum());
+        return lista;
     }
 }
 

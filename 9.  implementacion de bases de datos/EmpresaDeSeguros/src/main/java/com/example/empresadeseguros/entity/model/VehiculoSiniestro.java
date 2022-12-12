@@ -1,4 +1,4 @@
-package com.example.empresadeseguros.dto.response;
+package com.example.empresadeseguros.entity.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,11 +9,9 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class VehiculoDTOResponse {
-    private Integer id;
+public class VehiculoSiniestro {
     private String patente;
     private String marca;
     private String modelo;
-    private Integer anio;
-    private Integer ruedas;
+    private Double perdidaEconomica;
 }

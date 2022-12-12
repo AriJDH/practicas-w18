@@ -1,10 +1,7 @@
 package com.example.empresadeseguros.service;
 
 import com.example.empresadeseguros.dto.request.VehiculoNewDTORequest;
-import com.example.empresadeseguros.dto.response.ListPatMarcaVehiculosDTOResponse;
-import com.example.empresadeseguros.dto.response.PatentesVehiculosDTOResponse;
-import com.example.empresadeseguros.dto.response.VehiculoConSiniestrosDTOResponse;
-import com.example.empresadeseguros.dto.response.VehiculoDTOResponse;
+import com.example.empresadeseguros.dto.response.*;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import java.util.List;
@@ -19,4 +16,10 @@ public interface IServiceVehiculo {
     List<VehiculoDTOResponse> findAll();
 
     VehiculoConSiniestrosDTOResponse findByIdConSiniestros(Integer id);
+
+    PatentesVehiculosDTOResponse findAllVehiculos4RuedasCurrentDate();
+
+    ListMMMVehiculoDTOResponse findAllVehiculosPerdida(Double perdidaEconomica);
+
+    ListMMMVehiculoTotalDTOResponse findAllVehiculosPerdidaTotal(Double perdidaEconomica);
 }

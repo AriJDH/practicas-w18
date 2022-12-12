@@ -9,11 +9,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class VehiculoDTOResponse {
-    private Integer id;
-    private String patente;
-    private String marca;
-    private String modelo;
-    private Integer anio;
-    private Integer ruedas;
+public class ErrorExceptionDTOResponse {
+    private String mensaje;
+    private Integer status;
 }

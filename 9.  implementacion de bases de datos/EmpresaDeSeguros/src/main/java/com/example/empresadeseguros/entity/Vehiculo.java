@@ -18,7 +18,7 @@ public class Vehiculo {
     private String marca;
     private String modelo;
     private Integer anio;
-    private Integer cantRuedas;
+    private Integer ruedas;
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name="vehiculo_id")
     private Set<Siniestro> siniestros;
