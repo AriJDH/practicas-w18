@@ -1,0 +1,237 @@
+{
+	"info": {
+		"_postman_id": "bb290273-7c2e-4c57-b564-4988f1ae1388",
+		"name": "HQL_moviesDB",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "24338643"
+	},
+	"item": [
+		{
+			"name": "getAllActors()",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/actors/all",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"actors",
+						"all"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "filterActorsByRating",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/actors/filterByRating/7.0",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"actors",
+						"filterByRating",
+						"7.0"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "findActorsByMovie()",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/actors/filterByMovie/titanic",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"actors",
+						"filterByMovie",
+						"titanic"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "findMoviesByActorsRating()",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/movies/filterByActorsRating/5.0",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"movies",
+						"filterByActorsRating",
+						"5.0"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getAllMovies",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/movies/all",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"movies",
+						"all"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "findMovieById()",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/movies/20",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"movies",
+						"20"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "filterMoviesByRating()",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/movies/filterByRating/9.0",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"movies",
+						"filterByRating",
+						"9.0"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "filterMoviesByGenre",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/movies/filterByGenre/Drama",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"movies",
+						"filterByGenre",
+						"Drama"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "filterEpisodesByActor",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/episodes/filterByActor/Kit",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"episodes",
+						"filterByActor",
+						"Kit"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ActorsWithFavMovie()",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/actors/withFavMovie",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"actors",
+						"withFavMovie"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "filterSeriesByQuantityOfSeasons()",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/series/filterBySeasons/3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"series",
+						"filterBySeasons",
+						"3"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
