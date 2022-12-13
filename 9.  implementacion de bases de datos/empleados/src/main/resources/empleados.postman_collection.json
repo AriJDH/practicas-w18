@@ -1,0 +1,192 @@
+{
+	"info": {
+		"_postman_id": "98b1fb91-8d18-44b4-bd3a-f0f1a323253e",
+		"name": "empleados",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Guardar Empleado",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"nombre\": \"Lisa\",\n    \"apellido\": \"Simpson\",\n    \"edad\": 8,\n    \"ciudad\": \"Springfield\",\n    \"provincia\": \"Estados Unidos\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/empleados/_doc",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"empleados",
+						"_doc"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Guardar Empleado2",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"nombre\": \"Homero\",\n    \"apellido\": \"Simpson\",\n    \"edad\": 44,\n    \"ciudad\": \"Springfield\",\n    \"provincia\": \"Estados Unidos\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/empleados/_doc",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"empleados",
+						"_doc"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Actualizar Empleado",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"nombre\": \"Homero\",\n    \"apellido\": \"Simpson\",\n    \"edad\": 40,\n    \"ciudad\": \"Springfield\",\n    \"provincia\": \"Estados Unidos\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/empleados/_doc/7kr0CYUBTniB8R2ni8We",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"empleados",
+						"_doc",
+						"7kr0CYUBTniB8R2ni8We"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Listar Empleados",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/empleados/_search",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"empleados",
+						"_search"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Eliminar Empleado Existente",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/empleados/_doc/7ErzCYUBTniB8R2n0cVj",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"empleados",
+						"_doc",
+						"7ErzCYUBTniB8R2n0cVj"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Eliminar Empleado Inexistente",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/empleados/_doc/inexistente",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"empleados",
+						"_doc",
+						"inexistente"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Buscar por Id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/empleados/_doc/7kr0CYUBTniB8R2ni8We",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"empleados",
+						"_doc",
+						"7kr0CYUBTniB8R2ni8We"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "url",
+			"value": ""
+		}
+	]
+}
