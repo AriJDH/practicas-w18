@@ -39,26 +39,26 @@ public class ObraDbServiceImpl implements ObraDbService{
 
     @Override
     public List<Obra> findByTitleSubstring(String substring) {
-        return obraRepository.findByTitleSubstring(substring);
+        return obraRepository.findByTituloContaining(substring);
     }
 
     @Override
     public List<Obra> findByPagesGreaterThan(int pages) {
-        return obraRepository.findByPagesGreaterThan(pages);
+        return obraRepository.findByCantidadPaginasGreaterThan(pages);
     }
 
     @Override
     public List<Obra> findAllPublishedBefore(int anio) {
-        return obraRepository.findAllPublishedBefore(anio);
+        return obraRepository.findByAnioPrimerPublicacionLessThan(anio);
     }
 
     @Override
     public List<Obra> findAllPublishedAfter(int anio) {
-        return obraRepository.findAllPublishedAfter(anio);
+        return obraRepository.findByAnioPrimerPublicacionGreaterThan(anio);
     }
 
     @Override
     public List<Obra> findAllByEditorial(String editorial) {
-        return obraRepository.findAllByEditorial(editorial);
+        return obraRepository.findByEditorialLike(editorial);
     }
 }
