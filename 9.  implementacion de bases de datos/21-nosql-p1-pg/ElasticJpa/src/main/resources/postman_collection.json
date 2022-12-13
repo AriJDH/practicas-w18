@@ -1,0 +1,168 @@
+{
+	"info": {
+		"_postman_id": "76d98f09-e603-42c4-8bc9-6731385715dc",
+		"name": "ElasticsearchEmpleados",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Find all empleados",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/empleados",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"empleados"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add empleado",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"nombre\": \"Kermit\",\n    \"apellido\": \"Frog\",\n    \"edad\": 157,\n    \"ciudad\": \"Miami\",\n    \"provincia\": \"Florida\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/empleados",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"empleados"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Find by name",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/empleados/find?nombre=Peppa",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"empleados",
+						"find"
+					],
+					"query": [
+						{
+							"key": "nombre",
+							"value": "Peppa"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Find by name in list",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"nombreList\": [\n    \"Kermit\",\n    \"Princess\"\n  ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/empleados/findByNamesIn",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"empleados",
+						"findByNamesIn"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Find by edad >= & order",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/empleados/findByEdadGreaterThanEqual?edad=157",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"empleados",
+						"findByEdadGreaterThanEqual"
+					],
+					"query": [
+						{
+							"key": "edad",
+							"value": "157"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Find by provincia contains",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/empleados/findAllByProvinciaContains?provincia=ee",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"empleados",
+						"findAllByProvinciaContains"
+					],
+					"query": [
+						{
+							"key": "provincia",
+							"value": "ee"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Mapping",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		}
+	]
+}
