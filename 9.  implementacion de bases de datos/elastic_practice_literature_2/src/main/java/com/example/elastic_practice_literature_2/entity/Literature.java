@@ -1,0 +1,34 @@
+package com.example.elastic_practice_literature_2.entity;
+
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Data;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.elasticsearch.annotations.Document;
+import org.springframework.data.elasticsearch.annotations.Field;
+import org.springframework.data.elasticsearch.annotations.FieldType;
+
+import java.time.LocalDate;
+
+@Document(indexName = "biblioteca")
+@Data
+public class Literature {
+
+    @Id
+    private String id;
+
+    private String nombreObra;
+
+    private String autor;
+
+    private Integer cantidadPaginas;
+
+    @Field(type = FieldType.Keyword)
+    private String editorial;
+
+    @JsonFormat(pattern = "dd/MM/yyyy")
+    @Field(type = FieldType.Date)
+    @JsonProperty("first_post")
+    private LocalDate firstPost;
+}

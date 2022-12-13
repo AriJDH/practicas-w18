@@ -12,7 +12,7 @@ public class Articulo {
 
     @Id
     private String id;
-    
+
     private String titulo;
 
     @Field(type = FieldType.Nested, includeInParent = true)
