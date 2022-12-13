@@ -1,0 +1,220 @@
+{
+	"info": {
+		"_postman_id": "2be1ac59-be14-4de8-a61c-466e0a0384ce",
+		"name": "HQL Movies",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "24341398"
+	},
+	"item": [
+		{
+			"name": "Get movies",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{urlBase}}/movies",
+					"host": [
+						"{{urlBase}}"
+					],
+					"path": [
+						"movies"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Actors By Favorite Movie Is Not Null",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{urlBase}}/actormovienotnull",
+					"host": [
+						"{{urlBase}}"
+					],
+					"path": [
+						"actormovienotnull"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Actors Rating Greater Than PathVariable",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{urlBase}}/actorsratinggreaterthan/9.00",
+					"host": [
+						"{{urlBase}}"
+					],
+					"path": [
+						"actorsratinggreaterthan",
+						"9.00"
+					],
+					"query": [
+						{
+							"key": "",
+							"value": null,
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Actors By Movie Name",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{urlBase}}/actorsbymovie/Titanic",
+					"host": [
+						"{{urlBase}}"
+					],
+					"path": [
+						"actorsbymovie",
+						"Titanic"
+					],
+					"query": [
+						{
+							"key": "",
+							"value": null,
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Movies By Actors Rating Greater Than",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{urlBase}}/moviesByActorsRatingGreaterThan/5.0",
+					"host": [
+						"{{urlBase}}"
+					],
+					"path": [
+						"moviesByActorsRatingGreaterThan",
+						"5.0"
+					],
+					"query": [
+						{
+							"key": "",
+							"value": null,
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Movies By Genre Id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{urlBase}}/moviesByGenreId/3",
+					"host": [
+						"{{urlBase}}"
+					],
+					"path": [
+						"moviesByGenreId",
+						"3"
+					],
+					"query": [
+						{
+							"key": "",
+							"value": null,
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Series Greater Than Season Number",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{urlBase}}/seriesGreaterThanSeasonsNumber/5",
+					"host": [
+						"{{urlBase}}"
+					],
+					"path": [
+						"seriesGreaterThanSeasonsNumber",
+						"5"
+					],
+					"query": [
+						{
+							"key": "",
+							"value": null,
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Episodes By Actor",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{urlBase}}/findEpisodesByActorId/32",
+					"host": [
+						"{{urlBase}}"
+					],
+					"path": [
+						"findEpisodesByActorId",
+						"32"
+					],
+					"query": [
+						{
+							"key": "",
+							"value": null,
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "urlBase",
+			"value": "localhost:8080"
+		}
+	]
+}
