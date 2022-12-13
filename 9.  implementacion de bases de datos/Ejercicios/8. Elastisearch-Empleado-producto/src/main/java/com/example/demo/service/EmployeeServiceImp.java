@@ -1,7 +1,7 @@
 package com.example.demo.service;
 
 import com.example.demo.model.Employee;
-import com.example.demo.model.EmployeeDTO;
+import com.example.demo.model.dto.EmployeeDTO;
 import com.example.demo.repository.IEmployeeRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.stereotype.Service;

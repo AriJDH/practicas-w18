@@ -1,7 +1,7 @@
 package com.example.demo.controller;
 
-import com.example.demo.model.EmployeeDTO;
-import com.example.demo.service.IEmployeeService;
+import com.example.demo.model.dto.ProductDTO;
+import com.example.demo.service.IProductService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -9,44 +9,45 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/employees")
-public class EmployeeController {
+@RequestMapping("/products")
+public class ProductController {
 	
 	// DEPENDENCIES ------------------------------------- //
-	final IEmployeeService employeeService;
+	final IProductService productService;
 	
-	public EmployeeController(IEmployeeService employeeService) {
-		this.employeeService = employeeService;
+	public ProductController(IProductService productService) {
+		
+		this.productService = productService;
 	}
 	
 	// CRUD --------------------------------------------- //
 	@PostMapping
-	public ResponseEntity<?> save(@RequestBody EmployeeDTO employeeDTO) {
-		employeeService.save(employeeDTO);
+	public ResponseEntity<?> save(@RequestBody ProductDTO productDTO) {
+		productService.save(productDTO);
 		return ResponseEntity.status(HttpStatus.CREATED).build();
 	}
 	
 	@GetMapping("/{id}")
 	public ResponseEntity<?> findById(@PathVariable String id) {
-		EmployeeDTO employeeDTO = employeeService.findById(id);
-		return ResponseEntity.ok().body(employeeDTO);
+		ProductDTO productDTO = productService.findById(id);
+		return ResponseEntity.ok().body(productDTO);
 	}
 	
 	@GetMapping
 	public ResponseEntity<?> findAll() {
-		List<EmployeeDTO> employeeDTOList = employeeService.findAll();
-		return ResponseEntity.ok().body(employeeDTOList);
+		List<ProductDTO> productDTOList = productService.findAll();
+		return ResponseEntity.ok().body(productDTOList);
 	}
 	
 	@DeleteMapping("/{id}")
 	public ResponseEntity<?> deleteById(@PathVariable String id) {
-		employeeService.delete(id);
+		productService.delete(id);
 		return ResponseEntity.ok().body("El elemento fue eliminado con éxito");
 	}
 	
 	@PutMapping("/{id}")
-	public ResponseEntity<?> update(@PathVariable String id, @RequestBody EmployeeDTO employeeDTO) {
-		employeeService.update(id, employeeDTO);
+	public ResponseEntity<?> update(@PathVariable String id, @RequestBody ProductDTO productDTO) {
+		productService.update(id, productDTO);
 		return ResponseEntity.ok("El elemento fue modificado con éxito");
 	}
 	
