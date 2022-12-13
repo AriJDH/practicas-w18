@@ -1,0 +1,14 @@
+insert into vehicle (license_plate, make, model, fabrication_year, wheel_count) values ('SK-ZI', 'Audi', 'A4', 2008, 8);
+insert into vehicle (license_plate, make, model, fabrication_year, wheel_count) values ('CA-QC', 'Land Rover', 'Range Rover', 1994, 6);
+insert into vehicle (license_plate, make, model, fabrication_year, wheel_count) values ('US-AK', 'Rolls-Royce', 'Phantom', 2008, 2);
+insert into vehicle (license_plate, make, model, fabrication_year, wheel_count) values ('MX-MEX', 'Ford', 'Contour', 1996, 7);
+insert into vehicle (license_plate, make, model, fabrication_year, wheel_count) values ('CA-NU', 'Chevrolet', 'Silverado 3500', 2012, 8);
+insert into vehicle (license_plate, make, model, fabrication_year, wheel_count) values ('US-TX', 'Mazda', 'RX-8', 2011, 8);
+insert into vehicle (license_plate, make, model, fabrication_year, wheel_count) values ('AF-PKA', 'Mitsubishi', 'Mirage', 1993, 3);
+insert into vehicle (license_plate, make, model, fabrication_year, wheel_count) values ('US-AL', 'Mitsubishi', 'Mirage', 1991, 8);
+insert into vehicle (license_plate, make, model, fabrication_year, wheel_count) values ('BR-GO', 'Dodge', 'Dakota Club', 1999, 2);
+insert into vehicle (license_plate, make, model, fabrication_year, wheel_count) values ('UZ-QA', 'BMW', 'X5', 2008, 5);
+insert into vehicle (license_plate, make, model, fabrication_year, wheel_count) values ('DK-83', 'Plymouth', 'Neon', 1996, 7);
+insert into vehicle (license_plate, make, model, fabrication_year, wheel_count) values ('GA-9', 'Lexus', 'RX Hybrid', 2007, 8);
+insert into vehicle (license_plate, make, model, fabrication_year, wheel_count) values ('AU-WA', 'Chevrolet', 'Suburban 1500', 1993, 4);
+INSERT INTO accident(id, `date`, monetary_loss, vehicle_id)VALUES(1, '2022-10-11 00:00:00', 11000.0, 6);
