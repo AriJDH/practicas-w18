@@ -1,0 +1,76 @@
+{
+	"info": {
+		"_postman_id": "44e3c91b-11ca-40ae-8b9d-5c01fc9d565c",
+		"name": "Prueba API Bulk",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Carga Masiva",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"create\":{\"_index\":\"pruebabulk\",\"_id\":1}}\n{\"apellido\": \"Joyes\",\"genero\": \"Female\",\"telefono\": \"35-86-6853\",\"nombre\": \"Hermina\",\"email\": \"hjoyes0@ucla.edu\"}\n{\"create\":{\"_index\":\"pruebabulk\",\"_id\":2}}\n{\"apellido\": \"Puzey\",\"genero\": \"Male\",\"telefono\": \"28-272-9501\",\"nombre\": \"Merrel\",\"email\": \"mpuzey1@intel.com\"}\n{\"create\":{\"_index\":\"pruebabulk\",\"_id\":3}}\n{\"apellido\": \"Parkins\",\"genero\": \"Male\",\"telefono\": \"13-350-9461\",\"nombre\": \"Farley\",\"email\": \"fparkins2@myspace.com\"}\n{\"create\":{\"_index\":\"pruebabulk\",\"_id\":4}}\n{\"apellido\": \"Perceval\",\"genero\": \"Male\",\"telefono\": \"05-053-8202\",\"nombre\": \"Thorsten\",\"email\": \"tperceval3@disqus.com\"}\n{\"create\":{\"_index\":\"pruebabulk\",\"_id\":5}}\n{\"apellido\": \"Purchall\",\"genero\": \"Male\",\"telefono\": \"55-344-3175\",\"nombre\": \"Arie\",\"email\": \"apurchall4@nba.com\"}\n{\"create\":{\"_index\":\"pruebabulk\",\"_id\":6}}\n{\"apellido\": \"Bryson\",\"genero\": \"Female\",\"telefono\": \"41-756-2151\",\"nombre\": \"Eugine\",\"email\":\"ebryson5@theatlantic.com\"}\n{\"create\":{\"_index\":\"pruebabulk\",\"_id\":7}}\n{\"apellido\": \"Jimeno\",\"genero\": \"Female\",\"telefono\": \"16-004-8302\",\"nombre\": \"Julissa\",  \"email\": \"jjimeno6@foxnews.com\"}\n{\"create\":{\"_index\":\"pruebabulk\",\"_id\":8}}\n{\"apellido\": \"Kingscote\",\"genero\": \"Female\",\"telefono\": \"05-648-8148\",\"nombre\": \"Norine\",\"email\": \"nkingscote7@etsy.com\"}\n{\"create\":{\"_index\":\"pruebabulk\",\"_id\":9}}\n{\"apellido\": \"Launder\",\"genero\": \"Female\",\"telefono\": \"97-001-8387\",\"nombre\": \"Aurel\",\"email\": \"alaunder8@devhub.com\"}\n{\"create\":{\"_index\":\"pruebabulk\",\"_id\":10}}\n{\"apellido\": \"Vivien\",\"genero\": \"Female\",\"telefono\": \"94-067-0425\",\"nombre\": \"Lindie\",\"email\": \"lvivien9@ebay.co.uk\"}\n\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:9200/pruebabulk/_bulk",
+					"host": [
+						"localhost"
+					],
+					"port": "9200",
+					"path": [
+						"pruebabulk",
+						"_bulk"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Buscar por Id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:9200/pruebabulk/_doc/3",
+					"host": [
+						"localhost"
+					],
+					"port": "9200",
+					"path": [
+						"pruebabulk",
+						"_doc",
+						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Listar Todas",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:9200/pruebabulk/_search",
+					"host": [
+						"localhost"
+					],
+					"port": "9200",
+					"path": [
+						"pruebabulk",
+						"_search"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
