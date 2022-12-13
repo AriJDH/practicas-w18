@@ -15,6 +15,6 @@ public class Cart {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "cart_id")
     private Long id;
-    @OneToMany(mappedBy = "cart", cascade = CascadeType.PERSIST.MERGE)
+    @OneToMany(mappedBy = "cart", cascade = CascadeType.ALL)
     private Set<Item> items;
 }

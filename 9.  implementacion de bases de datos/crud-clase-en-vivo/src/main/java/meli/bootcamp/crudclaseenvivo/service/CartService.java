@@ -28,7 +28,10 @@ public class CartService implements ICartService {
 
     @Override
     public List<CartDto> findAllCarts() {
+        // ModelMapper mapper = new ModelMapper();
+
         List<Cart> cartList = cartRepository.findAll();
+        // List<CartDto> cartDtoList =
         List<CartDto> cartDtoList = cartList.stream()
                 .map( cart -> mapper.convertValue(cart, CartDto.class))
                 .collect(Collectors.toList());
