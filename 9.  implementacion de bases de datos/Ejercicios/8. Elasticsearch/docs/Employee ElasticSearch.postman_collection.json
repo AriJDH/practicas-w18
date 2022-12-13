@@ -1,0 +1,300 @@
+{
+	"info": {
+		"_postman_id": "eae9d180-79ed-4bf1-9f82-cdea139d9245",
+		"name": "Employee ElasticSearch",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "24341398"
+	},
+	"item": [
+		{
+			"name": "Post New Employee",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"Empleado1 Nombre\",\n    \"lastname\": \"Empleado1 Apellido\",\n    \"age\": \"10\",\n    \"city\": \"Buenos Aires\",\n    \"province\": \"Santa Fe\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{urlBase}}/employees",
+					"host": [
+						"{{urlBase}}"
+					],
+					"path": [
+						"employees"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Post New Product",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"Empleado1 Nombre\",\n    \"type\": \"limpieza\",\n    \"price\": 100.00,\n    \"cost\": 90.00,\n    \"quantity\": 100\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{urlBase}}/products",
+					"host": [
+						"{{urlBase}}"
+					],
+					"path": [
+						"products"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All Employees",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{urlBase}}/employees",
+					"host": [
+						"{{urlBase}}"
+					],
+					"path": [
+						"employees"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All Products",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{urlBase}}/products",
+					"host": [
+						"{{urlBase}}"
+					],
+					"path": [
+						"products"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Employee By Id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{urlBase}}/employees/2R3kDIUB0OTiXR8cXgU-",
+					"host": [
+						"{{urlBase}}"
+					],
+					"path": [
+						"employees",
+						"2R3kDIUB0OTiXR8cXgU-"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Product By Id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{urlBase}}/products/3h0MDYUB0OTiXR8cZwV6",
+					"host": [
+						"{{urlBase}}"
+					],
+					"path": [
+						"products",
+						"3h0MDYUB0OTiXR8cZwV6"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update employee",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"Modificado Nombre\",\n    \"lastname\": \"Modificado Apellido\",\n    \"age\": \"10\",\n    \"city\": \"Buenos Aires\",\n    \"province\": \"Santa Fe\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{urlBase}}/employees/2B3fDIUB0OTiXR8cQAVm",
+					"host": [
+						"{{urlBase}}"
+					],
+					"path": [
+						"employees",
+						"2B3fDIUB0OTiXR8cQAVm"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Product",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"Empleado1 Nombre\",\n    \"type\": \"modificado\",\n    \"price\": 100.00,\n    \"cost\": 90.00,\n    \"quantity\": 100\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{urlBase}}/products/3h0MDYUB0OTiXR8cZwV6",
+					"host": [
+						"{{urlBase}}"
+					],
+					"path": [
+						"products",
+						"3h0MDYUB0OTiXR8cZwV6"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Employee By Id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{urlBase}}/employees/2B3fDIUB0OTiXR8cQAVm",
+					"host": [
+						"{{urlBase}}"
+					],
+					"path": [
+						"employees",
+						"2B3fDIUB0OTiXR8cQAVm"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get product By Id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{urlBase}}/products/3h0MDYUB0OTiXR8cZwV6",
+					"host": [
+						"{{urlBase}}"
+					],
+					"path": [
+						"products",
+						"3h0MDYUB0OTiXR8cZwV6"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete  Employee By Id",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{urlBase}}/employees/2B3fDIUB0OTiXR8cQAVm",
+					"host": [
+						"{{urlBase}}"
+					],
+					"path": [
+						"employees",
+						"2B3fDIUB0OTiXR8cQAVm"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Products By Id",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{urlBase}}/products/3h0MDYUB0OTiXR8cZwV6",
+					"host": [
+						"{{urlBase}}"
+					],
+					"path": [
+						"products",
+						"3h0MDYUB0OTiXR8cZwV6"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Employee By Id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{urlBase}}/employees/2B3fDIUB0OTiXR8cQAVm",
+					"host": [
+						"{{urlBase}}"
+					],
+					"path": [
+						"employees",
+						"2B3fDIUB0OTiXR8cQAVm"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Products By Id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{urlBase}}/employees/2B3fDIUB0OTiXR8cQAVm",
+					"host": [
+						"{{urlBase}}"
+					],
+					"path": [
+						"employees",
+						"2B3fDIUB0OTiXR8cQAVm"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "urlBase",
+			"value": "localhost:8080"
+		}
+	]
+}
