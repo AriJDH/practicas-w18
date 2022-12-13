@@ -15,6 +15,7 @@ public class Vehiculo {
     private String patente;
     private String marca;
     private String modelo;
+    private String matricula;
     private int anioFabricacion;
     private int cantidadRuedas;
 

@@ -1,13 +1,11 @@
 package com.meli.hqlhibernatevivoseguros.dto;
 
+import com.meli.hqlhibernatevivoseguros.entity.Vehiculo;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-
 @Data
 @AllArgsConstructor
-public class MatriculaMarcaModeloPerdidaDTO {
-    private String matricula;
-    private String marca;
-    private String modelo;
+public class VehiculoPerdidaDTO {
+    private Vehiculo vehiculo;
     private Double perdidaEconomica;
 }

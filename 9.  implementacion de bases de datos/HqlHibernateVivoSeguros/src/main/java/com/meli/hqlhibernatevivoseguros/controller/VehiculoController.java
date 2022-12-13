@@ -25,7 +25,7 @@ public class VehiculoController {
         return new ResponseEntity<>(vehiculoServiceImp.listarPatenteMarcaOrderByAnioFabricacion(), HttpStatus.OK);
     }
 
-    @GetMapping("/selectAllPatentesVehiculosFabricadosAnioActualConCuatroRuedass")
+    @GetMapping("/selectAllPatentesVehiculosFabricadosAnioActualConCuatroRuedas")
     public ResponseEntity<PatenteListDTO> listarPatentesVehiculosFabricadosAnioActualConCuatroRuedass() {
         return new ResponseEntity<>(vehiculoServiceImp.listarPatentesVehiculosCuatroRuedasFabricadosAnioActual(), HttpStatus.OK);
     }

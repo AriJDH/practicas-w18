@@ -8,6 +8,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -22,22 +23,21 @@ public class VehiculoServiceImp implements IVehiculoService {
     @Override
     public PatenteListDTO listarPatentes() {
         List<String> vehiculoList = iVehiculoRepository.findAllPatent();
-        PatenteListDTO patenteListDTO = this.modelMapper.map(vehiculoList, PatenteListDTO.class);
+        PatenteListDTO patenteListDTO = new PatenteListDTO(vehiculoList);
         return patenteListDTO;
     }
 
     @Override
     public PatenteMarcaListDTO listarPatenteMarcaOrderByAnioFabricacion() {
-        Map<String,String> vehiculoMap = iVehiculoRepository.findAllPatentBrandOrderByAnioFabricacion();
-        PatenteMarcaListDTO patenteMarcaListDTO = new PatenteMarcaListDTO();
-        vehiculoMap.forEach( (x,y) -> patenteMarcaListDTO.getPatenteMarcaDTOList().add(new PatenteMarcaDTO(x,y)) );
+        List<PatenteMarcaDTO> patenteMarcaDTOList = iVehiculoRepository.findAllPatentBrandOrderByAnioFabricacion();
+        PatenteMarcaListDTO patenteMarcaListDTO = new PatenteMarcaListDTO(patenteMarcaDTOList);
         return patenteMarcaListDTO;
     }
 
     @Override
     public PatenteListDTO listarPatentesVehiculosCuatroRuedasFabricadosAnioActual() {
-        List<String> vehiculoList = iVehiculoRepository.findAllPatentFourWheelActualYear();
-        PatenteListDTO patenteListDTO = this.modelMapper.map(vehiculoList, PatenteListDTO.class);
+        List<String> patenteMarcaDTOList = iVehiculoRepository.findAllPatentFourWheelActualYear();
+        PatenteListDTO patenteListDTO = new PatenteListDTO(patenteMarcaDTOList);
         return patenteListDTO;
     }
 }
