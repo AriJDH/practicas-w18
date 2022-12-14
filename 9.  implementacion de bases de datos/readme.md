@@ -7,8 +7,8 @@
 ----------------------------------------------------------------------------
 7. HQL: Hibernate Query Language - VIVO | HQL Vehiculos // **En desarrollo**
 ----------------------------------------------------------------------------
-8. Implementación NO SQL (Elasticsearch) - PG | Ejercitación // **En desarrollo**
+8. Implementación NO SQL (Elasticsearch) - PG | Ejercitación // _Terminado_
 ----------------------------------------------------------------------------
-9. Implementación NO SQL (Elasticsearch) - VIVO |  API - Obras literarias // **PENDIENTE**
+9. Implementación NO SQL (Elasticsearch) - VIVO |  API - Obras literarias // _Terminado_
 ----------------------------------------------------------------------------
 10. Ejercicios Prácticos EXTRA (Opcionales) - PG | Ejercitación Extra // Opcional
