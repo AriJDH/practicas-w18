@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+
 import java.time.LocalDate;
 
 @Getter
@@ -16,3 +17,12 @@ public class TestCaseDtoReq {
     private Integer number_of_tries;
     private LocalDate last_updated;
 }
+
+// JSON REPRESENTATION
+// {
+//  "description": "",
+//  "tested": false,
+//  "passed": false,
+//  "number_of_tries": 0,
+//  "last_updated": "2022-12-06"
+//}

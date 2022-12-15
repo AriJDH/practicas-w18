@@ -6,8 +6,6 @@ import com.dh.qatester.service.ITestCaseService;
 import com.dh.qatester.service.TestCaseService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -63,9 +61,8 @@ public class TestController {
         return ResponseEntity.ok().body("TestCase deleted successfully");
     }
 
-    private ResponseEntity<?> findTestCaseByDate(
-        @RequestParam String last_update
-    ){
+    private ResponseEntity<?> findTestCaseByDate(String last_update)
+    {
         List<TestCaseDtoRes> testCaseDtos = testCaseService.findTestCaseByDate(last_update);
         return ResponseEntity.ok().body(testCaseDtos);
     }

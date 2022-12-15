@@ -4,6 +4,8 @@ import com.dh.qatester.dto.TestCaseDtoReq;
 import com.dh.qatester.entity.TestCase;
 import org.modelmapper.ModelMapper;
 
+import java.time.LocalDate;
+
 public class MapToEntity {
 
     private static ModelMapper mapper;
@@ -16,7 +18,9 @@ public class MapToEntity {
     }
 
     public static TestCase map(TestCaseDtoReq testCaseDto) {
-        return instance().map(testCaseDto, TestCase.class);
+        TestCase result = instance().map(testCaseDto, TestCase.class);
+        LocalDate date = HandlerDate.StringToDate(strDate);
+        return null;
     }
 
 

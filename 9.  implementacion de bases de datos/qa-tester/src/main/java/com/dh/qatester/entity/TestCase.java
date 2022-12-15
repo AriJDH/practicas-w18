@@ -21,7 +21,9 @@ public class TestCase {
     private Boolean tested;
     private Boolean passed;
     private Integer number_of_tries;
-    private LocalDate last_updated;
+
+    @Column(name = "last_updated")
+    private LocalDate lastUpdated;
 
     @Override
     public boolean equals(Object o) {

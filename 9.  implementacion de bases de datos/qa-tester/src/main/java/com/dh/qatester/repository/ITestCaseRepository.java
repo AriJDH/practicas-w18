@@ -10,6 +10,6 @@ import java.util.List;
 @Repository
 public interface ITestCaseRepository extends JpaRepository<TestCase, Long> {
 
-    List<TestCase> findByLast_updatedAfter(LocalDate last_updated);
+    List<TestCase> findByLastUpdated_After(LocalDate last_updated);
 
 }

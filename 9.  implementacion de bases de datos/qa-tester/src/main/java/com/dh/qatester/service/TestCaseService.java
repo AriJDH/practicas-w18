@@ -24,6 +24,7 @@ public class TestCaseService implements ITestCaseService {
     @Override
     public void createTestCase(TestCaseDtoReq testCaseDto) {
         TestCase testCase = MapToEntity.map(testCaseDto);
+
         testCaseRepository.save(testCase);
     }
 
@@ -63,7 +64,7 @@ public class TestCaseService implements ITestCaseService {
     public List<TestCaseDtoRes> findTestCaseByDate(String date) {
         LocalDate d = HandlerDate.StringToDate(date.replace("/", "-"));
         return testCaseRepository
-                .findByLast_updatedAfter(d)
+                .findByLastUpdated_After(d)
                 .stream()
                 .map(MapToDto::map)
                 .toList();
