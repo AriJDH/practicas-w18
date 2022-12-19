@@ -1,0 +1,8 @@
+Ejercicio Nº 2
+
+
+Si tengo que guardar todos los datos de los usuarios de MELI 
+¿Qué tipo de base de datos debo utilizar? ¿Por qué?
+
+
+R// Una bd no relacional por llave valor para consultar los datos rapidamente y verificar que los datos del usuario sean iguales a los enviados por el usuario.

@@ -1,0 +1,11 @@
+
+
+
+Use case N_2
+R//= Integracion con document search
+
+Use case N_3
+R//= 
+
+Use case N_4
+R//= BigQueue

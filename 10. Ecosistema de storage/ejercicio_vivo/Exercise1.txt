@@ -1,0 +1,8 @@
+Ejercicio Nº 1
+
+Si tengo que almacenar archivos binarios (recibos) para mi sistema de procesamiento de Billing…. 
+¿Qué tipo de base de datos debo utilizar? ¿Por qué?
+
+
+R// Se utilizaria Cloud storage para almacenar gran cantidad de archivos y guardariamos la url de estos archivos en otra base de datos
+ 
