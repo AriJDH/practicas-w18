@@ -78,8 +78,8 @@ class PostControllerTest {
 
         // Matchers
         ResultMatcher expectedStatus = MockMvcResultMatchers.status().isOk();
-        ResultMatcher expectedContentType = MockMvcResultMatchers.
-                content()
+        ResultMatcher expectedContentType = MockMvcResultMatchers
+                .content()
                 .contentType(MediaType.APPLICATION_JSON);
 
         // Request
