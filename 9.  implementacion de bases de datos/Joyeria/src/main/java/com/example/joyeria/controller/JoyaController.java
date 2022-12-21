@@ -34,6 +34,7 @@ public class JoyaController {
 
     @PutMapping("/jewerly/update/{id_modificar}")
     public ResponseEntity<MessageDTO> updateJoya(@RequestBody Joya joya, @PathVariable(name = "id_modificar") int id){
+
         return new ResponseEntity<>(service.update(joya,id),HttpStatus.OK);
     }
 }
