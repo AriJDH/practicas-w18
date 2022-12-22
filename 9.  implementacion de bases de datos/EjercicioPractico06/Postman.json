@@ -1,0 +1,99 @@
+{
+	"info": {
+		"_postman_id": "32b97b53-9615-47ac-bc6c-cce5fbd26e73",
+		"name": "EmpresaSeguros",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "/getAllPatente",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/getAllPatentes",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"getAllPatentes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/getAllPatenteAndMarcaOrderByAnioDeFabricacion",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/getAllPatenteAndMarcaOrderByAnioDeFabricacion",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"getAllPatenteAndMarcaOrderByAnioDeFabricacion"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/getAllPatenteWhereCantRuedasGreater4AndYearsEqualsTo",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/getAllPatenteWhereCantRuedasGreater4AndYearsEqualsTo",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"getAllPatenteWhereCantRuedasGreater4AndYearsEqualsTo"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/getAllPatenteAndMarcaAndModelWherePerdidaEconomicaEqualsTo10000",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/getAllPatenteAndMarcaAndModelWherePerdidaEconomicaEqualsTo10000",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"getAllPatenteAndMarcaAndModelWherePerdidaEconomicaEqualsTo10000"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/getAllPatenteAndMarcaAndModelAndTotalDamageWherePerdidaEconomicaEqualsTo10000",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/getAllPatenteAndMarcaAndModelAndTotalDamageWherePerdidaEconomicaEqualsTo10000",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"getAllPatenteAndMarcaAndModelAndTotalDamageWherePerdidaEconomicaEqualsTo10000"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
