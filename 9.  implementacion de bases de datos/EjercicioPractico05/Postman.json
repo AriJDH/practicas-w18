@@ -1,0 +1,183 @@
+{
+	"info": {
+		"_postman_id": "34a6402a-2b86-4a86-ae68-6e3aaa3334c8",
+		"name": "HQL Movies",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "24344597"
+	},
+	"item": [
+		{
+			"name": "Query 1",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/actors/query1",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"actors",
+						"query1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Query 2",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/actors/query2?actor_rating=9",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"actors",
+						"query2"
+					],
+					"query": [
+						{
+							"key": "actor_rating",
+							"value": "9"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Query 3",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/actors/query3?movie_title=Parque Jurasico",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"actors",
+						"query3"
+					],
+					"query": [
+						{
+							"key": "movie_title",
+							"value": "Parque Jurasico"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Query 4",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/movies/query4?actor_rating=3",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"movies",
+						"query4"
+					],
+					"query": [
+						{
+							"key": "actor_rating",
+							"value": "3"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Query 5",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/movies/query5?genre_name=Ciencia Ficcion",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"movies",
+						"query5"
+					],
+					"query": [
+						{
+							"key": "genre_name",
+							"value": "Ciencia Ficcion"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Query 6",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/series/query6?number_of_seasons=3",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"series",
+						"query6"
+					],
+					"query": [
+						{
+							"key": "number_of_seasons",
+							"value": "3"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Query 7",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/episodes/query7?actor_first_name=Peter&actor_last_name=Dinklage",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"episodes",
+						"query7"
+					],
+					"query": [
+						{
+							"key": "actor_first_name",
+							"value": "Peter"
+						},
+						{
+							"key": "actor_last_name",
+							"value": "Dinklage"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
