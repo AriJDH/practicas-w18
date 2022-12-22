@@ -9,12 +9,13 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Repository
+@Service
 public class ActorService implements IActorService {
 
     @Autowired
@@ -42,17 +43,10 @@ public class ActorService implements IActorService {
     }
 
     @Override
-    public ActorDTO getActorByName(String name) {
-        return null;
+    public List<ActorDTO> getAllActorsById(List<Integer> actorsIds) {
+        List<Actor> actors = repository.findAllActorsById(actorsIds);
+        return actors.stream().map(actor -> mapper.convertValue(actor, ActorDTO.class)).collect(Collectors.toList());
     }
 
-    @Override
-    public MovieDTO getMovieOfActor(Integer id) {
-        return null;
-    }
 
-    @Override
-    public ActorMovieResponseDTO getActorWithfavoriteMovie(String name) {
-        return null;
-    }
 }

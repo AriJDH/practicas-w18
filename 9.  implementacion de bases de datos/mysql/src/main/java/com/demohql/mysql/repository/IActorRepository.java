@@ -4,6 +4,7 @@ import com.demohql.mysql.entities.entity.Actor;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+import org.springframework.data.repository.query.Parameters;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -19,5 +20,9 @@ public interface IActorRepository extends JpaRepository<Actor, Integer> {
 
     @Query("From Actor A WHERE A.rating > :rating")
     List<Actor> findAllActorsByRating(@Param("rating") Double rating);
+
+    @Query("From Actor A WHERE A.id in (:actorsIds)")
+    List<Actor> findAllActorsById(@Param("actorsIds") List<Integer> actorsIds);
+
 
 }

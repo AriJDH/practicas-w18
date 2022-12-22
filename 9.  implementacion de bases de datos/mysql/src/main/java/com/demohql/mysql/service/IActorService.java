@@ -14,9 +14,6 @@ public interface IActorService {
 
     List<ActorDTO> getAllActorsByRating(Double rating);
 
-    ActorDTO getActorByName(String name);
+    List<ActorDTO> getAllActorsById(List<Integer> actorsIds);
 
-    MovieDTO getMovieOfActor(Integer id);
-
-    public ActorMovieResponseDTO getActorWithfavoriteMovie(String name);
-}
+   }

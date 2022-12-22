@@ -3,9 +3,11 @@ package com.demohql.mysql.entities.dto;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.List;
+
 @Getter
 @Setter
 public class ActorMovieResponseDTO {
-    private ActorDTO actor;
-    private MovieDTO favoriteMovie;
+    private List<ActorDTO> actors;
+    private MovieDTO movie;
 }
