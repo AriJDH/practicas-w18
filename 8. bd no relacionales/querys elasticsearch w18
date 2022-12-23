@@ -1,0 +1,255 @@
+
+# Creacion con id definido
+POST people/_create/1
+{
+  "name":"marco",
+  "lastname":"avila",
+  "age":22,
+  "mail":"marco@correco.com"
+}
+
+# Creacion con id como hash
+POST users/_doc
+{
+  "title": "D-Day",
+  "description": "curabitur at ipsum ac tellus semper interdum mauris ullamcorper purus sit amet nulla quisque arcu libero rutrum ac",
+  "email": "esnozzwell0@alibaba.com",
+  "age": 20
+}
+
+GET people/_search
+# Como esta construido el index
+GET people/_mapping
+
+# Delete
+DELETE people/_doc/1
+
+# Update
+PUT people/_doc/1
+{
+  "name":"antonio",
+  "lastname":"tapia",
+  "age":22,
+  "mail":"marco@correco.com"
+}
+
+# Como esta construido el index
+GET authors/_mapping
+
+# Obtener todos los elementos
+GET authors/_search
+
+# Busca por un parametro en todos los campos de nuestros documentos.
+GET authors/_search?q=applications
+
+# Si especificamos el nombre del parametro, lo buscara solo en ese atributo.
+GET authors/_search?q=title: by
+
+# Podemos hacer condiciones dentro de una query
+GET authors/_search?q=pages:>=30
+
+# Ademas podemos anidar condiciones
+# Importante no dejar espacios en las condiciones y los numeros
+GET authors/_search?q=pages:(>=300 AND <=350)
+
+# Filtrar campos
+GET authors/_search
+{
+  "_source": ["email", "title"]
+}
+
+# Limit
+GET authors/_search
+{
+  "from": 10, "size": 5, 
+  "_source": ["email", "title"]
+}
+
+# Sort
+GET authors/_search
+{
+  "sort": [
+    { "title.keyword": "asc" }
+  ],
+  "_source": [ "email", "title" ]
+}
+
+
+#Busca un mismo valor en varios campos, si en alguno aparece, los devuelve.
+
+GET authors/_search
+{
+  "query": {
+    "multi_match": {
+      "query": "a",
+      "fields": ["title", "slogan"]
+    }
+  }
+}
+
+#Busca por la condicion de OR la cual es "should"
+GET authors/_search
+{
+  "query": {
+    "bool": {
+      "should": [
+        {
+          "term": {
+            "slogan": "app"
+          }
+        },
+        {
+          "term": {
+            "title": "trick"
+          }
+        }
+      ]
+    }
+  }
+}
+
+
+# Busca por la condicion AND la cual es "must"
+GET authors/_search
+{
+  "query": {
+    "bool": {
+      "must": [
+        {
+          "term": {
+            "title": "a"
+          }
+        },
+        {
+          "term": {
+            "title": "trick"
+          }
+        }
+      ]
+    }
+  }
+}
+
+# Busca los documentos coincidentes con un rango especifico de fechas
+GET authors/_search
+{
+  "query": {
+    "bool": {
+      "filter": {
+        "range": {
+          "date": {
+            "gte": "2000-03-03",
+            "lt": "2020-03-03"
+          }
+        }
+      }
+    }
+  }
+}
+
+# Busca los documentos coincidentes con un rango especifico de numers
+GET authors/_search
+{
+  "query": {
+    "bool": {
+      "filter": {
+        "range": {
+          "pages": {
+            "gte": "300",
+            "lt": "400"
+          }
+        }
+      }
+    }
+  }
+}
+
+# Search With regular expression
+GET authors/_search
+{
+  "query": {
+    "bool": {
+      "should": [
+        {
+          "query_string": {
+            "query": "e*"
+          }
+        }
+      ]
+    }
+  }
+}
+
+
+# Promedio
+GET authors/_search
+{
+  "size": 0,
+  "query": {
+    "bool": {
+      "filter": {
+        "range": {
+          "pages": {
+            "gte": "300",
+            "lt": "400"
+          }
+        }
+      }
+    }
+  },
+  "aggs": {
+    "average": {
+      "avg": {
+        "field": "pages"
+      }
+    }
+  }
+}
+
+# Querys de SQL
+POST _sql?format=txt
+{
+  "query": "SELECT title, date FROM authors "
+}
+
+# Querys de SQL to elasticsearch
+GET _sql/translate?format=text
+{
+  "query": "SELECT * FROM authors "
+}
+
+# traduccion
+GET authors/_search
+{
+  "size" : 1000,
+  "_source" : false,
+  "fields" : [
+    {
+      "field" : "@timestamp",
+      "format" : "strict_date_optional_time_nanos"
+    },
+    {
+      "field" : "description"
+    },
+    {
+      "field" : "email"
+    },
+    {
+      "field" : "pages"
+    },
+    {
+      "field" : "title"
+    },
+    {
+      "field" : "year",
+      "format" : "strict_date_optional_time_nanos"
+    }
+  ],
+  "sort" : [
+    {
+      "_doc" : {
+        "order" : "asc"
+      }
+    }
+  ]
+}

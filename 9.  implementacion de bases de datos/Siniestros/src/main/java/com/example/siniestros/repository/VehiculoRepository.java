@@ -17,6 +17,12 @@ public interface VehiculoRepository extends JpaRepository<Vehiculo, Long> {
     @Query("SELECT v.patente, v.marca, v.modelo FROM Vehiculo v " +
             "INNER JOIN Siniestro s WHERE s.vehiculoDenunciado.id=v.id AND s.perdidaEconomica>10000")
     List<String[]> findAllPatenteMarcaModeloPerdidaMayor10000();
+
+    /*PROBAR ESTO, PUEDE QUE FUNCIONE
+    @Query("SELECT v.patente as patente, v.marca as marca, v.modelo as modelo FROM Vehiculo v " +
+            "INNER JOIN Siniestro s WHERE s.vehiculoDenunciado.id=v.id AND s.perdidaEconomica>10000")
+    List<PatenteMarcaModeloDTO> findAllPatenteMarcaModeloPerdidaMayor10000();
+     */
     @Query("SELECT SUM(s.perdidaEconomica) FROM Vehiculo v " +
             "INNER JOIN Siniestro s WHERE s.vehiculoDenunciado.id=v.id AND s.perdidaEconomica>10000")
     Double findAllPatenteMarcaModeloPerdidaPerdidaMayor10000TotalGastado();
