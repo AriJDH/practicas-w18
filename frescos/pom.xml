@@ -45,12 +45,35 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
-            <scope>test</scope>
         </dependency>
+        <!-- Login JWT -->
         <dependency>
-            <groupId>log4j</groupId>
-            <artifactId>log4j</artifactId>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt</artifactId>
+            <version>0.9.1</version>
         </dependency>
+
+        <!-- JWT -->
+        <dependency>
+            <groupId>com.auth0</groupId>
+            <artifactId>java-jwt</artifactId>
+            <version>3.19.2</version>
+        </dependency>
+
+        <!-- Seguridad de SPRING BOOT-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+            <version>2.7.6</version>
+        </dependency>
+
+        <!-- Seguridad en test de SPRING BOOT-->
+
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-test</artifactId>
+        </dependency>
+        <!--                  -->
     </dependencies>
 
     <build>
