@@ -12,7 +12,7 @@ import java.util.List;
 @Data
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-public class User {
+public class ApplicationUser {
     @Id
     private Long id;
     private String fullName;
