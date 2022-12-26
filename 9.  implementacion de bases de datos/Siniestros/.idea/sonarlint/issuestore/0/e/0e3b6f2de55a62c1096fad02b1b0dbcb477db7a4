@@ -1,0 +1,6 @@
+
+o	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(åó°™
+e
+java:S1128"CRemove this unused import 'com.example.siniestros.entity.Vehiculo'.(©Äõúüÿÿÿÿ8„İ¼æÎ0
+R
+java:S1128"0Remove this unused import 'jakarta.persistence'.(Î«Ô§úÿÿÿÿ8ø“¼æÎ0

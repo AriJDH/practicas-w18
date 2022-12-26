@@ -1,0 +1,20 @@
+
+b
+java:S22596"LA "NullPointerException" could be thrown; "getFieldError()" can return null.(∂Â¿®
+<
+java:S1452"&Remove usage of generic wildcard type.(ò—¥·
+A
+java:S1452!"&Remove usage of generic wildcard type.(èåá˛˙ˇˇˇˇ
+A
+java:S1452+"&Remove usage of generic wildcard type.(∆Ù∆¸˚ˇˇˇˇ
+Q	java:S125B"<This block of commented-out lines of code should be removed.(√Ωø†
+W	java:S125P"<This block of commented-out lines of code should be removed.(°∆≥8‰⁄Ü…Ã0
+^
+java:S1128"HRemove this unused import 'com.meli.be_java_hisp_w18_g01.dtos.ErrorDTO'.(Ìÿ≠€
+a
+java:S1128
+"FRemove this unused import 'org.springframework.validation.FieldError'.(÷åçÈ˝ˇˇˇˇ
+F
+java:S1128"+Remove this unused import 'java.util.List'.(’Î±ƒ¯ˇˇˇˇ
+S
+java:S1128"8Remove this unused import 'java.util.stream.Collectors'.(”Û∫¥˙ˇˇˇˇ
