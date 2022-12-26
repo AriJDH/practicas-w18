@@ -1,5 +1,6 @@
 package com.example.frescos.entity;
 
+import com.example.frescos.enums.SectionCode;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -15,7 +16,8 @@ public class Section {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
-    private Integer sectionCode;
+    @Enumerated(EnumType.ORDINAL)
+    private SectionCode sectionCode;
     @OneToMany(cascade = {CascadeType.MERGE, CascadeType.REMOVE}, orphanRemoval = true)
     @JoinColumn(name = "section_id")
     private List<Batch> batches;
