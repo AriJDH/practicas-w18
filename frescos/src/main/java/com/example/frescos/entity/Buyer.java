@@ -8,7 +8,7 @@ import java.util.List;
 @Data
 @Entity
 public class Buyer extends ApplicationUser {
-    public Buyer(Long id, String fullName, List<Integer> roles) {
+    public Buyer(Long id, String fullName, List<ApplicationUser> roles) {
         super(id, fullName, roles);
     }
 
