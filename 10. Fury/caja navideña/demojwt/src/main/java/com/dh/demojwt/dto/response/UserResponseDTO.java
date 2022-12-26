@@ -11,6 +11,6 @@ import lombok.NoArgsConstructor;
 public class UserResponseDTO {
     @JsonProperty("user_name")
     private String userName;
-    
+
     private String token;
 }
