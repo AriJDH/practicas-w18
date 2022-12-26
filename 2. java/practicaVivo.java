@@ -2,8 +2,9 @@ import java.util.*;
 import java.util.Scanner;
 
 public class Main {
+
     static Scanner keyboard = new Scanner(System.in);
-    static int numeroParticipante = 0;
+    static int numeroParticipante = 1;
     static LinkedList<HashMap<String, String>> listaPersonasChico = new LinkedList<HashMap<String, String>>();
     static LinkedList<HashMap<String, String>> listaPersonasMedio = new LinkedList<HashMap<String, String>>();
     static LinkedList<HashMap<String, String>> listaPersonasAvanzado = new LinkedList<HashMap<String, String>>();
