@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -17,6 +18,7 @@ public class InboundOrder {
     private LocalDate orderDate;
     @ManyToOne(cascade = {CascadeType.MERGE})
     private Section section;
-    @ManyToOne(cascade = {CascadeType.MERGE})
-    private Batch batch;
+    @OneToMany(cascade = {CascadeType.ALL}, orphanRemoval = true)
+    @JoinColumn(name = "inbound_order_id")
+    private List<Batch> batches;
 }
