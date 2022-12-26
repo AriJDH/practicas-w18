@@ -19,4 +19,10 @@ public class Product {
     @Enumerated(EnumType.ORDINAL)
     private SectionCode sectionCode;
     private Double price;
+
+    public Product(String description, SectionCode sectionCode, Double price) {
+        this.description = description;
+        this.sectionCode = sectionCode;
+        this.price = price;
+    }
 }

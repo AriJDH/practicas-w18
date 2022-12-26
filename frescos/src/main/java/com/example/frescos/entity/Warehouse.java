@@ -20,4 +20,9 @@ public class Warehouse {
     @OneToOne(cascade = {CascadeType.MERGE})
     @JoinColumn(name = "agent_id")
     private Agent agent;
+
+    public Warehouse(List<Section> sections, Agent agent) {
+        this.sections = sections;
+        this.agent = agent;
+    }
 }

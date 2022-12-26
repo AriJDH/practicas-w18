@@ -1,5 +1,6 @@
 package com.example.frescos.entity;
 
+import com.example.frescos.enums.ApplicationRol;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -17,5 +18,11 @@ public class ApplicationUser {
     private Long id;
     private String fullName;
     @ElementCollection
-    private List<Integer> roles;
+    @Enumerated(EnumType.ORDINAL)
+    private List<ApplicationRol> roles;
+
+    public ApplicationUser(String fullName, List<ApplicationRol> roles) {
+        this.fullName = fullName;
+        this.roles = roles;
+    }
 }
