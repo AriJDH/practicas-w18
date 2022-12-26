@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Data
 @AllArgsConstructor
@@ -20,7 +21,7 @@ public class Section {
     private Long id;
     @Enumerated(EnumType.ORDINAL)
     private SectionCode sectionCode;
-    @OneToMany(cascade = {CascadeType.MERGE, CascadeType.REMOVE}, orphanRemoval = true)
+    @OneToMany(cascade = {CascadeType.MERGE}, orphanRemoval = true)
     @JoinColumn(name = "section_id")
     private List<Batch> batches = new ArrayList<>();
     private Integer availableBatchSpace = 100;
@@ -40,9 +41,22 @@ public class Section {
     }
 
     public void addBatch(Batch batch){
-        if(this.batches.size()+1<this.availableBatchSpace)
+        if(this.batches.size()+1<this.availableBatchSpace){
             this.batches.add(batch);
+            this.availableBatchSpace--;
+        }
         else
             throw new FullSectionException("La sección alcanzó su capacidad máxima");
+    }
+
+    public void removeBatchByBatchNumber(Long batchNumber){
+        Optional<Batch> optBatch = batches.stream().filter(b->b.getBatchNumber().equals(batchNumber)).findFirst();
+        if(optBatch.isPresent()){
+            this.batches.remove(optBatch.get());
+            this.availableBatchSpace++;
+        }
+    }
+    public boolean containsSpace(int space){
+        return space <= this.availableBatchSpace.intValue();
     }
 }

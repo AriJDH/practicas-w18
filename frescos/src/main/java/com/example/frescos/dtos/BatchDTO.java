@@ -14,11 +14,11 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @Data
 public class BatchDTO {
-    @JsonProperty("order_number")
+    @JsonProperty("batch_number")
     private Long batchNumber;
     @JsonProperty("product_id")
     private Long productId;
-    @JsonProperty("current_property")
+    @JsonProperty("current_temperature")
     private Double currentTemperature;
     @JsonProperty("minimum_temperature")
     private Double minimumTemperature;

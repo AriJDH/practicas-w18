@@ -5,4 +5,5 @@ import com.example.frescos.service.InboundOrderService;
 
 public interface InboundOrderDbService {
     InboundOrder save(InboundOrder inboundOrder);
+    InboundOrder findByOrderNumber(Long orderNumber);
 }
