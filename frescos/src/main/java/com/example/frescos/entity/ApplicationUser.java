@@ -15,6 +15,7 @@ import java.util.List;
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public class ApplicationUser {
     @Id
+    @GeneratedValue(strategy=GenerationType.SEQUENCE)
     private Long id;
     private String fullName;
     @ElementCollection

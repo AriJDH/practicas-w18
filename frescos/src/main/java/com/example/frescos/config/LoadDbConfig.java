@@ -1,12 +1,18 @@
 package com.example.frescos.config;
 
+import com.example.frescos.entity.Agent;
 import com.example.frescos.entity.Product;
+import com.example.frescos.entity.Section;
+import com.example.frescos.entity.Warehouse;
 import com.example.frescos.enums.SectionCode;
+import com.example.frescos.repository.AgentRepository;
 import com.example.frescos.repository.ProductRepository;
+import com.example.frescos.repository.WarehouseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 
 import javax.annotation.PostConstruct;
+import java.util.ArrayList;
 import java.util.logging.Logger;
 
 @Configuration
@@ -14,6 +20,10 @@ public class LoadDbConfig {
     private Logger logger = Logger.getLogger(String.valueOf(LoadDbConfig.class));
     @Autowired
     private ProductRepository productRepository;
+    @Autowired
+    private AgentRepository agentRepository;
+    @Autowired
+    private WarehouseRepository warehouseRepository;
     @PostConstruct
     public void loadDb(){
         Product product1 = new Product("Pan", SectionCode.FRESH,100.0);
@@ -42,6 +52,13 @@ public class LoadDbConfig {
         logger.info("Productos creados:");
         productRepository.findAll().forEach(p-> logger.info(p.getDescription()));
 
+        Agent marcos = new Agent("Marcos Infantino");
+        agentRepository.save(marcos);
+        Warehouse warehouse = new Warehouse(marcos);
+        warehouseRepository.save(warehouse);
+
+        logger.info("Warehouses creados:");
+        warehouseRepository.findAll().forEach(w->logger.info("Warehouse de " + w.getAgent().getFullName()));
 
     }
 }

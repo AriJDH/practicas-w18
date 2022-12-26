@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -20,9 +21,20 @@ public class Section {
     private SectionCode sectionCode;
     @OneToMany(cascade = {CascadeType.MERGE, CascadeType.REMOVE}, orphanRemoval = true)
     @JoinColumn(name = "section_id")
-    private List<Batch> batches;
-    @ManyToOne(cascade = {CascadeType.MERGE})
-    @JoinColumn(name = "warehouse_code")
-    private Warehouse warehouse;
-    private Integer availableBatchSpace;
+    private List<Batch> batches = new ArrayList<>();
+    private Integer availableBatchSpace = 100;
+
+    public Section(SectionCode sectionCode, List<Batch> batches, Integer availableBatchSpace) {
+        this.sectionCode = sectionCode;
+        this.batches = batches;
+        this.availableBatchSpace = availableBatchSpace;
+    }
+
+    public Section(SectionCode sectionCode, List<Batch> batches) {
+        this.sectionCode = sectionCode;
+        this.batches = batches;
+    }
+    public Section(SectionCode sectionCode) {
+        this.sectionCode = sectionCode;
+    }
 }
