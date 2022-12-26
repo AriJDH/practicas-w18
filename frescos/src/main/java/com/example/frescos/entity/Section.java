@@ -1,6 +1,7 @@
 package com.example.frescos.entity;
 
 import com.example.frescos.enums.SectionCode;
+import com.example.frescos.exception.FullSectionException;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -36,5 +37,12 @@ public class Section {
     }
     public Section(SectionCode sectionCode) {
         this.sectionCode = sectionCode;
+    }
+
+    public void addBatch(Batch batch){
+        if(this.batches.size()+1<this.availableBatchSpace)
+            this.batches.add(batch);
+        else
+            throw new FullSectionException("La sección alcanzó su capacidad máxima");
     }
 }

@@ -1,9 +1,11 @@
 package com.example.frescos.entity;
 
 import com.example.frescos.enums.SectionCode;
+import com.example.frescos.exception.EntityNotFoundException;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.tool.schema.extract.spi.SchemaExtractionException;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -37,5 +39,15 @@ public class Warehouse {
         this.sections.add(coolSection);
         this.sections.add(frozenSection);
         this.agent=agent;
+    }
+
+    public Section getSectionFromCode(Integer code){
+        if(code<3)
+            return sections.get(code);
+        else
+            throw new EntityNotFoundException("No existe una sección de código " + code);
+    }
+    public void addBatch(Integer sectionCode,  Batch batch){
+        this.sections.get(sectionCode).addBatch(batch);
     }
 }
