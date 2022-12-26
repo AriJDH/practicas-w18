@@ -1,9 +1,11 @@
 package com.example.frescos.service;
 
+import com.example.frescos.dtos.request.InboundOrderRequest;
+import com.example.frescos.dtos.response.BatchStockResponse;
 import com.example.frescos.dtos.InboundOrderDTO;
-import com.example.frescos.dtos.ResponseCreateDTO;
-import com.example.frescos.entity.InboundOrder;
+import org.springframework.security.core.Authentication;
 
 public interface InboundOrderService {
-    InboundOrder addInboundOrder(InboundOrderDTO inboundOrderDTO);
+    BatchStockResponse addInboundOrder(Authentication authentication, InboundOrderRequest inboundOrderRequest);
+    BatchStockResponse updateInboundOrder(Authentication authentication, InboundOrderRequest inboundOrderRequest);
 }

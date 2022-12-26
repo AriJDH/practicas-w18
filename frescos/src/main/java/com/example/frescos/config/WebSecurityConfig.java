@@ -24,7 +24,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
           .authorizeRequests()
           .antMatchers(
             "/auth/agent",
-                  "/auth/agent2"
+                  "/auth/agent2",
+                  "/api/v1/fresh-products/inboundorder"
           ).hasAnyAuthority(ApplicationRol.AGENT.getCode())
           .antMatchers(
                   "/auth/buyer",
