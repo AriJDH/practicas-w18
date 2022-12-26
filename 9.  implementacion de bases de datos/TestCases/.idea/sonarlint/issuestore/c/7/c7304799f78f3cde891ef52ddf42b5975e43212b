@@ -1,0 +1,7 @@
+
+r	java:S1174"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ô¸¨Þùÿÿÿÿ8ÍäÂÆÎ0
+m
+java:S1128"PRemove this unused import 'com.example.testcases.service.TestCaseDbServiceImpl'.(È¸£È8´áËÆÎ0
+h
+java:S1128
+"FRemove this unused import 'org.springframework.stereotype.Repository'.(¦ýÍýüÿÿÿÿ8µáËÆÎ0

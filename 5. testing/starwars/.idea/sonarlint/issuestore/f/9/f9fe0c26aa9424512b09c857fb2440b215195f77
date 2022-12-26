@@ -1,0 +1,20 @@
+
+k	java:S117#"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ëûÛ¦ıÿÿÿÿ
+f	java:S117+"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÊÏÎé
+f	java:S1173"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Ùò®é
+f	java:S117;"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(°Õ¢¥
+j	java:S116
+"URename this field "hair_color" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÎŸ­ù
+j	java:S116"URename this field "skin_color" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(²¶İ©
+n	java:S116"TRename this field "eye_color" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ğŒ³‚ıÿÿÿÿ
+o	java:S116"URename this field "birth_year" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(•Ü‘øÿÿÿÿ
+œ
+java:S1186"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(‘¥Œ«üÿÿÿÿ
+h	java:S100"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(³¦´¦øÿÿÿÿ
+h	java:S100#"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ëûÛ¦ıÿÿÿÿ
+h	java:S100'"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Şàñâÿÿÿÿÿ
+c	java:S100+"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÊÏÎé
+h	java:S100/"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(º¶­ºıÿÿÿÿ
+c	java:S1003"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Ùò®é
+h	java:S1007"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ŠµÅóüÿÿÿÿ
+c	java:S100;"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(°Õ¢¥

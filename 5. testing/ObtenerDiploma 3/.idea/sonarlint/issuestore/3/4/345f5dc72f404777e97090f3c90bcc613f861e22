@@ -1,0 +1,8 @@
+
+d	java:S116"PRename this field "SCOPE" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(²N
+C	java:S108<")Either remove or fill this block of code.(µÖæœùÿÿÿÿ
+>	java:S108G")Either remove or fill this block of code.(óÁ×ü
+S	java:S106c"9Replace this use of System.out or System.err by a logger.(ªâ¨»ùÿÿÿÿ
+S	java:S106f"9Replace this use of System.out or System.err by a logger.(½ŒŒãùÿÿÿÿ
+M	java:S106s"9Replace this use of System.out or System.err by a logger.(×²‚4
+N	java:S106v"9Replace this use of System.out or System.err by a logger.(±İ”ø

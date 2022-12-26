@@ -1,0 +1,7 @@
+
+ƒ
+java:S1104"hMake specialCharsNotIncludedRegex a static final constant or non-public and provide accessors if needed.(ãîºéýÿÿÿÿ
+]
+java:S1444"BMake this "public static specialCharsNotIncludedRegex" field final(ãîºéýÿÿÿÿ
+U
+java:S1118":Add a private constructor to hide the implicit public one.(ý¸µ¸ÿÿÿÿÿ

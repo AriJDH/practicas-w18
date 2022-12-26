@@ -1,0 +1,7 @@
+
+[
+java:S4684"@Replace this persistent entity with a simple POJO or DTO object.(Œ®½…ùÿÿÿÿ
+<
+java:S1452"&Remove usage of generic wildcard type.(£ïÚþ
+R
+java:S1128"7Remove this unused import 'org.apache.coyote.Response'.(˜ÊŠþÿÿÿÿ

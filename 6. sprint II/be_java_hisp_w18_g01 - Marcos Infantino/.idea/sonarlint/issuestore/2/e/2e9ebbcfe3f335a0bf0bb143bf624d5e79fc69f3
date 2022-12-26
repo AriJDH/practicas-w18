@@ -1,0 +1,41 @@
+
+i	java:S116"URename this field "product_id" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Ş²
+l	java:S116"WRename this field "product_name" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(’©œÙ
+J
+java:S5854"(Use the CANON_EQ flag with this pattern.(ºæïùÿÿÿÿ8ä¤’„Ë0
+L
+java:S5869"*Remove duplicates in this character class.(ºæïùÿÿÿÿ8¬ê„„Ë0
+R
+java:S6035"0Replace this alternation with a character class.(ºæïùÿÿÿÿ8øıŠ„Ë0
+W
+java:S6353"<Use concise character class syntax '\\d' instead of '[0-9]'.(ºæïùÿÿÿÿ
+W
+java:S6353"<Use concise character class syntax '\\d' instead of '[0-9]'.(ºæïùÿÿÿÿ
+E
+java:S5854"(Use the CANON_EQ flag with this pattern.(ëó€8¼“„Ë0
+G
+java:S5869"*Remove duplicates in this character class.(ëó€8â†„Ë0
+F
+java:S6035"0Replace this alternation with a character class.(ëó€
+Y
+java:S6353"<Use concise character class syntax '\\d' instead of '[0-9]'.(ëó€8µê„„Ë0
+Y
+java:S6353"<Use concise character class syntax '\\d' instead of '[0-9]'.(ëó€8ä†„Ë0
+J
+java:S5854"(Use the CANON_EQ flag with this pattern.(ª‡÷¢üÿÿÿÿ8ÿ²“„Ë0
+L
+java:S5869"*Remove duplicates in this character class.(ª‡÷¢üÿÿÿÿ8ªıĞ„Ë0
+R
+java:S6035"0Replace this alternation with a character class.(ª‡÷¢üÿÿÿÿ8êÌ‹„Ë0
+E
+java:S5854 "(Use the CANON_EQ flag with this pattern.(˜­ È8©ıĞ„Ë0
+G
+java:S5869 "*Remove duplicates in this character class.(˜­ È8ªàÑ„Ë0
+M
+java:S6035 "0Replace this alternation with a character class.(˜­ È8¬ıĞ„Ë0
+Y
+java:S6353 "<Use concise character class syntax '\\d' instead of '[0-9]'.(˜­ È8­ıĞ„Ë0
+Y
+java:S6353 "<Use concise character class syntax '\\d' instead of '[0-9]'.(˜­ È8­ıĞ„Ë0
+j
+java:S1128"MRemove this unused import 'com.meli.be_java_hisp_w18_g01.utils.RegexFactory'.(ŸÌ¤Ø8®ıĞ„Ë0
