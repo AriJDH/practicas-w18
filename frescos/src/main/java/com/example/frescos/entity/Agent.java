@@ -14,12 +14,12 @@ import static com.example.frescos.enums.ApplicationRol.AGENT;
 @Data
 @Entity
 public class Agent extends ApplicationUser {
-    public Agent(Long id, String fullName) {
-        super(id, fullName, new ArrayList<>(Arrays.asList(new ApplicationRol[]{AGENT})));
+    public Agent(Long id, String userName, String password) {
+        super(id, userName, password,new ArrayList<>(Arrays.asList(new ApplicationRol[]{AGENT})));
     }
 
-    public Agent(String fullName) {
-        super(fullName, new ArrayList<>(Arrays.asList(new ApplicationRol[]{AGENT})));
+    public Agent(String userName, String password) {
+        super(userName, password, new ArrayList<>(Arrays.asList(new ApplicationRol[]{AGENT})));
     }
 
     public Agent() {

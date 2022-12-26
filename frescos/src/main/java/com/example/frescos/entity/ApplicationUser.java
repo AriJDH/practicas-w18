@@ -17,13 +17,16 @@ public class ApplicationUser {
     @Id
     @GeneratedValue(strategy=GenerationType.SEQUENCE)
     private Long id;
-    private String fullName;
+    private String userName;
+    private String password;
     @ElementCollection
     @Enumerated(EnumType.ORDINAL)
     private List<ApplicationRol> roles;
 
-    public ApplicationUser(String fullName, List<ApplicationRol> roles) {
-        this.fullName = fullName;
+    public ApplicationUser(String userName, String password, List<ApplicationRol> roles) {
+        System.out.println(userName);
+        this.userName = userName;
+        this.password=password;
         this.roles = roles;
     }
 }

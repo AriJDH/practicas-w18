@@ -14,12 +14,12 @@ import static com.example.frescos.enums.ApplicationRol.BUYER;
 @Data
 @Entity
 public class Buyer extends ApplicationUser {
-    public Buyer(Long id, String fullName) {
-        super(id, fullName, new ArrayList<>(Arrays.asList(new ApplicationRol[]{BUYER})));
+    public Buyer(Long id, String userName, String password) {
+        super(id, userName,password, new ArrayList<>(Arrays.asList(new ApplicationRol[]{BUYER})));
     }
 
-    public Buyer( String fullName) {
-        super(fullName, new ArrayList<>(Arrays.asList(new ApplicationRol[]{BUYER})));
+    public Buyer( String userName, String password) {
+        super(userName,password, new ArrayList<>(Arrays.asList(new ApplicationRol[]{BUYER})));
     }
 
     public Buyer() {
