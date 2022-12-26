@@ -13,6 +13,11 @@ public enum SectionCode {
     }
 
     private final Integer code;
+
+    public Integer getCode() {
+        return code;
+    }
+
     public static SectionCode sectionCodeFromInteger(Integer i){
         Optional<SectionCode> optSectionCode = Arrays.stream(SectionCode.values()).filter(s->s.code.equals(i)).findFirst();
         return optSectionCode.isPresent()?optSectionCode.get():null;
