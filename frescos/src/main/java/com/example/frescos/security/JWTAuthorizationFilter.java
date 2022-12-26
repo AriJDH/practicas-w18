@@ -14,6 +14,8 @@ import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static com.example.frescos.utils.CONSTANTS.SECRET_KEY_TOKEN;
+
 
 public class JWTAuthorizationFilter extends OncePerRequestFilter {
     private final String HEADER = "Authorization";

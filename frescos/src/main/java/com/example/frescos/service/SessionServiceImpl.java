@@ -1,10 +1,9 @@
 package com.example.frescos.service;
 
-import com.dh.demojwt.dto.request.UserRequestDTO;
-import com.dh.demojwt.dto.response.UserResponseDTO;
-import com.dh.demojwt.exception.UserNotFoundException;
-import com.dh.demojwt.model.User;
-import com.dh.demojwt.repository.UserRepository;
+import com.example.frescos.dtos.ApplicationUserRequestDTO;
+import com.example.frescos.dtos.ApplicationUserResponseDTO;
+import com.example.frescos.entity.ApplicationUser;
+import com.example.frescos.repository.ApplicationUserRepository;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -15,33 +14,37 @@ import java.time.ZoneId;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
+import com.example.frescos.exception.UserNotFoundException;
 
-import static com.dh.demojwt.utils.CONSTANTS.SECRET_KEY_TOKEN;
+import static com.example.frescos.utils.CONSTANTS.SECRET_KEY_TOKEN;
+
 
 @Service
-public class SessionServiceImpl implements ISessionService {
-    private final UserRepository userRepository;
+public class SessionServiceImpl implements SessionService {
+    private final ApplicationUserRepository userRepository;
 
-    public SessionServiceImpl ( UserRepository userRepository ) {
+    public SessionServiceImpl ( ApplicationUserRepository userRepository ) {
         this.userRepository = userRepository;
     }
 
     @Override
-    public UserResponseDTO login ( UserRequestDTO user ) {
+    public ApplicationUserResponseDTO login (ApplicationUserRequestDTO user ) {
         //Voy a la base de datos y reviso que el usuario y contraseña existan.
         // ToDo: se podria agregar alguna libreria para encriptar la password
+        System.out.println(user.getUserName());
+        System.out.println(user.getPassword());
         String username = user.getUserName();
-        User usuario = userRepository.findByUsernameAndPassword(username, user.getPassword())
+        ApplicationUser usuario = userRepository.findByUserNameAndPassword(username, user.getPassword())
           .orElseThrow(UserNotFoundException::new);
 
         List<String> roles = usuario.getRoles()
           .stream()
-          .map(e -> e.getRol().getText())
+          .map(e -> e.getCode())
           .collect(Collectors.toList());
 
         String token = getJWTToken(username, roles);
 
-        return new UserResponseDTO(username, token);
+        return new ApplicationUserResponseDTO(username, token);
     }
 
     /**

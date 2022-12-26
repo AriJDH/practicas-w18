@@ -1,5 +1,10 @@
 package com.example.frescos.service;
-public interface ISessionService {
+
+import com.example.frescos.dtos.ApplicationUserRequestDTO;
+import com.example.frescos.dtos.ApplicationUserResponseDTO;
+import com.example.frescos.exception.UserNotFoundException;
+
+public interface SessionService {
     /**
      * Realiza la validación del usuario y contraseña ingresado.
      * En caso de ser correcto, devuelve la cuenta con el token necesario para realizar las demás consultas.
@@ -8,5 +13,5 @@ public interface ISessionService {
      * @return UserResponseDTO -- Objeto con userName y token
      * @throws UserNotFoundException -- se lanza la exception en caso de no encontrar al usuario
      */
-    UserResponseDTO login( UserRequestDTO user );
+    ApplicationUserResponseDTO login(ApplicationUserRequestDTO user );
 }

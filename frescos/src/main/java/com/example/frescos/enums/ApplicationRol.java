@@ -8,7 +8,9 @@ public enum ApplicationRol {
     BUYER("BUYER");
 
     private final String code;
-
+    public String getCode(){
+        return this.code;
+    }
     ApplicationRol(String code) {
         this.code = code;
     }

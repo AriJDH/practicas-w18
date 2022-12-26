@@ -1,6 +1,7 @@
 package com.example.frescos.config;
 
 
+import com.example.frescos.enums.ApplicationRol;
 import com.example.frescos.security.JWTAuthorizationFilter;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -21,16 +22,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
           .disable()
           .addFilterBefore(new JWTAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class)
           .authorizeRequests()
-/*
           .antMatchers(
-            "/api/v1/users/admin-1",
-            "/api/v1/users/admin-2"
-          ).hasAnyAuthority(RolE.ADMIN.getText())
+            "/auth/agent",
+                  "/auth/agent2"
+          ).hasAnyAuthority(ApplicationRol.AGENT.getCode())
           .antMatchers(
-            "/api/v1/users/buyer-1",
-            "/api/v1/users/buyer-2"
-          ).hasAnyAuthority(RolE.BUYER.getText())
-*/
+                  "/auth/buyer",
+                  "/auth/buyer2"
+          ).hasAnyAuthority(ApplicationRol.BUYER.getCode())
           .anyRequest()
           .permitAll();
     }
