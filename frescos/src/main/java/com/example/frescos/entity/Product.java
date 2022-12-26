@@ -19,6 +19,7 @@ public class Product {
     @Enumerated(EnumType.ORDINAL)
     private SectionCode sectionCode;
     private Double price;
+    private String category;
 
     public Product(String description, SectionCode sectionCode, Double price) {
         this.description = description;
