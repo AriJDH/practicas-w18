@@ -21,4 +21,8 @@ public class InboundOrder {
     @OneToMany(cascade = {CascadeType.ALL}, orphanRemoval = true)
     @JoinColumn(name = "inbound_order_id")
     private List<Batch> batches;
+    @ManyToOne
+    @JoinColumn(name="agent_id")
+    private Agent agent;
+
 }

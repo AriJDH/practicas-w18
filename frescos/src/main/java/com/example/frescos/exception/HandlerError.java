@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 @ControllerAdvice
 public class HandlerError {
 
-    @ExceptionHandler({UserNotFoundException.class, EntityNotFoundException.class, FullSectionException.class})
+    @ExceptionHandler({UserNotFoundException.class, EntityNotFoundException.class, FullSectionException.class, IncorrectSectionException.class, BadRequestException.class})
     public ResponseEntity<String>  handleNotFound
             ( Exception exception ) {
         return new ResponseEntity<>(exception.getMessage(), HttpStatus.BAD_REQUEST);

@@ -17,12 +17,7 @@ public class ProductController {
     ProductService productService;
 
     @GetMapping("/list")
-    ResponseEntity<List<ProductDTO>> getAllProducts() {
-        return new ResponseEntity<>(productService.findAllProducts(), HttpStatus.OK);
-    }
-
-    @GetMapping("/list")
-    ResponseEntity<List<ProductDTO>> getAllByCategory(@RequestParam(required = true) String category) {
+    ResponseEntity<List<ProductDTO>> getAllByCategory(@RequestParam(required = false) String category) {
         return new ResponseEntity<>(productService.findByCategory(category), HttpStatus.OK);
     }
 
