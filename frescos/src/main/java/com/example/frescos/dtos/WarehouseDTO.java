@@ -1,6 +1,5 @@
 package com.example.frescos.dtos;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -13,5 +12,5 @@ import java.util.List;
 public class WarehouseDTO {
     private SectionDTO section;
     private Long productoId;
-    private List<BatchStockDTO> batches;
+    private List<BatchForStockDTO> batches;
 }

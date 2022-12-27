@@ -12,7 +12,7 @@ import java.time.LocalDate;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class BatchStockDTO {
+public class BatchForStockDTO {
 
     @JsonProperty("batch_number")
     private Long batchNumber;
