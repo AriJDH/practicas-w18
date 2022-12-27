@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @AllArgsConstructor
@@ -26,5 +27,22 @@ public class PurchaseOrder {
 
     public Double totalPrice(){
         return items.stream().mapToDouble(item->item.getProduct().getPrice()*item.getQuantity()).sum();
+    }
+
+    public void removeItem(Item item){
+        this.items.remove(item);
+    }
+    public void removeAllItems(){
+        this.items.removeAll(this.items);
+    }
+    public void addAllItems(List<Item> items){
+        this.items.addAll(items);
+    }
+    public List<Product> getProducts(){
+        List<Product> products =new ArrayList<>();
+        for(Item item: this.items){
+            products.add(item.getProduct());
+        }
+        return products;
     }
 }

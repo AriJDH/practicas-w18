@@ -25,6 +25,18 @@ public class LoginManager {
                 "    \"user_name\": \"MarcosInfantino\",\n" +
                 "    \"password\": \"admin\"\n" +
                 "}";
+        return login(data, mockMvc);
+    }
+
+    public static String loginAsBuyer(MockMvc mockMvc) throws Exception {
+        String data = "{\n" +
+                "    \"user_name\": \"MiguelAvalle\",\n" +
+                "    \"password\": \"admin\"\n" +
+                "}";
+        return login(data, mockMvc);
+    }
+
+    public static String login(String data, MockMvc mockMvc) throws Exception {
         MvcResult result=mockMvc.perform(post("/login")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(data)).andReturn();

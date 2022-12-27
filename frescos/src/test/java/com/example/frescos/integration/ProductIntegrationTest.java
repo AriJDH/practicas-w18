@@ -1,11 +1,8 @@
 package com.example.frescos.integration;
 
-import com.example.frescos.config.LoadDbScript;
-import com.example.frescos.controller.SessionController;
 import com.example.frescos.dtos.BatchForStockDTO;
 import com.example.frescos.dtos.SectionDTO;
 import com.example.frescos.dtos.WarehouseDTO;
-import com.example.frescos.repository.ApplicationUserRepository;
 import com.example.frescos.utils.LoginManager;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.DisplayName;
@@ -27,7 +24,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-
 
 @SpringBootTest
 @AutoConfigureMockMvc

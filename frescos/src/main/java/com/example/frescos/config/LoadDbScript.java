@@ -65,18 +65,18 @@ public class LoadDbScript {
         productRepository.save(product11);
 
 
-        Batch batch1 = new Batch(1L, product1,11.50,4.0,500,500,LocalDate.now(), LocalDateTime.of(LocalDate.now(), LocalTime.now()), LocalDate.now().plusDays(1));
-        Batch batch2 = new Batch(2L, product2,13.00,1.2,2000,2000,LocalDate.of(2010,3,11), LocalDateTime.of(LocalDate.of(2010,3,11), LocalTime.now()), LocalDate.now().plusDays(2));
-        Batch batch3 = new Batch(3L, product3,2.00,-4.2,300,300,LocalDate.of(2016,2,20), LocalDateTime.of(LocalDate.of(2016,2,20), LocalTime.now()), LocalDate.now().plusDays(3));
-        Batch batch4 = new Batch(4L, product4,5.00,-1.2,5231,4002,LocalDate.of(2021,6,23), LocalDateTime.of(LocalDate.of(2021,6,23), LocalTime.now()), LocalDate.now().plusDays(4));
-        Batch batch5 = new Batch(5L, product5,5.00,-1.2,1489,807,LocalDate.of(2022,10,4), LocalDateTime.of(LocalDate.of(2022,10,4), LocalTime.now()), LocalDate.now().plusDays(5));
-        Batch batch6 = new Batch(6L, product6,4.00,-5.0,3210,1201,LocalDate.of(2022,9,30), LocalDateTime.of(LocalDate.of(2021,9,30), LocalTime.now()), LocalDate.now().plusDays(6));
-        Batch batch7 = new Batch(7L, product7,-80.00,-91.2,10205,9990,LocalDate.of(2022,10,1), LocalDateTime.of(LocalDate.of(2022,10,1), LocalTime.now()), LocalDate.now().plusDays(7));
-        Batch batch8 = new Batch(8L, product8,-30.00,-50.6,4506,2776,LocalDate.of(2019,8,9), LocalDateTime.of(LocalDate.of(2019,8,9), LocalTime.now()), LocalDate.now().plusDays(8));
-        Batch batch9 = new Batch(9L, product9,-12.00,-30.4,888,401,LocalDate.of(2019,5,29), LocalDateTime.of(LocalDate.of(2019,5,29), LocalTime.now()), LocalDate.now().plusDays(9));
-        Batch batch10 = new Batch(10L, product10,-22.00,-42.7,343,3,LocalDate.of(2005,11,7), LocalDateTime.of(LocalDate.of(2005,11,7), LocalTime.now()), LocalDate.now().plusDays(10));
-        Batch batch11 = new Batch(11L, product10,-40.00,-50.7,88580,77565,LocalDate.of(2022,7,14), LocalDateTime.of(LocalDate.of(2022,7,14), LocalTime.now()), LocalDate.now().plusDays(500));
-        Batch batch12 = new Batch(11L, product10,-40.00,-50.7,88580,77565,LocalDate.of(2022,7,14), LocalDateTime.of(LocalDate.of(2022,7,14), LocalTime.now()), LocalDate.now().minusDays(1));
+        Batch batch1 = new Batch(1L, product1,11.50,4.0,500,500,LocalDate.now(), LocalDateTime.of(LocalDate.now(), LocalTime.now()), LocalDate.now().plusDays(30));
+        Batch batch2 = new Batch(2L, product2,13.00,1.2,2000,2000,LocalDate.of(2010,3,11), LocalDateTime.of(LocalDate.of(2010,3,11), LocalTime.now()), LocalDate.now().plusDays(30));
+        Batch batch3 = new Batch(3L, product3,2.00,-4.2,300,300,LocalDate.of(2016,2,20), LocalDateTime.of(LocalDate.of(2016,2,20), LocalTime.now()), LocalDate.now().plusDays(30));
+        Batch batch4 = new Batch(4L, product4,5.00,-1.2,4002,4002,LocalDate.of(2021,6,23), LocalDateTime.of(LocalDate.of(2021,6,23), LocalTime.now()), LocalDate.now().plusDays(30));
+        Batch batch5 = new Batch(5L, product5,5.00,-1.2,807,807,LocalDate.of(2022,10,4), LocalDateTime.of(LocalDate.of(2022,10,4), LocalTime.now()), LocalDate.now().plusDays(5));
+        Batch batch6 = new Batch(6L, product6,4.00,-5.0,1201,1201,LocalDate.of(2022,9,30), LocalDateTime.of(LocalDate.of(2021,9,30), LocalTime.now()), LocalDate.now().plusDays(6));
+        Batch batch7 = new Batch(7L, product7,-80.00,-91.2,9990,9990,LocalDate.of(2022,10,1), LocalDateTime.of(LocalDate.of(2022,10,1), LocalTime.now()), LocalDate.now().plusDays(7));
+        Batch batch8 = new Batch(8L, product8,-30.00,-50.6,2776,2776,LocalDate.of(2019,8,9), LocalDateTime.of(LocalDate.of(2019,8,9), LocalTime.now()), LocalDate.now().plusDays(8));
+        Batch batch9 = new Batch(9L, product9,-12.00,-30.4,401,401,LocalDate.of(2019,5,29), LocalDateTime.of(LocalDate.of(2019,5,29), LocalTime.now()), LocalDate.now().plusDays(9));
+        Batch batch10 = new Batch(10L, product10,-22.00,-42.7,343,343,LocalDate.of(2005,11,7), LocalDateTime.of(LocalDate.of(2005,11,7), LocalTime.now()), LocalDate.now().plusDays(10));
+        Batch batch11 = new Batch(11L, product10,-40.00,-50.7,88580,88580,LocalDate.of(2022,7,14), LocalDateTime.of(LocalDate.of(2022,7,14), LocalTime.now()), LocalDate.now().plusDays(11));
+        Batch batch12 = new Batch(11L, product10,-40.00,-50.7,88580,88580,LocalDate.of(2022,7,14), LocalDateTime.of(LocalDate.of(2022,7,14), LocalTime.now()), LocalDate.now().minusDays(12));
 
         batchRepository.save(batch1);
         batchRepository.save(batch2);
