@@ -31,7 +31,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
           ).hasAnyAuthority(ApplicationRol.AGENT.getCode())
           .antMatchers(
                   "/auth/buyer",
-                  "/auth/buyer2"
+                  "/auth/buyer2",
+                  "/api/v1/fresh-products/orders",
+                  "/api/v1/fresh-products/orders/*",
+                  "/api/v1/fresh-products/list"
           ).hasAnyAuthority(ApplicationRol.BUYER.getCode())
           .anyRequest()
           .permitAll();

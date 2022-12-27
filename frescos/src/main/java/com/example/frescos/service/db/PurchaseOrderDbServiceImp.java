@@ -22,4 +22,9 @@ public class PurchaseOrderDbServiceImp implements PurchaseOrderDbService{
     public void delete(PurchaseOrder purchaseOrder) {
         purchaseOrderRepository.delete(purchaseOrder);
     }
+
+    @Override
+    public PurchaseOrder save(PurchaseOrder purchaseOrder) {
+        return purchaseOrderRepository.saveAndFlush(purchaseOrder);
+    }
 }

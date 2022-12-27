@@ -21,7 +21,7 @@ public class ProductController {
     WarehouseServiceImpl warehouseService;
 
     @GetMapping("/list")
-    ResponseEntity<List<ProductDTO>> getAllByCategory(@RequestParam(required = false) String category) {
+    ResponseEntity<List<ProductDTO>> getAllByCategory(Authentication authentication, @RequestParam(required = false) String category) {
         return new ResponseEntity<>(productService.findByCategory(category), HttpStatus.OK);
     }
 
