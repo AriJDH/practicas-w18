@@ -10,7 +10,7 @@ import java.util.List;
 
 @Repository
 public interface BatchRepository extends JpaRepository<Batch, Long> {
-    @Query(value = "SELECT * FROM Batch b WHERE b.product.id=:productId")
+    @Query(value = "SELECT b FROM Batch b WHERE b.product.id=:productId")
     List<Batch> findAllBatchesByProductId(@Param("productId") Long productId);
 
 }
