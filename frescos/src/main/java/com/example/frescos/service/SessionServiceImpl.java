@@ -7,6 +7,8 @@ import com.example.frescos.repository.ApplicationUserRepository;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import lombok.NoArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -21,11 +23,8 @@ import static com.example.frescos.utils.CONSTANTS.SECRET_KEY_TOKEN;
 
 @Service
 public class SessionServiceImpl implements SessionService {
-    private final ApplicationUserRepository userRepository;
-
-    public SessionServiceImpl ( ApplicationUserRepository userRepository ) {
-        this.userRepository = userRepository;
-    }
+    @Autowired
+    private ApplicationUserRepository userRepository;
 
     @Override
     public ApplicationUserResponseDTO login (ApplicationUserRequestDTO user ) {
@@ -34,7 +33,7 @@ public class SessionServiceImpl implements SessionService {
         System.out.println(user.getUserName());
         System.out.println(user.getPassword());
         String username = user.getUserName();
-        ApplicationUser usuario = userRepository.findByUserNameAndPassword(username, user.getPassword())
+        ApplicationUser usuario = this.userRepository.findByUserNameAndPassword(username, user.getPassword())
           .orElseThrow(UserNotFoundException::new);
 
         List<String> roles = usuario.getRoles()

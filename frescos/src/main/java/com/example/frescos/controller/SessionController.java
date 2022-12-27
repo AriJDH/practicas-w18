@@ -3,6 +3,7 @@ package com.example.frescos.controller;
 import com.example.frescos.dtos.ApplicationUserRequestDTO;
 import com.example.frescos.dtos.ApplicationUserResponseDTO;
 import com.example.frescos.service.SessionService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,11 +11,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class SessionController {
-    private final SessionService service;
-
-    public SessionController(SessionService sessionService) {
-        this.service = sessionService;
-    }
+    @Autowired
+    private SessionService service;
 
     /**
      * Realiza la validación del usuario y contraseña ingresado.

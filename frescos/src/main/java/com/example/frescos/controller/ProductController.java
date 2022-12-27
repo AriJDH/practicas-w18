@@ -27,7 +27,6 @@ public class ProductController {
 
     @GetMapping("/{idProduct}/batch/list")
     public ResponseEntity<?>findAllProductOrderBy(Authentication authentication, @PathVariable Long idProduct, @RequestParam(required=false) Character order){
-        return new ResponseEntity(warehouseService.findByProduct(idProduct, order), HttpStatus.OK);
+        return new ResponseEntity(warehouseService.findByProduct(authentication, idProduct, order), HttpStatus.OK);
     }
-
 }
