@@ -27,4 +27,8 @@ public class PurchaseOrder {
     public Double totalPrice(){
         return items.stream().mapToDouble(item->item.getProduct().getPrice()*item.getQuantity()).sum();
     }
+
+    public void removeItem(Item item){
+        this.items.remove(item);
+    }
 }

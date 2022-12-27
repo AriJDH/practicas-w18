@@ -27,4 +27,8 @@ public class PurchaseOrderController {
     ResponseEntity<PurchaseOrderCreationResponseDTO> addPurchaseOrder(@RequestBody PurchaseOrderRequest purchaseOrderRequest){
         return new ResponseEntity<>(purchaseOrderService.addPurchaseOrder(purchaseOrderRequest), HttpStatus.CREATED);
     }
+    @PutMapping("/{orderId}")
+    ResponseEntity<PurchaseOrderCreationResponseDTO> updatePurchaseOrder(@RequestBody PurchaseOrderRequest purchaseOrderRequest, @PathVariable Long orderId){
+        return new ResponseEntity<>(purchaseOrderService.updatePurchaseOrder(orderId, purchaseOrderRequest), HttpStatus.CREATED);
+    }
 }

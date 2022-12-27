@@ -3,10 +3,13 @@ package com.example.frescos.entity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import java.time.temporal.ChronoUnit;
 
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+
+import static java.time.temporal.ChronoUnit.DAYS;
 
 @Data
 @AllArgsConstructor
@@ -25,6 +28,10 @@ public class Batch {
     private LocalDate manufacturingDate;
     private LocalDateTime manufacturingTime;
     private LocalDate dueDate;
+
+    public Boolean isDueDateOk(LocalDate ref){
+        return DAYS.between(ref, this.dueDate)>=21;
+    }
 
 
 }

@@ -34,7 +34,6 @@ public class WarehouseServiceImpl implements WarehouseService{
 
     @Override
     public List<WarehouseDTO> findByProduct(Authentication authentication, Long id, Character order) {
-
         Product product = productDbService.findById(id);
         Section section = sectionDbService.findBySectionCode(product.getSectionCode());
 
@@ -75,7 +74,7 @@ public class WarehouseServiceImpl implements WarehouseService{
     }
 
     private Boolean validationBatchByProductAndDueDate(Batch batch, Long id){
-        long weeksBetween = ChronoUnit.WEEKS.between(batch.getDueDate(), LocalDate.now());
+        long weeksBetween = ChronoUnit.WEEKS.between(LocalDate.now(), batch.getDueDate());
         if (batch.getProduct().getId().equals(id) && weeksBetween>= 3)
             return true;
         else
