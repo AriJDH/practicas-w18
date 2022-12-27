@@ -2,6 +2,7 @@ package com.example.frescos.service;
 
 import com.example.frescos.dtos.SectionDTO;
 import com.example.frescos.dtos.WarehouseDTO;
+import com.example.frescos.entity.Batch;
 import com.example.frescos.entity.Product;
 import com.example.frescos.entity.Section;
 import com.example.frescos.entity.Warehouse;
@@ -11,8 +12,11 @@ import com.example.frescos.service.db.SectionDbServiceImpl;
 import com.example.frescos.service.db.WarehouseDbService;
 import com.example.frescos.utils.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -29,20 +33,17 @@ public class WarehouseServiceImpl implements WarehouseService{
     private Mapper mapper;
 
     @Override
-    public List<WarehouseDTO> findByProduct(Long id, Character order) {
+    public List<WarehouseDTO> findByProduct(Authentication authentication, Long id, Character order) {
         Product product = productDbService.findById(id);
         Section section = sectionDbService.findBySectionCode(product.getSectionCode());
 
-        List<Warehouse> warehouses = warehouseDbService.findAllBySection(section.getSectionCode());
-        SectionDTO sectionDTO = new SectionDTO();
+        Warehouse warehouse = warehouseDbService.findWarehouseBySectionsAndAgent(section.getSectionCode(), authentication.getName());
+        SectionDTO sectionDTO = new SectionDTO(section.getSectionCode().getCode(), warehouse.getWareHouseCode());
 
-        List<WarehouseDTO> warehousesResponse = warehouses.stream()
-                .map(w -> {
-                    sectionDTO.setSectionCode(section.getSectionCode().getCode());
-                    sectionDTO.setWarehouseCode(w.getWareHouseCode());
-                    return getSectionWarehouse(w.getSections(), section);})
+        List<WarehouseDTO> warehousesResponse = warehouse.getSections().stream()
+                .filter(s -> s.getSectionCode().equals(section.getSectionCode()))
                 .map(s -> s.getBatches())
-                .map(b -> b.stream().filter(p -> p.getProduct().getId().equals(id)))
+                .map(b -> b.stream().filter(p -> validationBatchByProductAndDueDate(p, product.getId())))
                 .map(b ->
                         warehouseOrderBatches(new WarehouseDTO(sectionDTO, product.getId(),
                                 b.map(p -> mapper.fromBatch(p))
@@ -71,7 +72,11 @@ public class WarehouseServiceImpl implements WarehouseService{
         return warehouseDTO;
     }
 
-    private Section getSectionWarehouse(List<Section> sections, Section section){
-        return sections.stream().filter(s -> s.getSectionCode().equals(section.getSectionCode())).findFirst().orElse(null);
+    private Boolean validationBatchByProductAndDueDate(Batch batch, Long id){
+        long weeksBetween = ChronoUnit.WEEKS.between(batch.getDueDate(), LocalDate.now());
+        if (batch.getProduct().getId().equals(id) && weeksBetween>= 3)
+            return true;
+        else
+            return false;
     }
 }
