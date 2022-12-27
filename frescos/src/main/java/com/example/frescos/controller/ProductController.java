@@ -29,5 +29,4 @@ public class ProductController {
     public ResponseEntity<?>findAllProductOrderBy(Authentication authentication, @PathVariable Long idProduct, @RequestParam(required=false) Character order){
         return new ResponseEntity(warehouseService.findByProduct(authentication, idProduct, order), HttpStatus.OK);
     }
-
 }

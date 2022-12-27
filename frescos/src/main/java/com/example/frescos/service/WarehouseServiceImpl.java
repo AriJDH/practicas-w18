@@ -7,6 +7,7 @@ import com.example.frescos.entity.Product;
 import com.example.frescos.entity.Section;
 import com.example.frescos.entity.Warehouse;
 import com.example.frescos.exception.BadRequestException;
+import com.example.frescos.security.AuthorizationManager;
 import com.example.frescos.service.db.ProductDbService;
 import com.example.frescos.service.db.SectionDbServiceImpl;
 import com.example.frescos.service.db.WarehouseDbService;
@@ -34,10 +35,12 @@ public class WarehouseServiceImpl implements WarehouseService{
 
     @Override
     public List<WarehouseDTO> findByProduct(Authentication authentication, Long id, Character order) {
+
         Product product = productDbService.findById(id);
         Section section = sectionDbService.findBySectionCode(product.getSectionCode());
 
         Warehouse warehouse = warehouseDbService.findWarehouseBySectionsAndAgent(section.getSectionCode(), authentication.getName());
+
         SectionDTO sectionDTO = new SectionDTO(section.getSectionCode().getCode(), warehouse.getWareHouseCode());
 
         List<WarehouseDTO> warehousesResponse = warehouse.getSections().stream()
