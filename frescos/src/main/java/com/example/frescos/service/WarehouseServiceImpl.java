@@ -49,7 +49,8 @@ public class WarehouseServiceImpl implements WarehouseService{
                                 b.map(p -> mapper.toDTO(p))
                                 .collect(Collectors.toList())), order))
                 .findFirst().get();
-
+        if (warehousesResponse.getBatches().isEmpty())
+            throw new BadRequestException("El warehouse no poseé un batch con ese producto y esa sección.");
         return warehousesResponse;
     }
     private WarehouseDTO warehouseOrderBatches(WarehouseDTO warehouseDTO, Character order){
