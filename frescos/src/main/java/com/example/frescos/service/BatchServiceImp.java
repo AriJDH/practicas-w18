@@ -35,7 +35,7 @@ public class BatchServiceImp implements BatchService {
 
         if(category != null){
             switch (category) {
-                case "FS": //FF es fresco
+                case "FS": //FS es fresco
                     batches = batches.stream().filter(b -> b.getProduct().getSectionCode().equals(SectionCode.FRESH)).collect(Collectors.toList());
                     break;
                 case "RF": //RF es refrigerado
@@ -64,7 +64,9 @@ public class BatchServiceImp implements BatchService {
             }
             batches.sort((p1, p2) -> comp.compare(p1.getDueDate(), p2.getDueDate()));
         }
+
         List<BatchResponseDTO> batchResponseDTOS= batches.stream().map(b -> new BatchResponseDTO(b.getBatchNumber(),b.getProduct().getId(),b.getProduct().getSectionCode().getCode(),b.getDueDate(),b.getCurrentQuantity())).collect(Collectors.toList());
+
         return batchResponseDTOS;
     }
 }
