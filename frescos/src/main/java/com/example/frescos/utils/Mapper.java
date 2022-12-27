@@ -1,13 +1,8 @@
 package com.example.frescos.utils;
 
-import com.example.frescos.dtos.BatchDTO;
-import com.example.frescos.dtos.BatchStockDTO;
-import com.example.frescos.dtos.InboundOrderDTO;
-import com.example.frescos.dtos.SectionDTO;
-import com.example.frescos.entity.Batch;
-import com.example.frescos.entity.InboundOrder;
-import com.example.frescos.entity.Section;
-import com.example.frescos.entity.Warehouse;
+import com.example.frescos.dtos.*;
+import com.example.frescos.entity.*;
+import com.example.frescos.service.db.BuyerDbService;
 import com.example.frescos.service.db.ProductDbService;
 import com.example.frescos.service.db.WarehouseDbService;
 import org.modelmapper.ModelMapper;
@@ -22,6 +17,8 @@ public class Mapper {
     private WarehouseDbService warehouseDbService;
     @Autowired
     private ProductDbService productDbService;
+    @Autowired
+    private BuyerDbService buyerDbService;
     private ModelMapper modelMapper = new ModelMapper();
     public InboundOrder fromDTO(InboundOrderDTO inboundOrderDTO){
         InboundOrder inboundOrder = modelMapper.map(inboundOrderDTO, InboundOrder.class);
@@ -42,8 +39,24 @@ public class Mapper {
         return batch;
     }
 
-    public BatchStockDTO fromBatch(Batch batch){
+    public BatchStockDTO toDTO(Batch batch){
         BatchStockDTO batchStockDTO = modelMapper.map(batch, BatchStockDTO.class);
         return batchStockDTO;
+    }
+
+    public PurchaseOrder fromDTO(PurchaseOrderDTO purchaseOrderDTO){
+        PurchaseOrder purchaseOrder = modelMapper.map(purchaseOrderDTO, PurchaseOrder.class);
+        purchaseOrder.setBuyer(buyerDbService.findById(purchaseOrderDTO.getBuyerId()));
+        purchaseOrder.setStatus(purchaseOrderDTO.getOrderStatus().getStatusCode());
+        purchaseOrder.setItems(purchaseOrderDTO.getItems().stream()
+                .map(itemDTO -> this.fromDTO(itemDTO)).collect(Collectors.toList()));
+        return purchaseOrder;
+    }
+
+    public Item fromDTO(ItemDTO itemDTO){
+        Item item = new Item();
+        item.setQuantity(itemDTO.getQuantity());
+        item.setProduct(productDbService.findById(itemDTO.getProductId()));
+        return item;
     }
 }

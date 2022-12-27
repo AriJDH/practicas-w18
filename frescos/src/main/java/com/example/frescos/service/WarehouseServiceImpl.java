@@ -7,7 +7,6 @@ import com.example.frescos.entity.Product;
 import com.example.frescos.entity.Section;
 import com.example.frescos.entity.Warehouse;
 import com.example.frescos.exception.BadRequestException;
-import com.example.frescos.security.AuthorizationManager;
 import com.example.frescos.service.db.ProductDbService;
 import com.example.frescos.service.db.SectionDbServiceImpl;
 import com.example.frescos.service.db.WarehouseDbService;
@@ -49,7 +48,7 @@ public class WarehouseServiceImpl implements WarehouseService{
                 .map(b -> b.stream().filter(p -> validationBatchByProductAndDueDate(p, product.getId())))
                 .map(b ->
                         warehouseOrderBatches(new WarehouseDTO(sectionDTO, product.getId(),
-                                b.map(p -> mapper.fromBatch(p))
+                                b.map(p -> mapper.toDTO(p))
                                 .collect(Collectors.toList())), order))
                 .collect(Collectors.toList());
 
