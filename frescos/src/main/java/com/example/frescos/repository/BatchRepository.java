@@ -4,13 +4,18 @@ import com.example.frescos.entity.Batch;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 @Repository
 public interface BatchRepository extends JpaRepository<Batch, Long> {
-    @Query(value = "SELECT b FROM Batch b WHERE b.product.id=:productId")
-    List<Batch> findAllBatchesByProductId(@Param("productId") Long productId);
+
+    @Query(value = "SELECT Sum(b.currentQuantity) FROM Batch b WHERE b.product.id=:productId")
+    Integer findQuantityByProductId(@Param("productId") Long productId);
+
+    @Query(value = "SELECT b from Batch b where b.product.id =: productId")
+    List<Batch> findBatchByProductId(@Param("productId") Long productId);
 
 }

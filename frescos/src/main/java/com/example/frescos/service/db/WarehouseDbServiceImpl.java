@@ -24,9 +24,12 @@ public class WarehouseDbServiceImpl implements WarehouseDbService{
     }
 
     @Override
-    public List<Warehouse> findAllBySection(SectionCode sectionCode) {
+    public Warehouse findWarehouseBySectionsAndAgent(SectionCode sectionCode, String name) {
         Section section = sectionDbService.findBySectionCode(sectionCode);
-        return warehouseRepository.findAllBySectionsIs(section);
+        Warehouse warehouse = warehouseRepository.findWarehouseBySectionsAndAgent_UserName(section, name);
+        if (warehouse == null)
+            throw new EntityNotFoundException("El representante " + name + " no tiene acceso a un warehouse con esas especificaciones.");
+        return warehouse;
     }
 
 }
