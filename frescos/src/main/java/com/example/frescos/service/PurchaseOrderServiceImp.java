@@ -1,6 +1,10 @@
 package com.example.frescos.service;
 
+import com.example.frescos.dtos.ItemDTO;
 import com.example.frescos.dtos.ProductDTO;
+import com.example.frescos.dtos.PurchaseOrderDTO;
+import com.example.frescos.dtos.request.PurchaseOrderRequest;
+import com.example.frescos.entity.Item;
 import com.example.frescos.entity.Product;
 import com.example.frescos.entity.PurchaseOrder;
 import com.example.frescos.exception.EntityNotFoundException;
@@ -29,5 +33,11 @@ public class PurchaseOrderServiceImp implements PurchaseOrderService{
         return purchaseOrder.getItems().stream()
                 .map(element -> modelMapper.map(element.getProduct(), ProductDTO.class))
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public void addPurchaseOrder(PurchaseOrderRequest purchaseOrderRequest) {
+        PurchaseOrderDTO purchaseOrderDTO = purchaseOrderRequest.getPurchaseOrderDTO();
+        List<ItemDTO> itemsDTO = purchaseOrderDTO.getItems();
     }
 }
