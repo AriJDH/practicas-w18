@@ -13,7 +13,7 @@ import java.util.List;
 @RequestMapping("/api/v1/fresh-products/batch/list/due-date")
 public class BatchController {
     @Autowired
-    BatchService batchService;
+    private BatchService batchService;
 
     @GetMapping("/{cantDays}")
     public ResponseEntity<List<BatchResponseDTO>> getRecentPostsFromFollowed(Authentication authentication, @PathVariable int cantDays, @RequestParam(required=false) String category, @RequestParam(required = false) String order) {
