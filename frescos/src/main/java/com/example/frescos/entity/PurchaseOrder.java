@@ -31,4 +31,10 @@ public class PurchaseOrder {
     public void removeItem(Item item){
         this.items.remove(item);
     }
+    public void removeAllItems(){
+        this.items.removeAll(this.items);
+    }
+    public void addAllItems(List<Item> items){
+        this.items.addAll(items);
+    }
 }
