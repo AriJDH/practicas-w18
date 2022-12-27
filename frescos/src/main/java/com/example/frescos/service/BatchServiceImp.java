@@ -30,7 +30,7 @@ public class BatchServiceImp implements BatchService {
 
         batches = batches.stream().filter(b -> {
             Long daysBetween = ChronoUnit.DAYS.between(LocalDate.now(), b.getDueDate());
-            return (daysBetween <= amountDays.longValue());
+            return ( ( (b.getDueDate().compareTo(LocalDate.now()) > 0)  || (b.getDueDate().compareTo(LocalDate.now()) == 0) ) && (daysBetween <= amountDays.longValue()) );
         }).collect(Collectors.toList());
 
         if(category != null){
