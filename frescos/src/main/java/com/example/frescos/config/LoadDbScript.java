@@ -10,6 +10,8 @@ import javax.annotation.PostConstruct;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.Arrays;
+import java.util.List;
 import java.util.logging.Logger;
 
 @Configuration
@@ -76,7 +78,10 @@ public class LoadDbScript {
         Batch batch9 = new Batch(9L, product9,-12.00,-30.4,401,401,LocalDate.of(2019,5,29), LocalDateTime.of(LocalDate.of(2019,5,29), LocalTime.now()), LocalDate.now().plusDays(9));
         Batch batch10 = new Batch(10L, product10,-22.00,-42.7,343,343,LocalDate.of(2005,11,7), LocalDateTime.of(LocalDate.of(2005,11,7), LocalTime.now()), LocalDate.now().plusDays(10));
         Batch batch11 = new Batch(11L, product10,-40.00,-50.7,88580,88580,LocalDate.of(2022,7,14), LocalDateTime.of(LocalDate.of(2022,7,14), LocalTime.now()), LocalDate.now().plusDays(11));
-        Batch batch12 = new Batch(11L, product10,-40.00,-50.7,88580,88580,LocalDate.of(2022,7,14), LocalDateTime.of(LocalDate.of(2022,7,14), LocalTime.now()), LocalDate.now().minusDays(12));
+        Batch batch12 = new Batch(12L, product10,-40.00,-50.7,88580,88580,LocalDate.of(2022,7,14), LocalDateTime.of(LocalDate.of(2022,7,14), LocalTime.now()), LocalDate.now().minusDays(12));
+        Batch batch13 = new Batch(13L, product4,5.00,-1.2,4005,400,LocalDate.of(2021,6,23), LocalDateTime.of(LocalDate.of(2021,6,23), LocalTime.now()), LocalDate.now().plusDays(150));
+        Batch batch14 = new Batch(14L, product4,5.00,-1.2,8089,8070,LocalDate.of(2022,10,4), LocalDateTime.of(LocalDate.of(2022,10,4), LocalTime.now()), LocalDate.now().plusDays(50));
+        Batch batch15 = new Batch(15L, product4,5.00,-1.2,120,10,LocalDate.of(2022,9,30), LocalDateTime.of(LocalDate.of(2021,9,30), LocalTime.now()), LocalDate.now().plusDays(60));
 
         batchRepository.save(batch1);
         batchRepository.save(batch2);
@@ -90,7 +95,13 @@ public class LoadDbScript {
         batchRepository.save(batch10);
         batchRepository.save(batch11);
         batchRepository.save(batch12);
+        batchRepository.save(batch13);
+        batchRepository.save(batch14);
+        batchRepository.save(batch15);
 
+        List<Batch> batchesFresh = Arrays.asList(batch1, batch2, batch3);
+        List<Batch> batchesCool = Arrays.asList(batch4, batch5, batch6, batch13, batch14, batch15);
+        List<Batch> batchesFrozen = Arrays.asList(batch7, batch8, batch9, batch10, batch11, batch12);
 
         logger.info("Productos creados:");
         productRepository.findAll().forEach(p-> logger.info(p.getDescription()));
@@ -108,5 +119,20 @@ public class LoadDbScript {
 
         applicationUserRepository.findAll().forEach(u->logger.info(u.getUserName()));
 
+        Section sectionFresh = sectionRepository.findById(3L).get();
+        Section sectionCool = sectionRepository.findById(4L).get();
+        Section sectionFrozen = sectionRepository.findById(5L).get();
+
+        sectionFresh.setBatches(batchesFresh);
+        sectionCool.setBatches(batchesCool);
+        sectionFrozen.setBatches(batchesFrozen);
+
+        InboundOrder inboundOrder1 = new InboundOrder(1L, LocalDate.of(2020,3,11), sectionFresh, batchesFresh, marcos);
+        InboundOrder inboundOrder2 = new InboundOrder(2L, LocalDate.of(2020,4,25), sectionCool, batchesCool, marcos);
+        InboundOrder inboundOrder3 = new InboundOrder(3L, LocalDate.of(2020,7,7), sectionFrozen, batchesFrozen, marcos);
+
+        inboundOrderRepository.save(inboundOrder1);
+        inboundOrderRepository.save(inboundOrder2);
+        inboundOrderRepository.save(inboundOrder3);
     }
 }
