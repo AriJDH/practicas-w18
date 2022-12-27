@@ -61,7 +61,7 @@ public class BatchIntegrationTests {
 
     @Test
     @Rollback
-    @DisplayName("Obtener la lista de batches con fecha de vencimiento entre el dia actual y el día siguiente")
+    @DisplayName("Obtener la lista de batches con fecha de vencimiento entre el dia actual hacia 5 dias en el futuro")
     public void getAllBatches() throws Exception {
 
 
@@ -69,7 +69,7 @@ public class BatchIntegrationTests {
         loginAsAgent();
         loadDbScript.loadDb();
 
-        BatchResponseDTO batchForStockDTO1 = new BatchResponseDTO(1L,1L,0,LocalDate.now() ,500);
+        BatchResponseDTO batchForStockDTO1 = new BatchResponseDTO(5L,5L,1,LocalDate.now().plusDays(5) ,807);
 
         List<BatchResponseDTO> batches = new ArrayList<>();
         batches.add(batchForStockDTO1);
@@ -87,7 +87,7 @@ public class BatchIntegrationTests {
 
         //Request
         MockHttpServletRequestBuilder requestPayload = MockMvcRequestBuilders
-                .get("/api/v1/fresh-products/batch/list/due-date/{cantDays}", 1)
+                .get("/api/v1/fresh-products/batch/list/due-date/{cantDays}", 5)
                 .contentType(MediaType.APPLICATION_JSON)
                 .header("Authorization", agentToken);
 
