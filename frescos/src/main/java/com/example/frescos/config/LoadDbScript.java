@@ -1,9 +1,6 @@
 package com.example.frescos.config;
 
-import com.example.frescos.entity.Agent;
-import com.example.frescos.entity.Batch;
-import com.example.frescos.entity.Product;
-import com.example.frescos.entity.Warehouse;
+import com.example.frescos.entity.*;
 import com.example.frescos.enums.SectionCode;
 import com.example.frescos.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,22 +13,34 @@ import java.time.LocalTime;
 import java.util.logging.Logger;
 
 @Configuration
-public class LoadDbConfig {
-    private Logger logger = Logger.getLogger(String.valueOf(LoadDbConfig.class));
-    @Autowired
-    private ProductRepository productRepository;
+public class LoadDbScript {
+    private Logger logger = Logger.getLogger(String.valueOf(LoadDbScript.class));
     @Autowired
     private AgentRepository agentRepository;
     @Autowired
     private ApplicationUserRepository applicationUserRepository;
     @Autowired
-    private WarehouseRepository warehouseRepository;
-
-    @Autowired
     private BatchRepository batchRepository;
+    @Autowired
+    private BuyerRepository buyerRepository;
+    @Autowired
+    private InboundOrderRepository inboundOrderRepository;
+    @Autowired
+    private ItemRepository itemRepository;
+    @Autowired
+    private ProductRepository productRepository;
+    @Autowired
+    private PurchaseOrderRepository purchaseOrderRepository;
+    @Autowired
+    private SectionRepository sectionRepository;
+    @Autowired
+    private WarehouseRepository warehouseRepository;
 
     @PostConstruct
     public void loadDb(){
+        if(agentRepository.findByUserName("MarcosInfantino").isPresent())
+            return;
+
         Product product1 = new Product("Pan", SectionCode.FRESH,100.0);
         Product product2 = new Product("Cereales", SectionCode.FRESH,50.0);
         Product product3 = new Product("Barrita de cereal", SectionCode.FRESH,20.0);
