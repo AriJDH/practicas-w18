@@ -26,4 +26,5 @@ public class Batch {
     private LocalDateTime manufacturingTime;
     private LocalDate dueDate;
 
+
 }

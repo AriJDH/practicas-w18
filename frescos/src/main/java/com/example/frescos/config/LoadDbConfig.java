@@ -5,15 +5,14 @@ import com.example.frescos.entity.Batch;
 import com.example.frescos.entity.Product;
 import com.example.frescos.entity.Warehouse;
 import com.example.frescos.enums.SectionCode;
-import com.example.frescos.repository.AgentRepository;
-import com.example.frescos.repository.ApplicationUserRepository;
-import com.example.frescos.repository.ProductRepository;
-import com.example.frescos.repository.WarehouseRepository;
-import com.example.frescos.service.db.BatchDbServiceImpl;
+import com.example.frescos.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 
 import javax.annotation.PostConstruct;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.logging.Logger;
 
 @Configuration
@@ -27,6 +26,10 @@ public class LoadDbConfig {
     private ApplicationUserRepository applicationUserRepository;
     @Autowired
     private WarehouseRepository warehouseRepository;
+
+    @Autowired
+    private BatchRepository batchRepository;
+
     @PostConstruct
     public void loadDb(){
         Product product1 = new Product("Pan", SectionCode.FRESH,100.0);
@@ -51,6 +54,15 @@ public class LoadDbConfig {
         productRepository.save(product9);
         productRepository.save(product10);
         productRepository.save(product11);
+
+        Batch batch1 = new Batch(1L, product1,11.50,4.0,500,20,LocalDate.now(), LocalDateTime.of(LocalDate.now(), LocalTime.now()), LocalDate.of(2030,12,30));
+        Batch batch2 = new Batch(2L, product2,13.00,1.2,2000,100,LocalDate.of(2010,03,11), LocalDateTime.of(LocalDate.of(2010,03,11), LocalTime.now()), LocalDate.of(2023,03,11));;
+        Batch batch3 = new Batch(3L, product3,16.00,3.2,300,3,LocalDate.of(2016,03,11), LocalDateTime.of(LocalDate.of(2016,03,11), LocalTime.now()), LocalDate.of(2041,03,11));;
+        batchRepository.save(batch1);
+        batchRepository.save(batch2);
+        batchRepository.save(batch3);
+
+
 
         logger.info("Productos creados:");
         productRepository.findAll().forEach(p-> logger.info(p.getDescription()));
