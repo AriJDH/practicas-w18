@@ -18,7 +18,6 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.Collections;
-import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
@@ -33,7 +32,7 @@ public class WarehouseServiceImpl implements WarehouseService{
     private Mapper mapper;
 
     @Override
-    public List<WarehouseDTO> findByProduct(Authentication authentication, Long id, Character order) {
+    public WarehouseDTO findByProduct(Authentication authentication, Long id, Character order) {
         Product product = productDbService.findById(id);
         Section section = sectionDbService.findBySectionCode(product.getSectionCode());
 
@@ -41,7 +40,7 @@ public class WarehouseServiceImpl implements WarehouseService{
 
         SectionDTO sectionDTO = new SectionDTO(section.getSectionCode().getCode(), warehouse.getWareHouseCode());
 
-        List<WarehouseDTO> warehousesResponse = warehouse.getSections().stream()
+        WarehouseDTO warehousesResponse = warehouse.getSections().stream()
                 .filter(s -> s.getSectionCode().equals(section.getSectionCode()))
                 .map(s -> s.getBatches())
                 .map(b -> b.stream().filter(p -> validationBatchByProductAndDueDate(p, product.getId())))
@@ -49,7 +48,7 @@ public class WarehouseServiceImpl implements WarehouseService{
                         warehouseOrderBatches(new WarehouseDTO(sectionDTO, product.getId(),
                                 b.map(p -> mapper.toDTO(p))
                                 .collect(Collectors.toList())), order))
-                .collect(Collectors.toList());
+                .findFirst().get();
 
         return warehousesResponse;
     }

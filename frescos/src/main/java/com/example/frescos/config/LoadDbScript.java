@@ -92,7 +92,6 @@ public class LoadDbScript {
         batchRepository.save(batch12);
 
 
-
         logger.info("Productos creados:");
         productRepository.findAll().forEach(p-> logger.info(p.getDescription()));
 
