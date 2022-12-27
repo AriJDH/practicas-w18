@@ -27,10 +27,10 @@ public class BatchServiceImp implements BatchService {
     @Override
     public List<BatchResponseDTO> getAllBatches(Authentication authentication, Integer amountDays, String category, String order) {
         List<Batch> batches = batchDbService.getAllBatches();
+
         batches = batches.stream().filter(b -> {
-            long daysBetween = ChronoUnit.DAYS.between(b.getDueDate(), LocalDate.now());
-            boolean check = (daysBetween <= amountDays) ? true : false;
-            return check;
+            Long daysBetween = ChronoUnit.DAYS.between(LocalDate.now(), b.getDueDate());
+            return (daysBetween <= amountDays.longValue());
         }).collect(Collectors.toList());
 
         if(category != null){
