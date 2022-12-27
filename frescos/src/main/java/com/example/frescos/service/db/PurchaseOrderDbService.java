@@ -4,4 +4,5 @@ import com.example.frescos.entity.PurchaseOrder;
 
 public interface PurchaseOrderDbService {
     PurchaseOrder findByOrderNumber(Long order);
+    void delete(PurchaseOrder purchaseOrder);
 }

@@ -11,4 +11,5 @@ public interface PurchaseOrderService {
     List<ProductDTO> findProductsByOrder(Long order);
 
     PurchaseOrderCreationResponseDTO addPurchaseOrder(PurchaseOrderRequest purchaseOrderRequest);
+    PurchaseOrderCreationResponseDTO updatePurchaseOrder(Long orderId, PurchaseOrderRequest purchaseOrderRequest);
 }

@@ -17,4 +17,9 @@ public class PurchaseOrderDbServiceImp implements PurchaseOrderDbService{
         return purchaseOrderRepository.findByOrderNumber(order)
                 .orElseThrow(()->{throw new EntityNotFoundException("purchaseOrder " + order + "no existe.");});
     }
+
+    @Override
+    public void delete(PurchaseOrder purchaseOrder) {
+        purchaseOrderRepository.delete(purchaseOrder);
+    }
 }
