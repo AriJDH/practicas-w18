@@ -2,6 +2,7 @@ package com.example.frescos.service;
 
 import com.example.frescos.dtos.ProductDTO;
 import com.example.frescos.entity.Product;
+import com.example.frescos.enums.SectionCode;
 import com.example.frescos.exception.EntityNotFoundException;
 import com.example.frescos.repository.ProductRepository;
 import org.mockito.internal.matchers.Null;
@@ -33,7 +34,22 @@ public class ProductServiceImp implements ProductService{
     public List<ProductDTO> findByCategory(String category) {
         List<Product> products;
         if (category != null) {
-            products = productRespository.findByCategory(category);
+            SectionCode code;
+            switch(category){
+                case "FS":
+                    code = SectionCode.FRESH;
+                    break;
+                case "RF":
+                    code = SectionCode.COOL;
+                    break;
+                case "FF":
+                    code = SectionCode.FROZEN;
+                    break;
+                default:
+                    throw new EntityNotFoundException("La categoria " + category + " no existe.");
+
+            }
+            products = productRespository.findBySectionCode(code);
         } else {
             products = productRespository.findAll();
         }
