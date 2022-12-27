@@ -1,7 +1,7 @@
 package com.example.frescos.service;
 
 import com.example.frescos.dtos.request.InboundOrderRequest;
-import com.example.frescos.dtos.response.BatchStockResponse;
+import com.example.frescos.dtos.response.BatchStockResponseDTO;
 import com.example.frescos.dtos.InboundOrderDTO;
 import com.example.frescos.entity.Agent;
 import com.example.frescos.entity.InboundOrder;
@@ -20,8 +20,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
-
 @Service
 public class InboundOrderServiceImp implements InboundOrderService {
     @Autowired
@@ -38,7 +36,7 @@ public class InboundOrderServiceImp implements InboundOrderService {
     private AgentRepository agentRepository;
 
     @Override
-    public BatchStockResponse addInboundOrder(Authentication authentication, InboundOrderRequest inboundOrderRequest) {
+    public BatchStockResponseDTO addInboundOrder(Authentication authentication, InboundOrderRequest inboundOrderRequest) {
         InboundOrderDTO inboundOrderDTO = inboundOrderRequest.getInboundOrder();
         checkAuthorization(inboundOrderDTO.getSection().getWarehouseCode(), authentication);
         InboundOrder inboundOrder = mapper.fromDTO(inboundOrderDTO);
@@ -50,11 +48,11 @@ public class InboundOrderServiceImp implements InboundOrderService {
         inboundOrderDbService.save(inboundOrder);
         inboundOrder.getBatches().forEach(b->section.addBatch(b));
         sectionDbService.save(section);
-        return new BatchStockResponse(inboundOrderDTO.getBatches());
+        return new BatchStockResponseDTO(inboundOrderDTO.getBatches());
     }
 
     @Override
-    public BatchStockResponse updateInboundOrder(Authentication authentication, InboundOrderRequest inboundOrderRequest) {
+    public BatchStockResponseDTO updateInboundOrder(Authentication authentication, InboundOrderRequest inboundOrderRequest) {
         InboundOrderDTO inboundOrderDTO = inboundOrderRequest.getInboundOrder();
         checkAuthorization(inboundOrderDTO.getSection().getWarehouseCode(), authentication);
         InboundOrder existingInboundOrder = inboundOrderDbService.findByOrderNumber(inboundOrderDTO.getOrderNumber());

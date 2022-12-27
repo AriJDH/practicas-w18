@@ -22,7 +22,6 @@ public class BatchServiceImp implements BatchService {
     @Autowired
     BatchDbService batchDbService;
 
-
     @Override
     public List<BatchResponseDTO> getAllBatches(Integer amountDays, String category, String order) {
         List<Batch> batches = batchDbService.getAllBatches();

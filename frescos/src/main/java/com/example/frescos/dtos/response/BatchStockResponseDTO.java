@@ -11,7 +11,7 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class BatchStockResponse {
+public class BatchStockResponseDTO {
     @JsonProperty("batch_stock")
     private List<BatchDTO> batches;
 }

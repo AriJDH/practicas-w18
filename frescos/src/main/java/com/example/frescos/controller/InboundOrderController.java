@@ -1,8 +1,7 @@
 package com.example.frescos.controller;
 
 import com.example.frescos.dtos.request.InboundOrderRequest;
-import com.example.frescos.dtos.response.BatchStockResponse;
-import com.example.frescos.dtos.InboundOrderDTO;
+import com.example.frescos.dtos.response.BatchStockResponseDTO;
 import com.example.frescos.service.InboundOrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,11 +15,11 @@ public class InboundOrderController {
     @Autowired
     private InboundOrderService inboundOrderService;
     @PostMapping
-    public ResponseEntity<BatchStockResponse> addInboundOrder(Authentication authentication,@RequestBody InboundOrderRequest inboundOrderRequest){
+    public ResponseEntity<BatchStockResponseDTO> addInboundOrder(Authentication authentication, @RequestBody InboundOrderRequest inboundOrderRequest){
         return new ResponseEntity(inboundOrderService.addInboundOrder(authentication, inboundOrderRequest), HttpStatus.CREATED);
     }
     @PutMapping
-    public ResponseEntity<BatchStockResponse> updateInboundOrder(Authentication authentication, @RequestBody InboundOrderRequest inboundOrderRequest){
+    public ResponseEntity<BatchStockResponseDTO> updateInboundOrder(Authentication authentication, @RequestBody InboundOrderRequest inboundOrderRequest){
         return new ResponseEntity(inboundOrderService.updateInboundOrder(authentication, inboundOrderRequest), HttpStatus.CREATED);
     }
 }

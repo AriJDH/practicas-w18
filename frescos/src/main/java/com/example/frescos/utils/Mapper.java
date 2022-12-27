@@ -1,6 +1,7 @@
 package com.example.frescos.utils;
 
 import com.example.frescos.dtos.BatchDTO;
+import com.example.frescos.dtos.BatchStockDTO;
 import com.example.frescos.dtos.InboundOrderDTO;
 import com.example.frescos.dtos.SectionDTO;
 import com.example.frescos.entity.Batch;
@@ -39,5 +40,10 @@ public class Mapper {
         Batch batch = modelMapper.map(batchDTO, Batch.class);
         batch.setProduct(productDbService.findById(batchDTO.getProductId()));
         return batch;
+    }
+
+    public BatchStockDTO fromBatch(Batch batch){
+        BatchStockDTO batchStockDTO = modelMapper.map(batch, BatchStockDTO.class);
+        return batchStockDTO;
     }
 }

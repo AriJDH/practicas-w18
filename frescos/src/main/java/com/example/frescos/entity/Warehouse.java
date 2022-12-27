@@ -50,4 +50,5 @@ public class Warehouse {
     public void addBatch(Integer sectionCode,  Batch batch){
         this.sections.get(sectionCode).addBatch(batch);
     }
+
 }
