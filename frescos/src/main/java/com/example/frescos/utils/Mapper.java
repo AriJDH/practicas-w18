@@ -39,8 +39,8 @@ public class Mapper {
         return batch;
     }
 
-    public BatchStockDTO toDTO(Batch batch){
-        BatchStockDTO batchStockDTO = modelMapper.map(batch, BatchStockDTO.class);
+    public BatchForStockDTO toDTO(Batch batch){
+        BatchForStockDTO batchStockDTO = modelMapper.map(batch, BatchForStockDTO.class);
         return batchStockDTO;
     }
 
