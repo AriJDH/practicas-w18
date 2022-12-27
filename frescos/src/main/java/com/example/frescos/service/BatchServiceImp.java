@@ -7,8 +7,10 @@ import com.example.frescos.entity.Batch;
 import com.example.frescos.enums.SectionCode;
 import com.example.frescos.exception.BadRequestException;
 import com.example.frescos.repository.BatchRepository;
+import com.example.frescos.security.AuthorizationManager;
 import com.example.frescos.service.db.BatchDbService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -20,13 +22,12 @@ import java.util.stream.Collectors;
 @Service
 public class BatchServiceImp implements BatchService {
     @Autowired
-    BatchDbService batchDbService;
+    private BatchDbService batchDbService;
 
     @Override
-    public List<BatchResponseDTO> getAllBatches(Integer amountDays, String category, String order) {
+    public List<BatchResponseDTO> getAllBatches(Authentication authentication, Integer amountDays, String category, String order) {
         List<Batch> batches = batchDbService.getAllBatches();
-
-        batches.stream().filter(b -> {
+        batches = batches.stream().filter(b -> {
             long daysBetween = ChronoUnit.DAYS.between(b.getDueDate(), LocalDate.now());
             boolean check = (daysBetween <= amountDays) ? true : false;
             return check;
@@ -35,14 +36,14 @@ public class BatchServiceImp implements BatchService {
         if(category != null){
             switch (category) {
                 case "FS": //FF es fresco
-                    batches.stream().filter(b -> b.getProduct().getSectionCode().equals(SectionCode.FRESH)).collect(Collectors.toList());
+                    batches = batches.stream().filter(b -> b.getProduct().getSectionCode().equals(SectionCode.FRESH)).collect(Collectors.toList());
                     break;
                 case "RF": //RF es refrigerado
-                    batches.stream().filter(b -> b.getProduct().getSectionCode().equals(SectionCode.COOL)).collect(Collectors.toList());
+                    batches = batches.stream().filter(b -> b.getProduct().getSectionCode().equals(SectionCode.COOL)).collect(Collectors.toList());
 
                     break;
                 case "FF": //FF es congelado
-                    batches.stream().filter(b -> b.getProduct().getSectionCode().equals(SectionCode.FROZEN)).collect(Collectors.toList());
+                    batches = batches.stream().filter(b -> b.getProduct().getSectionCode().equals(SectionCode.FROZEN)).collect(Collectors.toList());
                     break;
                 default:
                     throw new BadRequestException("El parámetro " + category + " es inválido.");

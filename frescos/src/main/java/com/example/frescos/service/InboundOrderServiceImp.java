@@ -12,6 +12,7 @@ import com.example.frescos.exception.FullSectionException;
 import com.example.frescos.exception.IncorrectSectionException;
 import com.example.frescos.repository.AgentRepository;
 import com.example.frescos.repository.BatchRepository;
+import com.example.frescos.security.AuthorizationManager;
 import com.example.frescos.service.db.InboundOrderDbService;
 import com.example.frescos.service.db.SectionDbService;
 import com.example.frescos.service.db.WarehouseDbService;
@@ -35,10 +36,13 @@ public class InboundOrderServiceImp implements InboundOrderService {
     @Autowired
     private AgentRepository agentRepository;
 
+    @Autowired
+    private AuthorizationManager authorizationManager;
+
     @Override
     public BatchStockResponseDTO addInboundOrder(Authentication authentication, InboundOrderRequest inboundOrderRequest) {
         InboundOrderDTO inboundOrderDTO = inboundOrderRequest.getInboundOrder();
-        checkAuthorization(inboundOrderDTO.getSection().getWarehouseCode(), authentication);
+        authorizationManager.checkWarehouseAuthorization(inboundOrderDTO.getSection().getWarehouseCode(), authentication);
         InboundOrder inboundOrder = mapper.fromDTO(inboundOrderDTO);
         Section section = inboundOrder.getSection();
         checkProductsAreFromSection(inboundOrder, section);
@@ -54,7 +58,7 @@ public class InboundOrderServiceImp implements InboundOrderService {
     @Override
     public BatchStockResponseDTO updateInboundOrder(Authentication authentication, InboundOrderRequest inboundOrderRequest) {
         InboundOrderDTO inboundOrderDTO = inboundOrderRequest.getInboundOrder();
-        checkAuthorization(inboundOrderDTO.getSection().getWarehouseCode(), authentication);
+        authorizationManager.checkWarehouseAuthorization(inboundOrderDTO.getSection().getWarehouseCode(), authentication);
         InboundOrder existingInboundOrder = inboundOrderDbService.findByOrderNumber(inboundOrderDTO.getOrderNumber());
         InboundOrder newInboundOrder = mapper.fromDTO(inboundOrderDTO);
         if(!existingInboundOrder.getBatches().equals(newInboundOrder.getBatches())){
@@ -80,9 +84,5 @@ public class InboundOrderServiceImp implements InboundOrderService {
             throw new FullSectionException("No hay suficiente espacio en la sección para almacenar la cantidad de lotes solicitados");
     }
 
-    public void checkAuthorization(Long warehouseCode, Authentication authentication){
-        Warehouse warehouse = warehouseDbService.findByWarehouseCode(warehouseCode);
-        if(!warehouse.getAgent().getUserName().equals(authentication.getName()))
-            throw new BadRequestException("Usted no está autorizado para agregar un lote al warehouse " + warehouse + ".");
-    }
+
 }

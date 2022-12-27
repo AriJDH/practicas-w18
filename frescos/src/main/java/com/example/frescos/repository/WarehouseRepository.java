@@ -12,5 +12,5 @@ import java.util.Optional;
 public interface WarehouseRepository extends JpaRepository<Warehouse, Long> {
     Optional<Warehouse> findByWareHouseCode(Long warehouseCode);
 
-    List<Warehouse> findAllBySectionsIs(Section section);
+    Warehouse findWarehouseBySectionsAndAgent_UserName(Section section, String name);
 }
