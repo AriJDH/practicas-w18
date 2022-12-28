@@ -7,6 +7,7 @@ import com.example.frescos.repository.SectionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -19,9 +20,8 @@ public class SectionDbServiceImpl implements SectionDbService{
     }
 
     @Override
-    public Section findBySectionCode(SectionCode sectionCode) {
-        return sectionRepository.findBySectionCode(sectionCode)
-                .orElseThrow(()->{throw new EntityNotFoundException("La section " + sectionCode + " no existe.");
-                });
+    public List<Section> findAllBySectionCode(SectionCode sectionCode) {
+        return sectionRepository.findAllBySectionCode(sectionCode);
     }
+
 }

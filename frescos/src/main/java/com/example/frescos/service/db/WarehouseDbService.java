@@ -8,5 +8,5 @@ import java.util.Optional;
 
 public interface WarehouseDbService {
     Warehouse findByWarehouseCode(Long wareHouseCode);
-    Warehouse findWarehouseBySectionsAndAgent(SectionCode sectionCode, String name);
+    List<Warehouse> findAllWarehouseBySectionsAndAgent(SectionCode sectionCode, String name);
 }

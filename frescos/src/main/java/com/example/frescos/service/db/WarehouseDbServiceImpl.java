@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class WarehouseDbServiceImpl implements WarehouseDbService{
@@ -24,12 +25,15 @@ public class WarehouseDbServiceImpl implements WarehouseDbService{
     }
 
     @Override
-    public Warehouse findWarehouseBySectionsAndAgent(SectionCode sectionCode, String name) {
-        Section section = sectionDbService.findBySectionCode(sectionCode);
-        Warehouse warehouse = warehouseRepository.findWarehouseBySectionsAndAgent_UserName(section, name);
-        if (warehouse == null)
+    public List<Warehouse> findAllWarehouseBySectionsAndAgent(SectionCode sectionCode, String name) {
+        List<Section> sections = sectionDbService.findAllBySectionCode(sectionCode);
+        List<Warehouse> warehouses = sections.stream()
+                .map(s -> warehouseRepository.findWarehouseBySectionsAndAgent_UserName(s, name))
+                .collect(Collectors.toList());
+
+        if (warehouses.isEmpty())
             throw new EntityNotFoundException("El representante " + name + " no tiene acceso a un warehouse con esas especificaciones.");
-        return warehouse;
+        return warehouses;
     }
 
 }

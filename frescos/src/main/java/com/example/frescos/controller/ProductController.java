@@ -25,9 +25,13 @@ public class ProductController {
         return new ResponseEntity<>(productService.findByCategory(category), HttpStatus.OK);
     }
 
+    @GetMapping("/{idProduct}/warehouse/list")
+    public ResponseEntity<?>getAllProduct(Authentication authentication, @PathVariable Long idProduct){
+        return new ResponseEntity(warehouseService.findByProduct(authentication, idProduct), HttpStatus.OK);
+    }
+
     @GetMapping("/{idProduct}/batch/list")
     public ResponseEntity<?>getAllProductOrderBy(Authentication authentication, @PathVariable Long idProduct, @RequestParam(required=false) Character order){
-        System.out.println("------->" + order);
-        return new ResponseEntity(warehouseService.findByProduct(authentication, idProduct, order), HttpStatus.OK);
+        return new ResponseEntity(warehouseService.findByProductForSection(authentication, idProduct, order), HttpStatus.OK);
     }
 }

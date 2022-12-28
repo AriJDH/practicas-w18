@@ -154,7 +154,7 @@ public class InboundOrderIntegrationTests {
 
         String content2 = "{\n" +
                 "    \"inbound_order\": {\n" +
-                "        \"order_number\": 4,\n" +
+                "        \"order_number\": 100,\n" +
                 "        \"order_date\": \"11-11-2022\",\n" +
                 "        \"section\": {\n" +
                 "            \"section_code\": 0,\n" +

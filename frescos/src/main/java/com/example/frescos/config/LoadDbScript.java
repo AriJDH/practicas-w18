@@ -66,7 +66,6 @@ public class LoadDbScript {
         productRepository.save(product10);
         productRepository.save(product11);
 
-
         Batch batch1 = new Batch(1L, product1,11.50,4.0,500,500,LocalDate.now(), LocalDateTime.of(LocalDate.now(), LocalTime.now()), LocalDate.now().plusDays(30));
         Batch batch2 = new Batch(2L, product2,13.00,1.2,2000,2000,LocalDate.of(2010,3,11), LocalDateTime.of(LocalDate.of(2010,3,11), LocalTime.now()), LocalDate.now().plusDays(30));
         Batch batch3 = new Batch(3L, product3,2.00,-4.2,300,300,LocalDate.of(2016,2,20), LocalDateTime.of(LocalDate.of(2016,2,20), LocalTime.now()), LocalDate.now().plusDays(30));
@@ -100,16 +99,19 @@ public class LoadDbScript {
         batchRepository.save(batch15);
 
         List<Batch> batchesFresh = Arrays.asList(batch1, batch2, batch3);
-        List<Batch> batchesCool = Arrays.asList(batch4, batch5, batch6, batch13, batch14, batch15);
+        List<Batch> batchesCool1 = Arrays.asList(batch4, batch5, batch6, batch13, batch14);
         List<Batch> batchesFrozen = Arrays.asList(batch7, batch8, batch9, batch10, batch11, batch12);
+        List<Batch> batchesCool2 = Arrays.asList(batch15);
 
         logger.info("Productos creados:");
         productRepository.findAll().forEach(p-> logger.info(p.getDescription()));
 
         Agent marcos = new Agent("MarcosInfantino", "admin");
         agentRepository.save(marcos);
-        Warehouse warehouse = new Warehouse(marcos);
-        warehouseRepository.save(warehouse);
+        Warehouse warehouse1 = new Warehouse(marcos);
+        Warehouse warehouse2 = new Warehouse(marcos);
+        warehouseRepository.save(warehouse1);
+        warehouseRepository.save(warehouse2);
 
         Buyer miguel = new Buyer("MiguelAvalle", "admin");
         buyerRepository.save(miguel);
@@ -120,19 +122,23 @@ public class LoadDbScript {
         applicationUserRepository.findAll().forEach(u->logger.info(u.getUserName()));
 
         Section sectionFresh = sectionRepository.findById(3L).get();
-        Section sectionCool = sectionRepository.findById(4L).get();
+        Section sectionCool1 = sectionRepository.findById(4L).get();
         Section sectionFrozen = sectionRepository.findById(5L).get();
+        Section sectionCool2 = sectionRepository.findById(8L).get();
 
         sectionFresh.setBatches(batchesFresh);
-        sectionCool.setBatches(batchesCool);
+        sectionCool1.setBatches(batchesCool1);
         sectionFrozen.setBatches(batchesFrozen);
+        sectionCool2.setBatches(batchesCool2);
 
         InboundOrder inboundOrder1 = new InboundOrder(1L, LocalDate.of(2020,3,11), sectionFresh, batchesFresh, marcos);
-        InboundOrder inboundOrder2 = new InboundOrder(2L, LocalDate.of(2020,4,25), sectionCool, batchesCool, marcos);
+        InboundOrder inboundOrder2 = new InboundOrder(2L, LocalDate.of(2020,4,25), sectionCool1, batchesCool1, marcos);
         InboundOrder inboundOrder3 = new InboundOrder(3L, LocalDate.of(2020,7,7), sectionFrozen, batchesFrozen, marcos);
+        InboundOrder inboundOrder4 = new InboundOrder(4L, LocalDate.of(2020,7,7), sectionCool2, batchesCool2, marcos);
 
         inboundOrderRepository.save(inboundOrder1);
         inboundOrderRepository.save(inboundOrder2);
         inboundOrderRepository.save(inboundOrder3);
+        inboundOrderRepository.save(inboundOrder4);
     }
 }

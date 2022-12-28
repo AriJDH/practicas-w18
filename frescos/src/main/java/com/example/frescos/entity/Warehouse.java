@@ -24,6 +24,7 @@ public class Warehouse {
     private List<Section> sections = new ArrayList<>();
     @OneToOne(cascade = {CascadeType.MERGE})
     @JoinColumn(name = "agent_id")
+    //TODO: Cambiar a OneToMany para cumplir los requisitos 3 y 4
     private Agent agent;
 
     public Warehouse(List<Section> sections, Agent agent) {
