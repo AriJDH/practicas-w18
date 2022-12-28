@@ -186,7 +186,7 @@ public class ProductIntegrationTest {
         Long productId = 10L;
 
         // Matchers
-        ResultMatcher expectedStatus = MockMvcResultMatchers.status().isNotFound();
+        ResultMatcher expectedStatus = MockMvcResultMatchers.status().isBadRequest();
 
         // Request
         MockHttpServletRequestBuilder requestPayload = MockMvcRequestBuilders
