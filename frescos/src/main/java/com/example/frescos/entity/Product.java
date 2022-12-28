@@ -26,4 +26,11 @@ public class Product {
         this.sectionCode = sectionCode;
         this.price = price;
     }
+
+    public Product(String description, SectionCode sectionCode, Double price, String category) {
+        this.description = description;
+        this.sectionCode = sectionCode;
+        this.price = price;
+        this.category = category;
+    }
 }

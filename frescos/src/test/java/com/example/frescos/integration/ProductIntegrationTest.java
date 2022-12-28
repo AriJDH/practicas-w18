@@ -182,7 +182,7 @@ public class ProductIntegrationTest {
         // Request
         MockHttpServletRequestBuilder requestPayload = MockMvcRequestBuilders
                 .get("/api/v1/fresh-products/{idProduct}/batch/list/", productId)
-                .param("order", "Inválido")
+                .param("order", "K")
                 .contentType(MediaType.APPLICATION_JSON)
                 .header("Authorization", agentToken);
 

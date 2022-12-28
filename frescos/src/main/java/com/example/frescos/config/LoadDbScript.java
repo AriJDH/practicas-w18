@@ -43,17 +43,17 @@ public class LoadDbScript {
         if(agentRepository.findByUserName("MarcosInfantino").isPresent())
             return;
 
-        Product product1 = new Product("Pan", SectionCode.FRESH,100.0);
-        Product product2 = new Product("Cereales", SectionCode.FRESH,50.0);
-        Product product3 = new Product("Barrita de cereal", SectionCode.FRESH,20.0);
-        Product product4 = new Product("Queso", SectionCode.COOL,200.0);
-        Product product5 = new Product("Leche", SectionCode.COOL,200.0);
-        Product product6 = new Product("Jamón", SectionCode.COOL,100.0);
-        Product product7 = new Product("Helado", SectionCode.FROZEN,300.0);
-        Product product8 = new Product("Bife de chorizo", SectionCode.FROZEN,400.0);
-        Product product9 = new Product("Morcilla", SectionCode.FROZEN,200.0);
-        Product product10 = new Product("Achuras", SectionCode.FROZEN,300.0);
-        Product product11 = new Product("Pollo", SectionCode.FROZEN,400.0);
+        Product product1 = new Product("Pan", SectionCode.FRESH,100.0, "FS");
+        Product product2 = new Product("Cereales", SectionCode.FRESH,50.0, "FS");
+        Product product3 = new Product("Barrita de cereal", SectionCode.FRESH,20.0, "FS");
+        Product product4 = new Product("Queso", SectionCode.COOL,200.0, "RF");
+        Product product5 = new Product("Leche", SectionCode.COOL,200.0,"RF");
+        Product product6 = new Product("Jamón", SectionCode.COOL,100.0,"RF");
+        Product product7 = new Product("Helado", SectionCode.FROZEN,300.0, "FF");
+        Product product8 = new Product("Bife de chorizo", SectionCode.FROZEN,400.0,"FF");
+        Product product9 = new Product("Morcilla", SectionCode.FROZEN,200.0, "FF");
+        Product product10 = new Product("Achuras", SectionCode.FROZEN,300.0, "FF");
+        Product product11 = new Product("Pollo", SectionCode.FROZEN,400.0, "FF");
         productRepository.save(product1);
         productRepository.save(product2);
         productRepository.save(product3);
