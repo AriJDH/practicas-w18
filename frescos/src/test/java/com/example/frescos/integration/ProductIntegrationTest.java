@@ -179,13 +179,14 @@ public class ProductIntegrationTest {
     @Test
     @Rollback
     @DisplayName("REQ3 - Consultar un producto sin stock")
+
     public void getListProductNotFound() throws Exception {
         //Arrange
         loginAsAgent();
         Long productId = 10L;
 
         // Matchers
-        ResultMatcher expectedStatus = MockMvcResultMatchers.status().isBadRequest();
+        ResultMatcher expectedStatus = MockMvcResultMatchers.status().isNotFound();
 
         // Request
         MockHttpServletRequestBuilder requestPayload = MockMvcRequestBuilders
