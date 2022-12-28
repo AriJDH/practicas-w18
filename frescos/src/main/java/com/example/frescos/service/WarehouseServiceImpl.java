@@ -7,6 +7,7 @@ import com.example.frescos.entity.Product;
 import com.example.frescos.entity.Section;
 import com.example.frescos.entity.Warehouse;
 import com.example.frescos.exception.BadRequestException;
+import com.example.frescos.exception.EntityNotFoundException;
 import com.example.frescos.service.db.ProductDbService;
 import com.example.frescos.service.db.SectionDbServiceImpl;
 import com.example.frescos.service.db.WarehouseDbService;
@@ -68,7 +69,7 @@ public class WarehouseServiceImpl implements WarehouseService{
                 Collections.sort(warehouseDTO.getBatches(), (x, y) -> x.getDueDate().compareTo(y.getDueDate()));
                 break;
             default:
-                throw new BadRequestException("Parámetro erróneo. Por favor intente nuevamente.");
+                throw new EntityNotFoundException("Parámetro erróneo. Por favor intente nuevamente.");
         }
         return warehouseDTO;
     }
