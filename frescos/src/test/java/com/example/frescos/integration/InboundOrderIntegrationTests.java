@@ -49,7 +49,7 @@ public class InboundOrderIntegrationTests {
         loginAsAgent();
         String content = "{\n" +
                 "    \"inbound_order\": {\n" +
-                "        \"order_number\": 1,\n" +
+                "        \"order_number\": 4,\n" +
                 "        \"order_date\": \"11-11-2022\",\n" +
                 "        \"section\": {\n" +
                 "            \"section_code\": 0,\n" +
@@ -57,7 +57,7 @@ public class InboundOrderIntegrationTests {
                 "        },\n" +
                 "        \"batch_stock\": [\n" +
                 "            {\n" +
-                "                \"batch_number\": 1,\n" +
+                "                \"batch_number\": 16,\n" +
                 "                \"product_id\": 1,\n" +
                 "                \"current_temperature\": 15.0,\n" +
                 "                \"minimum_temperature\": 20.0,\n" +
@@ -86,7 +86,7 @@ public class InboundOrderIntegrationTests {
         loginAsAgent();
         String content1 = "{\n" +
                 "    \"inbound_order\": {\n" +
-                "        \"order_number\": 1,\n" +
+                "        \"order_number\": 4,\n" +
                 "        \"order_date\": \"11-11-2022\",\n" +
                 "        \"section\": {\n" +
                 "            \"section_code\": 0,\n" +
@@ -94,7 +94,7 @@ public class InboundOrderIntegrationTests {
                 "        },\n" +
                 "        \"batch_stock\": [\n" +
                 "            {\n" +
-                "                \"batch_number\": 1,\n" +
+                "                \"batch_number\": 16,\n" +
                 "                \"product_id\": 1,\n" +
                 "                \"current_temperature\": 15.0,\n" +
                 "                \"minimum_temperature\": 20.0,\n" +
@@ -116,7 +116,7 @@ public class InboundOrderIntegrationTests {
 
         String content2 = "{\n" +
                 "    \"inbound_order\": {\n" +
-                "        \"order_number\": 1,\n" +
+                "        \"order_number\": 4,\n" +
                 "        \"order_date\": \"11-11-2022\",\n" +
                 "        \"section\": {\n" +
                 "            \"section_code\": 0,\n" +
@@ -124,7 +124,7 @@ public class InboundOrderIntegrationTests {
                 "        },\n" +
                 "        \"batch_stock\": [\n" +
                 "            {\n" +
-                "                \"batch_number\": 2,\n" +
+                "                \"batch_number\": 16,\n" +
                 "                \"product_id\": 2,\n" +
                 "                \"current_temperature\": 15.0,\n" +
                 "                \"minimum_temperature\": 20.0,\n" +
@@ -154,7 +154,7 @@ public class InboundOrderIntegrationTests {
 
         String content2 = "{\n" +
                 "    \"inbound_order\": {\n" +
-                "        \"order_number\": 1,\n" +
+                "        \"order_number\": 4,\n" +
                 "        \"order_date\": \"11-11-2022\",\n" +
                 "        \"section\": {\n" +
                 "            \"section_code\": 0,\n" +
