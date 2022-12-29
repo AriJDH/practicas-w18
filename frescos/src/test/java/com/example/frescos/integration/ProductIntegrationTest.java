@@ -16,6 +16,9 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import javax.transaction.Transactional;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 
 @SpringBootTest
@@ -37,6 +40,11 @@ public class ProductIntegrationTest {
         //Arrange
         loginAsAgent();
         Long productId = 4L;
+        String date1 = LocalDate.now().plusDays(30).format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+        String date2 = LocalDate.now().plusDays(150).format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+        String date3 = LocalDate.now().plusDays(50).format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+        String date4 = LocalDate.now().plusDays(60).format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+
         String expect = "[\n" +
                 "    {\n" +
                 "        \"section\": {\n" +
@@ -48,17 +56,17 @@ public class ProductIntegrationTest {
                 "            {\n" +
                 "                \"batch_number\": 4,\n" +
                 "                \"current_quantity\": 4002,\n" +
-                "                \"due_date\": \"27-01-2023\"\n" +
+                "                \"due_date\":" + date1 + "\n" +
                 "            },\n" +
                 "            {\n" +
                 "                \"batch_number\": 14,\n" +
                 "                \"current_quantity\": 8070,\n" +
-                "                \"due_date\": \"16-02-2023\"\n" +
+                "                \"due_date\":" + date3 + "\n" +
                 "            },\n" +
                 "            {\n" +
                 "                \"batch_number\": 13,\n" +
                 "                \"current_quantity\": 400,\n" +
-                "                \"due_date\": \"27-05-2023\"\n" +
+                "                \"due_date\":" + date2 + "\n" +
                 "            }\n" +
                 "        ]\n" +
                 "    },\n" +
@@ -72,7 +80,7 @@ public class ProductIntegrationTest {
                 "            {\n" +
                 "                \"batch_number\": 15,\n" +
                 "                \"current_quantity\": 10,\n" +
-                "                \"due_date\": \"26-02-2023\"\n" +
+                "                \"due_date\":" + date4 + "\n" +
                 "            }\n" +
                 "        ]\n" +
                 "    }\n" +
@@ -106,6 +114,10 @@ public class ProductIntegrationTest {
         ///Arrange
         loginAsAgent();
         Long productId = 4L;
+        String date1 = LocalDate.now().plusDays(30).format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+        String date2 = LocalDate.now().plusDays(150).format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+        String date3 = LocalDate.now().plusDays(50).format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+        String date4 = LocalDate.now().plusDays(60).format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
 
         String expect = "[\n" +
                 "    {\n" +
@@ -118,17 +130,17 @@ public class ProductIntegrationTest {
                 "            {\n" +
                 "                \"batch_number\": 4,\n" +
                 "                \"current_quantity\": 4002,\n" +
-                "                \"due_date\": \"27-01-2023\"\n" +
+                "                \"due_date\":" + date1 + "\n" +
                 "            },\n" +
                 "            {\n" +
                 "                \"batch_number\": 13,\n" +
                 "                \"current_quantity\": 400,\n" +
-                "                \"due_date\": \"27-05-2023\"\n" +
+                "                \"due_date\":"+ date2 + "\n" +
                 "            },\n" +
                 "            {\n" +
                 "                \"batch_number\": 14,\n" +
                 "                \"current_quantity\": 8070,\n" +
-                "                \"due_date\": \"16-02-2023\"\n" +
+                "                \"due_date\":" + date3 + "\n" +
                 "            }\n" +
                 "        ]\n" +
                 "    },\n" +
@@ -142,7 +154,7 @@ public class ProductIntegrationTest {
                 "            {\n" +
                 "                \"batch_number\": 15,\n" +
                 "                \"current_quantity\": 10,\n" +
-                "                \"due_date\": \"26-02-2023\"\n" +
+                "                \"due_date\":" + date4 + "\n" +
                 "            }\n" +
                 "        ]\n" +
                 "    }\n" +
