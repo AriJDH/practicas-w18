@@ -26,6 +26,10 @@ public class BatchServiceImp implements BatchService {
 
     @Override
     public List<BatchResponseDTO> getAllBatches(Authentication authentication, Integer amountDays, String category, String order) {
+
+        if(amountDays < 0)
+            throw new BadRequestException("La cantidad de dias debe ser mayor o igual a cero");
+
         List<Batch> batches = batchDbService.getAllBatches();
 
         batches = batches.stream().filter(b -> {
@@ -35,14 +39,14 @@ public class BatchServiceImp implements BatchService {
 
         if(category != null){
             switch (category) {
-                case "FS": //FS es fresco
+                case "FS","Fs","fS","fs": //FS es fresco (0)
                     batches = batches.stream().filter(b -> b.getProduct().getSectionCode().equals(SectionCode.FRESH)).collect(Collectors.toList());
                     break;
-                case "RF": //RF es refrigerado
+                case "RF","Rf","rF","rf": //RF es refrigerado (1)
                     batches = batches.stream().filter(b -> b.getProduct().getSectionCode().equals(SectionCode.COOL)).collect(Collectors.toList());
 
                     break;
-                case "FF": //FF es congelado
+                case "FF","fF","Ff","ff": //FF es congelado (2)
                     batches = batches.stream().filter(b -> b.getProduct().getSectionCode().equals(SectionCode.FROZEN)).collect(Collectors.toList());
                     break;
                 default:

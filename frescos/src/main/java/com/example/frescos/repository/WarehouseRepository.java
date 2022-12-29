@@ -13,4 +13,5 @@ public interface WarehouseRepository extends JpaRepository<Warehouse, Long> {
     Optional<Warehouse> findByWareHouseCode(Long warehouseCode);
 
     Warehouse findWarehouseBySectionsAndAgent_UserName(Section section, String name);
+
 }

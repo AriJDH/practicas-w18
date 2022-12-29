@@ -81,6 +81,7 @@ public class LoadDbScript {
         Batch batch13 = new Batch(13L, product4,5.00,-1.2,4005,400,LocalDate.of(2021,6,23), LocalDateTime.of(LocalDate.of(2021,6,23), LocalTime.now()), LocalDate.now().plusDays(150));
         Batch batch14 = new Batch(14L, product4,5.00,-1.2,8089,8070,LocalDate.of(2022,10,4), LocalDateTime.of(LocalDate.of(2022,10,4), LocalTime.now()), LocalDate.now().plusDays(50));
         Batch batch15 = new Batch(15L, product4,5.00,-1.2,120,10,LocalDate.of(2022,9,30), LocalDateTime.of(LocalDate.of(2021,9,30), LocalTime.now()), LocalDate.now().plusDays(60));
+        Batch batch16 = new Batch(16L, product4,5.00,-1.2,120,10,LocalDate.of(2022,9,30), LocalDateTime.of(LocalDate.of(2021,9,30), LocalTime.now()), LocalDate.now());
 
         batchRepository.save(batch1);
         batchRepository.save(batch2);
@@ -97,6 +98,7 @@ public class LoadDbScript {
         batchRepository.save(batch13);
         batchRepository.save(batch14);
         batchRepository.save(batch15);
+        batchRepository.save(batch16);
 
         List<Batch> batchesFresh = Arrays.asList(batch1, batch2, batch3);
         List<Batch> batchesCool1 = Arrays.asList(batch4, batch5, batch6, batch13, batch14);
