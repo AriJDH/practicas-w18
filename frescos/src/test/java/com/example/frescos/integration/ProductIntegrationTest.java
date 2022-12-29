@@ -51,7 +51,7 @@ public class ProductIntegrationTest {
                 "            \"section_code\": 1,\n" +
                 "            \"warehouse_code\": 2\n" +
                 "        },\n" +
-                "        \"productoId\": 4,\n" +
+                "        \"producto_id\": 4,\n" +
                 "        \"batches\": [\n" +
                 "            {\n" +
                 "                \"batch_number\": 4,\n" +
@@ -75,7 +75,7 @@ public class ProductIntegrationTest {
                 "            \"section_code\": 1,\n" +
                 "            \"warehouse_code\": 6\n" +
                 "        },\n" +
-                "        \"productoId\": 4,\n" +
+                "        \"producto_id\": 4,\n" +
                 "        \"batches\": [\n" +
                 "            {\n" +
                 "                \"batch_number\": 15,\n" +
@@ -125,7 +125,7 @@ public class ProductIntegrationTest {
                 "            \"section_code\": 1,\n" +
                 "            \"warehouse_code\": 2\n" +
                 "        },\n" +
-                "        \"productoId\": 4,\n" +
+                "        \"producto_id\": 4,\n" +
                 "        \"batches\": [\n" +
                 "            {\n" +
                 "                \"batch_number\": 4,\n" +
@@ -149,7 +149,7 @@ public class ProductIntegrationTest {
                 "            \"section_code\": 1,\n" +
                 "            \"warehouse_code\": 6\n" +
                 "        },\n" +
-                "        \"productoId\": 4,\n" +
+                "        \"producto_id\": 4,\n" +
                 "        \"batches\": [\n" +
                 "            {\n" +
                 "                \"batch_number\": 15,\n" +
@@ -228,5 +228,48 @@ public class ProductIntegrationTest {
                 .perform(requestPayload)
                 .andDo(print())
                 .andExpectAll(expectedStatus);
+    }
+
+    @Test
+    @Rollback
+    @DisplayName("REQ4 - Consultar un producto en diferentes warehouse")
+
+    public void getListProduct() throws Exception {
+        //Arrange
+        loginAsAgent();
+        Long productId = 4L;
+
+        String expect = "{\n" +
+                "    \"producto_id\": 4,\n" +
+                "    \"warehouses\": [\n" +
+                "        {\n" +
+                "            \"warehouse_code\": 2,\n" +
+                "            \"total_quantity\": 12472\n" +
+                "        },\n" +
+                "        {\n" +
+                "            \"warehouse_code\": 6,\n" +
+                "            \"total_quantity\": 10\n" +
+                "        }\n" +
+                "    ]\n" +
+                "}";
+
+        // Matchers
+        ResultMatcher expectedStatus = MockMvcResultMatchers.status().isOk();
+        ResultMatcher expectedJson = MockMvcResultMatchers.content().json(expect);
+        ResultMatcher expectedContentType = MockMvcResultMatchers
+                .content()
+                .contentType(MediaType.APPLICATION_JSON);
+
+        // Request
+        MockHttpServletRequestBuilder requestPayload = MockMvcRequestBuilders
+                .get("/api/v1/fresh-products/{idProduct}/warehouse/list", productId)
+                .contentType(MediaType.APPLICATION_JSON)
+                .header("Authorization", agentToken);
+
+        //Act - Assert
+        mockMvc
+                .perform(requestPayload)
+                .andDo(print())
+                .andExpectAll(expectedStatus, expectedJson, expectedContentType);
     }
 }
