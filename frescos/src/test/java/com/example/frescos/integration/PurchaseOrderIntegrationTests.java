@@ -60,7 +60,7 @@ public class PurchaseOrderIntegrationTests {
                 "        },\n" +
                 "        \"batch_stock\": [\n" +
                 "            {\n" +
-                "                \"batch_number\": 16,\n" +
+                "                \"batch_number\": 20,\n" +
                 "                \"product_id\": 1,\n" +
                 "                \"current_temperature\": 15.0,\n" +
                 "                \"minimum_temperature\": 20.0,\n" +
@@ -86,7 +86,7 @@ public class PurchaseOrderIntegrationTests {
         String content = "{\n" +
                 "    \"purchase_order\": {\n" +
                 "        \"date\": \"28-12-2022\",\n" +
-                "        \"buyer_id\": 6,\n" +
+                "        \"buyer_id\": 10,\n" +
                 "        \"order_status\": {\n" +
                 "           \"status_code\": \"carrito\" \n" +
                 "        }, \n" +

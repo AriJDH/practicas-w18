@@ -57,7 +57,7 @@ public class InboundOrderIntegrationTests {
                 "        },\n" +
                 "        \"batch_stock\": [\n" +
                 "            {\n" +
-                "                \"batch_number\": 16,\n" +
+                "                \"batch_number\": 20,\n" +
                 "                \"product_id\": 1,\n" +
                 "                \"current_temperature\": 15.0,\n" +
                 "                \"minimum_temperature\": 20.0,\n" +
@@ -94,7 +94,7 @@ public class InboundOrderIntegrationTests {
                 "        },\n" +
                 "        \"batch_stock\": [\n" +
                 "            {\n" +
-                "                \"batch_number\": 16,\n" +
+                "                \"batch_number\": 20,\n" +
                 "                \"product_id\": 1,\n" +
                 "                \"current_temperature\": 15.0,\n" +
                 "                \"minimum_temperature\": 20.0,\n" +
@@ -124,7 +124,7 @@ public class InboundOrderIntegrationTests {
                 "        },\n" +
                 "        \"batch_stock\": [\n" +
                 "            {\n" +
-                "                \"batch_number\": 16,\n" +
+                "                \"batch_number\": 20,\n" +
                 "                \"product_id\": 2,\n" +
                 "                \"current_temperature\": 15.0,\n" +
                 "                \"minimum_temperature\": 20.0,\n" +

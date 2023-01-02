@@ -43,6 +43,10 @@ public class InboundOrderServiceImp implements InboundOrderService {
     public BatchStockResponseDTO addInboundOrder(Authentication authentication, InboundOrderRequest inboundOrderRequest) {
         if(inboundOrderRequest.getInboundOrder().getBatches().stream().anyMatch(batchDTO -> batchRepository.findByBatchNumber(batchDTO.getBatchNumber()).isPresent()))
             throw new BadRequestException("Existen lotes en la orden que ya fueron ingresados en la aplicación.");
+        return saveInboundOrder(authentication, inboundOrderRequest);
+    }
+
+    private BatchStockResponseDTO saveInboundOrder(Authentication authentication, InboundOrderRequest inboundOrderRequest){
         InboundOrderDTO inboundOrderDTO = inboundOrderRequest.getInboundOrder();
         authorizationManager.checkWarehouseAuthorization(inboundOrderDTO.getSection().getWarehouseCode(), authentication);
         InboundOrder inboundOrder = mapper.fromDTO(inboundOrderDTO);
@@ -73,7 +77,7 @@ public class InboundOrderServiceImp implements InboundOrderService {
             });
         }
 
-        return this.addInboundOrder(authentication, inboundOrderRequest);
+        return this.saveInboundOrder(authentication, inboundOrderRequest);
     }
 
     public void checkProductsAreFromSection(InboundOrder inboundOrder, Section section){
