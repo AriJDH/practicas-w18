@@ -1,0 +1,8 @@
+# Ejemplo de configuración para una base de datos de fury, esto se usa junto con el datasource
+# Algunas variables están encriptadas y con el fury util del datasource se soluciona
+spring:
+  jpa:
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+    defer-datasource-initialization: true
+    hibernate:
+      ddl-auto: create

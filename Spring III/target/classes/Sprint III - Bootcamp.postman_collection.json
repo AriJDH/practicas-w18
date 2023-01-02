@@ -1,0 +1,1086 @@
+{
+	"info": {
+		"_postman_id": "6ab670bc-08b9-4300-b531-513bf449174f",
+		"name": "Sprint III - Bootcamp",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "login",
+			"item": [
+				{
+					"name": "Login Admin",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const json = JSON.parse(responseBody)",
+									"const token = `${json.token}`",
+									"pm.collectionVariables.set('token-admin', token)"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"user_name\":\"MarcosInfantino\",\n    \"password\":\"admin\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/login",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"login"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": "",
+									"disabled": true
+								},
+								{
+									"key": "",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login Buyer",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const json = JSON.parse(responseBody)",
+									"const token = `${json.token}`",
+									"pm.collectionVariables.set('token-buyer', token)"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"description": "vence en 12 horas, 13:00 inicio",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"user_name\":\"MiguelAvalle\",\n    \"password\":\"admin\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/login",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"login"
+							],
+							"query": [
+								{
+									"key": "username",
+									"value": "MiguelAvalle",
+									"disabled": true
+								},
+								{
+									"key": "password",
+									"value": "admin",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Req 1 - Admin",
+			"item": [
+				{
+					"name": "1. Inboundorder",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJqdGkiOiJzb2Z0dGVrSldUIiwic3ViIjoiTWFyY29zSW5mYW50aW5vIiwiYXV0aG9yaXRpZXMiOlsiQUdFTlQiXSwiaWF0IjoxNjcyNzAwOTI2LCJleHAiOjE2NzI3MDY5MjZ9.JatFYI_p8SNW0ysJ0bhQfGYSk1Ji4tlIzzjmz9jkpQYe6lBDEVCvfubtGTAGE8klYCF4jqaI4XPDpAR-zFGEOw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"inbound_order\": {\n        \"order_number\": 11,\n        \"order_date\": \"22-12-2022\",\n        \"section\": {\n            \"section_code\": 1,\n            \"warehouse_code\": 2\n        },\n        \"batch_stock\": [\n            {\n                \"batch_number\": 20,\n                \"product_id\": 4,\n                \"current_temperature\": 70.0,\n                \"minimum_temperature\": 0.0,\n                \"initial_quantity\": 50,\n                \"current_quantity\": 50,\n                \"manufacturing_date\": \"10-09-2022\",\n                \"manufacturing_time\": \"10-09-2022 10:00:00\",\n                \"due_date\": \"25-12-2022\"\n            }\n        ]\n    }\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/v1/fresh-products/inboundorder",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"fresh-products",
+								"inboundorder"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "2. Inboundorder",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJqdGkiOiJzb2Z0dGVrSldUIiwic3ViIjoiTWFyY29zSW5mYW50aW5vIiwiYXV0aG9yaXRpZXMiOlsiQUdFTlQiXSwiaWF0IjoxNjcyNzAwOTI2LCJleHAiOjE2NzI3MDY5MjZ9.JatFYI_p8SNW0ysJ0bhQfGYSk1Ji4tlIzzjmz9jkpQYe6lBDEVCvfubtGTAGE8klYCF4jqaI4XPDpAR-zFGEOw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{token-fury}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"inbound_order\": {\n        \"order_number\": 11,\n        \"order_date\": \"22-12-2022\",\n        \"section\": {\n            \"section_code\": 1,\n            \"warehouse_code\": 2\n        },\n        \"batch_stock\": [\n            {\n                \"batch_number\": 20,\n                \"product_id\": 4,\n                \"current_temperature\": 50.0,\n                \"minimum_temperature\": 0.0,\n                \"initial_quantity\": 50,\n                \"current_quantity\": 50,\n                \"manufacturing_date\": \"10-09-2022\",\n                \"manufacturing_time\": \"10-09-2022 10:00:00\",\n                \"due_date\": \"25-09-2022\"\n            },\n            {\n                \"batch_number\": 2,\n                \"product_id\": 4,\n                \"current_temperature\": 80.0,\n                \"minimum_temperature\": 0.0,\n                \"initial_quantity\": 50,\n                \"current_quantity\": 50,\n                \"manufacturing_date\": \"10-09-2022\",\n                \"manufacturing_time\": \"10-09-2022 10:00:00\",\n                \"due_date\": \"25-09-2022\"\n            }\n        ]\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/v1/fresh-products/inboundorder",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"fresh-products",
+								"inboundorder"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "{{token-admin}}",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Req 2 - Buyer",
+			"item": [
+				{
+					"name": "1. List Products",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJqdGkiOiJzb2Z0dGVrSldUIiwic3ViIjoiTWFyY29zSW5mYW50aW5vIiwiYXV0aG9yaXRpZXMiOlsiQUdFTlQiXSwiaWF0IjoxNjcyNzAwNDIxLCJleHAiOjE2NzI3MDY0MjF9.UTuuxtdCe2j1DT-_zn9fxlRYfPRUnLRVadEzs6-h8-7apNXuwjvZ3A6eIDlY6NjwODnRKU-rGlkd3y5iqdIpYQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/v1/fresh-products/list",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"fresh-products",
+								"list"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "2. List Products filters",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJqdGkiOiJzb2Z0dGVrSldUIiwic3ViIjoiTWFyY29zSW5mYW50aW5vIiwiYXV0aG9yaXRpZXMiOlsiQUdFTlQiXSwiaWF0IjoxNjcyNzAwNDIxLCJleHAiOjE2NzI3MDY0MjF9.UTuuxtdCe2j1DT-_zn9fxlRYfPRUnLRVadEzs6-h8-7apNXuwjvZ3A6eIDlY6NjwODnRKU-rGlkd3y5iqdIpYQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:8080/api/v1/fresh-products/list?category=FS",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"fresh-products",
+								"list"
+							],
+							"query": [
+								{
+									"key": "category",
+									"value": "FS"
+								},
+								{
+									"key": "category",
+									"value": "RF",
+									"disabled": true
+								},
+								{
+									"key": "category",
+									"value": "FF",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "3. Purchase Order",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJqdGkiOiJzb2Z0dGVrSldUIiwic3ViIjoiTWFyY29zSW5mYW50aW5vIiwiYXV0aG9yaXRpZXMiOlsiQUdFTlQiXSwiaWF0IjoxNjcyNzAwNDIxLCJleHAiOjE2NzI3MDY0MjF9.UTuuxtdCe2j1DT-_zn9fxlRYfPRUnLRVadEzs6-h8-7apNXuwjvZ3A6eIDlY6NjwODnRKU-rGlkd3y5iqdIpYQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"purchase_order\": {\n        \"date\": \"16-09-2022\",\n        \"buyer_id\": 10,\n        \"order_status\": {\n            \"status_code\": \"carrito\"\n        },\n        \"products\": [\n            {\n                \"product_id\": 4,\n                \"quantity\": 2\n            },\n            {\n                \"product_id\": 5,\n                \"quantity\": 5\n            }\n        ]\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/v1/fresh-products/orders",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"fresh-products",
+								"orders"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "4. Products By Order",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.collectionVariables.set(\"idOrder\", 1);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJqdGkiOiJzb2Z0dGVrSldUIiwic3ViIjoiTWFyY29zSW5mYW50aW5vIiwiYXV0aG9yaXRpZXMiOlsiQUdFTlQiXSwiaWF0IjoxNjcyNzAwNDIxLCJleHAiOjE2NzI3MDY0MjF9.UTuuxtdCe2j1DT-_zn9fxlRYfPRUnLRVadEzs6-h8-7apNXuwjvZ3A6eIDlY6NjwODnRKU-rGlkd3y5iqdIpYQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "localhost:8080/api/v1/fresh-products/orders/11",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"fresh-products",
+								"orders",
+								"11"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "5. Purchase Order",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.collectionVariables.set(\"idOrder\", 7);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJqdGkiOiJzb2Z0dGVrSldUIiwic3ViIjoiTWFyY29zSW5mYW50aW5vIiwiYXV0aG9yaXRpZXMiOlsiQUdFTlQiXSwiaWF0IjoxNjcyNzAwNDIxLCJleHAiOjE2NzI3MDY0MjF9.UTuuxtdCe2j1DT-_zn9fxlRYfPRUnLRVadEzs6-h8-7apNXuwjvZ3A6eIDlY6NjwODnRKU-rGlkd3y5iqdIpYQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"purchase_order\": {\n        \"date\": \"16-09-2022\",\n        \"buyer_id\": 10,\n        \"order_status\": {\n            \"status_code\": \"carrito\"\n        },\n        \"products\": [\n            {\n                \"product_id\": 1,\n                \"quantity\": 2\n            },\n            {\n                \"product_id\": 2,\n                \"quantity\": 5\n            }\n        ]\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/v1/fresh-products/orders/11",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"fresh-products",
+								"orders",
+								"11"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "{{token-buyer}}",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Req 3, 4, 5 - Admin",
+			"item": [
+				{
+					"name": "Req 3.1 - Stock Products",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.collectionVariables.set(\"idProduct\", 3);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"connection": true,
+							"accept-encoding": true,
+							"accept": true,
+							"user-agent": true
+						},
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJqdGkiOiJzb2Z0dGVrSldUIiwic3ViIjoiTWFyY29zSW5mYW50aW5vIiwiYXV0aG9yaXRpZXMiOlsiQUdFTlQiXSwiaWF0IjoxNjcyNzAwOTI2LCJleHAiOjE2NzI3MDY5MjZ9.JatFYI_p8SNW0ysJ0bhQfGYSk1Ji4tlIzzjmz9jkpQYe6lBDEVCvfubtGTAGE8klYCF4jqaI4XPDpAR-zFGEOw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "localhost:8080/api/v1/fresh-products/4/batch/list",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"fresh-products",
+								"4",
+								"batch",
+								"list"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Req 3.2 - Stock Products Order",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.collectionVariables.set(\"idProduct\", 1);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJqdGkiOiJzb2Z0dGVrSldUIiwic3ViIjoiTWFyY29zSW5mYW50aW5vIiwiYXV0aG9yaXRpZXMiOlsiQUdFTlQiXSwiaWF0IjoxNjcyNzAwOTI2LCJleHAiOjE2NzI3MDY5MjZ9.JatFYI_p8SNW0ysJ0bhQfGYSk1Ji4tlIzzjmz9jkpQYe6lBDEVCvfubtGTAGE8klYCF4jqaI4XPDpAR-zFGEOw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "localhost:8080/api/v1/fresh-products/4/batch/list?order=F",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"fresh-products",
+								"4",
+								"batch",
+								"list"
+							],
+							"query": [
+								{
+									"key": "order",
+									"value": "L",
+									"disabled": true
+								},
+								{
+									"key": "order",
+									"value": "C",
+									"disabled": true
+								},
+								{
+									"key": "order",
+									"value": "F"
+								},
+								{
+									"key": "order",
+									"value": "K",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Req 4 - Batchs In Each Warehouse",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.collectionVariables.set(\"idProduct\", 1);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJqdGkiOiJzb2Z0dGVrSldUIiwic3ViIjoiTWFyY29zSW5mYW50aW5vIiwiYXV0aG9yaXRpZXMiOlsiQUdFTlQiXSwiaWF0IjoxNjcyNzAwOTI2LCJleHAiOjE2NzI3MDY5MjZ9.JatFYI_p8SNW0ysJ0bhQfGYSk1Ji4tlIzzjmz9jkpQYe6lBDEVCvfubtGTAGE8klYCF4jqaI4XPDpAR-zFGEOw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "localhost:8080/api/v1/fresh-products/4/warehouse/list",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"fresh-products",
+								"4",
+								"warehouse",
+								"list"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Req 5.1 - Batchs Due Date Between",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.collectionVariables.set(\"cantDays\", 60);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJqdGkiOiJzb2Z0dGVrSldUIiwic3ViIjoiTWFyY29zSW5mYW50aW5vIiwiYXV0aG9yaXRpZXMiOlsiQUdFTlQiXSwiaWF0IjoxNjcyNzAwOTI2LCJleHAiOjE2NzI3MDY5MjZ9.JatFYI_p8SNW0ysJ0bhQfGYSk1Ji4tlIzzjmz9jkpQYe6lBDEVCvfubtGTAGE8klYCF4jqaI4XPDpAR-zFGEOw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "localhost:8080/api/v1/fresh-products/batch/list/due-date/20",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"fresh-products",
+								"batch",
+								"list",
+								"due-date",
+								"20"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Req 5.2 - Batchs Due Date Between Order Filter",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.collectionVariables.set(\"cantDays\", 30);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJqdGkiOiJzb2Z0dGVrSldUIiwic3ViIjoiTWFyY29zSW5mYW50aW5vIiwiYXV0aG9yaXRpZXMiOlsiQUdFTlQiXSwiaWF0IjoxNjcyNzAwOTI2LCJleHAiOjE2NzI3MDY5MjZ9.JatFYI_p8SNW0ysJ0bhQfGYSk1Ji4tlIzzjmz9jkpQYe6lBDEVCvfubtGTAGE8klYCF4jqaI4XPDpAR-zFGEOw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "localhost:8080/api/v1/fresh-products/batch/list/due-date/20?category=RF&order=date_desc",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"fresh-products",
+								"batch",
+								"list",
+								"due-date",
+								"20"
+							],
+							"query": [
+								{
+									"key": "category",
+									"value": "FS",
+									"disabled": true
+								},
+								{
+									"key": "category",
+									"value": "RF"
+								},
+								{
+									"key": "category",
+									"value": "FF",
+									"disabled": true
+								},
+								{
+									"key": "order",
+									"value": "date_asc",
+									"disabled": true
+								},
+								{
+									"key": "order",
+									"value": "date_desc"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJqdGkiOiJzb2Z0dGVrSldUIiwic3ViIjoiTWFyY29zSW5mYW50aW5vIiwiYXV0aG9yaXRpZXMiOlsiQUdFTlQiXSwiaWF0IjoxNjcyMTU2NjQ3LCJleHAiOjE2NzIxNjI2NDd9.O6ec1090J-J5hL8ifWItDgZgJefkbMNq0tVolSnBPFem-P70mjTjRwlGmXepuVrJMZ5_RALi31jexoS4UjnoXQ",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Req 6 -Template",
+			"item": [
+				{
+					"name": "Req 6 - Stock products",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{token-fury}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:8080/api/v1/fresh-products/minimumStock/list?id_warehouse=2&minimum_stock=1000",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"fresh-products",
+								"minimumStock",
+								"list"
+							],
+							"query": [
+								{
+									"key": "id_warehouse",
+									"value": "2"
+								},
+								{
+									"key": "minimum_stock",
+									"value": "1000"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "{{token-admin}}",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "url-app",
+			"value": ""
+		},
+		{
+			"key": "token-fury",
+			"value": "huella fury"
+		},
+		{
+			"key": "token-buyer",
+			"value": "token de buyer"
+		},
+		{
+			"key": "token-admin",
+			"value": "token de admin"
+		},
+		{
+			"key": "idOrder",
+			"value": "1"
+		},
+		{
+			"key": "idProduct",
+			"value": "1"
+		},
+		{
+			"key": "cantDays",
+			"value": "1"
+		}
+	]
+}
