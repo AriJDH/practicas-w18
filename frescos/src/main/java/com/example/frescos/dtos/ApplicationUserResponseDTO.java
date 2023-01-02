@@ -9,6 +9,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ApplicationUserResponseDTO {
+    @JsonProperty("user_id")
+    private Long user_id;
     @JsonProperty("user_name")
     private String userName;
     private String token;

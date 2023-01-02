@@ -43,7 +43,7 @@ public class SessionServiceImpl implements SessionService {
 
         String token = getJWTToken(username, roles);
 
-        return new ApplicationUserResponseDTO(username, token);
+        return new ApplicationUserResponseDTO(usuario.getId(), username, token);
     }
 
     /**

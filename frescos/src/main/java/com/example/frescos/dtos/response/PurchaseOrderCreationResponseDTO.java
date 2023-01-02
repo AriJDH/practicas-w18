@@ -9,6 +9,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class PurchaseOrderCreationResponseDTO {
+    @JsonProperty("order_number")
+    private Long orderNumber;
     @JsonProperty("total_price")
     private Double totalPrice;
 }

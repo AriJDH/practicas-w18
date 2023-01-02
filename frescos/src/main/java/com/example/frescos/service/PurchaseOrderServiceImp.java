@@ -55,9 +55,9 @@ public class PurchaseOrderServiceImp implements PurchaseOrderService{
 
         PurchaseOrder purchaseOrder = mapper.fromDTO(purchaseOrderDTO);
 
-        purchaseOrderRepository.saveAndFlush(purchaseOrder);
+        PurchaseOrder savedPurchaseOrder = purchaseOrderRepository.saveAndFlush(purchaseOrder);
 
-        return new PurchaseOrderCreationResponseDTO(purchaseOrder.totalPrice());
+        return new PurchaseOrderCreationResponseDTO(savedPurchaseOrder.getOrderNumber(), purchaseOrder.totalPrice());
     }
 
     @Override
@@ -106,8 +106,8 @@ public class PurchaseOrderServiceImp implements PurchaseOrderService{
         existingPurchaseOrder.removeAllItems();
         existingPurchaseOrder.addAllItems(newPurchaseOrder.getItems());
 
-        purchaseOrderDbService.save(existingPurchaseOrder);
-        return new PurchaseOrderCreationResponseDTO(existingPurchaseOrder.totalPrice());
+        PurchaseOrder savedPurchaseOrder = purchaseOrderDbService.save(existingPurchaseOrder);
+        return new PurchaseOrderCreationResponseDTO(savedPurchaseOrder.getOrderNumber(), existingPurchaseOrder.totalPrice());
     }
 
     public void updateBatchesStock(PurchaseOrderDTO purchaseOrderDTO){

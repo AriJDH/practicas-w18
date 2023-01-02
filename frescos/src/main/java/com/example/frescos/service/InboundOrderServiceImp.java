@@ -41,6 +41,8 @@ public class InboundOrderServiceImp implements InboundOrderService {
 
     @Override
     public BatchStockResponseDTO addInboundOrder(Authentication authentication, InboundOrderRequest inboundOrderRequest) {
+        if(inboundOrderRequest.getInboundOrder().getBatches().stream().anyMatch(batchDTO -> batchRepository.findByBatchNumber(batchDTO.getBatchNumber()).isPresent()))
+            throw new BadRequestException("Existen lotes en la orden que ya fueron ingresados en la aplicación.");
         InboundOrderDTO inboundOrderDTO = inboundOrderRequest.getInboundOrder();
         authorizationManager.checkWarehouseAuthorization(inboundOrderDTO.getSection().getWarehouseCode(), authentication);
         InboundOrder inboundOrder = mapper.fromDTO(inboundOrderDTO);

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface BatchRepository extends JpaRepository<Batch, Long> {
@@ -18,5 +19,5 @@ public interface BatchRepository extends JpaRepository<Batch, Long> {
 
     @Query(value = "SELECT b from Batch b where b.product.id =?1")
     List<Batch> findAllBatchesByProductId(Long productId);
-    
+    Optional<Batch> findByBatchNumber(Long aLong);
 }
