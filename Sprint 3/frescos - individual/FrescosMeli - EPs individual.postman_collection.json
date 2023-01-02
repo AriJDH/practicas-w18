@@ -1,0 +1,197 @@
+{
+	"info": {
+		"_postman_id": "38664988-5ead-4eae-b8fa-a29c04f9a0fb",
+		"name": "FrescosMeli - EPs individual",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "11653559"
+	},
+	"item": [
+		{
+			"name": "Login Buyer",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"user_name\": \"MiguelAvalle\",\n    \"password\": \"admin\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/login",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/orders/buyer",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJqdGkiOiJzb2Z0dGVrSldUIiwic3ViIjoiTWlndWVsQXZhbGxlIiwiYXV0aG9yaXRpZXMiOlsiQlVZRVIiXSwiaWF0IjoxNjcyNjg5ODEwLCJleHAiOjE2NzI2OTU4MTB9.fVovp3IG4MYW1xf-FgWd6iARPnjQOJWRwA49BX7Nc78MEwsygKqyy2oyW2V8MLOIw57gz_i3PentdFdvFzb-ZQ",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/api/v1/fresh-products/orders/buyer",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"fresh-products",
+						"orders",
+						"buyer"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/orders/total",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJqdGkiOiJzb2Z0dGVrSldUIiwic3ViIjoiTWlndWVsQXZhbGxlIiwiYXV0aG9yaXRpZXMiOlsiQlVZRVIiXSwiaWF0IjoxNjcyNjg4ODcwLCJleHAiOjE2NzI2OTQ4NzB9.7UF6SHbyagseaNB-De5S9uPcnlgfycnWL3S3xUuSvZ2njbu3UWWlqVmtiCpqspIil0JEUKNO3c3z5cDQYePfiw",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/api/v1/fresh-products/orders/total",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"fresh-products",
+						"orders",
+						"total"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/orders/ordered-products",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJqdGkiOiJzb2Z0dGVrSldUIiwic3ViIjoiTWlndWVsQXZhbGxlIiwiYXV0aG9yaXRpZXMiOlsiQlVZRVIiXSwiaWF0IjoxNjcyNjg4ODcwLCJleHAiOjE2NzI2OTQ4NzB9.7UF6SHbyagseaNB-De5S9uPcnlgfycnWL3S3xUuSvZ2njbu3UWWlqVmtiCpqspIil0JEUKNO3c3z5cDQYePfiw",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/api/v1/fresh-products/orders/ordered-products",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"fresh-products",
+						"orders",
+						"ordered-products"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/orders/ordered-sections",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJqdGkiOiJzb2Z0dGVrSldUIiwic3ViIjoiTWlndWVsQXZhbGxlIiwiYXV0aG9yaXRpZXMiOlsiQlVZRVIiXSwiaWF0IjoxNjcyNjg4ODcwLCJleHAiOjE2NzI2OTQ4NzB9.7UF6SHbyagseaNB-De5S9uPcnlgfycnWL3S3xUuSvZ2njbu3UWWlqVmtiCpqspIil0JEUKNO3c3z5cDQYePfiw",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/api/v1/fresh-products/orders/ordered-sections",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"fresh-products",
+						"orders",
+						"ordered-sections"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/orders/last-order",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJqdGkiOiJzb2Z0dGVrSldUIiwic3ViIjoiTWlndWVsQXZhbGxlIiwiYXV0aG9yaXRpZXMiOlsiQlVZRVIiXSwiaWF0IjoxNjcyNjg5ODEwLCJleHAiOjE2NzI2OTU4MTB9.fVovp3IG4MYW1xf-FgWd6iARPnjQOJWRwA49BX7Nc78MEwsygKqyy2oyW2V8MLOIw57gz_i3PentdFdvFzb-ZQ",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/api/v1/fresh-products/orders/last-order",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"fresh-products",
+						"orders",
+						"last-order"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

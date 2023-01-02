@@ -59,4 +59,21 @@ public class Mapper {
         item.setProduct(productDbService.findById(itemDTO.getProductId()));
         return item;
     }
+
+    public ItemDTO toDTO(Item item){
+        ItemDTO itemDTO = new ItemDTO();
+        itemDTO.setProductId(item.getProduct().getId());
+        itemDTO.setQuantity(item.getQuantity());
+        return itemDTO;
+    }
+
+    public PurchaseOrderDTO toDTO(PurchaseOrder purchaseOrder){
+        PurchaseOrderDTO purchaseOrderDTO = new PurchaseOrderDTO();
+        purchaseOrderDTO.setOrderDate(purchaseOrder.getOrderDate());
+        purchaseOrderDTO.setBuyerId(purchaseOrder.getBuyer().getId());
+        purchaseOrderDTO.setOrderStatus(new OrderStatusDTO(purchaseOrder.getStatus()));
+        purchaseOrderDTO.setItems(purchaseOrder.getItems().stream()
+                .map(item->this.toDTO(item)).collect(Collectors.toList()));
+        return purchaseOrderDTO;
+    }
 }

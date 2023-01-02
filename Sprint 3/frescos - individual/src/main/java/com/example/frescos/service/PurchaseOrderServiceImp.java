@@ -4,22 +4,28 @@ import com.example.frescos.dtos.ItemDTO;
 import com.example.frescos.dtos.ProductDTO;
 import com.example.frescos.dtos.PurchaseOrderDTO;
 import com.example.frescos.dtos.request.PurchaseOrderRequest;
-import com.example.frescos.dtos.response.PurchaseOrderCreationResponseDTO;
+import com.example.frescos.dtos.response.*;
 import com.example.frescos.entity.Batch;
+import com.example.frescos.entity.Product;
 import com.example.frescos.entity.PurchaseOrder;
+import com.example.frescos.enums.SectionCode;
 import com.example.frescos.exception.InsuficientStockException;
 import com.example.frescos.repository.BatchRepository;
 import com.example.frescos.repository.ItemRepository;
 import com.example.frescos.repository.PurchaseOrderRepository;
 import com.example.frescos.service.db.PurchaseOrderDbService;
 import com.example.frescos.utils.Mapper;
+import com.example.frescos.utils.PurchaseOrderComparator;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.time.LocalDate;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
@@ -108,6 +114,51 @@ public class PurchaseOrderServiceImp implements PurchaseOrderService{
 
         PurchaseOrder savedPurchaseOrder = purchaseOrderDbService.save(existingPurchaseOrder);
         return new PurchaseOrderCreationResponseDTO(savedPurchaseOrder.getOrderNumber(), existingPurchaseOrder.totalPrice());
+    }
+
+    @Override
+    public PurchaseOrdersResponseDTO findAllPurchaseOrdersByBuyerId(Authentication authentication) {
+        return  new PurchaseOrdersResponseDTO(purchaseOrderDbService.findAllByBuyerUsername(authentication.getName())
+                .stream().map(order->mapper.toDTO(order)).collect(Collectors.toList()));
+    }
+
+    @Override
+    public TotalMoneySpentDTO purchaseOrdersTotal(Authentication authentication) {
+        return new TotalMoneySpentDTO(purchaseOrderDbService.findAllByBuyerUsername(authentication.getName())
+                .stream().mapToDouble(order->order.totalPrice()).sum());
+    }
+
+    @Override
+    public ProductsResponseDTO findAllOrderedProducts(Authentication authentication) {
+
+        return new ProductsResponseDTO(this.findAllProductsByBuyerUserName(authentication.getName())
+                .stream().map(product -> modelMapper.map(product, ProductDTO.class))
+                .collect(Collectors.toList()));
+    }
+
+    private List<Product> findAllProductsByBuyerUserName(String userName){
+        Set<Product> products = new HashSet<>();
+        for(PurchaseOrder order: purchaseOrderDbService.findAllByBuyerUsername(userName)){
+            for(Product product: order.getProducts()){
+                products.add(product);
+            }
+        }
+        return products.stream().toList();
+    }
+
+    @Override
+    public OrderedSectionsResponseDTO findAllOrderedSections(Authentication authentication) {
+        Set<SectionCode> sectionCodes = new HashSet<>();
+        for(Product product: this.findAllProductsByBuyerUserName(authentication.getName())){
+            sectionCodes.add(product.getSectionCode());
+        }
+        return new OrderedSectionsResponseDTO(sectionCodes.stream().sorted().toList());
+    }
+
+    @Override
+    public PurchaseOrderDTO findLastOrder(Authentication authentication) {
+        return mapper.toDTO(purchaseOrderDbService.findAllByBuyerUsername(authentication.getName())
+                .stream().sorted(new PurchaseOrderComparator()::compare).findFirst().get());
     }
 
     public void updateBatchesStock(PurchaseOrderDTO purchaseOrderDTO){

@@ -18,4 +18,9 @@ public class HandlerError {
     public ResponseEntity<String> handleNotFound(Exception exception){
         return new ResponseEntity<>(exception.getMessage(), HttpStatus.NOT_FOUND);
     }
+
+    @ExceptionHandler({ForbiddenException.class})
+    public ResponseEntity<String> handleNotForbidden(Exception exception){
+        return new ResponseEntity<>(exception.getMessage(), HttpStatus.FORBIDDEN);
+    }
 }

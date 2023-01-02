@@ -1,5 +1,7 @@
 package com.example.frescos.enums;
 
+import lombok.EqualsAndHashCode;
+
 import java.util.Arrays;
 import java.util.Optional;
 

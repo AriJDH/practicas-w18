@@ -14,4 +14,8 @@ import java.util.Optional;
 public interface PurchaseOrderRepository extends JpaRepository<PurchaseOrder, Long> {
 
     Optional<PurchaseOrder> findByOrderNumber(Long order);
+    @Query(value = "SELECT p from PurchaseOrder p where p.buyer.id =?1")
+    public List<PurchaseOrder> findAllByBuyerId(Long buyerId);
+    @Query(value = "SELECT p from PurchaseOrder p where p.buyer.userName =?1")
+    public List<PurchaseOrder> findAllByBuyerUserName(String userName);
 }

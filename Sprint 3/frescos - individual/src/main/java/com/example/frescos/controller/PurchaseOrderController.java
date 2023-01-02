@@ -1,8 +1,9 @@
 package com.example.frescos.controller;
 
 import com.example.frescos.dtos.ProductDTO;
+import com.example.frescos.dtos.PurchaseOrderDTO;
 import com.example.frescos.dtos.request.PurchaseOrderRequest;
-import com.example.frescos.dtos.response.PurchaseOrderCreationResponseDTO;
+import com.example.frescos.dtos.response.*;
 import com.example.frescos.service.PurchaseOrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -32,4 +33,25 @@ public class PurchaseOrderController {
     ResponseEntity<PurchaseOrderCreationResponseDTO> updatePurchaseOrder(Authentication authentication, @RequestBody PurchaseOrderRequest purchaseOrderRequest, @PathVariable Long orderId){
         return new ResponseEntity<>(purchaseOrderService.updatePurchaseOrder(orderId, purchaseOrderRequest), HttpStatus.CREATED);
     }
+    @GetMapping("/buyer")
+    ResponseEntity<PurchaseOrdersResponseDTO> findAllPurchaseOrdersByBuyer(Authentication authentication){
+        return ResponseEntity.ok(purchaseOrderService.findAllPurchaseOrdersByBuyerId(authentication));
+    }
+    @GetMapping("/total")
+    ResponseEntity<TotalMoneySpentDTO> purchaseOrdersTotal(Authentication authentication){
+        return ResponseEntity.ok(purchaseOrderService.purchaseOrdersTotal(authentication));
+    }
+    @GetMapping("/ordered-products")
+    ResponseEntity<ProductsResponseDTO> findAllOrderedProducts(Authentication authentication){
+        return ResponseEntity.ok(purchaseOrderService.findAllOrderedProducts(authentication));
+    }
+    @GetMapping("/ordered-sections")
+    ResponseEntity<OrderedSectionsResponseDTO> findAllOrderedSections(Authentication authentication){
+        return ResponseEntity.ok(purchaseOrderService.findAllOrderedSections(authentication));
+    }
+    @GetMapping("/last-order")
+    ResponseEntity<PurchaseOrderDTO> findLastOrder(Authentication authentication){
+        return ResponseEntity.ok(purchaseOrderService.findLastOrder(authentication));
+    }
+
 }
